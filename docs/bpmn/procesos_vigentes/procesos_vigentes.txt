@@ -6,3 +6,4 @@
 6. Pago de honorarios médicos
 7. Entrega exámenes
 8. Comprobación de hora
+9. Pago hora agendada
