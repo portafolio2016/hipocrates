@@ -8,6 +8,6 @@ reflejar el estado inicial del centro médico.
 6. Pago de honorarios médicos
 7. Entrega exámenes
 8. Comprobación de hora
-9. Pago atención
+9. Pago boleta de honorarios
 10. Anular atenciones
 11. Apertura de cajas
