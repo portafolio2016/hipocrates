@@ -8,3 +8,4 @@
 8. Comprobación de hora
 9. Pago hora agendada
 10. Anular atenciones
+11. Apertura de cajas
