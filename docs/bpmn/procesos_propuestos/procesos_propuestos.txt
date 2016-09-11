@@ -1,4 +1,4 @@
-1. Agendamiento de hora
+1. Agendamiento por internet
 2. Ingreso del paciente
 3. Procedimiento pre atención
 4. Procedimiento post atención
