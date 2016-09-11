@@ -1,3 +1,5 @@
+NOTA: ciertos procesos se dejaron intencionalmente vagos para
+reflejar el estado inicial del centro médico.
 1. Agendamiento de hora
 2. Ingreso del paciente
 3. Procedimiento pre atención
