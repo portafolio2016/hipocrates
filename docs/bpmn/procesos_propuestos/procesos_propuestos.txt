@@ -15,3 +15,5 @@
 15. Post examen de laboratorio
 16. Post examen de imagenologia
 17. Ver reportes de operadores
+18. Calcular precio atención
+
