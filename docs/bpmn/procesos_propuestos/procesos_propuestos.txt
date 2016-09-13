@@ -10,4 +10,4 @@
 10. Anular atenciones
 11. Apertura de cajas
 12. Generar reportes caja
-13. Crear cliente
+13. Crear paciente
