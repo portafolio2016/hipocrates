@@ -11,3 +11,7 @@
 11. Apertura de cajas
 12. Generar reportes caja
 13. Crear paciente
+14. Post atencion médica
+15. Post examen de laboratorio
+16. Post examen de imagenologia
+17. Ver reportes de operadores
