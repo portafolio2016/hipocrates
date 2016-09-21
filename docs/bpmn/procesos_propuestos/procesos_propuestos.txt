@@ -1,6 +1,4 @@
-NOTA: ciertos procesos se dejaron intencionalmente vagos para
-reflejar el estado inicial del centro médico.
-1. Agendamiento de hora
+1. Agendamiento por internet
 2. Ingreso del paciente
 3. Procedimiento pre atención
 4. Procedimiento post atención
@@ -11,6 +9,10 @@ reflejar el estado inicial del centro médico.
 9. Pago boleta de honorarios
 10. Anular atenciones
 11. Apertura de cajas
-12. Post atención médica
-13. Post examen de laboratorio
-14. Post examen imagenología
+12. Generar reportes caja
+13. Crear paciente
+14. Post atencion médica
+15. Post examen de laboratorio
+16. Post examen de imagenologia
+17. Calcular precio atención
+
