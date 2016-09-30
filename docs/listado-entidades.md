@@ -14,5 +14,6 @@
 * Resultado laboratorio
 * Resultado imagen
 * Imagen
-* Tipo prestacion
 * Aseguradora
+* Nota credito
+* Detalle pago
