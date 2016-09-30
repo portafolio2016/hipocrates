@@ -1,2 +1,18 @@
 * Empleado
-* Rol
+* Cargo empleado
+* Paciente
+* Atencion
+* Prestacion
+* Equipo
+* Tipo equipo
+* Terminal
+* Pago
+* Caja
+* Ficha
+* Entrada ficha
+* Orden analisis
+* Resultado laboratorio
+* Resultado imagen
+* Imagen
+* Tipo prestacion
+* Aseguradora
