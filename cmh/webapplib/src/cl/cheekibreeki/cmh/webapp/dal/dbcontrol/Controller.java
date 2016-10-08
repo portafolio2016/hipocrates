@@ -28,4 +28,17 @@ public class Controller {
         }
     }
     
+    public static Object findById(Class clazz, Integer id){
+        EntityManager em = EMFProvider.getEMF().createEntityManager();
+        Object obj = null;
+        try {
+            obj = em.find(clazz, id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally{
+           em.close();
+           return obj;
+        }
+    }
+    
 }
