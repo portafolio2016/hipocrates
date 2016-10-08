@@ -9,3 +9,4 @@
 
 *.LDB
 /cmh/webapplib/dist/
+/cmh/servPago/nbproject/private/
