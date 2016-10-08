@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,21 +36,20 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Personal implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_PERSONAL")
-    private BigDecimal idPersonal;
+    private Integer idPersonal;
     @Column(name = "NOMBRES")
     private String nombres;
     @Column(name = "APELLIDOS")
     private String apellidos;
     @Column(name = "REMUNERACION")
-    private BigDecimal remuneracion;
+    private Integer remuneracion;
     @Column(name = "HASHED_PASS")
     private String hashedPass;
     @Column(name = "PORCENT_DESCUENTO")
-    private BigDecimal porcentDescuento;
+    private Integer porcentDescuento;
     @OneToMany(mappedBy = "idPersonal")
     private Collection<PersMedico> persMedicoCollection;
     @OneToMany(mappedBy = "idPersonal")
@@ -60,15 +58,15 @@ public class Personal implements Serializable {
     public Personal() {
     }
 
-    public Personal(BigDecimal idPersonal) {
+    public Personal(Integer idPersonal) {
         this.idPersonal = idPersonal;
     }
 
-    public BigDecimal getIdPersonal() {
+    public Integer getIdPersonal() {
         return idPersonal;
     }
 
-    public void setIdPersonal(BigDecimal idPersonal) {
+    public void setIdPersonal(Integer idPersonal) {
         this.idPersonal = idPersonal;
     }
 
@@ -88,11 +86,11 @@ public class Personal implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public BigDecimal getRemuneracion() {
+    public Integer getRemuneracion() {
         return remuneracion;
     }
 
-    public void setRemuneracion(BigDecimal remuneracion) {
+    public void setRemuneracion(Integer remuneracion) {
         this.remuneracion = remuneracion;
     }
 
@@ -104,11 +102,11 @@ public class Personal implements Serializable {
         this.hashedPass = hashedPass;
     }
 
-    public BigDecimal getPorcentDescuento() {
+    public Integer getPorcentDescuento() {
         return porcentDescuento;
     }
 
-    public void setPorcentDescuento(BigDecimal porcentDescuento) {
+    public void setPorcentDescuento(Integer porcentDescuento) {
         this.porcentDescuento = porcentDescuento;
     }
 
@@ -152,7 +150,7 @@ public class Personal implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Personal[ idPersonal=" + idPersonal + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Personal[ idPersonal=" + idPersonal + " ]";
     }
     
 }

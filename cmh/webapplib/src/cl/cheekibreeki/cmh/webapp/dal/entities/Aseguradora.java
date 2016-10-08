@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,11 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Aseguradora implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_ASEGURADORA")
-    private BigDecimal idAseguradora;
+    private Integer idAseguradora;
     @Column(name = "NOM_ASEGURADORA")
     private String nomAseguradora;
     @OneToMany(mappedBy = "idAseguradora")
@@ -46,15 +44,15 @@ public class Aseguradora implements Serializable {
     public Aseguradora() {
     }
 
-    public Aseguradora(BigDecimal idAseguradora) {
+    public Aseguradora(Integer idAseguradora) {
         this.idAseguradora = idAseguradora;
     }
 
-    public BigDecimal getIdAseguradora() {
+    public Integer getIdAseguradora() {
         return idAseguradora;
     }
 
-    public void setIdAseguradora(BigDecimal idAseguradora) {
+    public void setIdAseguradora(Integer idAseguradora) {
         this.idAseguradora = idAseguradora;
     }
 
@@ -97,7 +95,7 @@ public class Aseguradora implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Aseguradora[ idAseguradora=" + idAseguradora + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Aseguradora[ idAseguradora=" + idAseguradora + " ]";
     }
     
 }

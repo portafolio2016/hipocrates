@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,15 +36,14 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Prestacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_PRESTACION")
-    private BigDecimal idPrestacion;
+    private Integer idPrestacion;
     @Column(name = "NOM_PRESTACION")
-    private BigDecimal nomPrestacion;
+    private Integer nomPrestacion;
     @Column(name = "PRECIO_PRESTACION")
-    private BigDecimal precioPrestacion;
+    private Integer precioPrestacion;
     @Column(name = "CODIGO_PRESTACION")
     private String codigoPrestacion;
     @OneToMany(mappedBy = "idPrestacion")
@@ -62,31 +60,31 @@ public class Prestacion implements Serializable {
     public Prestacion() {
     }
 
-    public Prestacion(BigDecimal idPrestacion) {
+    public Prestacion(Integer idPrestacion) {
         this.idPrestacion = idPrestacion;
     }
 
-    public BigDecimal getIdPrestacion() {
+    public Integer getIdPrestacion() {
         return idPrestacion;
     }
 
-    public void setIdPrestacion(BigDecimal idPrestacion) {
+    public void setIdPrestacion(Integer idPrestacion) {
         this.idPrestacion = idPrestacion;
     }
 
-    public BigDecimal getNomPrestacion() {
+    public Integer getNomPrestacion() {
         return nomPrestacion;
     }
 
-    public void setNomPrestacion(BigDecimal nomPrestacion) {
+    public void setNomPrestacion(Integer nomPrestacion) {
         this.nomPrestacion = nomPrestacion;
     }
 
-    public BigDecimal getPrecioPrestacion() {
+    public Integer getPrecioPrestacion() {
         return precioPrestacion;
     }
 
-    public void setPrecioPrestacion(BigDecimal precioPrestacion) {
+    public void setPrecioPrestacion(Integer precioPrestacion) {
         this.precioPrestacion = precioPrestacion;
     }
 
@@ -154,7 +152,7 @@ public class Prestacion implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Prestacion[ idPrestacion=" + idPrestacion + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Prestacion[ idPrestacion=" + idPrestacion + " ]";
     }
     
 }

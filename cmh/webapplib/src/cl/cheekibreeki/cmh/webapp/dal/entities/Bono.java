@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -36,13 +35,12 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Bono implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_BONO")
-    private BigDecimal idBono;
+    private Integer idBono;
     @Column(name = "CANT_BONO")
-    private BigDecimal cantBono;
+    private Integer cantBono;
     @Column(name = "COD_ASEGURADORA")
     private String codAseguradora;
     @JoinColumn(name = "ID_ASEGURADORA", referencedColumnName = "ID_ASEGURADORA")
@@ -54,23 +52,23 @@ public class Bono implements Serializable {
     public Bono() {
     }
 
-    public Bono(BigDecimal idBono) {
+    public Bono(Integer idBono) {
         this.idBono = idBono;
     }
 
-    public BigDecimal getIdBono() {
+    public Integer getIdBono() {
         return idBono;
     }
 
-    public void setIdBono(BigDecimal idBono) {
+    public void setIdBono(Integer idBono) {
         this.idBono = idBono;
     }
 
-    public BigDecimal getCantBono() {
+    public Integer getCantBono() {
         return cantBono;
     }
 
-    public void setCantBono(BigDecimal cantBono) {
+    public void setCantBono(Integer cantBono) {
         this.cantBono = cantBono;
     }
 
@@ -121,7 +119,7 @@ public class Bono implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Bono[ idBono=" + idBono + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Bono[ idBono=" + idBono + " ]";
     }
     
 }

@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,13 +31,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Inventario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_INVENTARIO_EQUIPO")
-    private BigDecimal idInventarioEquipo;
+    private Integer idInventarioEquipo;
     @Column(name = "CANT_BODEGA")
-    private BigDecimal cantBodega;
+    private Integer cantBodega;
     @JoinColumn(name = "ID_TIPO_EQUIPO", referencedColumnName = "ID_TIPO_EQUIPO")
     @ManyToOne
     private TipoEquipo idTipoEquipo;
@@ -46,23 +44,23 @@ public class Inventario implements Serializable {
     public Inventario() {
     }
 
-    public Inventario(BigDecimal idInventarioEquipo) {
+    public Inventario(Integer idInventarioEquipo) {
         this.idInventarioEquipo = idInventarioEquipo;
     }
 
-    public BigDecimal getIdInventarioEquipo() {
+    public Integer getIdInventarioEquipo() {
         return idInventarioEquipo;
     }
 
-    public void setIdInventarioEquipo(BigDecimal idInventarioEquipo) {
+    public void setIdInventarioEquipo(Integer idInventarioEquipo) {
         this.idInventarioEquipo = idInventarioEquipo;
     }
 
-    public BigDecimal getCantBodega() {
+    public Integer getCantBodega() {
         return cantBodega;
     }
 
-    public void setCantBodega(BigDecimal cantBodega) {
+    public void setCantBodega(Integer cantBodega) {
         this.cantBodega = cantBodega;
     }
 
@@ -96,7 +94,7 @@ public class Inventario implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Inventario[ idInventarioEquipo=" + idInventarioEquipo + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Inventario[ idInventarioEquipo=" + idInventarioEquipo + " ]";
     }
     
 }

@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,11 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_PACIENTE")
-    private BigDecimal idPaciente;
+    private Integer idPaciente;
     @Column(name = "NOMBRES_PACIENTE")
     private String nombresPaciente;
     @Column(name = "APELLIDOS_PACIENTE")
@@ -60,15 +58,15 @@ public class Paciente implements Serializable {
     public Paciente() {
     }
 
-    public Paciente(BigDecimal idPaciente) {
+    public Paciente(Integer idPaciente) {
         this.idPaciente = idPaciente;
     }
 
-    public BigDecimal getIdPaciente() {
+    public Integer getIdPaciente() {
         return idPaciente;
     }
 
-    public void setIdPaciente(BigDecimal idPaciente) {
+    public void setIdPaciente(Integer idPaciente) {
         this.idPaciente = idPaciente;
     }
 
@@ -152,7 +150,7 @@ public class Paciente implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Paciente[ idPaciente=" + idPaciente + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Paciente[ idPaciente=" + idPaciente + " ]";
     }
     
 }

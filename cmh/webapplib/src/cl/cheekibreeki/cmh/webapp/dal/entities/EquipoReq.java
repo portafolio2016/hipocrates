@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,13 +31,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class EquipoReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_EQUIPO_REQ")
-    private BigDecimal idEquipoReq;
+    private Integer idEquipoReq;
     @Column(name = "CANTIDAD")
-    private BigDecimal cantidad;
+    private Integer cantidad;
     @JoinColumn(name = "ID_PRESTACION", referencedColumnName = "ID_PRESTACION")
     @ManyToOne
     private Prestacion idPrestacion;
@@ -49,23 +47,23 @@ public class EquipoReq implements Serializable {
     public EquipoReq() {
     }
 
-    public EquipoReq(BigDecimal idEquipoReq) {
+    public EquipoReq(Integer idEquipoReq) {
         this.idEquipoReq = idEquipoReq;
     }
 
-    public BigDecimal getIdEquipoReq() {
+    public Integer getIdEquipoReq() {
         return idEquipoReq;
     }
 
-    public void setIdEquipoReq(BigDecimal idEquipoReq) {
+    public void setIdEquipoReq(Integer idEquipoReq) {
         this.idEquipoReq = idEquipoReq;
     }
 
-    public BigDecimal getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(BigDecimal cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -107,7 +105,7 @@ public class EquipoReq implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.EquipoReq[ idEquipoReq=" + idEquipoReq + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.EquipoReq[ idEquipoReq=" + idEquipoReq + " ]";
     }
     
 }

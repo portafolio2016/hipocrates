@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -36,13 +35,12 @@ import javax.xml.bind.annotation.XmlTransient;
 public class ResAtencion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_RESULTADO_ATENCION")
-    private BigDecimal idResultadoAtencion;
+    private Integer idResultadoAtencion;
     @Column(name = "ATENCION_ABIERTA")
-    private BigDecimal atencionAbierta;
+    private Integer atencionAbierta;
     @Column(name = "COMENTARIO")
     private String comentario;
     @JoinColumn(name = "ID_ATENCION_AGENDADA", referencedColumnName = "ID_ATENCION_AGEN")
@@ -60,23 +58,23 @@ public class ResAtencion implements Serializable {
     public ResAtencion() {
     }
 
-    public ResAtencion(BigDecimal idResultadoAtencion) {
+    public ResAtencion(Integer idResultadoAtencion) {
         this.idResultadoAtencion = idResultadoAtencion;
     }
 
-    public BigDecimal getIdResultadoAtencion() {
+    public Integer getIdResultadoAtencion() {
         return idResultadoAtencion;
     }
 
-    public void setIdResultadoAtencion(BigDecimal idResultadoAtencion) {
+    public void setIdResultadoAtencion(Integer idResultadoAtencion) {
         this.idResultadoAtencion = idResultadoAtencion;
     }
 
-    public BigDecimal getAtencionAbierta() {
+    public Integer getAtencionAbierta() {
         return atencionAbierta;
     }
 
-    public void setAtencionAbierta(BigDecimal atencionAbierta) {
+    public void setAtencionAbierta(Integer atencionAbierta) {
         this.atencionAbierta = atencionAbierta;
     }
 
@@ -143,7 +141,7 @@ public class ResAtencion implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.ResAtencion[ idResultadoAtencion=" + idResultadoAtencion + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.ResAtencion[ idResultadoAtencion=" + idResultadoAtencion + " ]";
     }
     
 }

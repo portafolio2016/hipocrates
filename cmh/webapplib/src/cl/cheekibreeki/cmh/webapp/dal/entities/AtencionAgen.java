@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -40,11 +39,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class AtencionAgen implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_ATENCION_AGEN")
-    private BigDecimal idAtencionAgen;
+    private Integer idAtencionAgen;
     @Column(name = "FECHA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
@@ -74,15 +72,15 @@ public class AtencionAgen implements Serializable {
     public AtencionAgen() {
     }
 
-    public AtencionAgen(BigDecimal idAtencionAgen) {
+    public AtencionAgen(Integer idAtencionAgen) {
         this.idAtencionAgen = idAtencionAgen;
     }
 
-    public BigDecimal getIdAtencionAgen() {
+    public Integer getIdAtencionAgen() {
         return idAtencionAgen;
     }
 
-    public void setIdAtencionAgen(BigDecimal idAtencionAgen) {
+    public void setIdAtencionAgen(Integer idAtencionAgen) {
         this.idAtencionAgen = idAtencionAgen;
     }
 
@@ -181,7 +179,7 @@ public class AtencionAgen implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.AtencionAgen[ idAtencionAgen=" + idAtencionAgen + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.AtencionAgen[ idAtencionAgen=" + idAtencionAgen + " ]";
     }
     
 }

@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -34,11 +33,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Funcionario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_FUNCIONARIO")
-    private BigDecimal idFuncionario;
+    private Integer idFuncionario;
     @JoinColumn(name = "ID_CARGO_FUNCI", referencedColumnName = "ID_CARGO_FUNCI")
     @ManyToOne
     private Cargo idCargoFunci;
@@ -51,15 +49,15 @@ public class Funcionario implements Serializable {
     public Funcionario() {
     }
 
-    public Funcionario(BigDecimal idFuncionario) {
+    public Funcionario(Integer idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
 
-    public BigDecimal getIdFuncionario() {
+    public Integer getIdFuncionario() {
         return idFuncionario;
     }
 
-    public void setIdFuncionario(BigDecimal idFuncionario) {
+    public void setIdFuncionario(Integer idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
 
@@ -110,7 +108,7 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Funcionario[ idFuncionario=" + idFuncionario + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Funcionario[ idFuncionario=" + idFuncionario + " ]";
     }
     
 }

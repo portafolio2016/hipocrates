@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,11 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class EstadoAten implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_ESTADO_ATENCION")
-    private BigDecimal idEstadoAtencion;
+    private Integer idEstadoAtencion;
     @Column(name = "NOM_ESTADO_ATEN")
     private String nomEstadoAten;
     @OneToMany(mappedBy = "idEstadoAtencion")
@@ -46,15 +44,15 @@ public class EstadoAten implements Serializable {
     public EstadoAten() {
     }
 
-    public EstadoAten(BigDecimal idEstadoAtencion) {
+    public EstadoAten(Integer idEstadoAtencion) {
         this.idEstadoAtencion = idEstadoAtencion;
     }
 
-    public BigDecimal getIdEstadoAtencion() {
+    public Integer getIdEstadoAtencion() {
         return idEstadoAtencion;
     }
 
-    public void setIdEstadoAtencion(BigDecimal idEstadoAtencion) {
+    public void setIdEstadoAtencion(Integer idEstadoAtencion) {
         this.idEstadoAtencion = idEstadoAtencion;
     }
 
@@ -97,7 +95,7 @@ public class EstadoAten implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.EstadoAten[ idEstadoAtencion=" + idEstadoAtencion + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.EstadoAten[ idEstadoAtencion=" + idEstadoAtencion + " ]";
     }
     
 }

@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,11 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Especialidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_ESPECIALIDAD")
-    private BigDecimal idEspecialidad;
+    private Integer idEspecialidad;
     @Column(name = "NOM_ESPECIALIDAD")
     private String nomEspecialidad;
     @OneToMany(mappedBy = "idEspecialidad")
@@ -48,15 +46,15 @@ public class Especialidad implements Serializable {
     public Especialidad() {
     }
 
-    public Especialidad(BigDecimal idEspecialidad) {
+    public Especialidad(Integer idEspecialidad) {
         this.idEspecialidad = idEspecialidad;
     }
 
-    public BigDecimal getIdEspecialidad() {
+    public Integer getIdEspecialidad() {
         return idEspecialidad;
     }
 
-    public void setIdEspecialidad(BigDecimal idEspecialidad) {
+    public void setIdEspecialidad(Integer idEspecialidad) {
         this.idEspecialidad = idEspecialidad;
     }
 
@@ -108,7 +106,7 @@ public class Especialidad implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Especialidad[ idEspecialidad=" + idEspecialidad + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Especialidad[ idEspecialidad=" + idEspecialidad + " ]";
     }
     
 }

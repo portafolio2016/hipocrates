@@ -64,11 +64,19 @@ public class ControllerTest {
     public void testFindById() {
         System.out.println("findById");
         Class clazz = Paciente.class;
-        Integer id = 2;
+        Integer id = 1;
         String expResult = "Pablo";
         Object result = Controller.findById(clazz, id);
         Paciente paciente2 = (Paciente)result;
-        assertEquals(expResult, paciente2.getNombresPaciente());
+        if(result == null){
+            fail("Retorno null");
+        }
+        if(paciente2.getNombresPaciente().equals(expResult)){
+            
+        }else{
+            System.out.println(paciente2.getNombresPaciente());
+            fail("Nombres no calzan");
+        }
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }

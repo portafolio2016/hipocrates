@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,11 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Cargo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_CARGO_FUNCI")
-    private BigDecimal idCargoFunci;
+    private Integer idCargoFunci;
     @Column(name = "NOMBRE_CARGO")
     private String nombreCargo;
     @OneToMany(mappedBy = "idCargoFunci")
@@ -46,15 +44,15 @@ public class Cargo implements Serializable {
     public Cargo() {
     }
 
-    public Cargo(BigDecimal idCargoFunci) {
+    public Cargo(Integer idCargoFunci) {
         this.idCargoFunci = idCargoFunci;
     }
 
-    public BigDecimal getIdCargoFunci() {
+    public Integer getIdCargoFunci() {
         return idCargoFunci;
     }
 
-    public void setIdCargoFunci(BigDecimal idCargoFunci) {
+    public void setIdCargoFunci(Integer idCargoFunci) {
         this.idCargoFunci = idCargoFunci;
     }
 
@@ -97,7 +95,7 @@ public class Cargo implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Cargo[ idCargoFunci=" + idCargoFunci + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Cargo[ idCargoFunci=" + idCargoFunci + " ]";
     }
     
 }

@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -37,11 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class OrdenAnalisis implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_ORDEN_ANALISIS")
-    private BigDecimal idOrdenAnalisis;
+    private Integer idOrdenAnalisis;
     @Column(name = "FECHA_HORA_EMISION")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHoraEmision;
@@ -54,15 +52,15 @@ public class OrdenAnalisis implements Serializable {
     public OrdenAnalisis() {
     }
 
-    public OrdenAnalisis(BigDecimal idOrdenAnalisis) {
+    public OrdenAnalisis(Integer idOrdenAnalisis) {
         this.idOrdenAnalisis = idOrdenAnalisis;
     }
 
-    public BigDecimal getIdOrdenAnalisis() {
+    public Integer getIdOrdenAnalisis() {
         return idOrdenAnalisis;
     }
 
-    public void setIdOrdenAnalisis(BigDecimal idOrdenAnalisis) {
+    public void setIdOrdenAnalisis(Integer idOrdenAnalisis) {
         this.idOrdenAnalisis = idOrdenAnalisis;
     }
 
@@ -113,7 +111,7 @@ public class OrdenAnalisis implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.OrdenAnalisis[ idOrdenAnalisis=" + idOrdenAnalisis + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.OrdenAnalisis[ idOrdenAnalisis=" + idOrdenAnalisis + " ]";
     }
     
 }

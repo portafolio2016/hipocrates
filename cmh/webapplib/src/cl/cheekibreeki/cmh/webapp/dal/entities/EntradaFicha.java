@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,11 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class EntradaFicha implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_ENTRADA_FICHA")
-    private BigDecimal idEntradaFicha;
+    private Integer idEntradaFicha;
     @Column(name = "NOMBRE_ENTRADA")
     private String nombreEntrada;
     @Column(name = "CONTENIDO_ENTRADA")
@@ -56,15 +54,15 @@ public class EntradaFicha implements Serializable {
     public EntradaFicha() {
     }
 
-    public EntradaFicha(BigDecimal idEntradaFicha) {
+    public EntradaFicha(Integer idEntradaFicha) {
         this.idEntradaFicha = idEntradaFicha;
     }
 
-    public BigDecimal getIdEntradaFicha() {
+    public Integer getIdEntradaFicha() {
         return idEntradaFicha;
     }
 
-    public void setIdEntradaFicha(BigDecimal idEntradaFicha) {
+    public void setIdEntradaFicha(Integer idEntradaFicha) {
         this.idEntradaFicha = idEntradaFicha;
     }
 
@@ -122,7 +120,7 @@ public class EntradaFicha implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.EntradaFicha[ idEntradaFicha=" + idEntradaFicha + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.EntradaFicha[ idEntradaFicha=" + idEntradaFicha + " ]";
     }
     
 }

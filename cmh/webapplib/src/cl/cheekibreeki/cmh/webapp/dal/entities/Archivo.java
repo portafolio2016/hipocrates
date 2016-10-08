@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,11 +31,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Archivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_ARCHIVO")
-    private BigDecimal idArchivo;
+    private Integer idArchivo;
     @Column(name = "FILE_URI")
     private String fileUri;
     @JoinColumn(name = "ID_RESULTADO_ATENCION", referencedColumnName = "ID_RESULTADO_ATENCION")
@@ -46,15 +44,15 @@ public class Archivo implements Serializable {
     public Archivo() {
     }
 
-    public Archivo(BigDecimal idArchivo) {
+    public Archivo(Integer idArchivo) {
         this.idArchivo = idArchivo;
     }
 
-    public BigDecimal getIdArchivo() {
+    public Integer getIdArchivo() {
         return idArchivo;
     }
 
-    public void setIdArchivo(BigDecimal idArchivo) {
+    public void setIdArchivo(Integer idArchivo) {
         this.idArchivo = idArchivo;
     }
 
@@ -96,7 +94,7 @@ public class Archivo implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Archivo[ idArchivo=" + idArchivo + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Archivo[ idArchivo=" + idArchivo + " ]";
     }
     
 }

@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -38,11 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Pago implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_PAGO")
-    private BigDecimal idPago;
+    private Integer idPago;
     @Column(name = "HORA_PAGO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horaPago;
@@ -61,15 +59,15 @@ public class Pago implements Serializable {
     public Pago() {
     }
 
-    public Pago(BigDecimal idPago) {
+    public Pago(Integer idPago) {
         this.idPago = idPago;
     }
 
-    public BigDecimal getIdPago() {
+    public Integer getIdPago() {
         return idPago;
     }
 
-    public void setIdPago(BigDecimal idPago) {
+    public void setIdPago(Integer idPago) {
         this.idPago = idPago;
     }
 
@@ -136,7 +134,7 @@ public class Pago implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.Pago[ idPago=" + idPago + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.Pago[ idPago=" + idPago + " ]";
     }
     
 }

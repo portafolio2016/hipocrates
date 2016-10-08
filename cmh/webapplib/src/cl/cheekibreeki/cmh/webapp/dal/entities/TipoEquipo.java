@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.webapp.dal.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,11 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class TipoEquipo implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_TIPO_EQUIPO")
-    private BigDecimal idTipoEquipo;
+    private Integer idTipoEquipo;
     @Column(name = "NOMBRE_TIPO_EQUIPO")
     private String nombreTipoEquipo;
     @OneToMany(mappedBy = "idTipoEquipo")
@@ -48,15 +46,15 @@ public class TipoEquipo implements Serializable {
     public TipoEquipo() {
     }
 
-    public TipoEquipo(BigDecimal idTipoEquipo) {
+    public TipoEquipo(Integer idTipoEquipo) {
         this.idTipoEquipo = idTipoEquipo;
     }
 
-    public BigDecimal getIdTipoEquipo() {
+    public Integer getIdTipoEquipo() {
         return idTipoEquipo;
     }
 
-    public void setIdTipoEquipo(BigDecimal idTipoEquipo) {
+    public void setIdTipoEquipo(Integer idTipoEquipo) {
         this.idTipoEquipo = idTipoEquipo;
     }
 
@@ -108,7 +106,7 @@ public class TipoEquipo implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.webapp.entities.TipoEquipo[ idTipoEquipo=" + idTipoEquipo + " ]";
+        return "cl.cheekibreeki.cmh.webapp.dal.entities.TipoEquipo[ idTipoEquipo=" + idTipoEquipo + " ]";
     }
     
 }
