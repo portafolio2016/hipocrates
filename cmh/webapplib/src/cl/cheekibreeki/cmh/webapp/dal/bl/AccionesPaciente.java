@@ -18,20 +18,24 @@ import java.util.Date;
  * @author pdelasotta
  */
 public class AccionesPaciente {
-    public boolean registrarPaciente(Paciente){
-        
+    public boolean registrarPaciente(Paciente paciente){
+        //TODO: implementar
+        return false;
     }
     
     public ArrayList<ResAtencion> obtenerExamenes(String rutPaciente){
-        
+        //TODO: implementar
+        return null;
     }
     
     public ArrayList<AtencionAgen> obtenerAtenciones(Date dia, Prestacion prestacion){
-        
+        //TODO: implementar
+        return null;
     }
     
     public ArrayList<AtencionAgen> obtenerAtenciones(PersMedico medico){
-        
+        //TODO: implementar
+        return null;
     }
     
     
