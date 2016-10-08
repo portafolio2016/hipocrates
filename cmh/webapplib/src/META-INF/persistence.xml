@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="webapplibPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Ficha</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Especialidad</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Prestacion</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.OrdenAnalisis</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.EntradaFicha</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.AtencionAgen</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.ResAtencion</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.TipoEquipo</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Archivo</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Inventario</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Turno</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Bono</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Paciente</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.PersMedico</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Cargo</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.TipoPres</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Pago</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.EstadoAten</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Personal</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Aseguradora</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Funcionario</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Caja</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.EquipoReq</class>
+    <class>cl.cheekibreeki.cmh.webapp.dal.entities.Devolucion</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+      <property name="javax.persistence.jdbc.user" value="dev"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="dev"/>
+    </properties>
+  </persistence-unit>
+</persistence>
