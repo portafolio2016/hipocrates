@@ -8,3 +8,4 @@
 /cmh/webapplib/build/
 
 *.LDB
+/cmh/webapplib/dist/
