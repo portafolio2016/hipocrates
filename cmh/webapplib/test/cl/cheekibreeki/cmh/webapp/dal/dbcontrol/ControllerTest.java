@@ -91,11 +91,20 @@ public class ControllerTest {
     @Test
     public void testRemove() {
         System.out.println("remove");
-        Class clazz = null;
-        Integer id = null;
-        Controller.remove(clazz, id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String query = "Paciente.findAll";
+        Map<String, Object> params = null;
+        Controller controller = new Controller();
+        List<? extends Object> result = controller.findByQuery(query, params);
+        int maxId = this.getMaxIdPaciente(result);
+        Class clazz = Paciente.class;
+        Integer id = maxId;
+        boolean resultVal = Controller.remove(clazz, id);
+        if(resultVal){
+            System.out.println("pass, max id:" + maxId);
+        }else{
+            fail("Remove no funcionando");
+        }
+        
     }
 
     /**
@@ -125,5 +134,15 @@ public class ControllerTest {
             fail("findByQuery.findByNombresPaciente no retornó nada");
         }
     }
-
+    
+    private int getMaxIdPaciente(List<? extends Object> pacientes){
+        int result = 0;
+        for (Object paciente1 : pacientes) {
+            Paciente p = (Paciente) paciente1;
+            if(p.getIdPaciente() > result){
+                result = p.getIdPaciente();
+            }
+        }
+        return result;
+    }
 }

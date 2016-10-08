@@ -44,17 +44,20 @@ public class Controller {
         }
     }
     
-    public static void remove(Class clazz, Integer id){
+    public static boolean remove(Class clazz, Integer id){
         EntityManager em = EMFProvider.getEMF().createEntityManager();
+        boolean returnVal = false;
         try {
             em.getTransaction().begin();
             Object o = em.find(clazz, id);
             em.remove(o);
             em.getTransaction().commit();
+            returnVal = true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally{
            em.close();
+           return returnVal;
         }
     }
     
