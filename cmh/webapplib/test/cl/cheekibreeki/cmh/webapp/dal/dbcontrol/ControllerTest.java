@@ -6,6 +6,9 @@
 package cl.cheekibreeki.cmh.webapp.dal.dbcontrol;
 
 import cl.cheekibreeki.cmh.webapp.dal.entities.Paciente;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,17 +47,17 @@ public class ControllerTest {
     }
 
     /**
-     * Test of merge method, of class Controller.
+     * Test of upsert method, of class Controller.
      */
     @Test
-    public void testMerge() {
-        System.out.println("merge");
+    public void testUpsert() {
+        System.out.println("upsert");
         Object obj = this.paciente;
         boolean expResult = true;
-        boolean result = Controller.merge(obj);
+        boolean result = Controller.upsert(obj);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        System.out.println("merge exitoso");
+        System.out.println("upsert exitoso");
     }
 
     /**
@@ -77,8 +80,50 @@ public class ControllerTest {
             System.out.println(paciente2.getNombresPaciente());
             fail("Nombres no calzan");
         }
+        
+    }
+
+
+
+    /**
+     * Test of remove method, of class Controller.
+     */
+    @Test
+    public void testRemove() {
+        System.out.println("remove");
+        Class clazz = null;
+        Integer id = null;
+        Controller.remove(clazz, id);
         // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of findByQuery method, of class Controller.
+     */
+    @Test
+    public void testFindByQuery() {
+        System.out.println("findByQuery");
+        String query = "Paciente.findAll";
+        Map<String, Object> params = null;
+        Controller instance = new Controller();
+//        List<? extends Object> expResult = null;
+        List<? extends Object> result = instance.findByQuery(query, params);
+        if(result.size() > 0){
+            System.out.println(result.toString());
+        }else{
+            fail("findByQuery All no retornó nada");
+        }
+        String query2 = "Paciente.findByNombresPaciente";
+        Map<String, Object> params2 = new HashMap<>();
+        params2.put("nombresPaciente", "Pablo");
+        Controller instance2 = new Controller();
+        List<? extends Object> result2 = instance2.findByQuery(query2, params2);
+        if(result2.size() > 0){
+            System.out.println(result2.toString());
+        }else{
+            fail("findByQuery.findByNombresPaciente no retornó nada");
+        }
     }
 
 }

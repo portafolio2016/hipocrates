@@ -5,14 +5,17 @@
  */
 package cl.cheekibreeki.cmh.webapp.dal.dbcontrol;
 
+import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
  * @author pdelasotta
  */
 public class Controller {
-    public static boolean merge(Object obj){
+    public static boolean upsert(Object obj){
         boolean success = false;
         EntityManager em = EMFProvider.getEMF().createEntityManager();
         try {
@@ -41,4 +44,38 @@ public class Controller {
         }
     }
     
+    public static void remove(Class clazz, Integer id){
+        EntityManager em = EMFProvider.getEMF().createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Object o = em.find(clazz, id);
+            em.remove(o);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally{
+           em.close();
+        }
+    }
+    
+    public List<? extends Object> findByQuery(String query, Map<String, Object> params){
+        EntityManager em = EMFProvider.getEMF().createEntityManager();
+        List ret = null;
+        try {
+            em.getEntityManagerFactory().getCache().evictAll();
+            Query q = em.createNamedQuery(query);
+            if(params != null){
+                for (Map.Entry<String, Object> param : params.entrySet()) {
+                    q.setParameter(param.getKey(), param.getValue());
+                }
+            }
+            ret = q.getResultList();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally{
+            em.close();
+        }
+        return ret;
+        
+    }
 }
