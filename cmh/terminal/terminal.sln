@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.DAL.UnitTests", "CheekiBreeki.CMH.Terminal.DAL.UnitTests\CheekiBreeki.CMH.Terminal.DAL.UnitTests.csproj", "{9798F4C4-41CA-4199-ACEE-617D6128FF1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.BL", "CheekiBreeki.CMH.Terminal.BL\CheekiBreeki.CMH.Terminal.BL.csproj", "{2CD187D1-FFC3-4C4E-8C93-746536109D92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.BL.UnitTests", "CheekiBreeki.CMH.Terminal.BL.UnitTests\CheekiBreeki.CMH.Terminal.BL.UnitTests.csproj", "{4EF6C0C0-04C9-43EC-806C-992F9A96A906}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{9798F4C4-41CA-4199-ACEE-617D6128FF1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9798F4C4-41CA-4199-ACEE-617D6128FF1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9798F4C4-41CA-4199-ACEE-617D6128FF1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD187D1-FFC3-4C4E-8C93-746536109D92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD187D1-FFC3-4C4E-8C93-746536109D92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD187D1-FFC3-4C4E-8C93-746536109D92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD187D1-FFC3-4C4E-8C93-746536109D92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EF6C0C0-04C9-43EC-806C-992F9A96A906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EF6C0C0-04C9-43EC-806C-992F9A96A906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EF6C0C0-04C9-43EC-806C-992F9A96A906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EF6C0C0-04C9-43EC-806C-992F9A96A906}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
