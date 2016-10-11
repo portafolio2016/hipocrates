@@ -23,7 +23,7 @@ public class AccionesPaciente {
         return false;
     }
     
-    public ArrayList<ResAtencion> obtenerExamenes(String rutPaciente){
+    public ArrayList<ResAtencion> obtenerExamenes(Paciente paciente){
         //TODO: implementar
         return null;
     }
@@ -33,8 +33,23 @@ public class AccionesPaciente {
         return null;
     }
     
-    public ArrayList<AtencionAgen> obtenerAtenciones(PersMedico medico){
+    public ArrayList<AtencionAgen> obtenerAtenciones(Date dia, PersMedico medico){
         //TODO: implementar
         return null;
+    }
+    
+    public boolean agendarAtencion(AtencionAgen atencion){
+        //TODO: implementar
+        return false;
+    }
+    
+    public ArrayList<AtencionAgen> obtenerAtencionesPendientes(String rut){
+        //TODO: implementar
+        return null;
+    }
+    
+    public boolean anularAtencion(AtencionAgen atencion){
+        //TODO: implementar
+        return false;
     }
 }

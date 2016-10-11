@@ -10,7 +10,8 @@ package cl.cheekibreeki.cmh.servpago;
  * @author pdelasotta
  */
 public class ServPago {
-    public void pagarMedicos(){
-        
+    public boolean pagarMedicos(){
+        //TODO: implementar
+        return false;
     }
 }
