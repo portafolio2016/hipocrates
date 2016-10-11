@@ -8,17 +8,14 @@
         <EntityTypeShape EntityType="Model.ARCHIVO" Width="1.5" PointX="14.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ASEGURADORA" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ATENCION_AGEN" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ATENCION_AGENDADA" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.BONO" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CAJA" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CARGO" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.DEVOLUCION" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ENTRADA_FICHA" Width="1.5" PointX="12" PointY="19.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.EQUIPO_REQ" Width="1.5" PointX="12" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ESP_PER_MEDICO" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ESPECIALIDAD" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ESTADO_ATEN" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ESTADO_ATENCION" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.FICHA" Width="1.5" PointX="9.75" PointY="19.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.FUNCIONARIO" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.INVENTARIO" Width="1.5" PointX="12" PointY="14.5" IsExpanded="true" />

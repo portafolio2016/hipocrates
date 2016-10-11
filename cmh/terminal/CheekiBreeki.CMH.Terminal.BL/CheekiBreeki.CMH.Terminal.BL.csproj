@@ -53,8 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccionesOperador.cs" />
+    <Compile Include="AccionesTerminal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultadoVerificacionSeguro.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
