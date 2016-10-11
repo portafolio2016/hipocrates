@@ -1,0 +1,1641 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ARCHIVO">
+          <Key>
+            <PropertyRef Name="ID_ARCHIVO" />
+          </Key>
+          <Property Name="ID_ARCHIVO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FILE_URI" Type="varchar2" MaxLength="50" />
+          <Property Name="ID_RESULTADO_ATENCION" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="ASEGURADORA">
+          <Key>
+            <PropertyRef Name="ID_ASEGURADORA" />
+          </Key>
+          <Property Name="ID_ASEGURADORA" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOM_ASEGURADORA" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ATENCION_AGEN">
+          <Key>
+            <PropertyRef Name="ID_ATENCION_AGEN" />
+          </Key>
+          <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="HORA" Type="date" />
+          <Property Name="OBSERVACIONES" Type="varchar2" MaxLength="50" />
+          <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_ESTADO_ATENCION" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="BONO">
+          <Key>
+            <PropertyRef Name="ID_BONO" />
+          </Key>
+          <Property Name="ID_BONO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CANT_BONO" Type="number" Precision="8" Scale="0" />
+          <Property Name="COD_ASEGURADORA" Type="varchar2" MaxLength="50" />
+          <Property Name="ID_ASEGURADORA" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="CAJA">
+          <Key>
+            <PropertyRef Name="ID_CAJA" />
+          </Key>
+          <Property Name="ID_CAJA" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FEC_HORA_CIERRE" Type="date" />
+          <Property Name="FEC_HORA_APERTURA" Type="date" />
+          <Property Name="ID_FUNCIONARIO" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="CARGO">
+          <Key>
+            <PropertyRef Name="ID_CARGO_FUNCI" />
+          </Key>
+          <Property Name="ID_CARGO_FUNCI" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_CARGO" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DEVOLUCION">
+          <Key>
+            <PropertyRef Name="ID_DEVOLUCION" />
+          </Key>
+          <Property Name="ID_DEVOLUCION" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="TIPO_DEVOLUCION" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ENTRADA_FICHA">
+          <Key>
+            <PropertyRef Name="ID_ENTRADA_FICHA" />
+          </Key>
+          <Property Name="ID_ENTRADA_FICHA" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_ENTRADA" Type="varchar2" MaxLength="50" />
+          <Property Name="CONTENIDO_ENTRADA" Type="varchar2" MaxLength="50" />
+          <Property Name="FECHA_ENTRADA" Type="date" />
+          <Property Name="ID_FICHA" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="EQUIPO_REQ">
+          <Key>
+            <PropertyRef Name="ID_EQUIPO_REQ" />
+          </Key>
+          <Property Name="ID_EQUIPO_REQ" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_TIPO_EQUIPO" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="ESPECIALIDAD">
+          <Key>
+            <PropertyRef Name="ID_ESPECIALIDAD" />
+          </Key>
+          <Property Name="ID_ESPECIALIDAD" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOM_ESPECIALIDAD" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ESTADO_ATEN">
+          <Key>
+            <PropertyRef Name="ID_ESTADO_ATENCION" />
+          </Key>
+          <Property Name="ID_ESTADO_ATENCION" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOM_ESTADO_ATEN" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FICHA">
+          <Key>
+            <PropertyRef Name="ID_FICHA" />
+          </Key>
+          <Property Name="ID_FICHA" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FEC_NAC" Type="date" />
+          <Property Name="SEXO" Type="char" MaxLength="1" />
+          <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="FUNCIONARIO">
+          <Key>
+            <PropertyRef Name="ID_FUNCIONARIO" />
+          </Key>
+          <Property Name="ID_FUNCIONARIO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_CARGO_FUNCI" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="INVENTARIO">
+          <Key>
+            <PropertyRef Name="ID_INVENTARIO_EQUIPO" />
+          </Key>
+          <Property Name="ID_INVENTARIO_EQUIPO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="CANT_BODEGA" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_TIPO_EQUIPO" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="ORDEN_ANALISIS">
+          <Key>
+            <PropertyRef Name="ID_ORDEN_ANALISIS" />
+          </Key>
+          <Property Name="ID_ORDEN_ANALISIS" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FECHA_HORA_EMISION" Type="date" />
+          <Property Name="FECHA_HORA_RECEP" Type="date" />
+        </EntityType>
+        <EntityType Name="PACIENTE">
+          <Key>
+            <PropertyRef Name="ID_PACIENTE" />
+          </Key>
+          <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOMBRES_PACIENTE" Type="varchar2" MaxLength="50" />
+          <Property Name="APELLIDOS_PACIENTE" Type="varchar2" MaxLength="50" />
+          <Property Name="RUT" Type="varchar2" MaxLength="50" />
+          <Property Name="HASHED_PASS" Type="varchar2" MaxLength="50" />
+          <Property Name="EMAIL_PACIENTE" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PAGO">
+          <Key>
+            <PropertyRef Name="ID_PAGO" />
+          </Key>
+          <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="HORA_PAGO" Type="date" />
+          <Property Name="ID_BONO" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_CAJA" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_DEVOLUCION" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="PERS_MEDICO">
+          <Key>
+            <PropertyRef Name="ID_PERSONAL_MEDICO" />
+          </Key>
+          <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_ESPECIALIDAD" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_TURNO" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="PERSONAL">
+          <Key>
+            <PropertyRef Name="ID_PERSONAL" />
+          </Key>
+          <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOMBRES" Type="varchar2" MaxLength="50" />
+          <Property Name="APELLIDOS" Type="varchar2" MaxLength="50" />
+          <Property Name="REMUNERACION" Type="number" Precision="8" Scale="0" />
+          <Property Name="HASHED_PASS" Type="varchar2" MaxLength="50" />
+          <Property Name="PORCENT_DESCUENTO" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="PRESTACION">
+          <Key>
+            <PropertyRef Name="ID_PRESTACION" />
+          </Key>
+          <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOM_PRESTACION" Type="number" Precision="8" Scale="0" />
+          <Property Name="PRECIO_PRESTACION" Type="number" Precision="8" Scale="0" />
+          <Property Name="CODIGO_PRESTACION" Type="varchar2" MaxLength="50" />
+          <Property Name="ID_ESPECIALIDAD" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="RES_ATENCION">
+          <Key>
+            <PropertyRef Name="ID_RESULTADO_ATENCION" />
+          </Key>
+          <Property Name="ID_RESULTADO_ATENCION" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ATENCION_ABIERTA" Type="number" Precision="8" Scale="0" />
+          <Property Name="COMENTARIO" Type="varchar2" MaxLength="50" />
+          <Property Name="ID_ATENCION_AGENDADA" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_ORDEN_ANALISIS" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="TIPO_EQUIPO">
+          <Key>
+            <PropertyRef Name="ID_TIPO_EQUIPO" />
+          </Key>
+          <Property Name="ID_TIPO_EQUIPO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_TIPO_EQUIPO" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TIPO_PRES">
+          <Key>
+            <PropertyRef Name="ID_TIPO_PRESTACION" />
+          </Key>
+          <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOM_TIPO_PREST" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TURNO">
+          <Key>
+            <PropertyRef Name="ID_TURNO" />
+          </Key>
+          <Property Name="ID_TURNO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="HORA_INI" Type="date" />
+          <Property Name="HORA_FIN" Type="date" />
+          <Property Name="NOMBRE_TURNO" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_ASEGURADORA_BONO">
+          <End Role="ASEGURADORA" Type="Self.ASEGURADORA" Multiplicity="0..1" />
+          <End Role="BONO" Type="Self.BONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASEGURADORA">
+              <PropertyRef Name="ID_ASEGURADORA" />
+            </Principal>
+            <Dependent Role="BONO">
+              <PropertyRef Name="ID_ASEGURADORA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_PRESTACION">
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_RES_ATENCION">
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="0..1" />
+          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
+            </Principal>
+            <Dependent Role="RES_ATENCION">
+              <PropertyRef Name="ID_ATENCION_AGENDADA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BONO_PAGO">
+          <End Role="BONO" Type="Self.BONO" Multiplicity="0..1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BONO">
+              <PropertyRef Name="ID_BONO" />
+            </Principal>
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_BONO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CAJA_PAGO">
+          <End Role="CAJA" Type="Self.CAJA" Multiplicity="0..1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAJA">
+              <PropertyRef Name="ID_CAJA" />
+            </Principal>
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_CAJA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARGO_FUNCIONARIO">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="0..1" />
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO">
+              <PropertyRef Name="ID_CARGO_FUNCI" />
+            </Principal>
+            <Dependent Role="FUNCIONARIO">
+              <PropertyRef Name="ID_CARGO_FUNCI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEVOLUCION_PAGO">
+          <End Role="DEVOLUCION" Type="Self.DEVOLUCION" Multiplicity="0..1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEVOLUCION">
+              <PropertyRef Name="ID_DEVOLUCION" />
+            </Principal>
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_DEVOLUCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EJECUTA_RES_ATENCION">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="RES_ATENCION">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ENTRADA_FICHA_FICHA">
+          <End Role="FICHA" Type="Self.FICHA" Multiplicity="0..1" />
+          <End Role="ENTRADA_FICHA" Type="Self.ENTRADA_FICHA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FICHA">
+              <PropertyRef Name="ID_FICHA" />
+            </Principal>
+            <Dependent Role="ENTRADA_FICHA">
+              <PropertyRef Name="ID_FICHA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_REQ_PRESTACION">
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="0..1" />
+          <End Role="EQUIPO_REQ" Type="Self.EQUIPO_REQ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Principal>
+            <Dependent Role="EQUIPO_REQ">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_REQ_TIPO_EQUIPO">
+          <End Role="TIPO_EQUIPO" Type="Self.TIPO_EQUIPO" Multiplicity="0..1" />
+          <End Role="EQUIPO_REQ" Type="Self.EQUIPO_REQ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_EQUIPO">
+              <PropertyRef Name="ID_TIPO_EQUIPO" />
+            </Principal>
+            <Dependent Role="EQUIPO_REQ">
+              <PropertyRef Name="ID_TIPO_EQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESPECIALIDAD_PRESTACION">
+          <End Role="ESPECIALIDAD" Type="Self.ESPECIALIDAD" Multiplicity="0..1" />
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIALIDAD">
+              <PropertyRef Name="ID_ESPECIALIDAD" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID_ESPECIALIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESTADO_ATEN_ATENCION_AGEN">
+          <End Role="ESTADO_ATEN" Type="Self.ESTADO_ATEN" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_ATEN">
+              <PropertyRef Name="ID_ESTADO_ATENCION" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_ESTADO_ATENCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_CAJA">
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
+          <End Role="CAJA" Type="Self.CAJA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FUNCIONARIO">
+              <PropertyRef Name="ID_FUNCIONARIO" />
+            </Principal>
+            <Dependent Role="CAJA">
+              <PropertyRef Name="ID_FUNCIONARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_ANALISIS_RES_ATENCION">
+          <End Role="ORDEN_ANALISIS" Type="Self.ORDEN_ANALISIS" Multiplicity="0..1" />
+          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_ANALISIS">
+              <PropertyRef Name="ID_ORDEN_ANALISIS" />
+            </Principal>
+            <Dependent Role="RES_ATENCION">
+              <PropertyRef Name="ID_ORDEN_ANALISIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACIENTE_ATENCION_AGEN">
+          <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACIENTE">
+              <PropertyRef Name="ID_PACIENTE" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PACIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACIENTE_FICHA">
+          <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="0..1" />
+          <End Role="FICHA" Type="Self.FICHA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACIENTE">
+              <PropertyRef Name="ID_PACIENTE" />
+            </Principal>
+            <Dependent Role="FICHA">
+              <PropertyRef Name="ID_PACIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAGO_ATENCION_AGEN">
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAGO">
+              <PropertyRef Name="ID_PAGO" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERS_MEDICO_ESPECIALIDAD">
+          <End Role="ESPECIALIDAD" Type="Self.ESPECIALIDAD" Multiplicity="0..1" />
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIALIDAD">
+              <PropertyRef Name="ID_ESPECIALIDAD" />
+            </Principal>
+            <Dependent Role="PERS_MEDICO">
+              <PropertyRef Name="ID_ESPECIALIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONAL_FUNCIONARIO">
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="0..1" />
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAL">
+              <PropertyRef Name="ID_PERSONAL" />
+            </Principal>
+            <Dependent Role="FUNCIONARIO">
+              <PropertyRef Name="ID_PERSONAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONAL_PERS_MEDICO">
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="0..1" />
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAL">
+              <PropertyRef Name="ID_PERSONAL" />
+            </Principal>
+            <Dependent Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RES_ATENCION_ARCHIVO">
+          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="0..1" />
+          <End Role="ARCHIVO" Type="Self.ARCHIVO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RES_ATENCION">
+              <PropertyRef Name="ID_RESULTADO_ATENCION" />
+            </Principal>
+            <Dependent Role="ARCHIVO">
+              <PropertyRef Name="ID_RESULTADO_ATENCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITA_ATENCION_AGEN">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_EQUIPO_INVENTARIO">
+          <End Role="TIPO_EQUIPO" Type="Self.TIPO_EQUIPO" Multiplicity="0..1" />
+          <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_EQUIPO">
+              <PropertyRef Name="ID_TIPO_EQUIPO" />
+            </Principal>
+            <Dependent Role="INVENTARIO">
+              <PropertyRef Name="ID_TIPO_EQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_PRES_PRESTACION">
+          <End Role="TIPO_PRES" Type="Self.TIPO_PRES" Multiplicity="0..1" />
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRES">
+              <PropertyRef Name="ID_TIPO_PRESTACION" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID_TIPO_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TURNO_PERS_MEDICO">
+          <End Role="TURNO" Type="Self.TURNO" Multiplicity="0..1" />
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TURNO">
+              <PropertyRef Name="ID_TURNO" />
+            </Principal>
+            <Dependent Role="PERS_MEDICO">
+              <PropertyRef Name="ID_TURNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="ARCHIVO" EntityType="Self.ARCHIVO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="ASEGURADORA" EntityType="Self.ASEGURADORA" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="ATENCION_AGEN" EntityType="Self.ATENCION_AGEN" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="BONO" EntityType="Self.BONO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="CAJA" EntityType="Self.CAJA" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="CARGO" EntityType="Self.CARGO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="DEVOLUCION" EntityType="Self.DEVOLUCION" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="ENTRADA_FICHA" EntityType="Self.ENTRADA_FICHA" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="EQUIPO_REQ" EntityType="Self.EQUIPO_REQ" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="ESPECIALIDAD" EntityType="Self.ESPECIALIDAD" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="ESTADO_ATEN" EntityType="Self.ESTADO_ATEN" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="FICHA" EntityType="Self.FICHA" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="INVENTARIO" EntityType="Self.INVENTARIO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="ORDEN_ANALISIS" EntityType="Self.ORDEN_ANALISIS" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="PACIENTE" EntityType="Self.PACIENTE" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="PAGO" EntityType="Self.PAGO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="PERS_MEDICO" EntityType="Self.PERS_MEDICO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="PERSONAL" EntityType="Self.PERSONAL" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="PRESTACION" EntityType="Self.PRESTACION" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="RES_ATENCION" EntityType="Self.RES_ATENCION" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="TIPO_EQUIPO" EntityType="Self.TIPO_EQUIPO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="TIPO_PRES" EntityType="Self.TIPO_PRES" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="TURNO" EntityType="Self.TURNO" Schema="DEV" store:Type="Tables" />
+          <AssociationSet Name="FK_ASEGURADORA_BONO" Association="Self.FK_ASEGURADORA_BONO">
+            <End Role="ASEGURADORA" EntitySet="ASEGURADORA" />
+            <End Role="BONO" EntitySet="BONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_PRESTACION" Association="Self.FK_ATENCION_AGEN_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_RES_ATENCION" Association="Self.FK_ATENCION_AGEN_RES_ATENCION">
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BONO_PAGO" Association="Self.FK_BONO_PAGO">
+            <End Role="BONO" EntitySet="BONO" />
+            <End Role="PAGO" EntitySet="PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CAJA_PAGO" Association="Self.FK_CAJA_PAGO">
+            <End Role="CAJA" EntitySet="CAJA" />
+            <End Role="PAGO" EntitySet="PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGO_FUNCIONARIO" Association="Self.FK_CARGO_FUNCIONARIO">
+            <End Role="CARGO" EntitySet="CARGO" />
+            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEVOLUCION_PAGO" Association="Self.FK_DEVOLUCION_PAGO">
+            <End Role="DEVOLUCION" EntitySet="DEVOLUCION" />
+            <End Role="PAGO" EntitySet="PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EJECUTA_RES_ATENCION" Association="Self.FK_EJECUTA_RES_ATENCION">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ENTRADA_FICHA_FICHA" Association="Self.FK_ENTRADA_FICHA_FICHA">
+            <End Role="FICHA" EntitySet="FICHA" />
+            <End Role="ENTRADA_FICHA" EntitySet="ENTRADA_FICHA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_REQ_PRESTACION" Association="Self.FK_EQUIPO_REQ_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="EQUIPO_REQ" EntitySet="EQUIPO_REQ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_REQ_TIPO_EQUIPO" Association="Self.FK_EQUIPO_REQ_TIPO_EQUIPO">
+            <End Role="TIPO_EQUIPO" EntitySet="TIPO_EQUIPO" />
+            <End Role="EQUIPO_REQ" EntitySet="EQUIPO_REQ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESPECIALIDAD_PRESTACION" Association="Self.FK_ESPECIALIDAD_PRESTACION">
+            <End Role="ESPECIALIDAD" EntitySet="ESPECIALIDAD" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESTADO_ATEN_ATENCION_AGEN" Association="Self.FK_ESTADO_ATEN_ATENCION_AGEN">
+            <End Role="ESTADO_ATEN" EntitySet="ESTADO_ATEN" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_CAJA" Association="Self.FK_FUNCIONARIO_CAJA">
+            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+            <End Role="CAJA" EntitySet="CAJA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_ANALISIS_RES_ATENCION" Association="Self.FK_ORDEN_ANALISIS_RES_ATENCION">
+            <End Role="ORDEN_ANALISIS" EntitySet="ORDEN_ANALISIS" />
+            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACIENTE_ATENCION_AGEN" Association="Self.FK_PACIENTE_ATENCION_AGEN">
+            <End Role="PACIENTE" EntitySet="PACIENTE" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACIENTE_FICHA" Association="Self.FK_PACIENTE_FICHA">
+            <End Role="PACIENTE" EntitySet="PACIENTE" />
+            <End Role="FICHA" EntitySet="FICHA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAGO_ATENCION_AGEN" Association="Self.FK_PAGO_ATENCION_AGEN">
+            <End Role="PAGO" EntitySet="PAGO" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERS_MEDICO_ESPECIALIDAD" Association="Self.FK_PERS_MEDICO_ESPECIALIDAD">
+            <End Role="ESPECIALIDAD" EntitySet="ESPECIALIDAD" />
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONAL_FUNCIONARIO" Association="Self.FK_PERSONAL_FUNCIONARIO">
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
+            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONAL_PERS_MEDICO" Association="Self.FK_PERSONAL_PERS_MEDICO">
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RES_ATENCION_ARCHIVO" Association="Self.FK_RES_ATENCION_ARCHIVO">
+            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+            <End Role="ARCHIVO" EntitySet="ARCHIVO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITA_ATENCION_AGEN" Association="Self.FK_SOLICITA_ATENCION_AGEN">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_EQUIPO_INVENTARIO" Association="Self.FK_TIPO_EQUIPO_INVENTARIO">
+            <End Role="TIPO_EQUIPO" EntitySet="TIPO_EQUIPO" />
+            <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_PRES_PRESTACION" Association="Self.FK_TIPO_PRES_PRESTACION">
+            <End Role="TIPO_PRES" EntitySet="TIPO_PRES" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TURNO_PERS_MEDICO" Association="Self.FK_TURNO_PERS_MEDICO">
+            <End Role="TURNO" EntitySet="TURNO" />
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ARCHIVO">
+          <Key>
+            <PropertyRef Name="ID_ARCHIVO" />
+          </Key>
+          <Property Name="ID_ARCHIVO" Type="Int32" Nullable="false" />
+          <Property Name="FILE_URI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_RESULTADO_ATENCION" Type="Int32" />
+          <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_RES_ATENCION_ARCHIVO" FromRole="ARCHIVO" ToRole="RES_ATENCION" />
+        </EntityType>
+        <EntityType Name="ASEGURADORA">
+          <Key>
+            <PropertyRef Name="ID_ASEGURADORA" />
+          </Key>
+          <Property Name="ID_ASEGURADORA" Type="Int32" Nullable="false" />
+          <Property Name="NOM_ASEGURADORA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BONO" Relationship="Self.FK_ASEGURADORA_BONO" FromRole="ASEGURADORA" ToRole="BONO" />
+        </EntityType>
+        <EntityType Name="ATENCION_AGEN">
+          <Key>
+            <PropertyRef Name="ID_ATENCION_AGEN" />
+          </Key>
+          <Property Name="ID_ATENCION_AGEN" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" />
+          <Property Name="HORA" Type="DateTime" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_PACIENTE" Type="Int32" />
+          <Property Name="ID_PERSONAL_MEDICO" Type="Int32" />
+          <Property Name="ID_PAGO" Type="Int32" />
+          <Property Name="ID_PRESTACION" Type="Int32" />
+          <Property Name="ID_ESTADO_ATENCION" Type="Int32" />
+          <NavigationProperty Name="PRESTACION" Relationship="Self.FK_ATENCION_AGEN_PRESTACION" FromRole="ATENCION_AGEN" ToRole="PRESTACION" />
+          <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_ATENCION_AGEN_RES_ATENCION" FromRole="ATENCION_AGEN" ToRole="RES_ATENCION" />
+          <NavigationProperty Name="ESTADO_ATEN" Relationship="Self.FK_ESTADO_ATEN_ATENCION_AGEN" FromRole="ATENCION_AGEN" ToRole="ESTADO_ATEN" />
+          <NavigationProperty Name="PACIENTE" Relationship="Self.FK_PACIENTE_ATENCION_AGEN" FromRole="ATENCION_AGEN" ToRole="PACIENTE" />
+          <NavigationProperty Name="PAGO" Relationship="Self.FK_PAGO_ATENCION_AGEN" FromRole="ATENCION_AGEN" ToRole="PAGO" />
+          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_SOLICITA_ATENCION_AGEN" FromRole="ATENCION_AGEN" ToRole="PERS_MEDICO" />
+        </EntityType>
+        <EntityType Name="BONO">
+          <Key>
+            <PropertyRef Name="ID_BONO" />
+          </Key>
+          <Property Name="ID_BONO" Type="Int32" Nullable="false" />
+          <Property Name="CANT_BONO" Type="Int32" />
+          <Property Name="COD_ASEGURADORA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ASEGURADORA" Type="Int32" />
+          <NavigationProperty Name="ASEGURADORA" Relationship="Self.FK_ASEGURADORA_BONO" FromRole="BONO" ToRole="ASEGURADORA" />
+          <NavigationProperty Name="PAGO" Relationship="Self.FK_BONO_PAGO" FromRole="BONO" ToRole="PAGO" />
+        </EntityType>
+        <EntityType Name="CAJA">
+          <Key>
+            <PropertyRef Name="ID_CAJA" />
+          </Key>
+          <Property Name="ID_CAJA" Type="Int32" Nullable="false" />
+          <Property Name="FEC_HORA_CIERRE" Type="DateTime" />
+          <Property Name="FEC_HORA_APERTURA" Type="DateTime" />
+          <Property Name="ID_FUNCIONARIO" Type="Int32" />
+          <NavigationProperty Name="PAGO" Relationship="Self.FK_CAJA_PAGO" FromRole="CAJA" ToRole="PAGO" />
+          <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_FUNCIONARIO_CAJA" FromRole="CAJA" ToRole="FUNCIONARIO" />
+        </EntityType>
+        <EntityType Name="CARGO">
+          <Key>
+            <PropertyRef Name="ID_CARGO_FUNCI" />
+          </Key>
+          <Property Name="ID_CARGO_FUNCI" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_CARGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_CARGO_FUNCIONARIO" FromRole="CARGO" ToRole="FUNCIONARIO" />
+        </EntityType>
+        <EntityType Name="DEVOLUCION">
+          <Key>
+            <PropertyRef Name="ID_DEVOLUCION" />
+          </Key>
+          <Property Name="ID_DEVOLUCION" Type="Int32" Nullable="false" />
+          <Property Name="TIPO_DEVOLUCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PAGO" Relationship="Self.FK_DEVOLUCION_PAGO" FromRole="DEVOLUCION" ToRole="PAGO" />
+        </EntityType>
+        <EntityType Name="ENTRADA_FICHA">
+          <Key>
+            <PropertyRef Name="ID_ENTRADA_FICHA" />
+          </Key>
+          <Property Name="ID_ENTRADA_FICHA" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_ENTRADA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONTENIDO_ENTRADA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_ENTRADA" Type="DateTime" />
+          <Property Name="ID_FICHA" Type="Int32" />
+          <NavigationProperty Name="FICHA" Relationship="Self.FK_ENTRADA_FICHA_FICHA" FromRole="ENTRADA_FICHA" ToRole="FICHA" />
+        </EntityType>
+        <EntityType Name="EQUIPO_REQ">
+          <Key>
+            <PropertyRef Name="ID_EQUIPO_REQ" />
+          </Key>
+          <Property Name="ID_EQUIPO_REQ" Type="Int32" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="ID_TIPO_EQUIPO" Type="Int32" />
+          <Property Name="ID_PRESTACION" Type="Int32" />
+          <NavigationProperty Name="PRESTACION" Relationship="Self.FK_EQUIPO_REQ_PRESTACION" FromRole="EQUIPO_REQ" ToRole="PRESTACION" />
+          <NavigationProperty Name="TIPO_EQUIPO" Relationship="Self.FK_EQUIPO_REQ_TIPO_EQUIPO" FromRole="EQUIPO_REQ" ToRole="TIPO_EQUIPO" />
+        </EntityType>
+        <EntityType Name="ESPECIALIDAD">
+          <Key>
+            <PropertyRef Name="ID_ESPECIALIDAD" />
+          </Key>
+          <Property Name="ID_ESPECIALIDAD" Type="Int32" Nullable="false" />
+          <Property Name="NOM_ESPECIALIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PRESTACION" Relationship="Self.FK_ESPECIALIDAD_PRESTACION" FromRole="ESPECIALIDAD" ToRole="PRESTACION" />
+          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_PERS_MEDICO_ESPECIALIDAD" FromRole="ESPECIALIDAD" ToRole="PERS_MEDICO" />
+        </EntityType>
+        <EntityType Name="ESTADO_ATEN">
+          <Key>
+            <PropertyRef Name="ID_ESTADO_ATENCION" />
+          </Key>
+          <Property Name="ID_ESTADO_ATENCION" Type="Int32" Nullable="false" />
+          <Property Name="NOM_ESTADO_ATEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ESTADO_ATEN_ATENCION_AGEN" FromRole="ESTADO_ATEN" ToRole="ATENCION_AGEN" />
+        </EntityType>
+        <EntityType Name="FICHA">
+          <Key>
+            <PropertyRef Name="ID_FICHA" />
+          </Key>
+          <Property Name="ID_FICHA" Type="Int32" Nullable="false" />
+          <Property Name="FEC_NAC" Type="DateTime" />
+          <Property Name="SEXO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ID_PACIENTE" Type="Int32" />
+          <NavigationProperty Name="ENTRADA_FICHA" Relationship="Self.FK_ENTRADA_FICHA_FICHA" FromRole="FICHA" ToRole="ENTRADA_FICHA" />
+          <NavigationProperty Name="PACIENTE" Relationship="Self.FK_PACIENTE_FICHA" FromRole="FICHA" ToRole="PACIENTE" />
+        </EntityType>
+        <EntityType Name="FUNCIONARIO">
+          <Key>
+            <PropertyRef Name="ID_FUNCIONARIO" />
+          </Key>
+          <Property Name="ID_FUNCIONARIO" Type="Int32" Nullable="false" />
+          <Property Name="ID_CARGO_FUNCI" Type="Int32" />
+          <Property Name="ID_PERSONAL" Type="Int32" />
+          <NavigationProperty Name="CAJA" Relationship="Self.FK_FUNCIONARIO_CAJA" FromRole="FUNCIONARIO" ToRole="CAJA" />
+          <NavigationProperty Name="CARGO" Relationship="Self.FK_CARGO_FUNCIONARIO" FromRole="FUNCIONARIO" ToRole="CARGO" />
+          <NavigationProperty Name="PERSONAL" Relationship="Self.FK_PERSONAL_FUNCIONARIO" FromRole="FUNCIONARIO" ToRole="PERSONAL" />
+        </EntityType>
+        <EntityType Name="INVENTARIO">
+          <Key>
+            <PropertyRef Name="ID_INVENTARIO_EQUIPO" />
+          </Key>
+          <Property Name="ID_INVENTARIO_EQUIPO" Type="Int32" Nullable="false" />
+          <Property Name="CANT_BODEGA" Type="Int32" />
+          <Property Name="ID_TIPO_EQUIPO" Type="Int32" />
+          <NavigationProperty Name="TIPO_EQUIPO" Relationship="Self.FK_TIPO_EQUIPO_INVENTARIO" FromRole="INVENTARIO" ToRole="TIPO_EQUIPO" />
+        </EntityType>
+        <EntityType Name="ORDEN_ANALISIS">
+          <Key>
+            <PropertyRef Name="ID_ORDEN_ANALISIS" />
+          </Key>
+          <Property Name="ID_ORDEN_ANALISIS" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_HORA_EMISION" Type="DateTime" />
+          <Property Name="FECHA_HORA_RECEP" Type="DateTime" />
+          <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_ORDEN_ANALISIS_RES_ATENCION" FromRole="ORDEN_ANALISIS" ToRole="RES_ATENCION" />
+        </EntityType>
+        <EntityType Name="PACIENTE">
+          <Key>
+            <PropertyRef Name="ID_PACIENTE" />
+          </Key>
+          <Property Name="ID_PACIENTE" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRES_PACIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOS_PACIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RUT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HASHED_PASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL_PACIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_PACIENTE_ATENCION_AGEN" FromRole="PACIENTE" ToRole="ATENCION_AGEN" />
+          <NavigationProperty Name="FICHA" Relationship="Self.FK_PACIENTE_FICHA" FromRole="PACIENTE" ToRole="FICHA" />
+        </EntityType>
+        <EntityType Name="PAGO">
+          <Key>
+            <PropertyRef Name="ID_PAGO" />
+          </Key>
+          <Property Name="ID_PAGO" Type="Int32" Nullable="false" />
+          <Property Name="HORA_PAGO" Type="DateTime" />
+          <Property Name="ID_BONO" Type="Int32" />
+          <Property Name="ID_CAJA" Type="Int32" />
+          <Property Name="ID_DEVOLUCION" Type="Int32" />
+          <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_PAGO_ATENCION_AGEN" FromRole="PAGO" ToRole="ATENCION_AGEN" />
+          <NavigationProperty Name="BONO" Relationship="Self.FK_BONO_PAGO" FromRole="PAGO" ToRole="BONO" />
+          <NavigationProperty Name="CAJA" Relationship="Self.FK_CAJA_PAGO" FromRole="PAGO" ToRole="CAJA" />
+          <NavigationProperty Name="DEVOLUCION" Relationship="Self.FK_DEVOLUCION_PAGO" FromRole="PAGO" ToRole="DEVOLUCION" />
+        </EntityType>
+        <EntityType Name="PERS_MEDICO">
+          <Key>
+            <PropertyRef Name="ID_PERSONAL_MEDICO" />
+          </Key>
+          <Property Name="ID_PERSONAL_MEDICO" Type="Int32" Nullable="false" />
+          <Property Name="ID_ESPECIALIDAD" Type="Int32" />
+          <Property Name="ID_PERSONAL" Type="Int32" />
+          <Property Name="ID_TURNO" Type="Int32" />
+          <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_SOLICITA_ATENCION_AGEN" FromRole="PERS_MEDICO" ToRole="ATENCION_AGEN" />
+          <NavigationProperty Name="ESPECIALIDAD" Relationship="Self.FK_PERS_MEDICO_ESPECIALIDAD" FromRole="PERS_MEDICO" ToRole="ESPECIALIDAD" />
+          <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_EJECUTA_RES_ATENCION" FromRole="PERS_MEDICO" ToRole="RES_ATENCION" />
+          <NavigationProperty Name="PERSONAL" Relationship="Self.FK_PERSONAL_PERS_MEDICO" FromRole="PERS_MEDICO" ToRole="PERSONAL" />
+          <NavigationProperty Name="TURNO" Relationship="Self.FK_TURNO_PERS_MEDICO" FromRole="PERS_MEDICO" ToRole="TURNO" />
+        </EntityType>
+        <EntityType Name="PERSONAL">
+          <Key>
+            <PropertyRef Name="ID_PERSONAL" />
+          </Key>
+          <Property Name="ID_PERSONAL" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REMUNERACION" Type="Int32" />
+          <Property Name="HASHED_PASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PORCENT_DESCUENTO" Type="Int32" />
+          <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_PERSONAL_FUNCIONARIO" FromRole="PERSONAL" ToRole="FUNCIONARIO" />
+          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_PERSONAL_PERS_MEDICO" FromRole="PERSONAL" ToRole="PERS_MEDICO" />
+        </EntityType>
+        <EntityType Name="PRESTACION">
+          <Key>
+            <PropertyRef Name="ID_PRESTACION" />
+          </Key>
+          <Property Name="ID_PRESTACION" Type="Int32" Nullable="false" />
+          <Property Name="NOM_PRESTACION" Type="Int32" />
+          <Property Name="PRECIO_PRESTACION" Type="Int32" />
+          <Property Name="CODIGO_PRESTACION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ESPECIALIDAD" Type="Int32" />
+          <Property Name="ID_TIPO_PRESTACION" Type="Int32" />
+          <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ATENCION_AGEN_PRESTACION" FromRole="PRESTACION" ToRole="ATENCION_AGEN" />
+          <NavigationProperty Name="EQUIPO_REQ" Relationship="Self.FK_EQUIPO_REQ_PRESTACION" FromRole="PRESTACION" ToRole="EQUIPO_REQ" />
+          <NavigationProperty Name="ESPECIALIDAD" Relationship="Self.FK_ESPECIALIDAD_PRESTACION" FromRole="PRESTACION" ToRole="ESPECIALIDAD" />
+          <NavigationProperty Name="TIPO_PRES" Relationship="Self.FK_TIPO_PRES_PRESTACION" FromRole="PRESTACION" ToRole="TIPO_PRES" />
+        </EntityType>
+        <EntityType Name="RES_ATENCION">
+          <Key>
+            <PropertyRef Name="ID_RESULTADO_ATENCION" />
+          </Key>
+          <Property Name="ID_RESULTADO_ATENCION" Type="Int32" Nullable="false" />
+          <Property Name="ATENCION_ABIERTA" Type="Int32" />
+          <Property Name="COMENTARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ATENCION_AGENDADA" Type="Int32" />
+          <Property Name="ID_ORDEN_ANALISIS" Type="Int32" />
+          <Property Name="ID_PERSONAL_MEDICO" Type="Int32" />
+          <NavigationProperty Name="ARCHIVO" Relationship="Self.FK_RES_ATENCION_ARCHIVO" FromRole="RES_ATENCION" ToRole="ARCHIVO" />
+          <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ATENCION_AGEN_RES_ATENCION" FromRole="RES_ATENCION" ToRole="ATENCION_AGEN" />
+          <NavigationProperty Name="ORDEN_ANALISIS" Relationship="Self.FK_ORDEN_ANALISIS_RES_ATENCION" FromRole="RES_ATENCION" ToRole="ORDEN_ANALISIS" />
+          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_EJECUTA_RES_ATENCION" FromRole="RES_ATENCION" ToRole="PERS_MEDICO" />
+        </EntityType>
+        <EntityType Name="TIPO_EQUIPO">
+          <Key>
+            <PropertyRef Name="ID_TIPO_EQUIPO" />
+          </Key>
+          <Property Name="ID_TIPO_EQUIPO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_TIPO_EQUIPO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EQUIPO_REQ" Relationship="Self.FK_EQUIPO_REQ_TIPO_EQUIPO" FromRole="TIPO_EQUIPO" ToRole="EQUIPO_REQ" />
+          <NavigationProperty Name="INVENTARIO" Relationship="Self.FK_TIPO_EQUIPO_INVENTARIO" FromRole="TIPO_EQUIPO" ToRole="INVENTARIO" />
+        </EntityType>
+        <EntityType Name="TIPO_PRES">
+          <Key>
+            <PropertyRef Name="ID_TIPO_PRESTACION" />
+          </Key>
+          <Property Name="ID_TIPO_PRESTACION" Type="Int32" Nullable="false" />
+          <Property Name="NOM_TIPO_PREST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PRESTACION" Relationship="Self.FK_TIPO_PRES_PRESTACION" FromRole="TIPO_PRES" ToRole="PRESTACION" />
+        </EntityType>
+        <EntityType Name="TURNO">
+          <Key>
+            <PropertyRef Name="ID_TURNO" />
+          </Key>
+          <Property Name="ID_TURNO" Type="Int32" Nullable="false" />
+          <Property Name="HORA_INI" Type="DateTime" />
+          <Property Name="HORA_FIN" Type="DateTime" />
+          <Property Name="NOMBRE_TURNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_TURNO_PERS_MEDICO" FromRole="TURNO" ToRole="PERS_MEDICO" />
+        </EntityType>
+        <Association Name="FK_RES_ATENCION_ARCHIVO">
+          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="0..1" />
+          <End Role="ARCHIVO" Type="Self.ARCHIVO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RES_ATENCION">
+              <PropertyRef Name="ID_RESULTADO_ATENCION" />
+            </Principal>
+            <Dependent Role="ARCHIVO">
+              <PropertyRef Name="ID_RESULTADO_ATENCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ASEGURADORA_BONO">
+          <End Role="ASEGURADORA" Type="Self.ASEGURADORA" Multiplicity="0..1" />
+          <End Role="BONO" Type="Self.BONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASEGURADORA">
+              <PropertyRef Name="ID_ASEGURADORA" />
+            </Principal>
+            <Dependent Role="BONO">
+              <PropertyRef Name="ID_ASEGURADORA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_PRESTACION">
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_RES_ATENCION">
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="0..1" />
+          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
+            </Principal>
+            <Dependent Role="RES_ATENCION">
+              <PropertyRef Name="ID_ATENCION_AGENDADA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESTADO_ATEN_ATENCION_AGEN">
+          <End Role="ESTADO_ATEN" Type="Self.ESTADO_ATEN" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO_ATEN">
+              <PropertyRef Name="ID_ESTADO_ATENCION" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_ESTADO_ATENCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACIENTE_ATENCION_AGEN">
+          <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACIENTE">
+              <PropertyRef Name="ID_PACIENTE" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PACIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAGO_ATENCION_AGEN">
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAGO">
+              <PropertyRef Name="ID_PAGO" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITA_ATENCION_AGEN">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BONO_PAGO">
+          <End Role="BONO" Type="Self.BONO" Multiplicity="0..1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BONO">
+              <PropertyRef Name="ID_BONO" />
+            </Principal>
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_BONO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CAJA_PAGO">
+          <End Role="CAJA" Type="Self.CAJA" Multiplicity="0..1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAJA">
+              <PropertyRef Name="ID_CAJA" />
+            </Principal>
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_CAJA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONARIO_CAJA">
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="0..1" />
+          <End Role="CAJA" Type="Self.CAJA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FUNCIONARIO">
+              <PropertyRef Name="ID_FUNCIONARIO" />
+            </Principal>
+            <Dependent Role="CAJA">
+              <PropertyRef Name="ID_FUNCIONARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARGO_FUNCIONARIO">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="0..1" />
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO">
+              <PropertyRef Name="ID_CARGO_FUNCI" />
+            </Principal>
+            <Dependent Role="FUNCIONARIO">
+              <PropertyRef Name="ID_CARGO_FUNCI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEVOLUCION_PAGO">
+          <End Role="DEVOLUCION" Type="Self.DEVOLUCION" Multiplicity="0..1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEVOLUCION">
+              <PropertyRef Name="ID_DEVOLUCION" />
+            </Principal>
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_DEVOLUCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ENTRADA_FICHA_FICHA">
+          <End Role="FICHA" Type="Self.FICHA" Multiplicity="0..1" />
+          <End Role="ENTRADA_FICHA" Type="Self.ENTRADA_FICHA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FICHA">
+              <PropertyRef Name="ID_FICHA" />
+            </Principal>
+            <Dependent Role="ENTRADA_FICHA">
+              <PropertyRef Name="ID_FICHA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_REQ_PRESTACION">
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="0..1" />
+          <End Role="EQUIPO_REQ" Type="Self.EQUIPO_REQ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Principal>
+            <Dependent Role="EQUIPO_REQ">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPO_REQ_TIPO_EQUIPO">
+          <End Role="TIPO_EQUIPO" Type="Self.TIPO_EQUIPO" Multiplicity="0..1" />
+          <End Role="EQUIPO_REQ" Type="Self.EQUIPO_REQ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_EQUIPO">
+              <PropertyRef Name="ID_TIPO_EQUIPO" />
+            </Principal>
+            <Dependent Role="EQUIPO_REQ">
+              <PropertyRef Name="ID_TIPO_EQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESPECIALIDAD_PRESTACION">
+          <End Role="ESPECIALIDAD" Type="Self.ESPECIALIDAD" Multiplicity="0..1" />
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIALIDAD">
+              <PropertyRef Name="ID_ESPECIALIDAD" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID_ESPECIALIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERS_MEDICO_ESPECIALIDAD">
+          <End Role="ESPECIALIDAD" Type="Self.ESPECIALIDAD" Multiplicity="0..1" />
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIALIDAD">
+              <PropertyRef Name="ID_ESPECIALIDAD" />
+            </Principal>
+            <Dependent Role="PERS_MEDICO">
+              <PropertyRef Name="ID_ESPECIALIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACIENTE_FICHA">
+          <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="0..1" />
+          <End Role="FICHA" Type="Self.FICHA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACIENTE">
+              <PropertyRef Name="ID_PACIENTE" />
+            </Principal>
+            <Dependent Role="FICHA">
+              <PropertyRef Name="ID_PACIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONAL_FUNCIONARIO">
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="0..1" />
+          <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAL">
+              <PropertyRef Name="ID_PERSONAL" />
+            </Principal>
+            <Dependent Role="FUNCIONARIO">
+              <PropertyRef Name="ID_PERSONAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_EQUIPO_INVENTARIO">
+          <End Role="TIPO_EQUIPO" Type="Self.TIPO_EQUIPO" Multiplicity="0..1" />
+          <End Role="INVENTARIO" Type="Self.INVENTARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_EQUIPO">
+              <PropertyRef Name="ID_TIPO_EQUIPO" />
+            </Principal>
+            <Dependent Role="INVENTARIO">
+              <PropertyRef Name="ID_TIPO_EQUIPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDEN_ANALISIS_RES_ATENCION">
+          <End Role="ORDEN_ANALISIS" Type="Self.ORDEN_ANALISIS" Multiplicity="0..1" />
+          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_ANALISIS">
+              <PropertyRef Name="ID_ORDEN_ANALISIS" />
+            </Principal>
+            <Dependent Role="RES_ATENCION">
+              <PropertyRef Name="ID_ORDEN_ANALISIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EJECUTA_RES_ATENCION">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="RES_ATENCION">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSONAL_PERS_MEDICO">
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="0..1" />
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAL">
+              <PropertyRef Name="ID_PERSONAL" />
+            </Principal>
+            <Dependent Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TURNO_PERS_MEDICO">
+          <End Role="TURNO" Type="Self.TURNO" Multiplicity="0..1" />
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TURNO">
+              <PropertyRef Name="ID_TURNO" />
+            </Principal>
+            <Dependent Role="PERS_MEDICO">
+              <PropertyRef Name="ID_TURNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TIPO_PRES_PRESTACION">
+          <End Role="TIPO_PRES" Type="Self.TIPO_PRES" Multiplicity="0..1" />
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRES">
+              <PropertyRef Name="ID_TIPO_PRESTACION" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID_TIPO_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CMHEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ARCHIVO" EntityType="Self.ARCHIVO" />
+          <EntitySet Name="ASEGURADORA" EntityType="Self.ASEGURADORA" />
+          <EntitySet Name="ATENCION_AGEN" EntityType="Self.ATENCION_AGEN" />
+          <EntitySet Name="BONO" EntityType="Self.BONO" />
+          <EntitySet Name="CAJA" EntityType="Self.CAJA" />
+          <EntitySet Name="CARGO" EntityType="Self.CARGO" />
+          <EntitySet Name="DEVOLUCION" EntityType="Self.DEVOLUCION" />
+          <EntitySet Name="ENTRADA_FICHA" EntityType="Self.ENTRADA_FICHA" />
+          <EntitySet Name="EQUIPO_REQ" EntityType="Self.EQUIPO_REQ" />
+          <EntitySet Name="ESPECIALIDAD" EntityType="Self.ESPECIALIDAD" />
+          <EntitySet Name="ESTADO_ATEN" EntityType="Self.ESTADO_ATEN" />
+          <EntitySet Name="FICHA" EntityType="Self.FICHA" />
+          <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" />
+          <EntitySet Name="INVENTARIO" EntityType="Self.INVENTARIO" />
+          <EntitySet Name="ORDEN_ANALISIS" EntityType="Self.ORDEN_ANALISIS" />
+          <EntitySet Name="PACIENTE" EntityType="Self.PACIENTE" />
+          <EntitySet Name="PAGO" EntityType="Self.PAGO" />
+          <EntitySet Name="PERS_MEDICO" EntityType="Self.PERS_MEDICO" />
+          <EntitySet Name="PERSONAL" EntityType="Self.PERSONAL" />
+          <EntitySet Name="PRESTACION" EntityType="Self.PRESTACION" />
+          <EntitySet Name="RES_ATENCION" EntityType="Self.RES_ATENCION" />
+          <EntitySet Name="TIPO_EQUIPO" EntityType="Self.TIPO_EQUIPO" />
+          <EntitySet Name="TIPO_PRES" EntityType="Self.TIPO_PRES" />
+          <EntitySet Name="TURNO" EntityType="Self.TURNO" />
+          <AssociationSet Name="FK_RES_ATENCION_ARCHIVO" Association="Self.FK_RES_ATENCION_ARCHIVO">
+            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+            <End Role="ARCHIVO" EntitySet="ARCHIVO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASEGURADORA_BONO" Association="Self.FK_ASEGURADORA_BONO">
+            <End Role="ASEGURADORA" EntitySet="ASEGURADORA" />
+            <End Role="BONO" EntitySet="BONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_PRESTACION" Association="Self.FK_ATENCION_AGEN_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_RES_ATENCION" Association="Self.FK_ATENCION_AGEN_RES_ATENCION">
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESTADO_ATEN_ATENCION_AGEN" Association="Self.FK_ESTADO_ATEN_ATENCION_AGEN">
+            <End Role="ESTADO_ATEN" EntitySet="ESTADO_ATEN" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACIENTE_ATENCION_AGEN" Association="Self.FK_PACIENTE_ATENCION_AGEN">
+            <End Role="PACIENTE" EntitySet="PACIENTE" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAGO_ATENCION_AGEN" Association="Self.FK_PAGO_ATENCION_AGEN">
+            <End Role="PAGO" EntitySet="PAGO" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITA_ATENCION_AGEN" Association="Self.FK_SOLICITA_ATENCION_AGEN">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BONO_PAGO" Association="Self.FK_BONO_PAGO">
+            <End Role="BONO" EntitySet="BONO" />
+            <End Role="PAGO" EntitySet="PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CAJA_PAGO" Association="Self.FK_CAJA_PAGO">
+            <End Role="CAJA" EntitySet="CAJA" />
+            <End Role="PAGO" EntitySet="PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONARIO_CAJA" Association="Self.FK_FUNCIONARIO_CAJA">
+            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+            <End Role="CAJA" EntitySet="CAJA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGO_FUNCIONARIO" Association="Self.FK_CARGO_FUNCIONARIO">
+            <End Role="CARGO" EntitySet="CARGO" />
+            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEVOLUCION_PAGO" Association="Self.FK_DEVOLUCION_PAGO">
+            <End Role="DEVOLUCION" EntitySet="DEVOLUCION" />
+            <End Role="PAGO" EntitySet="PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ENTRADA_FICHA_FICHA" Association="Self.FK_ENTRADA_FICHA_FICHA">
+            <End Role="FICHA" EntitySet="FICHA" />
+            <End Role="ENTRADA_FICHA" EntitySet="ENTRADA_FICHA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_REQ_PRESTACION" Association="Self.FK_EQUIPO_REQ_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="EQUIPO_REQ" EntitySet="EQUIPO_REQ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPO_REQ_TIPO_EQUIPO" Association="Self.FK_EQUIPO_REQ_TIPO_EQUIPO">
+            <End Role="TIPO_EQUIPO" EntitySet="TIPO_EQUIPO" />
+            <End Role="EQUIPO_REQ" EntitySet="EQUIPO_REQ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESPECIALIDAD_PRESTACION" Association="Self.FK_ESPECIALIDAD_PRESTACION">
+            <End Role="ESPECIALIDAD" EntitySet="ESPECIALIDAD" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERS_MEDICO_ESPECIALIDAD" Association="Self.FK_PERS_MEDICO_ESPECIALIDAD">
+            <End Role="ESPECIALIDAD" EntitySet="ESPECIALIDAD" />
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACIENTE_FICHA" Association="Self.FK_PACIENTE_FICHA">
+            <End Role="PACIENTE" EntitySet="PACIENTE" />
+            <End Role="FICHA" EntitySet="FICHA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONAL_FUNCIONARIO" Association="Self.FK_PERSONAL_FUNCIONARIO">
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
+            <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_EQUIPO_INVENTARIO" Association="Self.FK_TIPO_EQUIPO_INVENTARIO">
+            <End Role="TIPO_EQUIPO" EntitySet="TIPO_EQUIPO" />
+            <End Role="INVENTARIO" EntitySet="INVENTARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDEN_ANALISIS_RES_ATENCION" Association="Self.FK_ORDEN_ANALISIS_RES_ATENCION">
+            <End Role="ORDEN_ANALISIS" EntitySet="ORDEN_ANALISIS" />
+            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EJECUTA_RES_ATENCION" Association="Self.FK_EJECUTA_RES_ATENCION">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSONAL_PERS_MEDICO" Association="Self.FK_PERSONAL_PERS_MEDICO">
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TURNO_PERS_MEDICO" Association="Self.FK_TURNO_PERS_MEDICO">
+            <End Role="TURNO" EntitySet="TURNO" />
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TIPO_PRES_PRESTACION" Association="Self.FK_TIPO_PRES_PRESTACION">
+            <End Role="TIPO_PRES" EntitySet="TIPO_PRES" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="CMHEntities">
+          <EntitySetMapping Name="ARCHIVO">
+            <EntityTypeMapping TypeName="Model.ARCHIVO">
+              <MappingFragment StoreEntitySet="ARCHIVO">
+                <ScalarProperty Name="ID_ARCHIVO" ColumnName="ID_ARCHIVO" />
+                <ScalarProperty Name="FILE_URI" ColumnName="FILE_URI" />
+                <ScalarProperty Name="ID_RESULTADO_ATENCION" ColumnName="ID_RESULTADO_ATENCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ASEGURADORA">
+            <EntityTypeMapping TypeName="Model.ASEGURADORA">
+              <MappingFragment StoreEntitySet="ASEGURADORA">
+                <ScalarProperty Name="ID_ASEGURADORA" ColumnName="ID_ASEGURADORA" />
+                <ScalarProperty Name="NOM_ASEGURADORA" ColumnName="NOM_ASEGURADORA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATENCION_AGEN">
+            <EntityTypeMapping TypeName="Model.ATENCION_AGEN">
+              <MappingFragment StoreEntitySet="ATENCION_AGEN">
+                <ScalarProperty Name="ID_ATENCION_AGEN" ColumnName="ID_ATENCION_AGEN" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="HORA" ColumnName="HORA" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+                <ScalarProperty Name="ID_PACIENTE" ColumnName="ID_PACIENTE" />
+                <ScalarProperty Name="ID_PERSONAL_MEDICO" ColumnName="ID_PERSONAL_MEDICO" />
+                <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
+                <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
+                <ScalarProperty Name="ID_ESTADO_ATENCION" ColumnName="ID_ESTADO_ATENCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BONO">
+            <EntityTypeMapping TypeName="Model.BONO">
+              <MappingFragment StoreEntitySet="BONO">
+                <ScalarProperty Name="ID_BONO" ColumnName="ID_BONO" />
+                <ScalarProperty Name="CANT_BONO" ColumnName="CANT_BONO" />
+                <ScalarProperty Name="COD_ASEGURADORA" ColumnName="COD_ASEGURADORA" />
+                <ScalarProperty Name="ID_ASEGURADORA" ColumnName="ID_ASEGURADORA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CAJA">
+            <EntityTypeMapping TypeName="Model.CAJA">
+              <MappingFragment StoreEntitySet="CAJA">
+                <ScalarProperty Name="ID_CAJA" ColumnName="ID_CAJA" />
+                <ScalarProperty Name="FEC_HORA_CIERRE" ColumnName="FEC_HORA_CIERRE" />
+                <ScalarProperty Name="FEC_HORA_APERTURA" ColumnName="FEC_HORA_APERTURA" />
+                <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARGO">
+            <EntityTypeMapping TypeName="Model.CARGO">
+              <MappingFragment StoreEntitySet="CARGO">
+                <ScalarProperty Name="ID_CARGO_FUNCI" ColumnName="ID_CARGO_FUNCI" />
+                <ScalarProperty Name="NOMBRE_CARGO" ColumnName="NOMBRE_CARGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEVOLUCION">
+            <EntityTypeMapping TypeName="Model.DEVOLUCION">
+              <MappingFragment StoreEntitySet="DEVOLUCION">
+                <ScalarProperty Name="ID_DEVOLUCION" ColumnName="ID_DEVOLUCION" />
+                <ScalarProperty Name="TIPO_DEVOLUCION" ColumnName="TIPO_DEVOLUCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ENTRADA_FICHA">
+            <EntityTypeMapping TypeName="Model.ENTRADA_FICHA">
+              <MappingFragment StoreEntitySet="ENTRADA_FICHA">
+                <ScalarProperty Name="ID_ENTRADA_FICHA" ColumnName="ID_ENTRADA_FICHA" />
+                <ScalarProperty Name="NOMBRE_ENTRADA" ColumnName="NOMBRE_ENTRADA" />
+                <ScalarProperty Name="CONTENIDO_ENTRADA" ColumnName="CONTENIDO_ENTRADA" />
+                <ScalarProperty Name="FECHA_ENTRADA" ColumnName="FECHA_ENTRADA" />
+                <ScalarProperty Name="ID_FICHA" ColumnName="ID_FICHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EQUIPO_REQ">
+            <EntityTypeMapping TypeName="Model.EQUIPO_REQ">
+              <MappingFragment StoreEntitySet="EQUIPO_REQ">
+                <ScalarProperty Name="ID_EQUIPO_REQ" ColumnName="ID_EQUIPO_REQ" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="ID_TIPO_EQUIPO" ColumnName="ID_TIPO_EQUIPO" />
+                <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESPECIALIDAD">
+            <EntityTypeMapping TypeName="Model.ESPECIALIDAD">
+              <MappingFragment StoreEntitySet="ESPECIALIDAD">
+                <ScalarProperty Name="ID_ESPECIALIDAD" ColumnName="ID_ESPECIALIDAD" />
+                <ScalarProperty Name="NOM_ESPECIALIDAD" ColumnName="NOM_ESPECIALIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO_ATEN">
+            <EntityTypeMapping TypeName="Model.ESTADO_ATEN">
+              <MappingFragment StoreEntitySet="ESTADO_ATEN">
+                <ScalarProperty Name="ID_ESTADO_ATENCION" ColumnName="ID_ESTADO_ATENCION" />
+                <ScalarProperty Name="NOM_ESTADO_ATEN" ColumnName="NOM_ESTADO_ATEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FICHA">
+            <EntityTypeMapping TypeName="Model.FICHA">
+              <MappingFragment StoreEntitySet="FICHA">
+                <ScalarProperty Name="ID_FICHA" ColumnName="ID_FICHA" />
+                <ScalarProperty Name="FEC_NAC" ColumnName="FEC_NAC" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="ID_PACIENTE" ColumnName="ID_PACIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUNCIONARIO">
+            <EntityTypeMapping TypeName="Model.FUNCIONARIO">
+              <MappingFragment StoreEntitySet="FUNCIONARIO">
+                <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
+                <ScalarProperty Name="ID_CARGO_FUNCI" ColumnName="ID_CARGO_FUNCI" />
+                <ScalarProperty Name="ID_PERSONAL" ColumnName="ID_PERSONAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVENTARIO">
+            <EntityTypeMapping TypeName="Model.INVENTARIO">
+              <MappingFragment StoreEntitySet="INVENTARIO">
+                <ScalarProperty Name="ID_INVENTARIO_EQUIPO" ColumnName="ID_INVENTARIO_EQUIPO" />
+                <ScalarProperty Name="CANT_BODEGA" ColumnName="CANT_BODEGA" />
+                <ScalarProperty Name="ID_TIPO_EQUIPO" ColumnName="ID_TIPO_EQUIPO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN_ANALISIS">
+            <EntityTypeMapping TypeName="Model.ORDEN_ANALISIS">
+              <MappingFragment StoreEntitySet="ORDEN_ANALISIS">
+                <ScalarProperty Name="ID_ORDEN_ANALISIS" ColumnName="ID_ORDEN_ANALISIS" />
+                <ScalarProperty Name="FECHA_HORA_EMISION" ColumnName="FECHA_HORA_EMISION" />
+                <ScalarProperty Name="FECHA_HORA_RECEP" ColumnName="FECHA_HORA_RECEP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PACIENTE">
+            <EntityTypeMapping TypeName="Model.PACIENTE">
+              <MappingFragment StoreEntitySet="PACIENTE">
+                <ScalarProperty Name="ID_PACIENTE" ColumnName="ID_PACIENTE" />
+                <ScalarProperty Name="NOMBRES_PACIENTE" ColumnName="NOMBRES_PACIENTE" />
+                <ScalarProperty Name="APELLIDOS_PACIENTE" ColumnName="APELLIDOS_PACIENTE" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="HASHED_PASS" ColumnName="HASHED_PASS" />
+                <ScalarProperty Name="EMAIL_PACIENTE" ColumnName="EMAIL_PACIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAGO">
+            <EntityTypeMapping TypeName="Model.PAGO">
+              <MappingFragment StoreEntitySet="PAGO">
+                <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
+                <ScalarProperty Name="HORA_PAGO" ColumnName="HORA_PAGO" />
+                <ScalarProperty Name="ID_BONO" ColumnName="ID_BONO" />
+                <ScalarProperty Name="ID_CAJA" ColumnName="ID_CAJA" />
+                <ScalarProperty Name="ID_DEVOLUCION" ColumnName="ID_DEVOLUCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERS_MEDICO">
+            <EntityTypeMapping TypeName="Model.PERS_MEDICO">
+              <MappingFragment StoreEntitySet="PERS_MEDICO">
+                <ScalarProperty Name="ID_PERSONAL_MEDICO" ColumnName="ID_PERSONAL_MEDICO" />
+                <ScalarProperty Name="ID_ESPECIALIDAD" ColumnName="ID_ESPECIALIDAD" />
+                <ScalarProperty Name="ID_PERSONAL" ColumnName="ID_PERSONAL" />
+                <ScalarProperty Name="ID_TURNO" ColumnName="ID_TURNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONAL">
+            <EntityTypeMapping TypeName="Model.PERSONAL">
+              <MappingFragment StoreEntitySet="PERSONAL">
+                <ScalarProperty Name="ID_PERSONAL" ColumnName="ID_PERSONAL" />
+                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="REMUNERACION" ColumnName="REMUNERACION" />
+                <ScalarProperty Name="HASHED_PASS" ColumnName="HASHED_PASS" />
+                <ScalarProperty Name="PORCENT_DESCUENTO" ColumnName="PORCENT_DESCUENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESTACION">
+            <EntityTypeMapping TypeName="Model.PRESTACION">
+              <MappingFragment StoreEntitySet="PRESTACION">
+                <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
+                <ScalarProperty Name="NOM_PRESTACION" ColumnName="NOM_PRESTACION" />
+                <ScalarProperty Name="PRECIO_PRESTACION" ColumnName="PRECIO_PRESTACION" />
+                <ScalarProperty Name="CODIGO_PRESTACION" ColumnName="CODIGO_PRESTACION" />
+                <ScalarProperty Name="ID_ESPECIALIDAD" ColumnName="ID_ESPECIALIDAD" />
+                <ScalarProperty Name="ID_TIPO_PRESTACION" ColumnName="ID_TIPO_PRESTACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RES_ATENCION">
+            <EntityTypeMapping TypeName="Model.RES_ATENCION">
+              <MappingFragment StoreEntitySet="RES_ATENCION">
+                <ScalarProperty Name="ID_RESULTADO_ATENCION" ColumnName="ID_RESULTADO_ATENCION" />
+                <ScalarProperty Name="ATENCION_ABIERTA" ColumnName="ATENCION_ABIERTA" />
+                <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
+                <ScalarProperty Name="ID_ATENCION_AGENDADA" ColumnName="ID_ATENCION_AGENDADA" />
+                <ScalarProperty Name="ID_ORDEN_ANALISIS" ColumnName="ID_ORDEN_ANALISIS" />
+                <ScalarProperty Name="ID_PERSONAL_MEDICO" ColumnName="ID_PERSONAL_MEDICO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_EQUIPO">
+            <EntityTypeMapping TypeName="Model.TIPO_EQUIPO">
+              <MappingFragment StoreEntitySet="TIPO_EQUIPO">
+                <ScalarProperty Name="ID_TIPO_EQUIPO" ColumnName="ID_TIPO_EQUIPO" />
+                <ScalarProperty Name="NOMBRE_TIPO_EQUIPO" ColumnName="NOMBRE_TIPO_EQUIPO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_PRES">
+            <EntityTypeMapping TypeName="Model.TIPO_PRES">
+              <MappingFragment StoreEntitySet="TIPO_PRES">
+                <ScalarProperty Name="ID_TIPO_PRESTACION" ColumnName="ID_TIPO_PRESTACION" />
+                <ScalarProperty Name="NOM_TIPO_PREST" ColumnName="NOM_TIPO_PREST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TURNO">
+            <EntityTypeMapping TypeName="Model.TURNO">
+              <MappingFragment StoreEntitySet="TURNO">
+                <ScalarProperty Name="ID_TURNO" ColumnName="ID_TURNO" />
+                <ScalarProperty Name="HORA_INI" ColumnName="HORA_INI" />
+                <ScalarProperty Name="HORA_FIN" ColumnName="HORA_FIN" />
+                <ScalarProperty Name="NOMBRE_TURNO" ColumnName="NOMBRE_TURNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
