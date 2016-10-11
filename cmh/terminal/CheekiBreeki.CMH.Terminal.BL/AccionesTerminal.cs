@@ -120,7 +120,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-019
         public List<CAJA> generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
         {
-
+            List<CAJA> cajas = null;
+            return cajas;
         }
 
         //ECU-022

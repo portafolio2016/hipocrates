@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CheekiBreeki.CMH.Terminal.BL
 {
-    class ResultadoVerificacionSeguro
+    public class ResultadoVerificacionSeguro
     {
     }
 }
