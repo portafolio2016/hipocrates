@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="87e89813817f4e4a81dff961dfc858fd" Name="Diagram1">
+        <EntityTypeShape EntityType="CMHModel.ARCHIVO" Width="1.5" PointX="14.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.ASEGURADORA" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.ATENCION_AGEN" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.ATENCION_AGENDADA" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.BONO" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.CAJA" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.CARGO" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.DEVOLUCION" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.ENTRADA_FICHA" Width="1.5" PointX="12" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.EQUIPO_REQ" Width="1.5" PointX="12" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.ESP_PER_MEDICO" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.ESPECIALIDAD" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.ESTADO_ATEN" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.ESTADO_ATENCION" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.FICHA" Width="1.5" PointX="9.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.FUNCIONARIO" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.INVENTARIO" Width="1.5" PointX="12" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.ORDEN_ANALISIS" Width="1.5" PointX="9.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.PACIENTE" Width="1.5" PointX="7.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.PAGO" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.PERS_MEDICO" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.PERSONAL" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.PRESTACION" Width="1.5" PointX="7.5" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.RES_ATENCION" Width="1.5" PointX="12" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.TIPO_EQUIPO" Width="1.5" PointX="9.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.TIPO_PRES" Width="1.5" PointX="5.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMHModel.TURNO" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="CMHModel.FK_RES_ATENCION_ARCHIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_ASEGURADORA_BONO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_ATENCION_AGEN_PRESTACION" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_ATENCION_AGEN_RES_ATENCION" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_ESTADO_ATEN_ATENCION_AGEN" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_PACIENTE_ATENCION_AGEN" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_PAGO_ATENCION_AGEN" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_SOLICITA_ATENCION_AGEN" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_BONO_PAGO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_CAJA_PAGO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_FUNCIONARIO_CAJA" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_CARGO_FUNCIONARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_DEVOLUCION_PAGO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_ENTRADA_FICHA_FICHA" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_EQUIPO_REQ_PRESTACION" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_EQUIPO_REQ_TIPO_EQUIPO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_ESPECIALIDAD_PRESTACION" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_PERS_MEDICO_ESPECIALIDAD" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_PACIENTE_FICHA" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_PERSONAL_FUNCIONARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_TIPO_EQUIPO_INVENTARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_ORDEN_ANALISIS_RES_ATENCION" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_EJECUTA_RES_ATENCION" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_PERSONAL_PERS_MEDICO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_TURNO_PERS_MEDICO" ManuallyRouted="false" />
+        <AssociationConnector Association="CMHModel.FK_TIPO_PRES_PRESTACION" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
