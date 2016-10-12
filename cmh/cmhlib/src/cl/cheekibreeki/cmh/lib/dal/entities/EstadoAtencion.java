@@ -6,53 +6,50 @@
 package cl.cheekibreeki.cmh.lib.dal.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author dev
  */
 @Entity
-@Table(name = "ESTADO_ATEN")
+@Table(name = "ESTADO_ATENCION")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EstadoAten.findAll", query = "SELECT e FROM EstadoAten e"),
-    @NamedQuery(name = "EstadoAten.findByIdEstadoAtencion", query = "SELECT e FROM EstadoAten e WHERE e.idEstadoAtencion = :idEstadoAtencion"),
-    @NamedQuery(name = "EstadoAten.findByNomEstadoAten", query = "SELECT e FROM EstadoAten e WHERE e.nomEstadoAten = :nomEstadoAten")})
-public class EstadoAten implements Serializable {
+    @NamedQuery(name = "EstadoAtencion.findAll", query = "SELECT e FROM EstadoAtencion e"),
+    @NamedQuery(name = "EstadoAtencion.findByIdEstadoAtencion", query = "SELECT e FROM EstadoAtencion e WHERE e.idEstadoAtencion = :idEstadoAtencion"),
+    @NamedQuery(name = "EstadoAtencion.findByNomEstadoAten", query = "SELECT e FROM EstadoAtencion e WHERE e.nomEstadoAten = :nomEstadoAten")})
+public class EstadoAtencion implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @Column(name = "ID_ESTADO_ATENCION")
-    private Integer idEstadoAtencion;
+    private BigDecimal idEstadoAtencion;
     @Column(name = "NOM_ESTADO_ATEN")
     private String nomEstadoAten;
-    @OneToMany(mappedBy = "idEstadoAtencion")
-    private Collection<AtencionAgen> atencionAgenCollection;
 
-    public EstadoAten() {
+    public EstadoAtencion() {
     }
 
-    public EstadoAten(Integer idEstadoAtencion) {
+    public EstadoAtencion(BigDecimal idEstadoAtencion) {
         this.idEstadoAtencion = idEstadoAtencion;
     }
 
-    public Integer getIdEstadoAtencion() {
+    public BigDecimal getIdEstadoAtencion() {
         return idEstadoAtencion;
     }
 
-    public void setIdEstadoAtencion(Integer idEstadoAtencion) {
+    public void setIdEstadoAtencion(BigDecimal idEstadoAtencion) {
         this.idEstadoAtencion = idEstadoAtencion;
     }
 
@@ -62,15 +59,6 @@ public class EstadoAten implements Serializable {
 
     public void setNomEstadoAten(String nomEstadoAten) {
         this.nomEstadoAten = nomEstadoAten;
-    }
-
-    @XmlTransient
-    public Collection<AtencionAgen> getAtencionAgenCollection() {
-        return atencionAgenCollection;
-    }
-
-    public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
-        this.atencionAgenCollection = atencionAgenCollection;
     }
 
     @Override
@@ -83,10 +71,10 @@ public class EstadoAten implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EstadoAten)) {
+        if (!(object instanceof EstadoAtencion)) {
             return false;
         }
-        EstadoAten other = (EstadoAten) object;
+        EstadoAtencion other = (EstadoAtencion) object;
         if ((this.idEstadoAtencion == null && other.idEstadoAtencion != null) || (this.idEstadoAtencion != null && !this.idEstadoAtencion.equals(other.idEstadoAtencion))) {
             return false;
         }
@@ -95,7 +83,7 @@ public class EstadoAten implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten[ idEstadoAtencion=" + idEstadoAtencion + " ]";
+        return "cl.cheekibreeki.cmh.lib.dal.entities.EstadoAtencion[ idEstadoAtencion=" + idEstadoAtencion + " ]";
     }
     
 }

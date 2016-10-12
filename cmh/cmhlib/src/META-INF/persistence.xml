@@ -26,6 +26,8 @@
     <class>cl.cheekibreeki.cmh.lib.dal.entities.Ficha</class>
     <class>cl.cheekibreeki.cmh.lib.dal.entities.Funcionario</class>
     <class>cl.cheekibreeki.cmh.lib.dal.entities.EquipoReq</class>
+    <class>cl.cheekibreeki.cmh.lib.dal.entities.EstadoAtencion</class>
+    <class>cl.cheekibreeki.cmh.lib.dal.entities.EspPerMedico</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="dev"/>

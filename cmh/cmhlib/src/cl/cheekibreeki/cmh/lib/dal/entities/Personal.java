@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "PERSONAL")
@@ -49,7 +49,7 @@ public class Personal implements Serializable {
     @Column(name = "HASHED_PASS")
     private String hashedPass;
     @Column(name = "PORCENT_DESCUENTO")
-    private Integer porcentDescuento;
+    private Short porcentDescuento;
     @OneToMany(mappedBy = "idPersonal")
     private Collection<PersMedico> persMedicoCollection;
     @OneToMany(mappedBy = "idPersonal")
@@ -102,11 +102,11 @@ public class Personal implements Serializable {
         this.hashedPass = hashedPass;
     }
 
-    public Integer getPorcentDescuento() {
+    public Short getPorcentDescuento() {
         return porcentDescuento;
     }
 
-    public void setPorcentDescuento(Integer porcentDescuento) {
+    public void setPorcentDescuento(Short porcentDescuento) {
         this.porcentDescuento = porcentDescuento;
     }
 
