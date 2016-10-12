@@ -118,14 +118,27 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-019
-        public List<CAJA> generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
+        public ReporteCaja generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
         {
-            List<CAJA> cajas = null;
-            return cajas;
+            //TODO: implementar
+            ReporteCaja reporteCaja = null;
+            return reporteCaja;
         }
 
         //ECU-022
         public Boolean actualizarInventarioEquipo(INVENTARIO inventario)
+        {
+            //TODO: implementar
+            return false;
+        }
+
+        public Boolean nuevoEquipo(TIPO_EQUIPO tipoEquipo)
+        {
+            //TODO: implementar
+            return false;
+        }
+
+        public Boolean borrarEquipo(TIPO_EQUIPO tipoEquipo)
         {
             //TODO: implementar
             return false;
@@ -144,6 +157,29 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return false;
         }
 
+        public Boolean nuevoPersonal(FUNCIONARIO funcionario)
+        {
+            //TODO: Implementar
+            return false;
+        }
+        public Boolean nuevoPersonal(PERS_MEDICO personalMedico)
+        {
+            //TODO: Implementar
+            return false;
+        }
+
+        public Boolean borrarPersonal(FUNCIONARIO funcionario)
+        {
+            //TODO: Implementar
+            return false;
+        }
+
+        public Boolean borrarPersonal(PERS_MEDICO personalMedico)
+        {
+            //TODO: Implementar
+            return false;
+        }
+
         //ECU-024
         public Boolean actualizarPrestacionesMedicas(PRESTACION prestacion)
         {
@@ -151,8 +187,32 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return false;
         }
 
+        public Boolean nuevaPrestacionMedica(PRESTACION prestacion)
+        {
+            //TODO: implementar
+            return false;
+        }
+
+        public Boolean borrarPrestacionMedica(PRESTACION prestacion)
+        {
+            //TODO: implementar
+            return false;
+        }
+
         //ECU-025
         public Boolean actualizarPacientes(PACIENTE paciente)
+        {
+            //TODO: implementar
+            return false;
+        }
+
+        public Boolean nuevoPaciente(PACIENTE paciente)
+        {
+            //TODO: implementar
+            return false;
+        }
+
+        public Boolean borrarPaciente(PACIENTE paciente)
         {
             //TODO: implementar
             return false;
