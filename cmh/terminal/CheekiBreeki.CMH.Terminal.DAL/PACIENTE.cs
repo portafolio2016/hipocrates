@@ -23,9 +23,10 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public int ID_PACIENTE { get; set; }
         public string NOMBRES_PACIENTE { get; set; }
         public string APELLIDOS_PACIENTE { get; set; }
-        public string RUT { get; set; }
+        public Nullable<int> RUT { get; set; }
         public string HASHED_PASS { get; set; }
         public string EMAIL_PACIENTE { get; set; }
+        public string DIGITO_VERIFICADOR { get; set; }
     
         public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN { get; set; }
         public virtual ICollection<FICHA> FICHA { get; set; }

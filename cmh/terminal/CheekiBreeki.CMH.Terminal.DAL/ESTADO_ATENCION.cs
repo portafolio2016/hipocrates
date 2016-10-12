@@ -12,16 +12,9 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class DEVOLUCION
+    public partial class ESTADO_ATENCION
     {
-        public DEVOLUCION()
-        {
-            this.PAGO = new HashSet<PAGO>();
-        }
-    
-        public int ID_DEVOLUCION { get; set; }
-        public string NOM_TIPO_DEV { get; set; }
-    
-        public virtual ICollection<PAGO> PAGO { get; set; }
+        public decimal ID_ESTADO_ATENCION { get; set; }
+        public string NOM_ESTADO_ATEN { get; set; }
     }
 }

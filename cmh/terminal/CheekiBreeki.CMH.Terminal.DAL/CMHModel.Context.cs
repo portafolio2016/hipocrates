@@ -28,14 +28,17 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public virtual DbSet<ARCHIVO> ARCHIVO { get; set; }
         public virtual DbSet<ASEGURADORA> ASEGURADORA { get; set; }
         public virtual DbSet<ATENCION_AGEN> ATENCION_AGEN { get; set; }
+        public virtual DbSet<ATENCION_AGENDADA> ATENCION_AGENDADA { get; set; }
         public virtual DbSet<BONO> BONO { get; set; }
         public virtual DbSet<CAJA> CAJA { get; set; }
         public virtual DbSet<CARGO> CARGO { get; set; }
         public virtual DbSet<DEVOLUCION> DEVOLUCION { get; set; }
         public virtual DbSet<ENTRADA_FICHA> ENTRADA_FICHA { get; set; }
         public virtual DbSet<EQUIPO_REQ> EQUIPO_REQ { get; set; }
+        public virtual DbSet<ESP_PER_MEDICO> ESP_PER_MEDICO { get; set; }
         public virtual DbSet<ESPECIALIDAD> ESPECIALIDAD { get; set; }
         public virtual DbSet<ESTADO_ATEN> ESTADO_ATEN { get; set; }
+        public virtual DbSet<ESTADO_ATENCION> ESTADO_ATENCION { get; set; }
         public virtual DbSet<FICHA> FICHA { get; set; }
         public virtual DbSet<FUNCIONARIO> FUNCIONARIO { get; set; }
         public virtual DbSet<INVENTARIO> INVENTARIO { get; set; }
