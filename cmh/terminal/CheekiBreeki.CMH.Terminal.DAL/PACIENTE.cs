@@ -23,7 +23,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public int ID_PACIENTE { get; set; }
         public string NOMBRES_PACIENTE { get; set; }
         public string APELLIDOS_PACIENTE { get; set; }
-        public Nullable<int> RUT { get; set; }
+        public int RUT { get; set; }
         public string HASHED_PASS { get; set; }
         public string EMAIL_PACIENTE { get; set; }
         public string DIGITO_VERIFICADOR { get; set; }
