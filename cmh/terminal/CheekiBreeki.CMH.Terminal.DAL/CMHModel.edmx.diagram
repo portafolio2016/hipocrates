@@ -8,17 +8,14 @@
         <EntityTypeShape EntityType="CMHModel.ARCHIVO" Width="1.5" PointX="14.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ASEGURADORA" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ATENCION_AGEN" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMHModel.ATENCION_AGENDADA" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.BONO" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.CAJA" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.CARGO" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.DEVOLUCION" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ENTRADA_FICHA" Width="1.5" PointX="12" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.EQUIPO_REQ" Width="1.5" PointX="12" PointY="17.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMHModel.ESP_PER_MEDICO" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ESPECIALIDAD" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ESTADO_ATEN" Width="1.5" PointX="7.5" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMHModel.ESTADO_ATENCION" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.FICHA" Width="1.5" PointX="9.75" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.FUNCIONARIO" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.INVENTARIO" Width="1.5" PointX="12" PointY="14.5" IsExpanded="true" />
