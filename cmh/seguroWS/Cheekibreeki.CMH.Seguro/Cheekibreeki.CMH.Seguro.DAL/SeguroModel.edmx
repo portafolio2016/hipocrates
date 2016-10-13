@@ -268,7 +268,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SeguroEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AFILIADO" EntityType="Self.AFILIADO" />
           <EntitySet Name="BENEFICIO" EntityType="Self.BENEFICIO" />
           <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
@@ -301,7 +301,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SeguroModelStoreContainer" CdmEntityContainer="SeguroEntities">
+        <EntityContainerMapping StorageEntityContainer="SeguroModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="AFILIADO">
             <EntityTypeMapping TypeName="SeguroModel.AFILIADO">
               <MappingFragment StoreEntitySet="AFILIADO">

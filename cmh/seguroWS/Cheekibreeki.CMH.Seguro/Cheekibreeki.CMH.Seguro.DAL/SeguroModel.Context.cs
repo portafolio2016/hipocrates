@@ -13,10 +13,10 @@ namespace Cheekibreeki.CMH.Seguro.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SeguroEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public SeguroEntities()
-            : base("name=SeguroEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
