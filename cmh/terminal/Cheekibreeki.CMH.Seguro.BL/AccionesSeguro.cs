@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Cheekibreeki.CMH.Seguro.DAL;
 namespace Cheekibreeki.CMH.Seguro.BL
 {
-    public static class AccionesSeguro
+    public class AccionesSeguro
     {
         public int comprobarSeguro(AFILIADO afiliado, PRESTACION prestacion)
         {
