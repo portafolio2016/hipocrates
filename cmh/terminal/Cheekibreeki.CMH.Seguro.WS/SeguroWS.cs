@@ -10,22 +10,18 @@ namespace Cheekibreeki.CMH.Seguro.WS
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class SeguroWS : ISeguroWS
     {
-        public string GetData(int value)
+        public string TestMethod(int value)
         {
             return string.Format("You entered: {0}", value);
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+
+
+        public SeguroResponse obtenerBeneficio(SeguroRequest seguroRequest)
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            SeguroResponse response = null;
+            //TODO:implementar
+            return response;
         }
     }
 }
