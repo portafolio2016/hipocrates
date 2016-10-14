@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheekibreeki.CMH.Seguro.DAL", "Cheekibreeki.CMH.Seguro.DAL\Cheekibreeki.CMH.Seguro.DAL.csproj", "{F9C10C6F-2F8B-4543-8489-21E36B036A4F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seguro", "Seguro", "{1A94CCA8-0524-49C9-A282-62411E17E506}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F9C10C6F-2F8B-4543-8489-21E36B036A4F} = {1A94CCA8-0524-49C9-A282-62411E17E506}
 	EndGlobalSection
 EndGlobal
