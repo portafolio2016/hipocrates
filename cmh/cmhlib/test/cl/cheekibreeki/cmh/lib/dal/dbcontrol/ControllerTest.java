@@ -29,6 +29,11 @@ public class ControllerTest {
         paciente = new Paciente();
         paciente.setNombresPaciente("Pablo");
         paciente.setApellidosPaciente("de la Sotta");
+        paciente.setRut(18766326);
+        paciente.setDigitoVerificador('1');
+        paciente.setHashedPass("holamundo");
+        paciente.setEmailPaciente("pablitodelasotita@peladordenaranjas.com");
+        
     }
 
     @BeforeClass
