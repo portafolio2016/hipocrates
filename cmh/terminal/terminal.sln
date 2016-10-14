@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheekibreeki.CMH.Seguro.DAL
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seguro", "Seguro", "{1A94CCA8-0524-49C9-A282-62411E17E506}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheekibreeki.CMH.Seguro.WS", "Cheekibreeki.CMH.Seguro.WS\Cheekibreeki.CMH.Seguro.WS.csproj", "{F83D024C-B5D7-4E82-AD93-121A326B0F85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheekibreeki.CMH.Seguro.BL", "Cheekibreeki.CMH.Seguro.BL\Cheekibreeki.CMH.Seguro.BL.csproj", "{1EAE83D4-3782-4824-8BBF-139C5A55FADB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,11 +45,21 @@ Global
 		{F9C10C6F-2F8B-4543-8489-21E36B036A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9C10C6F-2F8B-4543-8489-21E36B036A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9C10C6F-2F8B-4543-8489-21E36B036A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83D024C-B5D7-4E82-AD93-121A326B0F85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83D024C-B5D7-4E82-AD93-121A326B0F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83D024C-B5D7-4E82-AD93-121A326B0F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83D024C-B5D7-4E82-AD93-121A326B0F85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EAE83D4-3782-4824-8BBF-139C5A55FADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EAE83D4-3782-4824-8BBF-139C5A55FADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EAE83D4-3782-4824-8BBF-139C5A55FADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EAE83D4-3782-4824-8BBF-139C5A55FADB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F9C10C6F-2F8B-4543-8489-21E36B036A4F} = {1A94CCA8-0524-49C9-A282-62411E17E506}
+		{F83D024C-B5D7-4E82-AD93-121A326B0F85} = {1A94CCA8-0524-49C9-A282-62411E17E506}
+		{1EAE83D4-3782-4824-8BBF-139C5A55FADB} = {1A94CCA8-0524-49C9-A282-62411E17E506}
 	EndGlobalSection
 EndGlobal
