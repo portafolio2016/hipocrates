@@ -16,6 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seguro", "Seguro", "{1A94CCA8-0524-49C9-A282-62411E17E506}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheekibreeki.CMH.Seguro.WS", "Cheekibreeki.CMH.Seguro.WS\Cheekibreeki.CMH.Seguro.WS.csproj", "{F83D024C-B5D7-4E82-AD93-121A326B0F85}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1EAE83D4-3782-4824-8BBF-139C5A55FADB} = {1EAE83D4-3782-4824-8BBF-139C5A55FADB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheekibreeki.CMH.Seguro.BL", "Cheekibreeki.CMH.Seguro.BL\Cheekibreeki.CMH.Seguro.BL.csproj", "{1EAE83D4-3782-4824-8BBF-139C5A55FADB}"
 EndProject
