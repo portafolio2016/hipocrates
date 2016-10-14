@@ -42,6 +42,12 @@
     <Compile Include="AccionesSeguro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cheekibreeki.CMH.Seguro.DAL\Cheekibreeki.CMH.Seguro.DAL.csproj">
+      <Project>{f9c10c6f-2f8b-4543-8489-21e36b036a4f}</Project>
+      <Name>Cheekibreeki.CMH.Seguro.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
