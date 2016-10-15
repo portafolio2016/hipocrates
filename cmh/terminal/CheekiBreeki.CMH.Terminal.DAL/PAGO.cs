@@ -24,7 +24,6 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public Nullable<int> ID_BONO { get; set; }
         public Nullable<int> ID_CAJA { get; set; }
         public Nullable<int> ID_DEVOLUCION { get; set; }
-        public Nullable<int> MONTO_PAGO { get; set; }
     
         public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN { get; set; }
         public virtual BONO BONO { get; set; }
