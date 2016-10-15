@@ -20,9 +20,11 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         }
     
         public int ID_CAJA { get; set; }
-        public Nullable<System.DateTime> FEC_HORA_CIERRE { get; set; }
-        public Nullable<System.DateTime> FEC_HORA_APERTURA { get; set; }
+        public Nullable<System.DateTime> FEC_APERTURA { get; set; }
+        public Nullable<System.DateTime> FEC_CIERRE { get; set; }
         public Nullable<int> ID_FUNCIONARIO { get; set; }
+        public Nullable<System.DateTime> HORA_APERTURA { get; set; }
+        public Nullable<System.DateTime> HORA_CIERRE { get; set; }
     
         public virtual ICollection<PAGO> PAGO { get; set; }
         public virtual FUNCIONARIO FUNCIONARIO { get; set; }

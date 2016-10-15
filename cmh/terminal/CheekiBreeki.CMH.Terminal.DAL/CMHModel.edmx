@@ -10,7 +10,7 @@
             <PropertyRef Name="ID_ARCHIVO" />
           </Key>
           <Property Name="ID_ARCHIVO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FILE_URI" Type="varchar2" MaxLength="50" />
+          <Property Name="FILE_URI" Type="varchar2" MaxLength="256" />
           <Property Name="ID_RESULTADO_ATENCION" Type="number" Precision="8" Scale="0" />
         </EntityType>
         <EntityType Name="ASEGURADORA">
@@ -18,7 +18,7 @@
             <PropertyRef Name="ID_ASEGURADORA" />
           </Key>
           <Property Name="ID_ASEGURADORA" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOM_ASEGURADORA" Type="varchar2" MaxLength="50" />
+          <Property Name="NOM_ASEGURADORA" Type="varchar2" MaxLength="128" />
         </EntityType>
         <EntityType Name="ATENCION_AGEN">
           <Key>
@@ -27,7 +27,7 @@
           <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="FECHA" Type="date" />
           <Property Name="HORA" Type="date" />
-          <Property Name="OBSERVACIONES" Type="varchar2" MaxLength="50" />
+          <Property Name="OBSERVACIONES" Type="varchar2" MaxLength="256" />
           <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" />
@@ -48,31 +48,33 @@
             <PropertyRef Name="ID_CAJA" />
           </Key>
           <Property Name="ID_CAJA" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FEC_HORA_CIERRE" Type="date" />
-          <Property Name="FEC_HORA_APERTURA" Type="date" />
+          <Property Name="FEC_APERTURA" Type="date" />
+          <Property Name="FEC_CIERRE" Type="date" />
           <Property Name="ID_FUNCIONARIO" Type="number" Precision="8" Scale="0" />
+          <Property Name="HORA_APERTURA" Type="timestamp" Precision="6" />
+          <Property Name="HORA_CIERRE" Type="timestamp" Precision="6" />
         </EntityType>
         <EntityType Name="CARGO">
           <Key>
             <PropertyRef Name="ID_CARGO_FUNCI" />
           </Key>
           <Property Name="ID_CARGO_FUNCI" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_CARGO" Type="varchar2" MaxLength="50" />
+          <Property Name="NOMBRE_CARGO" Type="varchar2" MaxLength="64" />
         </EntityType>
         <EntityType Name="DEVOLUCION">
           <Key>
             <PropertyRef Name="ID_DEVOLUCION" />
           </Key>
           <Property Name="ID_DEVOLUCION" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="TIPO_DEVOLUCION" Type="varchar2" MaxLength="50" />
+          <Property Name="NOM_TIPO_DEV" Type="varchar2" MaxLength="128" />
         </EntityType>
         <EntityType Name="ENTRADA_FICHA">
           <Key>
             <PropertyRef Name="ID_ENTRADA_FICHA" />
           </Key>
           <Property Name="ID_ENTRADA_FICHA" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_ENTRADA" Type="varchar2" MaxLength="50" />
-          <Property Name="CONTENIDO_ENTRADA" Type="varchar2" MaxLength="50" />
+          <Property Name="NOMBRE_ENTRADA" Type="varchar2" MaxLength="64" />
+          <Property Name="CONTENIDO_ENTRADA" Type="varchar2" MaxLength="1028" />
           <Property Name="FECHA_ENTRADA" Type="date" />
           <Property Name="ID_FICHA" Type="number" Precision="8" Scale="0" />
         </EntityType>
@@ -90,14 +92,14 @@
             <PropertyRef Name="ID_ESPECIALIDAD" />
           </Key>
           <Property Name="ID_ESPECIALIDAD" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOM_ESPECIALIDAD" Type="varchar2" MaxLength="50" />
+          <Property Name="NOM_ESPECIALIDAD" Type="varchar2" MaxLength="64" />
         </EntityType>
         <EntityType Name="ESTADO_ATEN">
           <Key>
             <PropertyRef Name="ID_ESTADO_ATENCION" />
           </Key>
           <Property Name="ID_ESTADO_ATENCION" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOM_ESTADO_ATEN" Type="varchar2" MaxLength="50" />
+          <Property Name="NOM_ESTADO_ATEN" Type="varchar2" MaxLength="64" />
         </EntityType>
         <EntityType Name="FICHA">
           <Key>
@@ -137,11 +139,12 @@
             <PropertyRef Name="ID_PACIENTE" />
           </Key>
           <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOMBRES_PACIENTE" Type="varchar2" MaxLength="50" />
-          <Property Name="APELLIDOS_PACIENTE" Type="varchar2" MaxLength="50" />
-          <Property Name="RUT" Type="varchar2" MaxLength="50" />
-          <Property Name="HASHED_PASS" Type="varchar2" MaxLength="50" />
-          <Property Name="EMAIL_PACIENTE" Type="varchar2" MaxLength="50" />
+          <Property Name="NOMBRES_PACIENTE" Type="varchar2" MaxLength="64" />
+          <Property Name="APELLIDOS_PACIENTE" Type="varchar2" MaxLength="64" />
+          <Property Name="RUT" Type="number" Precision="9" Scale="0" />
+          <Property Name="HASHED_PASS" Type="varchar2" MaxLength="1080" />
+          <Property Name="EMAIL_PACIENTE" Type="varchar2" MaxLength="512" />
+          <Property Name="DIGITO_VERIFICADOR" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="PAGO">
           <Key>
@@ -152,6 +155,7 @@
           <Property Name="ID_BONO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_CAJA" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_DEVOLUCION" Type="number" Precision="8" Scale="0" />
+          <Property Name="MONTO_PAGO" Type="number" Precision="8" Scale="0" />
         </EntityType>
         <EntityType Name="PERS_MEDICO">
           <Key>
@@ -167,20 +171,22 @@
             <PropertyRef Name="ID_PERSONAL" />
           </Key>
           <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOMBRES" Type="varchar2" MaxLength="50" />
-          <Property Name="APELLIDOS" Type="varchar2" MaxLength="50" />
+          <Property Name="NOMBRES" Type="varchar2" MaxLength="64" />
+          <Property Name="APELLIDOS" Type="varchar2" MaxLength="64" />
           <Property Name="REMUNERACION" Type="number" Precision="8" Scale="0" />
-          <Property Name="HASHED_PASS" Type="varchar2" MaxLength="50" />
-          <Property Name="PORCENT_DESCUENTO" Type="number" Precision="8" Scale="0" />
+          <Property Name="HASHED_PASS" Type="varchar2" MaxLength="512" />
+          <Property Name="PORCENT_DESCUENTO" Type="number" Precision="3" Scale="0" />
+          <Property Name="RUT" Type="varchar2" MaxLength="9" Nullable="false" />
+          <Property Name="VERIFICADOR" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="PRESTACION">
           <Key>
             <PropertyRef Name="ID_PRESTACION" />
           </Key>
           <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOM_PRESTACION" Type="number" Precision="8" Scale="0" />
+          <Property Name="NOM_PRESTACION" Type="varchar2" MaxLength="256" />
           <Property Name="PRECIO_PRESTACION" Type="number" Precision="8" Scale="0" />
-          <Property Name="CODIGO_PRESTACION" Type="varchar2" MaxLength="50" />
+          <Property Name="CODIGO_PRESTACION" Type="varchar2" MaxLength="64" />
           <Property Name="ID_ESPECIALIDAD" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" />
         </EntityType>
@@ -189,8 +195,8 @@
             <PropertyRef Name="ID_RESULTADO_ATENCION" />
           </Key>
           <Property Name="ID_RESULTADO_ATENCION" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="ATENCION_ABIERTA" Type="number" Precision="8" Scale="0" />
-          <Property Name="COMENTARIO" Type="varchar2" MaxLength="50" />
+          <Property Name="ATENCION_ABIERTA" Type="number" Precision="1" Scale="0" />
+          <Property Name="COMENTARIO" Type="varchar2" MaxLength="256" />
           <Property Name="ID_ATENCION_AGENDADA" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_ORDEN_ANALISIS" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" />
@@ -200,14 +206,14 @@
             <PropertyRef Name="ID_TIPO_EQUIPO" />
           </Key>
           <Property Name="ID_TIPO_EQUIPO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_TIPO_EQUIPO" Type="varchar2" MaxLength="50" />
+          <Property Name="NOMBRE_TIPO_EQUIPO" Type="varchar2" MaxLength="256" />
         </EntityType>
         <EntityType Name="TIPO_PRES">
           <Key>
             <PropertyRef Name="ID_TIPO_PRESTACION" />
           </Key>
           <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOM_TIPO_PREST" Type="varchar2" MaxLength="50" />
+          <Property Name="NOM_TIPO_PREST" Type="varchar2" MaxLength="256" />
         </EntityType>
         <EntityType Name="TURNO">
           <Key>
@@ -216,7 +222,7 @@
           <Property Name="ID_TURNO" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="HORA_INI" Type="date" />
           <Property Name="HORA_FIN" Type="date" />
-          <Property Name="NOMBRE_TURNO" Type="varchar2" MaxLength="50" />
+          <Property Name="NOMBRE_TURNO" Type="varchar2" MaxLength="64" />
         </EntityType>
         <Association Name="FK_ASEGURADORA_BONO">
           <End Role="ASEGURADORA" Type="Self.ASEGURADORA" Multiplicity="0..1" />
@@ -670,7 +676,7 @@
             <PropertyRef Name="ID_ARCHIVO" />
           </Key>
           <Property Name="ID_ARCHIVO" Type="Int32" Nullable="false" />
-          <Property Name="FILE_URI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FILE_URI" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="ID_RESULTADO_ATENCION" Type="Int32" />
           <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_RES_ATENCION_ARCHIVO" FromRole="ARCHIVO" ToRole="RES_ATENCION" />
         </EntityType>
@@ -679,7 +685,7 @@
             <PropertyRef Name="ID_ASEGURADORA" />
           </Key>
           <Property Name="ID_ASEGURADORA" Type="Int32" Nullable="false" />
-          <Property Name="NOM_ASEGURADORA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_ASEGURADORA" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BONO" Relationship="Self.FK_ASEGURADORA_BONO" FromRole="ASEGURADORA" ToRole="BONO" />
         </EntityType>
         <EntityType Name="ATENCION_AGEN">
@@ -689,7 +695,7 @@
           <Property Name="ID_ATENCION_AGEN" Type="Int32" Nullable="false" />
           <Property Name="FECHA" Type="DateTime" />
           <Property Name="HORA" Type="DateTime" />
-          <Property Name="OBSERVACIONES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="ID_PACIENTE" Type="Int32" />
           <Property Name="ID_PERSONAL_MEDICO" Type="Int32" />
           <Property Name="ID_PAGO" Type="Int32" />
@@ -718,9 +724,11 @@
             <PropertyRef Name="ID_CAJA" />
           </Key>
           <Property Name="ID_CAJA" Type="Int32" Nullable="false" />
-          <Property Name="FEC_HORA_CIERRE" Type="DateTime" />
-          <Property Name="FEC_HORA_APERTURA" Type="DateTime" />
+          <Property Name="FEC_APERTURA" Type="DateTime" />
+          <Property Name="FEC_CIERRE" Type="DateTime" />
           <Property Name="ID_FUNCIONARIO" Type="Int32" />
+          <Property Name="HORA_APERTURA" Type="DateTime" Precision="6" />
+          <Property Name="HORA_CIERRE" Type="DateTime" Precision="6" />
           <NavigationProperty Name="PAGO" Relationship="Self.FK_CAJA_PAGO" FromRole="CAJA" ToRole="PAGO" />
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_FUNCIONARIO_CAJA" FromRole="CAJA" ToRole="FUNCIONARIO" />
         </EntityType>
@@ -729,7 +737,7 @@
             <PropertyRef Name="ID_CARGO_FUNCI" />
           </Key>
           <Property Name="ID_CARGO_FUNCI" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRE_CARGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE_CARGO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_CARGO_FUNCIONARIO" FromRole="CARGO" ToRole="FUNCIONARIO" />
         </EntityType>
         <EntityType Name="DEVOLUCION">
@@ -737,7 +745,7 @@
             <PropertyRef Name="ID_DEVOLUCION" />
           </Key>
           <Property Name="ID_DEVOLUCION" Type="Int32" Nullable="false" />
-          <Property Name="TIPO_DEVOLUCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_TIPO_DEV" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PAGO" Relationship="Self.FK_DEVOLUCION_PAGO" FromRole="DEVOLUCION" ToRole="PAGO" />
         </EntityType>
         <EntityType Name="ENTRADA_FICHA">
@@ -745,8 +753,8 @@
             <PropertyRef Name="ID_ENTRADA_FICHA" />
           </Key>
           <Property Name="ID_ENTRADA_FICHA" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRE_ENTRADA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONTENIDO_ENTRADA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE_ENTRADA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CONTENIDO_ENTRADA" Type="String" MaxLength="1028" FixedLength="false" Unicode="false" />
           <Property Name="FECHA_ENTRADA" Type="DateTime" />
           <Property Name="ID_FICHA" Type="Int32" />
           <NavigationProperty Name="FICHA" Relationship="Self.FK_ENTRADA_FICHA_FICHA" FromRole="ENTRADA_FICHA" ToRole="FICHA" />
@@ -767,7 +775,7 @@
             <PropertyRef Name="ID_ESPECIALIDAD" />
           </Key>
           <Property Name="ID_ESPECIALIDAD" Type="Int32" Nullable="false" />
-          <Property Name="NOM_ESPECIALIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_ESPECIALIDAD" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PRESTACION" Relationship="Self.FK_ESPECIALIDAD_PRESTACION" FromRole="ESPECIALIDAD" ToRole="PRESTACION" />
           <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_PERS_MEDICO_ESPECIALIDAD" FromRole="ESPECIALIDAD" ToRole="PERS_MEDICO" />
         </EntityType>
@@ -776,7 +784,7 @@
             <PropertyRef Name="ID_ESTADO_ATENCION" />
           </Key>
           <Property Name="ID_ESTADO_ATENCION" Type="Int32" Nullable="false" />
-          <Property Name="NOM_ESTADO_ATEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_ESTADO_ATEN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ESTADO_ATEN_ATENCION_AGEN" FromRole="ESTADO_ATEN" ToRole="ATENCION_AGEN" />
         </EntityType>
         <EntityType Name="FICHA">
@@ -824,11 +832,12 @@
             <PropertyRef Name="ID_PACIENTE" />
           </Key>
           <Property Name="ID_PACIENTE" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRES_PACIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="APELLIDOS_PACIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RUT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="HASHED_PASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EMAIL_PACIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRES_PACIENTE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOS_PACIENTE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="RUT" Type="Int32" />
+          <Property Name="HASHED_PASS" Type="String" MaxLength="1080" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL_PACIENTE" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="DIGITO_VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_PACIENTE_ATENCION_AGEN" FromRole="PACIENTE" ToRole="ATENCION_AGEN" />
           <NavigationProperty Name="FICHA" Relationship="Self.FK_PACIENTE_FICHA" FromRole="PACIENTE" ToRole="FICHA" />
         </EntityType>
@@ -841,6 +850,7 @@
           <Property Name="ID_BONO" Type="Int32" />
           <Property Name="ID_CAJA" Type="Int32" />
           <Property Name="ID_DEVOLUCION" Type="Int32" />
+          <Property Name="MONTO_PAGO" Type="Int32" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_PAGO_ATENCION_AGEN" FromRole="PAGO" ToRole="ATENCION_AGEN" />
           <NavigationProperty Name="BONO" Relationship="Self.FK_BONO_PAGO" FromRole="PAGO" ToRole="BONO" />
           <NavigationProperty Name="CAJA" Relationship="Self.FK_CAJA_PAGO" FromRole="PAGO" ToRole="CAJA" />
@@ -865,11 +875,13 @@
             <PropertyRef Name="ID_PERSONAL" />
           </Key>
           <Property Name="ID_PERSONAL" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRES" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="REMUNERACION" Type="Int32" />
-          <Property Name="HASHED_PASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PORCENT_DESCUENTO" Type="Int32" />
+          <Property Name="HASHED_PASS" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="PORCENT_DESCUENTO" Type="Byte" />
+          <Property Name="RUT" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_PERSONAL_FUNCIONARIO" FromRole="PERSONAL" ToRole="FUNCIONARIO" />
           <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_PERSONAL_PERS_MEDICO" FromRole="PERSONAL" ToRole="PERS_MEDICO" />
         </EntityType>
@@ -878,9 +890,9 @@
             <PropertyRef Name="ID_PRESTACION" />
           </Key>
           <Property Name="ID_PRESTACION" Type="Int32" Nullable="false" />
-          <Property Name="NOM_PRESTACION" Type="Int32" />
+          <Property Name="NOM_PRESTACION" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="PRECIO_PRESTACION" Type="Int32" />
-          <Property Name="CODIGO_PRESTACION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CODIGO_PRESTACION" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="ID_ESPECIALIDAD" Type="Int32" />
           <Property Name="ID_TIPO_PRESTACION" Type="Int32" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ATENCION_AGEN_PRESTACION" FromRole="PRESTACION" ToRole="ATENCION_AGEN" />
@@ -893,8 +905,8 @@
             <PropertyRef Name="ID_RESULTADO_ATENCION" />
           </Key>
           <Property Name="ID_RESULTADO_ATENCION" Type="Int32" Nullable="false" />
-          <Property Name="ATENCION_ABIERTA" Type="Int32" />
-          <Property Name="COMENTARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ATENCION_ABIERTA" Type="Boolean" />
+          <Property Name="COMENTARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="ID_ATENCION_AGENDADA" Type="Int32" />
           <Property Name="ID_ORDEN_ANALISIS" Type="Int32" />
           <Property Name="ID_PERSONAL_MEDICO" Type="Int32" />
@@ -908,7 +920,7 @@
             <PropertyRef Name="ID_TIPO_EQUIPO" />
           </Key>
           <Property Name="ID_TIPO_EQUIPO" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRE_TIPO_EQUIPO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE_TIPO_EQUIPO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EQUIPO_REQ" Relationship="Self.FK_EQUIPO_REQ_TIPO_EQUIPO" FromRole="TIPO_EQUIPO" ToRole="EQUIPO_REQ" />
           <NavigationProperty Name="INVENTARIO" Relationship="Self.FK_TIPO_EQUIPO_INVENTARIO" FromRole="TIPO_EQUIPO" ToRole="INVENTARIO" />
         </EntityType>
@@ -917,7 +929,7 @@
             <PropertyRef Name="ID_TIPO_PRESTACION" />
           </Key>
           <Property Name="ID_TIPO_PRESTACION" Type="Int32" Nullable="false" />
-          <Property Name="NOM_TIPO_PREST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOM_TIPO_PREST" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PRESTACION" Relationship="Self.FK_TIPO_PRES_PRESTACION" FromRole="TIPO_PRES" ToRole="PRESTACION" />
         </EntityType>
         <EntityType Name="TURNO">
@@ -927,7 +939,7 @@
           <Property Name="ID_TURNO" Type="Int32" Nullable="false" />
           <Property Name="HORA_INI" Type="DateTime" />
           <Property Name="HORA_FIN" Type="DateTime" />
-          <Property Name="NOMBRE_TURNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE_TURNO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_TURNO_PERS_MEDICO" FromRole="TURNO" ToRole="PERS_MEDICO" />
         </EntityType>
         <Association Name="FK_RES_ATENCION_ARCHIVO">
@@ -1424,9 +1436,11 @@
             <EntityTypeMapping TypeName="CMHModel.CAJA">
               <MappingFragment StoreEntitySet="CAJA">
                 <ScalarProperty Name="ID_CAJA" ColumnName="ID_CAJA" />
-                <ScalarProperty Name="FEC_HORA_CIERRE" ColumnName="FEC_HORA_CIERRE" />
-                <ScalarProperty Name="FEC_HORA_APERTURA" ColumnName="FEC_HORA_APERTURA" />
+                <ScalarProperty Name="FEC_APERTURA" ColumnName="FEC_APERTURA" />
+                <ScalarProperty Name="FEC_CIERRE" ColumnName="FEC_CIERRE" />
                 <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
+                <ScalarProperty Name="HORA_APERTURA" ColumnName="HORA_APERTURA" />
+                <ScalarProperty Name="HORA_CIERRE" ColumnName="HORA_CIERRE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1442,7 +1456,7 @@
             <EntityTypeMapping TypeName="CMHModel.DEVOLUCION">
               <MappingFragment StoreEntitySet="DEVOLUCION">
                 <ScalarProperty Name="ID_DEVOLUCION" ColumnName="ID_DEVOLUCION" />
-                <ScalarProperty Name="TIPO_DEVOLUCION" ColumnName="TIPO_DEVOLUCION" />
+                <ScalarProperty Name="NOM_TIPO_DEV" ColumnName="NOM_TIPO_DEV" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1529,6 +1543,7 @@
                 <ScalarProperty Name="RUT" ColumnName="RUT" />
                 <ScalarProperty Name="HASHED_PASS" ColumnName="HASHED_PASS" />
                 <ScalarProperty Name="EMAIL_PACIENTE" ColumnName="EMAIL_PACIENTE" />
+                <ScalarProperty Name="DIGITO_VERIFICADOR" ColumnName="DIGITO_VERIFICADOR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1540,6 +1555,7 @@
                 <ScalarProperty Name="ID_BONO" ColumnName="ID_BONO" />
                 <ScalarProperty Name="ID_CAJA" ColumnName="ID_CAJA" />
                 <ScalarProperty Name="ID_DEVOLUCION" ColumnName="ID_DEVOLUCION" />
+                <ScalarProperty Name="MONTO_PAGO" ColumnName="MONTO_PAGO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1562,6 +1578,8 @@
                 <ScalarProperty Name="REMUNERACION" ColumnName="REMUNERACION" />
                 <ScalarProperty Name="HASHED_PASS" ColumnName="HASHED_PASS" />
                 <ScalarProperty Name="PORCENT_DESCUENTO" ColumnName="PORCENT_DESCUENTO" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="VERIFICADOR" ColumnName="VERIFICADOR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

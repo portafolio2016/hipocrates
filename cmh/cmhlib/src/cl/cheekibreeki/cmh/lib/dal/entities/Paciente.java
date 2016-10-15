@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Paciente.findByApellidosPaciente", query = "SELECT p FROM Paciente p WHERE p.apellidosPaciente = :apellidosPaciente"),
     @NamedQuery(name = "Paciente.findByRut", query = "SELECT p FROM Paciente p WHERE p.rut = :rut"),
     @NamedQuery(name = "Paciente.findByHashedPass", query = "SELECT p FROM Paciente p WHERE p.hashedPass = :hashedPass"),
-    @NamedQuery(name = "Paciente.findByEmailPaciente", query = "SELECT p FROM Paciente p WHERE p.emailPaciente = :emailPaciente")})
+    @NamedQuery(name = "Paciente.findByEmailPaciente", query = "SELECT p FROM Paciente p WHERE p.emailPaciente = :emailPaciente"),
+    @NamedQuery(name = "Paciente.findByDigitoVerificador", query = "SELECT p FROM Paciente p WHERE p.digitoVerificador = :digitoVerificador")})
 public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,11 +46,14 @@ public class Paciente implements Serializable {
     @Column(name = "APELLIDOS_PACIENTE")
     private String apellidosPaciente;
     @Column(name = "RUT")
-    private String rut;
+    private Integer rut;
     @Column(name = "HASHED_PASS")
     private String hashedPass;
     @Column(name = "EMAIL_PACIENTE")
     private String emailPaciente;
+    @Basic(optional = false)
+    @Column(name = "DIGITO_VERIFICADOR")
+    private Character digitoVerificador;
     @OneToMany(mappedBy = "idPaciente")
     private Collection<Ficha> fichaCollection;
     @OneToMany(mappedBy = "idPaciente")
@@ -60,6 +64,11 @@ public class Paciente implements Serializable {
 
     public Paciente(Integer idPaciente) {
         this.idPaciente = idPaciente;
+    }
+
+    public Paciente(Integer idPaciente, Character digitoVerificador) {
+        this.idPaciente = idPaciente;
+        this.digitoVerificador = digitoVerificador;
     }
 
     public Integer getIdPaciente() {
@@ -86,11 +95,11 @@ public class Paciente implements Serializable {
         this.apellidosPaciente = apellidosPaciente;
     }
 
-    public String getRut() {
+    public Integer getRut() {
         return rut;
     }
 
-    public void setRut(String rut) {
+    public void setRut(Integer rut) {
         this.rut = rut;
     }
 
@@ -108,6 +117,14 @@ public class Paciente implements Serializable {
 
     public void setEmailPaciente(String emailPaciente) {
         this.emailPaciente = emailPaciente;
+    }
+
+    public Character getDigitoVerificador() {
+        return digitoVerificador;
+    }
+
+    public void setDigitoVerificador(Character digitoVerificador) {
+        this.digitoVerificador = digitoVerificador;
     }
 
     @XmlTransient

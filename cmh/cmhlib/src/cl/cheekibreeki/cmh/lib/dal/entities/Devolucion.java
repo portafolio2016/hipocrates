@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Devolucion.findAll", query = "SELECT d FROM Devolucion d"),
     @NamedQuery(name = "Devolucion.findByIdDevolucion", query = "SELECT d FROM Devolucion d WHERE d.idDevolucion = :idDevolucion"),
-    @NamedQuery(name = "Devolucion.findByTipoDevolucion", query = "SELECT d FROM Devolucion d WHERE d.tipoDevolucion = :tipoDevolucion")})
+    @NamedQuery(name = "Devolucion.findByNomTipoDev", query = "SELECT d FROM Devolucion d WHERE d.nomTipoDev = :nomTipoDev")})
 public class Devolucion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,8 +36,8 @@ public class Devolucion implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_DEVOLUCION")
     private Integer idDevolucion;
-    @Column(name = "TIPO_DEVOLUCION")
-    private String tipoDevolucion;
+    @Column(name = "NOM_TIPO_DEV")
+    private String nomTipoDev;
     @OneToMany(mappedBy = "idDevolucion")
     private Collection<Pago> pagoCollection;
 
@@ -56,12 +56,12 @@ public class Devolucion implements Serializable {
         this.idDevolucion = idDevolucion;
     }
 
-    public String getTipoDevolucion() {
-        return tipoDevolucion;
+    public String getNomTipoDev() {
+        return nomTipoDev;
     }
 
-    public void setTipoDevolucion(String tipoDevolucion) {
-        this.tipoDevolucion = tipoDevolucion;
+    public void setNomTipoDev(String nomTipoDev) {
+        this.nomTipoDev = nomTipoDev;
     }
 
     @XmlTransient

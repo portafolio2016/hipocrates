@@ -40,7 +40,7 @@ public class ResAtencion implements Serializable {
     @Column(name = "ID_RESULTADO_ATENCION")
     private Integer idResultadoAtencion;
     @Column(name = "ATENCION_ABIERTA")
-    private Integer atencionAbierta;
+    private Short atencionAbierta;
     @Column(name = "COMENTARIO")
     private String comentario;
     @JoinColumn(name = "ID_ATENCION_AGENDADA", referencedColumnName = "ID_ATENCION_AGEN")
@@ -70,11 +70,11 @@ public class ResAtencion implements Serializable {
         this.idResultadoAtencion = idResultadoAtencion;
     }
 
-    public Integer getAtencionAbierta() {
+    public Short getAtencionAbierta() {
         return atencionAbierta;
     }
 
-    public void setAtencionAbierta(Integer atencionAbierta) {
+    public void setAtencionAbierta(Short atencionAbierta) {
         this.atencionAbierta = atencionAbierta;
     }
 

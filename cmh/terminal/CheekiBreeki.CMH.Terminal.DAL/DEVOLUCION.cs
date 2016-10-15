@@ -20,7 +20,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         }
     
         public int ID_DEVOLUCION { get; set; }
-        public string TIPO_DEVOLUCION { get; set; }
+        public string NOM_TIPO_DEV { get; set; }
     
         public virtual ICollection<PAGO> PAGO { get; set; }
     }
