@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "RES_ATENCION")
@@ -40,11 +40,9 @@ public class ResAtencion implements Serializable {
     @Column(name = "ID_RESULTADO_ATENCION")
     private Integer idResultadoAtencion;
     @Column(name = "ATENCION_ABIERTA")
-    private Short atencionAbierta;
+    private Integer atencionAbierta;
     @Column(name = "COMENTARIO")
     private String comentario;
-    @OneToMany(mappedBy = "idResultadoAtencion")
-    private Collection<Archivo> archivoCollection;
     @JoinColumn(name = "ID_ATENCION_AGENDADA", referencedColumnName = "ID_ATENCION_AGEN")
     @ManyToOne
     private AtencionAgen idAtencionAgendada;
@@ -54,6 +52,8 @@ public class ResAtencion implements Serializable {
     @JoinColumn(name = "ID_PERSONAL_MEDICO", referencedColumnName = "ID_PERSONAL_MEDICO")
     @ManyToOne
     private PersMedico idPersonalMedico;
+    @OneToMany(mappedBy = "idResultadoAtencion")
+    private Collection<Archivo> archivoCollection;
 
     public ResAtencion() {
     }
@@ -70,11 +70,11 @@ public class ResAtencion implements Serializable {
         this.idResultadoAtencion = idResultadoAtencion;
     }
 
-    public Short getAtencionAbierta() {
+    public Integer getAtencionAbierta() {
         return atencionAbierta;
     }
 
-    public void setAtencionAbierta(Short atencionAbierta) {
+    public void setAtencionAbierta(Integer atencionAbierta) {
         this.atencionAbierta = atencionAbierta;
     }
 
@@ -84,15 +84,6 @@ public class ResAtencion implements Serializable {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
-    }
-
-    @XmlTransient
-    public Collection<Archivo> getArchivoCollection() {
-        return archivoCollection;
-    }
-
-    public void setArchivoCollection(Collection<Archivo> archivoCollection) {
-        this.archivoCollection = archivoCollection;
     }
 
     public AtencionAgen getIdAtencionAgendada() {
@@ -117,6 +108,15 @@ public class ResAtencion implements Serializable {
 
     public void setIdPersonalMedico(PersMedico idPersonalMedico) {
         this.idPersonalMedico = idPersonalMedico;
+    }
+
+    @XmlTransient
+    public Collection<Archivo> getArchivoCollection() {
+        return archivoCollection;
+    }
+
+    public void setArchivoCollection(Collection<Archivo> archivoCollection) {
+        this.archivoCollection = archivoCollection;
     }
 
     @Override

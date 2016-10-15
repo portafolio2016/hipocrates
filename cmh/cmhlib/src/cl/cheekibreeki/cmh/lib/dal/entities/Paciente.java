@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "PACIENTE")
@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Paciente.findByApellidosPaciente", query = "SELECT p FROM Paciente p WHERE p.apellidosPaciente = :apellidosPaciente"),
     @NamedQuery(name = "Paciente.findByRut", query = "SELECT p FROM Paciente p WHERE p.rut = :rut"),
     @NamedQuery(name = "Paciente.findByHashedPass", query = "SELECT p FROM Paciente p WHERE p.hashedPass = :hashedPass"),
-    @NamedQuery(name = "Paciente.findByEmailPaciente", query = "SELECT p FROM Paciente p WHERE p.emailPaciente = :emailPaciente"),
-    @NamedQuery(name = "Paciente.findByDigitoVerificador", query = "SELECT p FROM Paciente p WHERE p.digitoVerificador = :digitoVerificador")})
+    @NamedQuery(name = "Paciente.findByEmailPaciente", query = "SELECT p FROM Paciente p WHERE p.emailPaciente = :emailPaciente")})
 public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,29 +45,21 @@ public class Paciente implements Serializable {
     @Column(name = "APELLIDOS_PACIENTE")
     private String apellidosPaciente;
     @Column(name = "RUT")
-    private Integer rut;
+    private String rut;
     @Column(name = "HASHED_PASS")
     private String hashedPass;
     @Column(name = "EMAIL_PACIENTE")
     private String emailPaciente;
-    @Basic(optional = false)
-    @Column(name = "DIGITO_VERIFICADOR")
-    private Character digitoVerificador;
-    @OneToMany(mappedBy = "idPaciente")
-    private Collection<AtencionAgen> atencionAgenCollection;
     @OneToMany(mappedBy = "idPaciente")
     private Collection<Ficha> fichaCollection;
+    @OneToMany(mappedBy = "idPaciente")
+    private Collection<AtencionAgen> atencionAgenCollection;
 
     public Paciente() {
     }
 
     public Paciente(Integer idPaciente) {
         this.idPaciente = idPaciente;
-    }
-
-    public Paciente(Integer idPaciente, Character digitoVerificador) {
-        this.idPaciente = idPaciente;
-        this.digitoVerificador = digitoVerificador;
     }
 
     public Integer getIdPaciente() {
@@ -95,11 +86,11 @@ public class Paciente implements Serializable {
         this.apellidosPaciente = apellidosPaciente;
     }
 
-    public Integer getRut() {
+    public String getRut() {
         return rut;
     }
 
-    public void setRut(Integer rut) {
+    public void setRut(String rut) {
         this.rut = rut;
     }
 
@@ -119,12 +110,13 @@ public class Paciente implements Serializable {
         this.emailPaciente = emailPaciente;
     }
 
-    public Character getDigitoVerificador() {
-        return digitoVerificador;
+    @XmlTransient
+    public Collection<Ficha> getFichaCollection() {
+        return fichaCollection;
     }
 
-    public void setDigitoVerificador(Character digitoVerificador) {
-        this.digitoVerificador = digitoVerificador;
+    public void setFichaCollection(Collection<Ficha> fichaCollection) {
+        this.fichaCollection = fichaCollection;
     }
 
     @XmlTransient
@@ -134,15 +126,6 @@ public class Paciente implements Serializable {
 
     public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
         this.atencionAgenCollection = atencionAgenCollection;
-    }
-
-    @XmlTransient
-    public Collection<Ficha> getFichaCollection() {
-        return fichaCollection;
-    }
-
-    public void setFichaCollection(Collection<Ficha> fichaCollection) {
-        this.fichaCollection = fichaCollection;
     }
 
     @Override

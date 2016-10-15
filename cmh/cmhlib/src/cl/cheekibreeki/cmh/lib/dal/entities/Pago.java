@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "PAGO")
@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Pago.findAll", query = "SELECT p FROM Pago p"),
     @NamedQuery(name = "Pago.findByIdPago", query = "SELECT p FROM Pago p WHERE p.idPago = :idPago"),
-    @NamedQuery(name = "Pago.findByHoraPago", query = "SELECT p FROM Pago p WHERE p.horaPago = :horaPago"),
-    @NamedQuery(name = "Pago.findByMontoPago", query = "SELECT p FROM Pago p WHERE p.montoPago = :montoPago")})
+    @NamedQuery(name = "Pago.findByHoraPago", query = "SELECT p FROM Pago p WHERE p.horaPago = :horaPago")})
 public class Pago implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,10 +44,6 @@ public class Pago implements Serializable {
     @Column(name = "HORA_PAGO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date horaPago;
-    @Column(name = "MONTO_PAGO")
-    private Integer montoPago;
-    @OneToMany(mappedBy = "idPago")
-    private Collection<AtencionAgen> atencionAgenCollection;
     @JoinColumn(name = "ID_BONO", referencedColumnName = "ID_BONO")
     @ManyToOne
     private Bono idBono;
@@ -58,6 +53,8 @@ public class Pago implements Serializable {
     @JoinColumn(name = "ID_DEVOLUCION", referencedColumnName = "ID_DEVOLUCION")
     @ManyToOne
     private Devolucion idDevolucion;
+    @OneToMany(mappedBy = "idPago")
+    private Collection<AtencionAgen> atencionAgenCollection;
 
     public Pago() {
     }
@@ -82,23 +79,6 @@ public class Pago implements Serializable {
         this.horaPago = horaPago;
     }
 
-    public Integer getMontoPago() {
-        return montoPago;
-    }
-
-    public void setMontoPago(Integer montoPago) {
-        this.montoPago = montoPago;
-    }
-
-    @XmlTransient
-    public Collection<AtencionAgen> getAtencionAgenCollection() {
-        return atencionAgenCollection;
-    }
-
-    public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
-        this.atencionAgenCollection = atencionAgenCollection;
-    }
-
     public Bono getIdBono() {
         return idBono;
     }
@@ -121,6 +101,15 @@ public class Pago implements Serializable {
 
     public void setIdDevolucion(Devolucion idDevolucion) {
         this.idDevolucion = idDevolucion;
+    }
+
+    @XmlTransient
+    public Collection<AtencionAgen> getAtencionAgenCollection() {
+        return atencionAgenCollection;
+    }
+
+    public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
+        this.atencionAgenCollection = atencionAgenCollection;
     }
 
     @Override
