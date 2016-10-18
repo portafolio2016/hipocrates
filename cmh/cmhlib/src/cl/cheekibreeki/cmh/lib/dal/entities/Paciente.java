@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "PACIENTE")
@@ -55,9 +55,9 @@ public class Paciente implements Serializable {
     @Column(name = "DIGITO_VERIFICADOR")
     private Character digitoVerificador;
     @OneToMany(mappedBy = "idPaciente")
-    private Collection<AtencionAgen> atencionAgenCollection;
-    @OneToMany(mappedBy = "idPaciente")
     private Collection<Ficha> fichaCollection;
+    @OneToMany(mappedBy = "idPaciente")
+    private Collection<AtencionAgen> atencionAgenCollection;
 
     public Paciente() {
     }
@@ -128,21 +128,21 @@ public class Paciente implements Serializable {
     }
 
     @XmlTransient
-    public Collection<AtencionAgen> getAtencionAgenCollection() {
-        return atencionAgenCollection;
-    }
-
-    public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
-        this.atencionAgenCollection = atencionAgenCollection;
-    }
-
-    @XmlTransient
     public Collection<Ficha> getFichaCollection() {
         return fichaCollection;
     }
 
     public void setFichaCollection(Collection<Ficha> fichaCollection) {
         this.fichaCollection = fichaCollection;
+    }
+
+    @XmlTransient
+    public Collection<AtencionAgen> getAtencionAgenCollection() {
+        return atencionAgenCollection;
+    }
+
+    public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
+        this.atencionAgenCollection = atencionAgenCollection;
     }
 
     @Override

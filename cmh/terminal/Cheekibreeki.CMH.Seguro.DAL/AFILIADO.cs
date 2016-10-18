@@ -7,14 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CheekiBreeki.CMH.Terminal.DAL
+namespace Cheekibreeki.CMH.Seguro.DAL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ESTADO_ATENCION
+    public partial class AFILIADO
     {
-        public decimal ID_ESTADO_ATENCION { get; set; }
-        public string NOM_ESTADO_ATEN { get; set; }
+        public int ID_AFILIADO { get; set; }
+        public Nullable<int> RUT { get; set; }
+        public string VERIFICADOR { get; set; }
+        public Nullable<int> ID_PLAN { get; set; }
+    
+        public virtual PLAN PLAN { get; set; }
     }
 }
