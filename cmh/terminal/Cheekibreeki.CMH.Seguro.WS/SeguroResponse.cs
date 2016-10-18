@@ -12,6 +12,14 @@ namespace Cheekibreeki.CMH.Seguro.WS
     {
         int descuentoPesos = 0;
 
+        private bool afiliadoTieneSeguro;
+
+        public bool AfiliadoTieneSeguro
+        {
+            get { return afiliadoTieneSeguro; }
+            set { afiliadoTieneSeguro = value; }
+        }
+        
         [DataMember]
         public int DescuentoPesos
         {
