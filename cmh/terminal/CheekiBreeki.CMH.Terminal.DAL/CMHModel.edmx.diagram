@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="CMHModel.ARCHIVO" Width="1.5" PointX="15.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ASEGURADORA" Width="1.5" PointX="1.5" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ATENCION_AGEN" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMHModel.ATENCION_AGENDADA" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.BANCO" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.BONO" Width="1.5" PointX="3.75" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.CAJA" Width="1.5" PointX="3.75" PointY="21.75" IsExpanded="true" />
@@ -20,7 +19,6 @@
         <EntityTypeShape EntityType="CMHModel.ESP_PER_MEDICO" Width="1.5" PointX="8.75" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ESPECIALIDAD" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ESTADO_ATEN" Width="1.5" PointX="6" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMHModel.ESTADO_ATENCION" Width="1.5" PointX="10.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.FICHA" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.FUNCIONARIO" Width="1.5" PointX="1.5" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.INVENTARIO" Width="1.5" PointX="11.25" PointY="0.75" IsExpanded="true" />
