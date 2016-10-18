@@ -1,2 +1,16 @@
 *.tmp
 *.ldb
+/cmh/webapp/nbproject/private/
+/cmh/testlib/nbproject/private/
+/cmh/testlib/build/
+/cmh/WebApplication1/nbproject/private/
+/cmh/webapplib/nbproject/private/
+/cmh/webapplib/build/
+
+*.LDB
+/cmh/webapplib/dist/
+/cmh/servPago/nbproject/private/
+/cmh/cmhlib/nbproject/private/
+/cmh/cmhlib/build/
+/cmh/webapp/build/
+/cmh/cmhlib/dist/
