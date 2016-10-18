@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "PERS_MEDICO")
@@ -37,8 +37,9 @@ public class PersMedico implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_PERSONAL_MEDICO")
     private Integer idPersonalMedico;
-    @OneToMany(mappedBy = "idPersonalMedico")
-    private Collection<ResAtencion> resAtencionCollection;
+    @JoinColumn(name = "ID_TURNO", referencedColumnName = "ID_CUEN_BANCARIA")
+    @ManyToOne
+    private CuenBancaria idTurno;
     @JoinColumn(name = "ID_ESPECIALIDAD", referencedColumnName = "ID_ESPECIALIDAD")
     @ManyToOne
     private Especialidad idEspecialidad;
@@ -47,9 +48,11 @@ public class PersMedico implements Serializable {
     private Personal idPersonal;
     @JoinColumn(name = "ID_TURNO", referencedColumnName = "ID_TURNO")
     @ManyToOne
-    private Turno idTurno;
+    private Turno idTurno1;
     @OneToMany(mappedBy = "idPersonalMedico")
     private Collection<AtencionAgen> atencionAgenCollection;
+    @OneToMany(mappedBy = "idPersonalMedico")
+    private Collection<ResAtencion> resAtencionCollection;
 
     public PersMedico() {
     }
@@ -66,13 +69,12 @@ public class PersMedico implements Serializable {
         this.idPersonalMedico = idPersonalMedico;
     }
 
-    @XmlTransient
-    public Collection<ResAtencion> getResAtencionCollection() {
-        return resAtencionCollection;
+    public CuenBancaria getIdTurno() {
+        return idTurno;
     }
 
-    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
-        this.resAtencionCollection = resAtencionCollection;
+    public void setIdTurno(CuenBancaria idTurno) {
+        this.idTurno = idTurno;
     }
 
     public Especialidad getIdEspecialidad() {
@@ -91,12 +93,12 @@ public class PersMedico implements Serializable {
         this.idPersonal = idPersonal;
     }
 
-    public Turno getIdTurno() {
-        return idTurno;
+    public Turno getIdTurno1() {
+        return idTurno1;
     }
 
-    public void setIdTurno(Turno idTurno) {
-        this.idTurno = idTurno;
+    public void setIdTurno1(Turno idTurno1) {
+        this.idTurno1 = idTurno1;
     }
 
     @XmlTransient
@@ -106,6 +108,15 @@ public class PersMedico implements Serializable {
 
     public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
         this.atencionAgenCollection = atencionAgenCollection;
+    }
+
+    @XmlTransient
+    public Collection<ResAtencion> getResAtencionCollection() {
+        return resAtencionCollection;
+    }
+
+    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
+        this.resAtencionCollection = resAtencionCollection;
     }
 
     @Override

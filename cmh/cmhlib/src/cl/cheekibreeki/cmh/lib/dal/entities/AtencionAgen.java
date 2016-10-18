@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "ATENCION_AGEN")
@@ -47,8 +47,6 @@ public class AtencionAgen implements Serializable {
     @Column(name = "FECHOR")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechor;
-    @OneToMany(mappedBy = "idAtencionAgendada")
-    private Collection<ResAtencion> resAtencionCollection;
     @JoinColumn(name = "ID_ESTADO_ATENCION", referencedColumnName = "ID_ESTADO_ATENCION")
     @ManyToOne
     private EstadoAten idEstadoAtencion;
@@ -64,6 +62,8 @@ public class AtencionAgen implements Serializable {
     @JoinColumn(name = "ID_PRESTACION", referencedColumnName = "ID_PRESTACION")
     @ManyToOne
     private Prestacion idPrestacion;
+    @OneToMany(mappedBy = "idAtencionAgendada")
+    private Collection<ResAtencion> resAtencionCollection;
 
     public AtencionAgen() {
     }
@@ -94,15 +94,6 @@ public class AtencionAgen implements Serializable {
 
     public void setFechor(Date fechor) {
         this.fechor = fechor;
-    }
-
-    @XmlTransient
-    public Collection<ResAtencion> getResAtencionCollection() {
-        return resAtencionCollection;
-    }
-
-    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
-        this.resAtencionCollection = resAtencionCollection;
     }
 
     public EstadoAten getIdEstadoAtencion() {
@@ -143,6 +134,15 @@ public class AtencionAgen implements Serializable {
 
     public void setIdPrestacion(Prestacion idPrestacion) {
         this.idPrestacion = idPrestacion;
+    }
+
+    @XmlTransient
+    public Collection<ResAtencion> getResAtencionCollection() {
+        return resAtencionCollection;
+    }
+
+    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
+        this.resAtencionCollection = resAtencionCollection;
     }
 
     @Override

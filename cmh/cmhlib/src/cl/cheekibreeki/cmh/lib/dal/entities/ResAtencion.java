@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "RES_ATENCION")
@@ -43,6 +43,8 @@ public class ResAtencion implements Serializable {
     private Short atencionAbierta;
     @Column(name = "COMENTARIO")
     private String comentario;
+    @OneToMany(mappedBy = "idResultadoAtencion")
+    private Collection<Archivo> archivoCollection;
     @JoinColumn(name = "ID_ATENCION_AGENDADA", referencedColumnName = "ID_ATENCION_AGEN")
     @ManyToOne
     private AtencionAgen idAtencionAgendada;
@@ -52,8 +54,6 @@ public class ResAtencion implements Serializable {
     @JoinColumn(name = "ID_PERSONAL_MEDICO", referencedColumnName = "ID_PERSONAL_MEDICO")
     @ManyToOne
     private PersMedico idPersonalMedico;
-    @OneToMany(mappedBy = "idResultadoAtencion")
-    private Collection<Archivo> archivoCollection;
 
     public ResAtencion() {
     }
@@ -86,6 +86,15 @@ public class ResAtencion implements Serializable {
         this.comentario = comentario;
     }
 
+    @XmlTransient
+    public Collection<Archivo> getArchivoCollection() {
+        return archivoCollection;
+    }
+
+    public void setArchivoCollection(Collection<Archivo> archivoCollection) {
+        this.archivoCollection = archivoCollection;
+    }
+
     public AtencionAgen getIdAtencionAgendada() {
         return idAtencionAgendada;
     }
@@ -108,15 +117,6 @@ public class ResAtencion implements Serializable {
 
     public void setIdPersonalMedico(PersMedico idPersonalMedico) {
         this.idPersonalMedico = idPersonalMedico;
-    }
-
-    @XmlTransient
-    public Collection<Archivo> getArchivoCollection() {
-        return archivoCollection;
-    }
-
-    public void setArchivoCollection(Collection<Archivo> archivoCollection) {
-        this.archivoCollection = archivoCollection;
     }
 
     @Override

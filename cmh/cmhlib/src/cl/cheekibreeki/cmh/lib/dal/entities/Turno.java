@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "TURNO")
@@ -50,7 +50,7 @@ public class Turno implements Serializable {
     private Short numhoraFin;
     @Column(name = "NUMMINU_FIN")
     private Short numminuFin;
-    @OneToMany(mappedBy = "idTurno")
+    @OneToMany(mappedBy = "idTurno1")
     private Collection<PersMedico> persMedicoCollection;
 
     public Turno() {

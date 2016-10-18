@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "PAGO")
@@ -47,6 +47,8 @@ public class Pago implements Serializable {
     private Date horaPago;
     @Column(name = "MONTO_PAGO")
     private Integer montoPago;
+    @OneToMany(mappedBy = "idPago")
+    private Collection<AtencionAgen> atencionAgenCollection;
     @JoinColumn(name = "ID_BONO", referencedColumnName = "ID_BONO")
     @ManyToOne
     private Bono idBono;
@@ -56,8 +58,6 @@ public class Pago implements Serializable {
     @JoinColumn(name = "ID_DEVOLUCION", referencedColumnName = "ID_DEVOLUCION")
     @ManyToOne
     private Devolucion idDevolucion;
-    @OneToMany(mappedBy = "idPago")
-    private Collection<AtencionAgen> atencionAgenCollection;
 
     public Pago() {
     }
@@ -90,6 +90,15 @@ public class Pago implements Serializable {
         this.montoPago = montoPago;
     }
 
+    @XmlTransient
+    public Collection<AtencionAgen> getAtencionAgenCollection() {
+        return atencionAgenCollection;
+    }
+
+    public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
+        this.atencionAgenCollection = atencionAgenCollection;
+    }
+
     public Bono getIdBono() {
         return idBono;
     }
@@ -112,15 +121,6 @@ public class Pago implements Serializable {
 
     public void setIdDevolucion(Devolucion idDevolucion) {
         this.idDevolucion = idDevolucion;
-    }
-
-    @XmlTransient
-    public Collection<AtencionAgen> getAtencionAgenCollection() {
-        return atencionAgenCollection;
-    }
-
-    public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
-        this.atencionAgenCollection = atencionAgenCollection;
     }
 
     @Override
