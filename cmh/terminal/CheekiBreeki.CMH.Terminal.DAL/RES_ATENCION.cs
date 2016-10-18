@@ -22,7 +22,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public int ID_RESULTADO_ATENCION { get; set; }
         public Nullable<bool> ATENCION_ABIERTA { get; set; }
         public string COMENTARIO { get; set; }
-        public Nullable<int> ID_ATENCION_AGENDADA { get; set; }
+        public Nullable<int> ID_ATENCION_AGEN { get; set; }
         public Nullable<int> ID_ORDEN_ANALISIS { get; set; }
         public Nullable<int> ID_PERSONAL_MEDICO { get; set; }
     
