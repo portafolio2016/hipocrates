@@ -32,7 +32,7 @@
           <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" />
           <Property Name="FECHOR" Type="date" />
-          <Property Name="ID_ESTADO_ATENCION" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_ESTADO_ATEN" Type="number" Precision="8" Scale="0" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -111,9 +111,9 @@
         </EntityType>
         <EntityType Name="ESTADO_ATEN">
           <Key>
-            <PropertyRef Name="ID_ESTADO_ATENCION" />
+            <PropertyRef Name="ID_ESTADO_ATEN" />
           </Key>
-          <Property Name="ID_ESTADO_ATENCION" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_ESTADO_ATEN" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="NOM_ESTADO_ATEN" Type="varchar2" MaxLength="64" />
         </EntityType>
         <EntityType Name="FICHA">
@@ -213,7 +213,7 @@
           <Property Name="ID_RESULTADO_ATENCION" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="ATENCION_ABIERTA" Type="number" Precision="1" Scale="0" />
           <Property Name="COMENTARIO" Type="varchar2" MaxLength="256" />
-          <Property Name="ID_ATENCION_AGENDADA" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_ORDEN_ANALISIS" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" />
         </EntityType>
@@ -287,7 +287,7 @@
               <PropertyRef Name="ID_ATENCION_AGEN" />
             </Principal>
             <Dependent Role="RES_ATENCION">
-              <PropertyRef Name="ID_ATENCION_AGENDADA" />
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -348,7 +348,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CUEN_BANCARIA_PERS_MEDICO">
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CUEN_BANCARIA" Type="Self.CUEN_BANCARIA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PERS_MEDICO">
@@ -464,10 +466,10 @@
           <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ESTADO_ATEN">
-              <PropertyRef Name="ID_ESTADO_ATENCION" />
+              <PropertyRef Name="ID_ESTADO_ATEN" />
             </Principal>
             <Dependent Role="ATENCION_AGEN">
-              <PropertyRef Name="ID_ESTADO_ATENCION" />
+              <PropertyRef Name="ID_ESTADO_ATEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -832,7 +834,7 @@
           <Property Name="ID_PAGO" Type="Int32" />
           <Property Name="ID_PRESTACION" Type="Int32" />
           <Property Name="FECHOR" Type="DateTime" />
-          <Property Name="ID_ESTADO_ATENCION" Type="Int32" />
+          <Property Name="ID_ESTADO_ATEN" Type="Int32" />
           <NavigationProperty Name="PRESTACION" Relationship="Self.FK_ATENCION_AGEN_PRESTACION" FromRole="ATENCION_AGEN" ToRole="PRESTACION" />
           <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_ATENCION_AGEN_RES_ATENCION" FromRole="ATENCION_AGEN" ToRole="RES_ATENCION" />
           <NavigationProperty Name="ESTADO_ATEN" Relationship="Self.FK_ESTADO_ATEN_ATENCION_AGEN" FromRole="ATENCION_AGEN" ToRole="ESTADO_ATEN" />
@@ -932,9 +934,9 @@
         </EntityType>
         <EntityType Name="ESTADO_ATEN">
           <Key>
-            <PropertyRef Name="ID_ESTADO_ATENCION" />
+            <PropertyRef Name="ID_ESTADO_ATEN" />
           </Key>
-          <Property Name="ID_ESTADO_ATENCION" Type="Int32" Nullable="false" />
+          <Property Name="ID_ESTADO_ATEN" Type="Int32" Nullable="false" />
           <Property Name="NOM_ESTADO_ATEN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ESTADO_ATEN_ATENCION_AGEN" FromRole="ESTADO_ATEN" ToRole="ATENCION_AGEN" />
         </EntityType>
@@ -1060,7 +1062,7 @@
           <Property Name="ID_RESULTADO_ATENCION" Type="Int32" Nullable="false" />
           <Property Name="ATENCION_ABIERTA" Type="Boolean" />
           <Property Name="COMENTARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="ID_ATENCION_AGENDADA" Type="Int32" />
+          <Property Name="ID_ATENCION_AGEN" Type="Int32" />
           <Property Name="ID_ORDEN_ANALISIS" Type="Int32" />
           <Property Name="ID_PERSONAL_MEDICO" Type="Int32" />
           <NavigationProperty Name="ARCHIVO" Relationship="Self.FK_RES_ATENCION_ARCHIVO" FromRole="RES_ATENCION" ToRole="ARCHIVO" />
@@ -1157,7 +1159,7 @@
               <PropertyRef Name="ID_ATENCION_AGEN" />
             </Principal>
             <Dependent Role="RES_ATENCION">
-              <PropertyRef Name="ID_ATENCION_AGENDADA" />
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1168,10 +1170,10 @@
           <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ESTADO_ATEN">
-              <PropertyRef Name="ID_ESTADO_ATENCION" />
+              <PropertyRef Name="ID_ESTADO_ATEN" />
             </Principal>
             <Dependent Role="ATENCION_AGEN">
-              <PropertyRef Name="ID_ESTADO_ATENCION" />
+              <PropertyRef Name="ID_ESTADO_ATEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1288,7 +1290,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CUEN_BANCARIA_PERS_MEDICO">
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CUEN_BANCARIA" Type="Self.CUEN_BANCARIA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PERS_MEDICO">
@@ -1688,7 +1692,7 @@
                 <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
                 <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
                 <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
-                <ScalarProperty Name="ID_ESTADO_ATENCION" ColumnName="ID_ESTADO_ATENCION" />
+                <ScalarProperty Name="ID_ESTADO_ATEN" ColumnName="ID_ESTADO_ATEN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1779,7 +1783,7 @@
           <EntitySetMapping Name="ESTADO_ATEN">
             <EntityTypeMapping TypeName="CMHModel.ESTADO_ATEN">
               <MappingFragment StoreEntitySet="ESTADO_ATEN">
-                <ScalarProperty Name="ID_ESTADO_ATENCION" ColumnName="ID_ESTADO_ATENCION" />
+                <ScalarProperty Name="ID_ESTADO_ATEN" ColumnName="ID_ESTADO_ATEN" />
                 <ScalarProperty Name="NOM_ESTADO_ATEN" ColumnName="NOM_ESTADO_ATEN" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1889,7 +1893,7 @@
                 <ScalarProperty Name="ID_RESULTADO_ATENCION" ColumnName="ID_RESULTADO_ATENCION" />
                 <ScalarProperty Name="ATENCION_ABIERTA" ColumnName="ATENCION_ABIERTA" />
                 <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
-                <ScalarProperty Name="ID_ATENCION_AGENDADA" ColumnName="ID_ATENCION_AGENDADA" />
+                <ScalarProperty Name="ID_ATENCION_AGEN" ColumnName="ID_ATENCION_AGEN" />
                 <ScalarProperty Name="ID_ORDEN_ANALISIS" ColumnName="ID_ORDEN_ANALISIS" />
                 <ScalarProperty Name="ID_PERSONAL_MEDICO" ColumnName="ID_PERSONAL_MEDICO" />
               </MappingFragment>
