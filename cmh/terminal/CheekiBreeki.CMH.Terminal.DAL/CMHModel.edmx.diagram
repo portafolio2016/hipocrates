@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="CMHModel.DEVOLUCION" Width="1.5" PointX="3.75" PointY="26.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ENTRADA_FICHA" Width="1.5" PointX="10.5" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.EQUIPO_REQ" Width="1.5" PointX="11.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CMHModel.ESP_PER_MEDICO" Width="1.5" PointX="8.75" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ESPECIALIDAD" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ESTADO_ATEN" Width="1.5" PointX="6" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.FICHA" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
