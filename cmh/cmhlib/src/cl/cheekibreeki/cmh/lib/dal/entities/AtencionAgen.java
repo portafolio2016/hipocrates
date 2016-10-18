@@ -47,9 +47,9 @@ public class AtencionAgen implements Serializable {
     @Column(name = "FECHOR")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechor;
-    @JoinColumn(name = "ID_ESTADO_ATENCION", referencedColumnName = "ID_ESTADO_ATENCION")
+    @JoinColumn(name = "ID_ESTADO_ATEN", referencedColumnName = "ID_ESTADO_ATEN")
     @ManyToOne
-    private EstadoAten idEstadoAtencion;
+    private EstadoAten idEstadoAten;
     @JoinColumn(name = "ID_PACIENTE", referencedColumnName = "ID_PACIENTE")
     @ManyToOne
     private Paciente idPaciente;
@@ -62,7 +62,7 @@ public class AtencionAgen implements Serializable {
     @JoinColumn(name = "ID_PRESTACION", referencedColumnName = "ID_PRESTACION")
     @ManyToOne
     private Prestacion idPrestacion;
-    @OneToMany(mappedBy = "idAtencionAgendada")
+    @OneToMany(mappedBy = "idAtencionAgen")
     private Collection<ResAtencion> resAtencionCollection;
 
     public AtencionAgen() {
@@ -96,12 +96,12 @@ public class AtencionAgen implements Serializable {
         this.fechor = fechor;
     }
 
-    public EstadoAten getIdEstadoAtencion() {
-        return idEstadoAtencion;
+    public EstadoAten getIdEstadoAten() {
+        return idEstadoAten;
     }
 
-    public void setIdEstadoAtencion(EstadoAten idEstadoAtencion) {
-        this.idEstadoAtencion = idEstadoAtencion;
+    public void setIdEstadoAten(EstadoAten idEstadoAten) {
+        this.idEstadoAten = idEstadoAten;
     }
 
     public Paciente getIdPaciente() {
