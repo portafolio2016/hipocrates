@@ -17,6 +17,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public PERS_MEDICO()
         {
             this.ATENCION_AGEN = new HashSet<ATENCION_AGEN>();
+            this.CUEN_BANCARIA = new HashSet<CUEN_BANCARIA>();
             this.RES_ATENCION = new HashSet<RES_ATENCION>();
         }
     
@@ -26,7 +27,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public Nullable<int> ID_TURNO { get; set; }
     
         public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN { get; set; }
-        public virtual CUEN_BANCARIA CUEN_BANCARIA { get; set; }
+        public virtual ICollection<CUEN_BANCARIA> CUEN_BANCARIA { get; set; }
         public virtual ESPECIALIDAD ESPECIALIDAD { get; set; }
         public virtual ICollection<RES_ATENCION> RES_ATENCION { get; set; }
         public virtual PERSONAL PERSONAL { get; set; }

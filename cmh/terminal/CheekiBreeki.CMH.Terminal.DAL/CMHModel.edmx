@@ -376,6 +376,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CUEN_BANCARIA_PERS_MEDICO">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="CUEN_BANCARIA" Type="Self.CUEN_BANCARIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="CUEN_BANCARIA">
+              <PropertyRef Name="ID_PERS_MEDICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CUEN_BANCARIA_TIPO_C_BANCA">
           <End Role="TIPO_C_BANCARIA" Type="Self.TIPO_C_BANCARIA" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -558,20 +570,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PERS_MEDICO_CUEN_BANCARIA">
-          <End Role="CUEN_BANCARIA" Type="Self.CUEN_BANCARIA" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CUEN_BANCARIA">
-              <PropertyRef Name="ID_CUEN_BANCARIA" />
-            </Principal>
-            <Dependent Role="PERS_MEDICO">
-              <PropertyRef Name="ID_TURNO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PERS_MEDICO_ESPECIALIDAD">
           <End Role="ESPECIALIDAD" Type="Self.ESPECIALIDAD" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -743,6 +741,10 @@
             <End Role="BANCO" EntitySet="BANCO" />
             <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
           </AssociationSet>
+          <AssociationSet Name="FK_CUEN_BANCARIA_PERS_MEDICO" Association="Self.FK_CUEN_BANCARIA_PERS_MEDICO">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
+          </AssociationSet>
           <AssociationSet Name="FK_CUEN_BANCARIA_TIPO_C_BANCA" Association="Self.FK_CUEN_BANCARIA_TIPO_C_BANCA">
             <End Role="TIPO_C_BANCARIA" EntitySet="TIPO_C_BANCARIA" />
             <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
@@ -794,10 +796,6 @@
           <AssociationSet Name="FK_PAGO_ATENCION_AGEN" Association="Self.FK_PAGO_ATENCION_AGEN">
             <End Role="PAGO" EntitySet="PAGO" />
             <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PERS_MEDICO_CUEN_BANCARIA" Association="Self.FK_PERS_MEDICO_CUEN_BANCARIA">
-            <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
-            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
           </AssociationSet>
           <AssociationSet Name="FK_PERS_MEDICO_ESPECIALIDAD" Association="Self.FK_PERS_MEDICO_ESPECIALIDAD">
             <End Role="ESPECIALIDAD" EntitySet="ESPECIALIDAD" />
@@ -936,8 +934,8 @@
           <Property Name="NUM_C_BANCARIA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="ID_BANCO" Type="Int32" />
           <NavigationProperty Name="BANCO" Relationship="Self.FK_CUEN_BANCARIA_BANCO" FromRole="CUEN_BANCARIA" ToRole="BANCO" />
+          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_CUEN_BANCARIA_PERS_MEDICO" FromRole="CUEN_BANCARIA" ToRole="PERS_MEDICO" />
           <NavigationProperty Name="TIPO_C_BANCARIA" Relationship="Self.FK_CUEN_BANCARIA_TIPO_C_BANCA" FromRole="CUEN_BANCARIA" ToRole="TIPO_C_BANCARIA" />
-          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_PERS_MEDICO_CUEN_BANCARIA" FromRole="CUEN_BANCARIA" ToRole="PERS_MEDICO" />
         </EntityType>
         <EntityType Name="DEVOLUCION">
           <Key>
@@ -1079,7 +1077,7 @@
           <Property Name="ID_PERSONAL" Type="Int32" />
           <Property Name="ID_TURNO" Type="Int32" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_SOLICITA_ATENCION_AGEN" FromRole="PERS_MEDICO" ToRole="ATENCION_AGEN" />
-          <NavigationProperty Name="CUEN_BANCARIA" Relationship="Self.FK_PERS_MEDICO_CUEN_BANCARIA" FromRole="PERS_MEDICO" ToRole="CUEN_BANCARIA" />
+          <NavigationProperty Name="CUEN_BANCARIA" Relationship="Self.FK_CUEN_BANCARIA_PERS_MEDICO" FromRole="PERS_MEDICO" ToRole="CUEN_BANCARIA" />
           <NavigationProperty Name="ESPECIALIDAD" Relationship="Self.FK_PERS_MEDICO_ESPECIALIDAD" FromRole="PERS_MEDICO" ToRole="ESPECIALIDAD" />
           <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_EJECUTA_RES_ATENCION" FromRole="PERS_MEDICO" ToRole="RES_ATENCION" />
           <NavigationProperty Name="PERSONAL" Relationship="Self.FK_PERSONAL_PERS_MEDICO" FromRole="PERS_MEDICO" ToRole="PERSONAL" />
@@ -1350,6 +1348,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CUEN_BANCARIA_PERS_MEDICO">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="CUEN_BANCARIA" Type="Self.CUEN_BANCARIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="CUEN_BANCARIA">
+              <PropertyRef Name="ID_PERS_MEDICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CUEN_BANCARIA_TIPO_C_BANCA">
           <End Role="TIPO_C_BANCARIA" Type="Self.TIPO_C_BANCARIA" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1361,20 +1371,6 @@
             </Principal>
             <Dependent Role="CUEN_BANCARIA">
               <PropertyRef Name="ID_TIPO_C_BANCARIA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PERS_MEDICO_CUEN_BANCARIA">
-          <End Role="CUEN_BANCARIA" Type="Self.CUEN_BANCARIA" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CUEN_BANCARIA">
-              <PropertyRef Name="ID_CUEN_BANCARIA" />
-            </Principal>
-            <Dependent Role="PERS_MEDICO">
-              <PropertyRef Name="ID_TURNO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1657,13 +1653,13 @@
             <End Role="CARGO" EntitySet="CARGO" />
             <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
           </AssociationSet>
+          <AssociationSet Name="FK_CUEN_BANCARIA_PERS_MEDICO" Association="Self.FK_CUEN_BANCARIA_PERS_MEDICO">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
+          </AssociationSet>
           <AssociationSet Name="FK_CUEN_BANCARIA_TIPO_C_BANCA" Association="Self.FK_CUEN_BANCARIA_TIPO_C_BANCA">
             <End Role="TIPO_C_BANCARIA" EntitySet="TIPO_C_BANCARIA" />
             <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PERS_MEDICO_CUEN_BANCARIA" Association="Self.FK_PERS_MEDICO_CUEN_BANCARIA">
-            <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
-            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
           </AssociationSet>
           <AssociationSet Name="FK_DEVOLUCION_PAGO" Association="Self.FK_DEVOLUCION_PAGO">
             <End Role="DEVOLUCION" EntitySet="DEVOLUCION" />
