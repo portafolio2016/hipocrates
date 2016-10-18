@@ -25,13 +25,12 @@
             <PropertyRef Name="ID_ATENCION_AGEN" />
           </Key>
           <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FECHA" Type="date" />
-          <Property Name="HORA" Type="date" />
           <Property Name="OBSERVACIONES" Type="varchar2" MaxLength="256" />
           <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" />
+          <Property Name="FECHOR" Type="date" />
           <Property Name="ID_ESTADO_ATENCION" Type="number" Precision="8" Scale="0" />
         </EntityType>
         <EntityType Name="BONO">
@@ -48,11 +47,9 @@
             <PropertyRef Name="ID_CAJA" />
           </Key>
           <Property Name="ID_CAJA" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FEC_APERTURA" Type="date" />
-          <Property Name="FEC_CIERRE" Type="date" />
+          <Property Name="FECHOR_APERTURA" Type="date" />
+          <Property Name="FECHOR_CIERRE" Type="date" />
           <Property Name="ID_FUNCIONARIO" Type="number" Precision="8" Scale="0" />
-          <Property Name="HORA_APERTURA" Type="timestamp" Precision="6" />
-          <Property Name="HORA_CIERRE" Type="timestamp" Precision="6" />
         </EntityType>
         <EntityType Name="CARGO">
           <Key>
@@ -131,8 +128,8 @@
             <PropertyRef Name="ID_ORDEN_ANALISIS" />
           </Key>
           <Property Name="ID_ORDEN_ANALISIS" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FECHA_HORA_EMISION" Type="date" />
-          <Property Name="FECHA_HORA_RECEP" Type="date" />
+          <Property Name="FECHOR_EMISION" Type="date" />
+          <Property Name="FECHOR_RECEP" Type="date" />
         </EntityType>
         <EntityType Name="PACIENTE">
           <Key>
@@ -220,9 +217,11 @@
             <PropertyRef Name="ID_TURNO" />
           </Key>
           <Property Name="ID_TURNO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="HORA_INI" Type="date" />
-          <Property Name="HORA_FIN" Type="date" />
           <Property Name="NOMBRE_TURNO" Type="varchar2" MaxLength="64" />
+          <Property Name="NUMHORA_INI" Type="number" Precision="2" Scale="0" />
+          <Property Name="NUMMINU_INI" Type="number" Precision="2" Scale="0" />
+          <Property Name="NUMHORA_FIN" Type="number" Precision="2" Scale="0" />
+          <Property Name="NUMMINU_FIN" Type="number" Precision="2" Scale="0" />
         </EntityType>
         <Association Name="FK_ASEGURADORA_BONO">
           <End Role="ASEGURADORA" Type="Self.ASEGURADORA" Multiplicity="0..1" />
@@ -693,13 +692,12 @@
             <PropertyRef Name="ID_ATENCION_AGEN" />
           </Key>
           <Property Name="ID_ATENCION_AGEN" Type="Int32" Nullable="false" />
-          <Property Name="FECHA" Type="DateTime" />
-          <Property Name="HORA" Type="DateTime" />
           <Property Name="OBSERVACIONES" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="ID_PACIENTE" Type="Int32" />
           <Property Name="ID_PERSONAL_MEDICO" Type="Int32" />
           <Property Name="ID_PAGO" Type="Int32" />
           <Property Name="ID_PRESTACION" Type="Int32" />
+          <Property Name="FECHOR" Type="DateTime" />
           <Property Name="ID_ESTADO_ATENCION" Type="Int32" />
           <NavigationProperty Name="PRESTACION" Relationship="Self.FK_ATENCION_AGEN_PRESTACION" FromRole="ATENCION_AGEN" ToRole="PRESTACION" />
           <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_ATENCION_AGEN_RES_ATENCION" FromRole="ATENCION_AGEN" ToRole="RES_ATENCION" />
@@ -724,11 +722,9 @@
             <PropertyRef Name="ID_CAJA" />
           </Key>
           <Property Name="ID_CAJA" Type="Int32" Nullable="false" />
-          <Property Name="FEC_APERTURA" Type="DateTime" />
-          <Property Name="FEC_CIERRE" Type="DateTime" />
+          <Property Name="FECHOR_APERTURA" Type="DateTime" />
+          <Property Name="FECHOR_CIERRE" Type="DateTime" />
           <Property Name="ID_FUNCIONARIO" Type="Int32" />
-          <Property Name="HORA_APERTURA" Type="DateTime" Precision="6" />
-          <Property Name="HORA_CIERRE" Type="DateTime" Precision="6" />
           <NavigationProperty Name="PAGO" Relationship="Self.FK_CAJA_PAGO" FromRole="CAJA" ToRole="PAGO" />
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_FUNCIONARIO_CAJA" FromRole="CAJA" ToRole="FUNCIONARIO" />
         </EntityType>
@@ -823,8 +819,8 @@
             <PropertyRef Name="ID_ORDEN_ANALISIS" />
           </Key>
           <Property Name="ID_ORDEN_ANALISIS" Type="Int32" Nullable="false" />
-          <Property Name="FECHA_HORA_EMISION" Type="DateTime" />
-          <Property Name="FECHA_HORA_RECEP" Type="DateTime" />
+          <Property Name="FECHOR_EMISION" Type="DateTime" />
+          <Property Name="FECHOR_RECEP" Type="DateTime" />
           <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_ORDEN_ANALISIS_RES_ATENCION" FromRole="ORDEN_ANALISIS" ToRole="RES_ATENCION" />
         </EntityType>
         <EntityType Name="PACIENTE">
@@ -937,9 +933,11 @@
             <PropertyRef Name="ID_TURNO" />
           </Key>
           <Property Name="ID_TURNO" Type="Int32" Nullable="false" />
-          <Property Name="HORA_INI" Type="DateTime" />
-          <Property Name="HORA_FIN" Type="DateTime" />
           <Property Name="NOMBRE_TURNO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="NUMHORA_INI" Type="Byte" />
+          <Property Name="NUMMINU_INI" Type="Byte" />
+          <Property Name="NUMHORA_FIN" Type="Byte" />
+          <Property Name="NUMMINU_FIN" Type="Byte" />
           <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_TURNO_PERS_MEDICO" FromRole="TURNO" ToRole="PERS_MEDICO" />
         </EntityType>
         <Association Name="FK_RES_ATENCION_ARCHIVO">
@@ -1411,13 +1409,12 @@
             <EntityTypeMapping TypeName="CMHModel.ATENCION_AGEN">
               <MappingFragment StoreEntitySet="ATENCION_AGEN">
                 <ScalarProperty Name="ID_ATENCION_AGEN" ColumnName="ID_ATENCION_AGEN" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="HORA" ColumnName="HORA" />
                 <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
                 <ScalarProperty Name="ID_PACIENTE" ColumnName="ID_PACIENTE" />
                 <ScalarProperty Name="ID_PERSONAL_MEDICO" ColumnName="ID_PERSONAL_MEDICO" />
                 <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
                 <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
+                <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
                 <ScalarProperty Name="ID_ESTADO_ATENCION" ColumnName="ID_ESTADO_ATENCION" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1436,11 +1433,9 @@
             <EntityTypeMapping TypeName="CMHModel.CAJA">
               <MappingFragment StoreEntitySet="CAJA">
                 <ScalarProperty Name="ID_CAJA" ColumnName="ID_CAJA" />
-                <ScalarProperty Name="FEC_APERTURA" ColumnName="FEC_APERTURA" />
-                <ScalarProperty Name="FEC_CIERRE" ColumnName="FEC_CIERRE" />
+                <ScalarProperty Name="FECHOR_APERTURA" ColumnName="FECHOR_APERTURA" />
+                <ScalarProperty Name="FECHOR_CIERRE" ColumnName="FECHOR_CIERRE" />
                 <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
-                <ScalarProperty Name="HORA_APERTURA" ColumnName="HORA_APERTURA" />
-                <ScalarProperty Name="HORA_CIERRE" ColumnName="HORA_CIERRE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1529,8 +1524,8 @@
             <EntityTypeMapping TypeName="CMHModel.ORDEN_ANALISIS">
               <MappingFragment StoreEntitySet="ORDEN_ANALISIS">
                 <ScalarProperty Name="ID_ORDEN_ANALISIS" ColumnName="ID_ORDEN_ANALISIS" />
-                <ScalarProperty Name="FECHA_HORA_EMISION" ColumnName="FECHA_HORA_EMISION" />
-                <ScalarProperty Name="FECHA_HORA_RECEP" ColumnName="FECHA_HORA_RECEP" />
+                <ScalarProperty Name="FECHOR_EMISION" ColumnName="FECHOR_EMISION" />
+                <ScalarProperty Name="FECHOR_RECEP" ColumnName="FECHOR_RECEP" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1627,9 +1622,11 @@
             <EntityTypeMapping TypeName="CMHModel.TURNO">
               <MappingFragment StoreEntitySet="TURNO">
                 <ScalarProperty Name="ID_TURNO" ColumnName="ID_TURNO" />
-                <ScalarProperty Name="HORA_INI" ColumnName="HORA_INI" />
-                <ScalarProperty Name="HORA_FIN" ColumnName="HORA_FIN" />
                 <ScalarProperty Name="NOMBRE_TURNO" ColumnName="NOMBRE_TURNO" />
+                <ScalarProperty Name="NUMHORA_INI" ColumnName="NUMHORA_INI" />
+                <ScalarProperty Name="NUMMINU_INI" ColumnName="NUMMINU_INI" />
+                <ScalarProperty Name="NUMHORA_FIN" ColumnName="NUMHORA_FIN" />
+                <ScalarProperty Name="NUMMINU_FIN" ColumnName="NUMMINU_FIN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
