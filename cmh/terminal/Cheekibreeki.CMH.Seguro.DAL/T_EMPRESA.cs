@@ -7,14 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CheekiBreeki.CMH.Terminal.DAL
+namespace Cheekibreeki.CMH.Seguro.DAL
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ESTADO_ATENCION
+    public partial class T_EMPRESA
     {
-        public decimal ID_ESTADO_ATENCION { get; set; }
-        public string NOM_ESTADO_ATEN { get; set; }
+        public T_EMPRESA()
+        {
+            this.EMPRESA = new HashSet<EMPRESA>();
+        }
+    
+        public int ID_T_EMPRESA { get; set; }
+        public string NOMBRE { get; set; }
+    
+        public virtual ICollection<EMPRESA> EMPRESA { get; set; }
     }
 }

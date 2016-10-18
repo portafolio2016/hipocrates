@@ -20,9 +20,11 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         }
     
         public int ID_TURNO { get; set; }
-        public Nullable<System.DateTime> HORA_INI { get; set; }
-        public Nullable<System.DateTime> HORA_FIN { get; set; }
         public string NOMBRE_TURNO { get; set; }
+        public Nullable<byte> NUMHORA_INI { get; set; }
+        public Nullable<byte> NUMMINU_INI { get; set; }
+        public Nullable<byte> NUMHORA_FIN { get; set; }
+        public Nullable<byte> NUMMINU_FIN { get; set; }
     
         public virtual ICollection<PERS_MEDICO> PERS_MEDICO { get; set; }
     }

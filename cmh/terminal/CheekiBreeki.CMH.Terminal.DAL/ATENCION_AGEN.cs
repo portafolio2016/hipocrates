@@ -20,14 +20,13 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         }
     
         public int ID_ATENCION_AGEN { get; set; }
-        public Nullable<System.DateTime> FECHA { get; set; }
-        public Nullable<System.DateTime> HORA { get; set; }
         public string OBSERVACIONES { get; set; }
         public Nullable<int> ID_PACIENTE { get; set; }
         public Nullable<int> ID_PERSONAL_MEDICO { get; set; }
         public Nullable<int> ID_PAGO { get; set; }
         public Nullable<int> ID_PRESTACION { get; set; }
-        public Nullable<int> ID_ESTADO_ATENCION { get; set; }
+        public Nullable<System.DateTime> FECHOR { get; set; }
+        public Nullable<int> ID_ESTADO_ATEN { get; set; }
     
         public virtual PRESTACION PRESTACION { get; set; }
         public virtual ICollection<RES_ATENCION> RES_ATENCION { get; set; }

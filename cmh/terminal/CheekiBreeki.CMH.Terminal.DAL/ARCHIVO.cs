@@ -17,6 +17,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public int ID_ARCHIVO { get; set; }
         public string FILE_URI { get; set; }
         public Nullable<int> ID_RESULTADO_ATENCION { get; set; }
+        public string EXTENSION { get; set; }
     
         public virtual RES_ATENCION RES_ATENCION { get; set; }
     }

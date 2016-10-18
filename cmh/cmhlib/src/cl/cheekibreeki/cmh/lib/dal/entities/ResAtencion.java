@@ -45,9 +45,9 @@ public class ResAtencion implements Serializable {
     private String comentario;
     @OneToMany(mappedBy = "idResultadoAtencion")
     private Collection<Archivo> archivoCollection;
-    @JoinColumn(name = "ID_ATENCION_AGENDADA", referencedColumnName = "ID_ATENCION_AGEN")
+    @JoinColumn(name = "ID_ATENCION_AGEN", referencedColumnName = "ID_ATENCION_AGEN")
     @ManyToOne
-    private AtencionAgen idAtencionAgendada;
+    private AtencionAgen idAtencionAgen;
     @JoinColumn(name = "ID_ORDEN_ANALISIS", referencedColumnName = "ID_ORDEN_ANALISIS")
     @ManyToOne
     private OrdenAnalisis idOrdenAnalisis;
@@ -95,12 +95,12 @@ public class ResAtencion implements Serializable {
         this.archivoCollection = archivoCollection;
     }
 
-    public AtencionAgen getIdAtencionAgendada() {
-        return idAtencionAgendada;
+    public AtencionAgen getIdAtencionAgen() {
+        return idAtencionAgen;
     }
 
-    public void setIdAtencionAgendada(AtencionAgen idAtencionAgendada) {
-        this.idAtencionAgendada = idAtencionAgendada;
+    public void setIdAtencionAgen(AtencionAgen idAtencionAgen) {
+        this.idAtencionAgen = idAtencionAgen;
     }
 
     public OrdenAnalisis getIdOrdenAnalisis() {

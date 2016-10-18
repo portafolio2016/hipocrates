@@ -12,10 +12,16 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ESP_PER_MEDICO
+    public partial class BANCO
     {
-        public decimal ID_ESP_PERS_MED { get; set; }
-        public Nullable<decimal> ID_ESPECIALIDAD { get; set; }
-        public Nullable<decimal> ID_PERSONAL_MEDICO { get; set; }
+        public BANCO()
+        {
+            this.CUEN_BANCARIA = new HashSet<CUEN_BANCARIA>();
+        }
+    
+        public int ID_BANCO { get; set; }
+        public string NOMBRE { get; set; }
+    
+        public virtual ICollection<CUEN_BANCARIA> CUEN_BANCARIA { get; set; }
     }
 }

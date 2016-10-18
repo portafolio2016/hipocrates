@@ -20,8 +20,8 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         }
     
         public int ID_ORDEN_ANALISIS { get; set; }
-        public Nullable<System.DateTime> FECHA_HORA_EMISION { get; set; }
-        public Nullable<System.DateTime> FECHA_HORA_RECEP { get; set; }
+        public Nullable<System.DateTime> FECHOR_EMISION { get; set; }
+        public Nullable<System.DateTime> FECHOR_RECEP { get; set; }
     
         public virtual ICollection<RES_ATENCION> RES_ATENCION { get; set; }
     }
