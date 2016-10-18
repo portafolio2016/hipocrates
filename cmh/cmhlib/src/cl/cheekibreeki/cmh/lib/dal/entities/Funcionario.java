@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "FUNCIONARIO")
@@ -37,14 +37,14 @@ public class Funcionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_FUNCIONARIO")
     private Integer idFuncionario;
+    @OneToMany(mappedBy = "idFuncionario")
+    private Collection<Caja> cajaCollection;
     @JoinColumn(name = "ID_CARGO_FUNCI", referencedColumnName = "ID_CARGO_FUNCI")
     @ManyToOne
     private Cargo idCargoFunci;
     @JoinColumn(name = "ID_PERSONAL", referencedColumnName = "ID_PERSONAL")
     @ManyToOne
     private Personal idPersonal;
-    @OneToMany(mappedBy = "idFuncionario")
-    private Collection<Caja> cajaCollection;
 
     public Funcionario() {
     }
@@ -61,6 +61,15 @@ public class Funcionario implements Serializable {
         this.idFuncionario = idFuncionario;
     }
 
+    @XmlTransient
+    public Collection<Caja> getCajaCollection() {
+        return cajaCollection;
+    }
+
+    public void setCajaCollection(Collection<Caja> cajaCollection) {
+        this.cajaCollection = cajaCollection;
+    }
+
     public Cargo getIdCargoFunci() {
         return idCargoFunci;
     }
@@ -75,15 +84,6 @@ public class Funcionario implements Serializable {
 
     public void setIdPersonal(Personal idPersonal) {
         this.idPersonal = idPersonal;
-    }
-
-    @XmlTransient
-    public Collection<Caja> getCajaCollection() {
-        return cajaCollection;
-    }
-
-    public void setCajaCollection(Collection<Caja> cajaCollection) {
-        this.cajaCollection = cajaCollection;
     }
 
     @Override

@@ -20,40 +20,40 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "ESTADO_ATEN")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "EstadoAten.findAll", query = "SELECT e FROM EstadoAten e"),
-    @NamedQuery(name = "EstadoAten.findByIdEstadoAtencion", query = "SELECT e FROM EstadoAten e WHERE e.idEstadoAtencion = :idEstadoAtencion"),
+    @NamedQuery(name = "EstadoAten.findByIdEstadoAten", query = "SELECT e FROM EstadoAten e WHERE e.idEstadoAten = :idEstadoAten"),
     @NamedQuery(name = "EstadoAten.findByNomEstadoAten", query = "SELECT e FROM EstadoAten e WHERE e.nomEstadoAten = :nomEstadoAten")})
 public class EstadoAten implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "ID_ESTADO_ATENCION")
-    private Integer idEstadoAtencion;
+    @Column(name = "ID_ESTADO_ATEN")
+    private Integer idEstadoAten;
     @Column(name = "NOM_ESTADO_ATEN")
     private String nomEstadoAten;
-    @OneToMany(mappedBy = "idEstadoAtencion")
+    @OneToMany(mappedBy = "idEstadoAten")
     private Collection<AtencionAgen> atencionAgenCollection;
 
     public EstadoAten() {
     }
 
-    public EstadoAten(Integer idEstadoAtencion) {
-        this.idEstadoAtencion = idEstadoAtencion;
+    public EstadoAten(Integer idEstadoAten) {
+        this.idEstadoAten = idEstadoAten;
     }
 
-    public Integer getIdEstadoAtencion() {
-        return idEstadoAtencion;
+    public Integer getIdEstadoAten() {
+        return idEstadoAten;
     }
 
-    public void setIdEstadoAtencion(Integer idEstadoAtencion) {
-        this.idEstadoAtencion = idEstadoAtencion;
+    public void setIdEstadoAten(Integer idEstadoAten) {
+        this.idEstadoAten = idEstadoAten;
     }
 
     public String getNomEstadoAten() {
@@ -76,7 +76,7 @@ public class EstadoAten implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idEstadoAtencion != null ? idEstadoAtencion.hashCode() : 0);
+        hash += (idEstadoAten != null ? idEstadoAten.hashCode() : 0);
         return hash;
     }
 
@@ -87,7 +87,7 @@ public class EstadoAten implements Serializable {
             return false;
         }
         EstadoAten other = (EstadoAten) object;
-        if ((this.idEstadoAtencion == null && other.idEstadoAtencion != null) || (this.idEstadoAtencion != null && !this.idEstadoAtencion.equals(other.idEstadoAtencion))) {
+        if ((this.idEstadoAten == null && other.idEstadoAten != null) || (this.idEstadoAten != null && !this.idEstadoAten.equals(other.idEstadoAten))) {
             return false;
         }
         return true;
@@ -95,7 +95,7 @@ public class EstadoAten implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten[ idEstadoAtencion=" + idEstadoAtencion + " ]";
+        return "cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten[ idEstadoAten=" + idEstadoAten + " ]";
     }
     
 }

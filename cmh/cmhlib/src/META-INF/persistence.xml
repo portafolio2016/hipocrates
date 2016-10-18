@@ -33,6 +33,10 @@
     <class>cl.cheekibreeki.cmh.lib.dal.entities.Empresa</class>
     <class>cl.cheekibreeki.cmh.lib.dal.entities.Plan</class>
     <class>cl.cheekibreeki.cmh.lib.dal.entities.Beneficio</class>
+    <class>cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgendada</class>
+    <class>cl.cheekibreeki.cmh.lib.dal.entities.Banco</class>
+    <class>cl.cheekibreeki.cmh.lib.dal.entities.TipoCBancaria</class>
+    <class>cl.cheekibreeki.cmh.lib.dal.entities.CuenBancaria</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="dev"/>

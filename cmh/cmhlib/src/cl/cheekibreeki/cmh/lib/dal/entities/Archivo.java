@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "ARCHIVO")
@@ -27,7 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Archivo.findAll", query = "SELECT a FROM Archivo a"),
     @NamedQuery(name = "Archivo.findByIdArchivo", query = "SELECT a FROM Archivo a WHERE a.idArchivo = :idArchivo"),
-    @NamedQuery(name = "Archivo.findByFileUri", query = "SELECT a FROM Archivo a WHERE a.fileUri = :fileUri")})
+    @NamedQuery(name = "Archivo.findByFileUri", query = "SELECT a FROM Archivo a WHERE a.fileUri = :fileUri"),
+    @NamedQuery(name = "Archivo.findByExtension", query = "SELECT a FROM Archivo a WHERE a.extension = :extension")})
 public class Archivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +38,9 @@ public class Archivo implements Serializable {
     private Integer idArchivo;
     @Column(name = "FILE_URI")
     private String fileUri;
+    @Basic(optional = false)
+    @Column(name = "EXTENSION")
+    private String extension;
     @JoinColumn(name = "ID_RESULTADO_ATENCION", referencedColumnName = "ID_RESULTADO_ATENCION")
     @ManyToOne
     private ResAtencion idResultadoAtencion;
@@ -46,6 +50,11 @@ public class Archivo implements Serializable {
 
     public Archivo(Integer idArchivo) {
         this.idArchivo = idArchivo;
+    }
+
+    public Archivo(Integer idArchivo, String extension) {
+        this.idArchivo = idArchivo;
+        this.extension = extension;
     }
 
     public Integer getIdArchivo() {
@@ -62,6 +71,14 @@ public class Archivo implements Serializable {
 
     public void setFileUri(String fileUri) {
         this.fileUri = fileUri;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
 
     public ResAtencion getIdResultadoAtencion() {

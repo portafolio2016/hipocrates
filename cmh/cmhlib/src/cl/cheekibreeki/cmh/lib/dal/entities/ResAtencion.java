@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "RES_ATENCION")
@@ -43,17 +43,17 @@ public class ResAtencion implements Serializable {
     private Short atencionAbierta;
     @Column(name = "COMENTARIO")
     private String comentario;
-    @JoinColumn(name = "ID_ATENCION_AGENDADA", referencedColumnName = "ID_ATENCION_AGEN")
+    @OneToMany(mappedBy = "idResultadoAtencion")
+    private Collection<Archivo> archivoCollection;
+    @JoinColumn(name = "ID_ATENCION_AGEN", referencedColumnName = "ID_ATENCION_AGEN")
     @ManyToOne
-    private AtencionAgen idAtencionAgendada;
+    private AtencionAgen idAtencionAgen;
     @JoinColumn(name = "ID_ORDEN_ANALISIS", referencedColumnName = "ID_ORDEN_ANALISIS")
     @ManyToOne
     private OrdenAnalisis idOrdenAnalisis;
     @JoinColumn(name = "ID_PERSONAL_MEDICO", referencedColumnName = "ID_PERSONAL_MEDICO")
     @ManyToOne
     private PersMedico idPersonalMedico;
-    @OneToMany(mappedBy = "idResultadoAtencion")
-    private Collection<Archivo> archivoCollection;
 
     public ResAtencion() {
     }
@@ -86,12 +86,21 @@ public class ResAtencion implements Serializable {
         this.comentario = comentario;
     }
 
-    public AtencionAgen getIdAtencionAgendada() {
-        return idAtencionAgendada;
+    @XmlTransient
+    public Collection<Archivo> getArchivoCollection() {
+        return archivoCollection;
     }
 
-    public void setIdAtencionAgendada(AtencionAgen idAtencionAgendada) {
-        this.idAtencionAgendada = idAtencionAgendada;
+    public void setArchivoCollection(Collection<Archivo> archivoCollection) {
+        this.archivoCollection = archivoCollection;
+    }
+
+    public AtencionAgen getIdAtencionAgen() {
+        return idAtencionAgen;
+    }
+
+    public void setIdAtencionAgen(AtencionAgen idAtencionAgen) {
+        this.idAtencionAgen = idAtencionAgen;
     }
 
     public OrdenAnalisis getIdOrdenAnalisis() {
@@ -108,15 +117,6 @@ public class ResAtencion implements Serializable {
 
     public void setIdPersonalMedico(PersMedico idPersonalMedico) {
         this.idPersonalMedico = idPersonalMedico;
-    }
-
-    @XmlTransient
-    public Collection<Archivo> getArchivoCollection() {
-        return archivoCollection;
-    }
-
-    public void setArchivoCollection(Collection<Archivo> archivoCollection) {
-        this.archivoCollection = archivoCollection;
     }
 
     @Override

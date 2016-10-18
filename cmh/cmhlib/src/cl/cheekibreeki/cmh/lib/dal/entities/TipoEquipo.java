@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "TIPO_EQUIPO")
@@ -39,9 +39,9 @@ public class TipoEquipo implements Serializable {
     @Column(name = "NOMBRE_TIPO_EQUIPO")
     private String nombreTipoEquipo;
     @OneToMany(mappedBy = "idTipoEquipo")
-    private Collection<Inventario> inventarioCollection;
-    @OneToMany(mappedBy = "idTipoEquipo")
     private Collection<EquipoReq> equipoReqCollection;
+    @OneToMany(mappedBy = "idTipoEquipo")
+    private Collection<Inventario> inventarioCollection;
 
     public TipoEquipo() {
     }
@@ -67,21 +67,21 @@ public class TipoEquipo implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Inventario> getInventarioCollection() {
-        return inventarioCollection;
-    }
-
-    public void setInventarioCollection(Collection<Inventario> inventarioCollection) {
-        this.inventarioCollection = inventarioCollection;
-    }
-
-    @XmlTransient
     public Collection<EquipoReq> getEquipoReqCollection() {
         return equipoReqCollection;
     }
 
     public void setEquipoReqCollection(Collection<EquipoReq> equipoReqCollection) {
         this.equipoReqCollection = equipoReqCollection;
+    }
+
+    @XmlTransient
+    public Collection<Inventario> getInventarioCollection() {
+        return inventarioCollection;
+    }
+
+    public void setInventarioCollection(Collection<Inventario> inventarioCollection) {
+        this.inventarioCollection = inventarioCollection;
     }
 
     @Override
