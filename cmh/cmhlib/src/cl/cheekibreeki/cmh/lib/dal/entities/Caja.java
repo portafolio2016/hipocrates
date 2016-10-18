@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "CAJA")
@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Caja.findAll", query = "SELECT c FROM Caja c"),
     @NamedQuery(name = "Caja.findByIdCaja", query = "SELECT c FROM Caja c WHERE c.idCaja = :idCaja"),
-    @NamedQuery(name = "Caja.findByFecHoraCierre", query = "SELECT c FROM Caja c WHERE c.fecHoraCierre = :fecHoraCierre"),
-    @NamedQuery(name = "Caja.findByFecHoraApertura", query = "SELECT c FROM Caja c WHERE c.fecHoraApertura = :fecHoraApertura")})
+    @NamedQuery(name = "Caja.findByFechorApertura", query = "SELECT c FROM Caja c WHERE c.fechorApertura = :fechorApertura"),
+    @NamedQuery(name = "Caja.findByFechorCierre", query = "SELECT c FROM Caja c WHERE c.fechorCierre = :fechorCierre")})
 public class Caja implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,12 +42,12 @@ public class Caja implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_CAJA")
     private Integer idCaja;
-    @Column(name = "FEC_HORA_CIERRE")
+    @Column(name = "FECHOR_APERTURA")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fecHoraCierre;
-    @Column(name = "FEC_HORA_APERTURA")
+    private Date fechorApertura;
+    @Column(name = "FECHOR_CIERRE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fecHoraApertura;
+    private Date fechorCierre;
     @JoinColumn(name = "ID_FUNCIONARIO", referencedColumnName = "ID_FUNCIONARIO")
     @ManyToOne
     private Funcionario idFuncionario;
@@ -69,20 +69,20 @@ public class Caja implements Serializable {
         this.idCaja = idCaja;
     }
 
-    public Date getFecHoraCierre() {
-        return fecHoraCierre;
+    public Date getFechorApertura() {
+        return fechorApertura;
     }
 
-    public void setFecHoraCierre(Date fecHoraCierre) {
-        this.fecHoraCierre = fecHoraCierre;
+    public void setFechorApertura(Date fechorApertura) {
+        this.fechorApertura = fechorApertura;
     }
 
-    public Date getFecHoraApertura() {
-        return fecHoraApertura;
+    public Date getFechorCierre() {
+        return fechorCierre;
     }
 
-    public void setFecHoraApertura(Date fecHoraApertura) {
-        this.fecHoraApertura = fecHoraApertura;
+    public void setFechorCierre(Date fechorCierre) {
+        this.fechorCierre = fechorCierre;
     }
 
     public Funcionario getIdFuncionario() {

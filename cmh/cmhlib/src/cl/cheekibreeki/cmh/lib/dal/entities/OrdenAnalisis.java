@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "ORDEN_ANALISIS")
@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "OrdenAnalisis.findAll", query = "SELECT o FROM OrdenAnalisis o"),
     @NamedQuery(name = "OrdenAnalisis.findByIdOrdenAnalisis", query = "SELECT o FROM OrdenAnalisis o WHERE o.idOrdenAnalisis = :idOrdenAnalisis"),
-    @NamedQuery(name = "OrdenAnalisis.findByFechaHoraEmision", query = "SELECT o FROM OrdenAnalisis o WHERE o.fechaHoraEmision = :fechaHoraEmision"),
-    @NamedQuery(name = "OrdenAnalisis.findByFechaHoraRecep", query = "SELECT o FROM OrdenAnalisis o WHERE o.fechaHoraRecep = :fechaHoraRecep")})
+    @NamedQuery(name = "OrdenAnalisis.findByFechorEmision", query = "SELECT o FROM OrdenAnalisis o WHERE o.fechorEmision = :fechorEmision"),
+    @NamedQuery(name = "OrdenAnalisis.findByFechorRecep", query = "SELECT o FROM OrdenAnalisis o WHERE o.fechorRecep = :fechorRecep")})
 public class OrdenAnalisis implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,12 +40,12 @@ public class OrdenAnalisis implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_ORDEN_ANALISIS")
     private Integer idOrdenAnalisis;
-    @Column(name = "FECHA_HORA_EMISION")
+    @Column(name = "FECHOR_EMISION")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHoraEmision;
-    @Column(name = "FECHA_HORA_RECEP")
+    private Date fechorEmision;
+    @Column(name = "FECHOR_RECEP")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHoraRecep;
+    private Date fechorRecep;
     @OneToMany(mappedBy = "idOrdenAnalisis")
     private Collection<ResAtencion> resAtencionCollection;
 
@@ -64,20 +64,20 @@ public class OrdenAnalisis implements Serializable {
         this.idOrdenAnalisis = idOrdenAnalisis;
     }
 
-    public Date getFechaHoraEmision() {
-        return fechaHoraEmision;
+    public Date getFechorEmision() {
+        return fechorEmision;
     }
 
-    public void setFechaHoraEmision(Date fechaHoraEmision) {
-        this.fechaHoraEmision = fechaHoraEmision;
+    public void setFechorEmision(Date fechorEmision) {
+        this.fechorEmision = fechorEmision;
     }
 
-    public Date getFechaHoraRecep() {
-        return fechaHoraRecep;
+    public Date getFechorRecep() {
+        return fechorRecep;
     }
 
-    public void setFechaHoraRecep(Date fechaHoraRecep) {
-        this.fechaHoraRecep = fechaHoraRecep;
+    public void setFechorRecep(Date fechorRecep) {
+        this.fechorRecep = fechorRecep;
     }
 
     @XmlTransient

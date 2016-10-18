@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "PERS_MEDICO")
@@ -37,6 +37,8 @@ public class PersMedico implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_PERSONAL_MEDICO")
     private Integer idPersonalMedico;
+    @OneToMany(mappedBy = "idPersonalMedico")
+    private Collection<ResAtencion> resAtencionCollection;
     @JoinColumn(name = "ID_ESPECIALIDAD", referencedColumnName = "ID_ESPECIALIDAD")
     @ManyToOne
     private Especialidad idEspecialidad;
@@ -48,8 +50,6 @@ public class PersMedico implements Serializable {
     private Turno idTurno;
     @OneToMany(mappedBy = "idPersonalMedico")
     private Collection<AtencionAgen> atencionAgenCollection;
-    @OneToMany(mappedBy = "idPersonalMedico")
-    private Collection<ResAtencion> resAtencionCollection;
 
     public PersMedico() {
     }
@@ -64,6 +64,15 @@ public class PersMedico implements Serializable {
 
     public void setIdPersonalMedico(Integer idPersonalMedico) {
         this.idPersonalMedico = idPersonalMedico;
+    }
+
+    @XmlTransient
+    public Collection<ResAtencion> getResAtencionCollection() {
+        return resAtencionCollection;
+    }
+
+    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
+        this.resAtencionCollection = resAtencionCollection;
     }
 
     public Especialidad getIdEspecialidad() {
@@ -97,15 +106,6 @@ public class PersMedico implements Serializable {
 
     public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
         this.atencionAgenCollection = atencionAgenCollection;
-    }
-
-    @XmlTransient
-    public Collection<ResAtencion> getResAtencionCollection() {
-        return resAtencionCollection;
-    }
-
-    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
-        this.resAtencionCollection = resAtencionCollection;
     }
 
     @Override
