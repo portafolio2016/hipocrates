@@ -12,25 +12,21 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class PERSONAL
+    public partial class CUEN_BANCARIA
     {
-        public PERSONAL()
+        public CUEN_BANCARIA()
         {
-            this.FUNCIONARIO = new HashSet<FUNCIONARIO>();
             this.PERS_MEDICO = new HashSet<PERS_MEDICO>();
         }
     
-        public int ID_PERSONAL { get; set; }
-        public string NOMBRES { get; set; }
-        public string APELLIDOS { get; set; }
-        public Nullable<int> REMUNERACION { get; set; }
-        public string HASHED_PASS { get; set; }
-        public Nullable<byte> PORCENT_DESCUENTO { get; set; }
-        public int RUT { get; set; }
-        public string VERIFICADOR { get; set; }
-        public string EMAIL { get; set; }
+        public int ID_CUEN_BANCARIA { get; set; }
+        public Nullable<int> ID_PERS_MEDICO { get; set; }
+        public Nullable<int> ID_TIPO_C_BANCARIA { get; set; }
+        public string NUM_C_BANCARIA { get; set; }
+        public Nullable<int> ID_BANCO { get; set; }
     
-        public virtual ICollection<FUNCIONARIO> FUNCIONARIO { get; set; }
+        public virtual BANCO BANCO { get; set; }
+        public virtual TIPO_C_BANCARIA TIPO_C_BANCARIA { get; set; }
         public virtual ICollection<PERS_MEDICO> PERS_MEDICO { get; set; }
     }
 }

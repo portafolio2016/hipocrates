@@ -12,13 +12,9 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ARCHIVO
+    public partial class ESTADO_ATENCION
     {
-        public int ID_ARCHIVO { get; set; }
-        public string FILE_URI { get; set; }
-        public Nullable<int> ID_RESULTADO_ATENCION { get; set; }
-        public string EXTENSION { get; set; }
-    
-        public virtual RES_ATENCION RES_ATENCION { get; set; }
+        public decimal ID_ESTADO_ATENCION { get; set; }
+        public string NOM_ESTADO_ATEN { get; set; }
     }
 }

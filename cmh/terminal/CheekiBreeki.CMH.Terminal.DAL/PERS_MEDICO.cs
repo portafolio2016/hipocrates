@@ -26,6 +26,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public Nullable<int> ID_TURNO { get; set; }
     
         public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN { get; set; }
+        public virtual CUEN_BANCARIA CUEN_BANCARIA { get; set; }
         public virtual ESPECIALIDAD ESPECIALIDAD { get; set; }
         public virtual ICollection<RES_ATENCION> RES_ATENCION { get; set; }
         public virtual PERSONAL PERSONAL { get; set; }
