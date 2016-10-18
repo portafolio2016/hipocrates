@@ -50,7 +50,7 @@ public class Turno implements Serializable {
     private Short numhoraFin;
     @Column(name = "NUMMINU_FIN")
     private Short numminuFin;
-    @OneToMany(mappedBy = "idTurno1")
+    @OneToMany(mappedBy = "idTurno")
     private Collection<PersMedico> persMedicoCollection;
 
     public Turno() {

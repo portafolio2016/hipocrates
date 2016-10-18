@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.lib.dal.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,7 +27,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "CuenBancaria.findAll", query = "SELECT c FROM CuenBancaria c"),
     @NamedQuery(name = "CuenBancaria.findByIdCuenBancaria", query = "SELECT c FROM CuenBancaria c WHERE c.idCuenBancaria = :idCuenBancaria"),
-    @NamedQuery(name = "CuenBancaria.findByIdPersMedico", query = "SELECT c FROM CuenBancaria c WHERE c.idPersMedico = :idPersMedico"),
     @NamedQuery(name = "CuenBancaria.findByNumCBancaria", query = "SELECT c FROM CuenBancaria c WHERE c.numCBancaria = :numCBancaria")})
 public class CuenBancaria implements Serializable {
 
@@ -39,15 +35,14 @@ public class CuenBancaria implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_CUEN_BANCARIA")
     private Integer idCuenBancaria;
-    @Column(name = "ID_PERS_MEDICO")
-    private Integer idPersMedico;
     @Column(name = "NUM_C_BANCARIA")
     private String numCBancaria;
-    @OneToMany(mappedBy = "idTurno")
-    private Collection<PersMedico> persMedicoCollection;
     @JoinColumn(name = "ID_BANCO", referencedColumnName = "ID_BANCO")
     @ManyToOne
     private Banco idBanco;
+    @JoinColumn(name = "ID_PERS_MEDICO", referencedColumnName = "ID_PERSONAL_MEDICO")
+    @ManyToOne
+    private PersMedico idPersMedico;
     @JoinColumn(name = "ID_TIPO_C_BANCARIA", referencedColumnName = "ID_TIPO_C_BANCARIA")
     @ManyToOne
     private TipoCBancaria idTipoCBancaria;
@@ -67,14 +62,6 @@ public class CuenBancaria implements Serializable {
         this.idCuenBancaria = idCuenBancaria;
     }
 
-    public Integer getIdPersMedico() {
-        return idPersMedico;
-    }
-
-    public void setIdPersMedico(Integer idPersMedico) {
-        this.idPersMedico = idPersMedico;
-    }
-
     public String getNumCBancaria() {
         return numCBancaria;
     }
@@ -83,21 +70,20 @@ public class CuenBancaria implements Serializable {
         this.numCBancaria = numCBancaria;
     }
 
-    @XmlTransient
-    public Collection<PersMedico> getPersMedicoCollection() {
-        return persMedicoCollection;
-    }
-
-    public void setPersMedicoCollection(Collection<PersMedico> persMedicoCollection) {
-        this.persMedicoCollection = persMedicoCollection;
-    }
-
     public Banco getIdBanco() {
         return idBanco;
     }
 
     public void setIdBanco(Banco idBanco) {
         this.idBanco = idBanco;
+    }
+
+    public PersMedico getIdPersMedico() {
+        return idPersMedico;
+    }
+
+    public void setIdPersMedico(PersMedico idPersMedico) {
+        this.idPersMedico = idPersMedico;
     }
 
     public TipoCBancaria getIdTipoCBancaria() {

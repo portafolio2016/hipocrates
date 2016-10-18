@@ -37,9 +37,6 @@ public class PersMedico implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_PERSONAL_MEDICO")
     private Integer idPersonalMedico;
-    @JoinColumn(name = "ID_TURNO", referencedColumnName = "ID_CUEN_BANCARIA")
-    @ManyToOne
-    private CuenBancaria idTurno;
     @JoinColumn(name = "ID_ESPECIALIDAD", referencedColumnName = "ID_ESPECIALIDAD")
     @ManyToOne
     private Especialidad idEspecialidad;
@@ -48,11 +45,13 @@ public class PersMedico implements Serializable {
     private Personal idPersonal;
     @JoinColumn(name = "ID_TURNO", referencedColumnName = "ID_TURNO")
     @ManyToOne
-    private Turno idTurno1;
+    private Turno idTurno;
     @OneToMany(mappedBy = "idPersonalMedico")
     private Collection<AtencionAgen> atencionAgenCollection;
     @OneToMany(mappedBy = "idPersonalMedico")
     private Collection<ResAtencion> resAtencionCollection;
+    @OneToMany(mappedBy = "idPersMedico")
+    private Collection<CuenBancaria> cuenBancariaCollection;
 
     public PersMedico() {
     }
@@ -67,14 +66,6 @@ public class PersMedico implements Serializable {
 
     public void setIdPersonalMedico(Integer idPersonalMedico) {
         this.idPersonalMedico = idPersonalMedico;
-    }
-
-    public CuenBancaria getIdTurno() {
-        return idTurno;
-    }
-
-    public void setIdTurno(CuenBancaria idTurno) {
-        this.idTurno = idTurno;
     }
 
     public Especialidad getIdEspecialidad() {
@@ -93,12 +84,12 @@ public class PersMedico implements Serializable {
         this.idPersonal = idPersonal;
     }
 
-    public Turno getIdTurno1() {
-        return idTurno1;
+    public Turno getIdTurno() {
+        return idTurno;
     }
 
-    public void setIdTurno1(Turno idTurno1) {
-        this.idTurno1 = idTurno1;
+    public void setIdTurno(Turno idTurno) {
+        this.idTurno = idTurno;
     }
 
     @XmlTransient
@@ -117,6 +108,15 @@ public class PersMedico implements Serializable {
 
     public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
         this.resAtencionCollection = resAtencionCollection;
+    }
+
+    @XmlTransient
+    public Collection<CuenBancaria> getCuenBancariaCollection() {
+        return cuenBancariaCollection;
+    }
+
+    public void setCuenBancariaCollection(Collection<CuenBancaria> cuenBancariaCollection) {
+        this.cuenBancariaCollection = cuenBancariaCollection;
     }
 
     @Override
