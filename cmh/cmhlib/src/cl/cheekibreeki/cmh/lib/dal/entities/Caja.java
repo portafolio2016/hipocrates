@@ -33,10 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Caja.findAll", query = "SELECT c FROM Caja c"),
     @NamedQuery(name = "Caja.findByIdCaja", query = "SELECT c FROM Caja c WHERE c.idCaja = :idCaja"),
-    @NamedQuery(name = "Caja.findByFecApertura", query = "SELECT c FROM Caja c WHERE c.fecApertura = :fecApertura"),
-    @NamedQuery(name = "Caja.findByFecCierre", query = "SELECT c FROM Caja c WHERE c.fecCierre = :fecCierre"),
-    @NamedQuery(name = "Caja.findByHoraApertura", query = "SELECT c FROM Caja c WHERE c.horaApertura = :horaApertura"),
-    @NamedQuery(name = "Caja.findByHoraCierre", query = "SELECT c FROM Caja c WHERE c.horaCierre = :horaCierre")})
+    @NamedQuery(name = "Caja.findByFechorApertura", query = "SELECT c FROM Caja c WHERE c.fechorApertura = :fechorApertura"),
+    @NamedQuery(name = "Caja.findByFechorCierre", query = "SELECT c FROM Caja c WHERE c.fechorCierre = :fechorCierre")})
 public class Caja implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,18 +42,12 @@ public class Caja implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_CAJA")
     private Integer idCaja;
-    @Column(name = "FEC_APERTURA")
+    @Column(name = "FECHOR_APERTURA")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fecApertura;
-    @Column(name = "FEC_CIERRE")
+    private Date fechorApertura;
+    @Column(name = "FECHOR_CIERRE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fecCierre;
-    @Column(name = "HORA_APERTURA")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date horaApertura;
-    @Column(name = "HORA_CIERRE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date horaCierre;
+    private Date fechorCierre;
     @JoinColumn(name = "ID_FUNCIONARIO", referencedColumnName = "ID_FUNCIONARIO")
     @ManyToOne
     private Funcionario idFuncionario;
@@ -77,36 +69,20 @@ public class Caja implements Serializable {
         this.idCaja = idCaja;
     }
 
-    public Date getFecApertura() {
-        return fecApertura;
+    public Date getFechorApertura() {
+        return fechorApertura;
     }
 
-    public void setFecApertura(Date fecApertura) {
-        this.fecApertura = fecApertura;
+    public void setFechorApertura(Date fechorApertura) {
+        this.fechorApertura = fechorApertura;
     }
 
-    public Date getFecCierre() {
-        return fecCierre;
+    public Date getFechorCierre() {
+        return fechorCierre;
     }
 
-    public void setFecCierre(Date fecCierre) {
-        this.fecCierre = fecCierre;
-    }
-
-    public Date getHoraApertura() {
-        return horaApertura;
-    }
-
-    public void setHoraApertura(Date horaApertura) {
-        this.horaApertura = horaApertura;
-    }
-
-    public Date getHoraCierre() {
-        return horaCierre;
-    }
-
-    public void setHoraCierre(Date horaCierre) {
-        this.horaCierre = horaCierre;
+    public void setFechorCierre(Date fechorCierre) {
+        this.fechorCierre = fechorCierre;
     }
 
     public Funcionario getIdFuncionario() {
