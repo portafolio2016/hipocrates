@@ -5,6 +5,7 @@
  */
 package cl.cheekibreeki.cmh.webapp.bl;
 
+import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
 import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
 import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
@@ -12,6 +13,8 @@ import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
 import cl.cheekibreeki.cmh.lib.dal.entities.ResAtencion;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -25,7 +28,16 @@ import static org.junit.Assert.*;
  */
 public class AccionesPacienteTest {
     
+     Paciente paciente = null;
+    
     public AccionesPacienteTest() {
+        paciente = new Paciente();
+        paciente.setNombresPaciente("Pablo");
+        paciente.setApellidosPaciente("de la Sotta");
+        paciente.setRut(18766326);
+        paciente.setDigitoVerificador('1');
+        paciente.setHashedPass("holamundo");
+        paciente.setEmailPaciente("pablitodelasotita@peladordenaranjas.com");
     }
     
     @BeforeClass
@@ -50,28 +62,20 @@ public class AccionesPacienteTest {
     @Test
     public void testRegistrarPaciente() {
         System.out.println("registrarPaciente");
-        Paciente paciente = null;
         AccionesPaciente instance = new AccionesPaciente();
         boolean expResult = false;
         boolean result = instance.registrarPaciente(paciente);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+         System.out.println("registro exitoso");
     }
 
     /**
      * Test of obtenerExamenes method, of class AccionesPaciente.
      */
+    
     @Test
     public void testObtenerExamenes() {
-        System.out.println("obtenerExamenes");
-        Paciente paciente = null;
-        AccionesPaciente instance = new AccionesPaciente();
-        ArrayList<ResAtencion> expResult = null;
-        ArrayList<ResAtencion> result = instance.obtenerExamenes(paciente);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -79,15 +83,6 @@ public class AccionesPacienteTest {
      */
     @Test
     public void testObtenerAtenciones_Date_Prestacion() {
-        System.out.println("obtenerAtenciones");
-        Date dia = null;
-        Prestacion prestacion = null;
-        AccionesPaciente instance = new AccionesPaciente();
-        ArrayList<AtencionAgen> expResult = null;
-        ArrayList<AtencionAgen> result = instance.obtenerAtenciones(dia, prestacion);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -95,15 +90,6 @@ public class AccionesPacienteTest {
      */
     @Test
     public void testObtenerAtenciones_Date_PersMedico() {
-        System.out.println("obtenerAtenciones");
-        Date dia = null;
-        PersMedico medico = null;
-        AccionesPaciente instance = new AccionesPaciente();
-        ArrayList<AtencionAgen> expResult = null;
-        ArrayList<AtencionAgen> result = instance.obtenerAtenciones(dia, medico);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -111,14 +97,6 @@ public class AccionesPacienteTest {
      */
     @Test
     public void testAgendarAtencion() {
-        System.out.println("agendarAtencion");
-        AtencionAgen atencion = null;
-        AccionesPaciente instance = new AccionesPaciente();
-        boolean expResult = false;
-        boolean result = instance.agendarAtencion(atencion);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -126,14 +104,6 @@ public class AccionesPacienteTest {
      */
     @Test
     public void testObtenerAtencionesPendientes() {
-        System.out.println("obtenerAtencionesPendientes");
-        String rut = "";
-        AccionesPaciente instance = new AccionesPaciente();
-        ArrayList<AtencionAgen> expResult = null;
-        ArrayList<AtencionAgen> result = instance.obtenerAtencionesPendientes(rut);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -141,14 +111,6 @@ public class AccionesPacienteTest {
      */
     @Test
     public void testAnularAtencion() {
-        System.out.println("anularAtencion");
-        AtencionAgen atencion = null;
-        AccionesPaciente instance = new AccionesPaciente();
-        boolean expResult = false;
-        boolean result = instance.anularAtencion(atencion);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

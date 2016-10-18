@@ -10,30 +10,56 @@ import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
 import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
 import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
 import cl.cheekibreeki.cmh.lib.dal.entities.ResAtencion;
+import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 
 /**
  *
  * @author pdelasotta
  */
 public class AccionesPaciente {
+     /**
+     * Método que registra un paciente
+     * @param paciente El paciente que se quiere registrar
+     * @return Si es true el paciente fue registrado
+     */
     public boolean registrarPaciente(Paciente paciente){
-        //TODO: implementar
-        return false;
+        boolean result = Controller.upsert(paciente);
+        return result;
     }
     
     public ArrayList<ResAtencion> obtenerExamenes(Paciente paciente){
-        //TODO: implementar
+        Map<String, Object> params = null;
+        Controller ctr = new Controller();
+        List<? extends Object>  atencion = ctr.findByQuery("AtencionAgen.findByIdPaciente", params);
+        //ArrayList<ResAtencion> result = Controller.findByQuery("ResAtencion.findBy", Integer.SIZE);
         return null;
     }
     
-    public ArrayList<AtencionAgen> obtenerAtenciones(Date dia, Prestacion prestacion){
-        //TODO: implementar
+     /**
+     * Método que devuelve un ArrayList con las prestaciones 
+     * @param dia El dia de la prestacion
+     * @param prestacion La prestacion 
+     * @return Si es true el paciente fue registrado
+     */
+    public ArrayList<AtencionAgen> obtenerAtenciones(Prestacion prestacion){
+        Map<String, Object> params = new HashMap<>();
+        params.put("nombresPaciente", "Pablo");
+        Controller ctr = new Controller();
+        List<? extends Object>  atencion = ctr.findByQuery("AtencionAgen.findByIdPaciente", params);
+        return (ArrayList<AtencionAgen> )atencion;
+    }
+    
+    public ArrayList<AtencionAgen> obtenerAtencion(Date dia, Prestacion prestacion){
+         //TODO: implementar
         return null;
     }
     
-    public ArrayList<AtencionAgen> obtenerAtenciones(Date dia, PersMedico medico){
+    public ArrayList<AtencionAgen> obtenerAtenciones(PersMedico medico){
         //TODO: implementar
         return null;
     }
