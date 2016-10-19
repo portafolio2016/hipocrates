@@ -39,7 +39,7 @@ public class AccionesPaciente {
      */
     public ArrayList<ResAtencion> obtenerExamenes(Paciente paciente){
         Map<String, Object> params = new HashMap<>();
-        params.put("idPaciente", 1);
+        params.put("idPaciente", paciente.getIdPaciente());
         Controller ctr = new Controller();
         List<? extends Object>  atencion = ctr.findByQuery("AtencionAgen.findByIdPaciente", params);
         ArrayList<ResAtencion> resAtencion = new ArrayList<>();
