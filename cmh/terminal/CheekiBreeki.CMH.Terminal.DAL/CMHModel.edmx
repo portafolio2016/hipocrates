@@ -130,8 +130,8 @@
             <PropertyRef Name="ID_FUNCIONARIO" />
           </Key>
           <Property Name="ID_FUNCIONARIO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="ID_CARGO_FUNCI" Type="number" Precision="8" Scale="0" />
-          <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_CARGO_FUNCI" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="INVENTARIO">
           <Key>
@@ -320,7 +320,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CARGO_FUNCIONARIO">
-          <End Role="CARGO" Type="Self.CARGO" Multiplicity="0..1">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -558,7 +558,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PERSONAL_FUNCIONARIO">
-          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="0..1">
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -956,8 +956,8 @@
             <PropertyRef Name="ID_FUNCIONARIO" />
           </Key>
           <Property Name="ID_FUNCIONARIO" Type="Int32" Nullable="false" />
-          <Property Name="ID_CARGO_FUNCI" Type="Int32" />
-          <Property Name="ID_PERSONAL" Type="Int32" />
+          <Property Name="ID_CARGO_FUNCI" Type="Int32" Nullable="false" />
+          <Property Name="ID_PERSONAL" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CAJA" Relationship="Self.FK_FUNCIONARIO_CAJA" FromRole="FUNCIONARIO" ToRole="CAJA" />
           <NavigationProperty Name="CARGO" Relationship="Self.FK_CARGO_FUNCIONARIO" FromRole="FUNCIONARIO" ToRole="CARGO" />
           <NavigationProperty Name="PERSONAL" Relationship="Self.FK_PERSONAL_FUNCIONARIO" FromRole="FUNCIONARIO" ToRole="PERSONAL" />
@@ -1276,7 +1276,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CARGO_FUNCIONARIO">
-          <End Role="CARGO" Type="Self.CARGO" Multiplicity="0..1">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -1416,7 +1416,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PERSONAL_FUNCIONARIO">
-          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="0..1">
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
