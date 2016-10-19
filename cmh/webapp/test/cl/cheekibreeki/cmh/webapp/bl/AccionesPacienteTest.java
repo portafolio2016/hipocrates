@@ -63,8 +63,8 @@ public class AccionesPacienteTest {
     public void testRegistrarPaciente() {
         System.out.println("registrarPaciente");
         AccionesPaciente instance = new AccionesPaciente();
-        boolean expResult = false;
-        boolean result = instance.registrarPaciente(paciente);
+        boolean expResult = true;
+        boolean result = instance.registrarPaciente(this.paciente);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
          System.out.println("registro exitoso");
@@ -73,9 +73,17 @@ public class AccionesPacienteTest {
     /**
      * Test of obtenerExamenes method, of class AccionesPaciente.
      */
-    
     @Test
     public void testObtenerExamenes() {
+         System.out.println("obtenerExamenes");
+         AccionesPaciente instance = new AccionesPaciente();
+         ArrayList<ResAtencion> result = instance.obtenerExamenes(paciente);
+         
+         if(result.isEmpty()){
+             System.out.println("El paciente no tiene examenes asociados");
+         }else{
+             System.out.println("Examenes obtenidos");
+         }
     }
 
     /**
