@@ -64,6 +64,9 @@
     <Compile Include="ATENCION_AGEN.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ATENCION_AGENDADA.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BANCO.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
@@ -106,7 +109,13 @@
     <Compile Include="ESPECIALIDAD.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ESP_PER_MEDICO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ESTADO_ATEN.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ESTADO_ATENCION.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FICHA.cs">
