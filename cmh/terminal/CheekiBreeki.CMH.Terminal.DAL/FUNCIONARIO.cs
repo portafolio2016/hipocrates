@@ -28,9 +28,9 @@ public partial class FUNCIONARIO
 
     public int ID_FUNCIONARIO { get; set; }
 
-    public Nullable<int> ID_CARGO_FUNCI { get; set; }
+    public int ID_CARGO_FUNCI { get; set; }
 
-    public Nullable<int> ID_PERSONAL { get; set; }
+    public int ID_PERSONAL { get; set; }
 
 
 

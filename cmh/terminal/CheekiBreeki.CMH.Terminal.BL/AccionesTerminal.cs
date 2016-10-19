@@ -230,12 +230,16 @@ namespace CheekiBreeki.CMH.Terminal.BL
                          funcionario.ID_PERSONAL == null ||
                          funcionario.ID_PERSONAL == 0)
                 {
-                    throw new Exception("Cargo o personal no existente");
+                    throw new Exception("Cargo o personal no vacío");
                 }
-                /*else if (!Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                else if (!Util.isObjetoNulo(conexionDB.CARGO.Find(funcionario.ID_CARGO_FUNCI)))
                 {
-                    throw new Exception("Equipo ya ingresado");
-                }*/
+                    throw new Exception("Cargo no existe");
+                }
+                else if (!Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Funcionario ya ingresado");
+                }
                 else
                 {
                     conexionDB.FUNCIONARIO.Add(funcionario);
@@ -252,20 +256,84 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         public FUNCIONARIO buscarFuncionario(int cargo, int personal)
         {
-            //TODO: Implementar
-            return null;
+            try
+            {
+                if (Util.isObjetoNulo(cargo) || Util.isObjetoNulo(personal))
+                {
+                    throw new Exception("Cargo o personal nulo");
+                }
+                else
+                {
+                    FUNCIONARIO funcionario = null;
+                    funcionario = conexionDB.FUNCIONARIO.Where(d => d.ID_CARGO_FUNCI == cargo
+                                                         && d.ID_PERSONAL == personal)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(funcionario))
+                    {
+                        throw new Exception("Funcionario no existe");
+                    }
+                    return funcionario;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         public Boolean actualizarFuncionario(FUNCIONARIO funcionario)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario nulo");
+                }
+                else if (funcionario.ID_CARGO_FUNCI == null ||
+                         funcionario.ID_CARGO_FUNCI == 0 ||
+                         funcionario.ID_PERSONAL == null ||
+                         funcionario.ID_PERSONAL == 0)
+                {
+                    throw new Exception("Cargo o personal no vacío");
+                }
+                else if (Util.isObjetoNulo(conexionDB.CARGO.Find(funcionario.ID_CARGO_FUNCI)))
+                {
+                    throw new Exception("Cargo no existe");
+                }
+                else
+                {
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         public Boolean borrarFuncionario(FUNCIONARIO funcionario)
         {
-            //TODO: Implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario no existe");
+                }
+                else
+                {
+                    conexionDB.FUNCIONARIO.Remove(funcionario);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
         #endregion
 

@@ -601,7 +601,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean resultadoEsperado2 = false;
             Assert.AreEqual(res2, resultadoEsperado2);
 
-            // Caso 3: Personal no existe
+            // Caso 3: Cargo no existe
             FUNCIONARIO funcionario3 = new FUNCIONARIO();
             funcionario3.ID_CARGO_FUNCI = 0;
 
@@ -624,19 +624,70 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         [TestMethod]
         public void buscarFuncionarioTest()
         {
-            Assert.Fail();
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Funcionario correcto
+            int cargo1 = 1;
+            int personal1 = 2;
+            FUNCIONARIO res1 = at.buscarFuncionario(cargo1, personal1);
+
+            Object resultadoNoEsperado1 = null;
+            Assert.AreNotEqual(res1, resultadoNoEsperado1);
+
+            // Caso 2: Funcionario no existente
+            int cargo2 = 0;
+            int personal2 = 0;
+
+            FUNCIONARIO res2 = at.buscarFuncionario(cargo2, personal2);
+            Object resultadoEsperado2 = null;
+            Assert.AreEqual(res2, resultadoEsperado2);
         }
 
         [TestMethod]
         public void actualizarFuncionarioTest()
         {
-            Assert.Fail();
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Funcionario correcto
+            int personal1 = 2;
+            int cargo1 = 1;
+            FUNCIONARIO funcionario1 = at.buscarFuncionario(cargo1, personal1);
+
+            funcionario1.ID_CARGO_FUNCI = 9;
+
+            Boolean res1 = at.actualizarFuncionario(funcionario1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+
+            // Caso 2: Funcionario nulo
+            FUNCIONARIO funcionario2 = at.buscarFuncionario(0, 0);
+
+            Boolean res2 = at.nuevoFuncionario(funcionario2);
+            Boolean resultadoEsperado2 = false;
+            Assert.AreEqual(res2, resultadoEsperado2);
+
+            // Caso 3: Cargo no existe
+            FUNCIONARIO funcionario3 = new FUNCIONARIO();
+            funcionario3.ID_CARGO_FUNCI = 0;
+
+            Boolean res3 = at.actualizarFuncionario(funcionario3);
+            Boolean resultadoEsperado3 = false;
+            Assert.AreEqual(res3, resultadoEsperado3);
         }
 
         [TestMethod]
         public void borrarFuncionarioTest()
         {
-            Assert.Fail();
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Funcionario correcto
+            int personal1 = 2;
+            int cargo1 = 9;
+
+            FUNCIONARIO funcionario1 = at.buscarFuncionario(cargo1, personal1);
+            if (Util.isObjetoNulo(funcionario1))
+                Assert.Fail("Equipo no existe");
+
+            at.borrarFuncionario(funcionario1);
+            Object resultadoEsperado1 = null;
+            Assert.AreEqual(at.buscarFuncionario(cargo1, personal1), resultadoEsperado1);
         }
         #endregion
     }
