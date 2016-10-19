@@ -56,6 +56,7 @@ public class Personal implements Serializable {
     @Basic(optional = false)
     @Column(name = "RUT")
     private int rut;
+    @Basic(optional = false)
     @Column(name = "VERIFICADOR")
     private Character verificador;
     @Column(name = "EMAIL")
@@ -72,9 +73,10 @@ public class Personal implements Serializable {
         this.idPersonal = idPersonal;
     }
 
-    public Personal(Integer idPersonal, int rut) {
+    public Personal(Integer idPersonal, int rut, Character verificador) {
         this.idPersonal = idPersonal;
         this.rut = rut;
+        this.verificador = verificador;
     }
 
     public Integer getIdPersonal() {
