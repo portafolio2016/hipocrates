@@ -56,32 +56,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ARCHIVO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ASEGURADORA.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ATENCION_AGEN.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="BONO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CAJA.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CARGO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="CMHModel.Context.cs">
+    <Compile Include="CMHModelo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CMHModel.Context.tt</DependentUpon>
+      <DependentUpon>CMHModelo.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CMHModel.cs">
+    <Compile Include="CMHModelo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="CMHModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -89,59 +89,62 @@
       <DependentUpon>CMHModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DEVOLUCION.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ENTRADA_FICHA.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="EQUIPO_REQ.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ESPECIALIDAD.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ESTADO_ATEN.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="FICHA.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="FUNCIONARIO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="INVENTARIO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ORDEN_ANALISIS.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="PACIENTE.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="PAGO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="PERSONAL.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="PERS_MEDICO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="PRESTACION.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PRUEBA.cs">
+      <DependentUpon>CMHModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="RES_ATENCION.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="TIPO_EQUIPO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="TIPO_PRES.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="TURNO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
+      <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -152,23 +155,25 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CMHModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="CMHModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CMHModel.edmx</DependentUpon>
-      <LastGenOutput>CMHModel.Context.cs</LastGenOutput>
-    </None>
     <None Include="CMHModel.edmx.diagram">
       <DependentUpon>CMHModel.edmx</DependentUpon>
-    </None>
-    <None Include="CMHModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CMHModel.edmx</DependentUpon>
-      <LastGenOutput>CMHModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CMHModelo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CMHModel.edmx</DependentUpon>
+      <LastGenOutput>CMHModelo.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CMHModelo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CMHModel.edmx</DependentUpon>
+      <LastGenOutput>CMHModelo.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

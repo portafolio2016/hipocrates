@@ -45,6 +45,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public virtual DbSet<PERS_MEDICO> PERS_MEDICO { get; set; }
         public virtual DbSet<PERSONAL> PERSONAL { get; set; }
         public virtual DbSet<PRESTACION> PRESTACION { get; set; }
+        public virtual DbSet<PRUEBA> PRUEBA { get; set; }
         public virtual DbSet<RES_ATENCION> RES_ATENCION { get; set; }
         public virtual DbSet<TIPO_EQUIPO> TIPO_EQUIPO { get; set; }
         public virtual DbSet<TIPO_PRES> TIPO_PRES { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CMHModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ARCHIVO">
           <Key>
             <PropertyRef Name="ID_ARCHIVO" />
@@ -186,6 +186,13 @@
           <Property Name="CODIGO_PRESTACION" Type="varchar2" MaxLength="64" />
           <Property Name="ID_ESPECIALIDAD" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="PRUEBA">
+          <Key>
+            <PropertyRef Name="ID_PRUEBA" />
+          </Key>
+          <Property Name="ID_PRUEBA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CAMPO" Type="varchar2" MaxLength="2000" />
         </EntityType>
         <EntityType Name="RES_ATENCION">
           <Key>
@@ -535,7 +542,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CMHModelStoreContainer">
+        <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="ARCHIVO" EntityType="Self.ARCHIVO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="ASEGURADORA" EntityType="Self.ASEGURADORA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="ATENCION_AGEN" EntityType="Self.ATENCION_AGEN" Schema="DEV" store:Type="Tables" />
@@ -556,6 +563,7 @@
           <EntitySet Name="PERS_MEDICO" EntityType="Self.PERS_MEDICO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="PERSONAL" EntityType="Self.PERSONAL" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="PRESTACION" EntityType="Self.PRESTACION" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="PRUEBA" EntityType="Self.PRUEBA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="RES_ATENCION" EntityType="Self.RES_ATENCION" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="TIPO_EQUIPO" EntityType="Self.TIPO_EQUIPO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="TIPO_PRES" EntityType="Self.TIPO_PRES" Schema="DEV" store:Type="Tables" />
@@ -669,7 +677,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CMHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ARCHIVO">
           <Key>
             <PropertyRef Name="ID_ARCHIVO" />
@@ -895,6 +903,13 @@
           <NavigationProperty Name="EQUIPO_REQ" Relationship="Self.FK_EQUIPO_REQ_PRESTACION" FromRole="PRESTACION" ToRole="EQUIPO_REQ" />
           <NavigationProperty Name="ESPECIALIDAD" Relationship="Self.FK_ESPECIALIDAD_PRESTACION" FromRole="PRESTACION" ToRole="ESPECIALIDAD" />
           <NavigationProperty Name="TIPO_PRES" Relationship="Self.FK_TIPO_PRES_PRESTACION" FromRole="PRESTACION" ToRole="TIPO_PRES" />
+        </EntityType>
+        <EntityType Name="PRUEBA">
+          <Key>
+            <PropertyRef Name="ID_PRUEBA" />
+          </Key>
+          <Property Name="ID_PRUEBA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CAMPO" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="RES_ATENCION">
           <Key>
@@ -1273,6 +1288,7 @@
           <EntitySet Name="PERS_MEDICO" EntityType="Self.PERS_MEDICO" />
           <EntitySet Name="PERSONAL" EntityType="Self.PERSONAL" />
           <EntitySet Name="PRESTACION" EntityType="Self.PRESTACION" />
+          <EntitySet Name="PRUEBA" EntityType="Self.PRUEBA" />
           <EntitySet Name="RES_ATENCION" EntityType="Self.RES_ATENCION" />
           <EntitySet Name="TIPO_EQUIPO" EntityType="Self.TIPO_EQUIPO" />
           <EntitySet Name="TIPO_PRES" EntityType="Self.TIPO_PRES" />
@@ -1387,9 +1403,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CMHModelStoreContainer" CdmEntityContainer="CMHEntities">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="CMHEntities">
           <EntitySetMapping Name="ARCHIVO">
-            <EntityTypeMapping TypeName="CMHModel.ARCHIVO">
+            <EntityTypeMapping TypeName="Model.ARCHIVO">
               <MappingFragment StoreEntitySet="ARCHIVO">
                 <ScalarProperty Name="ID_ARCHIVO" ColumnName="ID_ARCHIVO" />
                 <ScalarProperty Name="FILE_URI" ColumnName="FILE_URI" />
@@ -1398,7 +1414,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ASEGURADORA">
-            <EntityTypeMapping TypeName="CMHModel.ASEGURADORA">
+            <EntityTypeMapping TypeName="Model.ASEGURADORA">
               <MappingFragment StoreEntitySet="ASEGURADORA">
                 <ScalarProperty Name="ID_ASEGURADORA" ColumnName="ID_ASEGURADORA" />
                 <ScalarProperty Name="NOM_ASEGURADORA" ColumnName="NOM_ASEGURADORA" />
@@ -1406,7 +1422,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ATENCION_AGEN">
-            <EntityTypeMapping TypeName="CMHModel.ATENCION_AGEN">
+            <EntityTypeMapping TypeName="Model.ATENCION_AGEN">
               <MappingFragment StoreEntitySet="ATENCION_AGEN">
                 <ScalarProperty Name="ID_ATENCION_AGEN" ColumnName="ID_ATENCION_AGEN" />
                 <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
@@ -1420,7 +1436,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BONO">
-            <EntityTypeMapping TypeName="CMHModel.BONO">
+            <EntityTypeMapping TypeName="Model.BONO">
               <MappingFragment StoreEntitySet="BONO">
                 <ScalarProperty Name="ID_BONO" ColumnName="ID_BONO" />
                 <ScalarProperty Name="CANT_BONO" ColumnName="CANT_BONO" />
@@ -1430,7 +1446,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CAJA">
-            <EntityTypeMapping TypeName="CMHModel.CAJA">
+            <EntityTypeMapping TypeName="Model.CAJA">
               <MappingFragment StoreEntitySet="CAJA">
                 <ScalarProperty Name="ID_CAJA" ColumnName="ID_CAJA" />
                 <ScalarProperty Name="FECHOR_APERTURA" ColumnName="FECHOR_APERTURA" />
@@ -1440,7 +1456,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CARGO">
-            <EntityTypeMapping TypeName="CMHModel.CARGO">
+            <EntityTypeMapping TypeName="Model.CARGO">
               <MappingFragment StoreEntitySet="CARGO">
                 <ScalarProperty Name="ID_CARGO_FUNCI" ColumnName="ID_CARGO_FUNCI" />
                 <ScalarProperty Name="NOMBRE_CARGO" ColumnName="NOMBRE_CARGO" />
@@ -1448,7 +1464,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DEVOLUCION">
-            <EntityTypeMapping TypeName="CMHModel.DEVOLUCION">
+            <EntityTypeMapping TypeName="Model.DEVOLUCION">
               <MappingFragment StoreEntitySet="DEVOLUCION">
                 <ScalarProperty Name="ID_DEVOLUCION" ColumnName="ID_DEVOLUCION" />
                 <ScalarProperty Name="NOM_TIPO_DEV" ColumnName="NOM_TIPO_DEV" />
@@ -1456,7 +1472,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ENTRADA_FICHA">
-            <EntityTypeMapping TypeName="CMHModel.ENTRADA_FICHA">
+            <EntityTypeMapping TypeName="Model.ENTRADA_FICHA">
               <MappingFragment StoreEntitySet="ENTRADA_FICHA">
                 <ScalarProperty Name="ID_ENTRADA_FICHA" ColumnName="ID_ENTRADA_FICHA" />
                 <ScalarProperty Name="NOMBRE_ENTRADA" ColumnName="NOMBRE_ENTRADA" />
@@ -1467,7 +1483,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EQUIPO_REQ">
-            <EntityTypeMapping TypeName="CMHModel.EQUIPO_REQ">
+            <EntityTypeMapping TypeName="Model.EQUIPO_REQ">
               <MappingFragment StoreEntitySet="EQUIPO_REQ">
                 <ScalarProperty Name="ID_EQUIPO_REQ" ColumnName="ID_EQUIPO_REQ" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -1477,7 +1493,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ESPECIALIDAD">
-            <EntityTypeMapping TypeName="CMHModel.ESPECIALIDAD">
+            <EntityTypeMapping TypeName="Model.ESPECIALIDAD">
               <MappingFragment StoreEntitySet="ESPECIALIDAD">
                 <ScalarProperty Name="ID_ESPECIALIDAD" ColumnName="ID_ESPECIALIDAD" />
                 <ScalarProperty Name="NOM_ESPECIALIDAD" ColumnName="NOM_ESPECIALIDAD" />
@@ -1485,7 +1501,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ESTADO_ATEN">
-            <EntityTypeMapping TypeName="CMHModel.ESTADO_ATEN">
+            <EntityTypeMapping TypeName="Model.ESTADO_ATEN">
               <MappingFragment StoreEntitySet="ESTADO_ATEN">
                 <ScalarProperty Name="ID_ESTADO_ATENCION" ColumnName="ID_ESTADO_ATENCION" />
                 <ScalarProperty Name="NOM_ESTADO_ATEN" ColumnName="NOM_ESTADO_ATEN" />
@@ -1493,7 +1509,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FICHA">
-            <EntityTypeMapping TypeName="CMHModel.FICHA">
+            <EntityTypeMapping TypeName="Model.FICHA">
               <MappingFragment StoreEntitySet="FICHA">
                 <ScalarProperty Name="ID_FICHA" ColumnName="ID_FICHA" />
                 <ScalarProperty Name="FEC_NAC" ColumnName="FEC_NAC" />
@@ -1503,7 +1519,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FUNCIONARIO">
-            <EntityTypeMapping TypeName="CMHModel.FUNCIONARIO">
+            <EntityTypeMapping TypeName="Model.FUNCIONARIO">
               <MappingFragment StoreEntitySet="FUNCIONARIO">
                 <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
                 <ScalarProperty Name="ID_CARGO_FUNCI" ColumnName="ID_CARGO_FUNCI" />
@@ -1512,7 +1528,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="INVENTARIO">
-            <EntityTypeMapping TypeName="CMHModel.INVENTARIO">
+            <EntityTypeMapping TypeName="Model.INVENTARIO">
               <MappingFragment StoreEntitySet="INVENTARIO">
                 <ScalarProperty Name="ID_INVENTARIO_EQUIPO" ColumnName="ID_INVENTARIO_EQUIPO" />
                 <ScalarProperty Name="CANT_BODEGA" ColumnName="CANT_BODEGA" />
@@ -1521,7 +1537,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ORDEN_ANALISIS">
-            <EntityTypeMapping TypeName="CMHModel.ORDEN_ANALISIS">
+            <EntityTypeMapping TypeName="Model.ORDEN_ANALISIS">
               <MappingFragment StoreEntitySet="ORDEN_ANALISIS">
                 <ScalarProperty Name="ID_ORDEN_ANALISIS" ColumnName="ID_ORDEN_ANALISIS" />
                 <ScalarProperty Name="FECHOR_EMISION" ColumnName="FECHOR_EMISION" />
@@ -1530,7 +1546,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PACIENTE">
-            <EntityTypeMapping TypeName="CMHModel.PACIENTE">
+            <EntityTypeMapping TypeName="Model.PACIENTE">
               <MappingFragment StoreEntitySet="PACIENTE">
                 <ScalarProperty Name="ID_PACIENTE" ColumnName="ID_PACIENTE" />
                 <ScalarProperty Name="NOMBRES_PACIENTE" ColumnName="NOMBRES_PACIENTE" />
@@ -1543,7 +1559,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PAGO">
-            <EntityTypeMapping TypeName="CMHModel.PAGO">
+            <EntityTypeMapping TypeName="Model.PAGO">
               <MappingFragment StoreEntitySet="PAGO">
                 <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
                 <ScalarProperty Name="HORA_PAGO" ColumnName="HORA_PAGO" />
@@ -1555,7 +1571,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PERS_MEDICO">
-            <EntityTypeMapping TypeName="CMHModel.PERS_MEDICO">
+            <EntityTypeMapping TypeName="Model.PERS_MEDICO">
               <MappingFragment StoreEntitySet="PERS_MEDICO">
                 <ScalarProperty Name="ID_PERSONAL_MEDICO" ColumnName="ID_PERSONAL_MEDICO" />
                 <ScalarProperty Name="ID_ESPECIALIDAD" ColumnName="ID_ESPECIALIDAD" />
@@ -1565,7 +1581,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PERSONAL">
-            <EntityTypeMapping TypeName="CMHModel.PERSONAL">
+            <EntityTypeMapping TypeName="Model.PERSONAL">
               <MappingFragment StoreEntitySet="PERSONAL">
                 <ScalarProperty Name="ID_PERSONAL" ColumnName="ID_PERSONAL" />
                 <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
@@ -1579,7 +1595,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRESTACION">
-            <EntityTypeMapping TypeName="CMHModel.PRESTACION">
+            <EntityTypeMapping TypeName="Model.PRESTACION">
               <MappingFragment StoreEntitySet="PRESTACION">
                 <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
                 <ScalarProperty Name="NOM_PRESTACION" ColumnName="NOM_PRESTACION" />
@@ -1590,8 +1606,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PRUEBA">
+            <EntityTypeMapping TypeName="Model.PRUEBA">
+              <MappingFragment StoreEntitySet="PRUEBA">
+                <ScalarProperty Name="ID_PRUEBA" ColumnName="ID_PRUEBA" />
+                <ScalarProperty Name="CAMPO" ColumnName="CAMPO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RES_ATENCION">
-            <EntityTypeMapping TypeName="CMHModel.RES_ATENCION">
+            <EntityTypeMapping TypeName="Model.RES_ATENCION">
               <MappingFragment StoreEntitySet="RES_ATENCION">
                 <ScalarProperty Name="ID_RESULTADO_ATENCION" ColumnName="ID_RESULTADO_ATENCION" />
                 <ScalarProperty Name="ATENCION_ABIERTA" ColumnName="ATENCION_ABIERTA" />
@@ -1603,7 +1627,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TIPO_EQUIPO">
-            <EntityTypeMapping TypeName="CMHModel.TIPO_EQUIPO">
+            <EntityTypeMapping TypeName="Model.TIPO_EQUIPO">
               <MappingFragment StoreEntitySet="TIPO_EQUIPO">
                 <ScalarProperty Name="ID_TIPO_EQUIPO" ColumnName="ID_TIPO_EQUIPO" />
                 <ScalarProperty Name="NOMBRE_TIPO_EQUIPO" ColumnName="NOMBRE_TIPO_EQUIPO" />
@@ -1611,7 +1635,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TIPO_PRES">
-            <EntityTypeMapping TypeName="CMHModel.TIPO_PRES">
+            <EntityTypeMapping TypeName="Model.TIPO_PRES">
               <MappingFragment StoreEntitySet="TIPO_PRES">
                 <ScalarProperty Name="ID_TIPO_PRESTACION" ColumnName="ID_TIPO_PRESTACION" />
                 <ScalarProperty Name="NOM_TIPO_PREST" ColumnName="NOM_TIPO_PREST" />
@@ -1619,7 +1643,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TURNO">
-            <EntityTypeMapping TypeName="CMHModel.TURNO">
+            <EntityTypeMapping TypeName="Model.TURNO">
               <MappingFragment StoreEntitySet="TURNO">
                 <ScalarProperty Name="ID_TURNO" ColumnName="ID_TURNO" />
                 <ScalarProperty Name="NOMBRE_TURNO" ColumnName="NOMBRE_TURNO" />

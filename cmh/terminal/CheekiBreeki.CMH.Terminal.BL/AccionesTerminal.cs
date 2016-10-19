@@ -9,7 +9,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 {
     public class AccionesTerminal
     {
-        Entities conexionDB = new Entities();
+        CMHEntities conexionDB = new CMHEntities();
 
         //ECU-001
         public Boolean agendarAtencion(ATENCION_AGEN atencion)
@@ -281,31 +281,130 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
         #endregion
 
-
         //ECU-024
-        #region TODO: Prestación médica
+        #region Prestación médica
         public Boolean nuevaPrestacionMedica(PRESTACION prestacion)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(prestacion))
+                {
+                    throw new Exception("Prestación nula");
+                }
+                else if (prestacion.NOM_PRESTACION == null ||
+                         prestacion.NOM_PRESTACION == String.Empty ||
+                         prestacion.PRECIO_PRESTACION == null)
+                {
+                    throw new Exception("Nombre, código o precio vacío");
+                }
+                else if (prestacion.CODIGO_PRESTACION == null || prestacion.CODIGO_PRESTACION == "")
+                {
+                    throw new Exception("Código vacío");
+                }
+                else if (prestacion.ID_TIPO_PRESTACION == null)
+                {
+                    throw new Exception("Tipo de prestación vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarPrestacionMedica(prestacion.CODIGO_PRESTACION)))
+                {
+                    throw new Exception("Prestación ya ingresada");
+                }
+                else
+                {
+                    conexionDB.PRESTACION.Add(prestacion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        public PRESTACION buscarPrestacionMedica(int id)
+        public PRESTACION buscarPrestacionMedica(string codigo)
         {
-            //TODO: implementar
-            return null;
+            try
+            {
+                if (Util.isObjetoNulo(codigo))
+                {
+                    throw new Exception("ID verificador nulo");
+                }
+                else
+                {
+                    PRESTACION prestacion = null;
+                    prestacion = conexionDB.PRESTACION.Where(d => d.CODIGO_PRESTACION == codigo)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(prestacion))
+                    {
+                        throw new Exception("Personal no existe");
+                    }
+                    return prestacion;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         public Boolean actualizarPrestacionesMedicas(PRESTACION prestacion)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(prestacion))
+                {
+                    throw new Exception("Prestación nula");
+                }
+                else if (prestacion.NOM_PRESTACION == null ||
+                         prestacion.NOM_PRESTACION == String.Empty ||
+                         prestacion.PRECIO_PRESTACION == null)
+                {
+                    throw new Exception("Nombre, código o precio vacío");
+                }
+                else if (prestacion.CODIGO_PRESTACION == null || prestacion.CODIGO_PRESTACION == "")
+                {
+                    throw new Exception("Código vacío");
+                }
+                else if (prestacion.ID_TIPO_PRESTACION == null)
+                {
+                    throw new Exception("Tipo de prestación vacío");
+                }
+                else
+                {
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         public Boolean borrarPrestacionMedica(PRESTACION prestacion)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(prestacion))
+                {
+                    throw new Exception("Prestacion no existe");
+                }
+                else
+                {
+                    conexionDB.PRESTACION.Remove(prestacion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
         #endregion
 
