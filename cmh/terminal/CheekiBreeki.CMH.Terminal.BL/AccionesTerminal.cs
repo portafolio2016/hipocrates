@@ -217,30 +217,56 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         //ECU-023 y ECU-026
         #region Funcionarios
-        public Boolean nuevoPersonal(FUNCIONARIO funcionario)
+        public Boolean nuevoFuncionario(FUNCIONARIO funcionario)
         {
-            //TODO: Implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario nulo");
+                }/*
+                else if (funcionario.ID_CARGO_FUNCI == null ||
+                         funcionario.ID_CARGO_FUNCI == 0 ||
+                         funcionario.ID_PERSONAL == null ||
+                         funcionario.ID_PERSONAL == 0)
+                {
+                    throw new Exception("Cargo o personal no existente");
+                }
+                /*else if (!Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Equipo ya ingresado");
+                }*/
+                else
+                {
+                    conexionDB.FUNCIONARIO.Add(funcionario);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        public FUNCIONARIO buscarPersonal(Object id)
+        public FUNCIONARIO buscarFuncionario(int cargo, int personal)
         {
             //TODO: Implementar
             return null;
         }
 
-        public Boolean actualizarPersonal(FUNCIONARIO funcionario)
+        public Boolean actualizarFuncionario(FUNCIONARIO funcionario)
         {
             //TODO: implementar
             return false;
         }
 
-        public Boolean borrarPersonal(FUNCIONARIO funcionario)
+        public Boolean borrarFuncionario(FUNCIONARIO funcionario)
         {
             //TODO: Implementar
             return false;
         }
-        
         #endregion
 
         #region Personal

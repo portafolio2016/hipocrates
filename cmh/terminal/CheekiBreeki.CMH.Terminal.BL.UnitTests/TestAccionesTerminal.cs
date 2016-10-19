@@ -193,6 +193,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Personal correcto
             PERSONAL personal1 = new PERSONAL();
+            FUNCIONARIO funcionario1 = new FUNCIONARIO();
 
             personal1.NOMBRES = "Moka";
             personal1.APELLIDOS = "Akashiya";
@@ -203,9 +204,14 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             personal1.VERIFICADOR = "K";
 
             Boolean res1 = at.nuevoPersonal(personal1);
+            
+            funcionario1.ID_CARGO_FUNCI = 1;
+            funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
+
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
 
+           
             // Caso 2: Personal nulo
             PERSONAL personal2 = null;
 
@@ -331,7 +337,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 2: Personal existe
             at.borrarPersonal(personal1);
             Object resultadoEsperado1 = null;
-            Assert.AreEqual(at.buscarPersonal(1), resultadoEsperado1);
+            Assert.AreEqual(at.buscarPersonal(rut1, dv1), resultadoEsperado1);
         }
         #endregion
 
@@ -564,6 +570,74 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             at.borrarEquipo(res1);
             Object resultadoEsperado1 = null;
             Assert.AreEqual(at.buscarEquipo(nombre), resultadoEsperado1);
+        }
+        #endregion
+
+        #region Funcionario
+        [TestMethod]
+        public void nuevoFuncionarioTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Funcionario correcto
+            FUNCIONARIO funcionario1 = new FUNCIONARIO();
+            int rutPersonal1 = 12345678;
+            string dvPersonal1 = "K";
+            PERSONAL personal1 = at.buscarPersonal(rutPersonal1, dvPersonal1);
+
+            if (Util.isObjetoNulo(personal1))
+                Assert.Fail("Personal no existe");
+
+            funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
+            funcionario1.ID_CARGO_FUNCI = 1;
+
+            Boolean res1 = at.nuevoFuncionario(funcionario1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+            /*
+            // Caso 2: Funcionario nulo
+            FUNCIONARIO funcionario2 = new FUNCIONARIO();
+
+            Boolean res2 = at.nuevoFuncionario(funcionario2);
+            Boolean resultadoEsperado2 = false;
+            Assert.AreEqual(res2, resultadoEsperado2);
+
+            // Caso 3: Personal no existe
+            FUNCIONARIO funcionario3 = new FUNCIONARIO();
+            funcionario3.ID_CARGO_FUNCI = 0;
+
+            Boolean res3 = at.nuevoFuncionario(funcionario3);
+            Boolean resultadoEsperado3 = false;
+            Assert.AreEqual(res3, resultadoEsperado3);
+
+            // Caso 4: Funcionario repetido
+            FUNCIONARIO funcionario4 = new FUNCIONARIO();
+            int rutPersonal4 = 12345678;
+            string dvPersonal4 = "K";
+            funcionario1.ID_PERSONAL = at.buscarPersonal(rutPersonal4, dvPersonal4).ID_PERSONAL;
+            funcionario1.ID_CARGO_FUNCI = 1;
+
+            Boolean res4 = at.nuevoFuncionario(funcionario4);
+            Boolean resultadoEsperado4 = false;
+            Assert.AreEqual(res4, resultadoEsperado4);
+             * */
+        }
+
+        [TestMethod]
+        public void buscarFuncionarioTest()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void actualizarFuncionarioTest()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod]
+        public void borrarFuncionarioTest()
+        {
+            Assert.Fail();
         }
         #endregion
     }
