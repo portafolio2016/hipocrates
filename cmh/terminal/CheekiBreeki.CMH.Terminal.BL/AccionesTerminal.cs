@@ -133,17 +133,87 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return false;
         }
 
-        public Boolean nuevoEquipo(TIPO_EQUIPO tipoEquipo)
+        #region Equipos
+        public Boolean nuevoEquipo(TIPO_EQUIPO equipo)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(equipo))
+                {
+                    throw new Exception("Personal nulo");
+                }
+                else if (equipo.NOMBRE_TIPO_EQUIPO == null ||
+                         equipo.NOMBRE_TIPO_EQUIPO == String.Empty)
+                {
+                    throw new Exception("Nombre vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarEquipo(equipo.NOMBRE_TIPO_EQUIPO)))
+                {
+                    throw new Exception("Equipo ya ingresado");
+                }
+                else
+                {
+                    conexionDB.TIPO_EQUIPO.Add(equipo);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        public Boolean borrarEquipo(TIPO_EQUIPO tipoEquipo)
+        public TIPO_EQUIPO buscarEquipo(string nombre)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(nombre))
+                {
+                    throw new Exception("Nombre nulo");
+                }
+                else
+                {
+                    TIPO_EQUIPO equipo = null;
+                    equipo = conexionDB.TIPO_EQUIPO.Where(d => d.NOMBRE_TIPO_EQUIPO == nombre)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(equipo))
+                    {
+                        throw new Exception("Personal no existe");
+                    }
+                    return equipo;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
+
+        public Boolean borrarEquipo(TIPO_EQUIPO equipo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(equipo))
+                {
+                    throw new Exception("Paciente no existe");
+                }
+                else
+                {
+                    conexionDB.TIPO_EQUIPO.Remove(equipo);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
 
         //ECU-023 y ECU-026
         #region Funcionarios

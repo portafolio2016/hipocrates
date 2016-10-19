@@ -494,6 +494,77 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         }
         #endregion
 
-        
+        #region Equipo
+        [TestMethod]
+        public void nuevoEquipoTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Equipo correcto
+            TIPO_EQUIPO equipo1 = new TIPO_EQUIPO();
+            equipo1.NOMBRE_TIPO_EQUIPO = "Test equipo";
+
+            Boolean res1 = at.nuevoEquipo(equipo1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+
+            // Caso 2: Equipo nulo
+            TIPO_EQUIPO equipo2 = new TIPO_EQUIPO();
+
+            Boolean res2 = at.nuevoEquipo(equipo2);
+            Boolean resultadoEsperado2 = false;
+            Assert.AreEqual(res2, resultadoEsperado2);
+
+            // Caso 3: Nombre nulo
+            TIPO_EQUIPO equipo3 = new TIPO_EQUIPO();
+            equipo3.NOMBRE_TIPO_EQUIPO = string.Empty;
+
+            Boolean res3 = at.nuevoEquipo(equipo3);
+            Boolean resultadoEsperado3 = false;
+            Assert.AreEqual(res3, resultadoEsperado3);
+
+            // Caso 4: Equipo repetido
+            TIPO_EQUIPO equipo4 = new TIPO_EQUIPO();
+            equipo4.NOMBRE_TIPO_EQUIPO = "Test equipo";
+
+            Boolean res4 = at.nuevoEquipo(equipo4);
+            Boolean resultadoEsperado4 = false;
+            Assert.AreEqual(res4, resultadoEsperado4);
+        }
+
+        [TestMethod]
+        public void buscarEquipoTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Equipo correcto
+            string nombre1 = "Test equipo";
+            TIPO_EQUIPO res1 = at.buscarEquipo(nombre1);
+
+            Object resultadoNoEsperado1 = null;
+            Assert.AreNotEqual(res1, resultadoNoEsperado1);
+
+            // Caso 2: Equipo no existente
+            string nombre2 = "Test equipo no existente";
+
+            TIPO_EQUIPO res2 = at.buscarEquipo(nombre2);
+            Object resultadoEsperado2 = null;
+            Assert.AreEqual(res2, resultadoEsperado2);
+        }
+
+        [TestMethod]
+        public void borrarEquipoTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Equipo correcto
+            string nombre = "Test equipo";
+
+            TIPO_EQUIPO res1 = at.buscarEquipo(nombre);
+            if (Util.isObjetoNulo(res1))
+                Assert.Fail("Equipo no existe");
+
+            at.borrarEquipo(res1);
+            Object resultadoEsperado1 = null;
+            Assert.AreEqual(at.buscarEquipo(nombre), resultadoEsperado1);
+        }
+        #endregion
     }
 }
