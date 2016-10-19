@@ -32,7 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Personal.findByApellidos", query = "SELECT p FROM Personal p WHERE p.apellidos = :apellidos"),
     @NamedQuery(name = "Personal.findByRemuneracion", query = "SELECT p FROM Personal p WHERE p.remuneracion = :remuneracion"),
     @NamedQuery(name = "Personal.findByHashedPass", query = "SELECT p FROM Personal p WHERE p.hashedPass = :hashedPass"),
-    @NamedQuery(name = "Personal.findByPorcentDescuento", query = "SELECT p FROM Personal p WHERE p.porcentDescuento = :porcentDescuento")})
+    @NamedQuery(name = "Personal.findByPorcentDescuento", query = "SELECT p FROM Personal p WHERE p.porcentDescuento = :porcentDescuento"),
+    @NamedQuery(name = "Personal.findByRut", query = "SELECT p FROM Personal p WHERE p.rut = :rut"),
+    @NamedQuery(name = "Personal.findByVerificador", query = "SELECT p FROM Personal p WHERE p.verificador = :verificador"),
+    @NamedQuery(name = "Personal.findByEmail", query = "SELECT p FROM Personal p WHERE p.email = :email")})
 public class Personal implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,13 @@ public class Personal implements Serializable {
     private String hashedPass;
     @Column(name = "PORCENT_DESCUENTO")
     private Short porcentDescuento;
+    @Basic(optional = false)
+    @Column(name = "RUT")
+    private int rut;
+    @Column(name = "VERIFICADOR")
+    private Character verificador;
+    @Column(name = "EMAIL")
+    private String email;
     @OneToMany(mappedBy = "idPersonal")
     private Collection<PersMedico> persMedicoCollection;
     @OneToMany(mappedBy = "idPersonal")
@@ -60,6 +70,11 @@ public class Personal implements Serializable {
 
     public Personal(Integer idPersonal) {
         this.idPersonal = idPersonal;
+    }
+
+    public Personal(Integer idPersonal, int rut) {
+        this.idPersonal = idPersonal;
+        this.rut = rut;
     }
 
     public Integer getIdPersonal() {
@@ -108,6 +123,30 @@ public class Personal implements Serializable {
 
     public void setPorcentDescuento(Short porcentDescuento) {
         this.porcentDescuento = porcentDescuento;
+    }
+
+    public int getRut() {
+        return rut;
+    }
+
+    public void setRut(int rut) {
+        this.rut = rut;
+    }
+
+    public Character getVerificador() {
+        return verificador;
+    }
+
+    public void setVerificador(Character verificador) {
+        this.verificador = verificador;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @XmlTransient

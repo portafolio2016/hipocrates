@@ -50,6 +50,8 @@ public class PersMedico implements Serializable {
     private Collection<AtencionAgen> atencionAgenCollection;
     @OneToMany(mappedBy = "idPersonalMedico")
     private Collection<ResAtencion> resAtencionCollection;
+    @OneToMany(mappedBy = "idPersMedico")
+    private Collection<CuenBancaria> cuenBancariaCollection;
 
     public PersMedico() {
     }
@@ -106,6 +108,15 @@ public class PersMedico implements Serializable {
 
     public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
         this.resAtencionCollection = resAtencionCollection;
+    }
+
+    @XmlTransient
+    public Collection<CuenBancaria> getCuenBancariaCollection() {
+        return cuenBancariaCollection;
+    }
+
+    public void setCuenBancariaCollection(Collection<CuenBancaria> cuenBancariaCollection) {
+        this.cuenBancariaCollection = cuenBancariaCollection;
     }
 
     @Override

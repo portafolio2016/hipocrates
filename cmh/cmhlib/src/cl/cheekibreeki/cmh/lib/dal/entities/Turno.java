@@ -7,7 +7,6 @@ package cl.cheekibreeki.cmh.lib.dal.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +15,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,9 +28,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Turno.findAll", query = "SELECT t FROM Turno t"),
     @NamedQuery(name = "Turno.findByIdTurno", query = "SELECT t FROM Turno t WHERE t.idTurno = :idTurno"),
-    @NamedQuery(name = "Turno.findByHoraIni", query = "SELECT t FROM Turno t WHERE t.horaIni = :horaIni"),
-    @NamedQuery(name = "Turno.findByHoraFin", query = "SELECT t FROM Turno t WHERE t.horaFin = :horaFin"),
-    @NamedQuery(name = "Turno.findByNombreTurno", query = "SELECT t FROM Turno t WHERE t.nombreTurno = :nombreTurno")})
+    @NamedQuery(name = "Turno.findByNombreTurno", query = "SELECT t FROM Turno t WHERE t.nombreTurno = :nombreTurno"),
+    @NamedQuery(name = "Turno.findByNumhoraIni", query = "SELECT t FROM Turno t WHERE t.numhoraIni = :numhoraIni"),
+    @NamedQuery(name = "Turno.findByNumminuIni", query = "SELECT t FROM Turno t WHERE t.numminuIni = :numminuIni"),
+    @NamedQuery(name = "Turno.findByNumhoraFin", query = "SELECT t FROM Turno t WHERE t.numhoraFin = :numhoraFin"),
+    @NamedQuery(name = "Turno.findByNumminuFin", query = "SELECT t FROM Turno t WHERE t.numminuFin = :numminuFin")})
 public class Turno implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,14 +40,16 @@ public class Turno implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_TURNO")
     private Integer idTurno;
-    @Column(name = "HORA_INI")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date horaIni;
-    @Column(name = "HORA_FIN")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date horaFin;
     @Column(name = "NOMBRE_TURNO")
     private String nombreTurno;
+    @Column(name = "NUMHORA_INI")
+    private Short numhoraIni;
+    @Column(name = "NUMMINU_INI")
+    private Short numminuIni;
+    @Column(name = "NUMHORA_FIN")
+    private Short numhoraFin;
+    @Column(name = "NUMMINU_FIN")
+    private Short numminuFin;
     @OneToMany(mappedBy = "idTurno")
     private Collection<PersMedico> persMedicoCollection;
 
@@ -67,28 +68,44 @@ public class Turno implements Serializable {
         this.idTurno = idTurno;
     }
 
-    public Date getHoraIni() {
-        return horaIni;
-    }
-
-    public void setHoraIni(Date horaIni) {
-        this.horaIni = horaIni;
-    }
-
-    public Date getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(Date horaFin) {
-        this.horaFin = horaFin;
-    }
-
     public String getNombreTurno() {
         return nombreTurno;
     }
 
     public void setNombreTurno(String nombreTurno) {
         this.nombreTurno = nombreTurno;
+    }
+
+    public Short getNumhoraIni() {
+        return numhoraIni;
+    }
+
+    public void setNumhoraIni(Short numhoraIni) {
+        this.numhoraIni = numhoraIni;
+    }
+
+    public Short getNumminuIni() {
+        return numminuIni;
+    }
+
+    public void setNumminuIni(Short numminuIni) {
+        this.numminuIni = numminuIni;
+    }
+
+    public Short getNumhoraFin() {
+        return numhoraFin;
+    }
+
+    public void setNumhoraFin(Short numhoraFin) {
+        this.numhoraFin = numhoraFin;
+    }
+
+    public Short getNumminuFin() {
+        return numminuFin;
+    }
+
+    public void setNumminuFin(Short numminuFin) {
+        this.numminuFin = numminuFin;
     }
 
     @XmlTransient

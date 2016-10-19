@@ -33,9 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "AtencionAgen.findAll", query = "SELECT a FROM AtencionAgen a"),
     @NamedQuery(name = "AtencionAgen.findByIdAtencionAgen", query = "SELECT a FROM AtencionAgen a WHERE a.idAtencionAgen = :idAtencionAgen"),
-    @NamedQuery(name = "AtencionAgen.findByFecha", query = "SELECT a FROM AtencionAgen a WHERE a.fecha = :fecha"),
-    @NamedQuery(name = "AtencionAgen.findByHora", query = "SELECT a FROM AtencionAgen a WHERE a.hora = :hora"),
-    @NamedQuery(name = "AtencionAgen.findByObservaciones", query = "SELECT a FROM AtencionAgen a WHERE a.observaciones = :observaciones")})
+    @NamedQuery(name = "AtencionAgen.findByObservaciones", query = "SELECT a FROM AtencionAgen a WHERE a.observaciones = :observaciones"),
+    @NamedQuery(name = "AtencionAgen.findByFechor", query = "SELECT a FROM AtencionAgen a WHERE a.fechor = :fechor")})
 public class AtencionAgen implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,17 +42,14 @@ public class AtencionAgen implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_ATENCION_AGEN")
     private Integer idAtencionAgen;
-    @Column(name = "FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
-    @Column(name = "HORA")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date hora;
     @Column(name = "OBSERVACIONES")
     private String observaciones;
-    @JoinColumn(name = "ID_ESTADO_ATENCION", referencedColumnName = "ID_ESTADO_ATENCION")
+    @Column(name = "FECHOR")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechor;
+    @JoinColumn(name = "ID_ESTADO_ATEN", referencedColumnName = "ID_ESTADO_ATEN")
     @ManyToOne
-    private EstadoAten idEstadoAtencion;
+    private EstadoAten idEstadoAten;
     @JoinColumn(name = "ID_PACIENTE", referencedColumnName = "ID_PACIENTE")
     @ManyToOne
     private Paciente idPaciente;
@@ -66,7 +62,7 @@ public class AtencionAgen implements Serializable {
     @JoinColumn(name = "ID_PRESTACION", referencedColumnName = "ID_PRESTACION")
     @ManyToOne
     private Prestacion idPrestacion;
-    @OneToMany(mappedBy = "idAtencionAgendada")
+    @OneToMany(mappedBy = "idAtencionAgen")
     private Collection<ResAtencion> resAtencionCollection;
 
     public AtencionAgen() {
@@ -84,22 +80,6 @@ public class AtencionAgen implements Serializable {
         this.idAtencionAgen = idAtencionAgen;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public Date getHora() {
-        return hora;
-    }
-
-    public void setHora(Date hora) {
-        this.hora = hora;
-    }
-
     public String getObservaciones() {
         return observaciones;
     }
@@ -108,12 +88,20 @@ public class AtencionAgen implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public EstadoAten getIdEstadoAtencion() {
-        return idEstadoAtencion;
+    public Date getFechor() {
+        return fechor;
     }
 
-    public void setIdEstadoAtencion(EstadoAten idEstadoAtencion) {
-        this.idEstadoAtencion = idEstadoAtencion;
+    public void setFechor(Date fechor) {
+        this.fechor = fechor;
+    }
+
+    public EstadoAten getIdEstadoAten() {
+        return idEstadoAten;
+    }
+
+    public void setIdEstadoAten(EstadoAten idEstadoAten) {
+        this.idEstadoAten = idEstadoAten;
     }
 
     public Paciente getIdPaciente() {

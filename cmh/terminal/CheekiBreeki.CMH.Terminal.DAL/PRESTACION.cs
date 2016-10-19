@@ -21,7 +21,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         }
     
         public int ID_PRESTACION { get; set; }
-        public Nullable<int> NOM_PRESTACION { get; set; }
+        public string NOM_PRESTACION { get; set; }
         public Nullable<int> PRECIO_PRESTACION { get; set; }
         public string CODIGO_PRESTACION { get; set; }
         public Nullable<int> ID_ESPECIALIDAD { get; set; }
