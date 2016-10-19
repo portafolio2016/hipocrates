@@ -224,7 +224,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 if (Util.isObjetoNulo(funcionario))
                 {
                     throw new Exception("Funcionario nulo");
-                }/*
+                }
                 else if (funcionario.ID_CARGO_FUNCI == null ||
                          funcionario.ID_CARGO_FUNCI == 0 ||
                          funcionario.ID_PERSONAL == null ||

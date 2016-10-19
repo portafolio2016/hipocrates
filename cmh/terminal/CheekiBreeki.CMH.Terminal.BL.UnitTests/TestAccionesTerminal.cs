@@ -593,7 +593,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean res1 = at.nuevoFuncionario(funcionario1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
-            /*
+            
             // Caso 2: Funcionario nulo
             FUNCIONARIO funcionario2 = new FUNCIONARIO();
 
@@ -619,7 +619,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean res4 = at.nuevoFuncionario(funcionario4);
             Boolean resultadoEsperado4 = false;
             Assert.AreEqual(res4, resultadoEsperado4);
-             * */
         }
 
         [TestMethod]
