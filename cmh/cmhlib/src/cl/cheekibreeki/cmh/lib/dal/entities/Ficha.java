@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "FICHA")
@@ -47,11 +47,11 @@ public class Ficha implements Serializable {
     private Date fecNac;
     @Column(name = "SEXO")
     private Character sexo;
+    @OneToMany(mappedBy = "idFicha")
+    private Collection<EntradaFicha> entradaFichaCollection;
     @JoinColumn(name = "ID_PACIENTE", referencedColumnName = "ID_PACIENTE")
     @ManyToOne
     private Paciente idPaciente;
-    @OneToMany(mappedBy = "idFicha")
-    private Collection<EntradaFicha> entradaFichaCollection;
 
     public Ficha() {
     }
@@ -84,14 +84,6 @@ public class Ficha implements Serializable {
         this.sexo = sexo;
     }
 
-    public Paciente getIdPaciente() {
-        return idPaciente;
-    }
-
-    public void setIdPaciente(Paciente idPaciente) {
-        this.idPaciente = idPaciente;
-    }
-
     @XmlTransient
     public Collection<EntradaFicha> getEntradaFichaCollection() {
         return entradaFichaCollection;
@@ -99,6 +91,14 @@ public class Ficha implements Serializable {
 
     public void setEntradaFichaCollection(Collection<EntradaFicha> entradaFichaCollection) {
         this.entradaFichaCollection = entradaFichaCollection;
+    }
+
+    public Paciente getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(Paciente idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     @Override

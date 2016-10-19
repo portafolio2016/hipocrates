@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "PERSONAL")
@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Personal.findByHashedPass", query = "SELECT p FROM Personal p WHERE p.hashedPass = :hashedPass"),
     @NamedQuery(name = "Personal.findByPorcentDescuento", query = "SELECT p FROM Personal p WHERE p.porcentDescuento = :porcentDescuento"),
     @NamedQuery(name = "Personal.findByRut", query = "SELECT p FROM Personal p WHERE p.rut = :rut"),
-    @NamedQuery(name = "Personal.findByVerificador", query = "SELECT p FROM Personal p WHERE p.verificador = :verificador")})
+    @NamedQuery(name = "Personal.findByVerificador", query = "SELECT p FROM Personal p WHERE p.verificador = :verificador"),
+    @NamedQuery(name = "Personal.findByEmail", query = "SELECT p FROM Personal p WHERE p.email = :email")})
 public class Personal implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,9 +55,11 @@ public class Personal implements Serializable {
     private Short porcentDescuento;
     @Basic(optional = false)
     @Column(name = "RUT")
-    private String rut;
+    private int rut;
     @Column(name = "VERIFICADOR")
     private Character verificador;
+    @Column(name = "EMAIL")
+    private String email;
     @OneToMany(mappedBy = "idPersonal")
     private Collection<PersMedico> persMedicoCollection;
     @OneToMany(mappedBy = "idPersonal")
@@ -69,7 +72,7 @@ public class Personal implements Serializable {
         this.idPersonal = idPersonal;
     }
 
-    public Personal(Integer idPersonal, String rut) {
+    public Personal(Integer idPersonal, int rut) {
         this.idPersonal = idPersonal;
         this.rut = rut;
     }
@@ -122,11 +125,11 @@ public class Personal implements Serializable {
         this.porcentDescuento = porcentDescuento;
     }
 
-    public String getRut() {
+    public int getRut() {
         return rut;
     }
 
-    public void setRut(String rut) {
+    public void setRut(int rut) {
         this.rut = rut;
     }
 
@@ -136,6 +139,14 @@ public class Personal implements Serializable {
 
     public void setVerificador(Character verificador) {
         this.verificador = verificador;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @XmlTransient

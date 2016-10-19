@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CheekiBreeki.CMH.Terminal.DAL;
-using System.Collections.Generic;
 namespace CheekiBreeki.CMH.Terminal.BL
 {
     public class AccionesTerminal

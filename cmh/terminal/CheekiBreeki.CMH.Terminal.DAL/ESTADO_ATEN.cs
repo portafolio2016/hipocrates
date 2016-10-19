@@ -19,7 +19,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
             this.ATENCION_AGEN = new HashSet<ATENCION_AGEN>();
         }
     
-        public int ID_ESTADO_ATENCION { get; set; }
+        public int ID_ESTADO_ATEN { get; set; }
         public string NOM_ESTADO_ATEN { get; set; }
     
         public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN { get; set; }

@@ -64,6 +64,9 @@
     <Compile Include="ATENCION_AGEN.cs">
       <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="BANCO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BONO.cs">
       <DependentUpon>CMHModelo.tt</DependentUpon>
     </Compile>
@@ -87,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CMHModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="CUEN_BANCARIA.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DEVOLUCION.cs">
       <DependentUpon>CMHModelo.tt</DependentUpon>
@@ -136,6 +142,9 @@
     </Compile>
     <Compile Include="RES_ATENCION.cs">
       <DependentUpon>CMHModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TIPO_C_BANCARIA.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TIPO_EQUIPO.cs">
       <DependentUpon>CMHModelo.tt</DependentUpon>

@@ -26,8 +26,9 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public Nullable<int> REMUNERACION { get; set; }
         public string HASHED_PASS { get; set; }
         public Nullable<byte> PORCENT_DESCUENTO { get; set; }
-        public string RUT { get; set; }
+        public int RUT { get; set; }
         public string VERIFICADOR { get; set; }
+        public string EMAIL { get; set; }
     
         public virtual ICollection<FUNCIONARIO> FUNCIONARIO { get; set; }
         public virtual ICollection<PERS_MEDICO> PERS_MEDICO { get; set; }
