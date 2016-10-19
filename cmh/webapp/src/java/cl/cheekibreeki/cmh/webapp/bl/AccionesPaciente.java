@@ -32,17 +32,31 @@ public class AccionesPaciente {
         return result;
     }
     
+     /**
+     * Método que entrega los examenes de un paciente
+     * @param paciente El paciente a quien pertenecen los examenes
+     * @return Un ArrayList con todos los examenes del paciente
+     */
     public ArrayList<ResAtencion> obtenerExamenes(Paciente paciente){
-        Map<String, Object> params = null;
+        Map<String, Object> params = new HashMap<>();
+        params.put("idPaciente", 1);
         Controller ctr = new Controller();
         List<? extends Object>  atencion = ctr.findByQuery("AtencionAgen.findByIdPaciente", params);
-        //ArrayList<ResAtencion> result = Controller.findByQuery("ResAtencion.findBy", Integer.SIZE);
-        return null;
+        ArrayList<ResAtencion> resAtencion = new ArrayList<>();
+        for(Object  x : atencion){
+            Map<String, Object> paramsAux = new HashMap<>();
+            AtencionAgen atencionAux = (AtencionAgen)x;
+            paramsAux.put("idAtencionAgen", atencionAux.getIdAtencionAgen());
+            List<? extends Object>  resultado = ctr.findByQuery("ResAtencion.findByIdAtencionAgen", paramsAux);
+            for(Object  y : resultado){
+                resAtencion.add((ResAtencion)y);
+            }
+        }
+        return resAtencion;
     }
     
      /**
      * Método que devuelve un ArrayList con las prestaciones 
-     * @param dia El dia de la prestacion
      * @param prestacion La prestacion 
      * @return Si es true el paciente fue registrado
      */

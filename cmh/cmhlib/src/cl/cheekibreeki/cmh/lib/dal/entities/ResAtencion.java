@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ResAtencion.findAll", query = "SELECT r FROM ResAtencion r"),
     @NamedQuery(name = "ResAtencion.findByIdResultadoAtencion", query = "SELECT r FROM ResAtencion r WHERE r.idResultadoAtencion = :idResultadoAtencion"),
     @NamedQuery(name = "ResAtencion.findByAtencionAbierta", query = "SELECT r FROM ResAtencion r WHERE r.atencionAbierta = :atencionAbierta"),
-    @NamedQuery(name = "ResAtencion.findByComentario", query = "SELECT r FROM ResAtencion r WHERE r.comentario = :comentario")})
+    @NamedQuery(name = "ResAtencion.findByComentario", query = "SELECT r FROM ResAtencion r WHERE r.comentario = :comentario"),
+    @NamedQuery(name = "ResAtencion.findByIdAtencionAgen", query = "SELECT r FROM ResAtencion r WHERE r.idAtencionAgen = :idAtencionAgen")})
 public class ResAtencion implements Serializable {
 
     private static final long serialVersionUID = 1L;
