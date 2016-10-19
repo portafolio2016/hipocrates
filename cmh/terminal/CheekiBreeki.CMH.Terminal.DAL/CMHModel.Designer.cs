@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 ﻿// T4 code generation is enabled for model 'C:\Portafolio\Repo\hipocrates\cmh\terminal\CheekiBreeki.CMH.Terminal.DAL\CMHModel.edmx'. 
-=======
-﻿// T4 code generation is enabled for model 'C:\Users\dev\Documents\GitHub\hipocrates\cmh\terminal\CheekiBreeki.CMH.Terminal.DAL\CMHModel.edmx'. 
->>>>>>> refs/remotes/origin/dev
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -199,6 +199,8 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             personal1.REMUNERACION = 850000;
             personal1.PORCENT_DESCUENTO = 7;
             personal1.HASHED_PASS = "4231";
+            personal1.RUT = 12345678;
+            personal1.VERIFICADOR = "K";
 
             Boolean res1 = at.nuevoPersonal(personal1);
             Boolean resultadoEsperado1 = true;
@@ -223,6 +225,35 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean res3 = at.nuevoPersonal(personal3);
             Boolean resultadoEsperado3 = false;
             Assert.AreEqual(res3, resultadoEsperado3);
+
+            // Caso 4: RUT vacío
+            PERSONAL personal4 = new PERSONAL();
+
+            personal4.NOMBRES = "Moka";
+            personal4.APELLIDOS = "Akashiya";
+            personal4.REMUNERACION = 850000;
+            personal4.PORCENT_DESCUENTO = 7;
+            personal4.HASHED_PASS = "4231";
+            personal4.VERIFICADOR = string.Empty;
+
+            Boolean res4 = at.nuevoPersonal(personal4);
+            Boolean resultadoEsperado4 = false;
+            Assert.AreEqual(res4, resultadoEsperado4);
+
+            // Caso 5: RUT repetido
+            PERSONAL personal5 = new PERSONAL();
+
+            personal5.NOMBRES = "Moka";
+            personal5.APELLIDOS = "Akashiya";
+            personal5.REMUNERACION = 850000;
+            personal5.PORCENT_DESCUENTO = 7;
+            personal5.HASHED_PASS = "4231";
+            personal5.RUT = 12345678;
+            personal5.VERIFICADOR = "K";
+
+            Boolean res5 = at.nuevoPersonal(personal5);
+            Boolean resultadoEsperado5 = false;
+            Assert.AreEqual(res5, resultadoEsperado5);
         }
 
         [TestMethod]
@@ -231,14 +262,16 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             AccionesTerminal at = new AccionesTerminal();
 
             // Caso 1: Personal existente
-            int id1 = 1;
-            PERSONAL res1 = at.buscarPersonal(id1);
+            int rut1 = 12345678;
+            string dv1 = "K";
+            PERSONAL res1 = at.buscarPersonal(rut1, dv1);
             Object resultadoNoEsperado1 = null;
             Assert.AreNotEqual(res1, resultadoNoEsperado1);
 
             // Caso 2: Personal no existente
-            int id2 = 0;
-            PERSONAL res2 = at.buscarPersonal(id2);
+            int rut2 = 999999;
+            string dv2 = "K";
+            PERSONAL res2 = at.buscarPersonal(rut2, dv2);
             Object resultadoEsperado2 = null;
             Assert.AreEqual(res2, resultadoEsperado2);
         }
@@ -248,8 +281,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Personal correcto
-            int id = 1;
-            PERSONAL personal1 = at.buscarPersonal(id);
+            int rut1 = 12345678;
+            string dv1 = "K";
+            PERSONAL personal1 = at.buscarPersonal(rut1, dv1);
 
             personal1.NOMBRES = "Mizore";
             personal1.APELLIDOS = "Shirayuki";
@@ -269,7 +303,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Assert.AreEqual(res2, resultadoEsperado2);
 
             // Caso 3: Nombre o apellido nulo
-            PERSONAL personal3 = at.buscarPersonal(id);
+            PERSONAL personal3 = at.buscarPersonal(rut1, dv1);
 
             personal3.NOMBRES = null;
             personal3.APELLIDOS = "";
@@ -286,15 +320,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void borrarPersonalTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-            int id = 2;
-            Object res1 = at.buscarPersonal(1);
+            int rut1 = 12345678;
+            string dv1 = "K";
+            PERSONAL personal1 = at.buscarPersonal(rut1, dv1);
 
             // Caso 1: Personal no existe
-            if (Util.isObjetoNulo(res1))
+            if (Util.isObjetoNulo(personal1))
                 Assert.Fail("Paciente no existe");
 
             // Caso 2: Personal existe
-            PERSONAL personal1 = (PERSONAL)res1;
             at.borrarPersonal(personal1);
             Object resultadoEsperado1 = null;
             Assert.AreEqual(at.buscarPersonal(1), resultadoEsperado1);
@@ -312,7 +346,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             prestacion1.NOM_PRESTACION = "Prestación test";
             prestacion1.PRECIO_PRESTACION = 100;
             prestacion1.CODIGO_PRESTACION = "PR01";
-            prestacion1.ID_TIPO_PRESTACION = 2;
+            prestacion1.ID_TIPO_PRESTACION = 1;
 
             Boolean res1 = at.nuevaPrestacionMedica(prestacion1);
             Boolean resultadoEsperado1 = true;
@@ -323,7 +357,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             prestacion2.NOM_PRESTACION = null;
             prestacion2.PRECIO_PRESTACION = 100;
             prestacion2.CODIGO_PRESTACION = "PR01";
-            prestacion2.ID_TIPO_PRESTACION = 2;
+            prestacion2.ID_TIPO_PRESTACION = 1;
 
             Boolean res2 = at.nuevaPrestacionMedica(prestacion2);
             Boolean resultadoEsperado2 = false;
@@ -333,7 +367,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             PRESTACION prestacion3 = new PRESTACION();
             prestacion3.NOM_PRESTACION = "Prestación test";
             prestacion3.PRECIO_PRESTACION = 100;
-            prestacion3.ID_TIPO_PRESTACION = 2;
+            prestacion3.ID_TIPO_PRESTACION = 1;
 
             Boolean res3 = at.nuevaPrestacionMedica(prestacion3);
             Boolean resultadoEsperado3 = false;
@@ -354,7 +388,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             prestacion5.NOM_PRESTACION = "Prestación test";
             prestacion5.PRECIO_PRESTACION = 100;
             prestacion5.CODIGO_PRESTACION = "PR01";
-            prestacion5.ID_TIPO_PRESTACION = 2;
+            prestacion5.ID_TIPO_PRESTACION = 1;
 
             Boolean res5 = at.nuevaPrestacionMedica(prestacion5);
             Boolean resultadoEsperado5 = false;
@@ -396,8 +430,8 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
             prestacion1.NOM_PRESTACION = "Prestación actualizada";
             prestacion1.PRECIO_PRESTACION = 200;
-            prestacion1.CODIGO_PRESTACION = "PR02";
-            prestacion1.ID_TIPO_PRESTACION = 2;
+            prestacion1.CODIGO_PRESTACION = "PR01";
+            prestacion1.ID_TIPO_PRESTACION = 1;
 
             Boolean res1 = at.actualizarPrestacionesMedicas(prestacion1);
             Boolean resultadoEsperado1 = true;
@@ -405,10 +439,10 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
             // Caso 2: Nombre vacío
             PRESTACION prestacion2 = at.buscarPrestacionMedica(codigo);
-            prestacion2.NOM_PRESTACION = null;
+            prestacion2.NOM_PRESTACION = string.Empty;
             prestacion2.PRECIO_PRESTACION = 100;
             prestacion2.CODIGO_PRESTACION = "PR01";
-            prestacion2.ID_TIPO_PRESTACION = 2;
+            prestacion2.ID_TIPO_PRESTACION = 1;
 
             Boolean res2 = at.actualizarPrestacionesMedicas(prestacion2);
             Boolean resultadoEsperado2 = false;
@@ -417,8 +451,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 3: Código vacío
             PRESTACION prestacion3 = at.buscarPrestacionMedica(codigo);
             prestacion3.NOM_PRESTACION = "Prestación test";
-            prestacion3.PRECIO_PRESTACION = 100;
-            prestacion3.ID_TIPO_PRESTACION = 2;
+            prestacion3.PRECIO_PRESTACION = 300;
+            prestacion3.ID_TIPO_PRESTACION = 1;
+            prestacion3.CODIGO_PRESTACION = null;
 
             Boolean res3 = at.actualizarPrestacionesMedicas(prestacion3);
             Boolean resultadoEsperado3 = false;
@@ -429,6 +464,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             prestacion4.NOM_PRESTACION = "Prestación test";
             prestacion4.PRECIO_PRESTACION = 100;
             prestacion4.CODIGO_PRESTACION = "PR01";
+            prestacion4.ID_TIPO_PRESTACION = null;
 
             Boolean res4 = at.actualizarPrestacionesMedicas(prestacion4);
             Boolean resultadoEsperado4 = false;

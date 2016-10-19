@@ -1713,7 +1713,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BANCO">
-            <EntityTypeMapping TypeName="CMHModel.BANCO">
+            <EntityTypeMapping TypeName="Model.BANCO">
               <MappingFragment StoreEntitySet="BANCO">
                 <ScalarProperty Name="ID_BANCO" ColumnName="ID_BANCO" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1749,7 +1749,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CUEN_BANCARIA">
-            <EntityTypeMapping TypeName="CMHModel.CUEN_BANCARIA">
+            <EntityTypeMapping TypeName="Model.CUEN_BANCARIA">
               <MappingFragment StoreEntitySet="CUEN_BANCARIA">
                 <ScalarProperty Name="ID_CUEN_BANCARIA" ColumnName="ID_CUEN_BANCARIA" />
                 <ScalarProperty Name="ID_PERS_MEDICO" ColumnName="ID_PERS_MEDICO" />
@@ -1924,7 +1924,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TIPO_C_BANCARIA">
-            <EntityTypeMapping TypeName="CMHModel.TIPO_C_BANCARIA">
+            <EntityTypeMapping TypeName="Model.TIPO_C_BANCARIA">
               <MappingFragment StoreEntitySet="TIPO_C_BANCARIA">
                 <ScalarProperty Name="ID_TIPO_C_BANCARIA" ColumnName="ID_TIPO_C_BANCARIA" />
                 <ScalarProperty Name="NOM_C_BANCARIA" ColumnName="NOM_C_BANCARIA" />

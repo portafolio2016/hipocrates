@@ -189,6 +189,14 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Nombre o apellido vacío");
                 }
+                else if (personal.RUT == null || personal.RUT == 0)
+                {
+                    throw new Exception("RUT vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarPersonal(personal.RUT, personal.VERIFICADOR)))
+                {
+                    throw new Exception("Personal ya ingresado");
+                }
                 else
                 {
                     conexionDB.PERSONAL.Add(personal);
@@ -203,18 +211,20 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
-        public PERSONAL buscarPersonal(int id)
+        public PERSONAL buscarPersonal(int rut, string dv)
         {
             try
             {
-                if (Util.isObjetoNulo(id))
+                if (Util.isObjetoNulo(rut) || Util.isObjetoNulo(dv))
                 {
-                    throw new Exception("ID verificador nulo");
+                    throw new Exception("RUT o dígito verificador nulo");
                 }
                 else
                 {
                     PERSONAL personal = null;
-                    personal = conexionDB.PERSONAL.Find(id);
+                    personal = conexionDB.PERSONAL.Where(d => d.RUT == rut
+                                                         && d.VERIFICADOR == dv)
+                                                         .FirstOrDefault();
                     if (Util.isObjetoNulo(personal))
                     {
                         throw new Exception("Personal no existe");
@@ -296,7 +306,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Nombre, código o precio vacío");
                 }
-                else if (prestacion.CODIGO_PRESTACION == null || prestacion.CODIGO_PRESTACION == "")
+                else if (prestacion.CODIGO_PRESTACION == null || 
+                         prestacion.CODIGO_PRESTACION == string.Empty || 
+                         Util.isObjetoNulo(prestacion.CODIGO_PRESTACION))
                 {
                     throw new Exception("Código vacío");
                 }
