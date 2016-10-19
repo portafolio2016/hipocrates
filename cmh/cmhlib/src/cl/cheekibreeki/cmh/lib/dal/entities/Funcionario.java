@@ -40,10 +40,10 @@ public class Funcionario implements Serializable {
     @OneToMany(mappedBy = "idFuncionario")
     private Collection<Caja> cajaCollection;
     @JoinColumn(name = "ID_CARGO_FUNCI", referencedColumnName = "ID_CARGO_FUNCI")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Cargo idCargoFunci;
     @JoinColumn(name = "ID_PERSONAL", referencedColumnName = "ID_PERSONAL")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Personal idPersonal;
 
     public Funcionario() {

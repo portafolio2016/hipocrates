@@ -8,6 +8,7 @@ package cl.cheekibreeki.cmh.lib.dal.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -38,7 +39,7 @@ public class Cargo implements Serializable {
     private Integer idCargoFunci;
     @Column(name = "NOMBRE_CARGO")
     private String nombreCargo;
-    @OneToMany(mappedBy = "idCargoFunci")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCargoFunci")
     private Collection<Funcionario> funcionarioCollection;
 
     public Cargo() {

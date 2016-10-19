@@ -8,6 +8,7 @@ package cl.cheekibreeki.cmh.lib.dal.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -63,7 +64,7 @@ public class Personal implements Serializable {
     private String email;
     @OneToMany(mappedBy = "idPersonal")
     private Collection<PersMedico> persMedicoCollection;
-    @OneToMany(mappedBy = "idPersonal")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonal")
     private Collection<Funcionario> funcionarioCollection;
 
     public Personal() {
