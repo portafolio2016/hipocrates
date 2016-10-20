@@ -332,7 +332,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
             // Caso 1: Personal no existe
             if (Util.isObjetoNulo(personal1))
-                Assert.Fail("Paciente no existe");
+                Assert.Fail("Personal no existe");
 
             // Caso 2: Personal existe
             at.borrarPersonal(personal1);
@@ -557,6 +557,27 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         }
 
         [TestMethod]
+        public void actualizarEquipoCantidadTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Equipo correcto
+            string nombre1 = "Test equipo";
+            int cantidad1 = 10;
+            Boolean res1 = at.actualizarEquipoCantidad(nombre1, cantidad1);
+
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+
+            // Caso 2: Equipo no existente
+            string nombre2 = "Test equipo no existente";
+            int cantidad2 = 10;
+
+            Boolean res2 = at.actualizarEquipoCantidad(nombre2, cantidad2);
+            Object resultadoEsperado2 = false;
+            Assert.AreEqual(res2, resultadoEsperado2);
+        }
+
+        [TestMethod]
         public void borrarEquipoTest()
         {
             AccionesTerminal at = new AccionesTerminal();
@@ -683,7 +704,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
             FUNCIONARIO funcionario1 = at.buscarFuncionario(cargo1, personal1);
             if (Util.isObjetoNulo(funcionario1))
-                Assert.Fail("Equipo no existe");
+                Assert.Fail("Funcionario no existe");
 
             at.borrarFuncionario(funcionario1);
             Object resultadoEsperado1 = null;
