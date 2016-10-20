@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>EASendMail</id>
+    <version>7.3.0.6</version>
+    <title>EASendMail</title>
+    <authors>AdminSystem Software Limited</authors>
+    <owners>AdminSystem Software Limited</owners>
+    <licenseUrl>https://www.emailarchitect.net/easendmail/license.aspx</licenseUrl>
+    <projectUrl>https://www.emailarchitect.net/easendmail/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Send email in C#, VB, ASP.NET, Managed C++ or other .NET environment applications with SMTP component based on SMTP RFC, Exchange Web Service and WebDav. SSL, S/MIME, HTML, Gmail OAUTH and Embedded Images are supported.</description>
+    <summary />
+    <copyright>AdminSystem Software Limited</copyright>
+  </metadata>
+</package>
