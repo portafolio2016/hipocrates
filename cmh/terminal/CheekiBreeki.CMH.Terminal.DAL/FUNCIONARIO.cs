@@ -20,8 +20,8 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         }
     
         public int ID_FUNCIONARIO { get; set; }
-        public Nullable<int> ID_CARGO_FUNCI { get; set; }
-        public Nullable<int> ID_PERSONAL { get; set; }
+        public int ID_CARGO_FUNCI { get; set; }
+        public int ID_PERSONAL { get; set; }
     
         public virtual ICollection<CAJA> CAJA { get; set; }
         public virtual CARGO CARGO { get; set; }

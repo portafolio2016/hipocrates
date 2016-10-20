@@ -1,0 +1,3 @@
+DROP USER devseguro CASCADE;
+CREATE USER devseguro IDENTIFIED BY devseguro;
+GRANT CONNECT, RESOURCE TO devseguro;

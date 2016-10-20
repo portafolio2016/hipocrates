@@ -20,7 +20,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         }
     
         public int ID_PAGO { get; set; }
-        public Nullable<System.DateTime> HORA_PAGO { get; set; }
+        public Nullable<System.DateTime> FECHOR { get; set; }
         public Nullable<int> ID_BONO { get; set; }
         public Nullable<int> ID_CAJA { get; set; }
         public Nullable<int> ID_DEVOLUCION { get; set; }
