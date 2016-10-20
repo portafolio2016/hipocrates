@@ -1,0 +1,7 @@
+c:\users\fjaqu\documents\visual studio 2013\Projects\TestMail\TestMail\bin\Debug\TestMail.exe.config
+c:\users\fjaqu\documents\visual studio 2013\Projects\TestMail\TestMail\bin\Debug\TestMail.exe
+c:\users\fjaqu\documents\visual studio 2013\Projects\TestMail\TestMail\bin\Debug\TestMail.pdb
+c:\users\fjaqu\documents\visual studio 2013\Projects\TestMail\TestMail\obj\Debug\TestMail.csprojResolveAssemblyReference.cache
+c:\users\fjaqu\documents\visual studio 2013\Projects\TestMail\TestMail\obj\Debug\TestMail.exe
+c:\users\fjaqu\documents\visual studio 2013\Projects\TestMail\TestMail\obj\Debug\TestMail.pdb
+c:\users\fjaqu\documents\visual studio 2013\Projects\TestMail\TestMail\bin\Debug\EASendMail45.dll
