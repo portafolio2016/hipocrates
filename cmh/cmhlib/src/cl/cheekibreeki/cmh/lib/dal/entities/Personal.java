@@ -8,6 +8,7 @@ package cl.cheekibreeki.cmh.lib.dal.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -56,13 +57,14 @@ public class Personal implements Serializable {
     @Basic(optional = false)
     @Column(name = "RUT")
     private int rut;
+    @Basic(optional = false)
     @Column(name = "VERIFICADOR")
     private Character verificador;
     @Column(name = "EMAIL")
     private String email;
     @OneToMany(mappedBy = "idPersonal")
     private Collection<PersMedico> persMedicoCollection;
-    @OneToMany(mappedBy = "idPersonal")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonal")
     private Collection<Funcionario> funcionarioCollection;
 
     public Personal() {
@@ -72,9 +74,10 @@ public class Personal implements Serializable {
         this.idPersonal = idPersonal;
     }
 
-    public Personal(Integer idPersonal, int rut) {
+    public Personal(Integer idPersonal, int rut, Character verificador) {
         this.idPersonal = idPersonal;
         this.rut = rut;
+        this.verificador = verificador;
     }
 
     public Integer getIdPersonal() {
