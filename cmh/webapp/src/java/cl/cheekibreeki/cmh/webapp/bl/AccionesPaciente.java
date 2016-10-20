@@ -29,8 +29,8 @@ public class AccionesPaciente {
      */
     public boolean registrarPaciente(Paciente paciente){
          Object obj = paciente;
-        boolean result = Controller.upsert(obj);
-        return result;
+         boolean result = Controller.upsert(obj);
+         return result;
     }
     
      /**

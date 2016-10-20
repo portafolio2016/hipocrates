@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cl.cheekibreeki.cmh.webapp.bl;
 
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
@@ -32,12 +27,12 @@ public class AccionesPacienteTest {
     
     public AccionesPacienteTest() {
         paciente = new Paciente();
-        paciente.setNombresPaciente("Pablo");
-        paciente.setApellidosPaciente("de la Sotta");
-        paciente.setRut(18766326);
+        paciente.setNombresPaciente("Tomas");
+        paciente.setApellidosPaciente("Muniz Quiroz");
+        paciente.setRut(18766322);
         paciente.setDigitoVerificador('1');
         paciente.setHashedPass("holamundo");
-        paciente.setEmailPaciente("pablitodelasotita@peladordenaranjas.com");
+        paciente.setEmailPaciente("tomasmuniz@peladordenaranjas.com");
     }
     
     @BeforeClass

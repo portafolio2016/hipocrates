@@ -57,13 +57,13 @@ public class ControllerTest {
      */
     @Test
     public void testUpsert() {
-        System.out.println("upsert");
-        Object obj = this.paciente;
-        boolean expResult = true;
-        boolean result = Controller.upsert(obj);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        System.out.println("upsert exitoso");
+         System.out.println("upsert");
+         Object obj = this.paciente;
+         boolean expResult = true;
+         boolean result = Controller.upsert(obj);
+         assertEquals(expResult, result);
+         // TODO review the generated test code and remove the default call to fail.
+         System.out.println("upsert exitoso");
     }
 
     /**
@@ -71,21 +71,21 @@ public class ControllerTest {
      */
     @Test
     public void testFindById() {
-        System.out.println("findById");
-        Class clazz = Paciente.class;
-        Integer id = 1;
-        String expResult = "Pablo";
-        Object result = Controller.findById(clazz, id);
-        Paciente paciente2 = (Paciente) result;
-        if (result == null) {
-            fail("Retorno null");
-        }
-        if (paciente2.getNombresPaciente().equals(expResult)) {
+         System.out.println("findById");
+         Class clazz = Paciente.class;
+         Integer id = 1;
+         String expResult = "Pablo";
+         Object result = Controller.findById(clazz, id);
+         Paciente paciente2 = (Paciente) result;
+         if (result == null) {
+             fail("Retorno null");
+         }
+         if (paciente2.getNombresPaciente().equals(expResult)) {
 
-        } else {
-            System.out.println(paciente2.getNombresPaciente());
-            fail("Nombres no calzan");
-        }
+         }else {
+             System.out.println(paciente2.getNombresPaciente());
+             fail("Nombres no calzan");
+         }
     }
 
     /**
