@@ -19,7 +19,7 @@
             <PropertyRef Name="ID_BENEFICIO" />
           </Key>
           <Property Name="ID_BENEFICIO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="PORCENTAJE" Type="number" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="PORCENTAJE" Type="number" Precision="3" Scale="2" Nullable="false" />
           <Property Name="LIMITE_DINERO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PLAN" Type="number" Precision="8" Scale="0" />
         </EntityType>
@@ -163,7 +163,7 @@
             <PropertyRef Name="ID_BENEFICIO" />
           </Key>
           <Property Name="ID_BENEFICIO" Type="Int32" Nullable="false" />
-          <Property Name="PORCENTAJE" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="PORCENTAJE" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
           <Property Name="LIMITE_DINERO" Type="Int32" />
           <Property Name="ID_PLAN" Type="Int32" />
           <NavigationProperty Name="PLAN" Relationship="Self.FK_BENEFICIO_PLAN" FromRole="BENEFICIO" ToRole="PLAN" />
