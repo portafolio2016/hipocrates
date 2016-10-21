@@ -60,23 +60,12 @@ public class AccionesPaciente {
     
      /**
      * Método que devuelve un ArrayList con las horas libres 
-     * @param prestacion Prestacion de la cual se quiere saber las horas disponibles
-     * @param dia Dia de la atencion que se quiere tomar
-     * @return El ArrayList contiene tas atenciones de una prestación
-     */
-    public ArrayList<AtencionAgen> obtenerHorasLibresParaPrestacion(Prestacion prestacion, Date dia){
-        //TODO: implementar
-        return null;
-    }
-    
-     /**
-     * Método que devuelve un ArrayList con las horas libres 
      * @param medico El medico
      * @param dia dia el cual se quiere tomar hora
      * @return El ArrayList contiene tas atenciones de una prestación
      */
     public HorasDisponibles HorasDisponibles(PersMedico medico, Date dia){
-       HorasDisponibles horas = new HorasDisponibles();
+        HorasDisponibles horas = new HorasDisponibles();
         Turno turno =  (Turno)Controller.findById(PersMedico.class, medico.getIdTurno().getIdTurno());
         Map<String, Object> params = new HashMap<>();
         params.put("idPersonalMedico", medico.getIdPersonalMedico());
@@ -96,29 +85,72 @@ public class AccionesPaciente {
             if(noDispo)
                 horas.getHoras().add(ConcatenarHora( turno.getNumhoraIni(), turno.getNumminuIni() ) + turnos*30);
         }
+        
         return horas;
     }
     
+    /**
+     * Método que concatena los dos parametros
+     * @param hora La hora
+     * @param minuto La minuto
+     * @return Lods dos parametros concatenados
+     */
     private int ConcatenarHora(int hora, int minuto){
         int x = hora*100 + minuto;
         return x;
     }
     
-    public ArrayList<HorasDisponibles> obtenerHorasLibresPorDia(ArrayList<AtencionAgen> atenciones, Date dia){
-        //TODO todo
-       return null;
-    }
     
+    /**
+     * Método que agenda una atencion
+     * @param atencion La atencion a registrar
+     * @return Si es true la atencion fue registrada
+     */
     public boolean agendarAtencion(AtencionAgen atencion){
-        //TODO: implementar
-        return false;
+        Object obj = atencion;
+        boolean result = Controller.upsert(obj);
+        return result;
     }
     
+    /**
+     * Método que retorna las atenciones pendientes
+     * @param rut rut del paciente
+     * @return Un ArrayList con todas las atenciones que no tengan respuesta, si es null significa que no fue encontrado el paciente o que no existen atenciones pendientes
+     */
     public ArrayList<AtencionAgen> obtenerAtencionesPendientes(String rut){
-        //TODO: implementar
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("rut", rut);
+        Controller ctr = new Controller();
+        List<? extends Object> pacientes = ctr.findByQuery("Paciente.findByRut", params1);
+        if(pacientes.isEmpty()){
+            return null;
+        }
+        Map<String, Object> params2 = new HashMap<>();
+        params2.put("idPaciente", pacientes.get(0));
+        ArrayList<AtencionAgen> atenciones = (ArrayList<AtencionAgen>)ctr.findByQuery("AtencionAgen.findByIdPaciente", params2);
+        for (AtencionAgen x : atenciones) {
+            if(!x.getResAtencionCollection().isEmpty()){
+                atenciones.remove(x);
+            }
+        }
+        return atenciones;
+    }
+    
+     /** 
+     * Método que develve todo el personal medico que realize la prestación
+     * @param prestacion La prestacion
+     * @return  un ArrayList de personal medico que realiza la prestacion
+     */
+    public ArrayList<PersMedico> obtenerMedicosPorPrestacion(Prestacion prestacion){
+        //TODO todo
         return null;
     }
     
+    /**
+     * Método que anula una atencion agendada
+     * @param atencion atencion agendada
+     * @return  Si es true significa que se pudo anular la atencion
+     */
     public boolean anularAtencion(AtencionAgen atencion){
         //TODO: implementar
         return false;
