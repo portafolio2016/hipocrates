@@ -215,6 +215,18 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             personal1.HASHED_PASS = "4231";
             personal1.RUT = 12345678;
             personal1.VERIFICADOR = "K";
+            CMHEntities entities = new CMHEntities();
+            using (var context = entities)
+            {
+                var pers = from p in entities.PERSONAL
+                           where p.RUT == personal1.RUT
+                           select p;
+                if (pers.Count<PERSONAL>() > 0)
+                {
+                    entities.PERSONAL.Remove(pers.First<PERSONAL>());
+                    entities.SaveChangesAsync();
+                }
+            }
 
             Boolean res1 = at.nuevoPersonal(personal1);
             
@@ -612,14 +624,33 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void nuevoFuncionarioTest()
         {
             AccionesTerminal at = new AccionesTerminal();
+
             // Caso 1: Funcionario correcto
             FUNCIONARIO funcionario1 = new FUNCIONARIO();
             int rutPersonal1 = 12345678;
             string dvPersonal1 = "K";
+            CMHEntities entities = new CMHEntities();
+            using (var context = entities)
+            {
+                var pers = from p in entities.PERSONAL
+                           where p.RUT == rutPersonal1
+                           select p;
+                if(pers.Count<PERSONAL>() == 0)
+                {
+                    PERSONAL personal = new PERSONAL();
+                    personal.RUT = rutPersonal1;
+                    personal.VERIFICADOR = dvPersonal1;
+                    personal.NOMBRES = "Testtest";
+                    personal.APELLIDOS = "Testtest";
+                    entities.PERSONAL.Add(personal);
+                    entities.SaveChangesAsync();
+                }else
+                {
+                    entities.PERSONAL.Remove(pers.First<PERSONAL>());
+                    entities.SaveChangesAsync();
+                }
+            }
             PERSONAL personal1 = at.buscarPersonal(rutPersonal1, dvPersonal1);
-
-            if (Util.isObjetoNulo(personal1))
-                Assert.Fail("Personal no existe");
 
             funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
             funcionario1.ID_CARGO_FUNCI = 1;
