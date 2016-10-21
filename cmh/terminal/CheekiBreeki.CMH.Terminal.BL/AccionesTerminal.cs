@@ -393,7 +393,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Cargo o personal no vacío");
                 }
-                else if (!Util.isObjetoNulo(conexionDB.CARGO.Find(funcionario.ID_CARGO_FUNCI)))
+                else if (Util.isObjetoNulo(conexionDB.CARGO.Find(funcionario.ID_CARGO_FUNCI)))
                 {
                     throw new Exception("Cargo no existe");
                 }
