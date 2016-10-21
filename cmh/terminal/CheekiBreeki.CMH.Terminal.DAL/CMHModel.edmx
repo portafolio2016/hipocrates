@@ -130,8 +130,8 @@
             <PropertyRef Name="ID_FUNCIONARIO" />
           </Key>
           <Property Name="ID_FUNCIONARIO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="ID_CARGO_FUNCI" Type="number" Precision="8" Scale="0" />
-          <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_CARGO_FUNCI" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="INVENTARIO">
           <Key>
@@ -156,17 +156,17 @@
           <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="NOMBRES_PACIENTE" Type="varchar2" MaxLength="64" />
           <Property Name="APELLIDOS_PACIENTE" Type="varchar2" MaxLength="64" />
-          <Property Name="RUT" Type="number" Precision="9" Scale="0" />
+          <Property Name="RUT" Type="number" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="DIGITO_VERIFICADOR" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="HASHED_PASS" Type="varchar2" MaxLength="1080" />
           <Property Name="EMAIL_PACIENTE" Type="varchar2" MaxLength="512" />
-          <Property Name="DIGITO_VERIFICADOR" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="PAGO">
           <Key>
             <PropertyRef Name="ID_PAGO" />
           </Key>
           <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="HORA_PAGO" Type="date" />
+          <Property Name="FECHOR" Type="date" />
           <Property Name="ID_BONO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_CAJA" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_DEVOLUCION" Type="number" Precision="8" Scale="0" />
@@ -189,10 +189,10 @@
           <Property Name="NOMBRES" Type="varchar2" MaxLength="64" />
           <Property Name="APELLIDOS" Type="varchar2" MaxLength="64" />
           <Property Name="REMUNERACION" Type="number" Precision="8" Scale="0" />
-          <Property Name="HASHED_PASS" Type="varchar2" MaxLength="512" />
+          <Property Name="HASHED_PASS" Type="varchar2" MaxLength="1080" />
           <Property Name="PORCENT_DESCUENTO" Type="number" Precision="3" Scale="0" />
-          <Property Name="RUT" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="VERIFICADOR" Type="char" MaxLength="1" />
+          <Property Name="RUT" Type="number" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="VERIFICADOR" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="EMAIL" Type="varchar2" MaxLength="512" />
         </EntityType>
         <EntityType Name="PRESTACION">
@@ -327,7 +327,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CARGO_FUNCIONARIO">
-          <End Role="CARGO" Type="Self.CARGO" Multiplicity="0..1">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -565,7 +565,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PERSONAL_FUNCIONARIO">
-          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="0..1">
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -964,8 +964,8 @@
             <PropertyRef Name="ID_FUNCIONARIO" />
           </Key>
           <Property Name="ID_FUNCIONARIO" Type="Int32" Nullable="false" />
-          <Property Name="ID_CARGO_FUNCI" Type="Int32" />
-          <Property Name="ID_PERSONAL" Type="Int32" />
+          <Property Name="ID_CARGO_FUNCI" Type="Int32" Nullable="false" />
+          <Property Name="ID_PERSONAL" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CAJA" Relationship="Self.FK_FUNCIONARIO_CAJA" FromRole="FUNCIONARIO" ToRole="CAJA" />
           <NavigationProperty Name="CARGO" Relationship="Self.FK_CARGO_FUNCIONARIO" FromRole="FUNCIONARIO" ToRole="CARGO" />
           <NavigationProperty Name="PERSONAL" Relationship="Self.FK_PERSONAL_FUNCIONARIO" FromRole="FUNCIONARIO" ToRole="PERSONAL" />
@@ -995,10 +995,10 @@
           <Property Name="ID_PACIENTE" Type="Int32" Nullable="false" />
           <Property Name="NOMBRES_PACIENTE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="APELLIDOS_PACIENTE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="RUT" Type="Int32" />
+          <Property Name="RUT" Type="Int32" Nullable="false" />
+          <Property Name="DIGITO_VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="HASHED_PASS" Type="String" MaxLength="1080" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL_PACIENTE" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="DIGITO_VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_PACIENTE_ATENCION_AGEN" FromRole="PACIENTE" ToRole="ATENCION_AGEN" />
           <NavigationProperty Name="FICHA" Relationship="Self.FK_PACIENTE_FICHA" FromRole="PACIENTE" ToRole="FICHA" />
         </EntityType>
@@ -1007,7 +1007,7 @@
             <PropertyRef Name="ID_PAGO" />
           </Key>
           <Property Name="ID_PAGO" Type="Int32" Nullable="false" />
-          <Property Name="HORA_PAGO" Type="DateTime" />
+          <Property Name="FECHOR" Type="DateTime" />
           <Property Name="ID_BONO" Type="Int32" />
           <Property Name="ID_CAJA" Type="Int32" />
           <Property Name="ID_DEVOLUCION" Type="Int32" />
@@ -1040,10 +1040,10 @@
           <Property Name="NOMBRES" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="APELLIDOS" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="REMUNERACION" Type="Int32" />
-          <Property Name="HASHED_PASS" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="HASHED_PASS" Type="String" MaxLength="1080" FixedLength="false" Unicode="false" />
           <Property Name="PORCENT_DESCUENTO" Type="Byte" />
           <Property Name="RUT" Type="Int32" Nullable="false" />
-          <Property Name="VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EMAIL" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_PERSONAL_FUNCIONARIO" FromRole="PERSONAL" ToRole="FUNCIONARIO" />
           <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_PERSONAL_PERS_MEDICO" FromRole="PERSONAL" ToRole="PERS_MEDICO" />
@@ -1291,7 +1291,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CARGO_FUNCIONARIO">
-          <End Role="CARGO" Type="Self.CARGO" Multiplicity="0..1">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -1431,7 +1431,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PERSONAL_FUNCIONARIO">
-          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="0..1">
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="FUNCIONARIO" Type="Self.FUNCIONARIO" Multiplicity="*" />
@@ -1848,9 +1848,9 @@
                 <ScalarProperty Name="NOMBRES_PACIENTE" ColumnName="NOMBRES_PACIENTE" />
                 <ScalarProperty Name="APELLIDOS_PACIENTE" ColumnName="APELLIDOS_PACIENTE" />
                 <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="DIGITO_VERIFICADOR" ColumnName="DIGITO_VERIFICADOR" />
                 <ScalarProperty Name="HASHED_PASS" ColumnName="HASHED_PASS" />
                 <ScalarProperty Name="EMAIL_PACIENTE" ColumnName="EMAIL_PACIENTE" />
-                <ScalarProperty Name="DIGITO_VERIFICADOR" ColumnName="DIGITO_VERIFICADOR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1858,7 +1858,7 @@
             <EntityTypeMapping TypeName="Model.PAGO">
               <MappingFragment StoreEntitySet="PAGO">
                 <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
-                <ScalarProperty Name="HORA_PAGO" ColumnName="HORA_PAGO" />
+                <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
                 <ScalarProperty Name="ID_BONO" ColumnName="ID_BONO" />
                 <ScalarProperty Name="ID_CAJA" ColumnName="ID_CAJA" />
                 <ScalarProperty Name="ID_DEVOLUCION" ColumnName="ID_DEVOLUCION" />

@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Pago.findAll", query = "SELECT p FROM Pago p"),
     @NamedQuery(name = "Pago.findByIdPago", query = "SELECT p FROM Pago p WHERE p.idPago = :idPago"),
-    @NamedQuery(name = "Pago.findByHoraPago", query = "SELECT p FROM Pago p WHERE p.horaPago = :horaPago"),
+    @NamedQuery(name = "Pago.findByFechor", query = "SELECT p FROM Pago p WHERE p.fechor = :fechor"),
     @NamedQuery(name = "Pago.findByMontoPago", query = "SELECT p FROM Pago p WHERE p.montoPago = :montoPago")})
 public class Pago implements Serializable {
 
@@ -42,9 +42,9 @@ public class Pago implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_PAGO")
     private Integer idPago;
-    @Column(name = "HORA_PAGO")
+    @Column(name = "FECHOR")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date horaPago;
+    private Date fechor;
     @Column(name = "MONTO_PAGO")
     private Integer montoPago;
     @OneToMany(mappedBy = "idPago")
@@ -74,12 +74,12 @@ public class Pago implements Serializable {
         this.idPago = idPago;
     }
 
-    public Date getHoraPago() {
-        return horaPago;
+    public Date getFechor() {
+        return fechor;
     }
 
-    public void setHoraPago(Date horaPago) {
-        this.horaPago = horaPago;
+    public void setFechor(Date fechor) {
+        this.fechor = fechor;
     }
 
     public Integer getMontoPago() {
