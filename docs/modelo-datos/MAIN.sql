@@ -3,8 +3,10 @@
 ALTER SESSION SET CURRENT_SCHEMA = dev;
 @@cmh.sql -- DDL CMHDB
 -- aqui va el script de insercion de datos
+@@cargaCMH.sql
 
 @@crear_devseguro.sql -- crea usuario DEVSEGURO
 ALTER SESSION SET CURRENT_SCHEMA = devseguro;
 @@seguroWS.sql -- DDL SeguroWS
 -- aqui va el script de insercion de datos
+@@cargaCMHseguro.sql
