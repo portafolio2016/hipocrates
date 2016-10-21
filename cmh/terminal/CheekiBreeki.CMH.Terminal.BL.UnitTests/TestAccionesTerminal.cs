@@ -691,9 +691,29 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Funcionario correcto
-            int cargo1 = 1;
-            int personal1 = 2;
-            FUNCIONARIO res1 = at.buscarFuncionario(cargo1, personal1);
+            CARGO cargo = new CARGO();
+            cargo.NOMBRE_CARGO = "Testcargo";
+            PERSONAL personal = new PERSONAL();
+            personal.RUT = 123;
+            personal.VERIFICADOR = "a";
+            personal.NOMBRES = "Test";
+            personal.APELLIDOS = "TEST";
+            CMHEntities entities = new CMHEntities();
+            entities.PERSONAL.Add(personal);
+            entities.CARGO.Add(cargo);
+            entities.SaveChangesAsync();
+            int idCargo1 = (from c in entities.CARGO
+                            where c.NOMBRE_CARGO == cargo.NOMBRE_CARGO
+                            select c).First<CARGO>().ID_CARGO_FUNCI;
+            int idPersonal1 = (from p in entities.PERSONAL
+                                where p.RUT == personal.RUT
+                               select p).First<PERSONAL>().ID_PERSONAL;
+            FUNCIONARIO funcionario = new FUNCIONARIO();
+            funcionario.ID_CARGO_FUNCI = idCargo1;
+            funcionario.ID_PERSONAL = idPersonal1;
+            entities.FUNCIONARIO.Add(funcionario);
+            entities.SaveChangesAsync();
+            FUNCIONARIO res1 = at.buscarFuncionario(idCargo1, idPersonal1);
 
             Object resultadoNoEsperado1 = null;
             Assert.AreNotEqual(res1, resultadoNoEsperado1);
