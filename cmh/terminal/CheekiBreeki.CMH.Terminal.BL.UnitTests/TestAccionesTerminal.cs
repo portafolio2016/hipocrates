@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CheekiBreeki.CMH.Terminal.DAL;
-
+using System.Linq;
 namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 {
     [TestClass]
@@ -21,10 +21,23 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             paciente1.DIGITO_VERIFICADOR = "K";
             paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
             paciente1.HASHED_PASS = "4231";
+            CMHEntities entities = new CMHEntities();
+            using (var context = entities)
+            {
+                var pac1 = from p in entities.PACIENTE
+                       where p.RUT == paciente1.RUT
+                       select p;
+                if(pac1.Count<PACIENTE>() > 0)
+                {
+                    entities.PACIENTE.Remove(pac1.First<PACIENTE>());
+                    entities.SaveChangesAsync();
+                }
+            }
 
             Boolean res1 = at.nuevoPaciente(paciente1);
             Boolean resultadoEsperado1 = true;
-            Assert.AreEqual(res1, resultadoEsperado1);
+            Assert.AreEqual(res1, resultadoEsperado1, "Caso 1: debería ser correcto pero NO");
+            //Assert.AreEqual(res1, resultadoEsperado1);
 
             // Caso 2: Paciente nulo
             PACIENTE paciente2 = null;
