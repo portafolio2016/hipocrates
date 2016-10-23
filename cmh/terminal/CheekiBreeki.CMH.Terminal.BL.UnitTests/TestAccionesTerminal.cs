@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CheekiBreeki.CMH.Terminal.DAL;
-
+using System.Linq;
 namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 {
     [TestClass]
@@ -21,10 +21,23 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             paciente1.DIGITO_VERIFICADOR = "K";
             paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
             paciente1.HASHED_PASS = "4231";
+            CMHEntities entities = new CMHEntities();
+            using (var context = entities)
+            {
+                var pac1 = from p in entities.PACIENTE
+                       where p.RUT == paciente1.RUT
+                       select p;
+                if(pac1.Count<PACIENTE>() > 0)
+                {
+                    entities.PACIENTE.Remove(pac1.First<PACIENTE>());
+                    entities.SaveChangesAsync();
+                }
+            }
 
             Boolean res1 = at.nuevoPaciente(paciente1);
             Boolean resultadoEsperado1 = true;
-            Assert.AreEqual(res1, resultadoEsperado1);
+            Assert.AreEqual(res1, resultadoEsperado1, "Caso 1: debería ser correcto pero NO");
+            //Assert.AreEqual(res1, resultadoEsperado1);
 
             // Caso 2: Paciente nulo
             PACIENTE paciente2 = null;
@@ -202,6 +215,18 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             personal1.HASHED_PASS = "4231";
             personal1.RUT = 12345678;
             personal1.VERIFICADOR = "K";
+            CMHEntities entities = new CMHEntities();
+            using (var context = entities)
+            {
+                var pers = from p in entities.PERSONAL
+                           where p.RUT == personal1.RUT
+                           select p;
+                if (pers.Count<PERSONAL>() > 0)
+                {
+                    entities.PERSONAL.Remove(pers.First<PERSONAL>());
+                    entities.SaveChangesAsync();
+                }
+            }
 
             Boolean res1 = at.nuevoPersonal(personal1);
             
@@ -599,14 +624,33 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void nuevoFuncionarioTest()
         {
             AccionesTerminal at = new AccionesTerminal();
+
             // Caso 1: Funcionario correcto
             FUNCIONARIO funcionario1 = new FUNCIONARIO();
             int rutPersonal1 = 12345678;
             string dvPersonal1 = "K";
+            CMHEntities entities = new CMHEntities();
+            using (var context = entities)
+            {
+                var pers = from p in entities.PERSONAL
+                           where p.RUT == rutPersonal1
+                           select p;
+                if(pers.Count<PERSONAL>() == 0)
+                {
+                    PERSONAL personal = new PERSONAL();
+                    personal.RUT = rutPersonal1;
+                    personal.VERIFICADOR = dvPersonal1;
+                    personal.NOMBRES = "Testtest";
+                    personal.APELLIDOS = "Testtest";
+                    entities.PERSONAL.Add(personal);
+                    entities.SaveChangesAsync();
+                }else
+                {
+                    entities.PERSONAL.Remove(pers.First<PERSONAL>());
+                    entities.SaveChangesAsync();
+                }
+            }
             PERSONAL personal1 = at.buscarPersonal(rutPersonal1, dvPersonal1);
-
-            if (Util.isObjetoNulo(personal1))
-                Assert.Fail("Personal no existe");
 
             funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
             funcionario1.ID_CARGO_FUNCI = 1;
@@ -647,9 +691,29 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Funcionario correcto
-            int cargo1 = 1;
-            int personal1 = 2;
-            FUNCIONARIO res1 = at.buscarFuncionario(cargo1, personal1);
+            CARGO cargo = new CARGO();
+            cargo.NOMBRE_CARGO = "Testcargo";
+            PERSONAL personal = new PERSONAL();
+            personal.RUT = 123;
+            personal.VERIFICADOR = "a";
+            personal.NOMBRES = "Test";
+            personal.APELLIDOS = "TEST";
+            CMHEntities entities = new CMHEntities();
+            entities.PERSONAL.Add(personal);
+            entities.CARGO.Add(cargo);
+            entities.SaveChangesAsync();
+            int idCargo1 = (from c in entities.CARGO
+                            where c.NOMBRE_CARGO == cargo.NOMBRE_CARGO
+                            select c).First<CARGO>().ID_CARGO_FUNCI;
+            int idPersonal1 = (from p in entities.PERSONAL
+                                where p.RUT == personal.RUT
+                               select p).First<PERSONAL>().ID_PERSONAL;
+            FUNCIONARIO funcionario = new FUNCIONARIO();
+            funcionario.ID_CARGO_FUNCI = idCargo1;
+            funcionario.ID_PERSONAL = idPersonal1;
+            entities.FUNCIONARIO.Add(funcionario);
+            entities.SaveChangesAsync();
+            FUNCIONARIO res1 = at.buscarFuncionario(idCargo1, idPersonal1);
 
             Object resultadoNoEsperado1 = null;
             Assert.AreNotEqual(res1, resultadoNoEsperado1);
@@ -668,12 +732,21 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Funcionario correcto
-            int personal1 = 2;
-            int cargo1 = 1;
-            FUNCIONARIO funcionario1 = at.buscarFuncionario(cargo1, personal1);
+            //instanciar persistencia
+            CMHEntities entities = new CMHEntities();
+            //buscar personal
+            PERSONAL personal = (from p in entities.PERSONAL select p).First<PERSONAL>();
+            //buscar cargo
+            CARGO cargo = (from c in entities.CARGO select c).First<CARGO>();
+            //crear funcionario
+            FUNCIONARIO funcionario = new FUNCIONARIO();
+            funcionario.ID_CARGO_FUNCI = cargo.ID_CARGO_FUNCI;
+            funcionario.ID_PERSONAL = personal.ID_PERSONAL;
+            //persistir funcionario
+            entities.FUNCIONARIO.Add(funcionario);
+            entities.SaveChangesAsync();
 
-            funcionario1.ID_CARGO_FUNCI = 9;
-
+            FUNCIONARIO funcionario1 = at.buscarFuncionario(cargo.ID_CARGO_FUNCI, personal.ID_PERSONAL);
             Boolean res1 = at.actualizarFuncionario(funcionario1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
@@ -699,16 +772,28 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Funcionario correcto
-            int personal1 = 2;
-            int cargo1 = 9;
-
-            FUNCIONARIO funcionario1 = at.buscarFuncionario(cargo1, personal1);
+            //Instanciar controlador persistencia
+            CMHEntities entities = new CMHEntities();
+            //obtener un personal existente
+            PERSONAL personal = (from p in entities.PERSONAL select p).First<PERSONAL>();
+            //obtener un cargo existente
+            CARGO cargo = (from c in entities.CARGO select c).First<CARGO>();
+            //crear un nuevo funcionario
+            FUNCIONARIO funcionario = new FUNCIONARIO();
+            funcionario.ID_PERSONAL = personal.ID_PERSONAL;
+            funcionario.ID_CARGO_FUNCI = cargo.ID_CARGO_FUNCI;
+            //persistir nuevo funcionario
+            entities.FUNCIONARIO.Add(funcionario);
+            entities.SaveChangesAsync();
+            int idPersonal = personal.ID_PERSONAL;
+            int idCargo = cargo.ID_CARGO_FUNCI;
+            FUNCIONARIO funcionario1 = at.buscarFuncionario(idCargo, idPersonal);
             if (Util.isObjetoNulo(funcionario1))
                 Assert.Fail("Funcionario no existe");
 
-            at.borrarFuncionario(funcionario1);
-            Object resultadoEsperado1 = null;
-            Assert.AreEqual(at.buscarFuncionario(cargo1, personal1), resultadoEsperado1);
+            bool resultado = at.borrarFuncionario(funcionario1);
+            bool resultadoEsperado1 = true;
+            Assert.AreEqual(resultado, resultadoEsperado1);
         }
         #endregion
     }
