@@ -732,12 +732,21 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Funcionario correcto
-            int personal1 = 2;
-            int cargo1 = 1;
-            FUNCIONARIO funcionario1 = at.buscarFuncionario(cargo1, personal1);
+            //instanciar persistencia
+            CMHEntities entities = new CMHEntities();
+            //buscar personal
+            PERSONAL personal = (from p in entities.PERSONAL select p).First<PERSONAL>();
+            //buscar cargo
+            CARGO cargo = (from c in entities.CARGO select c).First<CARGO>();
+            //crear funcionario
+            FUNCIONARIO funcionario = new FUNCIONARIO();
+            funcionario.ID_CARGO_FUNCI = cargo.ID_CARGO_FUNCI;
+            funcionario.ID_PERSONAL = personal.ID_PERSONAL;
+            //persistir funcionario
+            entities.FUNCIONARIO.Add(funcionario);
+            entities.SaveChangesAsync();
 
-            funcionario1.ID_CARGO_FUNCI = 9;
-
+            FUNCIONARIO funcionario1 = at.buscarFuncionario(cargo.ID_CARGO_FUNCI, personal.ID_PERSONAL);
             Boolean res1 = at.actualizarFuncionario(funcionario1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
