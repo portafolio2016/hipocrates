@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -19,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "ARCHIVO")
@@ -27,7 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Archivo.findAll", query = "SELECT a FROM Archivo a"),
     @NamedQuery(name = "Archivo.findByIdArchivo", query = "SELECT a FROM Archivo a WHERE a.idArchivo = :idArchivo"),
-    @NamedQuery(name = "Archivo.findByFileUri", query = "SELECT a FROM Archivo a WHERE a.fileUri = :fileUri"),
     @NamedQuery(name = "Archivo.findByExtension", query = "SELECT a FROM Archivo a WHERE a.extension = :extension")})
 public class Archivo implements Serializable {
 
@@ -36,8 +36,10 @@ public class Archivo implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_ARCHIVO")
     private Integer idArchivo;
-    @Column(name = "FILE_URI")
-    private String fileUri;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "ARCHIVO_B64")
+    private String archivoB64;
     @Basic(optional = false)
     @Column(name = "EXTENSION")
     private String extension;
@@ -52,8 +54,9 @@ public class Archivo implements Serializable {
         this.idArchivo = idArchivo;
     }
 
-    public Archivo(Integer idArchivo, String extension) {
+    public Archivo(Integer idArchivo, String archivoB64, String extension) {
         this.idArchivo = idArchivo;
+        this.archivoB64 = archivoB64;
         this.extension = extension;
     }
 
@@ -65,12 +68,12 @@ public class Archivo implements Serializable {
         this.idArchivo = idArchivo;
     }
 
-    public String getFileUri() {
-        return fileUri;
+    public String getArchivoB64() {
+        return archivoB64;
     }
 
-    public void setFileUri(String fileUri) {
-        this.fileUri = fileUri;
+    public void setArchivoB64(String archivoB64) {
+        this.archivoB64 = archivoB64;
     }
 
     public String getExtension() {

@@ -10,7 +10,7 @@
             <PropertyRef Name="ID_ARCHIVO" />
           </Key>
           <Property Name="ID_ARCHIVO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FILE_URI" Type="varchar2" MaxLength="256" />
+          <Property Name="ARCHIVO_B64" Type="clob" Nullable="false" />
           <Property Name="ID_RESULTADO_ATENCION" Type="number" Precision="8" Scale="0" />
           <Property Name="EXTENSION" Type="varchar2" MaxLength="16" Nullable="false" />
         </EntityType>
@@ -810,7 +810,7 @@
             <PropertyRef Name="ID_ARCHIVO" />
           </Key>
           <Property Name="ID_ARCHIVO" Type="Int32" Nullable="false" />
-          <Property Name="FILE_URI" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHIVO_B64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_RESULTADO_ATENCION" Type="Int32" />
           <Property Name="EXTENSION" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_RES_ATENCION_ARCHIVO" FromRole="ARCHIVO" ToRole="RES_ATENCION" />
@@ -1668,7 +1668,7 @@
             <EntityTypeMapping TypeName="CMHModel.ARCHIVO">
               <MappingFragment StoreEntitySet="ARCHIVO">
                 <ScalarProperty Name="ID_ARCHIVO" ColumnName="ID_ARCHIVO" />
-                <ScalarProperty Name="FILE_URI" ColumnName="FILE_URI" />
+                <ScalarProperty Name="ARCHIVO_B64" ColumnName="ARCHIVO_B64" />
                 <ScalarProperty Name="ID_RESULTADO_ATENCION" ColumnName="ID_RESULTADO_ATENCION" />
                 <ScalarProperty Name="EXTENSION" ColumnName="EXTENSION" />
               </MappingFragment>

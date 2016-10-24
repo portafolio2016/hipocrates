@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "PACIENTE")
