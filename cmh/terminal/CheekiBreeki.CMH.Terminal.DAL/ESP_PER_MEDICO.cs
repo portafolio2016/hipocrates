@@ -12,19 +12,10 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class FUNCIONARIO
+    public partial class ESP_PER_MEDICO
     {
-        public FUNCIONARIO()
-        {
-            this.CAJA = new HashSet<CAJA>();
-        }
-    
-        public int ID_FUNCIONARIO { get; set; }
-        public int ID_CARGO_FUNCI { get; set; }
-        public int ID_PERSONAL { get; set; }
-    
-        public virtual ICollection<CAJA> CAJA { get; set; }
-        public virtual CARGO CARGO { get; set; }
-        public virtual PERSONAL PERSONAL { get; set; }
+        public decimal ID_ESP_PERS_MED { get; set; }
+        public Nullable<decimal> ID_ESPECIALIDAD { get; set; }
+        public Nullable<decimal> ID_PERSONAL_MEDICO { get; set; }
     }
 }

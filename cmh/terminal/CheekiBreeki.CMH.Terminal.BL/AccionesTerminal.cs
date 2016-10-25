@@ -8,6 +8,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
 {
     public class AccionesTerminal
     {
+        CMHEntities conexionDB = new CMHEntities();
+
         //ECU-001
         public Boolean agendarAtencion(ATENCION_AGEN atencion)
         {
@@ -65,7 +67,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             //TODO: implementar
             return false;
         }
- 
+
         //ECU-011
         public Boolean cerrarConsultaMedica(RES_ATENCION resultadoAtencion)
         {
@@ -123,100 +125,640 @@ namespace CheekiBreeki.CMH.Terminal.BL
             ReporteCaja reporteCaja = null;
             return reporteCaja;
         }
-
-        //ECU-022
+        
         public Boolean actualizarInventarioEquipo(INVENTARIO inventario)
         {
             //TODO: implementar
             return false;
         }
 
-        public Boolean nuevoEquipo(TIPO_EQUIPO tipoEquipo)
+        //ECU-022
+        #region Equipos
+        public Boolean nuevoEquipo(TIPO_EQUIPO equipo)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(equipo))
+                {
+                    throw new Exception("Personal nulo");
+                }
+                else if (equipo.NOMBRE_TIPO_EQUIPO == null ||
+                         equipo.NOMBRE_TIPO_EQUIPO == String.Empty)
+                {
+                    throw new Exception("Nombre vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarEquipo(equipo.NOMBRE_TIPO_EQUIPO)))
+                {
+                    throw new Exception("Equipo ya ingresado");
+                }
+                else
+                {
+                    conexionDB.TIPO_EQUIPO.Add(equipo);
+                    Task<int> insercion = conexionDB.SaveChangesAsync();
+                    insercion.Wait();
+
+                    INVENTARIO inventario = new INVENTARIO();
+                    inventario.CANT_BODEGA = 0;
+                    inventario.ID_TIPO_EQUIPO = buscarEquipo(equipo.NOMBRE_TIPO_EQUIPO).ID_TIPO_EQUIPO;
+                    conexionDB.INVENTARIO.Add(inventario);
+                    conexionDB.SaveChangesAsync();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        public Boolean borrarEquipo(TIPO_EQUIPO tipoEquipo)
+        public TIPO_EQUIPO buscarEquipo(string nombre)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(nombre))
+                {
+                    throw new Exception("Nombre nulo");
+                }
+                else
+                {
+                    TIPO_EQUIPO equipo = null;
+                    equipo = conexionDB.TIPO_EQUIPO.Where(d => d.NOMBRE_TIPO_EQUIPO == nombre)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(equipo))
+                    {
+                        throw new Exception("Equipo no existe");
+                    }
+                    return equipo;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
+
+        public Boolean actualizarEquipoCantidad(string nombre, int cantidad)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(nombre))
+                {
+                    throw new Exception("Nombre nulo");
+                }
+                else
+                {
+                    TIPO_EQUIPO equipo = null;
+                    equipo = conexionDB.TIPO_EQUIPO.Where(d => d.NOMBRE_TIPO_EQUIPO == nombre)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(equipo))
+                    {
+                        throw new Exception("Equipo no existe");
+                    }
+
+                    INVENTARIO inventario = conexionDB.INVENTARIO.Where(d => d.ID_TIPO_EQUIPO == equipo.ID_TIPO_EQUIPO)
+                                                                        .FirstOrDefault();
+                    if (Util.isObjetoNulo(inventario))
+                    {
+                        throw new Exception("Inventario no existe");
+                    }
+                    inventario.CANT_BODEGA = cantidad;
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean borrarEquipo(TIPO_EQUIPO equipo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(equipo))
+                {
+                    throw new Exception("Paciente no existe");
+                }
+                else
+                {
+                    conexionDB.TIPO_EQUIPO.Remove(equipo);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
 
         //ECU-023 y ECU-026
-        public Boolean actualizarPersonal(PERS_MEDICO personalMedico)
+        #region Personal
+        public Boolean nuevoPersonal(PERSONAL personal)
         {
-            //TODO: Implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(personal))
+                {
+                    throw new Exception("Personal nulo");
+                }
+                else if (personal.NOMBRES == null ||
+                         personal.APELLIDOS == null ||
+                         personal.NOMBRES == String.Empty ||
+                         personal.APELLIDOS == String.Empty)
+                {
+                    throw new Exception("Nombre o apellido vacío");
+                }
+                else if (personal.RUT == null || personal.RUT == 0)
+                {
+                    throw new Exception("RUT vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarPersonal(personal.RUT, personal.VERIFICADOR)))
+                {
+                    throw new Exception("Personal ya ingresado");
+                }
+                else
+                {
+                    conexionDB.PERSONAL.Add(personal);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        public Boolean actualizarPersonal(FUNCIONARIO funcionario)
+        public PERSONAL buscarPersonal(int rut, string dv)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(rut) || Util.isObjetoNulo(dv))
+                {
+                    throw new Exception("RUT o dígito verificador nulo");
+                }
+                else
+                {
+                    PERSONAL personal = null;
+                    personal = conexionDB.PERSONAL.Where(d => d.RUT == rut
+                                                         && d.VERIFICADOR == dv)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(personal))
+                    {
+                        throw new Exception("Personal no existe");
+                    }
+                    return personal;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
-        public Boolean nuevoPersonal(FUNCIONARIO funcionario)
+        public Boolean actualizarPersonal(PERSONAL personal)
         {
-            //TODO: Implementar
-            return false;
-        }
-        public Boolean nuevoPersonal(PERS_MEDICO personalMedico)
-        {
-            //TODO: Implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(personal))
+                {
+                    throw new Exception("Personal nulo");
+                }
+                else if (personal.NOMBRES == null ||
+                         personal.APELLIDOS == null ||
+                         personal.NOMBRES == String.Empty ||
+                         personal.APELLIDOS == String.Empty)
+                {
+                    throw new Exception("Nombre o apellido vacío");
+                }
+                else
+                {
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        public Boolean borrarPersonal(FUNCIONARIO funcionario)
+        public Boolean borrarPersonal(PERSONAL personal)
         {
-            //TODO: Implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(personal))
+                {
+                    throw new Exception("Paciente no existe");
+                }
+                else
+                {
+                    conexionDB.PERSONAL.Remove(personal);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
+
+        #region Funcionarios
+        public Boolean nuevoFuncionario(FUNCIONARIO funcionario)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario nulo");
+                }
+                else if (funcionario.ID_CARGO_FUNCI == null ||
+                         funcionario.ID_CARGO_FUNCI == 0 ||
+                         funcionario.ID_PERSONAL == null ||
+                         funcionario.ID_PERSONAL == 0)
+                {
+                    throw new Exception("Cargo o personal no vacío");
+                }
+                else if (Util.isObjetoNulo(conexionDB.CARGO.Find(funcionario.ID_CARGO_FUNCI)))
+                {
+                    throw new Exception("Cargo no existe");
+                }
+                else if (!Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Funcionario ya ingresado");
+                }
+                else
+                {
+                    conexionDB.FUNCIONARIO.Add(funcionario);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        public Boolean borrarPersonal(PERS_MEDICO personalMedico)
+        public FUNCIONARIO buscarFuncionario(int cargo, int personal)
         {
-            //TODO: Implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(cargo) || Util.isObjetoNulo(personal))
+                {
+                    throw new Exception("Cargo o personal nulo");
+                }
+                else
+                {
+                    FUNCIONARIO funcionario = null;
+                    funcionario = conexionDB.FUNCIONARIO.Where(d => d.ID_CARGO_FUNCI == cargo
+                                                         && d.ID_PERSONAL == personal)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(funcionario))
+                    {
+                        throw new Exception("Funcionario no existe");
+                    }
+                    return funcionario;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
+
+        public Boolean actualizarFuncionario(FUNCIONARIO funcionario)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario nulo");
+                }
+                else if (funcionario.ID_CARGO_FUNCI == null ||
+                         funcionario.ID_CARGO_FUNCI == 0 ||
+                         funcionario.ID_PERSONAL == null ||
+                         funcionario.ID_PERSONAL == 0)
+                {
+                    throw new Exception("Cargo o personal no vacío");
+                }
+                else if (Util.isObjetoNulo(conexionDB.CARGO.Find(funcionario.ID_CARGO_FUNCI)))
+                {
+                    throw new Exception("Cargo no existe");
+                }
+                else
+                {
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean borrarFuncionario(FUNCIONARIO funcionario)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario no existe");
+                }
+                else
+                {
+                    conexionDB.FUNCIONARIO.Remove(funcionario);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
 
         //ECU-024
-        public Boolean actualizarPrestacionesMedicas(PRESTACION prestacion)
-        {
-            //TODO: implementar
-            return false;
-        }
-
+        #region Prestación médica
         public Boolean nuevaPrestacionMedica(PRESTACION prestacion)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(prestacion))
+                {
+                    throw new Exception("Prestación nula");
+                }
+                else if (prestacion.NOM_PRESTACION == null ||
+                         prestacion.NOM_PRESTACION == String.Empty ||
+                         prestacion.PRECIO_PRESTACION == null)
+                {
+                    throw new Exception("Nombre, código o precio vacío");
+                }
+                else if (prestacion.CODIGO_PRESTACION == null ||
+                         prestacion.CODIGO_PRESTACION == string.Empty ||
+                         Util.isObjetoNulo(prestacion.CODIGO_PRESTACION))
+                {
+                    throw new Exception("Código vacío");
+                }
+                else if (prestacion.ID_TIPO_PRESTACION == null)
+                {
+                    throw new Exception("Tipo de prestación vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarPrestacionMedica(prestacion.CODIGO_PRESTACION)))
+                {
+                    throw new Exception("Prestación ya ingresada");
+                }
+                else
+                {
+                    conexionDB.PRESTACION.Add(prestacion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public PRESTACION buscarPrestacionMedica(string codigo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(codigo))
+                {
+                    throw new Exception("ID verificador nulo");
+                }
+                else
+                {
+                    PRESTACION prestacion = null;
+                    prestacion = conexionDB.PRESTACION.Where(d => d.CODIGO_PRESTACION == codigo)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(prestacion))
+                    {
+                        throw new Exception("Personal no existe");
+                    }
+                    return prestacion;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public Boolean actualizarPrestacionesMedicas(PRESTACION prestacion)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(prestacion))
+                {
+                    throw new Exception("Prestación nula");
+                }
+                else if (prestacion.NOM_PRESTACION == null ||
+                         prestacion.NOM_PRESTACION == String.Empty ||
+                         prestacion.PRECIO_PRESTACION == null)
+                {
+                    throw new Exception("Nombre, código o precio vacío");
+                }
+                else if (prestacion.CODIGO_PRESTACION == null || prestacion.CODIGO_PRESTACION == "")
+                {
+                    throw new Exception("Código vacío");
+                }
+                else if (prestacion.ID_TIPO_PRESTACION == null)
+                {
+                    throw new Exception("Tipo de prestación vacío");
+                }
+                else
+                {
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         public Boolean borrarPrestacionMedica(PRESTACION prestacion)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(prestacion))
+                {
+                    throw new Exception("Prestacion no existe");
+                }
+                else
+                {
+                    conexionDB.PRESTACION.Remove(prestacion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
+        #endregion
 
         //ECU-025
-        public Boolean actualizarPacientes(PACIENTE paciente)
-        {
-            //TODO: implementar
-            return false;
-        }
-
+        #region Paciente
         public Boolean nuevoPaciente(PACIENTE paciente)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(paciente))
+                {
+                    throw new Exception("Paciente nulo");
+                }
+                else if (paciente.NOMBRES_PACIENTE == null ||
+                         paciente.APELLIDOS_PACIENTE == null ||
+                         paciente.NOMBRES_PACIENTE == String.Empty ||
+                         paciente.APELLIDOS_PACIENTE == String.Empty)
+                {
+                    throw new Exception("Nombre o apellido vacío");
+                }
+                else if (paciente.EMAIL_PACIENTE == null || paciente.EMAIL_PACIENTE == String.Empty)
+                {
+                    throw new Exception("Email vacío");
+                }
+                else if (paciente.RUT == null || paciente.RUT == 0)
+                {
+                    throw new Exception("RUT vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarPaciente(paciente.RUT, paciente.DIGITO_VERIFICADOR)))
+                {
+                    throw new Exception("Paciente ya ingresado");
+                }
+                else
+                {
+                    conexionDB.PACIENTE.Add(paciente);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public PACIENTE buscarPaciente(int rut, string dv)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(rut) || Util.isObjetoNulo(dv))
+                {
+                    throw new Exception("RUT o dígito verificador nulo");
+                }
+                else
+                {
+                    PACIENTE paciente = null;
+                    paciente = conexionDB.PACIENTE.Where(d => d.RUT == rut
+                                                         && d.DIGITO_VERIFICADOR == dv)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(paciente))
+                    {
+                        throw new Exception("Paciente no existe");
+                    }
+                    return paciente;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public Boolean actualizarPaciente(PACIENTE paciente)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(paciente))
+                {
+                    throw new Exception("Paciente nulo");
+                }
+                else if (paciente.NOMBRES_PACIENTE == null ||
+                         paciente.APELLIDOS_PACIENTE == null ||
+                         paciente.NOMBRES_PACIENTE == String.Empty ||
+                         paciente.APELLIDOS_PACIENTE == String.Empty)
+                {
+                    throw new Exception("Nombre o apellido vacío");
+                }
+                else if (paciente.EMAIL_PACIENTE == null || paciente.EMAIL_PACIENTE == String.Empty)
+                {
+                    throw new Exception("Email vacío");
+                }
+                else if (paciente.RUT == null || paciente.RUT == 0)
+                {
+                    throw new Exception("RUT vacío");
+                }
+                else if (Util.isObjetoNulo(buscarPaciente(paciente.RUT, paciente.DIGITO_VERIFICADOR)))
+                {
+                    throw new Exception("Paciente no existe");
+                }
+                else
+                {
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         public Boolean borrarPaciente(PACIENTE paciente)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(paciente))
+                {
+                    throw new Exception("Paciente no existe");
+                }
+                else
+                {
+                    conexionDB.PACIENTE.Remove(paciente);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
-
-        
+        #endregion
     }
 }
