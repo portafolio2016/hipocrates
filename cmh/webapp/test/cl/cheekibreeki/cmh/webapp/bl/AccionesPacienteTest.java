@@ -65,6 +65,16 @@ public class AccionesPacienteTest {
         System.out.println("registrarPaciente");
         AccionesPaciente instance = new AccionesPaciente();
         
+        //remueve los pacientes extras de test
+        Controller ctr = new Controller();
+        Map<String, Object> params = new HashMap<>();
+        params.put("rut", this.paciente.getRut());
+        List<? extends Object>  pacientes = ctr.findByQuery("Paciente.findByRut", params);
+        if(!pacientes.isEmpty()){
+            Paciente  pacienteAux = (Paciente)pacientes.get(0);
+            Controller.remove(Paciente.class, pacienteAux.getIdPaciente());
+        }
+        
         //Prueba 1: Ingresa paciente
         boolean expResult = true;
         boolean result = instance.registrarPaciente(this.paciente);
@@ -76,8 +86,8 @@ public class AccionesPacienteTest {
         result = instance.registrarPaciente(paciente2);
         assertEquals(expResult, result);
         
-        //Prueba 3: ingresa el mismo paciente que en el test 1, se ingresa como otro paciente
-        expResult = true;
+        //Prueba 3: ingresa el mismo paciente que en el test 1 pero no se puede inresar un paciente con el mismo rut
+        expResult = false;
         result = instance.registrarPaciente(this.paciente);
         assertEquals(expResult, result);
         
@@ -118,9 +128,9 @@ public class AccionesPacienteTest {
     public void InsertAtencionesYExamenes(AtencionAgen atencion,ResAtencion resAtencion, boolean delete){
         Controller ctr = new Controller();
         if(!delete){
-            Map<String, Object> params = new HashMap<>();
-            params.put("rut", this.paciente.getRut());
-            Paciente pacienteAux = (Paciente)ctr.findByQuery("Paciente.findByRut", params).get(0);
+            Map<String, Object> params1 = new HashMap<>();
+            params1.put("rut", this.paciente.getRut());
+            Paciente pacienteAux = (Paciente)ctr.findByQuery("Paciente.findByRut", params1).get(0);
             atencion.setFechor(Date.from(Instant.now()));
             atencion.setIdEstadoAten(new EstadoAten());
             atencion.setIdPaciente(pacienteAux);
@@ -132,10 +142,12 @@ public class AccionesPacienteTest {
             boolean x = Controller.upsert(obj1);
             assertEquals(true, x);
             
-            params = new HashMap<>();
-            params.put("idPaciente", pacienteAux.getIdPaciente());
-            AtencionAgen atencionAux = (AtencionAgen)ctr.findByQuery("AtencionAgen.findByIdPaciente", params).get(0);//error
-            resAtencion.setAtencionAbierta((short)0);
+            Map<String, Object> params2 = new HashMap<>();
+            params2.put("idPaciente", pacienteAux.getIdPaciente());
+            List<? extends Object> atenciones = ctr.findByQuery("AtencionAgen.findByIdPaciente", params2);//error
+            System.out.println("//"+atenciones.size());
+            AtencionAgen atencionAux = (AtencionAgen)atenciones.get(0);
+            resAtencion.setAtencionAbierta(Short.parseShort("0"));
             resAtencion.setComentario("test");
             resAtencion.setIdAtencionAgen(atencionAux);
             resAtencion.setIdOrdenAnalisis(new OrdenAnalisis());

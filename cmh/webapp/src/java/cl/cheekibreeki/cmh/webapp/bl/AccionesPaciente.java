@@ -30,9 +30,17 @@ public class AccionesPaciente {
      * @return Si es true el paciente fue registrado
      */
     public boolean registrarPaciente(Paciente paciente){
-         Object obj = paciente;
-         boolean result = Controller.upsert(obj);
-         return result;
+        Controller ctr = new Controller();
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("rut", paciente.getRut());
+        List<? extends Object>  pacienteAux = ctr.findByQuery("Paciente.findByRut", params1);
+        if(pacienteAux.isEmpty()){
+            Object obj = paciente;
+            boolean result = Controller.upsert(obj);
+            return result;
+        }else{
+            return false;
+        }
     }
     
      /**
