@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CheekiBreeki.CMH.Terminal.DAL;
 using System.Linq;
+using System.IO;
 namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 {
     [TestClass]
@@ -851,6 +852,61 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean res5 = at.enviarCorreo(receptor5, titulo5, cuerpo5);
             Boolean resultadoEsperado5 = false;
             Assert.AreEqual(res5, resultadoEsperado5);
+        }
+        #endregion
+
+        #region Archivo base64
+        [TestMethod]
+        public void conversionABase64Test()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Conversión correcta
+            string archivo1 = "file.pdf";
+
+            Object res1 = at.convertirABase64(archivo1);
+            Object resultadoNoEsperado1 = null;
+            Assert.AreNotEqual(res1, resultadoNoEsperado1);
+        }
+
+        [TestMethod]
+        public void conversionDesdeBase64Test()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Conversión correcta
+            string uri = at.convertirABase64("file.pdf");
+
+            string salida1 = "file_resultado";
+            string extension1 = "pdf";
+            string nombre1 = salida1 + "." + extension1;
+
+            if (File.Exists(nombre1))
+            {
+                File.Delete(nombre1);
+            }
+
+            Boolean res1 = at.convertirDesdeBase64(uri, salida1, extension1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+        }
+
+        /// <summary>
+        /// Este método es de muestra para subir los archivos en base64
+        /// Eliminar luego de sacar las referencias
+        /// </summary>
+        [TestMethod]
+        public void subirResultadoAtencion()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            string file = "file.pdf";
+            
+            RES_ATENCION resAtencion = new RES_ATENCION();
+            //resAtencion.ARCHIVO_B64 = at.convertirABase64(file);
+            //resAtencion.EXT_ARCHIVO = Path.GetExtension(file);
+
+            Boolean res1 = at.cerrarConsultaMedica(resAtencion);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+
         }
         #endregion
     }
