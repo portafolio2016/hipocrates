@@ -1,8 +1,9 @@
 package cl.cheekibreeki.cmh.webapp.bl;
 
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
-import cl.cheekibreeki.cmh.lib.dal.entities.Archivo;
 import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
+import cl.cheekibreeki.cmh.lib.dal.entities.Bloque;
+import cl.cheekibreeki.cmh.lib.dal.entities.DiaSem;
 import cl.cheekibreeki.cmh.lib.dal.entities.Especialidad;
 import cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten;
 import cl.cheekibreeki.cmh.lib.dal.entities.OrdenAnalisis;
@@ -13,7 +14,6 @@ import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
 import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
 import cl.cheekibreeki.cmh.lib.dal.entities.ResAtencion;
 import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
-import cl.cheekibreeki.cmh.lib.dal.entities.Turno;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -139,15 +139,63 @@ public class AccionesPacienteTest {
             params1.put("rut", this.paciente.getRut());
             Paciente pacienteAux = (Paciente)ctr.findByQuery("Paciente.findByRut", params1).get(0);
             atencion.setFechor(Date.from(Instant.now()));
+            atencion.setObservaciones("Test");
+            //Crear Bloque
+            Bloque bloque = new Bloque();
+            //Se crea un dia si no existe
+            DiaSem dia = new DiaSem();
+            Map<String, Object> para = new HashMap<>();
+            List<? extends Object> dias = ctr.findByQuery("DiaSem.findAll", para);
+            if(!dias.isEmpty()){
+                dia = (DiaSem)dias.get(dias.size()-1);
+            }else{
+                dia.setNombreIda("DiaTest");
+                Object objDia = dia;
+                Controller.upsert(objDia);
+                List<? extends Object> diasAux = ctr.findByQuery("DiaSem.findAll", para);
+                dia = (DiaSem)diasAux.get(diasAux.size()-1);
+            }
+            //Fin dia
+            para = new HashMap<>();
+            List<? extends Object> bloques = ctr.findByQuery("Bloque.findAll", para);
+            if(!bloques.isEmpty()){
+                bloque = (Bloque)bloques.get(bloques.size()-1);
+            }else{
+                bloque.setIdDiaSem(dia);
+                bloque.setNumBloque(0);
+                bloque.setNumHoraFin(Short.parseShort("0"));
+                bloque.setNumHoraIni(Short.parseShort("0"));
+                bloque.setNumMinuFin(Short.parseShort("0"));
+                bloque.setNumMinuIni(Short.parseShort("0"));
+                Object objBloq = bloque;
+                Controller.upsert(objBloq);
+                List<? extends Object> bloquesAux = ctr.findByQuery("Bloque.findAll", para);
+                bloque = (Bloque)bloquesAux.get(bloquesAux.size()-1);
+            }
+            //Fin bloque
+            atencion.setIdBloque(bloque);
             atencion.setIdEstadoAten(new EstadoAten());
             atencion.setIdPaciente(pacienteAux);
-            atencion.setIdPago(new Pago());
-            atencion.setIdPersonalMedico(new PersMedico());
+            //Se crea PersMedico
+            PersMedico pers = new PersMedico();
+            para = new HashMap<>();
+            List<? extends Object> persMedicos = ctr.findByQuery("PersMedico.findAll", para);
+            if(!persMedicos.isEmpty()){
+                pers = (PersMedico)persMedicos.get(persMedicos.size()-1);
+            }else{
+                //pers.setIdEspecialidad(idEspecialidad);
+                Object objPers = pers;
+                Controller.upsert(objPers);
+                List<? extends Object> diasAux = ctr.findByQuery("PersMedico.findAll", para);
+                pers = (PersMedico)persMedicos.get(persMedicos.size()-1);
+            }
+            //Fin PersMedico
+            atencion.setIdPersAtiende(pers);
             atencion.setIdPrestacion(new Prestacion());
             atencion.setObservaciones("test");
             Object obj1 = atencion;
             boolean x = Controller.upsert(obj1);
-            assertEquals(true, x);
+            assertEquals(true, x);//error
             
             Map<String, Object> params2 = new HashMap<>();
             params2.put("idPaciente", pacienteAux);
@@ -157,7 +205,7 @@ public class AccionesPacienteTest {
             resAtencion.setComentario("test");
             resAtencion.setIdAtencionAgen(atencionAux);
             resAtencion.setIdOrdenAnalisis(new OrdenAnalisis());
-            resAtencion.setIdPersonalMedico(new PersMedico());
+           // resAtencion.setIdPersonalMedico(new PersMedico());
             resAtencion.setIdResultadoAtencion(0);
             Object obj2 = resAtencion;
             boolean y = Controller.upsert(obj2);   

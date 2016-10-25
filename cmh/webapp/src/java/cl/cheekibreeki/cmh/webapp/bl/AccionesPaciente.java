@@ -12,7 +12,6 @@ import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
 import cl.cheekibreeki.cmh.lib.dal.entities.ResAtencion;
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
-import cl.cheekibreeki.cmh.lib.dal.entities.Turno;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,8 +72,8 @@ public class AccionesPaciente {
      * @return El ArrayList contiene tas atenciones de una prestación
      */
     public HorasDisponibles HorasDisponibles(PersMedico medico, Date dia){
-        HorasDisponibles horas = new HorasDisponibles();
-        Turno turno =  (Turno)Controller.findById(PersMedico.class, medico.getIdTurno().getIdTurno());
+       HorasDisponibles horas = new HorasDisponibles();
+       /*  Turno turno =  (Turno)Controller.findById(PersMedico.class, medico.getIdTurno().getIdTurno());
         Map<String, Object> params = new HashMap<>();
         params.put("idPersonalMedico", medico.getIdPersonalMedico());
         Controller ctr = new Controller();
@@ -93,7 +92,7 @@ public class AccionesPaciente {
             if(noDispo)
                 horas.getHoras().add(ConcatenarHora( turno.getNumhoraIni(), turno.getNumminuIni() ) + turnos*30);
         }
-        
+        */
         return horas;
     }
     
