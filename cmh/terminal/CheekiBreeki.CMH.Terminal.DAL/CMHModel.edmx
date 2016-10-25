@@ -20,7 +20,6 @@
           <Property Name="FECHOR" Type="date" />
           <Property Name="OBSERVACIONES" Type="varchar2" MaxLength="256" />
           <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" />
-          <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_ESTADO_ATEN" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PERS_ATIENDE" Type="number" Precision="8" Scale="0" Nullable="false" />
@@ -181,11 +180,12 @@
             <PropertyRef Name="ID_PAGO" />
           </Key>
           <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FECHOR" Type="date" />
           <Property Name="ID_BONO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_CAJA" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_DEVOLUCION" Type="number" Precision="8" Scale="0" />
+          <Property Name="FECHOR" Type="date" />
           <Property Name="MONTO_PAGO" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PERS_MEDICO">
           <Key>
@@ -262,17 +262,6 @@
           </Key>
           <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="NOM_TIPO_PREST" Type="varchar2" MaxLength="256" />
-        </EntityType>
-        <EntityType Name="TURNO">
-          <Key>
-            <PropertyRef Name="ID_TURNO" />
-          </Key>
-          <Property Name="ID_TURNO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_TURNO" Type="varchar2" MaxLength="64" />
-          <Property Name="NUMHORA_INI" Type="number" Precision="2" Scale="0" />
-          <Property Name="NUMMINU_INI" Type="number" Precision="2" Scale="0" />
-          <Property Name="NUMHORA_FIN" Type="number" Precision="2" Scale="0" />
-          <Property Name="NUMMINU_FIN" Type="number" Precision="2" Scale="0" />
         </EntityType>
         <Association Name="FK_ASEGURADORA_BONO">
           <End Role="ASEGURADORA" Type="Self.ASEGURADORA" Multiplicity="0..1">
@@ -617,16 +606,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PAGO_ATENCION_AGEN">
-          <End Role="PAGO" Type="Self.PAGO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PAGO">
-              <PropertyRef Name="ID_PAGO" />
+            <Principal Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Principal>
-            <Dependent Role="ATENCION_AGEN">
-              <PropertyRef Name="ID_PAGO" />
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -729,7 +716,6 @@
           <EntitySet Name="TIPO_EQUIPO" EntityType="Self.TIPO_EQUIPO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="TIPO_FICHA" EntityType="Self.TIPO_FICHA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="TIPO_PRES" EntityType="Self.TIPO_PRES" Schema="DEV" store:Type="Tables" />
-          <EntitySet Name="TURNO" EntityType="Self.TURNO" Schema="DEV" store:Type="Tables" />
           <AssociationSet Name="FK_ASEGURADORA_BONO" Association="Self.FK_ASEGURADORA_BONO">
             <End Role="ASEGURADORA" EntitySet="ASEGURADORA" />
             <End Role="BONO" EntitySet="BONO" />
@@ -831,8 +817,8 @@
             <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
           </AssociationSet>
           <AssociationSet Name="FK_PAGO_ATENCION_AGEN" Association="Self.FK_PAGO_ATENCION_AGEN">
-            <End Role="PAGO" EntitySet="PAGO" />
             <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+            <End Role="PAGO" EntitySet="PAGO" />
           </AssociationSet>
           <AssociationSet Name="FK_PERS_MEDICO_ESPECIALIDAD" Association="Self.FK_PERS_MEDICO_ESPECIALIDAD">
             <End Role="ESPECIALIDAD" EntitySet="ESPECIALIDAD" />
@@ -876,7 +862,6 @@
           <Property Name="FECHOR" Type="DateTime" />
           <Property Name="OBSERVACIONES" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="ID_PACIENTE" Type="Int32" />
-          <Property Name="ID_PAGO" Type="Int32" />
           <Property Name="ID_PRESTACION" Type="Int32" />
           <Property Name="ID_ESTADO_ATEN" Type="Int32" />
           <Property Name="ID_PERS_ATIENDE" Type="Int32" Nullable="false" />
@@ -1075,11 +1060,12 @@
             <PropertyRef Name="ID_PAGO" />
           </Key>
           <Property Name="ID_PAGO" Type="Int32" Nullable="false" />
-          <Property Name="FECHOR" Type="DateTime" />
           <Property Name="ID_BONO" Type="Int32" />
           <Property Name="ID_CAJA" Type="Int32" />
           <Property Name="ID_DEVOLUCION" Type="Int32" />
+          <Property Name="FECHOR" Type="DateTime" />
           <Property Name="MONTO_PAGO" Type="Int32" />
+          <Property Name="ID_ATENCION_AGEN" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_PAGO_ATENCION_AGEN" FromRole="PAGO" ToRole="ATENCION_AGEN" />
           <NavigationProperty Name="BONO" Relationship="Self.FK_BONO_PAGO" FromRole="PAGO" ToRole="BONO" />
           <NavigationProperty Name="CAJA" Relationship="Self.FK_CAJA_PAGO" FromRole="PAGO" ToRole="CAJA" />
@@ -1179,17 +1165,6 @@
           <Property Name="ID_TIPO_PRESTACION" Type="Int32" Nullable="false" />
           <Property Name="NOM_TIPO_PREST" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PRESTACION" Relationship="Self.FK_TIPO_PRES_PRESTACION" FromRole="TIPO_PRES" ToRole="PRESTACION" />
-        </EntityType>
-        <EntityType Name="TURNO">
-          <Key>
-            <PropertyRef Name="ID_TURNO" />
-          </Key>
-          <Property Name="ID_TURNO" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRE_TURNO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="NUMHORA_INI" Type="Byte" />
-          <Property Name="NUMMINU_INI" Type="Byte" />
-          <Property Name="NUMHORA_FIN" Type="Byte" />
-          <Property Name="NUMMINU_FIN" Type="Byte" />
         </EntityType>
         <Association Name="FK_ASEGURADORA_BONO">
           <End Role="ASEGURADORA" Type="Self.ASEGURADORA" Multiplicity="0..1">
@@ -1298,16 +1273,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PAGO_ATENCION_AGEN">
-          <End Role="PAGO" Type="Self.PAGO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PAGO">
-              <PropertyRef Name="ID_PAGO" />
+            <Principal Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Principal>
-            <Dependent Role="ATENCION_AGEN">
-              <PropertyRef Name="ID_PAGO" />
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1646,7 +1619,6 @@
           <EntitySet Name="TIPO_EQUIPO" EntityType="Self.TIPO_EQUIPO" />
           <EntitySet Name="TIPO_FICHA" EntityType="Self.TIPO_FICHA" />
           <EntitySet Name="TIPO_PRES" EntityType="Self.TIPO_PRES" />
-          <EntitySet Name="TURNO" EntityType="Self.TURNO" />
           <AssociationSet Name="FK_ASEGURADORA_BONO" Association="Self.FK_ASEGURADORA_BONO">
             <End Role="ASEGURADORA" EntitySet="ASEGURADORA" />
             <End Role="BONO" EntitySet="BONO" />
@@ -1680,8 +1652,8 @@
             <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
           </AssociationSet>
           <AssociationSet Name="FK_PAGO_ATENCION_AGEN" Association="Self.FK_PAGO_ATENCION_AGEN">
-            <End Role="PAGO" EntitySet="PAGO" />
             <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+            <End Role="PAGO" EntitySet="PAGO" />
           </AssociationSet>
           <AssociationSet Name="FK_CUEN_BANCARIA_BANCO" Association="Self.FK_CUEN_BANCARIA_BANCO">
             <End Role="BANCO" EntitySet="BANCO" />
@@ -1793,7 +1765,6 @@
                 <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
                 <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
                 <ScalarProperty Name="ID_PACIENTE" ColumnName="ID_PACIENTE" />
-                <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
                 <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
                 <ScalarProperty Name="ID_ESTADO_ATEN" ColumnName="ID_ESTADO_ATEN" />
                 <ScalarProperty Name="ID_PERS_ATIENDE" ColumnName="ID_PERS_ATIENDE" />
@@ -1972,11 +1943,12 @@
             <EntityTypeMapping TypeName="CMHModel.PAGO">
               <MappingFragment StoreEntitySet="PAGO">
                 <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
-                <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
                 <ScalarProperty Name="ID_BONO" ColumnName="ID_BONO" />
                 <ScalarProperty Name="ID_CAJA" ColumnName="ID_CAJA" />
                 <ScalarProperty Name="ID_DEVOLUCION" ColumnName="ID_DEVOLUCION" />
+                <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
                 <ScalarProperty Name="MONTO_PAGO" ColumnName="MONTO_PAGO" />
+                <ScalarProperty Name="ID_ATENCION_AGEN" ColumnName="ID_ATENCION_AGEN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2061,18 +2033,6 @@
               <MappingFragment StoreEntitySet="TIPO_PRES">
                 <ScalarProperty Name="ID_TIPO_PRESTACION" ColumnName="ID_TIPO_PRESTACION" />
                 <ScalarProperty Name="NOM_TIPO_PREST" ColumnName="NOM_TIPO_PREST" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TURNO">
-            <EntityTypeMapping TypeName="CMHModel.TURNO">
-              <MappingFragment StoreEntitySet="TURNO">
-                <ScalarProperty Name="ID_TURNO" ColumnName="ID_TURNO" />
-                <ScalarProperty Name="NOMBRE_TURNO" ColumnName="NOMBRE_TURNO" />
-                <ScalarProperty Name="NUMHORA_INI" ColumnName="NUMHORA_INI" />
-                <ScalarProperty Name="NUMMINU_INI" ColumnName="NUMMINU_INI" />
-                <ScalarProperty Name="NUMHORA_FIN" ColumnName="NUMHORA_FIN" />
-                <ScalarProperty Name="NUMMINU_FIN" ColumnName="NUMMINU_FIN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

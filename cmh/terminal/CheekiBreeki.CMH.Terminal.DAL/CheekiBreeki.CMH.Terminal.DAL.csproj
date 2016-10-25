@@ -155,9 +155,6 @@
     <Compile Include="TIPO_PRES.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TURNO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

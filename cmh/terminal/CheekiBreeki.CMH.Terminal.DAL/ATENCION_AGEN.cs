@@ -17,13 +17,13 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public ATENCION_AGEN()
         {
             this.RES_ATENCION = new HashSet<RES_ATENCION>();
+            this.PAGO = new HashSet<PAGO>();
         }
     
         public int ID_ATENCION_AGEN { get; set; }
         public Nullable<System.DateTime> FECHOR { get; set; }
         public string OBSERVACIONES { get; set; }
         public Nullable<int> ID_PACIENTE { get; set; }
-        public Nullable<int> ID_PAGO { get; set; }
         public Nullable<int> ID_PRESTACION { get; set; }
         public Nullable<int> ID_ESTADO_ATEN { get; set; }
         public int ID_PERS_ATIENDE { get; set; }
@@ -37,6 +37,6 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public virtual ICollection<RES_ATENCION> RES_ATENCION { get; set; }
         public virtual ESTADO_ATEN ESTADO_ATEN { get; set; }
         public virtual PACIENTE PACIENTE { get; set; }
-        public virtual PAGO PAGO { get; set; }
+        public virtual ICollection<PAGO> PAGO { get; set; }
     }
 }

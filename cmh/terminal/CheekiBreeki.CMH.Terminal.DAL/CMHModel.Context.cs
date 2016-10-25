@@ -53,6 +53,5 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public virtual DbSet<TIPO_EQUIPO> TIPO_EQUIPO { get; set; }
         public virtual DbSet<TIPO_FICHA> TIPO_FICHA { get; set; }
         public virtual DbSet<TIPO_PRES> TIPO_PRES { get; set; }
-        public virtual DbSet<TURNO> TURNO { get; set; }
     }
 }
