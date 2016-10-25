@@ -796,5 +796,62 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Assert.AreEqual(resultado, resultadoEsperado1);
         }
         #endregion
+
+        #region Envío correo
+        [TestMethod]
+        public void enviarCorreoTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Envío correcto
+            string receptor1, titulo1, cuerpo1;
+            receptor1 = "fjaqueg@gmail.com";
+            titulo1 = "Prueba de correos CMH";
+            cuerpo1 = "Esta es una prueba exitosa del envío de correos para el portafolio 2016";
+
+            Boolean res1 = at.enviarCorreo(receptor1, titulo1, cuerpo1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+
+            // Caso 2: Receptor vacío
+            string receptor2, titulo2, cuerpo2;
+            receptor2 = null;
+            titulo2 = "Prueba de correos CMH";
+            cuerpo2 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
+
+            Boolean res2 = at.enviarCorreo(receptor2, titulo2, cuerpo2);
+            Boolean resultadoEsperado2 = false;
+            Assert.AreEqual(res2, resultadoEsperado2);
+
+            // Caso 3: Título vacío
+            string receptor3, titulo3, cuerpo3;
+            receptor3 = "fjaqueg@gmail.com";
+            titulo3 = string.Empty;
+            cuerpo3 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
+
+            Boolean res3 = at.enviarCorreo(receptor3, titulo3, cuerpo3);
+            Boolean resultadoEsperado3 = false;
+            Assert.AreEqual(res3, resultadoEsperado3);
+
+            // Caso 4: Cuerpo vacío
+            string receptor4, titulo4, cuerpo4;
+            receptor4 = "fjaqueg@gmail.com";
+            titulo4 = "Prueba de correos CMH";
+            cuerpo4 = "";
+
+            Boolean res4 = at.enviarCorreo(receptor4, titulo4, cuerpo4);
+            Boolean resultadoEsperado4 = false;
+            Assert.AreEqual(res4, resultadoEsperado4);
+
+            // Caso 5: Receptor inválido
+            string receptor5, titulo5, cuerpo5;
+            receptor5 = "correoinvalido";
+            titulo5 = "Prueba de correos CMH";
+            cuerpo5 = "Esta es una prueba fallida del envío de correos para el portafolio 5016";
+
+            Boolean res5 = at.enviarCorreo(receptor5, titulo5, cuerpo5);
+            Boolean resultadoEsperado5 = false;
+            Assert.AreEqual(res5, resultadoEsperado5);
+        }
+        #endregion
     }
 }
