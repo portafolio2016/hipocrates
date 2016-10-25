@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -56,9 +57,6 @@ public class AtencionAgen implements Serializable {
     @JoinColumn(name = "ID_PACIENTE", referencedColumnName = "ID_PACIENTE")
     @ManyToOne
     private Paciente idPaciente;
-    @JoinColumn(name = "ID_PAGO", referencedColumnName = "ID_PAGO")
-    @ManyToOne
-    private Pago idPago;
     @JoinColumn(name = "ID_PERS_SOLICITA", referencedColumnName = "ID_PERSONAL_MEDICO")
     @ManyToOne
     private PersMedico idPersSolicita;
@@ -70,6 +68,8 @@ public class AtencionAgen implements Serializable {
     private Prestacion idPrestacion;
     @OneToMany(mappedBy = "idAtencionAgen")
     private Collection<ResAtencion> resAtencionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAtencionAgen")
+    private Collection<Pago> pagoCollection;
 
     public AtencionAgen() {
     }
@@ -126,14 +126,6 @@ public class AtencionAgen implements Serializable {
         this.idPaciente = idPaciente;
     }
 
-    public Pago getIdPago() {
-        return idPago;
-    }
-
-    public void setIdPago(Pago idPago) {
-        this.idPago = idPago;
-    }
-
     public PersMedico getIdPersSolicita() {
         return idPersSolicita;
     }
@@ -165,6 +157,15 @@ public class AtencionAgen implements Serializable {
 
     public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
         this.resAtencionCollection = resAtencionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Pago> getPagoCollection() {
+        return pagoCollection;
+    }
+
+    public void setPagoCollection(Collection<Pago> pagoCollection) {
+        this.pagoCollection = pagoCollection;
     }
 
     @Override
