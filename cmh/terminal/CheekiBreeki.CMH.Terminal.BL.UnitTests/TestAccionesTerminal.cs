@@ -796,5 +796,59 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Assert.AreEqual(resultado, resultadoEsperado1);
         }
         #endregion
+
+
+        #region IngresoPaciente
+        [TestMethod]
+        public void ingresoPacienteTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+
+            //Caso 1: Ingreso paciente correcto
+            //Caso 2: Paciente no existente
+            //Caso 3: Atención no existente
+            //Caso 4: Atención no vigente
+        }
+        #endregion
+
+        #region Revisar agenda diaria
+        [TestMethod]
+        public void revisarAgendaDiariaTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            //Caso 1: 
+        }
+        #endregion
+
+        #region Registrar pago
+        [TestMethod]
+        public void registrarPagoTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            //Caso 1: 
+        }
+        #endregion 
+
+        #region Abrir Caja
+        [TestMethod]
+        public void registrarPagoTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            //Caso 1: Caja correcta
+            //
+        }
+        #endregion 
+
+        #region Cerrar caja
+        [TestMethod]
+        public void registrarPagoTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            //Caso 1: 
+        }
+        #endregion 
+
+
+
     }
 }
