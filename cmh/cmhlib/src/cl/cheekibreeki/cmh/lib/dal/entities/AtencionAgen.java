@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -44,28 +45,33 @@ public class AtencionAgen implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_ATENCION_AGEN")
     private Integer idAtencionAgen;
-    @Column(name = "OBSERVACIONES")
-    private String observaciones;
     @Column(name = "FECHOR")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechor;
+    @Column(name = "OBSERVACIONES")
+    private String observaciones;
+    @JoinColumn(name = "ID_BLOQUE", referencedColumnName = "ID_BLOQUE")
+    @ManyToOne(optional = false)
+    private Bloque idBloque;
     @JoinColumn(name = "ID_ESTADO_ATEN", referencedColumnName = "ID_ESTADO_ATEN")
     @ManyToOne
     private EstadoAten idEstadoAten;
     @JoinColumn(name = "ID_PACIENTE", referencedColumnName = "ID_PACIENTE")
     @ManyToOne
     private Paciente idPaciente;
-    @JoinColumn(name = "ID_PAGO", referencedColumnName = "ID_PAGO")
+    @JoinColumn(name = "ID_PERS_SOLICITA", referencedColumnName = "ID_PERSONAL_MEDICO")
     @ManyToOne
-    private Pago idPago;
-    @JoinColumn(name = "ID_PERSONAL_MEDICO", referencedColumnName = "ID_PERSONAL_MEDICO")
-    @ManyToOne
-    private PersMedico idPersonalMedico;
+    private PersMedico idPersSolicita;
+    @JoinColumn(name = "ID_PERS_ATIENDE", referencedColumnName = "ID_PERSONAL_MEDICO")
+    @ManyToOne(optional = false)
+    private PersMedico idPersAtiende;
     @JoinColumn(name = "ID_PRESTACION", referencedColumnName = "ID_PRESTACION")
     @ManyToOne
     private Prestacion idPrestacion;
     @OneToMany(mappedBy = "idAtencionAgen")
     private Collection<ResAtencion> resAtencionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAtencionAgen")
+    private Collection<Pago> pagoCollection;
 
     public AtencionAgen() {
     }
@@ -82,6 +88,14 @@ public class AtencionAgen implements Serializable {
         this.idAtencionAgen = idAtencionAgen;
     }
 
+    public Date getFechor() {
+        return fechor;
+    }
+
+    public void setFechor(Date fechor) {
+        this.fechor = fechor;
+    }
+
     public String getObservaciones() {
         return observaciones;
     }
@@ -90,12 +104,12 @@ public class AtencionAgen implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public Date getFechor() {
-        return fechor;
+    public Bloque getIdBloque() {
+        return idBloque;
     }
 
-    public void setFechor(Date fechor) {
-        this.fechor = fechor;
+    public void setIdBloque(Bloque idBloque) {
+        this.idBloque = idBloque;
     }
 
     public EstadoAten getIdEstadoAten() {
@@ -114,20 +128,20 @@ public class AtencionAgen implements Serializable {
         this.idPaciente = idPaciente;
     }
 
-    public Pago getIdPago() {
-        return idPago;
+    public PersMedico getIdPersSolicita() {
+        return idPersSolicita;
     }
 
-    public void setIdPago(Pago idPago) {
-        this.idPago = idPago;
+    public void setIdPersSolicita(PersMedico idPersSolicita) {
+        this.idPersSolicita = idPersSolicita;
     }
 
-    public PersMedico getIdPersonalMedico() {
-        return idPersonalMedico;
+    public PersMedico getIdPersAtiende() {
+        return idPersAtiende;
     }
 
-    public void setIdPersonalMedico(PersMedico idPersonalMedico) {
-        this.idPersonalMedico = idPersonalMedico;
+    public void setIdPersAtiende(PersMedico idPersAtiende) {
+        this.idPersAtiende = idPersAtiende;
     }
 
     public Prestacion getIdPrestacion() {
@@ -145,6 +159,15 @@ public class AtencionAgen implements Serializable {
 
     public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
         this.resAtencionCollection = resAtencionCollection;
+    }
+
+    @XmlTransient
+    public Collection<Pago> getPagoCollection() {
+        return pagoCollection;
+    }
+
+    public void setPagoCollection(Collection<Pago> pagoCollection) {
+        this.pagoCollection = pagoCollection;
     }
 
     @Override

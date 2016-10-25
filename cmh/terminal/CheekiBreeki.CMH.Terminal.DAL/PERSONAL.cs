@@ -29,6 +29,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public int RUT { get; set; }
         public string VERIFICADOR { get; set; }
         public string EMAIL { get; set; }
+        public bool ACTIVO { get; set; }
     
         public virtual ICollection<FUNCIONARIO> FUNCIONARIO { get; set; }
         public virtual ICollection<PERS_MEDICO> PERS_MEDICO { get; set; }

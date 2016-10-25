@@ -8,6 +8,7 @@ package cl.cheekibreeki.cmh.lib.dal.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -45,13 +46,12 @@ public class PersMedico implements Serializable {
     @JoinColumn(name = "ID_PERSONAL", referencedColumnName = "ID_PERSONAL")
     @ManyToOne
     private Personal idPersonal;
-    @JoinColumn(name = "ID_TURNO", referencedColumnName = "ID_TURNO")
-    @ManyToOne
-    private Turno idTurno;
-    @OneToMany(mappedBy = "idPersonalMedico")
+    @OneToMany(mappedBy = "idPersSolicita")
     private Collection<AtencionAgen> atencionAgenCollection;
-    @OneToMany(mappedBy = "idPersonalMedico")
-    private Collection<ResAtencion> resAtencionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersAtiende")
+    private Collection<AtencionAgen> atencionAgenCollection1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersMedico")
+    private Collection<Horario> horarioCollection;
     @OneToMany(mappedBy = "idPersMedico")
     private Collection<CuenBancaria> cuenBancariaCollection;
 
@@ -86,14 +86,6 @@ public class PersMedico implements Serializable {
         this.idPersonal = idPersonal;
     }
 
-    public Turno getIdTurno() {
-        return idTurno;
-    }
-
-    public void setIdTurno(Turno idTurno) {
-        this.idTurno = idTurno;
-    }
-
     @XmlTransient
     public Collection<AtencionAgen> getAtencionAgenCollection() {
         return atencionAgenCollection;
@@ -104,12 +96,21 @@ public class PersMedico implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ResAtencion> getResAtencionCollection() {
-        return resAtencionCollection;
+    public Collection<AtencionAgen> getAtencionAgenCollection1() {
+        return atencionAgenCollection1;
     }
 
-    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
-        this.resAtencionCollection = resAtencionCollection;
+    public void setAtencionAgenCollection1(Collection<AtencionAgen> atencionAgenCollection1) {
+        this.atencionAgenCollection1 = atencionAgenCollection1;
+    }
+
+    @XmlTransient
+    public Collection<Horario> getHorarioCollection() {
+        return horarioCollection;
+    }
+
+    public void setHorarioCollection(Collection<Horario> horarioCollection) {
+        this.horarioCollection = horarioCollection;
     }
 
     @XmlTransient

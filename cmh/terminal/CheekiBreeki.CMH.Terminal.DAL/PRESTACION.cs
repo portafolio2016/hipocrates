@@ -26,6 +26,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public string CODIGO_PRESTACION { get; set; }
         public Nullable<int> ID_ESPECIALIDAD { get; set; }
         public Nullable<int> ID_TIPO_PRESTACION { get; set; }
+        public bool ACTIVO { get; set; }
     
         public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN { get; set; }
         public virtual ICollection<EQUIPO_REQ> EQUIPO_REQ { get; set; }
