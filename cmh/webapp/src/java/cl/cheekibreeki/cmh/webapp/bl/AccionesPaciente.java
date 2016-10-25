@@ -50,14 +50,14 @@ public class AccionesPaciente {
      */
     public ArrayList<ResAtencion> obtenerExamenes(Paciente paciente){
         Map<String, Object> params = new HashMap<>();
-        params.put("idPaciente", paciente.getIdPaciente());
+        params.put("idPaciente", paciente);
         Controller ctr = new Controller();
-        List<? extends Object>  atencion = ctr.findByQuery("AtencionAgen.findByIdPaciente", params);
+        List<? extends Object>  atenciones = ctr.findByQuery("AtencionAgen.findByIdPaciente", params);
         ArrayList<ResAtencion> resAtencion = new ArrayList<>();
-        for(Object  x : atencion){
+        for(Object  x : atenciones){
             Map<String, Object> paramsAux = new HashMap<>();
             AtencionAgen atencionAux = (AtencionAgen)x;
-            paramsAux.put("idAtencionAgen", atencionAux.getIdAtencionAgen());
+            paramsAux.put("idAtencionAgen", atencionAux);
             List<? extends Object>  resultado = ctr.findByQuery("ResAtencion.findByIdAtencionAgen", paramsAux);
             for(Object  y : resultado){
                 resAtencion.add((ResAtencion)y);

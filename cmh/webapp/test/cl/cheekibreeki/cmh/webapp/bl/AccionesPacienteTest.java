@@ -102,13 +102,17 @@ public class AccionesPacienteTest {
     public void testObtenerExamenes() {
          System.out.println("obtenerExamenes");
          AccionesPaciente instance = new AccionesPaciente();
+         Controller ctr = new Controller();
+         Map<String, Object> params1 = new HashMap<>();
+         params1.put("rut", this.paciente.getRut());
+         Paciente pacienteAux = (Paciente)ctr.findByQuery("Paciente.findByRut", params1).get(0);
  
          AtencionAgen atencion = new AtencionAgen();
          ResAtencion resAtencion = new ResAtencion();
          
          //Prueba 1: Si no hay examenes asociados
-         InsertAtencionesYExamenes(atencion, resAtencion, true);
-         ArrayList<ResAtencion> result = instance.obtenerExamenes(this.paciente);
+         InsertAtencionesYExamenes(atencion, resAtencion, true, ctr);
+         ArrayList<ResAtencion> result = instance.obtenerExamenes(pacienteAux);
          if(result.isEmpty()){
              System.out.println("El paciente no tiene examenes asociados");
          }else{
@@ -116,8 +120,8 @@ public class AccionesPacienteTest {
          }
          
          //Prueba 2: Si hay examenes asociados
-         InsertAtencionesYExamenes(atencion, resAtencion, false);
-         result = instance.obtenerExamenes(this.paciente);
+         InsertAtencionesYExamenes(atencion, resAtencion, false, ctr);
+         result = instance.obtenerExamenes(pacienteAux);
          if(result.isEmpty()){
              fail("El paciente no tiene examenes asociados");
          }else{
@@ -125,8 +129,7 @@ public class AccionesPacienteTest {
          }
     }
     
-    public void InsertAtencionesYExamenes(AtencionAgen atencion,ResAtencion resAtencion, boolean delete){
-        Controller ctr = new Controller();
+    public void InsertAtencionesYExamenes(AtencionAgen atencion,ResAtencion resAtencion, boolean delete, Controller ctr){
         if(!delete){
             Map<String, Object> params1 = new HashMap<>();
             params1.put("rut", this.paciente.getRut());
@@ -143,10 +146,9 @@ public class AccionesPacienteTest {
             assertEquals(true, x);
             
             Map<String, Object> params2 = new HashMap<>();
-            params2.put("idPaciente", pacienteAux.getIdPaciente());
-            List<? extends Object> atenciones = ctr.findByQuery("AtencionAgen.findByIdPaciente", params2);//error
-            System.out.println("//"+atenciones.size());
-            AtencionAgen atencionAux = (AtencionAgen)atenciones.get(0);
+            params2.put("idPaciente", pacienteAux);
+            List<? extends Object> atenciones = ctr.findByQuery("AtencionAgen.findByIdPaciente", params2);
+            AtencionAgen atencionAux = (AtencionAgen)atenciones.get(atenciones.size()-1);
             resAtencion.setAtencionAbierta(Short.parseShort("0"));
             resAtencion.setComentario("test");
             resAtencion.setIdAtencionAgen(atencionAux);
@@ -165,8 +167,9 @@ public class AccionesPacienteTest {
                 return;
             
              params = new HashMap<>();
-            params.put("idPaciente", pacienteAux.getIdPaciente());
-            AtencionAgen atencionAux = (AtencionAgen)ctr.findByQuery("AtencionAgen.findByIdPaciente", params);
+            params.put("idPaciente", pacienteAux);
+            try{
+            AtencionAgen atencionAux = (AtencionAgen)ctr.findByQuery("AtencionAgen.findByIdPaciente", params).get(0);
             if(atencionAux == null)
                 return;
             else
@@ -174,9 +177,12 @@ public class AccionesPacienteTest {
             
             params = new HashMap<>();
             params.put("idAtencionAgen", atencionAux.getIdAtencionAgen());
-            ResAtencion resAtencionAux = (ResAtencion)ctr.findByQuery("ResAtencion.findByIdAtencionAgen", params);
+            ResAtencion resAtencionAux = (ResAtencion)ctr.findByQuery("ResAtencion.findByIdAtencionAgen", params).get(0);
             if(resAtencionAux != null)
-                Controller.remove(ResAtencion.class, resAtencionAux.getIdResultadoAtencion());          
+                Controller.remove(ResAtencion.class, resAtencionAux.getIdResultadoAtencion());   
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
         }  
     }
 
@@ -188,26 +194,26 @@ public class AccionesPacienteTest {
     }
 
     /**
-     * Test of obtenerAtenciones method, of class AccionesPaciente.
-     */
-    @Test
-    public void testObtenerAtenciones_Date_PersMedico() {
-    }
-
-    /**
      * Test of agendarAtencion method, of class AccionesPaciente.
      */
     @Test
     public void testAgendarAtencion() {
     }
-
-    /**
-     * Test of obtenerAtencionesPendientes method, of class AccionesPaciente.
+    
+      /**
+     * Test of obtenerAtenciones method, of class AccionesPaciente.
      */
     @Test
     public void testObtenerAtencionesPendientes() {
     }
 
+    /**
+     * Test of obtenerMedicosPorPrestacion method, of class AccionesPaciente.
+     */
+    @Test
+    public void testObtenerMedicosPorPrestacion() {
+    }
+    
     /**
      * Test of anularAtencion method, of class AccionesPaciente.
      */
