@@ -3,13 +3,17 @@ package cl.cheekibreeki.cmh.webapp.bl;
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.Archivo;
 import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
+import cl.cheekibreeki.cmh.lib.dal.entities.Especialidad;
 import cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten;
 import cl.cheekibreeki.cmh.lib.dal.entities.OrdenAnalisis;
 import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
 import cl.cheekibreeki.cmh.lib.dal.entities.Pago;
 import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
+import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
 import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
 import cl.cheekibreeki.cmh.lib.dal.entities.ResAtencion;
+import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
+import cl.cheekibreeki.cmh.lib.dal.entities.Turno;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -212,6 +216,87 @@ public class AccionesPacienteTest {
      */
     @Test
     public void testObtenerMedicosPorPrestacion() {
+        System.out.println("obtenerMedicosPorPrestacion");
+        AccionesPaciente instance = new AccionesPaciente();
+        Controller ctr = new Controller();
+        
+        //Prueba 1: Se encuentran medicos por prestacion
+        Prestacion prestacionAux = InitPrestacion(ctr);
+        ArrayList<PersMedico> persMedicos = instance.obtenerMedicosPorPrestacion(prestacionAux);
+        if(!persMedicos.isEmpty()){
+            System.out.println("Se encontraror medicos por prestacion");
+        }else{
+             fail("No se encontraron medicos por prestacion");
+        }
+        
+        //Prueba 2: No se encuentran medicos por prestacion
+        Prestacion prestacionVacia = new Prestacion();
+        persMedicos = instance.obtenerMedicosPorPrestacion(prestacionVacia);
+        if(!persMedicos.isEmpty()){
+             fail("Se encontraror medicos por prestacion");
+        }else{
+             System.out.println("No se encontraron medicos por prestacion");
+        }
+        
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("rut", this.paciente.getRut());
+        Paciente pacienteAux = (Paciente)ctr.findByQuery("Paciente.findByRut", params1).get(0);
+    }
+    
+    private Prestacion InitPrestacion(Controller ctr){
+        //Eliminar ultimo PersMedico
+        Map<String, Object> params = new HashMap<>();
+        List<? extends Object> persMedicos = ctr.findByQuery("PersMedico.findAll", params);
+        if(!persMedicos.isEmpty()){
+            PersMedico persMedicoAux = (PersMedico)persMedicos.get(persMedicos.size()-1);
+            Controller.remove(PersMedico.class, persMedicoAux.getIdPersonalMedico());
+        }
+        //Eliminar ultima Prestacion
+        params = new HashMap<>();
+        List<? extends Object> prestaciones = ctr.findByQuery("Prestacion.findAll", params);
+        if(!prestaciones.isEmpty()){
+            Prestacion prestacionAux = (Prestacion)prestaciones.get(prestaciones.size()-1);
+            Controller.remove(Prestacion.class, prestacionAux.getIdPrestacion());
+        }
+        //Eliminar ultima Especialidad
+        params = new HashMap<>();
+        List<? extends Object> especialidades = ctr.findByQuery("Especialidad.findAll", params);
+        if(!especialidades.isEmpty()){
+            Especialidad especialidadAux = (Especialidad)especialidades.get(especialidades.size()-1);
+            Controller.remove(Especialidad.class, especialidadAux.getIdEspecialidad());
+        }
+        //Crear Especialidad
+        Especialidad esp = new Especialidad();
+        esp.setNomEspecialidad("Test");
+        Object obj = esp;
+        Controller.upsert(obj);
+        params = new HashMap<>();
+        especialidades = ctr.findByQuery("Especialidad.findAll", params);
+        if(!especialidades.isEmpty()){
+            esp = (Especialidad)especialidades.get(especialidades.size()-1);
+        }
+        //Crear PersMedico
+        PersMedico perMe = new PersMedico();
+        perMe.setIdEspecialidad(esp);
+        //perMe.setIdPersonal(new Personal());
+        //perMe.setIdTurno(new Turno());
+        obj = perMe;
+        Controller.upsert(obj);
+        //Crear Prestacion
+        Prestacion pre = new Prestacion();
+        pre.setCodigoPrestacion("Test");
+        pre.setIdEspecialidad(esp);
+        //pre.setIdTipoPrestacion(new TipoPres());
+        pre.setNomPrestacion("PrestacionTest");
+        pre.setPrecioPrestacion(1000);
+        obj = pre;
+        Controller.upsert(obj);
+        params = new HashMap<>();
+        prestaciones = ctr.findByQuery("Prestacion.findAll", params);
+        if(!prestaciones.isEmpty()){
+            pre = (Prestacion)prestaciones.get(prestaciones.size()-1);
+        }
+        return pre;
     }
     
     /**

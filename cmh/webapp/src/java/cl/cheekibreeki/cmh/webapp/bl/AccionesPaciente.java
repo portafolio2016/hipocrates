@@ -150,8 +150,17 @@ public class AccionesPaciente {
      * @return  un ArrayList de personal medico que realiza la prestacion
      */
     public ArrayList<PersMedico> obtenerMedicosPorPrestacion(Prestacion prestacion){
-        //TODO todo
-        return null;
+        Controller ctr = new Controller();
+        ArrayList<PersMedico> atenciones = new ArrayList<>();
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("idEspecialidad", prestacion.getIdEspecialidad());
+        List<? extends Object> atencionesAux = ctr.findByQuery("PersMedico.findByIdEspecialidad", params1);
+        if(!atencionesAux.isEmpty()){
+            for (Object x : atencionesAux) {
+                atenciones.add((PersMedico)x);
+            }
+        }
+        return atenciones;
     }
     
     /**
