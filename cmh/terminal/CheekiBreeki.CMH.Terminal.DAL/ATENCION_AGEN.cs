@@ -20,19 +20,23 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         }
     
         public int ID_ATENCION_AGEN { get; set; }
+        public Nullable<System.DateTime> FECHOR { get; set; }
         public string OBSERVACIONES { get; set; }
         public Nullable<int> ID_PACIENTE { get; set; }
-        public Nullable<int> ID_PERSONAL_MEDICO { get; set; }
         public Nullable<int> ID_PAGO { get; set; }
         public Nullable<int> ID_PRESTACION { get; set; }
-        public Nullable<System.DateTime> FECHOR { get; set; }
         public Nullable<int> ID_ESTADO_ATEN { get; set; }
+        public int ID_PERS_ATIENDE { get; set; }
+        public Nullable<int> ID_PERS_SOLICITA { get; set; }
+        public int ID_BLOQUE { get; set; }
     
+        public virtual BLOQUE BLOQUE { get; set; }
+        public virtual PERS_MEDICO PERS_MEDICO { get; set; }
+        public virtual PERS_MEDICO PERS_MEDICO1 { get; set; }
         public virtual PRESTACION PRESTACION { get; set; }
         public virtual ICollection<RES_ATENCION> RES_ATENCION { get; set; }
         public virtual ESTADO_ATEN ESTADO_ATEN { get; set; }
         public virtual PACIENTE PACIENTE { get; set; }
         public virtual PAGO PAGO { get; set; }
-        public virtual PERS_MEDICO PERS_MEDICO { get; set; }
     }
 }
