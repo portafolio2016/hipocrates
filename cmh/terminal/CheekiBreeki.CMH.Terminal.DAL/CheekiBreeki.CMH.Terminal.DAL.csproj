@@ -55,9 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ARCHIVO.cs">
-      <DependentUpon>CMHModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ASEGURADORA.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
@@ -65,6 +62,9 @@
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="BANCO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BLOQUE.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="BONO.cs">
@@ -97,6 +97,9 @@
     <Compile Include="DEVOLUCION.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DIA_SEM.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ENTRADA_FICHA.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
@@ -109,10 +112,10 @@
     <Compile Include="ESTADO_ATEN.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FICHA.cs">
+    <Compile Include="FUNCIONARIO.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FUNCIONARIO.cs">
+    <Compile Include="HORARIO.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="INVENTARIO.cs">
@@ -146,10 +149,10 @@
     <Compile Include="TIPO_EQUIPO.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TIPO_PRES.cs">
+    <Compile Include="TIPO_FICHA.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TURNO.cs">
+    <Compile Include="TIPO_PRES.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

@@ -5,15 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="CMHModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ARCHIVO">
-          <Key>
-            <PropertyRef Name="ID_ARCHIVO" />
-          </Key>
-          <Property Name="ID_ARCHIVO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FILE_URI" Type="varchar2" MaxLength="256" />
-          <Property Name="ID_RESULTADO_ATENCION" Type="number" Precision="8" Scale="0" />
-          <Property Name="EXTENSION" Type="varchar2" MaxLength="16" Nullable="false" />
-        </EntityType>
         <EntityType Name="ASEGURADORA">
           <Key>
             <PropertyRef Name="ID_ASEGURADORA" />
@@ -26,13 +17,14 @@
             <PropertyRef Name="ID_ATENCION_AGEN" />
           </Key>
           <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FECHOR" Type="date" />
           <Property Name="OBSERVACIONES" Type="varchar2" MaxLength="256" />
           <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" />
-          <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" />
-          <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" />
-          <Property Name="FECHOR" Type="date" />
           <Property Name="ID_ESTADO_ATEN" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PERS_ATIENDE" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_PERS_SOLICITA" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_BLOQUE" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -40,6 +32,18 @@
           </Key>
           <Property Name="ID_BANCO" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="BLOQUE">
+          <Key>
+            <PropertyRef Name="ID_BLOQUE" />
+          </Key>
+          <Property Name="ID_BLOQUE" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NUM_BLOQUE" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NUM_HORA_INI" Type="number" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="NUM_MINU_INI" Type="number" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="NUM_HORA_FIN" Type="number" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="NUM_MINU_FIN" Type="number" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="ID_DIA_SEM" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="BONO">
           <Key>
@@ -83,6 +87,13 @@
           <Property Name="ID_DEVOLUCION" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="NOM_TIPO_DEV" Type="varchar2" MaxLength="128" />
         </EntityType>
+        <EntityType Name="DIA_SEM">
+          <Key>
+            <PropertyRef Name="ID_DIA" />
+          </Key>
+          <Property Name="ID_DIA" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_IDA" Type="varchar2" MaxLength="64" />
+        </EntityType>
         <EntityType Name="ENTRADA_FICHA">
           <Key>
             <PropertyRef Name="ID_ENTRADA_FICHA" />
@@ -91,7 +102,8 @@
           <Property Name="NOMBRE_ENTRADA" Type="varchar2" MaxLength="64" />
           <Property Name="CONTENIDO_ENTRADA" Type="varchar2" MaxLength="1028" />
           <Property Name="FECHA_ENTRADA" Type="date" />
-          <Property Name="ID_FICHA" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_TIPO_FICHA" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="EQUIPO_REQ">
           <Key>
@@ -116,15 +128,6 @@
           <Property Name="ID_ESTADO_ATEN" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="NOM_ESTADO_ATEN" Type="varchar2" MaxLength="64" />
         </EntityType>
-        <EntityType Name="FICHA">
-          <Key>
-            <PropertyRef Name="ID_FICHA" />
-          </Key>
-          <Property Name="ID_FICHA" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FEC_NAC" Type="date" />
-          <Property Name="SEXO" Type="char" MaxLength="1" />
-          <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" />
-        </EntityType>
         <EntityType Name="FUNCIONARIO">
           <Key>
             <PropertyRef Name="ID_FUNCIONARIO" />
@@ -132,6 +135,14 @@
           <Property Name="ID_FUNCIONARIO" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="ID_CARGO_FUNCI" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HORARIO">
+          <Key>
+            <PropertyRef Name="ID_HORARIO" />
+          </Key>
+          <Property Name="ID_HORARIO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_BLOQUE" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_PERS_MEDICO" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="INVENTARIO">
           <Key>
@@ -160,17 +171,21 @@
           <Property Name="DIGITO_VERIFICADOR" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="HASHED_PASS" Type="varchar2" MaxLength="1080" />
           <Property Name="EMAIL_PACIENTE" Type="varchar2" MaxLength="512" />
+          <Property Name="SEXO" Type="char" MaxLength="1" />
+          <Property Name="FEC_NAC" Type="date" />
+          <Property Name="ACTIVO" Type="number" Precision="1" Scale="0" />
         </EntityType>
         <EntityType Name="PAGO">
           <Key>
             <PropertyRef Name="ID_PAGO" />
           </Key>
           <Property Name="ID_PAGO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="FECHOR" Type="date" />
           <Property Name="ID_BONO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_CAJA" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_DEVOLUCION" Type="number" Precision="8" Scale="0" />
+          <Property Name="FECHOR" Type="date" />
           <Property Name="MONTO_PAGO" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PERS_MEDICO">
           <Key>
@@ -179,7 +194,6 @@
           <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="ID_ESPECIALIDAD" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" />
-          <Property Name="ID_TURNO" Type="number" Precision="8" Scale="0" />
         </EntityType>
         <EntityType Name="PERSONAL">
           <Key>
@@ -194,6 +208,7 @@
           <Property Name="RUT" Type="number" Precision="9" Scale="0" Nullable="false" />
           <Property Name="VERIFICADOR" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="EMAIL" Type="varchar2" MaxLength="512" />
+          <Property Name="ACTIVO" Type="number" Precision="1" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PRESTACION">
           <Key>
@@ -205,6 +220,7 @@
           <Property Name="CODIGO_PRESTACION" Type="varchar2" MaxLength="64" />
           <Property Name="ID_ESPECIALIDAD" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" />
+          <Property Name="ACTIVO" Type="number" Precision="1" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="RES_ATENCION">
           <Key>
@@ -216,6 +232,8 @@
           <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_ORDEN_ANALISIS" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PERSONAL_MEDICO" Type="number" Precision="8" Scale="0" />
+          <Property Name="ARCHIVO_B64" Type="clob" />
+          <Property Name="EXT_ARCHIVO" Type="varchar2" MaxLength="3" />
         </EntityType>
         <EntityType Name="TIPO_C_BANCARIA">
           <Key>
@@ -231,23 +249,19 @@
           <Property Name="ID_TIPO_EQUIPO" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_TIPO_EQUIPO" Type="varchar2" MaxLength="256" />
         </EntityType>
+        <EntityType Name="TIPO_FICHA">
+          <Key>
+            <PropertyRef Name="ID_TIPO_FICHA" />
+          </Key>
+          <Property Name="ID_TIPO_FICHA" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOM_TIPO_FICHA" Type="varchar2" MaxLength="64" />
+        </EntityType>
         <EntityType Name="TIPO_PRES">
           <Key>
             <PropertyRef Name="ID_TIPO_PRESTACION" />
           </Key>
           <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="NOM_TIPO_PREST" Type="varchar2" MaxLength="256" />
-        </EntityType>
-        <EntityType Name="TURNO">
-          <Key>
-            <PropertyRef Name="ID_TURNO" />
-          </Key>
-          <Property Name="ID_TURNO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_TURNO" Type="varchar2" MaxLength="64" />
-          <Property Name="NUMHORA_INI" Type="number" Precision="2" Scale="0" />
-          <Property Name="NUMMINU_INI" Type="number" Precision="2" Scale="0" />
-          <Property Name="NUMHORA_FIN" Type="number" Precision="2" Scale="0" />
-          <Property Name="NUMMINU_FIN" Type="number" Precision="2" Scale="0" />
         </EntityType>
         <Association Name="FK_ASEGURADORA_BONO">
           <End Role="ASEGURADORA" Type="Self.ASEGURADORA" Multiplicity="0..1">
@@ -260,6 +274,42 @@
             </Principal>
             <Dependent Role="BONO">
               <PropertyRef Name="ID_ASEGURADORA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_BLOQUE">
+          <End Role="BLOQUE" Type="Self.BLOQUE" Multiplicity="1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BLOQUE">
+              <PropertyRef Name="ID_BLOQUE" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_BLOQUE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_PERS_MEDICO">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PERS_ATIENDE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_PERS_MEDICO02">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PERS_SOLICITA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -288,6 +338,20 @@
             </Principal>
             <Dependent Role="RES_ATENCION">
               <PropertyRef Name="ID_ATENCION_AGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BLOQUE_DIA_SEM">
+          <End Role="DIA_SEM" Type="Self.DIA_SEM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BLOQUE" Type="Self.BLOQUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIA_SEM">
+              <PropertyRef Name="ID_DIA" />
+            </Principal>
+            <Dependent Role="BLOQUE">
+              <PropertyRef Name="ID_DIA_SEM" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -389,31 +453,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EJECUTA_RES_ATENCION">
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERS_MEDICO">
-              <PropertyRef Name="ID_PERSONAL_MEDICO" />
-            </Principal>
-            <Dependent Role="RES_ATENCION">
-              <PropertyRef Name="ID_PERSONAL_MEDICO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ENTRADA_FICHA_FICHA">
-          <End Role="FICHA" Type="Self.FICHA" Multiplicity="0..1">
+        <Association Name="FK_ENTRADA_FICHA_PACIENTE">
+          <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="ENTRADA_FICHA" Type="Self.ENTRADA_FICHA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FICHA">
-              <PropertyRef Name="ID_FICHA" />
+            <Principal Role="PACIENTE">
+              <PropertyRef Name="ID_PACIENTE" />
             </Principal>
             <Dependent Role="ENTRADA_FICHA">
-              <PropertyRef Name="ID_FICHA" />
+              <PropertyRef Name="ID_PACIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ENTRADA_FICHA_TIPO_FICHA">
+          <End Role="TIPO_FICHA" Type="Self.TIPO_FICHA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ENTRADA_FICHA" Type="Self.ENTRADA_FICHA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_FICHA">
+              <PropertyRef Name="ID_TIPO_FICHA" />
+            </Principal>
+            <Dependent Role="ENTRADA_FICHA">
+              <PropertyRef Name="ID_TIPO_FICHA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -487,6 +551,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HORARIO_BLOQUE">
+          <End Role="BLOQUE" Type="Self.BLOQUE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HORARIO" Type="Self.HORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BLOQUE">
+              <PropertyRef Name="ID_BLOQUE" />
+            </Principal>
+            <Dependent Role="HORARIO">
+              <PropertyRef Name="ID_BLOQUE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HORARIO_PERS_MEDICO">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="1" />
+          <End Role="HORARIO" Type="Self.HORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="HORARIO">
+              <PropertyRef Name="ID_PERS_MEDICO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ORDEN_ANALISIS_RES_ATENCION">
           <End Role="ORDEN_ANALISIS" Type="Self.ORDEN_ANALISIS" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -515,31 +605,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PACIENTE_FICHA">
-          <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="FICHA" Type="Self.FICHA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PACIENTE">
-              <PropertyRef Name="ID_PACIENTE" />
-            </Principal>
-            <Dependent Role="FICHA">
-              <PropertyRef Name="ID_PACIENTE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PAGO_ATENCION_AGEN">
-          <End Role="PAGO" Type="Self.PAGO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PAGO">
-              <PropertyRef Name="ID_PAGO" />
+            <Principal Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Principal>
-            <Dependent Role="ATENCION_AGEN">
-              <PropertyRef Name="ID_PAGO" />
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -585,34 +659,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RES_ATENCION_ARCHIVO">
-          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ARCHIVO" Type="Self.ARCHIVO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RES_ATENCION">
-              <PropertyRef Name="ID_RESULTADO_ATENCION" />
-            </Principal>
-            <Dependent Role="ARCHIVO">
-              <PropertyRef Name="ID_RESULTADO_ATENCION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SOLICITA_ATENCION_AGEN">
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERS_MEDICO">
-              <PropertyRef Name="ID_PERSONAL_MEDICO" />
-            </Principal>
-            <Dependent Role="ATENCION_AGEN">
-              <PropertyRef Name="ID_PERSONAL_MEDICO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TIPO_EQUIPO_INVENTARIO">
           <End Role="TIPO_EQUIPO" Type="Self.TIPO_EQUIPO" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -641,36 +687,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TURNO_PERS_MEDICO">
-          <End Role="TURNO" Type="Self.TURNO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TURNO">
-              <PropertyRef Name="ID_TURNO" />
-            </Principal>
-            <Dependent Role="PERS_MEDICO">
-              <PropertyRef Name="ID_TURNO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="CMHModelStoreContainer">
-          <EntitySet Name="ARCHIVO" EntityType="Self.ARCHIVO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="ASEGURADORA" EntityType="Self.ASEGURADORA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="ATENCION_AGEN" EntityType="Self.ATENCION_AGEN" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="BANCO" EntityType="Self.BANCO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="BLOQUE" EntityType="Self.BLOQUE" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="BONO" EntityType="Self.BONO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="CAJA" EntityType="Self.CAJA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="CARGO" EntityType="Self.CARGO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="CUEN_BANCARIA" EntityType="Self.CUEN_BANCARIA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="DEVOLUCION" EntityType="Self.DEVOLUCION" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="DIA_SEM" EntityType="Self.DIA_SEM" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="ENTRADA_FICHA" EntityType="Self.ENTRADA_FICHA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="EQUIPO_REQ" EntityType="Self.EQUIPO_REQ" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="ESPECIALIDAD" EntityType="Self.ESPECIALIDAD" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="ESTADO_ATEN" EntityType="Self.ESTADO_ATEN" Schema="DEV" store:Type="Tables" />
-          <EntitySet Name="FICHA" EntityType="Self.FICHA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="HORARIO" EntityType="Self.HORARIO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="INVENTARIO" EntityType="Self.INVENTARIO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="ORDEN_ANALISIS" EntityType="Self.ORDEN_ANALISIS" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="PACIENTE" EntityType="Self.PACIENTE" Schema="DEV" store:Type="Tables" />
@@ -681,11 +714,23 @@
           <EntitySet Name="RES_ATENCION" EntityType="Self.RES_ATENCION" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="TIPO_C_BANCARIA" EntityType="Self.TIPO_C_BANCARIA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="TIPO_EQUIPO" EntityType="Self.TIPO_EQUIPO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="TIPO_FICHA" EntityType="Self.TIPO_FICHA" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="TIPO_PRES" EntityType="Self.TIPO_PRES" Schema="DEV" store:Type="Tables" />
-          <EntitySet Name="TURNO" EntityType="Self.TURNO" Schema="DEV" store:Type="Tables" />
           <AssociationSet Name="FK_ASEGURADORA_BONO" Association="Self.FK_ASEGURADORA_BONO">
             <End Role="ASEGURADORA" EntitySet="ASEGURADORA" />
             <End Role="BONO" EntitySet="BONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_BLOQUE" Association="Self.FK_ATENCION_AGEN_BLOQUE">
+            <End Role="BLOQUE" EntitySet="BLOQUE" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_PERS_MEDICO" Association="Self.FK_ATENCION_AGEN_PERS_MEDICO">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_PERS_MEDICO02" Association="Self.FK_ATENCION_AGEN_PERS_MEDICO02">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
           </AssociationSet>
           <AssociationSet Name="FK_ATENCION_AGEN_PRESTACION" Association="Self.FK_ATENCION_AGEN_PRESTACION">
             <End Role="PRESTACION" EntitySet="PRESTACION" />
@@ -694,6 +739,10 @@
           <AssociationSet Name="FK_ATENCION_AGEN_RES_ATENCION" Association="Self.FK_ATENCION_AGEN_RES_ATENCION">
             <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
             <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BLOQUE_DIA_SEM" Association="Self.FK_BLOQUE_DIA_SEM">
+            <End Role="DIA_SEM" EntitySet="DIA_SEM" />
+            <End Role="BLOQUE" EntitySet="BLOQUE" />
           </AssociationSet>
           <AssociationSet Name="FK_BONO_PAGO" Association="Self.FK_BONO_PAGO">
             <End Role="BONO" EntitySet="BONO" />
@@ -723,12 +772,12 @@
             <End Role="DEVOLUCION" EntitySet="DEVOLUCION" />
             <End Role="PAGO" EntitySet="PAGO" />
           </AssociationSet>
-          <AssociationSet Name="FK_EJECUTA_RES_ATENCION" Association="Self.FK_EJECUTA_RES_ATENCION">
-            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
-            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
+          <AssociationSet Name="FK_ENTRADA_FICHA_PACIENTE" Association="Self.FK_ENTRADA_FICHA_PACIENTE">
+            <End Role="PACIENTE" EntitySet="PACIENTE" />
+            <End Role="ENTRADA_FICHA" EntitySet="ENTRADA_FICHA" />
           </AssociationSet>
-          <AssociationSet Name="FK_ENTRADA_FICHA_FICHA" Association="Self.FK_ENTRADA_FICHA_FICHA">
-            <End Role="FICHA" EntitySet="FICHA" />
+          <AssociationSet Name="FK_ENTRADA_FICHA_TIPO_FICHA" Association="Self.FK_ENTRADA_FICHA_TIPO_FICHA">
+            <End Role="TIPO_FICHA" EntitySet="TIPO_FICHA" />
             <End Role="ENTRADA_FICHA" EntitySet="ENTRADA_FICHA" />
           </AssociationSet>
           <AssociationSet Name="FK_EQUIPO_REQ_PRESTACION" Association="Self.FK_EQUIPO_REQ_PRESTACION">
@@ -751,6 +800,14 @@
             <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
             <End Role="CAJA" EntitySet="CAJA" />
           </AssociationSet>
+          <AssociationSet Name="FK_HORARIO_BLOQUE" Association="Self.FK_HORARIO_BLOQUE">
+            <End Role="BLOQUE" EntitySet="BLOQUE" />
+            <End Role="HORARIO" EntitySet="HORARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HORARIO_PERS_MEDICO" Association="Self.FK_HORARIO_PERS_MEDICO">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="HORARIO" EntitySet="HORARIO" />
+          </AssociationSet>
           <AssociationSet Name="FK_ORDEN_ANALISIS_RES_ATENCION" Association="Self.FK_ORDEN_ANALISIS_RES_ATENCION">
             <End Role="ORDEN_ANALISIS" EntitySet="ORDEN_ANALISIS" />
             <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
@@ -759,13 +816,9 @@
             <End Role="PACIENTE" EntitySet="PACIENTE" />
             <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
           </AssociationSet>
-          <AssociationSet Name="FK_PACIENTE_FICHA" Association="Self.FK_PACIENTE_FICHA">
-            <End Role="PACIENTE" EntitySet="PACIENTE" />
-            <End Role="FICHA" EntitySet="FICHA" />
-          </AssociationSet>
           <AssociationSet Name="FK_PAGO_ATENCION_AGEN" Association="Self.FK_PAGO_ATENCION_AGEN">
-            <End Role="PAGO" EntitySet="PAGO" />
             <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+            <End Role="PAGO" EntitySet="PAGO" />
           </AssociationSet>
           <AssociationSet Name="FK_PERS_MEDICO_ESPECIALIDAD" Association="Self.FK_PERS_MEDICO_ESPECIALIDAD">
             <End Role="ESPECIALIDAD" EntitySet="ESPECIALIDAD" />
@@ -779,14 +832,6 @@
             <End Role="PERSONAL" EntitySet="PERSONAL" />
             <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
           </AssociationSet>
-          <AssociationSet Name="FK_RES_ATENCION_ARCHIVO" Association="Self.FK_RES_ATENCION_ARCHIVO">
-            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
-            <End Role="ARCHIVO" EntitySet="ARCHIVO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SOLICITA_ATENCION_AGEN" Association="Self.FK_SOLICITA_ATENCION_AGEN">
-            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
-            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
-          </AssociationSet>
           <AssociationSet Name="FK_TIPO_EQUIPO_INVENTARIO" Association="Self.FK_TIPO_EQUIPO_INVENTARIO">
             <End Role="TIPO_EQUIPO" EntitySet="TIPO_EQUIPO" />
             <End Role="INVENTARIO" EntitySet="INVENTARIO" />
@@ -795,26 +840,12 @@
             <End Role="TIPO_PRES" EntitySet="TIPO_PRES" />
             <End Role="PRESTACION" EntitySet="PRESTACION" />
           </AssociationSet>
-          <AssociationSet Name="FK_TURNO_PERS_MEDICO" Association="Self.FK_TURNO_PERS_MEDICO">
-            <End Role="TURNO" EntitySet="TURNO" />
-            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CMHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ARCHIVO">
-          <Key>
-            <PropertyRef Name="ID_ARCHIVO" />
-          </Key>
-          <Property Name="ID_ARCHIVO" Type="Int32" Nullable="false" />
-          <Property Name="FILE_URI" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="ID_RESULTADO_ATENCION" Type="Int32" />
-          <Property Name="EXTENSION" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_RES_ATENCION_ARCHIVO" FromRole="ARCHIVO" ToRole="RES_ATENCION" />
-        </EntityType>
         <EntityType Name="ASEGURADORA">
           <Key>
             <PropertyRef Name="ID_ASEGURADORA" />
@@ -828,19 +859,22 @@
             <PropertyRef Name="ID_ATENCION_AGEN" />
           </Key>
           <Property Name="ID_ATENCION_AGEN" Type="Int32" Nullable="false" />
+          <Property Name="FECHOR" Type="DateTime" />
           <Property Name="OBSERVACIONES" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="ID_PACIENTE" Type="Int32" />
-          <Property Name="ID_PERSONAL_MEDICO" Type="Int32" />
-          <Property Name="ID_PAGO" Type="Int32" />
           <Property Name="ID_PRESTACION" Type="Int32" />
-          <Property Name="FECHOR" Type="DateTime" />
           <Property Name="ID_ESTADO_ATEN" Type="Int32" />
+          <Property Name="ID_PERS_ATIENDE" Type="Int32" Nullable="false" />
+          <Property Name="ID_PERS_SOLICITA" Type="Int32" />
+          <Property Name="ID_BLOQUE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BLOQUE" Relationship="Self.FK_ATENCION_AGEN_BLOQUE" FromRole="ATENCION_AGEN" ToRole="BLOQUE" />
+          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_ATENCION_AGEN_PERS_MEDICO" FromRole="ATENCION_AGEN" ToRole="PERS_MEDICO" />
+          <NavigationProperty Name="PERS_MEDICO1" Relationship="Self.FK_ATENCION_AGEN_PERS_MEDICO02" FromRole="ATENCION_AGEN" ToRole="PERS_MEDICO" />
           <NavigationProperty Name="PRESTACION" Relationship="Self.FK_ATENCION_AGEN_PRESTACION" FromRole="ATENCION_AGEN" ToRole="PRESTACION" />
           <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_ATENCION_AGEN_RES_ATENCION" FromRole="ATENCION_AGEN" ToRole="RES_ATENCION" />
           <NavigationProperty Name="ESTADO_ATEN" Relationship="Self.FK_ESTADO_ATEN_ATENCION_AGEN" FromRole="ATENCION_AGEN" ToRole="ESTADO_ATEN" />
           <NavigationProperty Name="PACIENTE" Relationship="Self.FK_PACIENTE_ATENCION_AGEN" FromRole="ATENCION_AGEN" ToRole="PACIENTE" />
           <NavigationProperty Name="PAGO" Relationship="Self.FK_PAGO_ATENCION_AGEN" FromRole="ATENCION_AGEN" ToRole="PAGO" />
-          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_SOLICITA_ATENCION_AGEN" FromRole="ATENCION_AGEN" ToRole="PERS_MEDICO" />
         </EntityType>
         <EntityType Name="BANCO">
           <Key>
@@ -849,6 +883,21 @@
           <Property Name="ID_BANCO" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CUEN_BANCARIA" Relationship="Self.FK_CUEN_BANCARIA_BANCO" FromRole="BANCO" ToRole="CUEN_BANCARIA" />
+        </EntityType>
+        <EntityType Name="BLOQUE">
+          <Key>
+            <PropertyRef Name="ID_BLOQUE" />
+          </Key>
+          <Property Name="ID_BLOQUE" Type="Int32" Nullable="false" />
+          <Property Name="NUM_BLOQUE" Type="Int32" Nullable="false" />
+          <Property Name="NUM_HORA_INI" Type="Byte" Nullable="false" />
+          <Property Name="NUM_MINU_INI" Type="Byte" Nullable="false" />
+          <Property Name="NUM_HORA_FIN" Type="Byte" Nullable="false" />
+          <Property Name="NUM_MINU_FIN" Type="Byte" Nullable="false" />
+          <Property Name="ID_DIA_SEM" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ATENCION_AGEN_BLOQUE" FromRole="BLOQUE" ToRole="ATENCION_AGEN" />
+          <NavigationProperty Name="DIA_SEM" Relationship="Self.FK_BLOQUE_DIA_SEM" FromRole="BLOQUE" ToRole="DIA_SEM" />
+          <NavigationProperty Name="HORARIO" Relationship="Self.FK_HORARIO_BLOQUE" FromRole="BLOQUE" ToRole="HORARIO" />
         </EntityType>
         <EntityType Name="BONO">
           <Key>
@@ -901,6 +950,14 @@
           <Property Name="NOM_TIPO_DEV" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PAGO" Relationship="Self.FK_DEVOLUCION_PAGO" FromRole="DEVOLUCION" ToRole="PAGO" />
         </EntityType>
+        <EntityType Name="DIA_SEM">
+          <Key>
+            <PropertyRef Name="ID_DIA" />
+          </Key>
+          <Property Name="ID_DIA" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_IDA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BLOQUE" Relationship="Self.FK_BLOQUE_DIA_SEM" FromRole="DIA_SEM" ToRole="BLOQUE" />
+        </EntityType>
         <EntityType Name="ENTRADA_FICHA">
           <Key>
             <PropertyRef Name="ID_ENTRADA_FICHA" />
@@ -909,8 +966,10 @@
           <Property Name="NOMBRE_ENTRADA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="CONTENIDO_ENTRADA" Type="String" MaxLength="1028" FixedLength="false" Unicode="false" />
           <Property Name="FECHA_ENTRADA" Type="DateTime" />
-          <Property Name="ID_FICHA" Type="Int32" />
-          <NavigationProperty Name="FICHA" Relationship="Self.FK_ENTRADA_FICHA_FICHA" FromRole="ENTRADA_FICHA" ToRole="FICHA" />
+          <Property Name="ID_PACIENTE" Type="Int32" />
+          <Property Name="ID_TIPO_FICHA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PACIENTE" Relationship="Self.FK_ENTRADA_FICHA_PACIENTE" FromRole="ENTRADA_FICHA" ToRole="PACIENTE" />
+          <NavigationProperty Name="TIPO_FICHA" Relationship="Self.FK_ENTRADA_FICHA_TIPO_FICHA" FromRole="ENTRADA_FICHA" ToRole="TIPO_FICHA" />
         </EntityType>
         <EntityType Name="EQUIPO_REQ">
           <Key>
@@ -940,17 +999,6 @@
           <Property Name="NOM_ESTADO_ATEN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ESTADO_ATEN_ATENCION_AGEN" FromRole="ESTADO_ATEN" ToRole="ATENCION_AGEN" />
         </EntityType>
-        <EntityType Name="FICHA">
-          <Key>
-            <PropertyRef Name="ID_FICHA" />
-          </Key>
-          <Property Name="ID_FICHA" Type="Int32" Nullable="false" />
-          <Property Name="FEC_NAC" Type="DateTime" />
-          <Property Name="SEXO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="ID_PACIENTE" Type="Int32" />
-          <NavigationProperty Name="ENTRADA_FICHA" Relationship="Self.FK_ENTRADA_FICHA_FICHA" FromRole="FICHA" ToRole="ENTRADA_FICHA" />
-          <NavigationProperty Name="PACIENTE" Relationship="Self.FK_PACIENTE_FICHA" FromRole="FICHA" ToRole="PACIENTE" />
-        </EntityType>
         <EntityType Name="FUNCIONARIO">
           <Key>
             <PropertyRef Name="ID_FUNCIONARIO" />
@@ -961,6 +1009,16 @@
           <NavigationProperty Name="CAJA" Relationship="Self.FK_FUNCIONARIO_CAJA" FromRole="FUNCIONARIO" ToRole="CAJA" />
           <NavigationProperty Name="CARGO" Relationship="Self.FK_CARGO_FUNCIONARIO" FromRole="FUNCIONARIO" ToRole="CARGO" />
           <NavigationProperty Name="PERSONAL" Relationship="Self.FK_PERSONAL_FUNCIONARIO" FromRole="FUNCIONARIO" ToRole="PERSONAL" />
+        </EntityType>
+        <EntityType Name="HORARIO">
+          <Key>
+            <PropertyRef Name="ID_HORARIO" />
+          </Key>
+          <Property Name="ID_HORARIO" Type="Int32" Nullable="false" />
+          <Property Name="ID_BLOQUE" Type="Int32" Nullable="false" />
+          <Property Name="ID_PERS_MEDICO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BLOQUE" Relationship="Self.FK_HORARIO_BLOQUE" FromRole="HORARIO" ToRole="BLOQUE" />
+          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_HORARIO_PERS_MEDICO" FromRole="HORARIO" ToRole="PERS_MEDICO" />
         </EntityType>
         <EntityType Name="INVENTARIO">
           <Key>
@@ -991,19 +1049,23 @@
           <Property Name="DIGITO_VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="HASHED_PASS" Type="String" MaxLength="1080" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL_PACIENTE" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="SEXO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FEC_NAC" Type="DateTime" />
+          <Property Name="ACTIVO" Type="Boolean" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_PACIENTE_ATENCION_AGEN" FromRole="PACIENTE" ToRole="ATENCION_AGEN" />
-          <NavigationProperty Name="FICHA" Relationship="Self.FK_PACIENTE_FICHA" FromRole="PACIENTE" ToRole="FICHA" />
+          <NavigationProperty Name="ENTRADA_FICHA" Relationship="Self.FK_ENTRADA_FICHA_PACIENTE" FromRole="PACIENTE" ToRole="ENTRADA_FICHA" />
         </EntityType>
         <EntityType Name="PAGO">
           <Key>
             <PropertyRef Name="ID_PAGO" />
           </Key>
           <Property Name="ID_PAGO" Type="Int32" Nullable="false" />
-          <Property Name="FECHOR" Type="DateTime" />
           <Property Name="ID_BONO" Type="Int32" />
           <Property Name="ID_CAJA" Type="Int32" />
           <Property Name="ID_DEVOLUCION" Type="Int32" />
+          <Property Name="FECHOR" Type="DateTime" />
           <Property Name="MONTO_PAGO" Type="Int32" />
+          <Property Name="ID_ATENCION_AGEN" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_PAGO_ATENCION_AGEN" FromRole="PAGO" ToRole="ATENCION_AGEN" />
           <NavigationProperty Name="BONO" Relationship="Self.FK_BONO_PAGO" FromRole="PAGO" ToRole="BONO" />
           <NavigationProperty Name="CAJA" Relationship="Self.FK_CAJA_PAGO" FromRole="PAGO" ToRole="CAJA" />
@@ -1016,13 +1078,12 @@
           <Property Name="ID_PERSONAL_MEDICO" Type="Int32" Nullable="false" />
           <Property Name="ID_ESPECIALIDAD" Type="Int32" />
           <Property Name="ID_PERSONAL" Type="Int32" />
-          <Property Name="ID_TURNO" Type="Int32" />
-          <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_SOLICITA_ATENCION_AGEN" FromRole="PERS_MEDICO" ToRole="ATENCION_AGEN" />
+          <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ATENCION_AGEN_PERS_MEDICO" FromRole="PERS_MEDICO" ToRole="ATENCION_AGEN" />
+          <NavigationProperty Name="ATENCION_AGEN1" Relationship="Self.FK_ATENCION_AGEN_PERS_MEDICO02" FromRole="PERS_MEDICO" ToRole="ATENCION_AGEN" />
           <NavigationProperty Name="CUEN_BANCARIA" Relationship="Self.FK_CUEN_BANCARIA_PERS_MEDICO" FromRole="PERS_MEDICO" ToRole="CUEN_BANCARIA" />
           <NavigationProperty Name="ESPECIALIDAD" Relationship="Self.FK_PERS_MEDICO_ESPECIALIDAD" FromRole="PERS_MEDICO" ToRole="ESPECIALIDAD" />
-          <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_EJECUTA_RES_ATENCION" FromRole="PERS_MEDICO" ToRole="RES_ATENCION" />
+          <NavigationProperty Name="HORARIO" Relationship="Self.FK_HORARIO_PERS_MEDICO" FromRole="PERS_MEDICO" ToRole="HORARIO" />
           <NavigationProperty Name="PERSONAL" Relationship="Self.FK_PERSONAL_PERS_MEDICO" FromRole="PERS_MEDICO" ToRole="PERSONAL" />
-          <NavigationProperty Name="TURNO" Relationship="Self.FK_TURNO_PERS_MEDICO" FromRole="PERS_MEDICO" ToRole="TURNO" />
         </EntityType>
         <EntityType Name="PERSONAL">
           <Key>
@@ -1037,6 +1098,7 @@
           <Property Name="RUT" Type="Int32" Nullable="false" />
           <Property Name="VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="EMAIL" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_PERSONAL_FUNCIONARIO" FromRole="PERSONAL" ToRole="FUNCIONARIO" />
           <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_PERSONAL_PERS_MEDICO" FromRole="PERSONAL" ToRole="PERS_MEDICO" />
         </EntityType>
@@ -1050,6 +1112,7 @@
           <Property Name="CODIGO_PRESTACION" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="ID_ESPECIALIDAD" Type="Int32" />
           <Property Name="ID_TIPO_PRESTACION" Type="Int32" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ATENCION_AGEN_PRESTACION" FromRole="PRESTACION" ToRole="ATENCION_AGEN" />
           <NavigationProperty Name="EQUIPO_REQ" Relationship="Self.FK_EQUIPO_REQ_PRESTACION" FromRole="PRESTACION" ToRole="EQUIPO_REQ" />
           <NavigationProperty Name="ESPECIALIDAD" Relationship="Self.FK_ESPECIALIDAD_PRESTACION" FromRole="PRESTACION" ToRole="ESPECIALIDAD" />
@@ -1065,10 +1128,10 @@
           <Property Name="ID_ATENCION_AGEN" Type="Int32" />
           <Property Name="ID_ORDEN_ANALISIS" Type="Int32" />
           <Property Name="ID_PERSONAL_MEDICO" Type="Int32" />
-          <NavigationProperty Name="ARCHIVO" Relationship="Self.FK_RES_ATENCION_ARCHIVO" FromRole="RES_ATENCION" ToRole="ARCHIVO" />
+          <Property Name="ARCHIVO_B64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EXT_ARCHIVO" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ATENCION_AGEN" Relationship="Self.FK_ATENCION_AGEN_RES_ATENCION" FromRole="RES_ATENCION" ToRole="ATENCION_AGEN" />
           <NavigationProperty Name="ORDEN_ANALISIS" Relationship="Self.FK_ORDEN_ANALISIS_RES_ATENCION" FromRole="RES_ATENCION" ToRole="ORDEN_ANALISIS" />
-          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_EJECUTA_RES_ATENCION" FromRole="RES_ATENCION" ToRole="PERS_MEDICO" />
         </EntityType>
         <EntityType Name="TIPO_C_BANCARIA">
           <Key>
@@ -1087,6 +1150,14 @@
           <NavigationProperty Name="EQUIPO_REQ" Relationship="Self.FK_EQUIPO_REQ_TIPO_EQUIPO" FromRole="TIPO_EQUIPO" ToRole="EQUIPO_REQ" />
           <NavigationProperty Name="INVENTARIO" Relationship="Self.FK_TIPO_EQUIPO_INVENTARIO" FromRole="TIPO_EQUIPO" ToRole="INVENTARIO" />
         </EntityType>
+        <EntityType Name="TIPO_FICHA">
+          <Key>
+            <PropertyRef Name="ID_TIPO_FICHA" />
+          </Key>
+          <Property Name="ID_TIPO_FICHA" Type="Int32" Nullable="false" />
+          <Property Name="NOM_TIPO_FICHA" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ENTRADA_FICHA" Relationship="Self.FK_ENTRADA_FICHA_TIPO_FICHA" FromRole="TIPO_FICHA" ToRole="ENTRADA_FICHA" />
+        </EntityType>
         <EntityType Name="TIPO_PRES">
           <Key>
             <PropertyRef Name="ID_TIPO_PRESTACION" />
@@ -1095,32 +1166,6 @@
           <Property Name="NOM_TIPO_PREST" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PRESTACION" Relationship="Self.FK_TIPO_PRES_PRESTACION" FromRole="TIPO_PRES" ToRole="PRESTACION" />
         </EntityType>
-        <EntityType Name="TURNO">
-          <Key>
-            <PropertyRef Name="ID_TURNO" />
-          </Key>
-          <Property Name="ID_TURNO" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRE_TURNO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="NUMHORA_INI" Type="Byte" />
-          <Property Name="NUMMINU_INI" Type="Byte" />
-          <Property Name="NUMHORA_FIN" Type="Byte" />
-          <Property Name="NUMMINU_FIN" Type="Byte" />
-          <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_TURNO_PERS_MEDICO" FromRole="TURNO" ToRole="PERS_MEDICO" />
-        </EntityType>
-        <Association Name="FK_RES_ATENCION_ARCHIVO">
-          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ARCHIVO" Type="Self.ARCHIVO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RES_ATENCION">
-              <PropertyRef Name="ID_RESULTADO_ATENCION" />
-            </Principal>
-            <Dependent Role="ARCHIVO">
-              <PropertyRef Name="ID_RESULTADO_ATENCION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ASEGURADORA_BONO">
           <End Role="ASEGURADORA" Type="Self.ASEGURADORA" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1132,6 +1177,42 @@
             </Principal>
             <Dependent Role="BONO">
               <PropertyRef Name="ID_ASEGURADORA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_BLOQUE">
+          <End Role="BLOQUE" Type="Self.BLOQUE" Multiplicity="1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BLOQUE">
+              <PropertyRef Name="ID_BLOQUE" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_BLOQUE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_PERS_MEDICO">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PERS_ATIENDE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATENCION_AGEN_PERS_MEDICO02">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_PERS_SOLICITA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1192,30 +1273,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PAGO_ATENCION_AGEN">
-          <End Role="PAGO" Type="Self.PAGO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
+          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="1" />
+          <End Role="PAGO" Type="Self.PAGO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PAGO">
-              <PropertyRef Name="ID_PAGO" />
+            <Principal Role="ATENCION_AGEN">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Principal>
-            <Dependent Role="ATENCION_AGEN">
-              <PropertyRef Name="ID_PAGO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SOLICITA_ATENCION_AGEN">
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ATENCION_AGEN" Type="Self.ATENCION_AGEN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERS_MEDICO">
-              <PropertyRef Name="ID_PERSONAL_MEDICO" />
-            </Principal>
-            <Dependent Role="ATENCION_AGEN">
-              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_ATENCION_AGEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1230,6 +1295,34 @@
             </Principal>
             <Dependent Role="CUEN_BANCARIA">
               <PropertyRef Name="ID_BANCO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BLOQUE_DIA_SEM">
+          <End Role="DIA_SEM" Type="Self.DIA_SEM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BLOQUE" Type="Self.BLOQUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIA_SEM">
+              <PropertyRef Name="ID_DIA" />
+            </Principal>
+            <Dependent Role="BLOQUE">
+              <PropertyRef Name="ID_DIA_SEM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HORARIO_BLOQUE">
+          <End Role="BLOQUE" Type="Self.BLOQUE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HORARIO" Type="Self.HORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BLOQUE">
+              <PropertyRef Name="ID_BLOQUE" />
+            </Principal>
+            <Dependent Role="HORARIO">
+              <PropertyRef Name="ID_BLOQUE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1331,17 +1424,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ENTRADA_FICHA_FICHA">
-          <End Role="FICHA" Type="Self.FICHA" Multiplicity="0..1">
+        <Association Name="FK_ENTRADA_FICHA_PACIENTE">
+          <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="ENTRADA_FICHA" Type="Self.ENTRADA_FICHA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="FICHA">
-              <PropertyRef Name="ID_FICHA" />
+            <Principal Role="PACIENTE">
+              <PropertyRef Name="ID_PACIENTE" />
             </Principal>
             <Dependent Role="ENTRADA_FICHA">
-              <PropertyRef Name="ID_FICHA" />
+              <PropertyRef Name="ID_PACIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ENTRADA_FICHA_TIPO_FICHA">
+          <End Role="TIPO_FICHA" Type="Self.TIPO_FICHA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ENTRADA_FICHA" Type="Self.ENTRADA_FICHA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_FICHA">
+              <PropertyRef Name="ID_TIPO_FICHA" />
+            </Principal>
+            <Dependent Role="ENTRADA_FICHA">
+              <PropertyRef Name="ID_TIPO_FICHA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1401,20 +1508,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PACIENTE_FICHA">
-          <End Role="PACIENTE" Type="Self.PACIENTE" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="FICHA" Type="Self.FICHA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PACIENTE">
-              <PropertyRef Name="ID_PACIENTE" />
-            </Principal>
-            <Dependent Role="FICHA">
-              <PropertyRef Name="ID_PACIENTE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PERSONAL_FUNCIONARIO">
           <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1426,6 +1519,18 @@
             </Principal>
             <Dependent Role="FUNCIONARIO">
               <PropertyRef Name="ID_PERSONAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HORARIO_PERS_MEDICO">
+          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="1" />
+          <End Role="HORARIO" Type="Self.HORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERS_MEDICO">
+              <PropertyRef Name="ID_PERSONAL_MEDICO" />
+            </Principal>
+            <Dependent Role="HORARIO">
+              <PropertyRef Name="ID_PERS_MEDICO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1457,20 +1562,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EJECUTA_RES_ATENCION">
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="RES_ATENCION" Type="Self.RES_ATENCION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERS_MEDICO">
-              <PropertyRef Name="ID_PERSONAL_MEDICO" />
-            </Principal>
-            <Dependent Role="RES_ATENCION">
-              <PropertyRef Name="ID_PERSONAL_MEDICO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PERSONAL_PERS_MEDICO">
           <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1482,20 +1573,6 @@
             </Principal>
             <Dependent Role="PERS_MEDICO">
               <PropertyRef Name="ID_PERSONAL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TURNO_PERS_MEDICO">
-          <End Role="TURNO" Type="Self.TURNO" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PERS_MEDICO" Type="Self.PERS_MEDICO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TURNO">
-              <PropertyRef Name="ID_TURNO" />
-            </Principal>
-            <Dependent Role="PERS_MEDICO">
-              <PropertyRef Name="ID_TURNO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1514,21 +1591,22 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CMHEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ARCHIVO" EntityType="Self.ARCHIVO" />
           <EntitySet Name="ASEGURADORA" EntityType="Self.ASEGURADORA" />
           <EntitySet Name="ATENCION_AGEN" EntityType="Self.ATENCION_AGEN" />
           <EntitySet Name="BANCO" EntityType="Self.BANCO" />
+          <EntitySet Name="BLOQUE" EntityType="Self.BLOQUE" />
           <EntitySet Name="BONO" EntityType="Self.BONO" />
           <EntitySet Name="CAJA" EntityType="Self.CAJA" />
           <EntitySet Name="CARGO" EntityType="Self.CARGO" />
           <EntitySet Name="CUEN_BANCARIA" EntityType="Self.CUEN_BANCARIA" />
           <EntitySet Name="DEVOLUCION" EntityType="Self.DEVOLUCION" />
+          <EntitySet Name="DIA_SEM" EntityType="Self.DIA_SEM" />
           <EntitySet Name="ENTRADA_FICHA" EntityType="Self.ENTRADA_FICHA" />
           <EntitySet Name="EQUIPO_REQ" EntityType="Self.EQUIPO_REQ" />
           <EntitySet Name="ESPECIALIDAD" EntityType="Self.ESPECIALIDAD" />
           <EntitySet Name="ESTADO_ATEN" EntityType="Self.ESTADO_ATEN" />
-          <EntitySet Name="FICHA" EntityType="Self.FICHA" />
           <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" />
+          <EntitySet Name="HORARIO" EntityType="Self.HORARIO" />
           <EntitySet Name="INVENTARIO" EntityType="Self.INVENTARIO" />
           <EntitySet Name="ORDEN_ANALISIS" EntityType="Self.ORDEN_ANALISIS" />
           <EntitySet Name="PACIENTE" EntityType="Self.PACIENTE" />
@@ -1539,15 +1617,23 @@
           <EntitySet Name="RES_ATENCION" EntityType="Self.RES_ATENCION" />
           <EntitySet Name="TIPO_C_BANCARIA" EntityType="Self.TIPO_C_BANCARIA" />
           <EntitySet Name="TIPO_EQUIPO" EntityType="Self.TIPO_EQUIPO" />
+          <EntitySet Name="TIPO_FICHA" EntityType="Self.TIPO_FICHA" />
           <EntitySet Name="TIPO_PRES" EntityType="Self.TIPO_PRES" />
-          <EntitySet Name="TURNO" EntityType="Self.TURNO" />
-          <AssociationSet Name="FK_RES_ATENCION_ARCHIVO" Association="Self.FK_RES_ATENCION_ARCHIVO">
-            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
-            <End Role="ARCHIVO" EntitySet="ARCHIVO" />
-          </AssociationSet>
           <AssociationSet Name="FK_ASEGURADORA_BONO" Association="Self.FK_ASEGURADORA_BONO">
             <End Role="ASEGURADORA" EntitySet="ASEGURADORA" />
             <End Role="BONO" EntitySet="BONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_BLOQUE" Association="Self.FK_ATENCION_AGEN_BLOQUE">
+            <End Role="BLOQUE" EntitySet="BLOQUE" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_PERS_MEDICO" Association="Self.FK_ATENCION_AGEN_PERS_MEDICO">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATENCION_AGEN_PERS_MEDICO02" Association="Self.FK_ATENCION_AGEN_PERS_MEDICO02">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
           </AssociationSet>
           <AssociationSet Name="FK_ATENCION_AGEN_PRESTACION" Association="Self.FK_ATENCION_AGEN_PRESTACION">
             <End Role="PRESTACION" EntitySet="PRESTACION" />
@@ -1566,16 +1652,20 @@
             <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
           </AssociationSet>
           <AssociationSet Name="FK_PAGO_ATENCION_AGEN" Association="Self.FK_PAGO_ATENCION_AGEN">
+            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
             <End Role="PAGO" EntitySet="PAGO" />
-            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SOLICITA_ATENCION_AGEN" Association="Self.FK_SOLICITA_ATENCION_AGEN">
-            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
-            <End Role="ATENCION_AGEN" EntitySet="ATENCION_AGEN" />
           </AssociationSet>
           <AssociationSet Name="FK_CUEN_BANCARIA_BANCO" Association="Self.FK_CUEN_BANCARIA_BANCO">
             <End Role="BANCO" EntitySet="BANCO" />
             <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BLOQUE_DIA_SEM" Association="Self.FK_BLOQUE_DIA_SEM">
+            <End Role="DIA_SEM" EntitySet="DIA_SEM" />
+            <End Role="BLOQUE" EntitySet="BLOQUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HORARIO_BLOQUE" Association="Self.FK_HORARIO_BLOQUE">
+            <End Role="BLOQUE" EntitySet="BLOQUE" />
+            <End Role="HORARIO" EntitySet="HORARIO" />
           </AssociationSet>
           <AssociationSet Name="FK_BONO_PAGO" Association="Self.FK_BONO_PAGO">
             <End Role="BONO" EntitySet="BONO" />
@@ -1605,8 +1695,12 @@
             <End Role="DEVOLUCION" EntitySet="DEVOLUCION" />
             <End Role="PAGO" EntitySet="PAGO" />
           </AssociationSet>
-          <AssociationSet Name="FK_ENTRADA_FICHA_FICHA" Association="Self.FK_ENTRADA_FICHA_FICHA">
-            <End Role="FICHA" EntitySet="FICHA" />
+          <AssociationSet Name="FK_ENTRADA_FICHA_PACIENTE" Association="Self.FK_ENTRADA_FICHA_PACIENTE">
+            <End Role="PACIENTE" EntitySet="PACIENTE" />
+            <End Role="ENTRADA_FICHA" EntitySet="ENTRADA_FICHA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ENTRADA_FICHA_TIPO_FICHA" Association="Self.FK_ENTRADA_FICHA_TIPO_FICHA">
+            <End Role="TIPO_FICHA" EntitySet="TIPO_FICHA" />
             <End Role="ENTRADA_FICHA" EntitySet="ENTRADA_FICHA" />
           </AssociationSet>
           <AssociationSet Name="FK_EQUIPO_REQ_PRESTACION" Association="Self.FK_EQUIPO_REQ_PRESTACION">
@@ -1625,13 +1719,13 @@
             <End Role="ESPECIALIDAD" EntitySet="ESPECIALIDAD" />
             <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
           </AssociationSet>
-          <AssociationSet Name="FK_PACIENTE_FICHA" Association="Self.FK_PACIENTE_FICHA">
-            <End Role="PACIENTE" EntitySet="PACIENTE" />
-            <End Role="FICHA" EntitySet="FICHA" />
-          </AssociationSet>
           <AssociationSet Name="FK_PERSONAL_FUNCIONARIO" Association="Self.FK_PERSONAL_FUNCIONARIO">
             <End Role="PERSONAL" EntitySet="PERSONAL" />
             <End Role="FUNCIONARIO" EntitySet="FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HORARIO_PERS_MEDICO" Association="Self.FK_HORARIO_PERS_MEDICO">
+            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
+            <End Role="HORARIO" EntitySet="HORARIO" />
           </AssociationSet>
           <AssociationSet Name="FK_TIPO_EQUIPO_INVENTARIO" Association="Self.FK_TIPO_EQUIPO_INVENTARIO">
             <End Role="TIPO_EQUIPO" EntitySet="TIPO_EQUIPO" />
@@ -1641,16 +1735,8 @@
             <End Role="ORDEN_ANALISIS" EntitySet="ORDEN_ANALISIS" />
             <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
           </AssociationSet>
-          <AssociationSet Name="FK_EJECUTA_RES_ATENCION" Association="Self.FK_EJECUTA_RES_ATENCION">
-            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
-            <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
-          </AssociationSet>
           <AssociationSet Name="FK_PERSONAL_PERS_MEDICO" Association="Self.FK_PERSONAL_PERS_MEDICO">
             <End Role="PERSONAL" EntitySet="PERSONAL" />
-            <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TURNO_PERS_MEDICO" Association="Self.FK_TURNO_PERS_MEDICO">
-            <End Role="TURNO" EntitySet="TURNO" />
             <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
           </AssociationSet>
           <AssociationSet Name="FK_TIPO_PRES_PRESTACION" Association="Self.FK_TIPO_PRES_PRESTACION">
@@ -1664,16 +1750,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CMHModelStoreContainer" CdmEntityContainer="CMHEntities">
-          <EntitySetMapping Name="ARCHIVO">
-            <EntityTypeMapping TypeName="CMHModel.ARCHIVO">
-              <MappingFragment StoreEntitySet="ARCHIVO">
-                <ScalarProperty Name="ID_ARCHIVO" ColumnName="ID_ARCHIVO" />
-                <ScalarProperty Name="FILE_URI" ColumnName="FILE_URI" />
-                <ScalarProperty Name="ID_RESULTADO_ATENCION" ColumnName="ID_RESULTADO_ATENCION" />
-                <ScalarProperty Name="EXTENSION" ColumnName="EXTENSION" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ASEGURADORA">
             <EntityTypeMapping TypeName="CMHModel.ASEGURADORA">
               <MappingFragment StoreEntitySet="ASEGURADORA">
@@ -1686,13 +1762,14 @@
             <EntityTypeMapping TypeName="CMHModel.ATENCION_AGEN">
               <MappingFragment StoreEntitySet="ATENCION_AGEN">
                 <ScalarProperty Name="ID_ATENCION_AGEN" ColumnName="ID_ATENCION_AGEN" />
+                <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
                 <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
                 <ScalarProperty Name="ID_PACIENTE" ColumnName="ID_PACIENTE" />
-                <ScalarProperty Name="ID_PERSONAL_MEDICO" ColumnName="ID_PERSONAL_MEDICO" />
-                <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
                 <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
-                <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
                 <ScalarProperty Name="ID_ESTADO_ATEN" ColumnName="ID_ESTADO_ATEN" />
+                <ScalarProperty Name="ID_PERS_ATIENDE" ColumnName="ID_PERS_ATIENDE" />
+                <ScalarProperty Name="ID_PERS_SOLICITA" ColumnName="ID_PERS_SOLICITA" />
+                <ScalarProperty Name="ID_BLOQUE" ColumnName="ID_BLOQUE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1701,6 +1778,19 @@
               <MappingFragment StoreEntitySet="BANCO">
                 <ScalarProperty Name="ID_BANCO" ColumnName="ID_BANCO" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BLOQUE">
+            <EntityTypeMapping TypeName="CMHModel.BLOQUE">
+              <MappingFragment StoreEntitySet="BLOQUE">
+                <ScalarProperty Name="ID_BLOQUE" ColumnName="ID_BLOQUE" />
+                <ScalarProperty Name="NUM_BLOQUE" ColumnName="NUM_BLOQUE" />
+                <ScalarProperty Name="NUM_HORA_INI" ColumnName="NUM_HORA_INI" />
+                <ScalarProperty Name="NUM_MINU_INI" ColumnName="NUM_MINU_INI" />
+                <ScalarProperty Name="NUM_HORA_FIN" ColumnName="NUM_HORA_FIN" />
+                <ScalarProperty Name="NUM_MINU_FIN" ColumnName="NUM_MINU_FIN" />
+                <ScalarProperty Name="ID_DIA_SEM" ColumnName="ID_DIA_SEM" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1751,6 +1841,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DIA_SEM">
+            <EntityTypeMapping TypeName="CMHModel.DIA_SEM">
+              <MappingFragment StoreEntitySet="DIA_SEM">
+                <ScalarProperty Name="ID_DIA" ColumnName="ID_DIA" />
+                <ScalarProperty Name="NOMBRE_IDA" ColumnName="NOMBRE_IDA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ENTRADA_FICHA">
             <EntityTypeMapping TypeName="CMHModel.ENTRADA_FICHA">
               <MappingFragment StoreEntitySet="ENTRADA_FICHA">
@@ -1758,7 +1856,8 @@
                 <ScalarProperty Name="NOMBRE_ENTRADA" ColumnName="NOMBRE_ENTRADA" />
                 <ScalarProperty Name="CONTENIDO_ENTRADA" ColumnName="CONTENIDO_ENTRADA" />
                 <ScalarProperty Name="FECHA_ENTRADA" ColumnName="FECHA_ENTRADA" />
-                <ScalarProperty Name="ID_FICHA" ColumnName="ID_FICHA" />
+                <ScalarProperty Name="ID_PACIENTE" ColumnName="ID_PACIENTE" />
+                <ScalarProperty Name="ID_TIPO_FICHA" ColumnName="ID_TIPO_FICHA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1788,22 +1887,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FICHA">
-            <EntityTypeMapping TypeName="CMHModel.FICHA">
-              <MappingFragment StoreEntitySet="FICHA">
-                <ScalarProperty Name="ID_FICHA" ColumnName="ID_FICHA" />
-                <ScalarProperty Name="FEC_NAC" ColumnName="FEC_NAC" />
-                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
-                <ScalarProperty Name="ID_PACIENTE" ColumnName="ID_PACIENTE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FUNCIONARIO">
             <EntityTypeMapping TypeName="CMHModel.FUNCIONARIO">
               <MappingFragment StoreEntitySet="FUNCIONARIO">
                 <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
                 <ScalarProperty Name="ID_CARGO_FUNCI" ColumnName="ID_CARGO_FUNCI" />
                 <ScalarProperty Name="ID_PERSONAL" ColumnName="ID_PERSONAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HORARIO">
+            <EntityTypeMapping TypeName="CMHModel.HORARIO">
+              <MappingFragment StoreEntitySet="HORARIO">
+                <ScalarProperty Name="ID_HORARIO" ColumnName="ID_HORARIO" />
+                <ScalarProperty Name="ID_BLOQUE" ColumnName="ID_BLOQUE" />
+                <ScalarProperty Name="ID_PERS_MEDICO" ColumnName="ID_PERS_MEDICO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1835,6 +1933,9 @@
                 <ScalarProperty Name="DIGITO_VERIFICADOR" ColumnName="DIGITO_VERIFICADOR" />
                 <ScalarProperty Name="HASHED_PASS" ColumnName="HASHED_PASS" />
                 <ScalarProperty Name="EMAIL_PACIENTE" ColumnName="EMAIL_PACIENTE" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="FEC_NAC" ColumnName="FEC_NAC" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1842,11 +1943,12 @@
             <EntityTypeMapping TypeName="CMHModel.PAGO">
               <MappingFragment StoreEntitySet="PAGO">
                 <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
-                <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
                 <ScalarProperty Name="ID_BONO" ColumnName="ID_BONO" />
                 <ScalarProperty Name="ID_CAJA" ColumnName="ID_CAJA" />
                 <ScalarProperty Name="ID_DEVOLUCION" ColumnName="ID_DEVOLUCION" />
+                <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
                 <ScalarProperty Name="MONTO_PAGO" ColumnName="MONTO_PAGO" />
+                <ScalarProperty Name="ID_ATENCION_AGEN" ColumnName="ID_ATENCION_AGEN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1856,7 +1958,6 @@
                 <ScalarProperty Name="ID_PERSONAL_MEDICO" ColumnName="ID_PERSONAL_MEDICO" />
                 <ScalarProperty Name="ID_ESPECIALIDAD" ColumnName="ID_ESPECIALIDAD" />
                 <ScalarProperty Name="ID_PERSONAL" ColumnName="ID_PERSONAL" />
-                <ScalarProperty Name="ID_TURNO" ColumnName="ID_TURNO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1872,6 +1973,7 @@
                 <ScalarProperty Name="RUT" ColumnName="RUT" />
                 <ScalarProperty Name="VERIFICADOR" ColumnName="VERIFICADOR" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1884,6 +1986,7 @@
                 <ScalarProperty Name="CODIGO_PRESTACION" ColumnName="CODIGO_PRESTACION" />
                 <ScalarProperty Name="ID_ESPECIALIDAD" ColumnName="ID_ESPECIALIDAD" />
                 <ScalarProperty Name="ID_TIPO_PRESTACION" ColumnName="ID_TIPO_PRESTACION" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1896,6 +1999,8 @@
                 <ScalarProperty Name="ID_ATENCION_AGEN" ColumnName="ID_ATENCION_AGEN" />
                 <ScalarProperty Name="ID_ORDEN_ANALISIS" ColumnName="ID_ORDEN_ANALISIS" />
                 <ScalarProperty Name="ID_PERSONAL_MEDICO" ColumnName="ID_PERSONAL_MEDICO" />
+                <ScalarProperty Name="ARCHIVO_B64" ColumnName="ARCHIVO_B64" />
+                <ScalarProperty Name="EXT_ARCHIVO" ColumnName="EXT_ARCHIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1915,23 +2020,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_FICHA">
+            <EntityTypeMapping TypeName="CMHModel.TIPO_FICHA">
+              <MappingFragment StoreEntitySet="TIPO_FICHA">
+                <ScalarProperty Name="ID_TIPO_FICHA" ColumnName="ID_TIPO_FICHA" />
+                <ScalarProperty Name="NOM_TIPO_FICHA" ColumnName="NOM_TIPO_FICHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TIPO_PRES">
             <EntityTypeMapping TypeName="CMHModel.TIPO_PRES">
               <MappingFragment StoreEntitySet="TIPO_PRES">
                 <ScalarProperty Name="ID_TIPO_PRESTACION" ColumnName="ID_TIPO_PRESTACION" />
                 <ScalarProperty Name="NOM_TIPO_PREST" ColumnName="NOM_TIPO_PREST" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TURNO">
-            <EntityTypeMapping TypeName="CMHModel.TURNO">
-              <MappingFragment StoreEntitySet="TURNO">
-                <ScalarProperty Name="ID_TURNO" ColumnName="ID_TURNO" />
-                <ScalarProperty Name="NOMBRE_TURNO" ColumnName="NOMBRE_TURNO" />
-                <ScalarProperty Name="NUMHORA_INI" ColumnName="NUMHORA_INI" />
-                <ScalarProperty Name="NUMMINU_INI" ColumnName="NUMMINU_INI" />
-                <ScalarProperty Name="NUMHORA_FIN" ColumnName="NUMHORA_FIN" />
-                <ScalarProperty Name="NUMMINU_FIN" ColumnName="NUMMINU_FIN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
