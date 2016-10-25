@@ -6,7 +6,6 @@
 package cl.cheekibreeki.cmh.lib.dal.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,12 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -47,8 +44,9 @@ public class Pago implements Serializable {
     private Date fechor;
     @Column(name = "MONTO_PAGO")
     private Integer montoPago;
-    @OneToMany(mappedBy = "idPago")
-    private Collection<AtencionAgen> atencionAgenCollection;
+    @JoinColumn(name = "ID_ATENCION_AGEN", referencedColumnName = "ID_ATENCION_AGEN")
+    @ManyToOne(optional = false)
+    private AtencionAgen idAtencionAgen;
     @JoinColumn(name = "ID_BONO", referencedColumnName = "ID_BONO")
     @ManyToOne
     private Bono idBono;
@@ -90,13 +88,12 @@ public class Pago implements Serializable {
         this.montoPago = montoPago;
     }
 
-    @XmlTransient
-    public Collection<AtencionAgen> getAtencionAgenCollection() {
-        return atencionAgenCollection;
+    public AtencionAgen getIdAtencionAgen() {
+        return idAtencionAgen;
     }
 
-    public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
-        this.atencionAgenCollection = atencionAgenCollection;
+    public void setIdAtencionAgen(AtencionAgen idAtencionAgen) {
+        this.idAtencionAgen = idAtencionAgen;
     }
 
     public Bono getIdBono() {
