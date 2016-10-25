@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "PERSONAL")
@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Personal.findByPorcentDescuento", query = "SELECT p FROM Personal p WHERE p.porcentDescuento = :porcentDescuento"),
     @NamedQuery(name = "Personal.findByRut", query = "SELECT p FROM Personal p WHERE p.rut = :rut"),
     @NamedQuery(name = "Personal.findByVerificador", query = "SELECT p FROM Personal p WHERE p.verificador = :verificador"),
-    @NamedQuery(name = "Personal.findByEmail", query = "SELECT p FROM Personal p WHERE p.email = :email")})
+    @NamedQuery(name = "Personal.findByEmail", query = "SELECT p FROM Personal p WHERE p.email = :email"),
+    @NamedQuery(name = "Personal.findByActivo", query = "SELECT p FROM Personal p WHERE p.activo = :activo")})
 public class Personal implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,6 +63,9 @@ public class Personal implements Serializable {
     private Character verificador;
     @Column(name = "EMAIL")
     private String email;
+    @Basic(optional = false)
+    @Column(name = "ACTIVO")
+    private short activo;
     @OneToMany(mappedBy = "idPersonal")
     private Collection<PersMedico> persMedicoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonal")
@@ -74,10 +78,11 @@ public class Personal implements Serializable {
         this.idPersonal = idPersonal;
     }
 
-    public Personal(Integer idPersonal, int rut, Character verificador) {
+    public Personal(Integer idPersonal, int rut, Character verificador, short activo) {
         this.idPersonal = idPersonal;
         this.rut = rut;
         this.verificador = verificador;
+        this.activo = activo;
     }
 
     public Integer getIdPersonal() {
@@ -150,6 +155,14 @@ public class Personal implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public short getActivo() {
+        return activo;
+    }
+
+    public void setActivo(short activo) {
+        this.activo = activo;
     }
 
     @XmlTransient

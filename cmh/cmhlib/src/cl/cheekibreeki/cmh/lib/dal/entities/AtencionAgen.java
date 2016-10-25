@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "ATENCION_AGEN")
@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "AtencionAgen.findAll", query = "SELECT a FROM AtencionAgen a"),
     @NamedQuery(name = "AtencionAgen.findByIdAtencionAgen", query = "SELECT a FROM AtencionAgen a WHERE a.idAtencionAgen = :idAtencionAgen"),
-    @NamedQuery(name = "AtencionAgen.findByObservaciones", query = "SELECT a FROM AtencionAgen a WHERE a.observaciones = :observaciones"),
-    @NamedQuery(name = "AtencionAgen.findByFechor", query = "SELECT a FROM AtencionAgen a WHERE a.fechor = :fechor")})
+    @NamedQuery(name = "AtencionAgen.findByFechor", query = "SELECT a FROM AtencionAgen a WHERE a.fechor = :fechor"),
+    @NamedQuery(name = "AtencionAgen.findByObservaciones", query = "SELECT a FROM AtencionAgen a WHERE a.observaciones = :observaciones")})
 public class AtencionAgen implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,11 +42,14 @@ public class AtencionAgen implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_ATENCION_AGEN")
     private Integer idAtencionAgen;
-    @Column(name = "OBSERVACIONES")
-    private String observaciones;
     @Column(name = "FECHOR")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechor;
+    @Column(name = "OBSERVACIONES")
+    private String observaciones;
+    @JoinColumn(name = "ID_BLOQUE", referencedColumnName = "ID_BLOQUE")
+    @ManyToOne(optional = false)
+    private Bloque idBloque;
     @JoinColumn(name = "ID_ESTADO_ATEN", referencedColumnName = "ID_ESTADO_ATEN")
     @ManyToOne
     private EstadoAten idEstadoAten;
@@ -56,9 +59,12 @@ public class AtencionAgen implements Serializable {
     @JoinColumn(name = "ID_PAGO", referencedColumnName = "ID_PAGO")
     @ManyToOne
     private Pago idPago;
-    @JoinColumn(name = "ID_PERSONAL_MEDICO", referencedColumnName = "ID_PERSONAL_MEDICO")
+    @JoinColumn(name = "ID_PERS_SOLICITA", referencedColumnName = "ID_PERSONAL_MEDICO")
     @ManyToOne
-    private PersMedico idPersonalMedico;
+    private PersMedico idPersSolicita;
+    @JoinColumn(name = "ID_PERS_ATIENDE", referencedColumnName = "ID_PERSONAL_MEDICO")
+    @ManyToOne(optional = false)
+    private PersMedico idPersAtiende;
     @JoinColumn(name = "ID_PRESTACION", referencedColumnName = "ID_PRESTACION")
     @ManyToOne
     private Prestacion idPrestacion;
@@ -80,6 +86,14 @@ public class AtencionAgen implements Serializable {
         this.idAtencionAgen = idAtencionAgen;
     }
 
+    public Date getFechor() {
+        return fechor;
+    }
+
+    public void setFechor(Date fechor) {
+        this.fechor = fechor;
+    }
+
     public String getObservaciones() {
         return observaciones;
     }
@@ -88,12 +102,12 @@ public class AtencionAgen implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public Date getFechor() {
-        return fechor;
+    public Bloque getIdBloque() {
+        return idBloque;
     }
 
-    public void setFechor(Date fechor) {
-        this.fechor = fechor;
+    public void setIdBloque(Bloque idBloque) {
+        this.idBloque = idBloque;
     }
 
     public EstadoAten getIdEstadoAten() {
@@ -120,12 +134,20 @@ public class AtencionAgen implements Serializable {
         this.idPago = idPago;
     }
 
-    public PersMedico getIdPersonalMedico() {
-        return idPersonalMedico;
+    public PersMedico getIdPersSolicita() {
+        return idPersSolicita;
     }
 
-    public void setIdPersonalMedico(PersMedico idPersonalMedico) {
-        this.idPersonalMedico = idPersonalMedico;
+    public void setIdPersSolicita(PersMedico idPersSolicita) {
+        this.idPersSolicita = idPersSolicita;
+    }
+
+    public PersMedico getIdPersAtiende() {
+        return idPersAtiende;
+    }
+
+    public void setIdPersAtiende(PersMedico idPersAtiende) {
+        this.idPersAtiende = idPersAtiende;
     }
 
     public Prestacion getIdPrestacion() {

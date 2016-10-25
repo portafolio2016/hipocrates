@@ -6,21 +6,18 @@
 package cl.cheekibreeki.cmh.lib.dal.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "TURNO")
@@ -50,8 +47,6 @@ public class Turno implements Serializable {
     private Short numhoraFin;
     @Column(name = "NUMMINU_FIN")
     private Short numminuFin;
-    @OneToMany(mappedBy = "idTurno")
-    private Collection<PersMedico> persMedicoCollection;
 
     public Turno() {
     }
@@ -106,15 +101,6 @@ public class Turno implements Serializable {
 
     public void setNumminuFin(Short numminuFin) {
         this.numminuFin = numminuFin;
-    }
-
-    @XmlTransient
-    public Collection<PersMedico> getPersMedicoCollection() {
-        return persMedicoCollection;
-    }
-
-    public void setPersMedicoCollection(Collection<PersMedico> persMedicoCollection) {
-        this.persMedicoCollection = persMedicoCollection;
     }
 
     @Override

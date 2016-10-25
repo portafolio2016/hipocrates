@@ -7,6 +7,7 @@ package cl.cheekibreeki.cmh.lib.dal.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,12 +16,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author pdelasotta
+ * @author dev
  */
 @Entity
 @Table(name = "PACIENTE")
@@ -33,7 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Paciente.findByRut", query = "SELECT p FROM Paciente p WHERE p.rut = :rut"),
     @NamedQuery(name = "Paciente.findByDigitoVerificador", query = "SELECT p FROM Paciente p WHERE p.digitoVerificador = :digitoVerificador"),
     @NamedQuery(name = "Paciente.findByHashedPass", query = "SELECT p FROM Paciente p WHERE p.hashedPass = :hashedPass"),
-    @NamedQuery(name = "Paciente.findByEmailPaciente", query = "SELECT p FROM Paciente p WHERE p.emailPaciente = :emailPaciente")})
+    @NamedQuery(name = "Paciente.findByEmailPaciente", query = "SELECT p FROM Paciente p WHERE p.emailPaciente = :emailPaciente"),
+    @NamedQuery(name = "Paciente.findBySexo", query = "SELECT p FROM Paciente p WHERE p.sexo = :sexo"),
+    @NamedQuery(name = "Paciente.findByFecNac", query = "SELECT p FROM Paciente p WHERE p.fecNac = :fecNac"),
+    @NamedQuery(name = "Paciente.findByActivo", query = "SELECT p FROM Paciente p WHERE p.activo = :activo")})
 public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,10 +61,17 @@ public class Paciente implements Serializable {
     private String hashedPass;
     @Column(name = "EMAIL_PACIENTE")
     private String emailPaciente;
+    @Column(name = "SEXO")
+    private Character sexo;
+    @Column(name = "FEC_NAC")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecNac;
+    @Column(name = "ACTIVO")
+    private Short activo;
+    @OneToMany(mappedBy = "idPaciente")
+    private Collection<EntradaFicha> entradaFichaCollection;
     @OneToMany(mappedBy = "idPaciente")
     private Collection<AtencionAgen> atencionAgenCollection;
-    @OneToMany(mappedBy = "idPaciente")
-    private Collection<Ficha> fichaCollection;
 
     public Paciente() {
     }
@@ -129,6 +142,39 @@ public class Paciente implements Serializable {
         this.emailPaciente = emailPaciente;
     }
 
+    public Character getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Character sexo) {
+        this.sexo = sexo;
+    }
+
+    public Date getFecNac() {
+        return fecNac;
+    }
+
+    public void setFecNac(Date fecNac) {
+        this.fecNac = fecNac;
+    }
+
+    public Short getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Short activo) {
+        this.activo = activo;
+    }
+
+    @XmlTransient
+    public Collection<EntradaFicha> getEntradaFichaCollection() {
+        return entradaFichaCollection;
+    }
+
+    public void setEntradaFichaCollection(Collection<EntradaFicha> entradaFichaCollection) {
+        this.entradaFichaCollection = entradaFichaCollection;
+    }
+
     @XmlTransient
     public Collection<AtencionAgen> getAtencionAgenCollection() {
         return atencionAgenCollection;
@@ -136,15 +182,6 @@ public class Paciente implements Serializable {
 
     public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
         this.atencionAgenCollection = atencionAgenCollection;
-    }
-
-    @XmlTransient
-    public Collection<Ficha> getFichaCollection() {
-        return fichaCollection;
-    }
-
-    public void setFichaCollection(Collection<Ficha> fichaCollection) {
-        this.fichaCollection = fichaCollection;
     }
 
     @Override
