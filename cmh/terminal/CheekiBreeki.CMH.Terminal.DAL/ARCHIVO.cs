@@ -15,7 +15,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     public partial class ARCHIVO
     {
         public int ID_ARCHIVO { get; set; }
-        public string FILE_URI { get; set; }
+        public string ARCHIVO_B64 { get; set; }
         public Nullable<int> ID_RESULTADO_ATENCION { get; set; }
         public string EXTENSION { get; set; }
     

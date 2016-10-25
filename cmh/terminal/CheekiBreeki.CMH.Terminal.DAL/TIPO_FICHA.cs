@@ -12,20 +12,16 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TURNO
+    public partial class TIPO_FICHA
     {
-        public TURNO()
+        public TIPO_FICHA()
         {
-            this.PERS_MEDICO = new HashSet<PERS_MEDICO>();
+            this.ENTRADA_FICHA = new HashSet<ENTRADA_FICHA>();
         }
     
-        public int ID_TURNO { get; set; }
-        public string NOMBRE_TURNO { get; set; }
-        public Nullable<byte> NUMHORA_INI { get; set; }
-        public Nullable<byte> NUMMINU_INI { get; set; }
-        public Nullable<byte> NUMHORA_FIN { get; set; }
-        public Nullable<byte> NUMMINU_FIN { get; set; }
+        public int ID_TIPO_FICHA { get; set; }
+        public string NOM_TIPO_FICHA { get; set; }
     
-        public virtual ICollection<PERS_MEDICO> PERS_MEDICO { get; set; }
+        public virtual ICollection<ENTRADA_FICHA> ENTRADA_FICHA { get; set; }
     }
 }

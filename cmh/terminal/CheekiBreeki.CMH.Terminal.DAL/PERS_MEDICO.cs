@@ -17,20 +17,20 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public PERS_MEDICO()
         {
             this.ATENCION_AGEN = new HashSet<ATENCION_AGEN>();
+            this.ATENCION_AGEN1 = new HashSet<ATENCION_AGEN>();
             this.CUEN_BANCARIA = new HashSet<CUEN_BANCARIA>();
-            this.RES_ATENCION = new HashSet<RES_ATENCION>();
+            this.HORARIO = new HashSet<HORARIO>();
         }
     
         public int ID_PERSONAL_MEDICO { get; set; }
         public Nullable<int> ID_ESPECIALIDAD { get; set; }
         public Nullable<int> ID_PERSONAL { get; set; }
-        public Nullable<int> ID_TURNO { get; set; }
     
         public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN { get; set; }
+        public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN1 { get; set; }
         public virtual ICollection<CUEN_BANCARIA> CUEN_BANCARIA { get; set; }
         public virtual ESPECIALIDAD ESPECIALIDAD { get; set; }
-        public virtual ICollection<RES_ATENCION> RES_ATENCION { get; set; }
+        public virtual ICollection<HORARIO> HORARIO { get; set; }
         public virtual PERSONAL PERSONAL { get; set; }
-        public virtual TURNO TURNO { get; set; }
     }
 }
