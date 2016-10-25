@@ -25,9 +25,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             using (var context = entities)
             {
                 var pac1 = from p in entities.PACIENTE
-                       where p.RUT == paciente1.RUT
-                       select p;
-                if(pac1.Count<PACIENTE>() > 0)
+                           where p.RUT == paciente1.RUT
+                           select p;
+                if (pac1.Count<PACIENTE>() > 0)
                 {
                     entities.PACIENTE.Remove(pac1.First<PACIENTE>());
                     entities.SaveChangesAsync();
@@ -103,7 +103,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void buscarPacienteTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-            
+
             // Caso 1: Paciente existente
             int rut1 = 18861423;
             string dv1 = "K";
@@ -229,14 +229,14 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             }
 
             Boolean res1 = at.nuevoPersonal(personal1);
-            
+
             funcionario1.ID_CARGO_FUNCI = 1;
             funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
 
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
 
-           
+
             // Caso 2: Personal nulo
             PERSONAL personal2 = null;
 
@@ -508,7 +508,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean resultadoEsperado5 = false;
             Assert.AreEqual(res5, resultadoEsperado5);
         }
-        
+
         [TestMethod]
         public void borrarPrestacionMedicaTest()
         {
@@ -635,7 +635,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 var pers = from p in entities.PERSONAL
                            where p.RUT == rutPersonal1
                            select p;
-                if(pers.Count<PERSONAL>() == 0)
+                if (pers.Count<PERSONAL>() == 0)
                 {
                     PERSONAL personal = new PERSONAL();
                     personal.RUT = rutPersonal1;
@@ -644,7 +644,8 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     personal.APELLIDOS = "Testtest";
                     entities.PERSONAL.Add(personal);
                     entities.SaveChangesAsync();
-                }else
+                }
+                else
                 {
                     entities.PERSONAL.Remove(pers.First<PERSONAL>());
                     entities.SaveChangesAsync();
@@ -658,7 +659,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean res1 = at.nuevoFuncionario(funcionario1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
-            
+
             // Caso 2: Funcionario nulo
             FUNCIONARIO funcionario2 = new FUNCIONARIO();
 
@@ -706,7 +707,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                             where c.NOMBRE_CARGO == cargo.NOMBRE_CARGO
                             select c).First<CARGO>().ID_CARGO_FUNCI;
             int idPersonal1 = (from p in entities.PERSONAL
-                                where p.RUT == personal.RUT
+                               where p.RUT == personal.RUT
                                select p).First<PERSONAL>().ID_PERSONAL;
             FUNCIONARIO funcionario = new FUNCIONARIO();
             funcionario.ID_CARGO_FUNCI = idCargo1;
@@ -794,6 +795,113 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             bool resultado = at.borrarFuncionario(funcionario1);
             bool resultadoEsperado1 = true;
             Assert.AreEqual(resultado, resultadoEsperado1);
+        }
+        #endregion
+
+        #region OrdendeAnalisis
+        [TestMethod]
+        public void generarOrdenDeAnalisisTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+
+            //Caso 1: Ingreso correcto  
+            ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
+
+            orden1.FECHOR_EMISION = DateTime.Today;
+            orden1.FECHOR_RECEP = DateTime.Today;
+            orden1.FECHOR_RECEP.Value.AddDays(1);
+
+            PACIENTE paciente1 = new PACIENTE();
+
+            CMHEntities entities = new CMHEntities();
+            using(var context = entities){
+                paciente1.NOMBRES_PACIENTE = "Miku";
+                paciente1.APELLIDOS_PACIENTE = "Hatsune";
+                paciente1.RUT = 18861423;
+                paciente1.DIGITO_VERIFICADOR = "K";
+                paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+                paciente1.HASHED_PASS = "4231";
+                context.PACIENTE.Add(paciente1);
+            }
+
+            ATENCION_AGEN atencion1 = new ATENCION_AGEN();
+            atencion1.FECHOR = DateTime.Today;
+            atencion1.OBSERVACIONES = "test";
+            atencion1.ID_PACIENTE
+
+            //Caso 2: Fecha inválidas
+            ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
+
+
+            //Caso 3: Orden nula
+            ORDEN_ANALISIS orden3 = null;
+        }
+
+        public void cerrarOrdenDeAnalisisTest()
+        {
+
+        }
+        #endregion
+
+        #region Atencion
+        public void agendarAtencionTest()
+        {
+            /* 
+             * Usa fk de las tablas
+             * Paciente
+             * Prestacion
+             * Estado_atencion
+             * personalmedico
+             **/
+
+            AccionesTerminal at = new AccionesTerminal();
+            CMHEntities entities = new CMHEntities();
+
+            //Caso 1: Ingreso correcto  
+            PACIENTE paciente1 = new PACIENTE();
+            PRESTACION prestacion1 = new PRESTACION();
+            ESTADO_ATEN estadoaten1 = new ESTADO_ATEN();
+            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
+            PERSONAL personal1 = new PERSONAL();
+            PERS_MEDICO persmedico1 = new PERS_MEDICO();
+
+            using(var context = entities){
+                paciente1.NOMBRES_PACIENTE = "Miku";
+                paciente1.APELLIDOS_PACIENTE = "Hatsune";
+                paciente1.RUT = 18861423;
+                paciente1.DIGITO_VERIFICADOR = "K";
+                paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+                paciente1.HASHED_PASS = "4231";
+                context.PACIENTE.Add(paciente1);
+
+                prestacion1.NOM_PRESTACION = "Chubi";
+                prestacion1.PRECIO_PRESTACION = 50000;
+                prestacion1.CODIGO_PRESTACION = "A002";
+              //prestacion.ACTIVO = 1;
+                context.PRESTACION.Add(prestacion1);
+
+                estadoaten1.NOM_ESTADO_ATEN = "Vigente";
+                context.ESTADO_ATEN.Add(estadoaten1);
+
+                especialidad1.NOM_ESPECIALIDAD = "Oculista";
+                context.ESPECIALIDAD.Add(especialidad1);
+
+                //persmedico1.
+            }
+
+
+
+            //Caso 2: Fecha inválidas
+            ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
+
+
+            //Caso 3: Orden nula
+            ORDEN_ANALISIS orden3 = null;
+        }
+
+        public void anularAtencionTest()
+        {
+
         }
         #endregion
     }
