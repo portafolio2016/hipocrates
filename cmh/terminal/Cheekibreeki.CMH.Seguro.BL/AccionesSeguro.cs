@@ -8,7 +8,7 @@ namespace Cheekibreeki.CMH.Seguro.BL
 {
     public class AccionesSeguro
     {
-        public int comprobarSeguro(AFILIADO afiliado, PRESTACION prestacion)
+        public ComprobarSeguroResponse comprobarSeguro(AFILIADO afiliado, PRESTACION prestacion)
         {
             //TODO: implementar
             return 0;
