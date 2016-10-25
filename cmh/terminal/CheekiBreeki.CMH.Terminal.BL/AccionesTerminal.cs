@@ -112,7 +112,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-018
-        public Boolean cerrarCaja(CAJA caja, FUNCIONARIO funcionario)
+        public Boolean cerrarCaja(CAJA caja)
         {
             //TODO: implementar
             return false;

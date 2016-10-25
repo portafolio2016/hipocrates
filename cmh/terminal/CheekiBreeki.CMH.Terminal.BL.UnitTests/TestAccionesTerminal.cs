@@ -816,7 +816,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void revisarAgendaDiariaTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-            //Caso 1: 
+            //Caso 1: Agenda correcta
+            //Atencion_agen, paciente, prestacion(tipo_prestacion), estado_atencion, pers_medico(personal,especialidad), bloque(dia_sem)
+            //Caso 2: 
         }
         #endregion
 
@@ -825,26 +827,30 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void registrarPagoTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-            //Caso 1: 
+            //Caso 1: Pago correcto
+            //Bono,Caja,Devolucion,Atencion_agen
         }
         #endregion 
 
         #region Abrir Caja
         [TestMethod]
-        public void registrarPagoTest()
+        public void abrirCajaTest()
         {
             AccionesTerminal at = new AccionesTerminal();
             //Caso 1: Caja correcta
-            //
+            //Personal, Cargo, Funcionario y caja
+            //Caso 2: No existe funcionario
+
         }
         #endregion 
 
         #region Cerrar caja
         [TestMethod]
-        public void registrarPagoTest()
+        public void cerrarCajaTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-            //Caso 1: 
+            //Caso 1: Caja cierre correcta
+            //Caso 2: Caja no existe
         }
         #endregion 
 
