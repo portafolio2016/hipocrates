@@ -31,9 +31,12 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             BENEFICIO beneficioPublico = crearBeneficio(40, 10000, entities);
             //crear prestacion
             PRESTACION prestacion = crearPrestacion("Examen de sangre", "EX001", beneficioPublico, entities);
+            AccionesSeguro accionesSeguro = new AccionesSeguro();
             //Caso 1
             //Afiliado tiene un seguro privado, obtiene un 25% de descuento          
-            
+            ComprobarSeguroResponse response = accionesSeguro.comprobarSeguro(afiliadoPrivado, prestacion);
+            ComprobarSeguroResponse expectedResponse1 = new ComprobarSeguroResponse();
+            Assert.IsTrue(response.Equals(expectedResponse1));
             //Caso 2
             //Afiliado tiene un seguro público, obtiene un 40% de descuento
             //Caso 3
