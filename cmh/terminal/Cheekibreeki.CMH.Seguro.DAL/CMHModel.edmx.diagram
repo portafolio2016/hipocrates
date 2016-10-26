@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c345b2c18a94086ab76ea3713545a57" Name="Diagram1">
+        <EntityTypeShape EntityType="SeguroModel.AFILIADO" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguroModel.BENEFICIO" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguroModel.EMPRESA" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguroModel.PLAN" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguroModel.PRESTACION" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguroModel.T_EMPRESA" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="SeguroModel.FK_AFILIADO_PLAN" ManuallyRouted="false" />
+        <AssociationConnector Association="SeguroModel.FK_BENEFICIO_PLAN" ManuallyRouted="false" />
+        <AssociationConnector Association="SeguroModel.FK_BENEFICIO_PRESTACION" ManuallyRouted="false" />
+        <AssociationConnector Association="SeguroModel.FK_EMPRESA_T_EMPRESA" ManuallyRouted="false" />
+        <AssociationConnector Association="SeguroModel.FK_PLAN_EMPRESA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

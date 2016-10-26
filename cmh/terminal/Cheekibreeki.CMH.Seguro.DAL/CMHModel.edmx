@@ -19,9 +19,10 @@
             <PropertyRef Name="ID_BENEFICIO" />
           </Key>
           <Property Name="ID_BENEFICIO" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="PORCENTAJE" Type="number" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="PORCENTAJE" Type="number" Precision="5" Scale="2" Nullable="false" />
           <Property Name="LIMITE_DINERO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PLAN" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" />
         </EntityType>
         <EntityType Name="EMPRESA">
           <Key>
@@ -46,7 +47,6 @@
           <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="128" />
           <Property Name="CODIGO" Type="varchar2" MaxLength="128" Nullable="false" />
-          <Property Name="ID_BENEFICIO" Type="number" Precision="8" Scale="0" />
         </EntityType>
         <EntityType Name="T_EMPRESA">
           <Key>
@@ -79,6 +79,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BENEFICIO_PRESTACION">
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="0..1" />
+          <End Role="BENEFICIO" Type="Self.BENEFICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Principal>
+            <Dependent Role="BENEFICIO">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EMPRESA_T_EMPRESA">
           <End Role="T_EMPRESA" Type="Self.T_EMPRESA" Multiplicity="0..1" />
           <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
@@ -103,18 +115,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PRESTACION_BENEFICIO">
-          <End Role="BENEFICIO" Type="Self.BENEFICIO" Multiplicity="0..1" />
-          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BENEFICIO">
-              <PropertyRef Name="ID_BENEFICIO" />
-            </Principal>
-            <Dependent Role="PRESTACION">
-              <PropertyRef Name="ID_BENEFICIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SeguroModelStoreContainer">
           <EntitySet Name="AFILIADO" EntityType="Self.AFILIADO" Schema="DEVSEGURO" store:Type="Tables" />
           <EntitySet Name="BENEFICIO" EntityType="Self.BENEFICIO" Schema="DEVSEGURO" store:Type="Tables" />
@@ -130,6 +130,10 @@
             <End Role="PLAN" EntitySet="PLAN" />
             <End Role="BENEFICIO" EntitySet="BENEFICIO" />
           </AssociationSet>
+          <AssociationSet Name="FK_BENEFICIO_PRESTACION" Association="Self.FK_BENEFICIO_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="BENEFICIO" EntitySet="BENEFICIO" />
+          </AssociationSet>
           <AssociationSet Name="FK_EMPRESA_T_EMPRESA" Association="Self.FK_EMPRESA_T_EMPRESA">
             <End Role="T_EMPRESA" EntitySet="T_EMPRESA" />
             <End Role="EMPRESA" EntitySet="EMPRESA" />
@@ -137,10 +141,6 @@
           <AssociationSet Name="FK_PLAN_EMPRESA" Association="Self.FK_PLAN_EMPRESA">
             <End Role="EMPRESA" EntitySet="EMPRESA" />
             <End Role="PLAN" EntitySet="PLAN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PRESTACION_BENEFICIO" Association="Self.FK_PRESTACION_BENEFICIO">
-            <End Role="BENEFICIO" EntitySet="BENEFICIO" />
-            <End Role="PRESTACION" EntitySet="PRESTACION" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -163,11 +163,12 @@
             <PropertyRef Name="ID_BENEFICIO" />
           </Key>
           <Property Name="ID_BENEFICIO" Type="Int32" Nullable="false" />
-          <Property Name="PORCENTAJE" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="PORCENTAJE" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="LIMITE_DINERO" Type="Int32" />
           <Property Name="ID_PLAN" Type="Int32" />
+          <Property Name="ID_PRESTACION" Type="Int32" />
           <NavigationProperty Name="PLAN" Relationship="Self.FK_BENEFICIO_PLAN" FromRole="BENEFICIO" ToRole="PLAN" />
-          <NavigationProperty Name="PRESTACION" Relationship="Self.FK_PRESTACION_BENEFICIO" FromRole="BENEFICIO" ToRole="PRESTACION" />
+          <NavigationProperty Name="PRESTACION" Relationship="Self.FK_BENEFICIO_PRESTACION" FromRole="BENEFICIO" ToRole="PRESTACION" />
         </EntityType>
         <EntityType Name="EMPRESA">
           <Key>
@@ -197,8 +198,7 @@
           <Property Name="ID_PRESTACION" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="CODIGO" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_BENEFICIO" Type="Int32" />
-          <NavigationProperty Name="BENEFICIO" Relationship="Self.FK_PRESTACION_BENEFICIO" FromRole="PRESTACION" ToRole="BENEFICIO" />
+          <NavigationProperty Name="BENEFICIO" Relationship="Self.FK_BENEFICIO_PRESTACION" FromRole="PRESTACION" ToRole="BENEFICIO" />
         </EntityType>
         <EntityType Name="T_EMPRESA">
           <Key>
@@ -232,15 +232,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PRESTACION_BENEFICIO">
-          <End Role="BENEFICIO" Type="Self.BENEFICIO" Multiplicity="0..1" />
-          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="*" />
+        <Association Name="FK_BENEFICIO_PRESTACION">
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="0..1" />
+          <End Role="BENEFICIO" Type="Self.BENEFICIO" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BENEFICIO">
-              <PropertyRef Name="ID_BENEFICIO" />
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID_PRESTACION" />
             </Principal>
-            <Dependent Role="PRESTACION">
-              <PropertyRef Name="ID_BENEFICIO" />
+            <Dependent Role="BENEFICIO">
+              <PropertyRef Name="ID_PRESTACION" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -283,9 +283,9 @@
             <End Role="PLAN" EntitySet="PLAN" />
             <End Role="BENEFICIO" EntitySet="BENEFICIO" />
           </AssociationSet>
-          <AssociationSet Name="FK_PRESTACION_BENEFICIO" Association="Self.FK_PRESTACION_BENEFICIO">
-            <End Role="BENEFICIO" EntitySet="BENEFICIO" />
+          <AssociationSet Name="FK_BENEFICIO_PRESTACION" Association="Self.FK_BENEFICIO_PRESTACION">
             <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="BENEFICIO" EntitySet="BENEFICIO" />
           </AssociationSet>
           <AssociationSet Name="FK_EMPRESA_T_EMPRESA" Association="Self.FK_EMPRESA_T_EMPRESA">
             <End Role="T_EMPRESA" EntitySet="T_EMPRESA" />
@@ -319,6 +319,7 @@
                 <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
                 <ScalarProperty Name="LIMITE_DINERO" ColumnName="LIMITE_DINERO" />
                 <ScalarProperty Name="ID_PLAN" ColumnName="ID_PLAN" />
+                <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -346,7 +347,6 @@
                 <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
-                <ScalarProperty Name="ID_BENEFICIO" ColumnName="ID_BENEFICIO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

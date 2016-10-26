@@ -57,60 +57,60 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AFILIADO.cs">
-      <DependentUpon>SeguroModel.tt</DependentUpon>
+      <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="BENEFICIO.cs">
-      <DependentUpon>SeguroModel.tt</DependentUpon>
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CMHModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMHModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CMHModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CMHModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMHModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="EMPRESA.cs">
-      <DependentUpon>SeguroModel.tt</DependentUpon>
+      <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PLAN.cs">
-      <DependentUpon>SeguroModel.tt</DependentUpon>
+      <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PRESTACION.cs">
-      <DependentUpon>SeguroModel.tt</DependentUpon>
+      <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeguroModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SeguroModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SeguroModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SeguroModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SeguroModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SeguroModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="T_EMPRESA.cs">
-      <DependentUpon>SeguroModel.tt</DependentUpon>
+      <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
-    <EntityDeploy Include="SeguroModel.edmx">
+    <EntityDeploy Include="CMHModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SeguroModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>CMHModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="SeguroModel.Context.tt">
+    <None Include="CMHModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SeguroModel.edmx</DependentUpon>
-      <LastGenOutput>SeguroModel.Context.cs</LastGenOutput>
+      <DependentUpon>CMHModel.edmx</DependentUpon>
+      <LastGenOutput>CMHModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="SeguroModel.edmx.diagram">
-      <DependentUpon>SeguroModel.edmx</DependentUpon>
+    <None Include="CMHModel.edmx.diagram">
+      <DependentUpon>CMHModel.edmx</DependentUpon>
     </None>
-    <None Include="SeguroModel.tt">
+    <None Include="CMHModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SeguroModel.edmx</DependentUpon>
-      <LastGenOutput>SeguroModel.cs</LastGenOutput>
+      <DependentUpon>CMHModel.edmx</DependentUpon>
+      <LastGenOutput>CMHModel.cs</LastGenOutput>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
