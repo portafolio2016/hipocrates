@@ -47,9 +47,12 @@ public class EntradaFicha implements Serializable {
     @Column(name = "FECHA_ENTRADA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEntrada;
-    @JoinColumn(name = "ID_FICHA", referencedColumnName = "ID_FICHA")
+    @JoinColumn(name = "ID_PACIENTE", referencedColumnName = "ID_PACIENTE")
     @ManyToOne
-    private Ficha idFicha;
+    private Paciente idPaciente;
+    @JoinColumn(name = "ID_TIPO_FICHA", referencedColumnName = "ID_TIPO_FICHA")
+    @ManyToOne(optional = false)
+    private TipoFicha idTipoFicha;
 
     public EntradaFicha() {
     }
@@ -90,12 +93,20 @@ public class EntradaFicha implements Serializable {
         this.fechaEntrada = fechaEntrada;
     }
 
-    public Ficha getIdFicha() {
-        return idFicha;
+    public Paciente getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setIdFicha(Ficha idFicha) {
-        this.idFicha = idFicha;
+    public void setIdPaciente(Paciente idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    public TipoFicha getIdTipoFicha() {
+        return idTipoFicha;
+    }
+
+    public void setIdTipoFicha(TipoFicha idTipoFicha) {
+        this.idTipoFicha = idTipoFicha;
     }
 
     @Override

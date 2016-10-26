@@ -12,26 +12,24 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class PACIENTE
+    public partial class BLOQUE
     {
-        public PACIENTE()
+        public BLOQUE()
         {
             this.ATENCION_AGEN = new HashSet<ATENCION_AGEN>();
-            this.ENTRADA_FICHA = new HashSet<ENTRADA_FICHA>();
+            this.HORARIO = new HashSet<HORARIO>();
         }
     
-        public int ID_PACIENTE { get; set; }
-        public string NOMBRES_PACIENTE { get; set; }
-        public string APELLIDOS_PACIENTE { get; set; }
-        public int RUT { get; set; }
-        public string DIGITO_VERIFICADOR { get; set; }
-        public string HASHED_PASS { get; set; }
-        public string EMAIL_PACIENTE { get; set; }
-        public string SEXO { get; set; }
-        public Nullable<System.DateTime> FEC_NAC { get; set; }
-        public Nullable<bool> ACTIVO { get; set; }
+        public int ID_BLOQUE { get; set; }
+        public int NUM_BLOQUE { get; set; }
+        public byte NUM_HORA_INI { get; set; }
+        public byte NUM_MINU_INI { get; set; }
+        public byte NUM_HORA_FIN { get; set; }
+        public byte NUM_MINU_FIN { get; set; }
+        public int ID_DIA_SEM { get; set; }
     
         public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN { get; set; }
-        public virtual ICollection<ENTRADA_FICHA> ENTRADA_FICHA { get; set; }
+        public virtual DIA_SEM DIA_SEM { get; set; }
+        public virtual ICollection<HORARIO> HORARIO { get; set; }
     }
 }

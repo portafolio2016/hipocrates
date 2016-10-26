@@ -56,15 +56,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return false;
         }
 
-        //ECU-009
-        public Boolean crearFichaMedica(FICHA ficha)
-        {
-            //TODO: implementar
-            return false;
-        }
+        ////ECU-009
+        //public Boolean crearFichaMedica(FICHA ficha)
+        //{
+        //    //TODO: implementar
+        //    return false;
+        //}
 
         //ECU-010
-        public Boolean actualizarFichaMedica(FICHA ficha)
+        public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
         {
             //TODO: implementar
             return false;
