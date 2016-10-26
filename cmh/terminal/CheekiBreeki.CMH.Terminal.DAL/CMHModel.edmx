@@ -16,7 +16,7 @@
           <Key>
             <PropertyRef Name="ID_ATENCION_AGEN" />
           </Key>
-          <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FECHOR" Type="date" />
           <Property Name="OBSERVACIONES" Type="varchar2" MaxLength="256" />
           <Property Name="ID_PACIENTE" Type="number" Precision="8" Scale="0" />
@@ -140,7 +140,7 @@
           <Key>
             <PropertyRef Name="ID_HORARIO" />
           </Key>
-          <Property Name="ID_HORARIO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_HORARIO" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ID_BLOQUE" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="ID_PERS_MEDICO" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
@@ -156,7 +156,7 @@
           <Key>
             <PropertyRef Name="ID_ORDEN_ANALISIS" />
           </Key>
-          <Property Name="ID_ORDEN_ANALISIS" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_ORDEN_ANALISIS" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FECHOR_EMISION" Type="date" />
           <Property Name="FECHOR_RECEP" Type="date" />
         </EntityType>
@@ -226,7 +226,7 @@
           <Key>
             <PropertyRef Name="ID_RESULTADO_ATENCION" />
           </Key>
-          <Property Name="ID_RESULTADO_ATENCION" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_RESULTADO_ATENCION" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ATENCION_ABIERTA" Type="number" Precision="1" Scale="0" />
           <Property Name="COMENTARIO" Type="varchar2" MaxLength="256" />
           <Property Name="ID_ATENCION_AGEN" Type="number" Precision="8" Scale="0" />
@@ -260,7 +260,7 @@
           <Key>
             <PropertyRef Name="ID_TIPO_PRESTACION" />
           </Key>
-          <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_TIPO_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOM_TIPO_PREST" Type="varchar2" MaxLength="256" />
         </EntityType>
         <Association Name="FK_ASEGURADORA_BONO">
@@ -858,7 +858,7 @@
           <Key>
             <PropertyRef Name="ID_ATENCION_AGEN" />
           </Key>
-          <Property Name="ID_ATENCION_AGEN" Type="Int32" Nullable="false" />
+          <Property Name="ID_ATENCION_AGEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FECHOR" Type="DateTime" />
           <Property Name="OBSERVACIONES" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="ID_PACIENTE" Type="Int32" />
@@ -1014,7 +1014,7 @@
           <Key>
             <PropertyRef Name="ID_HORARIO" />
           </Key>
-          <Property Name="ID_HORARIO" Type="Int32" Nullable="false" />
+          <Property Name="ID_HORARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_BLOQUE" Type="Int32" Nullable="false" />
           <Property Name="ID_PERS_MEDICO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BLOQUE" Relationship="Self.FK_HORARIO_BLOQUE" FromRole="HORARIO" ToRole="BLOQUE" />
@@ -1033,7 +1033,7 @@
           <Key>
             <PropertyRef Name="ID_ORDEN_ANALISIS" />
           </Key>
-          <Property Name="ID_ORDEN_ANALISIS" Type="Int32" Nullable="false" />
+          <Property Name="ID_ORDEN_ANALISIS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FECHOR_EMISION" Type="DateTime" />
           <Property Name="FECHOR_RECEP" Type="DateTime" />
           <NavigationProperty Name="RES_ATENCION" Relationship="Self.FK_ORDEN_ANALISIS_RES_ATENCION" FromRole="ORDEN_ANALISIS" ToRole="RES_ATENCION" />
@@ -1122,7 +1122,7 @@
           <Key>
             <PropertyRef Name="ID_RESULTADO_ATENCION" />
           </Key>
-          <Property Name="ID_RESULTADO_ATENCION" Type="Int32" Nullable="false" />
+          <Property Name="ID_RESULTADO_ATENCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ATENCION_ABIERTA" Type="Boolean" />
           <Property Name="COMENTARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="ID_ATENCION_AGEN" Type="Int32" />
@@ -1162,7 +1162,7 @@
           <Key>
             <PropertyRef Name="ID_TIPO_PRESTACION" />
           </Key>
-          <Property Name="ID_TIPO_PRESTACION" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIPO_PRESTACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOM_TIPO_PREST" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PRESTACION" Relationship="Self.FK_TIPO_PRES_PRESTACION" FromRole="TIPO_PRES" ToRole="PRESTACION" />
         </EntityType>
