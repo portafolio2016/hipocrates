@@ -105,7 +105,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-017
-        #region Caja
+        #region  Abrir Caja
         public Boolean abrirCaja(CAJA caja, FUNCIONARIO funcionario)
         {
             try
@@ -131,14 +131,54 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
+
+        #endregion
+
+        #region Buscar caja
+        public CAJA buscarCaja(int idCaja)
+        {
+            try
+            {
+                CAJA caja = null;
+                caja = conexionDB.CAJA.Where(d => d.ID_CAJA == idCaja).FirstOrDefault();
+                if (Util.isObjetoNulo(caja))
+                {
+                    throw new Exception("Caja no existe");
+                }
+                return caja;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         #endregion
 
         //ECU-018
-        public Boolean cerrarCaja(CAJA caja, FUNCIONARIO funcionario)
+        #region Cerrar Caja
+        public Boolean cerrarCaja(CAJA caja)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(caja))
+                {
+                    throw new Exception("Caja nulo");
+                }
+                else
+                {
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
+        #endregion 
 
         //ECU-019
         public ReporteCaja generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
