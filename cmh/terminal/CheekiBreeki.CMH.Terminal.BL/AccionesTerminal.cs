@@ -162,20 +162,20 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             try
             {
-                    if (buscarCaja(caja.ID_CAJA) == null)
-                    {
-                        throw new Exception("Caja no encontrada");
-                    }
-                    if (Util.isObjetoNulo(caja))
-                    {
-                        throw new Exception("Caja nulo");
-                    }
-                    else
-                    {
-                        conexionDB.SaveChangesAsync();
-                        return true;
-                    }
-               
+                if (buscarCaja(caja.ID_CAJA) == null)
+                {
+                    throw new Exception("Caja no encontrada");
+                }
+                else if (Util.isObjetoNulo(caja))
+                {
+                    throw new Exception("Caja nulo");
+                }
+                else
+                {
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+
             }
             catch (Exception ex)
             {
@@ -183,7 +183,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
-        #endregion 
+        #endregion
 
         //ECU-019
         public ReporteCaja generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
@@ -192,7 +192,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             ReporteCaja reporteCaja = null;
             return reporteCaja;
         }
-        
+
         public Boolean actualizarInventarioEquipo(INVENTARIO inventario)
         {
             //TODO: implementar

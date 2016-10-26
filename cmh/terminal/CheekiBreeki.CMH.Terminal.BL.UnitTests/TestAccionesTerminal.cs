@@ -894,50 +894,53 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void cerrarCajaTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-            CMHEntities conexionBD = new CMHEntities();
-            //Caso 1: Caja cierre correcta
+            CAJA cajaBuscada = new CAJA();
+            using (var conexionBD = new CMHEntities())
+            {
+                //Caso 1: Caja cierre correcta
                 //Instanciar y crear Cargo
-            CARGO cargo1 = new CARGO();
-            cargo1.NOMBRE_CARGO = "Operador";
-            conexionBD.CARGO.Add(cargo1);
-            conexionBD.SaveChangesAsync();
-            Console.WriteLine("ID CARGO: " + cargo1.ID_CARGO_FUNCI);
+                CARGO cargo1 = new CARGO();
+                cargo1.NOMBRE_CARGO = "Operador";
+                conexionBD.CARGO.Add(cargo1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID CARGO: " + cargo1.ID_CARGO_FUNCI);
                 //Instanciar y crear personal
-            PERSONAL personal1 = new PERSONAL();
-            personal1.NOMBRES = "Gonzalo";
-            personal1.APELLIDOS = "Lopez";
-            personal1.REMUNERACION = 1000000;
-            personal1.HASHED_PASS = "QWERTY1";
-            personal1.PORCENT_DESCUENTO = 50;
-            personal1.RUT = 12345678;
-            personal1.VERIFICADOR = "K";
-            personal1.EMAIL = "asdf@gmail.com";
-            personal1.ACTIVO = true;
-            conexionBD.PERSONAL.Add(personal1);
-            conexionBD.SaveChangesAsync();
-            Console.WriteLine("ID PERSONAL: " + personal1.ID_PERSONAL);
+                PERSONAL personal1 = new PERSONAL();
+                personal1.NOMBRES = "Gonzalo";
+                personal1.APELLIDOS = "Lopez";
+                personal1.REMUNERACION = 1000000;
+                personal1.HASHED_PASS = "QWERTY1";
+                personal1.PORCENT_DESCUENTO = 50;
+                personal1.RUT = 12345678;
+                personal1.VERIFICADOR = "K";
+                personal1.EMAIL = "asdf@gmail.com";
+                personal1.ACTIVO = true;
+                conexionBD.PERSONAL.Add(personal1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID PERSONAL: " + personal1.ID_PERSONAL);
                 //Instanciar y crear funcionario
-            FUNCIONARIO funcionario1 = new FUNCIONARIO();
-            funcionario1.ID_CARGO_FUNCI = cargo1.ID_CARGO_FUNCI;
-            funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
-            conexionBD.FUNCIONARIO.Add(funcionario1);
-            conexionBD.SaveChangesAsync();
-            Console.WriteLine("ID FUNCIONARIO: " + funcionario1.ID_FUNCIONARIO);
+                FUNCIONARIO funcionario1 = new FUNCIONARIO();
+                funcionario1.ID_CARGO_FUNCI = cargo1.ID_CARGO_FUNCI;
+                funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
+                conexionBD.FUNCIONARIO.Add(funcionario1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID FUNCIONARIO: " + funcionario1.ID_FUNCIONARIO);
                 //Instanciar y crear caja
-            CAJA caja1 = new CAJA();
-            caja1.FECHOR_APERTURA = DateTime.Today;
-            caja1.ID_FUNCIONARIO = funcionario1.ID_FUNCIONARIO;
-            conexionBD.CAJA.Add(caja1);
-            conexionBD.SaveChangesAsync();
-            Console.WriteLine("ID CAJA: " + caja1.ID_CAJA);
+                CAJA caja1 = new CAJA();
+                caja1.FECHOR_APERTURA = DateTime.Today;
+                caja1.ID_FUNCIONARIO = funcionario1.ID_FUNCIONARIO;
+                conexionBD.CAJA.Add(caja1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID CAJA: " + caja1.ID_CAJA);
                 //Modificar caja (Agregar Fechor termino)
 
-            /*
-            CAJA cajaBuscada = at.buscarCaja(caja1.ID_CAJA);*/
-            caja1.FECHOR_CIERRE = DateTime.Today;
-            caja1.FECHOR_CIERRE.Value.AddDays(1);
+                cajaBuscada.ID_CAJA = caja1.ID_CAJA;
+            }
+            cajaBuscada = at.buscarCaja(cajaBuscada.ID_CAJA);
+            cajaBuscada.FECHOR_CIERRE = DateTime.Today;
+            cajaBuscada.FECHOR_CIERRE = cajaBuscada.FECHOR_CIERRE.Value.AddDays(1);
 
-            Boolean res1 = at.cerrarCaja(caja1);
+            Boolean res1 = at.cerrarCaja(cajaBuscada);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
             
