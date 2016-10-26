@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="ID_AFILIADO" />
           </Key>
-          <Property Name="ID_AFILIADO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_AFILIADO" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RUT" Type="number" Precision="9" Scale="0" />
           <Property Name="VERIFICADOR" Type="char" MaxLength="1" />
           <Property Name="ID_PLAN" Type="number" Precision="8" Scale="0" />
@@ -18,7 +18,7 @@
           <Key>
             <PropertyRef Name="ID_BENEFICIO" />
           </Key>
-          <Property Name="ID_BENEFICIO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_BENEFICIO" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="PORCENTAJE" Type="number" Precision="5" Scale="2" Nullable="false" />
           <Property Name="LIMITE_DINERO" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_PLAN" Type="number" Precision="8" Scale="0" />
@@ -28,7 +28,7 @@
           <Key>
             <PropertyRef Name="ID_EMPRESA" />
           </Key>
-          <Property Name="ID_EMPRESA" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="64" />
           <Property Name="ID_T_EMPRESA" Type="number" Precision="8" Scale="0" />
         </EntityType>
@@ -36,7 +36,7 @@
           <Key>
             <PropertyRef Name="ID_PLAN" />
           </Key>
-          <Property Name="ID_PLAN" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_PLAN" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="256" />
           <Property Name="ID_EMPRESA" Type="number" Precision="8" Scale="0" />
         </EntityType>
@@ -44,7 +44,7 @@
           <Key>
             <PropertyRef Name="ID_PRESTACION" />
           </Key>
-          <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="128" />
           <Property Name="CODIGO" Type="varchar2" MaxLength="128" Nullable="false" />
         </EntityType>
@@ -52,7 +52,7 @@
           <Key>
             <PropertyRef Name="ID_T_EMPRESA" />
           </Key>
-          <Property Name="ID_T_EMPRESA" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_T_EMPRESA" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="varchar2" MaxLength="64" />
         </EntityType>
         <Association Name="FK_AFILIADO_PLAN">
@@ -152,7 +152,7 @@
           <Key>
             <PropertyRef Name="ID_AFILIADO" />
           </Key>
-          <Property Name="ID_AFILIADO" Type="Int32" Nullable="false" />
+          <Property Name="ID_AFILIADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RUT" Type="Int32" />
           <Property Name="VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="ID_PLAN" Type="Int32" />
@@ -162,7 +162,7 @@
           <Key>
             <PropertyRef Name="ID_BENEFICIO" />
           </Key>
-          <Property Name="ID_BENEFICIO" Type="Int32" Nullable="false" />
+          <Property Name="ID_BENEFICIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PORCENTAJE" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="LIMITE_DINERO" Type="Int32" />
           <Property Name="ID_PLAN" Type="Int32" />
@@ -174,7 +174,7 @@
           <Key>
             <PropertyRef Name="ID_EMPRESA" />
           </Key>
-          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="ID_T_EMPRESA" Type="Int32" />
           <NavigationProperty Name="T_EMPRESA" Relationship="Self.FK_EMPRESA_T_EMPRESA" FromRole="EMPRESA" ToRole="T_EMPRESA" />
@@ -184,7 +184,7 @@
           <Key>
             <PropertyRef Name="ID_PLAN" />
           </Key>
-          <Property Name="ID_PLAN" Type="Int32" Nullable="false" />
+          <Property Name="ID_PLAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="ID_EMPRESA" Type="Int32" />
           <NavigationProperty Name="AFILIADO" Relationship="Self.FK_AFILIADO_PLAN" FromRole="PLAN" ToRole="AFILIADO" />
@@ -195,7 +195,7 @@
           <Key>
             <PropertyRef Name="ID_PRESTACION" />
           </Key>
-          <Property Name="ID_PRESTACION" Type="Int32" Nullable="false" />
+          <Property Name="ID_PRESTACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="CODIGO" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="BENEFICIO" Relationship="Self.FK_BENEFICIO_PRESTACION" FromRole="PRESTACION" ToRole="BENEFICIO" />
@@ -204,7 +204,7 @@
           <Key>
             <PropertyRef Name="ID_T_EMPRESA" />
           </Key>
-          <Property Name="ID_T_EMPRESA" Type="Int32" Nullable="false" />
+          <Property Name="ID_T_EMPRESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EMPRESA" Relationship="Self.FK_EMPRESA_T_EMPRESA" FromRole="T_EMPRESA" ToRole="EMPRESA" />
         </EntityType>
