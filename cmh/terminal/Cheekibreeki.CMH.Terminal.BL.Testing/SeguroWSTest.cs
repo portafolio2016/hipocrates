@@ -26,6 +26,7 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             //crear afiliado
             AFILIADO afiliadoPublico = crearAfiliado(12345678, "1", planPublico, entities);
             AFILIADO afiliadoPrivado = crearAfiliado(98765432, "2", planPrivado, entities);
+            AFILIADO afiliadoSinSeguro = crearAfiliado(123123, "3", null, entities);
             //crear beneficio
             BENEFICIO beneficioPrivado = crearBeneficio(25, 10000, entities);
             BENEFICIO beneficioPublico = crearBeneficio(40, 10000, entities);
@@ -34,17 +35,28 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             AccionesSeguro accionesSeguro = new AccionesSeguro();
             //Caso 1
             //Afiliado tiene un seguro privado, obtiene un 25% de descuento          
-            ComprobarSeguroResponse response = accionesSeguro.comprobarSeguro(afiliadoPrivado, prestacion);
-            ComprobarSeguroResponse expectedResponse1 = new ComprobarSeguroResponse();
-            Assert.IsTrue(response.Equals(expectedResponse1));
+            ComprobarSeguroResponse response = accionesSeguro.comprobarSeguro(afiliadoPrivado.RUT.Value, prestacion.CODIGO, 100);
+            ComprobarSeguroResponse expectedResponse1 = new ComprobarSeguroResponse(true, 25);
+            Assert.IsTrue(response.Equals(expectedResponse1), "Caso 1 fallando");
             //Caso 2
             //Afiliado tiene un seguro público, obtiene un 40% de descuento
+            ComprobarSeguroResponse response2 = accionesSeguro.comprobarSeguro(afiliadoPublico.RUT.Value, prestacion.CODIGO, 100);
+            ComprobarSeguroResponse expectedResponse2 = new ComprobarSeguroResponse(true, 40);
+            Assert.IsTrue(response2.Equals(expectedResponse2));
             //Caso 3
             //Afiliado no tiene seguro
+            ComprobarSeguroResponse response3 = accionesSeguro.comprobarSeguro(afiliadoSinSeguro.RUT.Value, prestacion.CODIGO, 100);
+            ComprobarSeguroResponse expectedResponse3 = new ComprobarSeguroResponse();
+            Assert.IsTrue(response3.Equals(expectedResponse3));
             //Caso 4: 
             //Afiliado no existe
+            ComprobarSeguroResponse response4 = accionesSeguro.comprobarSeguro(0, prestacion.CODIGO, 100);
+            ComprobarSeguroResponse expectedResponse4 = new ComprobarSeguroResponse();
+            Assert.IsFalse(response4.Equals(expectedResponse4));
             //Caso 5: prestación no existe
-            //Caso 6: empresa no existe
+            ComprobarSeguroResponse response5 = accionesSeguro.comprobarSeguro(afiliadoPrivado.RUT.Value, "codigofalso", 100);
+            ComprobarSeguroResponse expectedResponse5 = new ComprobarSeguroResponse();
+            Assert.IsFalse(response5.Equals(expectedResponse5));
         }
 
         private T_EMPRESA crearTipoEmpresa(String nombre, SeguroEntities entities)

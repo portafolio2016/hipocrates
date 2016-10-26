@@ -8,7 +8,17 @@ namespace Cheekibreeki.CMH.Seguro.BL
 {
     public class ComprobarSeguroResponse
     {
+        public ComprobarSeguroResponse()
+        {
+            this.TieneSeguro = false;
+            this.descuento = 0;
+        }
 
+        public ComprobarSeguroResponse(bool tieneSeguro, int descuento)
+        {
+            this.tieneSeguro = tieneSeguro;
+            this.descuento = descuento;
+        }
         private bool tieneSeguro;
         private int descuento;
 

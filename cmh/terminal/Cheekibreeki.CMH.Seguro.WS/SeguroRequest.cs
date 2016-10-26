@@ -11,6 +11,15 @@ namespace Cheekibreeki.CMH.Seguro.WS
     {
         private string afiliadoRut;
         private string codigoPrestacion;
+        private int precioPrestacion;
+
+        [DataMember]
+        public int PrecioPrestacion
+        {
+            get { return precioPrestacion; }
+            set { precioPrestacion = value; }
+        }
+        
         [DataMember]
         public string CodigoPrestacion
         {
