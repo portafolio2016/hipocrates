@@ -10,18 +10,45 @@ namespace Cheekibreeki.CMH.Seguro.BL
     {
         public int obtenerDescuentoPrestacion(int precioPrestacion, BENEFICIO beneficio)
         {
-            return 0;
-            
+            int fraccion = (int)(precioPrestacion * beneficio.PORCENTAJE / 100);
+            if (fraccion > beneficio.LIMITE_DINERO)
+            {
+                return beneficio.LIMITE_DINERO.Value;
+            }
+            else
+            {
+                return fraccion;
+            }
         }
 
-        public AFILIADO obtenerAfiliado(String rut)
+        public AFILIADO obtenerAfiliado(int rut)
         {
-            return new AFILIADO();
+            using (var entities = new SeguroEntities())
+            {
+                List<AFILIADO> afiliados = (from a in entities.AFILIADO
+                                      where a.RUT.Value == rut
+                                      select a).ToList<AFILIADO>();
+                if (afiliados.Count() == 0)
+                {
+                    throw new Exception("Afiliado no existe");
+                }
+                else
+                {
+                    return afiliados.First<AFILIADO>();
+                }
+            }
+            
         }
 
         public PLAN obtenerPlanAfiliado(AFILIADO afiliado)
         {
-            return new PLAN();
+            using (var entities = new SeguroEntities())
+            {
+                PLAN plan = (from p in entities.PLAN
+                                 where afiliado.ID_PLAN == p.ID_PLAN
+                                 select p).First<PLAN>();
+                return plan;
+            }
         }
 
         public List<BENEFICIO> obtenerBeneficiosPlan(PLAN plan)
