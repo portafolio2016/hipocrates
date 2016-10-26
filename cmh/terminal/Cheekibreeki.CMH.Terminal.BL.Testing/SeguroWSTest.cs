@@ -42,7 +42,7 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
                 AccionesSeguro accionesSeguro = new AccionesSeguro();
                 //Caso1: obtener afiliado correctamente
                 AFILIADO result1 = accionesSeguro.obtenerAfiliado(afiliado.RUT.Value);
-                Assert.AreEqual(result1.ID_AFILIADO, afiliado.ID_AFILIADO);
+                Assert.AreNotEqual(result1, null);
                 //Caso2: afiliado no existe
                 try
                 {
