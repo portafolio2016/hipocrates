@@ -13,7 +13,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-001
         public Boolean agendarAtencion(ATENCION_AGEN atencion)
         {
-            //Al generar una orden de análisis, tiene que ir relacionada con una atencion
+            
             try
             {
                 if (Util.isObjetoNulo(atencion))
@@ -103,17 +103,57 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-012
-        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, ORDEN_ANALISIS ordenAnalisis)
+        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, ORDEN_ANALISIS ordenAnalisis) 
         {
-            //TODO: implementar
-            return false;
+            //tablas res_atencion... orden_analisis CAMPOS fechor_emision fechor_recep
+            //Al generar una orden de análisis, tiene que ir relacionada con una atencion
+            try
+            {
+                if (Util.isObjetoNulo(ordenAnalisis))
+                {
+                    throw new Exception("Orden nula");
+                }
+                
+                else if (ordenAnalisis.FECHOR_EMISION <= DateTime.Today)
+                {
+                    throw new Exception("Fecha invalida");
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            
         }
 
         //ECU-013
         public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis)
         {
-            //TODO: implementar
-            return false;
+            //tablas res_atencion... orden_analisis CAMPOS fechor_emision fechor_recep
+            //Al generar una orden de análisis, tiene que ir relacionada con una atencion
+            try
+            {
+                if (Util.isObjetoNulo(ordenAnalisis))
+                {
+                    throw new Exception("Orden nula");
+                }
+
+                else if (ordenAnalisis.FECHOR_RECEP <= DateTime.Today)
+                {
+                    throw new Exception("Fecha invalida");
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
         }
 
         //ECU-014
@@ -181,7 +221,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return reporteCaja;
         }
         
-        public Boolean actualizarInventarioEquipo(INVENTARIO inventario)
+        public Boolean orualizarInventarioEquipo(INVENTARIO inventario)
         {
             //TODO: implementar
             return false;

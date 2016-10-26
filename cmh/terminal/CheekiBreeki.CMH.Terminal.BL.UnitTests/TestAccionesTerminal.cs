@@ -852,7 +852,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 prestacion1.NOM_PRESTACION = "Chubi";
                 prestacion1.PRECIO_PRESTACION = 50000;
                 prestacion1.CODIGO_PRESTACION = "A002";
-                prestacion1.ACTIVO = true;
                 context.PRESTACION.Add(prestacion1);
                 context.SaveChanges();
 
@@ -933,7 +932,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 prestacion2.NOM_PRESTACION = "Chubi";
                 prestacion2.PRECIO_PRESTACION = 50000;
                 prestacion2.CODIGO_PRESTACION = "A002";
-                prestacion2.ACTIVO = true;
                 context.PRESTACION.Add(prestacion2);
                 context.SaveChanges();
 
@@ -1044,7 +1042,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 prestacion1.NOM_PRESTACION = "Chubi";
                 prestacion1.PRECIO_PRESTACION = 50000;
                 prestacion1.CODIGO_PRESTACION = "A002";
-                prestacion1.ACTIVO = true;
                 context.PRESTACION.Add(prestacion1);
                 context.SaveChanges();
 
@@ -1129,7 +1126,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 prestacion2.NOM_PRESTACION = "Chubi";
                 prestacion2.PRECIO_PRESTACION = 50000;
                 prestacion2.CODIGO_PRESTACION = "A002";
-                prestacion2.ACTIVO = true;
                 context.PRESTACION.Add(prestacion2);
                 context.SaveChanges();
 
@@ -1247,7 +1243,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 prestacion1.NOM_PRESTACION = "Chubi";
                 prestacion1.PRECIO_PRESTACION = 50000;
                 prestacion1.CODIGO_PRESTACION = "A002";
-                prestacion1.ACTIVO = true;
                 context.PRESTACION.Add(prestacion1);
                 context.SaveChanges();
 
@@ -1330,7 +1325,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 prestacion2.NOM_PRESTACION = "Chubi";
                 prestacion2.PRECIO_PRESTACION = 50000;
                 prestacion2.CODIGO_PRESTACION = "A002";
-                prestacion2.ACTIVO = true;
                 context.PRESTACION.Add(prestacion2);
                 context.SaveChanges();
 
