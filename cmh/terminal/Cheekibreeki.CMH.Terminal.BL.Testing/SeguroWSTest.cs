@@ -107,6 +107,12 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
         [TestMethod]
         public void obtenerBeneficiosPlanTest()
         {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        public void obtenerBeneficioPrestacion()
+        {
             PRESTACION prestacion = new PRESTACION();
             prestacion.ID_PRESTACION = 1;
             prestacion.NOMBRE = "Prestacion ex";
@@ -119,12 +125,6 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             AccionesSeguro accionesSeguro = new AccionesSeguro();
             BENEFICIO resultado = accionesSeguro.obtenerBeneficioPrestacion(prestacion, beneficios);
             Assert.IsTrue(resultado.ID_BENEFICIO == beneficio.ID_BENEFICIO);
-        }
-
-        [TestMethod]
-        public void obtenerBeneficioPrestacion()
-        {
-            throw new NotImplementedException();
         }
     }
 }
