@@ -524,6 +524,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Tipo de prestación vacío");
                 }
+                else if (prestacion.ID_ESPECIALIDAD == null)
+                {
+                    throw new Exception("Especialidad vacío");
+                }
                 else if (!Util.isObjetoNulo(buscarPrestacionMedica(prestacion.CODIGO_PRESTACION)))
                 {
                     throw new Exception("Prestación ya ingresada");
