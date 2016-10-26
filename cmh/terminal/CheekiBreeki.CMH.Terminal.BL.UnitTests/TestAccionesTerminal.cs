@@ -888,26 +888,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
         }
-
-        /// <summary>
-        /// Este método es de muestra para subir los archivos en base64
-        /// Eliminar luego de sacar las referencias
-        /// </summary>
-        [TestMethod]
-        public void subirResultadoAtencion()
-        {
-            AccionesTerminal at = new AccionesTerminal();
-            string file = "file.pdf";
-            
-            RES_ATENCION resAtencion = new RES_ATENCION();
-            //resAtencion.ARCHIVO_B64 = at.convertirABase64(file);
-            //resAtencion.EXT_ARCHIVO = Path.GetExtension(file);
-
-            Boolean res1 = at.cerrarConsultaMedica(resAtencion);
-            Boolean resultadoEsperado1 = true;
-            Assert.AreEqual(res1, resultadoEsperado1);
-
-        }
         #endregion
     }
 }

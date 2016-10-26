@@ -872,36 +872,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
-
-
-        /*
-        /// <summary>
-        /// Convierte los datos de un resultado de atención a archivo
-        /// </summary>
-        /// <param name="resultadoAtencion">ID resultado atención</param>
-        /// <returns>true si la conversión fue correcta</returns>
-        public Boolean convertirDesdeBase64(int resultadoAtencion)
-        {
-            try
-            {
-                RES_ATENCION resAtencion = conexionDB.RES_ATENCION.Find(resultadoAtencion);
-                if (Util.isObjetoNulo(resAtencion))
-                    throw new Exception("Resultado atención no existe");
-                else
-                {
-                    string nombre = "resultado_atencion_" + resAtencion.ID_RESULTADO_ATENCION + "." + resAtencion.EXT_ARCHIVO;
-                    byte[] resultadoFinal = Convert.FromBase64String(resAtencion.ARCHIVO_B64);
-                    File.WriteAllBytes(nombre, resultadoFinal);
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
-        */ 
         #endregion
     }
 }
