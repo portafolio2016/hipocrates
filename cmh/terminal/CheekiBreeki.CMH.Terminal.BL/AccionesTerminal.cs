@@ -104,10 +104,37 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return false;
         }
 
-       
+        //ECU-017
+        #region Caja
+        public Boolean abrirCaja(CAJA caja, FUNCIONARIO funcionario)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(caja))
+                {
+                    throw new Exception("Caja nula.");
+                }
+                else if (Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Funcionario no encontrado.");
+                }
+                else
+                {
+                    conexionDB.CAJA.Add(caja);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
 
         //ECU-018
-        public Boolean cerrarCaja(CAJA caja)
+        public Boolean cerrarCaja(CAJA caja, FUNCIONARIO funcionario)
         {
             //TODO: implementar
             return false;
@@ -519,6 +546,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Tipo de prestación vacío");
                 }
+                else if (prestacion.ID_ESPECIALIDAD == null)
+                {
+                    throw new Exception("Especialidad vacío");
+                }
                 else if (!Util.isObjetoNulo(buscarPrestacionMedica(prestacion.CODIGO_PRESTACION)))
                 {
                     throw new Exception("Prestación ya ingresada");
@@ -744,35 +775,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 else
                 {
                     conexionDB.PACIENTE.Remove(paciente);
-                    conexionDB.SaveChangesAsync();
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
-        #endregion
-
-        //ECU-017
-        #region Caja
-        public Boolean abrirCaja(CAJA caja, FUNCIONARIO funcionario)
-        {
-            try
-            {
-                if (Util.isObjetoNulo(caja))
-                {
-                    throw new Exception("Caja nula.");
-                }
-                else if (Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI,funcionario.ID_PERSONAL)))
-                {
-                    throw new Exception("Funcionario no encontrado.");
-                }
-                else
-                {
-                    conexionDB.CAJA.Add(caja);
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
