@@ -107,14 +107,18 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
         [TestMethod]
         public void obtenerBeneficiosPlanTest()
         {
-            using (var entities = new SeguroEntities())
-            {
-                AccionesSeguro accionesSeguro = new AccionesSeguro();
-                //Caso1: Plan obtiene beneficios                
-                //Caso2: Plan no tiene beneficios
-                throw new NotImplementedException();
-            }
-            
+            PRESTACION prestacion = new PRESTACION();
+            prestacion.ID_PRESTACION = 1;
+            prestacion.NOMBRE = "Prestacion ex";
+            prestacion.CODIGO = "CodigoEx";
+            BENEFICIO beneficio = new BENEFICIO();
+            beneficio.ID_BENEFICIO = 1;
+            beneficio.ID_PRESTACION = 1;
+            List<BENEFICIO> beneficios = new List<BENEFICIO>();
+            beneficios.Add(beneficio);
+            AccionesSeguro accionesSeguro = new AccionesSeguro();
+            BENEFICIO resultado = accionesSeguro.obtenerBeneficioPrestacion(prestacion, beneficios);
+            Assert.IsTrue(resultado.ID_BENEFICIO == beneficio.ID_BENEFICIO);
         }
 
         [TestMethod]
