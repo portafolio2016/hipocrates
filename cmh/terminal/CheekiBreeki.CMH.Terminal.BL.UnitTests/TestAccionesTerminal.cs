@@ -803,191 +803,10 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         [TestMethod]
         public void generarOrdenDeAnalisisTest()
         {
-            AccionesTerminal at = new AccionesTerminal();
-            CMHEntities entities = new CMHEntities();
-
-
-            /*
-             * Tablas utilizadas
-             * 
-             * orden_analisis
-             * atencion_agen
-             * paciente
-             * prestacion
-             * estado_atencion
-             * especialidad
-             * personal
-             * bloque
-             * dia_sem
-             * pers_medico
-             * atencion_agen
-             */
-
-            //Al generar una orden de análisis, tiene que ir relacionada con una atencion
-
-            //Caso 1: Ingreso correcto
-            ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
-            PACIENTE paciente1 = new PACIENTE();
-            PRESTACION prestacion1 = new PRESTACION();
-            ESTADO_ATEN estadoaten1 = new ESTADO_ATEN();
-            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
-            PERSONAL personal1 = new PERSONAL();
-            BLOQUE bloque1 = new BLOQUE();
-            DIA_SEM dia1 = new DIA_SEM();
-            PERS_MEDICO persmedico1 = new PERS_MEDICO();
-            ATENCION_AGEN aten_agen1 = new ATENCION_AGEN();
-
-            using (var context = entities)
-            {
-                paciente1.NOMBRES_PACIENTE = "Miku";
-                paciente1.APELLIDOS_PACIENTE = "Hatsune";
-                paciente1.RUT = 18861423;
-                paciente1.DIGITO_VERIFICADOR = "K";
-                paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
-                paciente1.HASHED_PASS = "4231";
-                paciente1.SEXO = "F";
-                paciente1.FEC_NAC = DateTime.Today;
-                context.PACIENTE.Add(paciente1);
-                context.SaveChangesAsync();
-
-                prestacion1.NOM_PRESTACION = "Chubi";
-                prestacion1.PRECIO_PRESTACION = 50000;
-                prestacion1.CODIGO_PRESTACION = "A002";
-                context.PRESTACION.Add(prestacion1);
-                context.SaveChangesAsync();
-
-                estadoaten1.NOM_ESTADO_ATEN = "Vigente";
-                context.ESTADO_ATEN.Add(estadoaten1);
-                context.SaveChangesAsync();
-
-
-                especialidad1.NOM_ESPECIALIDAD = "Oculista";
-                context.ESPECIALIDAD.Add(especialidad1);
-                context.SaveChangesAsync();
-
-                personal1.NOMBRES = "Moka";
-                personal1.APELLIDOS = "Akashiya";
-                personal1.REMUNERACION = 850000;
-                personal1.PORCENT_DESCUENTO = 7;
-                personal1.HASHED_PASS = "4231";
-                personal1.RUT = 12345678;
-                personal1.VERIFICADOR = "K";
-                context.PERSONAL.Add(personal1);
-                context.SaveChangesAsync();
-
-                bloque1.NUM_BLOQUE = 5;
-                bloque1.NUM_HORA_INI = 11;
-                bloque1.NUM_MINU_INI = 22;
-                bloque1.NUM_HORA_FIN = 16;
-                bloque1.NUM_MINU_FIN = 45;
-                context.BLOQUE.Add(bloque1);
-                context.SaveChangesAsync();
-
-                dia1.NOMBRE_IDA = "Lumamijunes";
-                context.DIA_SEM.Add(dia1);
-                context.SaveChangesAsync();
-
-
-                persmedico1.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
-                persmedico1.ID_PERSONAL = personal1.ID_PERSONAL;
-                context.PERS_MEDICO.Add(persmedico1);
-                context.SaveChangesAsync();
-
-            }
-
-            orden1.FECHOR_EMISION = DateTime.Today;
-            orden1.FECHOR_RECEP = DateTime.Today;
-            orden1.FECHOR_RECEP.Value.AddDays(1);
-
-            Boolean res1 = at.generarOrdenDeAnalisis(aten_agen1, orden1);
-            Boolean resultadoEsperado1 = true;
-            Assert.AreEqual(res1, resultadoEsperado1);
-
-
-            //Caso 2: Fecha erronea
-
-            ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
-            PACIENTE paciente2 = new PACIENTE();
-            PRESTACION prestacion2 = new PRESTACION();
-            ESTADO_ATEN estadoaten2 = new ESTADO_ATEN();
-            ESPECIALIDAD especialidad2 = new ESPECIALIDAD();
-            PERSONAL personal2 = new PERSONAL();
-            BLOQUE bloque2 = new BLOQUE();
-            DIA_SEM dia2 = new DIA_SEM();
-            PERS_MEDICO persmedico2 = new PERS_MEDICO();
-            ATENCION_AGEN aten_agen2 = new ATENCION_AGEN();
-
-            using (var context = entities)
-            {
-                paciente2.NOMBRES_PACIENTE = "Miku";
-                paciente2.APELLIDOS_PACIENTE = "Hatsune";
-                paciente2.RUT = 18861423;
-                paciente2.DIGITO_VERIFICADOR = "K";
-                paciente2.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
-                paciente2.HASHED_PASS = "4231";
-                paciente2.SEXO = "F";
-                paciente2.FEC_NAC = DateTime.Today;
-                context.PACIENTE.Add(paciente2);
-                context.SaveChangesAsync();
-
-                prestacion2.NOM_PRESTACION = "Chubi";
-                prestacion2.PRECIO_PRESTACION = 50000;
-                prestacion2.CODIGO_PRESTACION = "A002";
-                context.PRESTACION.Add(prestacion2);
-                context.SaveChangesAsync();
-
-                estadoaten2.NOM_ESTADO_ATEN = "Vigente";
-                context.ESTADO_ATEN.Add(estadoaten2);
-                context.SaveChangesAsync();
-
-
-                especialidad2.NOM_ESPECIALIDAD = "Oculista";
-                context.ESPECIALIDAD.Add(especialidad2);
-                context.SaveChangesAsync();
-
-                personal2.NOMBRES = "Moka";
-                personal2.APELLIDOS = "Akashiya";
-                personal2.REMUNERACION = 850000;
-                personal2.PORCENT_DESCUENTO = 7;
-                personal2.HASHED_PASS = "4231";
-                personal2.RUT = 12345678;
-                personal2.VERIFICADOR = "K";
-                context.PERSONAL.Add(personal2);
-                context.SaveChangesAsync();
-
-                bloque2.NUM_BLOQUE = 5;
-                bloque2.NUM_HORA_INI = 11;
-                bloque2.NUM_MINU_INI = 22;
-                bloque2.NUM_HORA_FIN = 16;
-                bloque2.NUM_MINU_FIN = 45;
-                context.BLOQUE.Add(bloque2);
-                context.SaveChangesAsync();
-
-                dia2.NOMBRE_IDA = "Lumamijunes";
-                context.DIA_SEM.Add(dia2);
-                context.SaveChangesAsync();
-
-
-                persmedico2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
-                persmedico2.ID_PERSONAL = 003;
-                context.PERS_MEDICO.Add(persmedico2);
-                context.SaveChangesAsync();
-
-            }
-
-            orden2.FECHOR_EMISION = DateTime.Today;
-            orden2.FECHOR_RECEP = DateTime.Today;
-            orden2.FECHOR_RECEP.Value.AddDays(1);
-
-            Boolean res2 = at.generarOrdenDeAnalisis(aten_agen2, orden2);
-            Boolean resultadoEsperado2 = true;
-            Assert.AreEqual(res2, resultadoEsperado2);
-
-            //Caso 3: Orden nula
-            ORDEN_ANALISIS orden3 = null;
 
         }
 
+        [TestMethod]
         public void cerrarOrdenDeAnalisisTest()
         {
 
@@ -1001,17 +820,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Ingresar atenciones
-            ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
-            PACIENTE paciente1 = new PACIENTE();
-            TIPO_PRES tipopres1 = new TIPO_PRES();
-            PRESTACION prestacion1 = new PRESTACION();
-            ESTADO_ATEN estadoaten1 = new ESTADO_ATEN();
-            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
-            PERSONAL personal1 = new PERSONAL();
-            BLOQUE bloque1 = new BLOQUE();
-            DIA_SEM dia1 = new DIA_SEM();
-            PERS_MEDICO persmedico1 = new PERS_MEDICO();
-            ATENCION_AGEN aten_agen1 = new ATENCION_AGEN();
 
             using (var context = new CMHEntities())
             {
@@ -1060,7 +868,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     idBloque = bloquePrevia.ID_BLOQUE;
                     context.BLOQUE.Remove(bloquePrevia);
                 }
-                DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "Lumamijunes").FirstOrDefault();
+                DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "LuMaMiJuVi").FirstOrDefault();
                 if (!Util.isObjetoNulo(diaPrevia))
                     context.DIA_SEM.Remove(diaPrevia);
                 PERS_MEDICO presMedicoPrevia = context.PERS_MEDICO.Where(d => d.ID_PERSONAL == idPersonal && d.ID_ESPECIALIDAD == idEspecialidad).FirstOrDefault();
@@ -1078,6 +886,21 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 {
                     context.ESPECIALIDAD.Remove(especialidadPrevia);
                 }
+
+
+                //CASO 1: Ingreso correcto de agendamiento
+                
+                ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
+                PACIENTE paciente1 = new PACIENTE();
+                TIPO_PRES tipopres1 = new TIPO_PRES();
+                PRESTACION prestacion1 = new PRESTACION();
+                ESTADO_ATEN estadoaten1 = new ESTADO_ATEN();
+                ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
+                PERSONAL personal1 = new PERSONAL();
+                BLOQUE bloque1 = new BLOQUE();
+                DIA_SEM dia1 = new DIA_SEM();
+                PERS_MEDICO persmedico1 = new PERS_MEDICO();
+                ATENCION_AGEN aten_agen1 = new ATENCION_AGEN();
 
                 paciente1.NOMBRES_PACIENTE = "Miku";
                 paciente1.APELLIDOS_PACIENTE = "Hatsune";
@@ -1120,7 +943,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal1);
                 context.SaveChangesAsync();
 
-                dia1.NOMBRE_IDA = "Lumamijunes";
+                dia1.NOMBRE_IDA = "LuMaMiJuVi";
                 context.DIA_SEM.Add(dia1);
                 context.SaveChangesAsync();
 
@@ -1148,125 +971,33 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
                 context.ATENCION_AGEN.Add(aten_agen1);
                 context.SaveChangesAsync();
-            }
-        }
+
+                //orden1.FECHOR_EMISION = DateTime.Today;
+                //orden1.FECHOR_RECEP = DateTime.Today.AddDays(3);
+                //context.ORDEN_ANALISIS.Add(orden1);
+                //context.SaveChangesAsync();
+
+                //falta ingresar bien orden1
+                Boolean res1 = at.generarOrdenDeAnalisis(aten_agen1, orden1);
+                Boolean resultadoEsperado1 = true;
+                Assert.AreEqual(res1, resultadoEsperado1);
+                
 
 
-        [TestMethod]
-        public void anularAtencionTest()
-        {
-            /* 
-             * Usa fk de las tablas
-             * paciente
-             * prestacion
-             * estado_atencion
-             * especialidad
-             * personal
-             * bloque
-             * dia_sem
-             * pers_medico
-             * atencion_agen
-             **/
+                //CASO 2: Fecha minima o invalida
+                /*
+                ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
+                PACIENTE paciente2 = new PACIENTE();
+                TIPO_PRES tipopres2 = new TIPO_PRES();
+                PRESTACION prestacion2 = new PRESTACION();
+                ESTADO_ATEN estadoaten2 = new ESTADO_ATEN();
+                ESPECIALIDAD especialidad2 = new ESPECIALIDAD();
+                PERSONAL personal2 = new PERSONAL();
+                BLOQUE bloque2 = new BLOQUE();
+                DIA_SEM dia2 = new DIA_SEM();
+                PERS_MEDICO persmedico2 = new PERS_MEDICO();
+                ATENCION_AGEN aten_agen2 = new ATENCION_AGEN();
 
-            AccionesTerminal at = new AccionesTerminal();
-            CMHEntities entities = new CMHEntities();
-
-            //Caso 1: Ingreso correcto de anulacion
-            PACIENTE paciente1 = new PACIENTE();
-            PRESTACION prestacion1 = new PRESTACION();
-            ESTADO_ATEN estadoaten1 = new ESTADO_ATEN();
-            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
-            PERSONAL personal1 = new PERSONAL();
-            BLOQUE bloque1 = new BLOQUE();
-            DIA_SEM dia1 = new DIA_SEM();
-            PERS_MEDICO persmedico1 = new PERS_MEDICO();
-            ATENCION_AGEN aten_agen1 = new ATENCION_AGEN();
-
-
-            using (var context = entities)
-            {
-                paciente1.NOMBRES_PACIENTE = "Miku";
-                paciente1.APELLIDOS_PACIENTE = "Hatsune";
-                paciente1.RUT = 18861423;
-                paciente1.DIGITO_VERIFICADOR = "K";
-                paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
-                paciente1.HASHED_PASS = "4231";
-                paciente1.SEXO = "F";
-                paciente1.FEC_NAC = DateTime.Today;
-                context.PACIENTE.Add(paciente1);
-                context.SaveChangesAsync();
-
-                prestacion1.NOM_PRESTACION = "Chubi";
-                prestacion1.PRECIO_PRESTACION = 50000;
-                prestacion1.CODIGO_PRESTACION = "A002";
-                context.PRESTACION.Add(prestacion1);
-                context.SaveChangesAsync();
-
-                estadoaten1.NOM_ESTADO_ATEN = "Anulada";
-                context.ESTADO_ATEN.Add(estadoaten1);
-                context.SaveChangesAsync();
-
-
-                especialidad1.NOM_ESPECIALIDAD = "Oculista";
-                context.ESPECIALIDAD.Add(especialidad1);
-                context.SaveChangesAsync();
-
-                personal1.NOMBRES = "Moka";
-                personal1.APELLIDOS = "Akashiya";
-                personal1.REMUNERACION = 850000;
-                personal1.PORCENT_DESCUENTO = 7;
-                personal1.HASHED_PASS = "4231";
-                personal1.RUT = 12345678;
-                personal1.VERIFICADOR = "K";
-                context.PERSONAL.Add(personal1);
-                context.SaveChangesAsync();
-
-                bloque1.NUM_BLOQUE = 5;
-                bloque1.NUM_HORA_INI = 11;
-                bloque1.NUM_MINU_INI = 22;
-                bloque1.NUM_HORA_FIN = 16;
-                bloque1.NUM_MINU_FIN = 45;
-                context.BLOQUE.Add(bloque1);
-                context.SaveChangesAsync();
-
-                dia1.NOMBRE_IDA = "Lumamijunes";
-                context.DIA_SEM.Add(dia1);
-                context.SaveChangesAsync();
-
-
-                persmedico1.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
-                persmedico1.ID_PERSONAL = 003;
-                context.PERS_MEDICO.Add(persmedico1);
-                context.SaveChangesAsync();
-
-            }
-            DateTime fecha1 = DateTime.Today;
-            aten_agen1.FECHOR = fecha1;
-            aten_agen1.OBSERVACIONES = "El paciente anuló la atención";
-            aten_agen1.ID_PACIENTE = paciente1.ID_PACIENTE;
-            aten_agen1.ID_PRESTACION = prestacion1.ID_PRESTACION;
-            aten_agen1.ID_ESTADO_ATEN = estadoaten1.ID_ESTADO_ATEN;
-            aten_agen1.ID_PERS_ATIENDE = persmedico1.ID_PERSONAL_MEDICO;
-            aten_agen1.ID_BLOQUE = bloque1.ID_BLOQUE;
-            Boolean res1 = at.agendarAtencion(aten_agen1);
-            Boolean resultadoEsperado1 = true;
-            Assert.AreEqual(res1, resultadoEsperado1);
-
-            //Caso 2: Fecha inválida para anulación
-
-            PACIENTE paciente2 = new PACIENTE();
-            PRESTACION prestacion2 = new PRESTACION();
-            ESTADO_ATEN estadoaten2 = new ESTADO_ATEN();
-            ESPECIALIDAD especialidad2 = new ESPECIALIDAD();
-            PERSONAL personal2 = new PERSONAL();
-            BLOQUE bloque2 = new BLOQUE();
-            DIA_SEM dia2 = new DIA_SEM();
-            PERS_MEDICO persmedico2 = new PERS_MEDICO();
-            ATENCION_AGEN aten_agen2 = new ATENCION_AGEN();
-
-
-            using (var context = entities)
-            {
                 paciente2.NOMBRES_PACIENTE = "Miku";
                 paciente2.APELLIDOS_PACIENTE = "Hatsune";
                 paciente2.RUT = 18861423;
@@ -1278,19 +1009,24 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PACIENTE.Add(paciente2);
                 context.SaveChangesAsync();
 
+                especialidad2.NOM_ESPECIALIDAD = "Oculista";
+                context.ESPECIALIDAD.Add(especialidad2);
+                context.SaveChangesAsync();
+
+                tipopres2.NOM_TIPO_PREST = "Test";
+                context.TIPO_PRES.Add(tipopres2);
+                context.SaveChangesAsync();
+
                 prestacion2.NOM_PRESTACION = "Chubi";
                 prestacion2.PRECIO_PRESTACION = 50000;
                 prestacion2.CODIGO_PRESTACION = "A002";
+                prestacion2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
+                prestacion2.ID_TIPO_PRESTACION = tipopres2.ID_TIPO_PRESTACION;
                 context.PRESTACION.Add(prestacion2);
                 context.SaveChangesAsync();
 
                 estadoaten2.NOM_ESTADO_ATEN = "Vigente";
                 context.ESTADO_ATEN.Add(estadoaten2);
-                context.SaveChangesAsync();
-
-
-                especialidad2.NOM_ESPECIALIDAD = "Oculista";
-                context.ESPECIALIDAD.Add(especialidad2);
                 context.SaveChangesAsync();
 
                 personal2.NOMBRES = "Moka";
@@ -1303,6 +1039,11 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal2);
                 context.SaveChangesAsync();
 
+                dia2.NOMBRE_IDA = "LuMaMiJuVi";
+                context.DIA_SEM.Add(dia2);
+                context.SaveChangesAsync();
+
+                bloque2.ID_DIA_SEM = dia2.ID_DIA;
                 bloque2.NUM_BLOQUE = 5;
                 bloque2.NUM_HORA_INI = 11;
                 bloque2.NUM_MINU_INI = 22;
@@ -1311,34 +1052,388 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.BLOQUE.Add(bloque2);
                 context.SaveChangesAsync();
 
-                dia2.NOMBRE_IDA = "Lumamijunes";
-                context.DIA_SEM.Add(dia2);
-                context.SaveChangesAsync();
-
-
-                persmedico2.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
-                persmedico2.ID_PERSONAL = 003;
+                persmedico2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
+                persmedico2.ID_PERSONAL = personal2.ID_PERSONAL;
                 context.PERS_MEDICO.Add(persmedico2);
                 context.SaveChangesAsync();
 
+                aten_agen2.FECHOR = null;
+                aten_agen2.OBSERVACIONES = null;
+                aten_agen2.ID_PACIENTE = 0;
+                aten_agen2.ID_ESTADO_ATEN = 0;
+                aten_agen2.ID_PRESTACION = 0;
+                aten_agen2.ID_BLOQUE = 0;
+                aten_agen2.ID_PERS_ATIENDE = 0;
+
+                context.ATENCION_AGEN.Add(aten_agen2);
+                context.SaveChangesAsync();
+
+
+                //Estará bien eso de aten_agen2, orden2
+                Boolean res2 = at.generarOrdenDeAnalisis(aten_agen2, orden2);
+                Boolean resultadoEsperado2 = false;
+                Assert.AreEqual(res2, resultadoEsperado2);
+                */
+                
+                
+                //CASO 3: Observación vacía o nula
+                
+                /*
+                ORDEN_ANALISIS orden3 = null;
+                ATENCION_AGEN aten_agen3 = null;
+
+                //Estará bien eso de aten_agen2, orden2
+                Boolean res3 = at.generarOrdenDeAnalisis(aten_agen3, orden3);
+                Boolean resultadoEsperado3 = false;
+                Assert.AreEqual(res3, resultadoEsperado3);
+                */
             }
-
-            //Caso 3: Orden nula para anulación
-            ATENCION_AGEN aten_agen3 = null;
-
-            aten_agen3.FECHOR = null;
-            aten_agen3.OBSERVACIONES = null;
-            aten_agen3.ID_PACIENTE = null;
-            aten_agen3.ID_PRESTACION = null;
-            aten_agen3.ID_ESTADO_ATEN = null;
-            aten_agen3.ID_PERS_ATIENDE = 0;
-            aten_agen3.ID_BLOQUE = 0;
-
-            Boolean res3 = at.agendarAtencion(aten_agen3);
-            Boolean resultadoEsperado3 = false;
-            Assert.AreEqual(res3, resultadoEsperado3);
         }
 
+        [TestMethod]
+        public void anularAtencionTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Ingresar atenciones
+
+            using (var context = new CMHEntities())
+            {
+                int idEspecialidad = 0,
+                    idPersonal = 0,
+                    idPaciente = 0,
+                    idPrestacion = 0,
+                    idEstadoAtencion = 0,
+                    idBloque = 0;
+                PACIENTE pacientePrevio = context.PACIENTE.Where(d => d.RUT == 18861423).FirstOrDefault();
+                if (!Util.isObjetoNulo(pacientePrevio))
+                {
+                    idPaciente = pacientePrevio.ID_PACIENTE;
+                    context.PACIENTE.Remove(pacientePrevio);
+                }
+                ESPECIALIDAD especialidadPrevia = context.ESPECIALIDAD.Where(d => d.NOM_ESPECIALIDAD == "Oculista").FirstOrDefault();
+                if (!Util.isObjetoNulo(especialidadPrevia))
+                {
+                    idEspecialidad = especialidadPrevia.ID_ESPECIALIDAD;
+                    context.ESPECIALIDAD.Remove(especialidadPrevia);
+                }
+                TIPO_PRES tipoPrestacionPrevia = context.TIPO_PRES.Where(d => d.NOM_TIPO_PREST == "Test").FirstOrDefault();
+                if (!Util.isObjetoNulo(tipoPrestacionPrevia))
+                    context.TIPO_PRES.Remove(tipoPrestacionPrevia);
+                PRESTACION prestacionPrevia = context.PRESTACION.Where(d => d.CODIGO_PRESTACION == "A002").FirstOrDefault();
+                if (!Util.isObjetoNulo(prestacionPrevia))
+                {
+                    idPrestacion = prestacionPrevia.ID_PRESTACION;
+                    context.PRESTACION.Remove(prestacionPrevia);
+                }
+                ESTADO_ATEN estadoAtencionPrevia = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "Vigente").FirstOrDefault();
+                if (!Util.isObjetoNulo(estadoAtencionPrevia))
+                {
+                    idEstadoAtencion = estadoAtencionPrevia.ID_ESTADO_ATEN;
+                    context.ESTADO_ATEN.Remove(estadoAtencionPrevia);
+                }
+                PERSONAL personalPrevia = context.PERSONAL.Where(d => d.RUT == 12345678).FirstOrDefault();
+                if (!Util.isObjetoNulo(personalPrevia))
+                {
+                    idPersonal = personalPrevia.ID_PERSONAL;
+                    context.PERSONAL.Remove(personalPrevia);
+                }
+                BLOQUE bloquePrevia = context.BLOQUE.Where(d => d.NUM_BLOQUE == 5).FirstOrDefault();
+                if (!Util.isObjetoNulo(bloquePrevia))
+                {
+                    idBloque = bloquePrevia.ID_BLOQUE;
+                    context.BLOQUE.Remove(bloquePrevia);
+                }
+                DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "LuMaMiJuVi").FirstOrDefault();
+                if (!Util.isObjetoNulo(diaPrevia))
+                    context.DIA_SEM.Remove(diaPrevia);
+                PERS_MEDICO presMedicoPrevia = context.PERS_MEDICO.Where(d => d.ID_PERSONAL == idPersonal && d.ID_ESPECIALIDAD == idEspecialidad).FirstOrDefault();
+                if (!Util.isObjetoNulo(presMedicoPrevia))
+                    context.PERS_MEDICO.Remove(presMedicoPrevia);
+
+                ATENCION_AGEN atencionagenPrevia = context.ATENCION_AGEN.
+                    Where(d =>
+                          d.ID_PACIENTE == idPaciente &&
+                          d.ID_PRESTACION == idPrestacion &&
+                          d.ID_ESTADO_ATEN == idEstadoAtencion &&
+                          d.ID_PERS_ATIENDE == idPersonal
+                          && d.ID_BLOQUE == idBloque).FirstOrDefault();
+                if (!Util.isObjetoNulo(especialidadPrevia))
+                {
+                    context.ESPECIALIDAD.Remove(especialidadPrevia);
+                }
+
+
+                //CASO 1: Cerrado correcto de agendamiento
+
+                ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
+                PACIENTE paciente1 = new PACIENTE();
+                TIPO_PRES tipopres1 = new TIPO_PRES();
+                PRESTACION prestacion1 = new PRESTACION();
+                ESTADO_ATEN estadoaten1 = new ESTADO_ATEN();
+                ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
+                PERSONAL personal1 = new PERSONAL();
+                BLOQUE bloque1 = new BLOQUE();
+                DIA_SEM dia1 = new DIA_SEM();
+                PERS_MEDICO persmedico1 = new PERS_MEDICO();
+                ATENCION_AGEN aten_agen1 = new ATENCION_AGEN();
+
+                paciente1.NOMBRES_PACIENTE = "Miku";
+                paciente1.APELLIDOS_PACIENTE = "Hatsune";
+                paciente1.RUT = 18861423;
+                paciente1.DIGITO_VERIFICADOR = "K";
+                paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+                paciente1.HASHED_PASS = "4231";
+                paciente1.SEXO = "F";
+                paciente1.FEC_NAC = DateTime.Today;
+                context.PACIENTE.Add(paciente1);
+                context.SaveChangesAsync();
+
+                especialidad1.NOM_ESPECIALIDAD = "Oculista";
+                context.ESPECIALIDAD.Add(especialidad1);
+                context.SaveChangesAsync();
+
+                tipopres1.NOM_TIPO_PREST = "Test";
+                context.TIPO_PRES.Add(tipopres1);
+                context.SaveChangesAsync();
+
+                prestacion1.NOM_PRESTACION = "Chubi";
+                prestacion1.PRECIO_PRESTACION = 50000;
+                prestacion1.CODIGO_PRESTACION = "A002";
+                prestacion1.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
+                prestacion1.ID_TIPO_PRESTACION = tipopres1.ID_TIPO_PRESTACION;
+                context.PRESTACION.Add(prestacion1);
+                context.SaveChangesAsync();
+
+                estadoaten1.NOM_ESTADO_ATEN = "Anulado";
+                context.ESTADO_ATEN.Add(estadoaten1);
+                context.SaveChangesAsync();
+
+                personal1.NOMBRES = "Moka";
+                personal1.APELLIDOS = "Akashiya";
+                personal1.REMUNERACION = 850000;
+                personal1.PORCENT_DESCUENTO = 7;
+                personal1.HASHED_PASS = "4231";
+                personal1.RUT = 12345678;
+                personal1.VERIFICADOR = "K";
+                context.PERSONAL.Add(personal1);
+                context.SaveChangesAsync();
+
+                dia1.NOMBRE_IDA = "LuMaMiJuVi";
+                context.DIA_SEM.Add(dia1);
+                context.SaveChangesAsync();
+
+                bloque1.ID_DIA_SEM = dia1.ID_DIA;
+                bloque1.NUM_BLOQUE = 5;
+                bloque1.NUM_HORA_INI = 11;
+                bloque1.NUM_MINU_INI = 22;
+                bloque1.NUM_HORA_FIN = 16;
+                bloque1.NUM_MINU_FIN = 45;
+                context.BLOQUE.Add(bloque1);
+                context.SaveChangesAsync();
+
+                persmedico1.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
+                persmedico1.ID_PERSONAL = personal1.ID_PERSONAL;
+                context.PERS_MEDICO.Add(persmedico1);
+                context.SaveChangesAsync();
+
+                aten_agen1.FECHOR = DateTime.Today;
+                aten_agen1.OBSERVACIONES = "Ya fue atendido";
+                aten_agen1.ID_PACIENTE = paciente1.ID_PACIENTE;
+                aten_agen1.ID_ESTADO_ATEN = estadoaten1.ID_ESTADO_ATEN;
+                aten_agen1.ID_PRESTACION = prestacion1.ID_PRESTACION;
+                aten_agen1.ID_BLOQUE = bloque1.ID_BLOQUE;
+                aten_agen1.ID_PERS_ATIENDE = persmedico1.ID_PERSONAL_MEDICO;
+
+                context.ATENCION_AGEN.Add(aten_agen1);
+                context.SaveChangesAsync();
+
+
+                Boolean res1 = at.anularAtencion(aten_agen1);
+                Boolean resultadoEsperado1 = true;
+                Assert.AreEqual(res1, resultadoEsperado1);
+
+
+
+                //CASO 2: Fecha minima o invalida
+
+                ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
+                PACIENTE paciente2 = new PACIENTE();
+                TIPO_PRES tipopres2 = new TIPO_PRES();
+                PRESTACION prestacion2 = new PRESTACION();
+                ESTADO_ATEN estadoaten2 = new ESTADO_ATEN();
+                ESPECIALIDAD especialidad2 = new ESPECIALIDAD();
+                PERSONAL personal2 = new PERSONAL();
+                BLOQUE bloque2 = new BLOQUE();
+                DIA_SEM dia2 = new DIA_SEM();
+                PERS_MEDICO persmedico2 = new PERS_MEDICO();
+                ATENCION_AGEN aten_agen2 = new ATENCION_AGEN();
+
+                paciente2.NOMBRES_PACIENTE = "Miku";
+                paciente2.APELLIDOS_PACIENTE = "Hatsune";
+                paciente2.RUT = 18861423;
+                paciente2.DIGITO_VERIFICADOR = "K";
+                paciente2.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+                paciente2.HASHED_PASS = "4231";
+                paciente2.SEXO = "F";
+                paciente2.FEC_NAC = DateTime.Today;
+                context.PACIENTE.Add(paciente2);
+                context.SaveChangesAsync();
+
+                especialidad2.NOM_ESPECIALIDAD = "Oculista";
+                context.ESPECIALIDAD.Add(especialidad2);
+                context.SaveChangesAsync();
+
+                tipopres2.NOM_TIPO_PREST = "Test";
+                context.TIPO_PRES.Add(tipopres2);
+                context.SaveChangesAsync();
+
+                prestacion2.NOM_PRESTACION = "Chubi";
+                prestacion2.PRECIO_PRESTACION = 50000;
+                prestacion2.CODIGO_PRESTACION = "A002";
+                prestacion2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
+                prestacion2.ID_TIPO_PRESTACION = tipopres2.ID_TIPO_PRESTACION;
+                context.PRESTACION.Add(prestacion2);
+                context.SaveChangesAsync();
+
+                estadoaten2.NOM_ESTADO_ATEN = "Vigente";
+                context.ESTADO_ATEN.Add(estadoaten2);
+                context.SaveChangesAsync();
+
+                personal2.NOMBRES = "Moka";
+                personal2.APELLIDOS = "Akashiya";
+                personal2.REMUNERACION = 850000;
+                personal2.PORCENT_DESCUENTO = 7;
+                personal2.HASHED_PASS = "4231";
+                personal2.RUT = 12345678;
+                personal2.VERIFICADOR = "K";
+                context.PERSONAL.Add(personal2);
+                context.SaveChangesAsync();
+
+                dia2.NOMBRE_IDA = "LuMaMiJuVi";
+                context.DIA_SEM.Add(dia2);
+                context.SaveChangesAsync();
+
+                bloque2.ID_DIA_SEM = dia2.ID_DIA;
+                bloque2.NUM_BLOQUE = 5;
+                bloque2.NUM_HORA_INI = 11;
+                bloque2.NUM_MINU_INI = 22;
+                bloque2.NUM_HORA_FIN = 16;
+                bloque2.NUM_MINU_FIN = 45;
+                context.BLOQUE.Add(bloque2);
+                context.SaveChangesAsync();
+
+                persmedico2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
+                persmedico2.ID_PERSONAL = personal2.ID_PERSONAL;
+                context.PERS_MEDICO.Add(persmedico2);
+                context.SaveChangesAsync();
+
+                aten_agen2.FECHOR = DateTime.MinValue;
+                aten_agen2.OBSERVACIONES = "Observacion";
+                aten_agen2.ID_PACIENTE = paciente2.ID_PACIENTE;
+                aten_agen2.ID_ESTADO_ATEN = estadoaten2.ID_ESTADO_ATEN;
+                aten_agen2.ID_PRESTACION = prestacion2.ID_PRESTACION;
+                aten_agen2.ID_BLOQUE = bloque2.ID_BLOQUE;
+                aten_agen2.ID_PERS_ATIENDE = persmedico2.ID_PERSONAL_MEDICO;
+
+                context.ATENCION_AGEN.Add(aten_agen2);
+                context.SaveChangesAsync();
+
+                
+                Boolean res2 = at.anularAtencion(aten_agen2);
+                Boolean resultadoEsperado2 = false;
+                Assert.AreEqual(res2, resultadoEsperado2);
+
+                //CASO 3: Observación vacía o nula
+
+                ORDEN_ANALISIS orden3 = new ORDEN_ANALISIS();
+                PACIENTE paciente3 = new PACIENTE();
+                TIPO_PRES tipopres3 = new TIPO_PRES();
+                PRESTACION prestacion3 = new PRESTACION();
+                ESTADO_ATEN estadoaten3 = new ESTADO_ATEN();
+                ESPECIALIDAD especialidad3 = new ESPECIALIDAD();
+                PERSONAL personal3 = new PERSONAL();
+                BLOQUE bloque3 = new BLOQUE();
+                DIA_SEM dia3 = new DIA_SEM();
+                PERS_MEDICO persmedico3 = new PERS_MEDICO();
+                ATENCION_AGEN aten_agen3 = new ATENCION_AGEN();
+
+                paciente3.NOMBRES_PACIENTE = "Miku";
+                paciente3.APELLIDOS_PACIENTE = "Hatsune";
+                paciente3.RUT = 18861423;
+                paciente3.DIGITO_VERIFICADOR = "K";
+                paciente3.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+                paciente3.HASHED_PASS = "4231";
+                paciente3.SEXO = "F";
+                paciente3.FEC_NAC = DateTime.Today;
+                context.PACIENTE.Add(paciente3);
+                context.SaveChangesAsync();
+
+                especialidad3.NOM_ESPECIALIDAD = "Oculista";
+                context.ESPECIALIDAD.Add(especialidad3);
+                context.SaveChangesAsync();
+
+                tipopres3.NOM_TIPO_PREST = "Test";
+                context.TIPO_PRES.Add(tipopres3);
+                context.SaveChangesAsync();
+
+                prestacion3.NOM_PRESTACION = "Chubi";
+                prestacion3.PRECIO_PRESTACION = 50000;
+                prestacion3.CODIGO_PRESTACION = "A002";
+                prestacion3.ID_ESPECIALIDAD = especialidad3.ID_ESPECIALIDAD;
+                prestacion3.ID_TIPO_PRESTACION = tipopres3.ID_TIPO_PRESTACION;
+                context.PRESTACION.Add(prestacion3);
+                context.SaveChangesAsync();
+
+                estadoaten3.NOM_ESTADO_ATEN = "Vigente";
+                context.ESTADO_ATEN.Add(estadoaten3);
+                context.SaveChangesAsync();
+
+                personal3.NOMBRES = "Moka";
+                personal3.APELLIDOS = "Akashiya";
+                personal3.REMUNERACION = 850000;
+                personal3.PORCENT_DESCUENTO = 7;
+                personal3.HASHED_PASS = "4231";
+                personal3.RUT = 12345678;
+                personal3.VERIFICADOR = "K";
+                context.PERSONAL.Add(personal3);
+                context.SaveChangesAsync();
+
+                dia3.NOMBRE_IDA = "LuMaMiJuVi";
+                context.DIA_SEM.Add(dia3);
+                context.SaveChangesAsync();
+
+                bloque3.ID_DIA_SEM = dia3.ID_DIA;
+                bloque3.NUM_BLOQUE = 5;
+                bloque3.NUM_HORA_INI = 11;
+                bloque3.NUM_MINU_INI = 22;
+                bloque3.NUM_HORA_FIN = 16;
+                bloque3.NUM_MINU_FIN = 45;
+                context.BLOQUE.Add(bloque3);
+                context.SaveChangesAsync();
+
+                persmedico3.ID_ESPECIALIDAD = especialidad3.ID_ESPECIALIDAD;
+                persmedico3.ID_PERSONAL = personal3.ID_PERSONAL;
+                context.PERS_MEDICO.Add(persmedico3);
+                context.SaveChangesAsync();
+
+                //usar algo para "" or null
+                aten_agen3.FECHOR = DateTime.MinValue;
+                aten_agen3.OBSERVACIONES = "";
+                aten_agen3.OBSERVACIONES = null;
+                aten_agen3.ID_PACIENTE = paciente3.ID_PACIENTE;
+                aten_agen3.ID_ESTADO_ATEN = estadoaten3.ID_ESTADO_ATEN;
+                aten_agen3.ID_PRESTACION = prestacion3.ID_PRESTACION;
+                aten_agen3.ID_BLOQUE = bloque3.ID_BLOQUE;
+                aten_agen3.ID_PERS_ATIENDE = persmedico3.ID_PERSONAL_MEDICO;
+
+                context.ATENCION_AGEN.Add(aten_agen3);
+                context.SaveChangesAsync();
+
+                Boolean res3 = at.anularAtencion(aten_agen3);
+                Boolean resultadoEsperado3 = false;
+                Assert.AreEqual(res3, resultadoEsperado3);
+            }
+        }
         #endregion
     }
 }

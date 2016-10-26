@@ -114,7 +114,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     throw new Exception("Orden nula");
                 }
                 
-                else if (ordenAnalisis.FECHOR_EMISION <= DateTime.Today)
+                else if (ordenAnalisis.FECHOR_EMISION <= DateTime.Today || ordenAnalisis.FECHOR_RECEP < DateTime.Today)
                 {
                     throw new Exception("Fecha invalida");
                 }
@@ -198,7 +198,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         
-
         //ECU-017
         public Boolean abrirCaja(CAJA caja, FUNCIONARIO funcionario)
         {
