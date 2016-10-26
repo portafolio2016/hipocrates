@@ -932,11 +932,12 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Console.WriteLine("ID CAJA: " + caja1.ID_CAJA);
                 //Modificar caja (Agregar Fechor termino)
 
-            CAJA cajaBuscada = at.buscarCaja(caja1.ID_CAJA);
-            cajaBuscada.FECHOR_CIERRE = DateTime.Today;
-            cajaBuscada.FECHOR_CIERRE.Value.AddDays(1);
+            /*
+            CAJA cajaBuscada = at.buscarCaja(caja1.ID_CAJA);*/
+            caja1.FECHOR_CIERRE = DateTime.Today;
+            caja1.FECHOR_CIERRE.Value.AddDays(1);
 
-            Boolean res1 = at.cerrarCaja(cajaBuscada);
+            Boolean res1 = at.cerrarCaja(caja1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
             
