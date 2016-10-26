@@ -13,8 +13,35 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-001
         public Boolean agendarAtencion(ATENCION_AGEN atencion)
         {
-            //TODO: implementar
-            return false;
+            //Al generar una orden de análisis, tiene que ir relacionada con una atencion
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion invalida");
+                }
+                else if (atencion.FECHOR == DateTime.MinValue || 
+                         atencion.FECHOR == null)
+                {
+                    throw new Exception("Fecha vacía");
+                }
+                else if (atencion.OBSERVACIONES == String.Empty ||
+                         atencion.OBSERVACIONES == null)
+                {
+                    throw new Exception("Observacion vacia");
+                }
+                else
+                {
+                    conexionDB.ATENCION_AGEN.Add(atencion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-003
@@ -54,7 +81,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return false;
         }
 
-        ////ECU-009
+        //ECU-009
         //public Boolean crearFichaMedica(FICHA ficha)
         //{
         //    //TODO: implementar
@@ -100,9 +127,37 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-016
         public Boolean anularAtencion(ATENCION_AGEN atencion)
         {
-            //TODO: implementar
-            return false;
+            
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion invalida");
+                }
+                else if (atencion.FECHOR == DateTime.MinValue ||
+                         atencion.FECHOR == null)
+                {
+                    throw new Exception("Fecha vacía");
+                }
+                else if (atencion.OBSERVACIONES == String.Empty ||
+                         atencion.OBSERVACIONES == null)
+                {
+                    throw new Exception("Observacion vacia");
+                }
+                else
+                {
+                    conexionDB.ATENCION_AGEN.Add(atencion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
+        
 
         //ECU-017
         public Boolean abrirCaja(CAJA caja, FUNCIONARIO funcionario)
