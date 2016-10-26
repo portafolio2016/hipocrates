@@ -79,7 +79,7 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
                 AFILIADO afiliado = new AFILIADO();
                 afiliado.RUT = 999;
                 afiliado.VERIFICADOR = "k";
-                afiliado.ID_PLAN = plan.ID_EMPRESA;
+                afiliado.ID_PLAN = plan.ID_PLAN;
                 AFILIADO sinPlan = new AFILIADO();
                 sinPlan.RUT = 123;
                 entities.AFILIADO.Add(sinPlan);
@@ -112,6 +112,7 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
                 AccionesSeguro accionesSeguro = new AccionesSeguro();
                 //Caso1: Plan obtiene beneficios                
                 //Caso2: Plan no tiene beneficios
+                throw new NotImplementedException();
             }
             
         }
@@ -119,7 +120,7 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
         [TestMethod]
         public void obtenerBeneficioPrestacion()
         {
-
+            throw new NotImplementedException();
         }
     }
 }
