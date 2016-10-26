@@ -10,8 +10,9 @@ namespace Cheekibreeki.CMH.Seguro.BL
     {
         public ComprobarSeguroResponse comprobarSeguro(AFILIADO afiliado, PRESTACION prestacion)
         {
+            ComprobarSeguroResponse comprobarSeguroResponse = new ComprobarSeguroResponse();
             //TODO: implementar
-            return 0;
+            return comprobarSeguroResponse;
         }
     }
 }

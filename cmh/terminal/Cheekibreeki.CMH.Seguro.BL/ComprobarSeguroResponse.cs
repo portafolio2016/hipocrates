@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cheekibreeki.CMH.Seguro.BL
 {
-    class ComprobarSeguroResponse
+    public class ComprobarSeguroResponse
     {
 
     }
