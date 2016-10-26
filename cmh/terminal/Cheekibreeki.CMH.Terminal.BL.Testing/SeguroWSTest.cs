@@ -15,23 +15,23 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             //Pre test
             SeguroEntities entities = new SeguroEntities();
             //crear tipoEmpresas
-            T_EMPRESA tipoEmpresaPublica = crearTipoEmpresa("Publica", entities);
-            T_EMPRESA tipoEmpresaPrivada = crearTipoEmpresa("Privada", entities);
+            T_EMPRESA tipoEmpresaPublica = crearTipoEmpresa("Publica");
+            T_EMPRESA tipoEmpresaPrivada = crearTipoEmpresa("Privada");
             //crear empresa
-            EMPRESA fonasa = crearEmpresa("Fonasa", tipoEmpresaPublica, entities);
-            EMPRESA banmedica = crearEmpresa("Banmedica", tipoEmpresaPrivada, entities);
+            EMPRESA fonasa = crearEmpresa("Fonasa", tipoEmpresaPublica);
+            EMPRESA banmedica = crearEmpresa("Banmedica", tipoEmpresaPrivada);
             //crear plan
-            PLAN planPublico = crearPlan("Plan Fonasa", fonasa, entities);
-            PLAN planPrivado = crearPlan("Plan Banmedica", banmedica, entities);
+            PLAN planPublico = crearPlan("Plan Fonasa", fonasa);
+            PLAN planPrivado = crearPlan("Plan Banmedica", banmedica);
             //crear afiliado
-            AFILIADO afiliadoPublico = crearAfiliado(12345678, "1", planPublico, entities);
-            AFILIADO afiliadoPrivado = crearAfiliado(98765432, "2", planPrivado, entities);
-            AFILIADO afiliadoSinSeguro = crearAfiliado(123123, "3", null, entities);
-            //crear beneficio
-            BENEFICIO beneficioPrivado = crearBeneficio(25, 10000, entities);
-            BENEFICIO beneficioPublico = crearBeneficio(40, 10000, entities);
+            AFILIADO afiliadoPublico = crearAfiliado(12345678, "1", planPublico);
+            AFILIADO afiliadoPrivado = crearAfiliado(98765432, "2", planPrivado);
+            AFILIADO afiliadoSinSeguro = crearAfiliado(123123, "3", null);
             //crear prestacion
-            PRESTACION prestacion = crearPrestacion("Examen de sangre", "EX001", beneficioPublico, entities);
+            PRESTACION prestacion = crearPrestacion("Examen de sangre", "EX001");
+            //crear beneficio
+            BENEFICIO beneficioPrivado = crearBeneficio(25, 10000, prestacion.ID_PRESTACION);
+            BENEFICIO beneficioPublico = crearBeneficio(40, 10000, prestacion.ID_PRESTACION);
             AccionesSeguro accionesSeguro = new AccionesSeguro();
             //Caso 1
             //Afiliado tiene un seguro privado, obtiene un 25% de descuento          
@@ -59,72 +59,96 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             Assert.IsFalse(response5.Equals(expectedResponse5));
         }
 
-        private T_EMPRESA crearTipoEmpresa(String nombre, SeguroEntities entities)
+        private T_EMPRESA crearTipoEmpresa(String nombre)
         {
-            T_EMPRESA tipoEmpresa = new T_EMPRESA();
-            tipoEmpresa.NOMBRE = nombre;
-            entities.T_EMPRESA.Add(tipoEmpresa);
-            entities.SaveChangesAsync();
-            return tipoEmpresa;
-        }
-
-        private PRESTACION crearPrestacion(String nombre, String codigo, BENEFICIO beneficio,SeguroEntities entities)
-        {
-            List<PRESTACION> prestaciones = (from p in entities.PRESTACION 
-                                        where p.CODIGO == codigo 
-                                        select p).ToList<PRESTACION>();
-            if (prestaciones.Count() > 0)
+            using (var entities = new SeguroEntities())
             {
-                PRESTACION prestacionOld = prestaciones.First<PRESTACION>();
-                entities.PRESTACION.Remove(prestacionOld);
+                T_EMPRESA tipoEmpresa = new T_EMPRESA();
+                tipoEmpresa.NOMBRE = nombre;
+                entities.T_EMPRESA.Add(tipoEmpresa);
+                entities.SaveChangesAsync();
+                return tipoEmpresa;
             }
-            PRESTACION prestacion = new PRESTACION();
-            prestacion.NOMBRE = nombre;
-            prestacion.CODIGO = codigo;
-            prestacion.BENEFICIO.Add(beneficio);
-            entities.PRESTACION.Add(prestacion);
-            entities.SaveChangesAsync();
-            return prestacion;
         }
 
-        private EMPRESA crearEmpresa(String nombre, T_EMPRESA tipoEmpresa, SeguroEntities entities){
+        private PRESTACION crearPrestacion(String nombre, String codigo)
+        {
+            using (var entities = new SeguroEntities())
+            {
+                List<PRESTACION> prestaciones = (from p in entities.PRESTACION
+                                                 where p.CODIGO == codigo
+                                                 select p).ToList<PRESTACION>();
+                if (prestaciones.Count() > 0)
+                {
+                    PRESTACION prestacionOld = prestaciones.First<PRESTACION>();
+                    entities.PRESTACION.Remove(prestacionOld);
+                }
+                PRESTACION prestacion = new PRESTACION();
+                prestacion.NOMBRE = nombre;
+                prestacion.CODIGO = codigo;
+
+                entities.PRESTACION.Add(prestacion);
+                entities.SaveChangesAsync();
+                prestacion = (from p in entities.PRESTACION
+                              where p.CODIGO == codigo
+                              select p).FirstOrDefault<PRESTACION>();
+                return prestacion;
+            }
+        }
+
+        private EMPRESA crearEmpresa(String nombre, T_EMPRESA tipoEmpresa){
             EMPRESA empresa = new EMPRESA();
             empresa.NOMBRE = nombre;
             empresa.T_EMPRESA = tipoEmpresa;
-            entities.EMPRESA.Add(empresa);
-            entities.SaveChangesAsync();
+            using(var entities = new SeguroEntities())
+            {
+                entities.EMPRESA.Add(empresa);
+                entities.SaveChangesAsync();
+            }
+            
             return empresa;
         }
 
-        private PLAN crearPlan(String nombre, EMPRESA empresa, SeguroEntities entities)
+        private PLAN crearPlan(String nombre, EMPRESA empresa)
         {
             PLAN plan = new PLAN();
             plan.NOMBRE = nombre;
             plan.EMPRESA = empresa;
-            entities.PLAN.Add(plan);
-            entities.SaveChangesAsync();
-            return plan;
+            using (var entities = new SeguroEntities())
+            {
+                entities.PLAN.Add(plan);
+                entities.SaveChangesAsync();
+                return plan;
+            }
         }
 
-        private AFILIADO crearAfiliado(int rut, String digitoVerificador, PLAN plan, SeguroEntities entities)
+        private AFILIADO crearAfiliado(int rut, String digitoVerificador, PLAN plan)
         {
             AFILIADO afiliado = new AFILIADO();
             afiliado.RUT = rut;
             afiliado.VERIFICADOR = digitoVerificador;
             afiliado.PLAN = plan;
-            entities.AFILIADO.Add(afiliado);
-            entities.SaveChangesAsync();
-            return afiliado;
+            using (var entities = new SeguroEntities())
+            {
+                entities.AFILIADO.Add(afiliado);
+                entities.SaveChangesAsync();
+                return afiliado;
+            }
+            
         }
 
-        private BENEFICIO crearBeneficio(decimal porcentaje, int limite, SeguroEntities entities)
+        private BENEFICIO crearBeneficio(decimal porcentaje, int limite, int idPrestacion)
         {
             BENEFICIO beneficio = new BENEFICIO();
             beneficio.PORCENTAJE = porcentaje;
             beneficio.LIMITE_DINERO = limite;
-            entities.BENEFICIO.Add(beneficio);
-            entities.SaveChangesAsync();
-            return beneficio;
+            beneficio.ID_PRESTACION = idPrestacion;
+            using (var entities = new SeguroEntities())
+            {
+                entities.BENEFICIO.Add(beneficio);
+                entities.SaveChangesAsync();
+                return beneficio;
+            }
         }
     }
 }
