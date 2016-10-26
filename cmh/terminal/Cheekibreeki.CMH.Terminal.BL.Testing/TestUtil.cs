@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Cheekibreeki.CMH.Seguro.DAL;
 namespace Cheekibreeki.CMH.Terminal.BL.Testing
 {
-    private class TestUtil
+    public class TestUtil
     {
         public static int crearTipoEmpresa(string nombre)
         {
@@ -33,9 +33,17 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             }
         }
 
-        public static int crearPlan()
+        public static int crearPlan(string nombrePlan, int idEmpresa)
         {
-            
+            using (var entities = new SeguroEntities())
+            {
+                PLAN plan = new PLAN();
+                plan.NOMBRE = nombrePlan;
+                plan.ID_EMPRESA = idEmpresa;
+                entities.PLAN.Add(plan);
+                entities.SaveChangesAsync();
+                return plan.ID_PLAN;
+            }
         }
 
         public static int crearPrestacion(string nombrePrestacion, string codigo)
@@ -46,18 +54,53 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
                 prestacion.NOMBRE = nombrePrestacion;
                 prestacion.CODIGO = codigo;
                 entities.PRESTACION.Add(prestacion);
+                entities.SaveChangesAsync();
                 return prestacion.ID_PRESTACION;
+                //return (from p in entities.PRESTACION
+                //         select p).First<PRESTACION>().ID_PRESTACION;
             }
         }
 
-        public static int crearBeneficio()
+        public static int crearBeneficio(decimal porcentaje, int limite, int idPlan, int idPrestacion)
         {
-
+            using (var entities = new SeguroEntities())
+            {
+                BENEFICIO beneficio = new BENEFICIO();
+                beneficio.ID_PLAN = idPlan;
+                beneficio.ID_PRESTACION = idPrestacion;
+                beneficio.PORCENTAJE = porcentaje;
+                beneficio.LIMITE_DINERO = limite;
+                entities.BENEFICIO.Add(beneficio);
+                entities.SaveChangesAsync();
+                return beneficio.ID_BENEFICIO;
+            }
         }
 
-        public static int crearAfiliado()
+        public static int crearAfiliado(int rut, string verificador)
         {
+            using (var entities = new SeguroEntities())
+            {
+                AFILIADO afiliado = new AFILIADO();
+                afiliado.RUT = rut;
+                afiliado.VERIFICADOR = verificador;
+                entities.AFILIADO.Add(afiliado);
+                entities.SaveChangesAsync();
+                return afiliado.ID_AFILIADO;
+            }
+        }
 
+        public static int crearAfiliado(int rut, string verificador, int idPlan)
+        {
+            using (var entities = new SeguroEntities())
+            {
+                AFILIADO afiliado = new AFILIADO();
+                afiliado.RUT = rut;
+                afiliado.VERIFICADOR = verificador;
+                afiliado.ID_PLAN = idPlan;
+                entities.AFILIADO.Add(afiliado);
+                entities.SaveChangesAsync();
+                return afiliado.ID_AFILIADO;
+            }
         }
     }
 }

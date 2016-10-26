@@ -51,19 +51,26 @@ namespace Cheekibreeki.CMH.Seguro.BL
             }
         }
 
-        public List<BENEFICIO> obtenerBeneficiosPlan(PLAN plan)
+        public List<BENEFICIO> obtenerBeneficiosPlan(int idPlan)
         {
-            using(var entities = new SeguroEntities()){
-                List<BENEFICIO> beneficios = (from b in entities.BENEFICIO
-                                                where b.ID_PLAN == plan.ID_PLAN
-                                                select b).ToList<BENEFICIO>();
-                return beneficios;
+            using (var entities = new SeguroEntities())
+            {
+                PLAN plan = (from p in entities.PLAN
+                                 where p.ID_PLAN == idPlan
+                                 select p).First<PLAN>();
+                return new List<BENEFICIO>();
             }
         }
 
         public BENEFICIO obtenerBeneficioPrestacion(PRESTACION prestacion)
         {
-            return new BENEFICIO();
+            using(var entities = new SeguroEntities()){
+                BENEFICIO beneficio = (from b in entities.BENEFICIO
+                                           where b.ID_PRESTACION == prestacion.ID_PRESTACION
+                                           select b).First<BENEFICIO>();
+                return beneficio;
+            }
+            
         }
     }
 }
