@@ -804,7 +804,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             CMHEntities entities = new CMHEntities();
-            
+
 
             /*
              * Tablas utilizadas
@@ -899,9 +899,90 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             orden1.FECHOR_RECEP = DateTime.Today;
             orden1.FECHOR_RECEP.Value.AddDays(1);
 
+            Boolean res1 = at.generarOrdenDeAnalisis(aten_agen1, orden1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+
 
             //Caso 2: Fecha erronea
 
+            ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
+            PACIENTE paciente2 = new PACIENTE();
+            PRESTACION prestacion2 = new PRESTACION();
+            ESTADO_ATEN estadoaten2 = new ESTADO_ATEN();
+            ESPECIALIDAD especialidad2 = new ESPECIALIDAD();
+            PERSONAL personal2 = new PERSONAL();
+            BLOQUE bloque2 = new BLOQUE();
+            DIA_SEM dia2 = new DIA_SEM();
+            PERS_MEDICO persmedico2 = new PERS_MEDICO();
+            ATENCION_AGEN aten_agen2 = new ATENCION_AGEN();
+
+            using (var context = entities)
+            {
+                paciente2.NOMBRES_PACIENTE = "Miku";
+                paciente2.APELLIDOS_PACIENTE = "Hatsune";
+                paciente2.RUT = 18861423;
+                paciente2.DIGITO_VERIFICADOR = "K";
+                paciente2.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+                paciente2.HASHED_PASS = "4231";
+                paciente2.SEXO = "F";
+                paciente2.FEC_NAC = DateTime.Today;
+                context.PACIENTE.Add(paciente2);
+                context.SaveChanges();
+
+                prestacion2.NOM_PRESTACION = "Chubi";
+                prestacion2.PRECIO_PRESTACION = 50000;
+                prestacion2.CODIGO_PRESTACION = "A002";
+                prestacion2.ACTIVO = true;
+                context.PRESTACION.Add(prestacion2);
+                context.SaveChanges();
+
+                estadoaten2.NOM_ESTADO_ATEN = "Vigente";
+                context.ESTADO_ATEN.Add(estadoaten2);
+                context.SaveChanges();
+
+
+                especialidad2.NOM_ESPECIALIDAD = "Oculista";
+                context.ESPECIALIDAD.Add(especialidad2);
+                context.SaveChanges();
+
+                personal2.NOMBRES = "Moka";
+                personal2.APELLIDOS = "Akashiya";
+                personal2.REMUNERACION = 850000;
+                personal2.PORCENT_DESCUENTO = 7;
+                personal2.HASHED_PASS = "4231";
+                personal2.RUT = 12345678;
+                personal2.VERIFICADOR = "K";
+                context.PERSONAL.Add(personal2);
+                context.SaveChanges();
+
+                bloque2.NUM_BLOQUE = 5;
+                bloque2.NUM_HORA_INI = 11;
+                bloque2.NUM_MINU_INI = 22;
+                bloque2.NUM_HORA_FIN = 16;
+                bloque2.NUM_MINU_FIN = 45;
+                context.BLOQUE.Add(bloque2);
+                context.SaveChanges();
+
+                dia2.NOMBRE_IDA = "Lumamijunes";
+                context.DIA_SEM.Add(dia2);
+                context.SaveChanges();
+
+
+                persmedico2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
+                persmedico2.ID_PERSONAL = 003;
+                context.PERS_MEDICO.Add(persmedico2);
+                context.SaveChanges();
+
+            }
+
+            orden2.FECHOR_EMISION = DateTime.Today;
+            orden2.FECHOR_RECEP = DateTime.Today;
+            orden2.FECHOR_RECEP.Value.AddDays(1);
+
+            Boolean res2 = at.generarOrdenDeAnalisis(aten_agen2, orden2);
+            Boolean resultadoEsperado2 = true;
+            Assert.AreEqual(res2, resultadoEsperado2);
 
             //Caso 3: Orden nula
             ORDEN_ANALISIS orden3 = null;
@@ -915,7 +996,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         #endregion
 
         #region Atencion
-        
+
         [TestMethod]
         public void agendarAtencionTest()
         {
@@ -945,9 +1026,10 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             DIA_SEM dia1 = new DIA_SEM();
             PERS_MEDICO persmedico1 = new PERS_MEDICO();
             ATENCION_AGEN aten_agen1 = new ATENCION_AGEN();
-            
 
-            using(var context = entities){
+
+            using (var context = entities)
+            {
                 paciente1.NOMBRES_PACIENTE = "Miku";
                 paciente1.APELLIDOS_PACIENTE = "Hatsune";
                 paciente1.RUT = 18861423;
@@ -1004,7 +1086,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.SaveChanges();
 
             }
-            DateTime fecha1 = DateTime.Today;  
+            DateTime fecha1 = DateTime.Today;
             aten_agen1.FECHOR = fecha1;
             aten_agen1.OBSERVACIONES = "El paciente esta vivo";
             aten_agen1.ID_PACIENTE = paciente1.ID_PACIENTE;
@@ -1307,6 +1389,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Assert.AreEqual(res3, resultadoEsperado3);
         }
 
-                #endregion
+        #endregion
     }
 }
