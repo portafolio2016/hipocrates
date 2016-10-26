@@ -162,14 +162,13 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             try
             {
-                if (buscarCaja(caja.ID_CAJA) == null)
-                {
-                    throw new Exception("Caja no encontrada");
-                }
-                else if (Util.isObjetoNulo(caja))
+                //Verificar si caja existe
+                bool cajaNula = Util.isObjetoNulo(buscarCaja(caja.ID_CAJA));
+                if (cajaNula)
                 {
                     throw new Exception("Caja nulo");
                 }
+                    //VERIFICAR HORA DE CIERRE PARA VER SI ESTA CERRADA O NO
                 else
                 {
                     conexionDB.SaveChangesAsync();

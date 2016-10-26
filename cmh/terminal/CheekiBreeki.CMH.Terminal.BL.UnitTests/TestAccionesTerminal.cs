@@ -939,7 +939,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             cajaBuscada = at.buscarCaja(cajaBuscada.ID_CAJA);
             cajaBuscada.FECHOR_CIERRE = DateTime.Today;
             cajaBuscada.FECHOR_CIERRE = cajaBuscada.FECHOR_CIERRE.Value.AddDays(1);
-
+            // FECHOR_CIERRE COMO PARAMETRO EN EL METODO CERRARCAJA
             Boolean res1 = at.cerrarCaja(cajaBuscada);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
