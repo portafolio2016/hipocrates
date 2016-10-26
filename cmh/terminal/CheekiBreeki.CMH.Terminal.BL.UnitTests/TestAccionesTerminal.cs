@@ -803,17 +803,39 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void generarOrdenDeAnalisisTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-
-            //Caso 1: Ingreso correcto  
-            ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
-
-            orden1.FECHOR_EMISION = DateTime.Today;
-            orden1.FECHOR_RECEP = DateTime.Today;
-            orden1.FECHOR_RECEP.Value.AddDays(1);
-
-            PACIENTE paciente1 = new PACIENTE();
-
             CMHEntities entities = new CMHEntities();
+            
+
+            /*
+             * Tablas utilizadas
+             * 
+             * orden_analisis
+             * atencion_agen
+             * paciente
+             * prestacion
+             * estado_atencion
+             * especialidad
+             * personal
+             * bloque
+             * dia_sem
+             * pers_medico
+             * atencion_agen
+             */
+
+            //Al generar una orden de análisis, tiene que ir relacionada con una atencion
+
+            //Caso 1: Ingreso correcto
+            ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
+            PACIENTE paciente1 = new PACIENTE();
+            PRESTACION prestacion1 = new PRESTACION();
+            ESTADO_ATEN estadoaten1 = new ESTADO_ATEN();
+            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
+            PERSONAL personal1 = new PERSONAL();
+            BLOQUE bloque1 = new BLOQUE();
+            DIA_SEM dia1 = new DIA_SEM();
+            PERS_MEDICO persmedico1 = new PERS_MEDICO();
+            ATENCION_AGEN aten_agen1 = new ATENCION_AGEN();
+
             using (var context = entities)
             {
                 paciente1.NOMBRES_PACIENTE = "Miku";
@@ -822,20 +844,68 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 paciente1.DIGITO_VERIFICADOR = "K";
                 paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
                 paciente1.HASHED_PASS = "4231";
+                paciente1.SEXO = "F";
+                paciente1.FEC_NAC = DateTime.Today;
                 context.PACIENTE.Add(paciente1);
+                context.SaveChanges();
+
+                prestacion1.NOM_PRESTACION = "Chubi";
+                prestacion1.PRECIO_PRESTACION = 50000;
+                prestacion1.CODIGO_PRESTACION = "A002";
+                prestacion1.ACTIVO = true;
+                context.PRESTACION.Add(prestacion1);
+                context.SaveChanges();
+
+                estadoaten1.NOM_ESTADO_ATEN = "Vigente";
+                context.ESTADO_ATEN.Add(estadoaten1);
+                context.SaveChanges();
+
+
+                especialidad1.NOM_ESPECIALIDAD = "Oculista";
+                context.ESPECIALIDAD.Add(especialidad1);
+                context.SaveChanges();
+
+                personal1.NOMBRES = "Moka";
+                personal1.APELLIDOS = "Akashiya";
+                personal1.REMUNERACION = 850000;
+                personal1.PORCENT_DESCUENTO = 7;
+                personal1.HASHED_PASS = "4231";
+                personal1.RUT = 12345678;
+                personal1.VERIFICADOR = "K";
+                context.PERSONAL.Add(personal1);
+                context.SaveChanges();
+
+                bloque1.NUM_BLOQUE = 5;
+                bloque1.NUM_HORA_INI = 11;
+                bloque1.NUM_MINU_INI = 22;
+                bloque1.NUM_HORA_FIN = 16;
+                bloque1.NUM_MINU_FIN = 45;
+                context.BLOQUE.Add(bloque1);
+                context.SaveChanges();
+
+                dia1.NOMBRE_IDA = "Lumamijunes";
+                context.DIA_SEM.Add(dia1);
+                context.SaveChanges();
+
+
+                persmedico1.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
+                persmedico1.ID_PERSONAL = 003;
+                context.PERS_MEDICO.Add(persmedico1);
+                context.SaveChanges();
+
             }
 
-            ATENCION_AGEN atencion1 = new ATENCION_AGEN();
-            atencion1.FECHOR = DateTime.Today;
-            atencion1.OBSERVACIONES = "test";
-            //atencion1.ID_PACIENTE
+            orden1.FECHOR_EMISION = DateTime.Today;
+            orden1.FECHOR_RECEP = DateTime.Today;
+            orden1.FECHOR_RECEP.Value.AddDays(1);
 
-            //Caso 2: Fecha inválidas
-            ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
+
+            //Caso 2: Fecha erronea
 
 
             //Caso 3: Orden nula
             ORDEN_ANALISIS orden3 = null;
+
         }
 
         public void cerrarOrdenDeAnalisisTest()
@@ -949,7 +1019,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
 
             //Caso 2: Fecha inválidas
-            ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
 
             PACIENTE paciente2 = new PACIENTE();
             PRESTACION prestacion2 = new PRESTACION();
@@ -1033,7 +1102,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Assert.AreEqual(res2, resultadoEsperado2);
 
             //Caso 3: Orden nula
-            ORDEN_ANALISIS orden3 = null;
             ATENCION_AGEN aten_agen3 = null;
 
             aten_agen3.FECHOR = null;
@@ -1152,7 +1220,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Assert.AreEqual(res1, resultadoEsperado1);
 
             //Caso 2: Fecha inválida para anulación
-            ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
 
             PACIENTE paciente2 = new PACIENTE();
             PRESTACION prestacion2 = new PRESTACION();
@@ -1225,7 +1292,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             }
 
             //Caso 3: Orden nula para anulación
-            ORDEN_ANALISIS orden3 = null;
             ATENCION_AGEN aten_agen3 = null;
 
             aten_agen3.FECHOR = null;
@@ -1241,7 +1307,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Assert.AreEqual(res3, resultadoEsperado3);
         }
 
-
-        #endregion
+                #endregion
     }
 }
