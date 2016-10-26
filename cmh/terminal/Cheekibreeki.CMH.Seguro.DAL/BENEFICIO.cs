@@ -14,17 +14,13 @@ namespace Cheekibreeki.CMH.Seguro.DAL
     
     public partial class BENEFICIO
     {
-        public BENEFICIO()
-        {
-            this.PRESTACION = new HashSet<PRESTACION>();
-        }
-    
         public int ID_BENEFICIO { get; set; }
         public decimal PORCENTAJE { get; set; }
         public Nullable<int> LIMITE_DINERO { get; set; }
         public Nullable<int> ID_PLAN { get; set; }
+        public Nullable<int> ID_PRESTACION { get; set; }
     
         public virtual PLAN PLAN { get; set; }
-        public virtual ICollection<PRESTACION> PRESTACION { get; set; }
+        public virtual PRESTACION PRESTACION { get; set; }
     }
 }
