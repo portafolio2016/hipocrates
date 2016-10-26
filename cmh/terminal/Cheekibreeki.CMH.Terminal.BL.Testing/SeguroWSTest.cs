@@ -104,5 +104,32 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             
         }
 
+        [TestMethod]
+        public void obtenerBeneficiosPlanTest()
+        {
+            int idTipoEmpresa = TestUtil.crearTipoEmpresa("Tipo Empresa Test");
+            int idEmpresa = TestUtil.crearEmpresa("Empresa Test", idTipoEmpresa);
+            int idPrestacion = TestUtil.crearPrestacion("Prestacion test", "codigotest");
+
+            using (var entities = new SeguroEntities())
+            {
+                AccionesSeguro accionesSeguro = new AccionesSeguro();
+                //Caso1: Plan obtiene beneficios                
+                List<BENEFICIO> resultado = accionesSeguro.obtenerBeneficiosPlan(plan);
+                Assert.IsTrue(resultado.Count() > 0);
+                Assert.IsTrue(resultado.First<BENEFICIO>().ID_BENEFICIO == beneficio.ID_BENEFICIO);
+                //Caso2: Plan no tiene beneficios
+                plan.ID_PLAN = 0;
+                List<BENEFICIO> resultado2 = accionesSeguro.obtenerBeneficiosPlan(plan);
+                Assert.IsTrue(resultado2.Count() == 0);
+            }
+            
+        }
+
+        [TestMethod]
+        public void obtenerBeneficioPrestacion()
+        {
+
+        }
     }
 }

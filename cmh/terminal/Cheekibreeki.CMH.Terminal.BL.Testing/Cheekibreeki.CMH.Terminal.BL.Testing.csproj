@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeguroWSTest.cs" />
+    <Compile Include="TestUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cheekibreeki.CMH.Seguro.BL\Cheekibreeki.CMH.Seguro.BL.csproj">
