@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.DAL.UnitTests", "CheekiBreeki.CMH.Terminal.DAL.UnitTests\CheekiBreeki.CMH.Terminal.DAL.UnitTests.csproj", "{9798F4C4-41CA-4199-ACEE-617D6128FF1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.BL", "CheekiBreeki.CMH.Terminal.BL\CheekiBreeki.CMH.Terminal.BL.csproj", "{2CD187D1-FFC3-4C4E-8C93-746536109D92}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F83D024C-B5D7-4E82-AD93-121A326B0F85} = {F83D024C-B5D7-4E82-AD93-121A326B0F85}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.BL.UnitTests", "CheekiBreeki.CMH.Terminal.BL.UnitTests\CheekiBreeki.CMH.Terminal.BL.UnitTests.csproj", "{4EF6C0C0-04C9-43EC-806C-992F9A96A906}"
 EndProject
