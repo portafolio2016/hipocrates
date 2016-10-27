@@ -116,7 +116,7 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             PRESTACION prestacion = new PRESTACION();
             prestacion.ID_PRESTACION = 1;
             prestacion.NOMBRE = "Prestacion ex";
-            prestacion.CODIGO = "CodigoEx";
+            prestacion.CODIGO = "CodigoEx" + System.DateTime.Today.ToString();
             BENEFICIO beneficio = new BENEFICIO();
             beneficio.ID_BENEFICIO = 1;
             beneficio.ID_PRESTACION = 1;
@@ -125,6 +125,27 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             AccionesSeguro accionesSeguro = new AccionesSeguro();
             BENEFICIO resultado = accionesSeguro.obtenerBeneficioPrestacion(prestacion, beneficios);
             Assert.IsTrue(resultado.ID_BENEFICIO == beneficio.ID_BENEFICIO);
+        }
+
+        [TestMethod]
+        public void obtenerPrestacionTest()
+        {
+            using(var entities = new SeguroEntities())
+            {
+                #region Caso1
+                //Prestación existe
+                PRESTACION prestacion = new PRESTACION();
+                prestacion.NOMBRE = "Prestacion ex";
+                prestacion.CODIGO = "la prestacion" + System.DateTime.Now.ToString();
+                entities.PRESTACION.Add(prestacion);
+                entities.SaveChangesAsync();
+                int idPrestacion = prestacion.ID_PRESTACION;
+                string codigoEsperado = prestacion.CODIGO;
+                PRESTACION result = new AccionesSeguro().obtenerPrestacion(idPrestacion);
+                Assert.IsTrue(result.CODIGO.CompareTo(codigoEsperado) == 0, "Codigos no coinciden");
+                #endregion
+            }
+            
         }
     }
 }
