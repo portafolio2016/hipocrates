@@ -10,6 +10,11 @@ namespace Cheekibreeki.CMH.Seguro.WS
     [DataContract]
     public class SeguroResponse
     {
+        public SeguroResponse()
+        {
+            this.descuentoPesos = 0;
+            this.afiliadoTieneSeguro = false;
+        }
         int descuentoPesos = 0;
 
         private bool afiliadoTieneSeguro;
