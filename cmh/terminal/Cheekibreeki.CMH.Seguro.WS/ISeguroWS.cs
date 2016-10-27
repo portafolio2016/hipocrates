@@ -12,7 +12,7 @@ namespace Cheekibreeki.CMH.Seguro.WS
     public interface ISeguroWS
     {
         [OperationContract]
-        SeguroResponse obtenerBeneficio(SeguroRequest seguroRequest);
+        SeguroResponse obtenerDescuento(SeguroRequest seguroRequest);
 
     }
 

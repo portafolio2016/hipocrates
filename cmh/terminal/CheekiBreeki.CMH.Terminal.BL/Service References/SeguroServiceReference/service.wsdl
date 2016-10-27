@@ -7,22 +7,22 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Cheekibreeki.CMH.Seguro.WS" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ISeguroWS_obtenerBeneficio_InputMessage">
-    <wsdl:part name="parameters" element="tns:obtenerBeneficio" />
+  <wsdl:message name="ISeguroWS_obtenerDescuento_InputMessage">
+    <wsdl:part name="parameters" element="tns:obtenerDescuento" />
   </wsdl:message>
-  <wsdl:message name="ISeguroWS_obtenerBeneficio_OutputMessage">
-    <wsdl:part name="parameters" element="tns:obtenerBeneficioResponse" />
+  <wsdl:message name="ISeguroWS_obtenerDescuento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:obtenerDescuentoResponse" />
   </wsdl:message>
   <wsdl:portType name="ISeguroWS">
-    <wsdl:operation name="obtenerBeneficio">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISeguroWS/obtenerBeneficio" message="tns:ISeguroWS_obtenerBeneficio_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISeguroWS/obtenerBeneficioResponse" message="tns:ISeguroWS_obtenerBeneficio_OutputMessage" />
+    <wsdl:operation name="obtenerDescuento">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISeguroWS/obtenerDescuento" message="tns:ISeguroWS_obtenerDescuento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISeguroWS/obtenerDescuentoResponse" message="tns:ISeguroWS_obtenerDescuento_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISeguroWS" type="tns:ISeguroWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="obtenerBeneficio">
-      <soap:operation soapAction="http://tempuri.org/ISeguroWS/obtenerBeneficio" style="document" />
+    <wsdl:operation name="obtenerDescuento">
+      <soap:operation soapAction="http://tempuri.org/ISeguroWS/obtenerDescuento" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

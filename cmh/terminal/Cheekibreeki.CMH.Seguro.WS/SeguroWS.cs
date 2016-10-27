@@ -9,7 +9,7 @@ namespace Cheekibreeki.CMH.Seguro.WS
 {
     public class SeguroWS : ISeguroWS
     {
-        public SeguroResponse obtenerBeneficio(SeguroRequest seguroRequest)
+        public SeguroResponse obtenerDescuento(SeguroRequest seguroRequest)
         {
 
             AccionesSeguro accionesSeguro = new AccionesSeguro();

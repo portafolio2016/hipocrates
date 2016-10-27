@@ -155,11 +155,11 @@ namespace CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SeguroServiceReference.ISeguroWS")]
     public interface ISeguroWS {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeguroWS/obtenerBeneficio", ReplyAction="http://tempuri.org/ISeguroWS/obtenerBeneficioResponse")]
-        CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroResponse obtenerBeneficio(CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroRequest seguroRequest);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeguroWS/obtenerDescuento", ReplyAction="http://tempuri.org/ISeguroWS/obtenerDescuentoResponse")]
+        CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroResponse obtenerDescuento(CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroRequest seguroRequest);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeguroWS/obtenerBeneficio", ReplyAction="http://tempuri.org/ISeguroWS/obtenerBeneficioResponse")]
-        System.Threading.Tasks.Task<CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroResponse> obtenerBeneficioAsync(CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroRequest seguroRequest);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISeguroWS/obtenerDescuento", ReplyAction="http://tempuri.org/ISeguroWS/obtenerDescuentoResponse")]
+        System.Threading.Tasks.Task<CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroResponse> obtenerDescuentoAsync(CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroRequest seguroRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -189,12 +189,12 @@ namespace CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroResponse obtenerBeneficio(CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroRequest seguroRequest) {
-            return base.Channel.obtenerBeneficio(seguroRequest);
+        public CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroResponse obtenerDescuento(CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroRequest seguroRequest) {
+            return base.Channel.obtenerDescuento(seguroRequest);
         }
         
-        public System.Threading.Tasks.Task<CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroResponse> obtenerBeneficioAsync(CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroRequest seguroRequest) {
-            return base.Channel.obtenerBeneficioAsync(seguroRequest);
+        public System.Threading.Tasks.Task<CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroResponse> obtenerDescuentoAsync(CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference.SeguroRequest seguroRequest) {
+            return base.Channel.obtenerDescuentoAsync(seguroRequest);
         }
     }
 }
