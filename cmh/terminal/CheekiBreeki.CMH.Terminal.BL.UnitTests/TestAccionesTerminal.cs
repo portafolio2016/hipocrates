@@ -8,12 +8,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
     [TestClass]
     public class TestAccionesTerminal
     {
-        #region Agenda diaria
-        [TestMethod]
-        public void revisarAgendaDiariaTest()
+        #region Agregar atención agendada
+        private void agregarAtencionAgendada()
         {
-            AccionesTerminal at = new AccionesTerminal();
-            // Ingresar atenciones
             ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
             PACIENTE paciente1 = new PACIENTE();
             TIPO_PRES tipopres1 = new TIPO_PRES();
@@ -161,6 +158,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.ATENCION_AGEN.Add(aten_agen1);
                 context.SaveChangesAsync();
             }
+        }
+        #endregion
+
+        #region Agenda diaria
+        [TestMethod]
+        public void revisarAgendaDiariaTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            agregarAtencionAgendada();
 
             // Caso 1: Obtener agenda
             List<ATENCION_AGEN> atenciones1 = null;
