@@ -9,7 +9,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
     public class TestAccionesTerminal
     {
         #region Agregar atención agendada
-        private void agregarAtencionAgendada()
+        private ATENCION_AGEN agregarAtencionAgendada()
         {
             ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
             PACIENTE paciente1 = new PACIENTE();
@@ -18,6 +18,8 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             ESTADO_ATEN estadoaten1 = new ESTADO_ATEN();
             ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
             PERSONAL personal1 = new PERSONAL();
+            CARGO cargo1 = new CARGO();
+            FUNCIONARIO funcionario1 = new FUNCIONARIO();
             BLOQUE bloque1 = new BLOQUE();
             DIA_SEM dia1 = new DIA_SEM();
             PERS_MEDICO persmedico1 = new PERS_MEDICO();
@@ -30,7 +32,8 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     idPaciente = 0,
                     idPrestacion = 0,
                     idEstadoAtencion = 0,
-                    idBloque = 0;
+                    idBloque = 0,
+                    idCargo = 0;
                 PACIENTE pacientePrevio = context.PACIENTE.Where(d => d.RUT == 18861423).FirstOrDefault();
                 if(!Util.isObjetoNulo(pacientePrevio))
                 {
@@ -57,6 +60,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 {
                     idEstadoAtencion = estadoAtencionPrevia.ID_ESTADO_ATEN;
                     context.ESTADO_ATEN.Remove(estadoAtencionPrevia);
+                }
+                FUNCIONARIO funcionarioPrevia = context.FUNCIONARIO.Where(d => d.CARGO.NOMBRE_CARGO == "Cargo test" && d.PERSONAL.RUT == 12345678).FirstOrDefault();
+                if (!Util.isObjetoNulo(funcionarioPrevia))
+                    context.FUNCIONARIO.Remove(funcionarioPrevia);
+                CARGO cargoPrevia = context.CARGO.Where(d => d.NOMBRE_CARGO == "Cargo test").FirstOrDefault();
+                if (!Util.isObjetoNulo(cargoPrevia))
+                {
+                    idCargo = cargoPrevia.ID_CARGO_FUNCI;
+                    context.CARGO.Remove(cargoPrevia);
                 }
                 PERSONAL personalPrevia = context.PERSONAL.Where(d => d.RUT == 12345678).FirstOrDefault();
                 if (!Util.isObjetoNulo(personalPrevia))
@@ -87,6 +99,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 {
                     context.ATENCION_AGEN.Remove(atencionagenPrevia);
                 }
+                context.SaveChangesAsync();
 
                 paciente1.NOMBRES_PACIENTE = "Miku";
                 paciente1.APELLIDOS_PACIENTE = "Hatsune";
@@ -129,6 +142,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal1);
                 context.SaveChangesAsync();
 
+                cargo1.NOMBRE_CARGO = "Cargo test";
+                context.CARGO.Add(cargo1);
+                context.SaveChangesAsync();
+
+                funcionario1.ID_CARGO_FUNCI = cargo1.ID_CARGO_FUNCI;
+                funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
+                context.FUNCIONARIO.Add(funcionario1);
+                context.SaveChangesAsync();
+
                 dia1.NOMBRE_IDA = "Lumamijunes";
                 context.DIA_SEM.Add(dia1);
                 context.SaveChangesAsync();
@@ -157,7 +179,55 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
                 context.ATENCION_AGEN.Add(aten_agen1);
                 context.SaveChangesAsync();
+                return aten_agen1;
             }
+        }
+        #endregion
+
+        #region Registrar pago
+        [TestMethod]
+        public void registrarPagoTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Caso 1: Pago correcto
+            using (var context = new CMHEntities())
+            {
+                //CMHEntities context = new CMHEntities();
+                ATENCION_AGEN atencion = agregarAtencionAgendada();
+
+                // Caja
+                CAJA caja1 = new CAJA();
+                caja1.FECHOR_APERTURA = DateTime.Today;
+                caja1.ID_FUNCIONARIO = atencion.PERS_MEDICO.PERSONAL.FUNCIONARIO.FirstOrDefault().ID_FUNCIONARIO;
+                context.CAJA.Add(caja1);
+                context.SaveChangesAsync();
+
+                // Aseguradora 
+                ASEGURADORA aseguradora1 = new ASEGURADORA();
+                aseguradora1.NOM_ASEGURADORA = "Aseguradora test";
+                context.ASEGURADORA.Add(aseguradora1);    
+                context.SaveChangesAsync();
+
+                // Bono
+                BONO bono1 = new BONO();
+                bono1.CANT_BONO = 100;
+                bono1.COD_ASEGURADORA = "C001";
+                bono1.ASEGURADORA = aseguradora1;
+                context.BONO.Add(bono1);     
+                context.SaveChangesAsync();
+
+                PAGO pago1 = new PAGO();
+                pago1.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                pago1.ID_BONO = bono1.ID_BONO;
+                pago1.ID_CAJA = caja1.ID_CAJA;
+                pago1.FECHOR = DateTime.Today;
+                pago1.MONTO_PAGO = 10000;
+                context.PAGO.Add(pago1);
+                context.SaveChangesAsync();
+                Assert.IsTrue(true);
+            }
+            // Caso 2: Atención no existente
+
         }
         #endregion
 
