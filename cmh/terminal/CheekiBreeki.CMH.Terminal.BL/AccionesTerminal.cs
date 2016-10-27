@@ -17,13 +17,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return false;
         }
 
-        //ECU-003
-        public Boolean registrarPaciente(PACIENTE paciente)
-        {
-            //TODO: implementar
-            return false;
-        }
-
         //ECU-005
         public List<ATENCION_AGEN> revisarAgendaDiaria(int rut, DateTime dia)
         {
@@ -68,10 +61,38 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-008
-        public Boolean registrarPago(PAGO pago, CAJA caja)
+        public Boolean registrarPago(PAGO pago)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(pago))
+                {
+                    throw new Exception("Pago nulo");
+                }
+                else if (Util.isObjetoNulo(conexionDB.BONO.Find(pago.ID_BONO)))
+                {
+                    throw new Exception("Bono no existe");
+                }
+                else if (Util.isObjetoNulo(conexionDB.CAJA.Find(pago.ID_CAJA)))
+                {
+                    throw new Exception("Caja no existe");
+                }
+                else if (Util.isObjetoNulo(conexionDB.ATENCION_AGEN.Find(pago.ID_ATENCION_AGEN)))
+                {
+                    throw new Exception("Atención agendada no existe");
+                }
+                else
+                {
+                    conexionDB.PAGO.Add(pago);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         ////ECU-009

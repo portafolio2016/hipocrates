@@ -63,7 +63,14 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 }
                 FUNCIONARIO funcionarioPrevia = context.FUNCIONARIO.Where(d => d.CARGO.NOMBRE_CARGO == "Cargo test" && d.PERSONAL.RUT == 12345678).FirstOrDefault();
                 if (!Util.isObjetoNulo(funcionarioPrevia))
+                {
+                    foreach (CAJA cajita in funcionarioPrevia.CAJA.ToList())
+                    {
+                        cajita.PAGO.ToList().ForEach(o => context.PAGO.Remove(o));
+                        context.CAJA.Remove(cajita);
+                    }
                     context.FUNCIONARIO.Remove(funcionarioPrevia);
+                }
                 CARGO cargoPrevia = context.CARGO.Where(d => d.NOMBRE_CARGO == "Cargo test").FirstOrDefault();
                 if (!Util.isObjetoNulo(cargoPrevia))
                 {
@@ -189,12 +196,10 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void registrarPagoTest()
         {
             AccionesTerminal at = new AccionesTerminal();
+            ATENCION_AGEN atencion = agregarAtencionAgendada();
             // Caso 1: Pago correcto
             using (var context = new CMHEntities())
             {
-                //CMHEntities context = new CMHEntities();
-                ATENCION_AGEN atencion = agregarAtencionAgendada();
-
                 // Caja
                 CAJA caja1 = new CAJA();
                 caja1.FECHOR_APERTURA = DateTime.Today;
@@ -216,15 +221,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.BONO.Add(bono1);     
                 context.SaveChangesAsync();
 
+                // Pago
                 PAGO pago1 = new PAGO();
                 pago1.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
                 pago1.ID_BONO = bono1.ID_BONO;
                 pago1.ID_CAJA = caja1.ID_CAJA;
                 pago1.FECHOR = DateTime.Today;
                 pago1.MONTO_PAGO = 10000;
-                context.PAGO.Add(pago1);
-                context.SaveChangesAsync();
-                Assert.IsTrue(true);
+
+                at.registrarPago(pago1);
             }
             // Caso 2: Atención no existente
 
