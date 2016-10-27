@@ -8,7 +8,13 @@ namespace Cheekibreeki.CMH.Seguro.BL
 {
     public class AccionesSeguro
     {
-        public int obtenerDescuentoPrestacion(int precioPrestacion, BENEFICIO beneficio)
+        public int obtenerDescuentoPrestacion(int rutAfiliado, string codigoPrestacion, int precioPrestacion)
+        {
+            throw new NotImplementedException();
+            return 0;
+        }
+
+        public int calcularDescuentoPrestacion(int precioPrestacion, BENEFICIO beneficio)
         {
             int fraccion = (int)(precioPrestacion * beneficio.PORCENTAJE / 100);
             if (fraccion > beneficio.LIMITE_DINERO)
@@ -55,10 +61,12 @@ namespace Cheekibreeki.CMH.Seguro.BL
         {
             using (var entities = new SeguroEntities())
             {
-                PLAN plan = (from p in entities.PLAN
-                                 where p.ID_PLAN == idPlan
-                                 select p).First<PLAN>();
-                return new List<BENEFICIO>();
+                List<BENEFICIO> beneficios = (
+                                                from b in entities.BENEFICIO
+                                                where idPlan == b.ID_PLAN
+                                                select b
+                                              ).ToList<BENEFICIO>();
+                return beneficios;
             }
         }
 

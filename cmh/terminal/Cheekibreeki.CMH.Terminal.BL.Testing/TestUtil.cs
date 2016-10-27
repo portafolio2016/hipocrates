@@ -52,7 +52,7 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             {
                 PRESTACION prestacion = new PRESTACION();
                 prestacion.NOMBRE = nombrePrestacion;
-                prestacion.CODIGO = codigo + System.DateTime.Now.ToString();
+                prestacion.CODIGO = codigo;
                 entities.PRESTACION.Add(prestacion);
                 entities.SaveChangesAsync();
                 return prestacion.ID_PRESTACION;

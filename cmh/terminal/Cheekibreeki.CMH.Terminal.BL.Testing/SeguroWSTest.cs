@@ -10,7 +10,7 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
     public class SeguroWSTest
     {
         [TestMethod]
-        public void obtenerDescuentoTest()
+        public void calcularDescuentoTest()
         {
             AccionesSeguro accionesSeguro = new AccionesSeguro();
             //caso 1
@@ -19,12 +19,12 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             beneficio.PORCENTAJE = 25;
             beneficio.LIMITE_DINERO = 90;
             int resultadoEsperado1 = 25;
-            int resultado1 = accionesSeguro.obtenerDescuentoPrestacion(precioPrestacion, beneficio);
+            int resultado1 = accionesSeguro.calcularDescuentoPrestacion(precioPrestacion, beneficio);
             Assert.IsTrue(resultado1 == resultadoEsperado1, "Resultado: " + resultado1 + " Resultado esperado: " + resultadoEsperado1);
             //caso 2
             precioPrestacion = 1000;
             int resultadoEsperado2 = 90;
-            int resultado2 = accionesSeguro.obtenerDescuentoPrestacion(precioPrestacion, beneficio);
+            int resultado2 = accionesSeguro.calcularDescuentoPrestacion(precioPrestacion, beneficio);
             Assert.IsTrue(resultado2 == resultadoEsperado2, "Res:" + resultado2 + " Esperado: " + resultadoEsperado2);
         }
 
@@ -117,7 +117,9 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
                 //crear plan, relacionar con empresa
                 int idPlan = TestUtil.crearPlan("Plan test", idEmpresa);
                 //crear prestación
-                int idPrestacion = TestUtil.crearPrestacion("Test prestacion", "codigotest");
+                //los codigos deben ser únicos, por lo que se usa la hora actual como diferenciador
+                string codigo = "codigoTest" + System.DateTime.Now.ToString(); 
+                int idPrestacion = TestUtil.crearPrestacion("Test prestacion", codigo);
                 //crear beneficio, relacionar con prestación y plan
                 int idBeneficio = TestUtil.crearBeneficio(10, 100, idPlan, idPrestacion);
                 //test
@@ -164,6 +166,38 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
                 #endregion
             }
             
+        }
+
+        [TestMethod]
+        public void obtenerDescuentoPrestacion()
+        {
+            //Caso 1: calcula correctamente
+            //crear tipoempresa, empresa, relacionar
+            int idTipoEmpresa = TestUtil.crearTipoEmpresa("Publica");
+            int idEmpresa = TestUtil.crearEmpresa("Fonasa", idTipoEmpresa);
+            //crear plan
+            int idPlan = TestUtil.crearPlan("Plan ejemplo", idEmpresa);
+            //crear afiliado
+            int rutAfiliado = 1238946;
+            int idAfiliado = TestUtil.crearAfiliado(rutAfiliado, "q",idPlan);
+            //crear prestacion
+            //crear prestación
+            //los codigos deben ser únicos, por lo que se usa la hora actual como diferenciador
+            string codigo = "codigoTest" + System.DateTime.Now.ToString(); 
+            int idPrestacion = TestUtil.crearPrestacion("Nueva prestacion", codigo);
+            //crear beneficio
+            int idBeneficio = TestUtil.crearBeneficio(10, 100, idPlan, idPrestacion);
+            //crear prestación
+            int precio = 100;
+            int result = new AccionesSeguro().obtenerDescuentoPrestacion(rutAfiliado, codigo, precio);
+            int expectedResult = 10;
+            Assert.IsTrue(result == expectedResult, "Caso1:Resultados no coinciden");
+            //Caso 2: no tiene seguro
+            //Pasar rut afiliado sin correspondencia
+            int rutInexistente = -100;
+            int result2 = new AccionesSeguro().obtenerDescuentoPrestacion(rutInexistente, codigo, precio);
+            int expectedResult2 = 0;
+            Assert.IsTrue(result2 == expectedResult2, "Caso2: resultados no coinciden");
         }
     }
 }
