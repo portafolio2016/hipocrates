@@ -16,6 +16,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             TIPO_PRES tipopres1 = new TIPO_PRES();
             PRESTACION prestacion1 = new PRESTACION();
             ESTADO_ATEN estadoaten1 = new ESTADO_ATEN();
+            ESTADO_ATEN estadoaten2 = new ESTADO_ATEN();
             ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
             PERSONAL personal1 = new PERSONAL();
             CARGO cargo1 = new CARGO();
@@ -61,6 +62,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     idEstadoAtencion = estadoAtencionPrevia.ID_ESTADO_ATEN;
                     context.ESTADO_ATEN.Remove(estadoAtencionPrevia);
                 }
+                ESTADO_ATEN estadoAtencionPrevia2 = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "En proceso").FirstOrDefault();
+                if (!Util.isObjetoNulo(estadoAtencionPrevia2))
+                    context.ESTADO_ATEN.Remove(estadoAtencionPrevia2);
                 FUNCIONARIO funcionarioPrevia = context.FUNCIONARIO.Where(d => d.CARGO.NOMBRE_CARGO == "Cargo test" && d.PERSONAL.RUT == 12345678).FirstOrDefault();
                 if (!Util.isObjetoNulo(funcionarioPrevia))
                 {
@@ -139,6 +143,10 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.ESTADO_ATEN.Add(estadoaten1);
                 context.SaveChangesAsync();
 
+                estadoaten2.NOM_ESTADO_ATEN = "En proceso";
+                context.ESTADO_ATEN.Add(estadoaten2);
+                context.SaveChangesAsync();
+
                 personal1.NOMBRES = "Moka";
                 personal1.APELLIDOS = "Akashiya";
                 personal1.REMUNERACION = 850000;
@@ -191,48 +199,99 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         }
         #endregion
 
+        #region Ingresar paciente
+        [TestMethod]
+        public void ingresarPacienteTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            ATENCION_AGEN atencion = agregarAtencionAgendada();
+            // Caso 1: Ingreso correcto
+            Boolean res1 = at.ingresarPaciente(atencion);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(resultadoEsperado1, res1);
+
+            // Caso 2: 
+        }
+        #endregion
+
         #region Registrar pago
         [TestMethod]
         public void registrarPagoTest()
         {
             AccionesTerminal at = new AccionesTerminal();
             ATENCION_AGEN atencion = agregarAtencionAgendada();
-            // Caso 1: Pago correcto
+            CAJA caja1 = new CAJA();
+            BONO bono1 = new BONO();
+            ASEGURADORA aseguradora1 = new ASEGURADORA();
+            // Dependencias
             using (var context = new CMHEntities())
             {
                 // Caja
-                CAJA caja1 = new CAJA();
                 caja1.FECHOR_APERTURA = DateTime.Today;
                 caja1.ID_FUNCIONARIO = atencion.PERS_MEDICO.PERSONAL.FUNCIONARIO.FirstOrDefault().ID_FUNCIONARIO;
                 context.CAJA.Add(caja1);
                 context.SaveChangesAsync();
 
                 // Aseguradora 
-                ASEGURADORA aseguradora1 = new ASEGURADORA();
                 aseguradora1.NOM_ASEGURADORA = "Aseguradora test";
                 context.ASEGURADORA.Add(aseguradora1);    
                 context.SaveChangesAsync();
 
                 // Bono
-                BONO bono1 = new BONO();
                 bono1.CANT_BONO = 100;
                 bono1.COD_ASEGURADORA = "C001";
                 bono1.ASEGURADORA = aseguradora1;
                 context.BONO.Add(bono1);     
                 context.SaveChangesAsync();
-
-                // Pago
-                PAGO pago1 = new PAGO();
-                pago1.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
-                pago1.ID_BONO = bono1.ID_BONO;
-                pago1.ID_CAJA = caja1.ID_CAJA;
-                pago1.FECHOR = DateTime.Today;
-                pago1.MONTO_PAGO = 10000;
-
-                at.registrarPago(pago1);
             }
-            // Caso 2: Atención no existente
 
+            // Caso 1: Pago correcto
+            PAGO pago1 = new PAGO();
+            pago1.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+            pago1.ID_BONO = bono1.ID_BONO;
+            pago1.ID_CAJA = caja1.ID_CAJA;
+            pago1.FECHOR = DateTime.Today;
+            pago1.MONTO_PAGO = 10000;
+
+            Boolean res1 = at.registrarPago(pago1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(resultadoEsperado1, res1, "Error místico al registrar pago");
+
+            // Caso 2: Atención no existente
+            PAGO pago2 = new PAGO();
+            pago2.ID_ATENCION_AGEN = 0;
+            pago2.ID_BONO = bono1.ID_BONO;
+            pago2.ID_CAJA = caja1.ID_CAJA;
+            pago2.FECHOR = DateTime.Today;
+            pago2.MONTO_PAGO = 20000;
+
+            Boolean res2 = at.registrarPago(pago2);
+            Boolean resultadoEsperado2 = false;
+            Assert.AreEqual(resultadoEsperado2, res2, "No debería ingresar");
+
+            // Caso 3: Atención no existente
+            PAGO pago3 = new PAGO();
+            pago3.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+            pago3.ID_BONO = 0;
+            pago3.ID_CAJA = caja1.ID_CAJA;
+            pago3.FECHOR = DateTime.Today;
+            pago3.MONTO_PAGO = 30000;
+
+            Boolean res3 = at.registrarPago(pago3);
+            Boolean resultadoEsperado3 = false;
+            Assert.AreEqual(resultadoEsperado3, res3, "No debería ingresar");
+
+            // Caso 4: Caja no existente
+            PAGO pago4 = new PAGO();
+            pago4.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+            pago4.ID_BONO = bono1.ID_BONO;
+            pago4.ID_CAJA = 0;
+            pago4.FECHOR = DateTime.Today;
+            pago4.MONTO_PAGO = 40000;
+
+            Boolean res4 = at.registrarPago(pago4);
+            Boolean resultadoEsperado4 = false;
+            Assert.AreEqual(resultadoEsperado4, res4, "No debería ingresar");
         }
         #endregion
 

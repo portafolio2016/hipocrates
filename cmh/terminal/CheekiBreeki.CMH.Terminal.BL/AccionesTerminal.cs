@@ -48,8 +48,28 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-006
         public Boolean ingresarPaciente(ATENCION_AGEN atencion)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atención nula");
+                }
+                if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN != "Vigente")
+                {
+                    throw new Exception("Estado no válido de la atención");
+                }
+                else
+                {
+                    atencion.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "En proceso").FirstOrDefault().ID_ESTADO_ATEN;
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-007
