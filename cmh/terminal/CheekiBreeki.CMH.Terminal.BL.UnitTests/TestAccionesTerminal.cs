@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CheekiBreeki.CMH.Terminal.DAL;
 using System.Linq;
+using System.Collections.Generic;
 namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 {
     [TestClass]
@@ -78,7 +79,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 PERS_MEDICO presMedicoPrevia = context.PERS_MEDICO.Where(d => d.ID_PERSONAL == idPersonal && d.ID_ESPECIALIDAD == idEspecialidad).FirstOrDefault();
                 if (!Util.isObjetoNulo(presMedicoPrevia))
                     context.PERS_MEDICO.Remove(presMedicoPrevia);
-
                 ATENCION_AGEN atencionagenPrevia = context.ATENCION_AGEN.
                     Where(d => 
                           d.ID_PACIENTE == idPaciente && 
@@ -86,9 +86,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                           d.ID_ESTADO_ATEN == idEstadoAtencion && 
                           d.ID_PERS_ATIENDE == idPersonal 
                           && d.ID_BLOQUE == idBloque).FirstOrDefault();
-                if (!Util.isObjetoNulo(especialidadPrevia))
+                if (!Util.isObjetoNulo(atencionagenPrevia))
                 {
-                    context.ESPECIALIDAD.Remove(especialidadPrevia);
+                    context.ATENCION_AGEN.Remove(atencionagenPrevia);
                 }
 
                 paciente1.NOMBRES_PACIENTE = "Miku";
@@ -161,6 +161,32 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.ATENCION_AGEN.Add(aten_agen1);
                 context.SaveChangesAsync();
             }
+
+            // Caso 1: Obtener agenda
+            List<ATENCION_AGEN> atenciones1 = null;
+            int rutPersonal1 = 12345678;
+            DateTime fecha1 = DateTime.Today;
+
+            atenciones1 = at.revisarAgendaDiaria(rutPersonal1, fecha1);
+            Object resultadoNoEsperado1 = null;
+            Assert.AreNotEqual(resultadoNoEsperado1, atenciones1);
+
+            // Mostrar atenciones
+            foreach (ATENCION_AGEN atencion in atenciones1)
+            {
+                Console.WriteLine("--- ATENCION " + atencion.ID_ATENCION_AGEN + " ---");
+                Console.WriteLine("Inicio: " + atencion.BLOQUE.NUM_HORA_INI + ":" + atencion.BLOQUE.NUM_MINU_INI);
+                Console.WriteLine("Fin: " + atencion.BLOQUE.NUM_HORA_FIN + ":" + atencion.BLOQUE.NUM_MINU_FIN);
+            }
+
+            // Caso 2: Personal no existente
+            List<ATENCION_AGEN> atenciones2 = null;
+            int rutPersonal2 = 0;
+            DateTime fecha2 = DateTime.Today;
+
+            atenciones2 = at.revisarAgendaDiaria(rutPersonal2, fecha2);
+            Object resultadoEsperado2 = null;
+            Assert.AreEqual(resultadoEsperado2, atenciones2);
         }
         #endregion
 

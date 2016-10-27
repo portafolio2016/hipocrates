@@ -25,11 +25,31 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-005
-        public List<ATENCION_AGEN> revisarAgendaDiaria(PERS_MEDICO personalMedico, DateTime dia)
+        public List<ATENCION_AGEN> revisarAgendaDiaria(int rut, DateTime dia)
         {
-            List<ATENCION_AGEN> atenciones = null;
-            //TODO: implementar
-            return atenciones;
+            
+            try
+            {
+                if (Util.isObjetoNulo(dia))
+                {
+                    throw new Exception("Día vacío");
+                }
+                else if (Util.isObjetoNulo(buscarPersonal(rut)))
+                {
+                    throw new Exception("Personal no existe");
+                }
+                else
+                {
+                    List<ATENCION_AGEN> atenciones = null;
+                    atenciones = conexionDB.ATENCION_AGEN.Where(d => d.PERS_MEDICO.PERSONAL.RUT == rut).ToList();
+                    return atenciones;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         //ECU-006
@@ -295,6 +315,32 @@ namespace CheekiBreeki.CMH.Terminal.BL
             {
                 Console.WriteLine(ex.Message);
                 return false;
+            }
+        }
+
+        public PERSONAL buscarPersonal(int rut)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(rut))
+                {
+                    throw new Exception("RUT o vacío");
+                }
+                else
+                {
+                    PERSONAL personal = null;
+                    personal = conexionDB.PERSONAL.Where(d => d.RUT == rut).FirstOrDefault();
+                    if (Util.isObjetoNulo(personal))
+                    {
+                        throw new Exception("Personal no existe");
+                    }
+                    return personal;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
             }
         }
 
