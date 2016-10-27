@@ -114,19 +114,40 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     throw new Exception("Orden nula");
                 }
                 
-                else if (ordenAnalisis.FECHOR_EMISION <= DateTime.Today || ordenAnalisis.FECHOR_RECEP < DateTime.Today)
+                else if (ordenAnalisis.FECHOR_EMISION < DateTime.Today || ordenAnalisis.FECHOR_RECEP < DateTime.Today)
                 {
                     throw new Exception("Fecha invalida");
                 }
 
-                return true;
+                else if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion agendada nula");
+                }
+
+                else if (atencion.FECHOR == null)
+                {
+                    throw new Exception("Fecha nula");
+                }
+
+                else if (atencion.OBSERVACIONES == null || atencion.OBSERVACIONES == "")
+                {
+                    throw new Exception("Observacion nula o vacía");
+                }
+                
+                else
+                {
+                    conexionDB.ATENCION_AGEN.Add(atencion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
             }
-            
+
+        
         }
 
         //ECU-013
@@ -146,13 +167,19 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     throw new Exception("Fecha invalida");
                 }
 
-                return true;
+                else
+                {
+                    conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
             }
+
 
         }
 
