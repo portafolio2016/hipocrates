@@ -107,7 +107,25 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
         [TestMethod]
         public void obtenerBeneficiosPlanTest()
         {
-            throw new NotImplementedException();
+            using(var entities = new SeguroEntities())
+            {
+                //Caso 1: obtener beneficio correctamente
+                //preparacion
+                //crear tipo empresa y empresa
+                int idTipoEmpresa = TestUtil.crearTipoEmpresa("TipoEmpresaTest");
+                int idEmpresa = TestUtil.crearEmpresa("Empresa test", idTipoEmpresa);
+                //crear plan, relacionar con empresa
+                int idPlan = TestUtil.crearPlan("Plan test", idEmpresa);
+                //crear prestación
+                int idPrestacion = TestUtil.crearPrestacion("Test prestacion", "codigotest");
+                //crear beneficio, relacionar con prestación y plan
+                int idBeneficio = TestUtil.crearBeneficio(10, 100, idPlan, idPrestacion);
+                //test
+                AccionesSeguro accionesSeguro = new AccionesSeguro();
+                List<BENEFICIO> resultadoBeneficios = accionesSeguro.obtenerBeneficiosPlan(idPlan);
+                int idResultado = resultadoBeneficios.First<BENEFICIO>().ID_BENEFICIO;
+                Assert.IsTrue(idResultado == idBeneficio, "Id beneficio no calza");
+            }
         }
 
         [TestMethod]
