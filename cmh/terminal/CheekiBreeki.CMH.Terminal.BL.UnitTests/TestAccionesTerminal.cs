@@ -802,14 +802,14 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         [TestMethod]
         public void enviarCorreoTest()
         {
-            AccionesTerminal at = new AccionesTerminal();
+            Emailer emailer = new Emailer();
             // Caso 1: Envío correcto
             string receptor1, titulo1, cuerpo1;
             receptor1 = "fjaqueg@gmail.com";
             titulo1 = "Prueba de correos CMH";
             cuerpo1 = "Esta es una prueba exitosa del envío de correos para el portafolio 2016";
 
-            Boolean res1 = at.enviarCorreo(receptor1, titulo1, cuerpo1);
+            Boolean res1 = emailer.enviarCorreo(receptor1, titulo1, cuerpo1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
 
@@ -819,7 +819,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             titulo2 = "Prueba de correos CMH";
             cuerpo2 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
 
-            Boolean res2 = at.enviarCorreo(receptor2, titulo2, cuerpo2);
+            Boolean res2 = emailer.enviarCorreo(receptor2, titulo2, cuerpo2);
             Boolean resultadoEsperado2 = false;
             Assert.AreEqual(res2, resultadoEsperado2);
 
@@ -829,7 +829,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             titulo3 = string.Empty;
             cuerpo3 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
 
-            Boolean res3 = at.enviarCorreo(receptor3, titulo3, cuerpo3);
+            Boolean res3 = emailer.enviarCorreo(receptor3, titulo3, cuerpo3);
             Boolean resultadoEsperado3 = false;
             Assert.AreEqual(res3, resultadoEsperado3);
 
@@ -839,7 +839,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             titulo4 = "Prueba de correos CMH";
             cuerpo4 = "";
 
-            Boolean res4 = at.enviarCorreo(receptor4, titulo4, cuerpo4);
+            Boolean res4 = emailer.enviarCorreo(receptor4, titulo4, cuerpo4);
             Boolean resultadoEsperado4 = false;
             Assert.AreEqual(res4, resultadoEsperado4);
 
@@ -849,7 +849,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             titulo5 = "Prueba de correos CMH";
             cuerpo5 = "Esta es una prueba fallida del envío de correos para el portafolio 5016";
 
-            Boolean res5 = at.enviarCorreo(receptor5, titulo5, cuerpo5);
+            Boolean res5 = emailer.enviarCorreo(receptor5, titulo5, cuerpo5);
             Boolean resultadoEsperado5 = false;
             Assert.AreEqual(res5, resultadoEsperado5);
         }
@@ -859,11 +859,11 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         [TestMethod]
         public void conversionABase64Test()
         {
-            AccionesTerminal at = new AccionesTerminal();
+            ConversorBase64 conversor = new ConversorBase64();
             // Caso 1: Conversión correcta
             string archivo1 = "../../file.pdf";
 
-            Object res1 = at.convertirABase64(archivo1);
+            Object res1 = conversor.convertirABase64(archivo1);
             Object resultadoNoEsperado1 = null;
             Assert.AreNotEqual(res1, resultadoNoEsperado1);
         }
@@ -871,9 +871,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         [TestMethod]
         public void conversionDesdeBase64Test()
         {
-            AccionesTerminal at = new AccionesTerminal();
+            ConversorBase64 conversor = new ConversorBase64();
             // Caso 1: Conversión correcta
-            string uri = at.convertirABase64("../../file.pdf");
+            string uri = conversor.convertirABase64("../../file.pdf");
 
             string salida1 = "file_resultado";
             string extension1 = "pdf";
@@ -884,7 +884,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 File.Delete(nombre1);
             }
 
-            Boolean res1 = at.convertirDesdeBase64(uri, salida1, extension1);
+            Boolean res1 = conversor.convertirDesdeBase64(uri, salida1, extension1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
         }
