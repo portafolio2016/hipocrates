@@ -861,7 +861,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Conversión correcta
-            string archivo1 = "file.pdf";
+            string archivo1 = "../../file.pdf";
 
             Object res1 = at.convertirABase64(archivo1);
             Object resultadoNoEsperado1 = null;
@@ -873,7 +873,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Conversión correcta
-            string uri = at.convertirABase64("file.pdf");
+            string uri = at.convertirABase64("../../file.pdf");
 
             string salida1 = "file_resultado";
             string extension1 = "pdf";
