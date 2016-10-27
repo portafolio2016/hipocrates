@@ -11,7 +11,9 @@ import cl.cheekibreeki.cmh.lib.dal.entities.CuenBancaria;
 import cl.cheekibreeki.cmh.lib.dal.entities.Especialidad;
 import cl.cheekibreeki.cmh.lib.dal.entities.Pago;
 import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +58,7 @@ public class ServPago {
                 int subtotal = 0;
                 ArrayList<AtencionAgen> atenciones = new ArrayList<>(x.getAtencionAgenCollection());
                 for (AtencionAgen at : atenciones) {
-                    if(at.getIdEstadoAten().getNomEstadoAten().equals("Terminado")){
+                    if(at.getIdEstadoAten().getNomEstadoAten().equals("Terminado") && AtencionDeEsteMes(at.getFechor())){ //AGREGAR QUE VEA QUE EL FECHOR SEA DE ESTE MES
                         ArrayList<Pago> pagos = new ArrayList<>(at.getPagoCollection());
                         for (Pago pago : pagos) {
                             subtotal += pago.getMontoPago();
@@ -72,5 +74,18 @@ public class ServPago {
             
         }
         return result;
+    }
+    
+    private boolean AtencionDeEsteMes(Date dat){
+        Date now = Date.from(Instant.now());
+        if(now.getMonth()-1 <=0)
+            now.setMonth(12);
+        else 
+            now.setMonth(now.getMonth()-1 );
+        if(dat.getMonth()==(now.getMonth()) && dat.getYear()==now.getYear()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
