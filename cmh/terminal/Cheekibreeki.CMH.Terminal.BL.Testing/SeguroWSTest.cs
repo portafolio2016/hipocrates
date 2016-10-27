@@ -156,13 +156,13 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
                 //Prestación existe
                 PRESTACION prestacion = new PRESTACION();
                 prestacion.NOMBRE = "Prestacion ex";
-                prestacion.CODIGO = "la prestacion" + System.DateTime.Now.ToString();
+                string codigo = "la prestacion" + System.DateTime.Now.ToString();
+                prestacion.CODIGO = codigo;
                 entities.PRESTACION.Add(prestacion);
                 entities.SaveChangesAsync();
                 int idPrestacion = prestacion.ID_PRESTACION;
-                string codigoEsperado = prestacion.CODIGO;
-                PRESTACION result = new AccionesSeguro().obtenerPrestacion(idPrestacion);
-                Assert.IsTrue(result.CODIGO.CompareTo(codigoEsperado) == 0, "Codigos no coinciden");
+                PRESTACION result = new AccionesSeguro().obtenerPrestacion(codigo);
+                Assert.IsTrue(result.ID_PRESTACION == idPrestacion, "IDs no coinciden");
                 #endregion
             }
             
@@ -178,16 +178,15 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             //crear plan
             int idPlan = TestUtil.crearPlan("Plan ejemplo", idEmpresa);
             //crear afiliado
-            int rutAfiliado = 1238946;
+            Random random = new Random();
+            int rutAfiliado = random.Next();
             int idAfiliado = TestUtil.crearAfiliado(rutAfiliado, "q",idPlan);
-            //crear prestacion
             //crear prestación
             //los codigos deben ser únicos, por lo que se usa la hora actual como diferenciador
             string codigo = "codigoTest" + System.DateTime.Now.ToString(); 
             int idPrestacion = TestUtil.crearPrestacion("Nueva prestacion", codigo);
             //crear beneficio
             int idBeneficio = TestUtil.crearBeneficio(10, 100, idPlan, idPrestacion);
-            //crear prestación
             int precio = 100;
             int result = new AccionesSeguro().obtenerDescuentoPrestacion(rutAfiliado, codigo, precio);
             int expectedResult = 10;

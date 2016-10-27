@@ -10,8 +10,23 @@ namespace Cheekibreeki.CMH.Seguro.BL
     {
         public int obtenerDescuentoPrestacion(int rutAfiliado, string codigoPrestacion, int precioPrestacion)
         {
-            throw new NotImplementedException();
-            return 0;
+            //obtenerner afiliado
+            AFILIADO afiliado = obtenerAfiliado(rutAfiliado);
+            if (afiliado == null)
+            {
+                return 0;
+            }
+            //obtener plan afiliado
+            PLAN plan = obtenerPlanAfiliado(afiliado);
+            //obtener beneficios del afiliado
+            List<BENEFICIO> beneficios = obtenerBeneficiosPlan(plan.ID_PLAN);
+            //obtener prestacion
+            PRESTACION prestacion = obtenerPrestacion(codigoPrestacion);
+            //obtener beneficio aplicable a la prestación
+            BENEFICIO beneficio = obtenerBeneficioPrestacion(prestacion, beneficios);
+            //obtener descuento
+            int descuento = calcularDescuentoPrestacion(precioPrestacion, beneficio);
+            return  descuento;
         }
 
         public int calcularDescuentoPrestacion(int precioPrestacion, BENEFICIO beneficio)
@@ -36,7 +51,7 @@ namespace Cheekibreeki.CMH.Seguro.BL
                                       select a).ToList<AFILIADO>();
                 if (afiliados.Count() == 0)
                 {
-                    throw new Exception("Afiliado no existe");
+                    return null;
                 }
                 else
                 {
@@ -70,7 +85,7 @@ namespace Cheekibreeki.CMH.Seguro.BL
             }
         }
 
-        public PRESTACION obtenerPrestacion(int idPrestacion)
+        public PRESTACION obtenerPrestacion(string codigoPrestacion)
         {
             using (var entities = new SeguroEntities())
             {
@@ -79,7 +94,7 @@ namespace Cheekibreeki.CMH.Seguro.BL
                 {
                     prestacion = (
                         from p in entities.PRESTACION
-                        where idPrestacion == p.ID_PRESTACION
+                        where codigoPrestacion == p.CODIGO
                         select p
                         ).First<PRESTACION>();
                     return prestacion;
