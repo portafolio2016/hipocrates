@@ -68,7 +68,8 @@ public class ServPago {
                 //Se guarda el pago de honorario en el ArrayList
                 pagosHonorario.add(ph);
             }
-            //Listo :D
+            //Se tiene que generar un log
+            
         }
         return result;
     }
