@@ -71,28 +71,9 @@ public class AccionesPaciente {
      * @param dia dia el cual se quiere tomar hora
      * @return El ArrayList contiene tas atenciones de una prestación
      */
-    public HorasDisponibles HorasDisponibles(PersMedico medico, Date dia){
+    public HorasDisponibles horasDisponibles(PersMedico medico, Date dia){
        HorasDisponibles horas = new HorasDisponibles();
-       /*  Turno turno =  (Turno)Controller.findById(PersMedico.class, medico.getIdTurno().getIdTurno());
-        Map<String, Object> params = new HashMap<>();
-        params.put("idPersonalMedico", medico.getIdPersonalMedico());
-        Controller ctr = new Controller();
-        List<? extends Object> atenciones = ctr.findByQuery("AtencionAgen.findByIdPersonalMedico", params);
-        int turnos = (ConcatenarHora( turno.getNumhoraIni(), turno.getNumminuIni() )  - ConcatenarHora( turno.getNumhoraFin(), turno.getNumminuFin() ) )/30;
-        
-        for (int i = 0; i < turnos; i++) {
-            boolean noDispo = true;
-            ArrayList<AtencionAgen> atenAgen = (ArrayList<AtencionAgen>)atenciones;
-            for (int j = 0; j < atenciones.size(); j++) {
-                if ( ConcatenarHora( turno.getNumhoraIni(), turno.getNumminuIni() ) + turnos*30 == ConcatenarHora(atenAgen.get(j).getFechor().getHours(), atenAgen.get(j).getFechor().getMinutes()) )
-                {
-                    noDispo = false;
-                }
-            }
-            if(noDispo)
-                horas.getHoras().add(ConcatenarHora( turno.getNumhoraIni(), turno.getNumminuIni() ) + turnos*30);
-        }
-        */
+       //TODO: implementar
         return horas;
     }
     
