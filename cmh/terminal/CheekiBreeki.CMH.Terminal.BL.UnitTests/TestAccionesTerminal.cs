@@ -33,6 +33,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     idPaciente = 0,
                     idPrestacion = 0,
                     idEstadoAtencion = 0,
+                    idEstadoAtencion2 = 0,
                     idBloque = 0,
                     idCargo = 0;
                 PACIENTE pacientePrevio = context.PACIENTE.Where(d => d.RUT == 18861423).FirstOrDefault();
@@ -64,7 +65,10 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 }
                 ESTADO_ATEN estadoAtencionPrevia2 = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "En proceso").FirstOrDefault();
                 if (!Util.isObjetoNulo(estadoAtencionPrevia2))
+                {
+                    idEstadoAtencion2 = estadoAtencionPrevia2.ID_ESTADO_ATEN;
                     context.ESTADO_ATEN.Remove(estadoAtencionPrevia2);
+                }
                 FUNCIONARIO funcionarioPrevia = context.FUNCIONARIO.Where(d => d.CARGO.NOMBRE_CARGO == "Cargo test" && d.PERSONAL.RUT == 12345678).FirstOrDefault();
                 if (!Util.isObjetoNulo(funcionarioPrevia))
                 {
@@ -102,8 +106,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 ATENCION_AGEN atencionagenPrevia = context.ATENCION_AGEN.
                     Where(d => 
                           d.ID_PACIENTE == idPaciente && 
-                          d.ID_PRESTACION == idPrestacion && 
-                          d.ID_ESTADO_ATEN == idEstadoAtencion && 
+                          d.ID_PRESTACION == idPrestacion &&
+                          (d.ID_ESTADO_ATEN == idEstadoAtencion || 
+                          d.ID_ESTADO_ATEN == idEstadoAtencion2) && 
                           d.ID_PERS_ATIENDE == idPersonal 
                           && d.ID_BLOQUE == idBloque).FirstOrDefault();
                 if (!Util.isObjetoNulo(atencionagenPrevia))
@@ -204,14 +209,31 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void ingresarPacienteTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-            ATENCION_AGEN atencion = agregarAtencionAgendada();
             // Caso 1: Ingreso correcto
-
-            Boolean res1 = at.ingresarPaciente(atencion);
+            ATENCION_AGEN atencion1 = agregarAtencionAgendada();
+            Boolean res1 = at.ingresarPaciente(atencion1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(resultadoEsperado1, res1);
 
-            // Caso 2: 
+            // Caso 2: Estado incorrecto
+            ATENCION_AGEN atencion2;
+            using (var context = new CMHEntities())
+            {
+                atencion2 = agregarAtencionAgendada();
+                atencion2 = context.ATENCION_AGEN.Find(atencion2.ID_ATENCION_AGEN);
+                atencion2.ID_ESTADO_ATEN = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "En proceso").FirstOrDefault().ID_ESTADO_ATEN;
+                context.SaveChangesAsync();
+            }
+            Boolean res2 = at.ingresarPaciente(atencion2);
+            Boolean resultadoEsperado2 = false;
+            Assert.AreEqual(resultadoEsperado2, res2);
+
+            // Caso 3: Atención no existe
+            ATENCION_AGEN atencion3 = new ATENCION_AGEN();
+            atencion3.ID_ATENCION_AGEN = 0;
+            Boolean res3 = at.ingresarPaciente(atencion3);
+            Boolean resultadoEsperado3 = false;
+            Assert.AreEqual(resultadoEsperado3, res3);
         }
         #endregion
 

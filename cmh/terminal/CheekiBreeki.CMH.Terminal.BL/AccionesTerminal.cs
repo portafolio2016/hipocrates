@@ -58,6 +58,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Estado no válido de la atención");
                 }
+                else if (Util.isObjetoNulo(conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN)))
+                {
+                    throw new Exception("Atención agendada no existe");
+                }
                 else
                 {
                     ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
@@ -115,13 +119,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
-
-        ////ECU-009
-        //public Boolean crearFichaMedica(FICHA ficha)
-        //{
-        //    //TODO: implementar
-        //    return false;
-        //}
 
         //ECU-010
         public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
