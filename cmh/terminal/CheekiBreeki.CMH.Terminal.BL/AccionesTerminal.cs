@@ -158,7 +158,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         //ECU-018
         #region Cerrar Caja
-        public Boolean cerrarCaja(CAJA caja)
+        public Boolean cerrarCaja(CAJA caja, DateTime fechor_cierre)
         {
             try
             {
@@ -169,12 +169,23 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     throw new Exception("Caja nulo");
                 }
                     //VERIFICAR HORA DE CIERRE PARA VER SI ESTA CERRADA O NO
-                else
+                else if (caja.FECHOR_APERTURA == null)
                 {
-                    conexionDB.SaveChangesAsync();
+                    throw new Exception("Fecha y hora apertura nula");
+                }
+                else 
+                {
+                   if (caja.FECHOR_CIERRE == null)
+                   {
+                       //caja.FECHOR_CIERRE = fechor_cierre;
+                       CAJA cajaUpdate = null;
+                       cajaUpdate = buscarCaja(caja.ID_CAJA);
+                       cajaUpdate.FECHOR_CIERRE = fechor_cierre;
+                       conexionDB.SaveChangesAsync();
+                   }
                     return true;
                 }
-
+                
             }
             catch (Exception ex)
             {
