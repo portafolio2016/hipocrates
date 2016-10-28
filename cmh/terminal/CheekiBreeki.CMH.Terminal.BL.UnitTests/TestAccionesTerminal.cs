@@ -8,6 +8,30 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
     public class TestAccionesTerminal
     {
         #region Paciente
+        private PACIENTE crearPaciente()
+        {
+            using (var context = new CMHEntities())
+            {
+                int rut = 18861423;
+                PACIENTE previo = context.PACIENTE.Where(d => d.RUT == rut).FirstOrDefault();
+                if (!Util.isObjetoNulo(previo))
+                    context.PACIENTE.Remove(previo);
+
+                PACIENTE paciente1 = new PACIENTE();
+
+                paciente1.NOMBRES_PACIENTE = "Miku";
+                paciente1.APELLIDOS_PACIENTE = "Hatsune";
+                paciente1.RUT = rut;
+                paciente1.DIGITO_VERIFICADOR = "K";
+                paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+                paciente1.HASHED_PASS = "4231";
+
+                context.PACIENTE.Add(paciente1);
+                context.SaveChangesAsync();
+                return (paciente1);
+            }
+        }
+
         [TestMethod]
         public void nuevoPacienteTest()
         {
@@ -37,7 +61,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean res1 = at.nuevoPaciente(paciente1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1, "Caso 1: debería ser correcto pero NO");
-            //Assert.AreEqual(res1, resultadoEsperado1);
 
             // Caso 2: Paciente nulo
             PACIENTE paciente2 = null;
@@ -107,6 +130,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 1: Paciente existente
             int rut1 = 18861423;
             string dv1 = "K";
+            crearPaciente();
             PACIENTE res1 = at.buscarPaciente(rut1, dv1);
             Object resultadoNoEsperado1 = null;
             Assert.AreNotEqual(res1, resultadoNoEsperado1);
@@ -126,6 +150,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 1: Paciente correcto
             int rut1 = 18861423;
             string dv1 = "K";
+            crearPaciente();
             PACIENTE paciente1 = at.buscarPaciente(rut1, dv1);
 
             paciente1.NOMBRES_PACIENTE = "Yuzuki";
@@ -189,6 +214,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 1: Paciente existe
             int rut1 = 18861423;
             string dv1 = "K";
+            crearPaciente();
             Object res1 = at.buscarPaciente(rut1, dv1);
             if (Util.isObjetoNulo(res1))
                 Assert.Fail("Paciente no existe");
@@ -200,6 +226,31 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         #endregion
 
         #region Personal
+        private PERSONAL crearPersonal()
+        {
+            using (var context = new CMHEntities())
+            {
+                int rut = 12345678;
+                PERSONAL previo = context.PERSONAL.Where(d => d.RUT == rut).FirstOrDefault();
+                if (!Util.isObjetoNulo(previo))
+                    context.PERSONAL.Remove(previo);
+
+                PERSONAL personal1 = new PERSONAL();
+                personal1.NOMBRES = "Moka";
+                personal1.APELLIDOS = "Akashiya";
+                personal1.REMUNERACION = 850000;
+                personal1.PORCENT_DESCUENTO = 7;
+                personal1.HASHED_PASS = "4231";
+                personal1.RUT = rut;
+                personal1.VERIFICADOR = "K";
+                personal1.EMAIL = "fjaqueg@gmail.com";
+
+                context.PERSONAL.Add(personal1);
+                context.SaveChangesAsync();
+                return(previo);
+            }
+        }
+
         [TestMethod]
         public void nuevoPersonalTest()
         {
@@ -215,24 +266,22 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             personal1.HASHED_PASS = "4231";
             personal1.RUT = 12345678;
             personal1.VERIFICADOR = "K";
-            CMHEntities entities = new CMHEntities();
-            using (var context = entities)
+            personal1.EMAIL = "fjaqueg@gmail.com";
+
+            using (var context = new CMHEntities())
             {
-                var pers = from p in entities.PERSONAL
+                // Borrar personal previo
+                var pers = from p in context.PERSONAL
                            where p.RUT == personal1.RUT
                            select p;
                 if (pers.Count<PERSONAL>() > 0)
                 {
-                    entities.PERSONAL.Remove(pers.First<PERSONAL>());
-                    entities.SaveChangesAsync();
+                    context.PERSONAL.Remove(pers.First<PERSONAL>());
+                    context.SaveChangesAsync();
                 }
             }
 
             Boolean res1 = at.nuevoPersonal(personal1);
-
-            funcionario1.ID_CARGO_FUNCI = 1;
-            funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
-
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
 
@@ -295,6 +344,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 1: Personal existente
             int rut1 = 12345678;
             string dv1 = "K";
+            crearPersonal();
             PERSONAL res1 = at.buscarPersonal(rut1, dv1);
             Object resultadoNoEsperado1 = null;
             Assert.AreNotEqual(res1, resultadoNoEsperado1);
@@ -314,6 +364,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 1: Personal correcto
             int rut1 = 12345678;
             string dv1 = "K";
+            crearPersonal();
             PERSONAL personal1 = at.buscarPersonal(rut1, dv1);
 
             personal1.NOMBRES = "Mizore";
@@ -353,6 +404,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             AccionesTerminal at = new AccionesTerminal();
             int rut1 = 12345678;
             string dv1 = "K";
+            crearPersonal();
             PERSONAL personal1 = at.buscarPersonal(rut1, dv1);
 
             // Caso 1: Personal no existe
@@ -745,6 +797,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
             using (var context = new CMHEntities())
             {
+                // Agregar personal previo
                 var pers = from p in context.PERSONAL
                            where p.RUT == rutPersonal1
                            select p;
@@ -762,11 +815,22 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     context.PERSONAL.Add(personal);
                     context.SaveChangesAsync();
                 }
-            }
-            PERSONAL personal1 = at.buscarPersonal(rutPersonal1, dvPersonal1);
 
+                // Agregar cargo
+                CARGO cargo1;
+                cargo1 = context.CARGO.Where(d => d.NOMBRE_CARGO == "Cargo test").FirstOrDefault();
+                if (Util.isObjetoNulo(cargo1))
+                {
+                    cargo1 = new CARGO();
+                    cargo1.NOMBRE_CARGO = "Cargo test";
+                    context.CARGO.Add(cargo1);
+                    context.SaveChangesAsync();
+                }
+                funcionario1.ID_CARGO_FUNCI = cargo1.ID_CARGO_FUNCI;
+            }
+
+            PERSONAL personal1 = at.buscarPersonal(rutPersonal1, dvPersonal1);
             funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
-            funcionario1.ID_CARGO_FUNCI = 1;
 
             Boolean res1 = at.nuevoFuncionario(funcionario1);
             Boolean resultadoEsperado1 = true;

@@ -199,7 +199,7 @@
           <Key>
             <PropertyRef Name="ID_PERSONAL" />
           </Key>
-          <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONAL" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRES" Type="varchar2" MaxLength="64" />
           <Property Name="APELLIDOS" Type="varchar2" MaxLength="64" />
           <Property Name="REMUNERACION" Type="number" Precision="8" Scale="0" />
@@ -1089,7 +1089,7 @@
           <Key>
             <PropertyRef Name="ID_PERSONAL" />
           </Key>
-          <Property Name="ID_PERSONAL" Type="Int32" Nullable="false" />
+          <Property Name="ID_PERSONAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRES" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="APELLIDOS" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="REMUNERACION" Type="Int32" />
