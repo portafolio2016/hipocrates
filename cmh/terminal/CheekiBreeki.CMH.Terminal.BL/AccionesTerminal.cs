@@ -17,26 +17,64 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return false;
         }
 
-        //ECU-003
-        public Boolean registrarPaciente(PACIENTE paciente)
-        {
-            //TODO: implementar
-            return false;
-        }
-
         //ECU-005
-        public List<ATENCION_AGEN> revisarAgendaDiaria(PERS_MEDICO personalMedico, DateTime dia)
+        public List<ATENCION_AGEN> revisarAgendaDiaria(int rut, DateTime dia)
         {
-            List<ATENCION_AGEN> atenciones = null;
-            //TODO: implementar
-            return atenciones;
+            
+            try
+            {
+                if (Util.isObjetoNulo(dia))
+                {
+                    throw new Exception("Día vacío");
+                }
+                else if (Util.isObjetoNulo(buscarPersonal(rut)))
+                {
+                    throw new Exception("Personal no existe");
+                }
+                else
+                {
+                    List<ATENCION_AGEN> atenciones = null;
+                    atenciones = conexionDB.ATENCION_AGEN.Where(d => d.PERS_MEDICO.PERSONAL.RUT == rut).ToList();
+                    return atenciones;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         //ECU-006
         public Boolean ingresarPaciente(ATENCION_AGEN atencion)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atención nula");
+                }
+                if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN != "Vigente")
+                {
+                    throw new Exception("Estado no válido de la atención");
+                }
+                else if (Util.isObjetoNulo(conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN)))
+                {
+                    throw new Exception("Atención agendada no existe");
+                }
+                else
+                {
+                    ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
+                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "En proceso").FirstOrDefault().ID_ESTADO_ATEN;
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-007
@@ -48,18 +86,39 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-008
-        public Boolean registrarPago(PAGO pago, CAJA caja)
+        public Boolean registrarPago(PAGO pago)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(pago))
+                {
+                    throw new Exception("Pago nulo");
+                }
+                else if (Util.isObjetoNulo(conexionDB.BONO.Find(pago.ID_BONO)))
+                {
+                    throw new Exception("Bono no existe");
+                }
+                else if (Util.isObjetoNulo(conexionDB.CAJA.Find(pago.ID_CAJA)))
+                {
+                    throw new Exception("Caja no existe");
+                }
+                else if (Util.isObjetoNulo(conexionDB.ATENCION_AGEN.Find(pago.ID_ATENCION_AGEN)))
+                {
+                    throw new Exception("Atención agendada no existe");
+                }
+                else
+                {
+                    conexionDB.PAGO.Add(pago);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
-
-        ////ECU-009
-        //public Boolean crearFichaMedica(FICHA ficha)
-        //{
-        //    //TODO: implementar
-        //    return false;
-        //}
 
         //ECU-010
         public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
@@ -295,6 +354,32 @@ namespace CheekiBreeki.CMH.Terminal.BL
             {
                 Console.WriteLine(ex.Message);
                 return false;
+            }
+        }
+
+        public PERSONAL buscarPersonal(int rut)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(rut))
+                {
+                    throw new Exception("RUT o vacío");
+                }
+                else
+                {
+                    PERSONAL personal = null;
+                    personal = conexionDB.PERSONAL.Where(d => d.RUT == rut).FirstOrDefault();
+                    if (Util.isObjetoNulo(personal))
+                    {
+                        throw new Exception("Personal no existe");
+                    }
+                    return personal;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
             }
         }
 
