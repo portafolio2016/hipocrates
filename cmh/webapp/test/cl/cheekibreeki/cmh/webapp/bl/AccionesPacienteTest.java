@@ -243,6 +243,13 @@ public class AccionesPacienteTest {
      */
     @Test
     public void testHorasDisponibles() {
+        System.out.println("testHorasDisponibles");
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        //Preparación
+        
+        //Caso 1: obtener 3 horas disponibles
+        //Caso 2: obtener 0 horas disponibles
+        
     }
 
     /**

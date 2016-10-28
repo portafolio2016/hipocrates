@@ -73,8 +73,8 @@ public class AccionesPaciente {
      */
     public HorasDisponibles horasDisponibles(PersMedico medico, Date dia){
        HorasDisponibles horas = new HorasDisponibles();
-       //TODO: implementar
-        return horas;
+       
+       return horas;
     }
     
     /**
