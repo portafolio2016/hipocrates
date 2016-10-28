@@ -383,7 +383,12 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
                 atenciones3 = at.revisarAgendaDiaria(personal3.RUT, fecha3);
                 Object resultadoEsperado3 = null;
-                Assert.AreEqual(resultadoEsperado3, atenciones3);
+                int resultadoEsperado4 = 0;
+                Boolean resFinal = true;
+                Boolean finalEsperado = false;
+                if (atenciones3 == resultadoEsperado3 || atenciones3.Count == resultadoEsperado4)
+                    resFinal = false;
+                Assert.AreEqual(finalEsperado, resFinal);
 
                 context.PERSONAL.Remove(context.PERSONAL.Where(d => d.RUT == rutPersonal3).FirstOrDefault());
                 context.SaveChangesAsync();
