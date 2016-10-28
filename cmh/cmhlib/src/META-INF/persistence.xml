@@ -42,7 +42,7 @@
     <class>cl.cheekibreeki.cmh.lib.dal.entities.Horario</class>
     <class>cl.cheekibreeki.cmh.lib.dal.entities.DiaSem</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+     <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="dev"/>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
       <property name="javax.persistence.jdbc.password" value="dev"/>
