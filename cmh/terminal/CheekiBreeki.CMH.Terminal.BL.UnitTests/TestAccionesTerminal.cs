@@ -798,9 +798,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         }
         #endregion
 
-<<<<<<< HEAD
 
-        
 
         #region Abrir Caja
         [TestMethod]
@@ -991,7 +989,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         }
         #endregion
 
-=======
+
         #region Envío correo
         [TestMethod]
         public void enviarCorreoTest()
@@ -1083,6 +1081,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Assert.AreEqual(res1, resultadoEsperado1);
         }
         #endregion
->>>>>>> refs/remotes/origin/dev
+
     }
 }
