@@ -246,7 +246,12 @@ public class AccionesPacienteTest {
         System.out.println("testHorasDisponibles");
         AccionesPaciente accionesPaciente = new AccionesPaciente();
         //Preparación
-        
+        //Crear dias
+        //Crear bloques
+        //Crear personal
+        //Crear especialidad
+        //Crear personal médico
+        //Crear horario
         //Caso 1: obtener 3 horas disponibles
         //Caso 2: obtener 0 horas disponibles
         
@@ -359,6 +364,12 @@ public class AccionesPacienteTest {
      */
     @Test
     public void testAnularAtencion() {
+        //Preparación
+        //Crear estado atención
+        //Crear Atención agendada
+        //Caso 1: anular una atención pendiente correctamente
+        //Caso 2: fallar al intentar anular una atención no pendiente
+        
     }
     
 }
