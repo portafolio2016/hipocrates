@@ -125,7 +125,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             ReporteCaja reporteCaja = null;
             return reporteCaja;
         }
-        
+
         public Boolean actualizarInventarioEquipo(INVENTARIO inventario)
         {
             //TODO: implementar
@@ -760,5 +760,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         #endregion
+
+
+     
     }
 }
