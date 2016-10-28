@@ -68,7 +68,7 @@ public class Controller {
             Query q = em.createNamedQuery(query);
             if(params != null){
                 for (Map.Entry<String, Object> param : params.entrySet()) {
-                    q.setParameter(param.getKey(), param.getValue());
+                    q.setParameter(param.getKey(), param.getValue());//aqui se webea
                 }
             }
             ret = q.getResultList();
