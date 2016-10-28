@@ -206,6 +206,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             AccionesTerminal at = new AccionesTerminal();
             ATENCION_AGEN atencion = agregarAtencionAgendada();
             // Caso 1: Ingreso correcto
+
             Boolean res1 = at.ingresarPaciente(atencion);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(resultadoEsperado1, res1);
