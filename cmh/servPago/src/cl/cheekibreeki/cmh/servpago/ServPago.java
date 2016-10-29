@@ -70,7 +70,7 @@ public class ServPago {
                 //Se guarda el pago de honorario en el ArrayList
                 pagosHonorario.add(ph);
             }
-            //Se tiene que generar un log
+            //Se tiene que guardar el resgitro en la base de datos
             
         }
         return result;
