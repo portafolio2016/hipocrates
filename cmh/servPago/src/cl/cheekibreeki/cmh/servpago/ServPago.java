@@ -58,7 +58,7 @@ public class ServPago {
                 int subtotal = 0;
                 ArrayList<AtencionAgen> atenciones = new ArrayList<>(x.getAtencionAgenCollection());
                 for (AtencionAgen at : atenciones) {
-                    if(at.getIdEstadoAten().getNomEstadoAten().equals("Terminado") && AtencionDeEsteMes(at.getFechor())){ //AGREGAR QUE VEA QUE EL FECHOR SEA DE ESTE MES
+                    if(at.getIdEstadoAten().getNomEstadoAten().equals("Terminado") && AtencionDeEsteMes(at.getFechor())){
                         ArrayList<Pago> pagos = new ArrayList<>(at.getPagoCollection());
                         for (Pago pago : pagos) {
                             subtotal += pago.getMontoPago();
