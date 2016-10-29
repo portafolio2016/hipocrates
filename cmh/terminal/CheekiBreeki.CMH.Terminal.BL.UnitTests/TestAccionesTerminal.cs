@@ -44,6 +44,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     idPaciente = pacientePrevio.ID_PACIENTE;
                     context.PACIENTE.Remove(pacientePrevio);
                 }
+                PERS_MEDICO presMedicoPrevia = context.PERS_MEDICO.Where(d => d.PERSONAL.RUT == 12345678 && d.ESPECIALIDAD.NOM_ESPECIALIDAD == "Oculista").FirstOrDefault();
+                if (!Util.isObjetoNulo(presMedicoPrevia))
+                {
+                    foreach (ATENCION_AGEN aten in presMedicoPrevia.ATENCION_AGEN.ToList())
+                    {
+                        context.ATENCION_AGEN.Remove(aten);
+                    }
+                    context.PERS_MEDICO.Remove(presMedicoPrevia);
+                }
                 ESPECIALIDAD especialidadPrevia = context.ESPECIALIDAD.Where(d => d.NOM_ESPECIALIDAD == "Oculista").FirstOrDefault();
                 if (!Util.isObjetoNulo(especialidadPrevia))
                 {
@@ -102,9 +111,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "Lumamijunes").FirstOrDefault();
                 if (!Util.isObjetoNulo(diaPrevia))
                     context.DIA_SEM.Remove(diaPrevia);
-                PERS_MEDICO presMedicoPrevia = context.PERS_MEDICO.Where(d => d.ID_PERSONAL == idPersonal && d.ID_ESPECIALIDAD == idEspecialidad).FirstOrDefault();
-                if (!Util.isObjetoNulo(presMedicoPrevia))
-                    context.PERS_MEDICO.Remove(presMedicoPrevia);
                 ATENCION_AGEN atencionagenPrevia = context.ATENCION_AGEN.
                     Where(d => 
                           d.ID_PACIENTE == idPaciente && 
@@ -352,6 +358,41 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             atenciones2 = at.revisarAgendaDiaria(rutPersonal2, fecha2);
             Object resultadoEsperado2 = null;
             Assert.AreEqual(resultadoEsperado2, atenciones2);
+
+            // Caso 3: Personal sin atenciones agendada
+            PERSONAL personal3 = new PERSONAL();
+            List<ATENCION_AGEN> atenciones3 = null;
+            DateTime fecha3 = DateTime.Today;
+            int rutPersonal3 = 11111111;
+
+            using (var context = new CMHEntities())
+            { 
+                PERSONAL personalPrevia = context.PERSONAL.Where(d => d.RUT == rutPersonal3).FirstOrDefault();
+                if (Util.isObjetoNulo(personalPrevia))
+                {
+                    personal3.NOMBRES = "Moka";
+                    personal3.APELLIDOS = "Akashiya";
+                    personal3.REMUNERACION = 850000;
+                    personal3.PORCENT_DESCUENTO = 7;
+                    personal3.HASHED_PASS = "4231";
+                    personal3.RUT = rutPersonal3;
+                    personal3.VERIFICADOR = "K";
+                    context.PERSONAL.Add(personal3);
+                    context.SaveChangesAsync();
+                }
+
+                atenciones3 = at.revisarAgendaDiaria(personal3.RUT, fecha3);
+                Object resultadoEsperado3 = null;
+                int resultadoEsperado4 = 0;
+                Boolean resFinal = true;
+                Boolean finalEsperado = false;
+                if (atenciones3 == resultadoEsperado3 || atenciones3.Count == resultadoEsperado4)
+                    resFinal = false;
+                Assert.AreEqual(finalEsperado, resFinal);
+
+                context.PERSONAL.Remove(context.PERSONAL.Where(d => d.RUT == rutPersonal3).FirstOrDefault());
+                context.SaveChangesAsync();
+            }
         }
         #endregion
 
