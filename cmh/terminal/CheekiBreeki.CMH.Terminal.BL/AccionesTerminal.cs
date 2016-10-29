@@ -213,6 +213,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
+                    ESTADO_ATEN estadoatencion = new ESTADO_ATEN();
+                    estadoatencion.NOM_ESTADO_ATEN = "Anulado";
+                    conexionDB.ESTADO_ATEN.Add(estadoatencion);
+                    atencion.ID_ESTADO_ATEN = estadoatencion.ID_ESTADO_ATEN;
                     conexionDB.ATENCION_AGEN.Add(atencion);
                     conexionDB.SaveChangesAsync();
                     return true;
