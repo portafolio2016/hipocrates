@@ -166,6 +166,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-017
+        /// <summary>
+        /// Se registra una caja con el respectivo funcionario que la abrio.
+        /// </summary>
+        /// <param name="caja">La caja</param>
+        /// <param name="funcionario">Funcionario que abre la caja</param>
+        /// <returns>Si es true la caja fue abierta con exito</returns>
         #region  Abrir Caja
         public Boolean abrirCaja(CAJA caja, FUNCIONARIO funcionario)
         {
@@ -195,6 +201,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         #endregion
 
+        /// <summary>
+        /// Busca una caja entre las cajas existentes.
+        /// </summary>
+        /// <param name="idCaja">Id de la caja que se quiere buscar</param>
+        /// <returns>La caja encontrada, si es null la caja no se encontro</returns>
         #region Buscar caja
         public CAJA buscarCaja(int idCaja)
         {
@@ -218,6 +229,13 @@ namespace CheekiBreeki.CMH.Terminal.BL
         #endregion
 
         //ECU-018
+        /// <summary>
+        /// Metodo que cierra una caja. 
+        /// Este metodo utiliza el metodo de buscar caja para verificar que esta exista previamente.
+        /// </summary>
+        /// <param name="caja">Caja que se quiere cerrar</param>
+        /// <param name="fechor_cierre">Fecha en la que se cierra la caja</param>
+        /// <returns>Si es true la caja fue cerrada con exito</returns>
         #region Cerrar Caja
         public Boolean cerrarCaja(CAJA caja, DateTime fechor_cierre)
         {
