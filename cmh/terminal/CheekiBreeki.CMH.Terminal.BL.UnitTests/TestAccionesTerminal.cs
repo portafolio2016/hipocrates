@@ -1372,6 +1372,198 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         }
         #endregion
 
+
+
+        #region Abrir Caja
+        [TestMethod]
+        public void abrirCajaTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            CMHEntities conexionBD = new CMHEntities();
+            //Caso 1: Caja correcta
+                //Instanciar y Crear Cargo
+            CARGO cargo1 = new CARGO();
+            cargo1.NOMBRE_CARGO = "Operador";
+            conexionBD.CARGO.Add(cargo1);
+            conexionBD.SaveChangesAsync();
+            Console.WriteLine("ID CARGO: " + cargo1.ID_CARGO_FUNCI);
+                //Instanciar y Crear Personal
+            PERSONAL personal1 = new PERSONAL();
+            personal1.NOMBRES = "Gonzalo";
+            personal1.APELLIDOS = "Lopez";
+            personal1.REMUNERACION = 1000000;
+            personal1.HASHED_PASS = "QWERTY1";
+            personal1.PORCENT_DESCUENTO = 50;
+            personal1.RUT = 12345678;
+            personal1.VERIFICADOR = "K";
+            personal1.EMAIL = "asdf@gmail.com";
+            personal1.ACTIVO = true;
+            conexionBD.PERSONAL.Add(personal1);
+            conexionBD.SaveChangesAsync();
+            Console.WriteLine("ID PERSONAL: " + personal1.ID_PERSONAL);
+                //Instanciar y Crear Funcionario
+            FUNCIONARIO funcionario1 = new FUNCIONARIO();
+            funcionario1.ID_CARGO_FUNCI = cargo1.ID_CARGO_FUNCI;
+            funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
+            conexionBD.FUNCIONARIO.Add(funcionario1);
+            conexionBD.SaveChangesAsync();
+            Console.WriteLine("ID FUNCIONARIO: " + funcionario1.ID_FUNCIONARIO);
+                //Instanciar y Crear Caja
+            CAJA caja1 = new CAJA();
+            caja1.FECHOR_APERTURA = DateTime.Today;
+            caja1.ID_FUNCIONARIO = funcionario1.ID_FUNCIONARIO;
+            conexionBD.CAJA.Add(caja1);
+            conexionBD.SaveChangesAsync();
+            Console.WriteLine("ID CAJA: " + caja1.ID_CAJA);
+
+            Boolean res1 = at.abrirCaja(caja1, funcionario1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1, "Caso 1: debería ser correcto");
+
+            //Caso 2: No existe funcionario
+                //Funcionario (no existe)
+            int id_cargo = -56;
+            int id_personal = -47;
+            FUNCIONARIO res2 = at.buscarFuncionario(id_cargo, id_personal);
+            Object resultadoNoEsperado2 = null;
+            Assert.AreEqual(res2, resultadoNoEsperado2, "Caso 2: debería ser correcto");
+
+        }
+        #endregion 
+
+        #region Cerrar caja
+        [TestMethod]
+        public void cerrarCajaTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+           
+            CARGO cargo1 = new CARGO();
+            PERSONAL personal1 = new PERSONAL();
+            FUNCIONARIO funcionario1 = new FUNCIONARIO();
+            CAJA caja1 = new CAJA();
+            // CAJA cajaBuscada = new CAJA();
+
+            using (var conexionBD = new CMHEntities())
+            {
+                //Caso 1: Caja cierre correcta
+                //Cargo
+                
+                cargo1.NOMBRE_CARGO = "Operador";
+                conexionBD.CARGO.Add(cargo1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID CARGO: " + cargo1.ID_CARGO_FUNCI);
+                //personal
+                
+                personal1.NOMBRES = "Gonzalo";
+                personal1.APELLIDOS = "Lopez";
+                personal1.REMUNERACION = 1000000;
+                personal1.HASHED_PASS = "QWERTY1";
+                personal1.PORCENT_DESCUENTO = 50;
+                personal1.RUT = 12345678;
+                personal1.VERIFICADOR = "K";
+                personal1.EMAIL = "asdf@gmail.com";
+                personal1.ACTIVO = true;
+                conexionBD.PERSONAL.Add(personal1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID PERSONAL: " + personal1.ID_PERSONAL);
+                //funcionario
+                
+                funcionario1.ID_CARGO_FUNCI = cargo1.ID_CARGO_FUNCI;
+                funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
+                conexionBD.FUNCIONARIO.Add(funcionario1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID FUNCIONARIO: " + funcionario1.ID_FUNCIONARIO);
+                //caja
+                
+                caja1.FECHOR_APERTURA = DateTime.Today;
+                caja1.ID_FUNCIONARIO = funcionario1.ID_FUNCIONARIO;
+                conexionBD.CAJA.Add(caja1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID CAJA: " + caja1.ID_CAJA);
+                //cajaBuscada.ID_CAJA = caja1.ID_CAJA;
+            }
+            
+            /*
+            cajaBuscada = at.buscarCaja(cajaBuscada.ID_CAJA);
+            cajaBuscada.FECHOR_CIERRE = DateTime.Today;
+            cajaBuscada.FECHOR_CIERRE = cajaBuscada.FECHOR_CIERRE.Value.AddDays(1);*/
+
+            // FECHOR_CIERRE COMO PARAMETRO EN EL METODO CERRARCAJA
+            DateTime fechor_cierre = DateTime.Today;
+            fechor_cierre = fechor_cierre.AddDays(1);
+
+            Boolean res1 = at.cerrarCaja(caja1,fechor_cierre);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+            
+            //Caso 2: Caja no existe
+            
+            int id_caja = -56;
+
+            CAJA res2 = at.buscarCaja(id_caja);
+            Object resultadoNoEsperado2 = null;
+            Assert.AreEqual(res2, resultadoNoEsperado2);
+            
+        }
+        #endregion 
+
+        #region Buscar caja
+        [TestMethod]
+        public void buscarCajaTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            CARGO cargo1 = new CARGO();
+            PERSONAL personal1 = new PERSONAL();
+            FUNCIONARIO funcionario1 = new FUNCIONARIO();
+            CAJA caja1 = new CAJA();
+           
+            using (var conexionBD = new CMHEntities())
+            {
+                //Caso 1: Caja cierre correcta
+                //Cargo
+
+                cargo1.NOMBRE_CARGO = "Operador";
+                conexionBD.CARGO.Add(cargo1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID CARGO: " + cargo1.ID_CARGO_FUNCI);
+                //personal
+
+                personal1.NOMBRES = "Gonzalo";
+                personal1.APELLIDOS = "Lopez";
+                personal1.REMUNERACION = 1000000;
+                personal1.HASHED_PASS = "QWERTY1";
+                personal1.PORCENT_DESCUENTO = 50;
+                personal1.RUT = 12345678;
+                personal1.VERIFICADOR = "K";
+                personal1.EMAIL = "asdf@gmail.com";
+                personal1.ACTIVO = true;
+                conexionBD.PERSONAL.Add(personal1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID PERSONAL: " + personal1.ID_PERSONAL);
+                //funcionario
+
+                funcionario1.ID_CARGO_FUNCI = cargo1.ID_CARGO_FUNCI;
+                funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
+                conexionBD.FUNCIONARIO.Add(funcionario1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID FUNCIONARIO: " + funcionario1.ID_FUNCIONARIO);
+                //caja
+
+                caja1.FECHOR_APERTURA = DateTime.Today;
+                caja1.ID_FUNCIONARIO = funcionario1.ID_FUNCIONARIO;
+                conexionBD.CAJA.Add(caja1);
+                conexionBD.SaveChangesAsync();
+                Console.WriteLine("ID CAJA: " + caja1.ID_CAJA);
+                //cajaBuscada.ID_CAJA = caja1.ID_CAJA;
+            }
+
+            CAJA res1 = at.buscarCaja(caja1.ID_CAJA);
+            Object resultadoNoEsperado1 = null;
+            Assert.AreNotEqual(res1, resultadoNoEsperado1);
+        }
+        #endregion
+
+
         #region Envío correo
         [TestMethod]
         public void enviarCorreoTest()
@@ -1463,5 +1655,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Assert.AreEqual(res1, resultadoEsperado1);
         }
         #endregion
+
     }
 }
