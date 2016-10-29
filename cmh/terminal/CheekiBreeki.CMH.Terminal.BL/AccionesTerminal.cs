@@ -17,26 +17,66 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return false;
         }
 
-        //ECU-003
-        public Boolean registrarPaciente(PACIENTE paciente)
-        {
-            //TODO: implementar
-            return false;
-        }
-
         //ECU-005
-        public List<ATENCION_AGEN> revisarAgendaDiaria(PERS_MEDICO personalMedico, DateTime dia)
+        public List<ATENCION_AGEN> revisarAgendaDiaria(int rut, DateTime dia)
         {
-            List<ATENCION_AGEN> atenciones = null;
-            //TODO: implementar
-            return atenciones;
+            
+            try
+            {
+                if (Util.isObjetoNulo(dia))
+                {
+                    throw new Exception("Día vacío");
+                }
+                else if (Util.isObjetoNulo(buscarPersonal(rut)))
+                {
+                    throw new Exception("Personal no existe");
+                }
+                else
+                {
+                    List<ATENCION_AGEN> atenciones = null;
+                    atenciones = conexionDB.ATENCION_AGEN.
+                        Where(d => d.PERS_MEDICO.PERSONAL.RUT == rut &&
+                              d.FECHOR == dia).ToList();
+                    return atenciones;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         //ECU-006
         public Boolean ingresarPaciente(ATENCION_AGEN atencion)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atención nula");
+                }
+                if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN != "Vigente")
+                {
+                    throw new Exception("Estado no válido de la atención");
+                }
+                else if (Util.isObjetoNulo(conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN)))
+                {
+                    throw new Exception("Atención agendada no existe");
+                }
+                else
+                {
+                    ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
+                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "En proceso").FirstOrDefault().ID_ESTADO_ATEN;
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-007
@@ -48,18 +88,39 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-008
-        public Boolean registrarPago(PAGO pago, CAJA caja)
+        public Boolean registrarPago(PAGO pago)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(pago))
+                {
+                    throw new Exception("Pago nulo");
+                }
+                else if (Util.isObjetoNulo(conexionDB.BONO.Find(pago.ID_BONO)))
+                {
+                    throw new Exception("Bono no existe");
+                }
+                else if (Util.isObjetoNulo(conexionDB.CAJA.Find(pago.ID_CAJA)))
+                {
+                    throw new Exception("Caja no existe");
+                }
+                else if (Util.isObjetoNulo(conexionDB.ATENCION_AGEN.Find(pago.ID_ATENCION_AGEN)))
+                {
+                    throw new Exception("Atención agendada no existe");
+                }
+                else
+                {
+                    conexionDB.PAGO.Add(pago);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
-
-        ////ECU-009
-        //public Boolean crearFichaMedica(FICHA ficha)
-        //{
-        //    //TODO: implementar
-        //    return false;
-        //}
 
         //ECU-010
         public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
@@ -105,18 +166,113 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-017
+        /// <summary>
+        /// Se registra una caja con el respectivo funcionario que la abrio.
+        /// </summary>
+        /// <param name="caja">La caja</param>
+        /// <param name="funcionario">Funcionario que abre la caja</param>
+        /// <returns>Si es true la caja fue abierta con exito</returns>
+        #region  Abrir Caja
         public Boolean abrirCaja(CAJA caja, FUNCIONARIO funcionario)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(caja))
+                {
+                    throw new Exception("Caja nula.");
+                }
+                else if (Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Funcionario no encontrado.");
+                }
+                else
+                {
+                    conexionDB.CAJA.Add(caja);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        //ECU-018
-        public Boolean cerrarCaja(CAJA caja, FUNCIONARIO funcionario)
+        #endregion
+
+        /// <summary>
+        /// Busca una caja entre las cajas existentes.
+        /// </summary>
+        /// <param name="idCaja">Id de la caja que se quiere buscar</param>
+        /// <returns>La caja encontrada, si es null la caja no se encontro</returns>
+        #region Buscar caja
+        public CAJA buscarCaja(int idCaja)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                CAJA caja = null;
+                caja = conexionDB.CAJA.Where(d => d.ID_CAJA == idCaja).FirstOrDefault();
+                if (Util.isObjetoNulo(caja))
+                {
+                    throw new Exception("Caja no existe");
+                }
+                return caja;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
+
+        #endregion
+
+        //ECU-018
+        /// <summary>
+        /// Metodo que cierra una caja. 
+        /// Este metodo utiliza el metodo de buscar caja para verificar que esta exista previamente.
+        /// </summary>
+        /// <param name="caja">Caja que se quiere cerrar</param>
+        /// <param name="fechor_cierre">Fecha en la que se cierra la caja</param>
+        /// <returns>Si es true la caja fue cerrada con exito</returns>
+        #region Cerrar Caja
+        public Boolean cerrarCaja(CAJA caja, DateTime fechor_cierre)
+        {
+            try
+            {
+                //Verificar si caja existe
+                bool cajaNula = Util.isObjetoNulo(buscarCaja(caja.ID_CAJA));
+                if (cajaNula)
+                {
+                    throw new Exception("Caja nulo");
+                }
+                    //VERIFICAR HORA DE CIERRE PARA VER SI ESTA CERRADA O NO
+                else if (caja.FECHOR_APERTURA == null)
+                {
+                    throw new Exception("Fecha y hora apertura nula");
+                }
+                else 
+                {
+                   if (caja.FECHOR_CIERRE == null)
+                   {
+                       //caja.FECHOR_CIERRE = fechor_cierre;
+                       CAJA cajaUpdate = null;
+                       cajaUpdate = buscarCaja(caja.ID_CAJA);
+                       cajaUpdate.FECHOR_CIERRE = fechor_cierre;
+                       conexionDB.SaveChangesAsync();
+                   }
+                    return true;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
 
         //ECU-019
         public ReporteCaja generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
@@ -125,7 +281,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             ReporteCaja reporteCaja = null;
             return reporteCaja;
         }
-        
+
         public Boolean actualizarInventarioEquipo(INVENTARIO inventario)
         {
             //TODO: implementar
@@ -295,6 +451,32 @@ namespace CheekiBreeki.CMH.Terminal.BL
             {
                 Console.WriteLine(ex.Message);
                 return false;
+            }
+        }
+
+        public PERSONAL buscarPersonal(int rut)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(rut))
+                {
+                    throw new Exception("RUT o vacío");
+                }
+                else
+                {
+                    PERSONAL personal = null;
+                    personal = conexionDB.PERSONAL.Where(d => d.RUT == rut).FirstOrDefault();
+                    if (Util.isObjetoNulo(personal))
+                    {
+                        throw new Exception("Personal no existe");
+                    }
+                    return personal;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
             }
         }
 
@@ -523,6 +705,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 else if (prestacion.ID_TIPO_PRESTACION == null)
                 {
                     throw new Exception("Tipo de prestación vacío");
+                }
+                else if (prestacion.ID_ESPECIALIDAD == null)
+                {
+                    throw new Exception("Especialidad vacío");
                 }
                 else if (!Util.isObjetoNulo(buscarPrestacionMedica(prestacion.CODIGO_PRESTACION)))
                 {
@@ -760,5 +946,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         #endregion
+
+
+     
     }
 }
