@@ -397,6 +397,30 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         #endregion
 
         #region Paciente
+        private PACIENTE crearPaciente()
+        {
+            using (var context = new CMHEntities())
+            {
+                int rut = 18861423;
+                PACIENTE previo = context.PACIENTE.Where(d => d.RUT == rut).FirstOrDefault();
+                if (!Util.isObjetoNulo(previo))
+                    context.PACIENTE.Remove(previo);
+
+                PACIENTE paciente1 = new PACIENTE();
+
+                paciente1.NOMBRES_PACIENTE = "Miku";
+                paciente1.APELLIDOS_PACIENTE = "Hatsune";
+                paciente1.RUT = rut;
+                paciente1.DIGITO_VERIFICADOR = "K";
+                paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+                paciente1.HASHED_PASS = "4231";
+
+                context.PACIENTE.Add(paciente1);
+                context.SaveChangesAsync();
+                return (paciente1);
+            }
+        }
+
         [TestMethod]
         public void nuevoPacienteTest()
         {
@@ -414,9 +438,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             using (var context = entities)
             {
                 var pac1 = from p in entities.PACIENTE
-                       where p.RUT == paciente1.RUT
-                       select p;
-                if(pac1.Count<PACIENTE>() > 0)
+                           where p.RUT == paciente1.RUT
+                           select p;
+                if (pac1.Count<PACIENTE>() > 0)
                 {
                     entities.PACIENTE.Remove(pac1.First<PACIENTE>());
                     entities.SaveChangesAsync();
@@ -426,7 +450,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean res1 = at.nuevoPaciente(paciente1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1, "Caso 1: debería ser correcto pero NO");
-            //Assert.AreEqual(res1, resultadoEsperado1);
 
             // Caso 2: Paciente nulo
             PACIENTE paciente2 = null;
@@ -492,10 +515,11 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void buscarPacienteTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-            
+
             // Caso 1: Paciente existente
             int rut1 = 18861423;
             string dv1 = "K";
+            crearPaciente();
             PACIENTE res1 = at.buscarPaciente(rut1, dv1);
             Object resultadoNoEsperado1 = null;
             Assert.AreNotEqual(res1, resultadoNoEsperado1);
@@ -515,6 +539,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 1: Paciente correcto
             int rut1 = 18861423;
             string dv1 = "K";
+            crearPaciente();
             PACIENTE paciente1 = at.buscarPaciente(rut1, dv1);
 
             paciente1.NOMBRES_PACIENTE = "Yuzuki";
@@ -578,6 +603,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 1: Paciente existe
             int rut1 = 18861423;
             string dv1 = "K";
+            crearPaciente();
             Object res1 = at.buscarPaciente(rut1, dv1);
             if (Util.isObjetoNulo(res1))
                 Assert.Fail("Paciente no existe");
@@ -589,6 +615,31 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         #endregion
 
         #region Personal
+        private PERSONAL crearPersonal()
+        {
+            using (var context = new CMHEntities())
+            {
+                int rut = 12345678;
+                PERSONAL previo = context.PERSONAL.Where(d => d.RUT == rut).FirstOrDefault();
+                if (!Util.isObjetoNulo(previo))
+                    context.PERSONAL.Remove(previo);
+
+                PERSONAL personal1 = new PERSONAL();
+                personal1.NOMBRES = "Moka";
+                personal1.APELLIDOS = "Akashiya";
+                personal1.REMUNERACION = 850000;
+                personal1.PORCENT_DESCUENTO = 7;
+                personal1.HASHED_PASS = "4231";
+                personal1.RUT = rut;
+                personal1.VERIFICADOR = "K";
+                personal1.EMAIL = "fjaqueg@gmail.com";
+
+                context.PERSONAL.Add(personal1);
+                context.SaveChangesAsync();
+                return(previo);
+            }
+        }
+
         [TestMethod]
         public void nuevoPersonalTest()
         {
@@ -604,28 +655,26 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             personal1.HASHED_PASS = "4231";
             personal1.RUT = 12345678;
             personal1.VERIFICADOR = "K";
-            CMHEntities entities = new CMHEntities();
-            using (var context = entities)
+            personal1.EMAIL = "fjaqueg@gmail.com";
+
+            using (var context = new CMHEntities())
             {
-                var pers = from p in entities.PERSONAL
+                // Borrar personal previo
+                var pers = from p in context.PERSONAL
                            where p.RUT == personal1.RUT
                            select p;
                 if (pers.Count<PERSONAL>() > 0)
                 {
-                    entities.PERSONAL.Remove(pers.First<PERSONAL>());
-                    entities.SaveChangesAsync();
+                    context.PERSONAL.Remove(pers.First<PERSONAL>());
+                    context.SaveChangesAsync();
                 }
             }
 
             Boolean res1 = at.nuevoPersonal(personal1);
-            
-            funcionario1.ID_CARGO_FUNCI = 1;
-            funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
-
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
 
-           
+
             // Caso 2: Personal nulo
             PERSONAL personal2 = null;
 
@@ -684,6 +733,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 1: Personal existente
             int rut1 = 12345678;
             string dv1 = "K";
+            crearPersonal();
             PERSONAL res1 = at.buscarPersonal(rut1, dv1);
             Object resultadoNoEsperado1 = null;
             Assert.AreNotEqual(res1, resultadoNoEsperado1);
@@ -703,6 +753,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 1: Personal correcto
             int rut1 = 12345678;
             string dv1 = "K";
+            crearPersonal();
             PERSONAL personal1 = at.buscarPersonal(rut1, dv1);
 
             personal1.NOMBRES = "Mizore";
@@ -742,6 +793,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             AccionesTerminal at = new AccionesTerminal();
             int rut1 = 12345678;
             string dv1 = "K";
+            crearPersonal();
             PERSONAL personal1 = at.buscarPersonal(rut1, dv1);
 
             // Caso 1: Personal no existe
@@ -763,10 +815,30 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             AccionesTerminal at = new AccionesTerminal();
             // Caso 1: Prestación correcto
             PRESTACION prestacion1 = new PRESTACION();
+            TIPO_PRES tipo1 = new TIPO_PRES();
+            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
             prestacion1.NOM_PRESTACION = "Prestación test";
             prestacion1.PRECIO_PRESTACION = 100;
             prestacion1.CODIGO_PRESTACION = "PR01";
-            prestacion1.ID_TIPO_PRESTACION = 1;
+            prestacion1.ACTIVO = true;
+            using (var context = new CMHEntities())
+            {
+                // Eliminar prestacion previa
+                PRESTACION previa = context.PRESTACION
+                    .Where(d => d.CODIGO_PRESTACION == prestacion1.CODIGO_PRESTACION)
+                    .FirstOrDefault();
+                if (!Util.isObjetoNulo(previa))
+                    context.PRESTACION.Remove(previa);
+                // Tipo prestación
+                tipo1.NOM_TIPO_PREST = "Prestación test";
+                context.TIPO_PRES.Add(tipo1);
+                // Especialidad
+                especialidad1.NOM_ESPECIALIDAD = "Especialidad test";
+                context.ESPECIALIDAD.Add(especialidad1);
+                context.SaveChangesAsync();
+            }
+            prestacion1.ID_TIPO_PRESTACION = tipo1.ID_TIPO_PRESTACION;
+            prestacion1.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
 
             Boolean res1 = at.nuevaPrestacionMedica(prestacion1);
             Boolean resultadoEsperado1 = true;
@@ -795,7 +867,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
             // Caso 4: Tipo vacío
             PRESTACION prestacion4 = new PRESTACION();
-            prestacion1.NOM_PRESTACION = "Prestación test";
+            prestacion4.NOM_PRESTACION = "Prestación test";
             prestacion4.PRECIO_PRESTACION = 100;
             prestacion4.CODIGO_PRESTACION = "PR01";
 
@@ -820,20 +892,59 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean res6 = at.nuevaPrestacionMedica(prestacion6);
             Boolean resultadoEsperado6 = false;
             Assert.AreEqual(res6, resultadoEsperado6);
+
+            // Borrar campos
+            /*using (var context = new CMHEntities())
+            {
+                PRESTACION prestacion = context.PRESTACION.Find(prestacion1.ID_PRESTACION);
+                TIPO_PRES tipoPrestacion = context.TIPO_PRES.Find(tipo1.ID_TIPO_PRESTACION);
+                ESPECIALIDAD especialidad = context.ESPECIALIDAD.Find(especialidad1.ID_ESPECIALIDAD);
+                context.PRESTACION.Remove(prestacion);
+                context.TIPO_PRES.Remove(tipo1);
+                context.ESPECIALIDAD.Remove(especialidad);
+                context.SaveChangesAsync();
+            }*/
         }
 
         [TestMethod]
         public void buscarPrestacionMedicaTest()
         {
             AccionesTerminal at = new AccionesTerminal();
+            // Crear prestación
+            PRESTACION prestacion = new PRESTACION();
+            TIPO_PRES tipo1 = new TIPO_PRES();
+            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
+            prestacion.NOM_PRESTACION = "Prestación test";
+            prestacion.PRECIO_PRESTACION = 100;
+            prestacion.CODIGO_PRESTACION = "PR01";
+            prestacion.ACTIVO = true;
+            using (var context = new CMHEntities())
+            {
+                // Eliminar prestacion previa
+                PRESTACION previa = context.PRESTACION
+                    .Where(d => d.CODIGO_PRESTACION == prestacion.CODIGO_PRESTACION)
+                    .FirstOrDefault();
+                if (!Util.isObjetoNulo(previa))
+                    context.PRESTACION.Remove(previa);
+                // Tipo prestación
+                tipo1.NOM_TIPO_PREST = "Prestación test";
+                context.TIPO_PRES.Add(tipo1);
+                // Especialidad
+                especialidad1.NOM_ESPECIALIDAD = "Especialidad test";
+                context.ESPECIALIDAD.Add(especialidad1);
+                context.SaveChangesAsync();
+            }
+            prestacion.ID_TIPO_PRESTACION = tipo1.ID_TIPO_PRESTACION;
+            prestacion.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
+            at.nuevaPrestacionMedica(prestacion);
 
-            // Caso 1: Personal existente
+            // Caso 1: Prestacion existente
             string id1 = "PR01";
             PRESTACION res1 = at.buscarPrestacionMedica(id1);
             Object resultadoNoEsperado1 = null;
             Assert.AreNotEqual(res1, resultadoNoEsperado1);
 
-            // Caso 2: Personal no existente
+            // Caso 2: Prestacion no existente
             string id2 = "PR00";
             PRESTACION res2 = at.buscarPrestacionMedica(id2);
             Object resultadoEsperado2 = null;
@@ -844,6 +955,34 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void actualizarPrestacionMedicaTest()
         {
             AccionesTerminal at = new AccionesTerminal();
+            // Crear prestación
+            PRESTACION prestacion = new PRESTACION();
+            TIPO_PRES tipo1 = new TIPO_PRES();
+            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
+            prestacion.NOM_PRESTACION = "Prestación test";
+            prestacion.PRECIO_PRESTACION = 100;
+            prestacion.CODIGO_PRESTACION = "PR01";
+            prestacion.ACTIVO = true;
+            using (var context = new CMHEntities())
+            {
+                // Eliminar prestacion previa
+                PRESTACION previa = context.PRESTACION
+                    .Where(d => d.CODIGO_PRESTACION == prestacion.CODIGO_PRESTACION)
+                    .FirstOrDefault();
+                if (!Util.isObjetoNulo(previa))
+                    context.PRESTACION.Remove(previa);
+                // Tipo prestación
+                tipo1.NOM_TIPO_PREST = "Prestación test";
+                context.TIPO_PRES.Add(tipo1);
+                // Especialidad
+                especialidad1.NOM_ESPECIALIDAD = "Especialidad test";
+                context.ESPECIALIDAD.Add(especialidad1);
+                context.SaveChangesAsync();
+            }
+            prestacion.ID_TIPO_PRESTACION = tipo1.ID_TIPO_PRESTACION;
+            prestacion.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
+            at.nuevaPrestacionMedica(prestacion);
+
             // Caso 1: Paciente correcto
             string codigo = "PR01";
             PRESTACION prestacion1 = at.buscarPrestacionMedica(codigo);
@@ -851,7 +990,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             prestacion1.NOM_PRESTACION = "Prestación actualizada";
             prestacion1.PRECIO_PRESTACION = 200;
             prestacion1.CODIGO_PRESTACION = "PR01";
-            prestacion1.ID_TIPO_PRESTACION = 1;
 
             Boolean res1 = at.actualizarPrestacionesMedicas(prestacion1);
             Boolean resultadoEsperado1 = true;
@@ -862,7 +1000,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             prestacion2.NOM_PRESTACION = string.Empty;
             prestacion2.PRECIO_PRESTACION = 100;
             prestacion2.CODIGO_PRESTACION = "PR01";
-            prestacion2.ID_TIPO_PRESTACION = 1;
 
             Boolean res2 = at.actualizarPrestacionesMedicas(prestacion2);
             Boolean resultadoEsperado2 = false;
@@ -870,10 +1007,10 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
             // Caso 3: Código vacío
             PRESTACION prestacion3 = at.buscarPrestacionMedica(codigo);
+            prestacion3.CODIGO_PRESTACION = "";
             prestacion3.NOM_PRESTACION = "Prestación test";
             prestacion3.PRECIO_PRESTACION = 300;
             prestacion3.ID_TIPO_PRESTACION = 1;
-            prestacion3.CODIGO_PRESTACION = null;
 
             Boolean res3 = at.actualizarPrestacionesMedicas(prestacion3);
             Boolean resultadoEsperado3 = false;
@@ -897,11 +1034,39 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean resultadoEsperado5 = false;
             Assert.AreEqual(res5, resultadoEsperado5);
         }
-        
+
         [TestMethod]
         public void borrarPrestacionMedicaTest()
         {
             AccionesTerminal at = new AccionesTerminal();
+            // Crear prestación
+            PRESTACION prestacion = new PRESTACION();
+            TIPO_PRES tipo1 = new TIPO_PRES();
+            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
+            prestacion.NOM_PRESTACION = "Prestación test";
+            prestacion.PRECIO_PRESTACION = 100;
+            prestacion.CODIGO_PRESTACION = "PR01";
+            prestacion.ACTIVO = true;
+            using (var context = new CMHEntities())
+            {
+                // Eliminar prestacion previa
+                PRESTACION previa = context.PRESTACION
+                    .Where(d => d.CODIGO_PRESTACION == prestacion.CODIGO_PRESTACION)
+                    .FirstOrDefault();
+                if (!Util.isObjetoNulo(previa))
+                    context.PRESTACION.Remove(previa);
+                // Tipo prestación
+                tipo1.NOM_TIPO_PREST = "Prestación test";
+                context.TIPO_PRES.Add(tipo1);
+                // Especialidad
+                especialidad1.NOM_ESPECIALIDAD = "Especialidad test";
+                context.ESPECIALIDAD.Add(especialidad1);
+                context.SaveChangesAsync();
+            }
+            prestacion.ID_TIPO_PRESTACION = tipo1.ID_TIPO_PRESTACION;
+            prestacion.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
+            at.nuevaPrestacionMedica(prestacion);
+
             string codigo = "PR01";
             PRESTACION res1 = at.buscarPrestacionMedica(codigo);
             // Caso 1: Prestación no existe
@@ -1018,36 +1183,48 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             FUNCIONARIO funcionario1 = new FUNCIONARIO();
             int rutPersonal1 = 12345678;
             string dvPersonal1 = "K";
-            CMHEntities entities = new CMHEntities();
-            using (var context = entities)
+
+            using (var context = new CMHEntities())
             {
-                var pers = from p in entities.PERSONAL
+                // Agregar personal previo
+                var pers = from p in context.PERSONAL
                            where p.RUT == rutPersonal1
                            select p;
-                if(pers.Count<PERSONAL>() == 0)
+                if (pers.Count<PERSONAL>() == 0)
                 {
                     PERSONAL personal = new PERSONAL();
                     personal.RUT = rutPersonal1;
                     personal.VERIFICADOR = dvPersonal1;
                     personal.NOMBRES = "Testtest";
                     personal.APELLIDOS = "Testtest";
-                    entities.PERSONAL.Add(personal);
-                    entities.SaveChangesAsync();
-                }else
-                {
-                    entities.PERSONAL.Remove(pers.First<PERSONAL>());
-                    entities.SaveChangesAsync();
+                    personal.REMUNERACION = 500000;
+                    personal.HASHED_PASS = "Testtest";
+                    personal.PORCENT_DESCUENTO = 7;
+                    personal.EMAIL = "test@gmail.com";
+                    context.PERSONAL.Add(personal);
+                    context.SaveChangesAsync();
                 }
-            }
-            PERSONAL personal1 = at.buscarPersonal(rutPersonal1, dvPersonal1);
 
+                // Agregar cargo
+                CARGO cargo1;
+                cargo1 = context.CARGO.Where(d => d.NOMBRE_CARGO == "Cargo test").FirstOrDefault();
+                if (Util.isObjetoNulo(cargo1))
+                {
+                    cargo1 = new CARGO();
+                    cargo1.NOMBRE_CARGO = "Cargo test";
+                    context.CARGO.Add(cargo1);
+                    context.SaveChangesAsync();
+                }
+                funcionario1.ID_CARGO_FUNCI = cargo1.ID_CARGO_FUNCI;
+            }
+
+            PERSONAL personal1 = at.buscarPersonal(rutPersonal1, dvPersonal1);
             funcionario1.ID_PERSONAL = personal1.ID_PERSONAL;
-            funcionario1.ID_CARGO_FUNCI = 1;
 
             Boolean res1 = at.nuevoFuncionario(funcionario1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
-            
+
             // Caso 2: Funcionario nulo
             FUNCIONARIO funcionario2 = new FUNCIONARIO();
 
@@ -1073,6 +1250,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean res4 = at.nuevoFuncionario(funcionario4);
             Boolean resultadoEsperado4 = false;
             Assert.AreEqual(res4, resultadoEsperado4);
+
+            // Borrar personal
+            using (var context = new CMHEntities())
+            {
+                PERSONAL personalEliminar1 = new PERSONAL();
+                personalEliminar1 = context.PERSONAL.Where(d => d.RUT == rutPersonal1).SingleOrDefault();
+                context.PERSONAL.Remove(personalEliminar1);
+                context.SaveChangesAsync();
+            }
         }
 
         [TestMethod]
@@ -1095,7 +1281,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                             where c.NOMBRE_CARGO == cargo.NOMBRE_CARGO
                             select c).First<CARGO>().ID_CARGO_FUNCI;
             int idPersonal1 = (from p in entities.PERSONAL
-                                where p.RUT == personal.RUT
+                               where p.RUT == personal.RUT
                                select p).First<PERSONAL>().ID_PERSONAL;
             FUNCIONARIO funcionario = new FUNCIONARIO();
             funcionario.ID_CARGO_FUNCI = idCargo1;
