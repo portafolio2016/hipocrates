@@ -166,18 +166,113 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-017
+        /// <summary>
+        /// Se registra una caja con el respectivo funcionario que la abrio.
+        /// </summary>
+        /// <param name="caja">La caja</param>
+        /// <param name="funcionario">Funcionario que abre la caja</param>
+        /// <returns>Si es true la caja fue abierta con exito</returns>
+        #region  Abrir Caja
         public Boolean abrirCaja(CAJA caja, FUNCIONARIO funcionario)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(caja))
+                {
+                    throw new Exception("Caja nula.");
+                }
+                else if (Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Funcionario no encontrado.");
+                }
+                else
+                {
+                    conexionDB.CAJA.Add(caja);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
-        //ECU-018
-        public Boolean cerrarCaja(CAJA caja, FUNCIONARIO funcionario)
+        #endregion
+
+        /// <summary>
+        /// Busca una caja entre las cajas existentes.
+        /// </summary>
+        /// <param name="idCaja">Id de la caja que se quiere buscar</param>
+        /// <returns>La caja encontrada, si es null la caja no se encontro</returns>
+        #region Buscar caja
+        public CAJA buscarCaja(int idCaja)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                CAJA caja = null;
+                caja = conexionDB.CAJA.Where(d => d.ID_CAJA == idCaja).FirstOrDefault();
+                if (Util.isObjetoNulo(caja))
+                {
+                    throw new Exception("Caja no existe");
+                }
+                return caja;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
+
+        #endregion
+
+        //ECU-018
+        /// <summary>
+        /// Metodo que cierra una caja. 
+        /// Este metodo utiliza el metodo de buscar caja para verificar que esta exista previamente.
+        /// </summary>
+        /// <param name="caja">Caja que se quiere cerrar</param>
+        /// <param name="fechor_cierre">Fecha en la que se cierra la caja</param>
+        /// <returns>Si es true la caja fue cerrada con exito</returns>
+        #region Cerrar Caja
+        public Boolean cerrarCaja(CAJA caja, DateTime fechor_cierre)
+        {
+            try
+            {
+                //Verificar si caja existe
+                bool cajaNula = Util.isObjetoNulo(buscarCaja(caja.ID_CAJA));
+                if (cajaNula)
+                {
+                    throw new Exception("Caja nulo");
+                }
+                    //VERIFICAR HORA DE CIERRE PARA VER SI ESTA CERRADA O NO
+                else if (caja.FECHOR_APERTURA == null)
+                {
+                    throw new Exception("Fecha y hora apertura nula");
+                }
+                else 
+                {
+                   if (caja.FECHOR_CIERRE == null)
+                   {
+                       //caja.FECHOR_CIERRE = fechor_cierre;
+                       CAJA cajaUpdate = null;
+                       cajaUpdate = buscarCaja(caja.ID_CAJA);
+                       cajaUpdate.FECHOR_CIERRE = fechor_cierre;
+                       conexionDB.SaveChangesAsync();
+                   }
+                    return true;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
 
         //ECU-019
         public ReporteCaja generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
