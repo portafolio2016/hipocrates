@@ -1,19 +1,7 @@
 package cl.cheekibreeki.cmh.webapp.bl;
 
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
-import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
-import cl.cheekibreeki.cmh.lib.dal.entities.Bloque;
-import cl.cheekibreeki.cmh.lib.dal.entities.DiaSem;
-import cl.cheekibreeki.cmh.lib.dal.entities.Especialidad;
-import cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten;
-import cl.cheekibreeki.cmh.lib.dal.entities.OrdenAnalisis;
-import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
-import cl.cheekibreeki.cmh.lib.dal.entities.Pago;
-import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
-import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
-import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
-import cl.cheekibreeki.cmh.lib.dal.entities.ResAtencion;
-import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
+import cl.cheekibreeki.cmh.lib.dal.entities.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -363,34 +351,118 @@ public class AccionesPacienteTest {
      * Test of anularAtencion method, of class AccionesPaciente.
      */
     @Test
-    public void testAnularAtencion() {
+    public void testAnularAtencion() throws Exception {
         //Preparación
         //Crear estado atención Vigente y Anulado
-        EstadoAten estadoVigente = new EstadoAten();
-        estadoVigente.setNomEstadoAten("Vigente");
-        EstadoAten estadoAnulado = new EstadoAten();
-        estadoAnulado.setNomEstadoAten("Anulado");
-        Controller.upsert(estadoVigente);
-        Controller.upsert(estadoAnulado);
+        EstadoAten estadoVigente = crearEstadoAten("Vigente");
+        EstadoAten estadoAnulada = crearEstadoAten("Anulada");
         //Crear personal
         Personal personal = new Personal();
         personal.setActivo((short)1);
         personal.setNombres("El hombre test");
         personal.setApellidos("El hombre test");
-        //Crear personal médico
-        PersMedico personalMedico
+        Controller.upsert(personal);
+        //Crear especialidad
+        Especialidad especialidad = new Especialidad();
+        especialidad.setNomEspecialidad("Especialidad test");
+        Controller.upsert(especialidad);
+        //Crear personal médico y asignar personal y especialidad
+        PersMedico personalMedico = new PersMedico();
+        personalMedico.setIdPersonal(personal);
+        personalMedico.setIdEspecialidad(especialidad);
+        Controller.upsert(personalMedico);
         //Crear dia
+        DiaSem dia = new DiaSem();
+        dia.setNombreIda("Lunes");
+        Controller.upsert(dia);
         //crear bloque
+        Bloque bloque = new Bloque();
+        bloque.setNumBloque(1);
+        bloque.setIdDiaSem(dia);
+        bloque.setNumHoraIni((short)8);
+        bloque.setNumMinuIni((short)0);
+        bloque.setNumHoraFin((short)8);
+        bloque.setNumMinuFin((short)15);
+        Controller.upsert(bloque);
         //crear horario
+        Horario horario = new Horario();
+        horario.setIdBloque(bloque);
+        horario.setIdPersMedico(personalMedico);
+        Controller.upsert(horario);
         //Crear Atención agendada
         AtencionAgen atencion = new AtencionAgen();
         atencion.setFechor(new Date());
         atencion.setObservaciones("TestAnular");
         atencion.setIdEstadoAten(estadoVigente);
-        fail();
+        atencion.setIdPersAtiende(personalMedico);
+        atencion.setIdBloque(bloque);
+        Controller.upsert(atencion);
         //Caso 1: anular una atención pendiente correctamente
-        //Caso 2: fallar al intentar anular una atención no pendiente
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        EstadoAten result = accionesPaciente.anularAtencion(atencion).getIdEstadoAten();
+        EstadoAten expectedResult = new EstadoAten();
+        expectedResult.setNomEstadoAten("Anulada");
+        try {
+            if(result.getNomEstadoAten().equals(expectedResult.getNomEstadoAten())){
+            
+        }else{
+            fail();
+        }
+        } catch (Exception e) {
+            fail();
+        }
         
+        //Caso 2: fallar al intentar anular una atención no pendiente
+        try{
+            accionesPaciente.anularAtencion(atencion); //si esto no levanta una excepción, falla la prueba
+            fail();
+        }catch(Exception ex){
+            System.out.println("Exito test anular atencion caso 2");
+        }
     }
     
+    private EstadoAten crearEstadoAten(String nomEstado){
+        EstadoAten estadoVigente = new EstadoAten();
+        estadoVigente.setNomEstadoAten(nomEstado);
+        Controller.upsert(estadoVigente);
+        Map<String, Object> params = new HashMap<>();
+        params.put("nomEstadoAten", nomEstado);
+        List<? extends Object>  estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
+        return (EstadoAten)estadoAtenList.get(0);
+    }
+    
+//    private Personal crearPersonal(short isActivo, String nombres, String apellidos){
+//        Personal personal = new Personal();
+//        personal.setActivo(isActivo);
+//        personal.setNombres(nombres);
+//        personal.setApellidos(apellidos);
+//        Controller.upsert(personal);
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("nomEstadoAten", nomEstado);
+//        List<? extends Object>  estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
+//    }
+//    
+//    private Especialidad crearEspecialidad(){
+//        
+//    }
+//    
+//    private PersMedico crearPersonalMedico(Personal personal, Especialidad especialidad){
+//        
+//    }
+//    
+//    private Dia crearDia(){
+//        
+//    }
+//    
+//    private Bloque crearBloque(){
+//        
+//    }
+//    
+//    private Horario crearHorario(){
+//        
+//    }
+//    
+//    private AtencionAgen crearAtencionAgendada(){
+//        
+//    }
 }

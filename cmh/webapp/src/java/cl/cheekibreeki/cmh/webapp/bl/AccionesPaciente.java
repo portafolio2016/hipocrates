@@ -5,13 +5,10 @@
  */
 package cl.cheekibreeki.cmh.webapp.bl;
 
-import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
-import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
-import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
-import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
-import cl.cheekibreeki.cmh.lib.dal.entities.ResAtencion;
+
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
-import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
+import cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten;
+import cl.cheekibreeki.cmh.lib.dal.entities.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,10 +26,9 @@ public class AccionesPaciente {
      * @return Si es true el paciente fue registrado
      */
     public boolean registrarPaciente(Paciente paciente){
-        Controller ctr = new Controller();
         Map<String, Object> params1 = new HashMap<>();
         params1.put("rut", paciente.getRut());
-        List<? extends Object>  pacienteAux = ctr.findByQuery("Paciente.findByRut", params1);
+        List<? extends Object>  pacienteAux = Controller.findByQuery("Paciente.findByRut", params1);
         if(pacienteAux.isEmpty()){
             Object obj = paciente;
             boolean result = Controller.upsert(obj);
@@ -50,14 +46,13 @@ public class AccionesPaciente {
     public ArrayList<ResAtencion> obtenerExamenes(Paciente paciente){
         Map<String, Object> params = new HashMap<>();
         params.put("idPaciente", paciente);
-        Controller ctr = new Controller();
-        List<? extends Object>  atenciones = ctr.findByQuery("AtencionAgen.findByIdPaciente", params);
+        List<? extends Object>  atenciones = Controller.findByQuery("AtencionAgen.findByIdPaciente", params);
         ArrayList<ResAtencion> resAtencion = new ArrayList<>();
         for(Object  x : atenciones){
             Map<String, Object> paramsAux = new HashMap<>();
             AtencionAgen atencionAux = (AtencionAgen)x;
             paramsAux.put("idAtencionAgen", atencionAux);
-            List<? extends Object>  resultado = ctr.findByQuery("ResAtencion.findByIdAtencionAgen", paramsAux);
+            List<? extends Object>  resultado = Controller.findByQuery("ResAtencion.findByIdAtencionAgen", paramsAux);
             for(Object  y : resultado){
                 resAtencion.add((ResAtencion)y);
             }
@@ -108,14 +103,13 @@ public class AccionesPaciente {
     public ArrayList<AtencionAgen> obtenerAtencionesPendientes(String rut){
         Map<String, Object> params1 = new HashMap<>();
         params1.put("rut", rut);
-        Controller ctr = new Controller();
-        List<? extends Object> pacientes = ctr.findByQuery("Paciente.findByRut", params1);
+        List<? extends Object> pacientes = Controller.findByQuery("Paciente.findByRut", params1);
         if(pacientes.isEmpty()){
             return null;
         }
         Map<String, Object> params2 = new HashMap<>();
         params2.put("idPaciente", pacientes.get(0));
-        ArrayList<AtencionAgen> atenciones = (ArrayList<AtencionAgen>)ctr.findByQuery("AtencionAgen.findByIdPaciente", params2);
+        ArrayList<AtencionAgen> atenciones = (ArrayList<AtencionAgen>)Controller.findByQuery("AtencionAgen.findByIdPaciente", params2);
         for (AtencionAgen x : atenciones) {
             if(!x.getResAtencionCollection().isEmpty()){
                 atenciones.remove(x);
@@ -130,11 +124,10 @@ public class AccionesPaciente {
      * @return  un ArrayList de personal medico que realiza la prestacion
      */
     public ArrayList<PersMedico> obtenerMedicosPorPrestacion(Prestacion prestacion){
-        Controller ctr = new Controller();
         ArrayList<PersMedico> atenciones = new ArrayList<>();
         Map<String, Object> params1 = new HashMap<>();
         params1.put("idEspecialidad", prestacion.getIdEspecialidad());
-        List<? extends Object> atencionesAux = ctr.findByQuery("PersMedico.findByIdEspecialidad", params1);
+        List<? extends Object> atencionesAux = Controller.findByQuery("PersMedico.findByIdEspecialidad", params1);
         if(!atencionesAux.isEmpty()){
             for (Object x : atencionesAux) {
                 atenciones.add((PersMedico)x);
@@ -148,8 +141,26 @@ public class AccionesPaciente {
      * @param atencion atencion agendada
      * @return  Si es true significa que se pudo anular la atencion
      */
-    public boolean anularAtencion(AtencionAgen atencion){
-        //TODO: implementar
-        return false;
+    public AtencionAgen anularAtencion(AtencionAgen atencion) throws Exception{
+        //Buscar estado actual de la atencion
+        EstadoAten estadoAtencion = atencion.getIdEstadoAten();
+        //si la atencion está anulada, lanzar excepción
+        if(estadoAtencion.getNomEstadoAten().equals("Anulada")){
+            throw new Exception("La atención ya está anulada");
+        }
+        //si la atención no está anulada, buscar estado anulada    
+        Map<String, Object> params = new HashMap<>();
+        params.put("nomEstadoAten", "Anulada");
+        List<? extends Object>  estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
+        if(estadoAtenList.size() < 1){
+            throw new Exception("No hay estado con nombre Anulada");
+        }
+        EstadoAten estadoAnulada = (EstadoAten)estadoAtenList.get(0);
+        //asignar estado anulada a atencion
+        atencion.setIdEstadoAten(estadoAnulada);
+        //upsert atencion
+        Controller.upsert(atencion);
+        //retornar atencion
+        return atencion;
     }
 }
