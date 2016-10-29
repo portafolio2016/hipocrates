@@ -805,7 +805,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             AccionesTerminal at = new AccionesTerminal();
             // Ingresar atenciones
-            
+
             using (var context = new CMHEntities())
             {
                 int idEspecialidad = 0,
@@ -813,68 +813,104 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     idPaciente = 0,
                     idPrestacion = 0,
                     idEstadoAtencion = 0,
-                    idBloque = 0;
-                PACIENTE pacientePrevio = context.PACIENTE.Where(d => d.RUT == 18861423).FirstOrDefault();
-                if (!Util.isObjetoNulo(pacientePrevio))
-                {
-                    idPaciente = pacientePrevio.ID_PACIENTE;
-                    context.PACIENTE.Remove(pacientePrevio);
-                }
-                ESPECIALIDAD especialidadPrevia = context.ESPECIALIDAD.Where(d => d.NOM_ESPECIALIDAD == "Oculista").FirstOrDefault();
-                if (!Util.isObjetoNulo(especialidadPrevia))
-                {
-                    idEspecialidad = especialidadPrevia.ID_ESPECIALIDAD;
-                    context.ESPECIALIDAD.Remove(especialidadPrevia);
-                }
-                TIPO_PRES tipoPrestacionPrevia = context.TIPO_PRES.Where(d => d.NOM_TIPO_PREST == "Test").FirstOrDefault();
-                if (!Util.isObjetoNulo(tipoPrestacionPrevia))
-                    context.TIPO_PRES.Remove(tipoPrestacionPrevia);
-                PRESTACION prestacionPrevia = context.PRESTACION.Where(d => d.CODIGO_PRESTACION == "A002").FirstOrDefault();
-                if (!Util.isObjetoNulo(prestacionPrevia))
-                {
-                    idPrestacion = prestacionPrevia.ID_PRESTACION;
-                    context.PRESTACION.Remove(prestacionPrevia);
-                }
-                ESTADO_ATEN estadoAtencionPrevia = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "Vigente").FirstOrDefault();
-                if (!Util.isObjetoNulo(estadoAtencionPrevia))
-                {
-                    idEstadoAtencion = estadoAtencionPrevia.ID_ESTADO_ATEN;
-                    context.ESTADO_ATEN.Remove(estadoAtencionPrevia);
-                }
-                PERSONAL personalPrevia = context.PERSONAL.Where(d => d.RUT == 12345678).FirstOrDefault();
-                if (!Util.isObjetoNulo(personalPrevia))
-                {
-                    idPersonal = personalPrevia.ID_PERSONAL;
-                    context.PERSONAL.Remove(personalPrevia);
-                }
-                BLOQUE bloquePrevia = context.BLOQUE.Where(d => d.NUM_BLOQUE == 5).FirstOrDefault();
-                if (!Util.isObjetoNulo(bloquePrevia))
-                {
-                    idBloque = bloquePrevia.ID_BLOQUE;
-                    context.BLOQUE.Remove(bloquePrevia);
-                }
-                DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "LuMaMiJuVi").FirstOrDefault();
-                if (!Util.isObjetoNulo(diaPrevia))
-                    context.DIA_SEM.Remove(diaPrevia);
-                PERS_MEDICO presMedicoPrevia = context.PERS_MEDICO.Where(d => d.ID_PERSONAL == idPersonal && d.ID_ESPECIALIDAD == idEspecialidad).FirstOrDefault();
-                if (!Util.isObjetoNulo(presMedicoPrevia))
-                    context.PERS_MEDICO.Remove(presMedicoPrevia);
+                    idBloque = 0,
+                    idTipoPrestacion = 0;
 
-                ATENCION_AGEN atencionagenPrevia = context.ATENCION_AGEN.
-                    Where(d =>
-                          d.ID_PACIENTE == idPaciente &&
-                          d.ID_PRESTACION == idPrestacion &&
-                          d.ID_ESTADO_ATEN == idEstadoAtencion &&
-                          d.ID_PERS_ATIENDE == idPersonal
-                          && d.ID_BLOQUE == idBloque).FirstOrDefault();
-                if (!Util.isObjetoNulo(especialidadPrevia))
+                for (int i = 0; i < 2; i++)
                 {
-                    context.ESPECIALIDAD.Remove(especialidadPrevia);
+                    PACIENTE pacientePrevio = context.PACIENTE.Where(d => d.RUT == 18861423).FirstOrDefault();
+                    if (!Util.isObjetoNulo(pacientePrevio))
+                    {
+                        idPaciente = pacientePrevio.ID_PACIENTE;
+                        context.PACIENTE.Remove(pacientePrevio);
+                        context.SaveChangesAsync();
+                    }
+
+
+                    ESPECIALIDAD especialidadPrevia = context.ESPECIALIDAD.Where(d => d.NOM_ESPECIALIDAD == "Oculista").FirstOrDefault();
+                    if (!Util.isObjetoNulo(especialidadPrevia))
+                    {
+                        idEspecialidad = especialidadPrevia.ID_ESPECIALIDAD;
+                        context.ESPECIALIDAD.Remove(especialidadPrevia);
+                        context.SaveChangesAsync();
+                    }
+
+
+                    TIPO_PRES tipoPrestacionPrevia = context.TIPO_PRES.Where(d => d.NOM_TIPO_PREST == "Test").FirstOrDefault();
+                    if (!Util.isObjetoNulo(tipoPrestacionPrevia))
+                    {
+                        idTipoPrestacion = tipoPrestacionPrevia.ID_TIPO_PRESTACION;
+                        context.TIPO_PRES.Remove(tipoPrestacionPrevia);
+                    }
+
+
+                    PRESTACION prestacionPrevia = context.PRESTACION.Where(d => d.CODIGO_PRESTACION == "A002").FirstOrDefault();
+                    if (!Util.isObjetoNulo(prestacionPrevia))
+                    {
+                        idPrestacion = prestacionPrevia.ID_PRESTACION;
+                        context.PRESTACION.Remove(prestacionPrevia);
+                    }
+
+
+                    ESTADO_ATEN estadoAtencionPrevia = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "Vigente").FirstOrDefault();
+                    if (!Util.isObjetoNulo(estadoAtencionPrevia))
+                    {
+                        idEstadoAtencion = estadoAtencionPrevia.ID_ESTADO_ATEN;
+                        context.ESTADO_ATEN.Remove(estadoAtencionPrevia);
+                    }
+
+
+                    PERSONAL personalPrevia = context.PERSONAL.Where(d => d.RUT == 12345678).FirstOrDefault();
+                    if (!Util.isObjetoNulo(personalPrevia))
+                    {
+                        idPersonal = personalPrevia.ID_PERSONAL;
+                        context.PERSONAL.Remove(personalPrevia);
+                    }
+
+
+                    BLOQUE bloquePrevia = context.BLOQUE.Where(d => d.NUM_BLOQUE == 5).FirstOrDefault();
+                    if (!Util.isObjetoNulo(bloquePrevia))
+                    {
+                        idBloque = bloquePrevia.ID_BLOQUE;
+                        context.BLOQUE.Remove(bloquePrevia);
+                    }
+
+
+                    DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "LuMaMiJuVi").FirstOrDefault();
+                    if (!Util.isObjetoNulo(diaPrevia))
+                    {
+                        context.DIA_SEM.Remove(diaPrevia);
+                    }
+
+
+                    PERS_MEDICO presMedicoPrevia = context.PERS_MEDICO.Where(d => d.ID_PERSONAL == idPersonal && d.ID_ESPECIALIDAD == idEspecialidad).FirstOrDefault();
+                    if (!Util.isObjetoNulo(presMedicoPrevia))
+                    {
+                        context.PERS_MEDICO.Remove(presMedicoPrevia);
+                    }
+
+
+                    ATENCION_AGEN atencionagenPrevia = context.ATENCION_AGEN.
+                        Where(d =>
+                                     d.ID_PACIENTE == idPaciente &&
+                                     d.ID_PRESTACION == idPrestacion &&
+                                     d.ID_ESTADO_ATEN == idEstadoAtencion &&
+                                     d.ID_PERS_ATIENDE == idPersonal
+                                  && d.ID_BLOQUE == idBloque).FirstOrDefault();
+
+                    if (!Util.isObjetoNulo(atencionagenPrevia))
+                    {
+                        context.ATENCION_AGEN.Remove(atencionagenPrevia);
+
+                    }
+
+                    context.SaveChangesAsync();
                 }
 
                 
+
                 //CASO 1: Ingreso correcto de agendamiento
-                
+
                 ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
                 PACIENTE paciente1 = new PACIENTE();
                 TIPO_PRES tipopres1 = new TIPO_PRES();
@@ -957,13 +993,11 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.ATENCION_AGEN.Add(aten_agen1);
                 context.SaveChangesAsync();
 
-                //falta ingresar bien orden1
                 Boolean res1 = at.agendarAtencion(aten_agen1);
                 Boolean resultadoEsperado1 = true;
                 Assert.AreEqual(res1, resultadoEsperado1);
-                
-                
 
+                
                 //CASO 2: Fecha minima o invalida
                 ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
                 PACIENTE paciente2 = new PACIENTE();
@@ -1051,19 +1085,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 Boolean resultadoEsperado2 = false;
                 Assert.AreEqual(res2, resultadoEsperado2);
 
-
-                
                 //CASO 3: Observación vacía o nula
-                
-                
+
                 ORDEN_ANALISIS orden3 = null;
                 ATENCION_AGEN aten_agen3 = null;
 
-                //Estará bien eso de aten_agen3, orden3
                 Boolean res3 = at.agendarAtencion(aten_agen3);
                 Boolean resultadoEsperado3 = false;
                 Assert.AreEqual(res3, resultadoEsperado3);
-                
+
             }
         }
 
@@ -1694,14 +1724,8 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         [TestMethod]
         public void cerrarOrdenDeAnalisisTest()
         {
-            
+
         }
         #endregion
     }
 }
-/*
- *  generarOrdenDeAnalisisTest
- *  cerrarOrdenDeAnalisisTest
- *  agendarAtencionTest
- *  anularAtencionTest
- */
