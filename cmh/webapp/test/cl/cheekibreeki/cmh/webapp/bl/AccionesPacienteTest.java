@@ -365,8 +365,29 @@ public class AccionesPacienteTest {
     @Test
     public void testAnularAtencion() {
         //Preparación
-        //Crear estado atención
+        //Crear estado atención Vigente y Anulado
+        EstadoAten estadoVigente = new EstadoAten();
+        estadoVigente.setNomEstadoAten("Vigente");
+        EstadoAten estadoAnulado = new EstadoAten();
+        estadoAnulado.setNomEstadoAten("Anulado");
+        Controller.upsert(estadoVigente);
+        Controller.upsert(estadoAnulado);
+        //Crear personal
+        Personal personal = new Personal();
+        personal.setActivo((short)1);
+        personal.setNombres("El hombre test");
+        personal.setApellidos("El hombre test");
+        //Crear personal médico
+        PersMedico personalMedico
+        //Crear dia
+        //crear bloque
+        //crear horario
         //Crear Atención agendada
+        AtencionAgen atencion = new AtencionAgen();
+        atencion.setFechor(new Date());
+        atencion.setObservaciones("TestAnular");
+        atencion.setIdEstadoAten(estadoVigente);
+        fail();
         //Caso 1: anular una atención pendiente correctamente
         //Caso 2: fallar al intentar anular una atención no pendiente
         
