@@ -130,10 +130,31 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-011
-        public Boolean cerrarConsultaMedica(RES_ATENCION resultadoAtencion)
+        public Boolean cerrarConsultaMedica(RES_ATENCION resultadoAtencion, ATENCION_AGEN atencionAgendada)
         {
-            //TODO: implementar
-            return false;
+            try 
+            {
+                if (Util.isObjetoNulo(atencionAgendada))
+                {
+                    throw new Exception("Atención nula");
+                }
+                else if (atencionAgendada.ESTADO_ATEN.NOM_ESTADO_ATEN != "Vigente")
+                {
+                    throw new Exception("Estado no válido de la atención");
+                }
+                else
+                {
+                    ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencionAgendada.ID_ATENCION_AGEN);
+                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "Cerrada").FirstOrDefault().ID_ESTADO_ATEN;
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-012

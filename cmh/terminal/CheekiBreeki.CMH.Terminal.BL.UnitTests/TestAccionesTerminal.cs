@@ -1656,5 +1656,76 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         }
         #endregion
 
+        #region Cerrar atención médica
+        [TestMethod]
+        public void cerrarAtencionMedica()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            ATENCION_AGEN atencionagendada1 = agregarAtencionAgendada();
+            ESTADO_ATEN estadoatenCerrada1 = new ESTADO_ATEN();
+            RES_ATENCION res_atencion1 = new RES_ATENCION();
+            ORDEN_ANALISIS orden_analisis1 = new ORDEN_ANALISIS();
+            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
+            PERSONAL personal1 = new PERSONAL();
+            PERS_MEDICO pers_medico1 = new PERS_MEDICO();
+
+            using (var context = new CMHEntities())
+            {
+                //Estado atención
+                estadoatenCerrada1.NOM_ESTADO_ATEN = "Cerrada";
+                context.ESTADO_ATEN.Add(estadoatenCerrada1);
+                context.SaveChangesAsync();
+
+                //Atención agendada
+                context.ATENCION_AGEN.Add(atencionagendada1);
+                context.SaveChangesAsync();
+
+                //Orden de análisis
+                orden_analisis1.FECHOR_EMISION = DateTime.Today;
+                orden_analisis1.FECHOR_RECEP = DateTime.Today;
+                orden_analisis1.FECHOR_RECEP = orden_analisis1.FECHOR_RECEP.Value.AddDays(1);
+                context.ORDEN_ANALISIS.Add(orden_analisis1);
+                context.SaveChangesAsync();
+
+                //Especialidad
+                especialidad1.NOM_ESPECIALIDAD = "Traumatología";
+                context.ESPECIALIDAD.Add(especialidad1);
+                context.SaveChangesAsync();
+                //Personal
+                personal1.NOMBRES = "Hanekawa";
+                personal1.APELLIDOS = "Tsubasa";
+                personal1.REMUNERACION = 950000;
+                personal1.PORCENT_DESCUENTO = 10;
+                personal1.HASHED_PASS = "4231";
+                personal1.RUT = 13243576;
+                personal1.VERIFICADOR = "K";
+                context.PERSONAL.Add(personal1);
+                context.SaveChangesAsync();
+                //Personal_medico
+                pers_medico1.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
+                pers_medico1.ID_PERSONAL = personal1.ID_PERSONAL;
+                context.PERS_MEDICO.Add(pers_medico1);
+                context.SaveChangesAsync();
+                //Resultado de la atención
+                res_atencion1.ATENCION_ABIERTA = true;
+                res_atencion1.COMENTARIO = "Comentario";
+                res_atencion1.ID_ATENCION_AGEN = atencionagendada1.ID_ATENCION_AGEN;
+                res_atencion1.ID_ORDEN_ANALISIS = orden_analisis1.ID_ORDEN_ANALISIS;
+                res_atencion1.ID_PERSONAL_MEDICO = pers_medico1.ID_PERSONAL_MEDICO;
+                res_atencion1.ARCHIVO_B64 = "Archivo B64";
+                res_atencion1.EXT_ARCHIVO = "as";
+                context.RES_ATENCION.Add(res_atencion1);
+                context.SaveChangesAsync();
+            }
+
+            //CASO 1: Cerrar atención exitosa.
+            Boolean res1 = at.cerrarConsultaMedica(res_atencion1, atencionagendada1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(resultadoEsperado1, res1);
+
+        }
+
+        #endregion
+
     }
 }
