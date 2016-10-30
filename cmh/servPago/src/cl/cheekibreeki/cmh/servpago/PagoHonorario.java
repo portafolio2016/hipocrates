@@ -1,6 +1,6 @@
 package cl.cheekibreeki.cmh.servpago;
 
-class PagoHonorario {
+public class PagoHonorario {
     private String nombre;
     private String banco;
     private String tipoCuenta;
@@ -8,6 +8,8 @@ class PagoHonorario {
     private int subTotal;
     private int total;
 
+    public PagoHonorario(){
+    }
     /**
      * @return the nombre
      */

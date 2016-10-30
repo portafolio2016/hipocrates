@@ -11,6 +11,7 @@ import cl.cheekibreeki.cmh.lib.dal.entities.CuenBancaria;
 import cl.cheekibreeki.cmh.lib.dal.entities.Especialidad;
 import cl.cheekibreeki.cmh.lib.dal.entities.Pago;
 import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
+import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,7 +43,7 @@ public class ServPago {
             params.put("idEspecialidad", especialidad);
             List<? extends Object> personalMedicos = ctr.findByQuery("PersMedico.findByIdEspecialidad", params);
             ArrayList<PersMedico> medicos = new ArrayList<>();
-            for (Object x : medicos) {
+            for (Object x : personalMedicos) {
                 medicos.add((PersMedico)x);
             }
             //Se filtra uno por uno el personal medico para sacar y almacenar sus datos;
@@ -87,14 +88,14 @@ public class ServPago {
             now.setMonth(now.getMonth()-1 );
         return (dat.getMonth()==(now.getMonth()) && dat.getYear()==now.getYear());
     }
-    
+ 
     public boolean pagarMedicos(String esp){
         Controller ctr = new Controller();
         boolean result = false;
         //Se obtiene una lista con la especialidad "Medico" de la cual solo se saca el primer registro [0]
         Map<String, Object> params = new HashMap<>();
         params.put("nomEspecialidad", esp);
-        List<? extends Object> especialidadList = ctr.findByQuery("Especialidadd.findByNomEspecialidad", params);
+        List<? extends Object> especialidadList = ctr.findByQuery("Especialidad.findByNomEspecialidad", params);
         if(!especialidadList.isEmpty()){
             Especialidad especialidad = (Especialidad)especialidadList.get(0);
             //Se obtiene una lista con el personal medico con la especialidad "Medico"
@@ -102,14 +103,15 @@ public class ServPago {
             params.put("idEspecialidad", especialidad);
             List<? extends Object> personalMedicos = ctr.findByQuery("PersMedico.findByIdEspecialidad", params);
             ArrayList<PersMedico> medicos = new ArrayList<>();
-            for (Object x : medicos) {
+            for (Object x : personalMedicos) {
                 medicos.add((PersMedico)x);
             }
             //Se filtra uno por uno el personal medico para sacar y almacenar sus datos;
             ArrayList<PagoHonorario> pagosHonorario = new ArrayList<>();
             for (PersMedico x : medicos) {
                 PagoHonorario ph = new PagoHonorario();
-                ph.setNombre(x.getIdPersonal().getNombres()+" "+x.getIdPersonal().getApellidos());
+                String nombreFull = x.getIdPersonal().getNombres()+" "+x.getIdPersonal().getApellidos();
+                ph.setNombre(nombreFull);
                 ArrayList<CuenBancaria> cuentaBancaria = new ArrayList<>(x.getCuenBancariaCollection());
                 //Saca la primera cuenta bancaria
                 ph.setBanco(cuentaBancaria.get(0).getIdBanco().getNombre());
