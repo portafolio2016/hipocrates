@@ -68,28 +68,12 @@ public class AccionesPaciente {
      * @param dia dia el cual se quiere tomar hora
      * @return El ArrayList contiene tas atenciones de una prestación
      */
-    public HorasDisponibles horasDisponibles(PersMedico medico, Date dia) throws Exception{
-       HorasDisponibles horas = new HorasDisponibles();
+    public HorasDisponibles horasDisponiblesMedico(PersMedico medico, Date dia) throws Exception{
        //Obtener todas las atenciones Vigentes del médico
-       Map<String, Object> paramAtencion = new HashMap<>();
-       paramAtencion.put("idPersAtiende", medico);
-       List<? extends Object>  atencionList = Controller.findByQuery("AtencionAgen.findByIdPersonalMedico", paramAtencion);
-       List<AtencionAgen> atencionesVigentes = new ArrayList<>();
-       for(Object a : atencionList){
-           AtencionAgen atencion = (AtencionAgen)a;
-           if(atencion.getIdEstadoAten().getNomEstadoAten().equals("Vigente")){
-               Calendar cal1 = Calendar.getInstance();
-               Calendar cal2 = Calendar.getInstance();
-               cal1.setTime(atencion.getFechor());
-               cal2.setTime(dia);
-               boolean mismoDia = (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
-                       && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
-               if(mismoDia){
-                atencionesVigentes.add(atencion);    
-               }
-           }
-       }
-       //Obtener el horario del medico
+       Collection<AtencionAgen> atencionesVigentes = buscarAtencionMedicoPorEstado(medico, "Vigente");
+       //Obtener todas las atenciones para el día
+       Collection<AtencionAgen> atencionesFiltradasPorDia = filtrarAtencionPorDia(atencionesVigentes, dia);
+       //Obtener los horarios del medico
        Collection<Horario> horarios = medico.getHorarioCollection();
        //Obtener lista de bloques
        ArrayList<Bloque> bloques = new ArrayList<>();
@@ -101,7 +85,7 @@ public class AccionesPaciente {
        DiaSem diaPorBuscar = buscarDiaPorDate(dia);
        ArrayList<Bloque> bloquesFiltrados = new ArrayList<>();
        for(Bloque bloque : bloques){
-           if(bloque.getIdDiaSem().getNombreDia().equalsIgnoreCase(diaPorBuscar.getNombreDia())){
+           if(bloque.getIdDiaSem().getIdDia() == diaPorBuscar.getIdDia()){
                for(AtencionAgen atencion : atencionesVigentes){
                    if(!(atencion.getIdBloque().getIdBloque() == bloque.getIdBloque())){
                        bloquesFiltrados.add(bloque);
@@ -111,7 +95,7 @@ public class AccionesPaciente {
            }
        }
        //convertir bloque a hora disponible
-       horas = new HorasDisponibles(dia, bloquesFiltrados);
+       HorasDisponibles horas = new HorasDisponibles(dia, bloquesFiltrados);
        return horas;
     }
     
@@ -138,9 +122,9 @@ public class AccionesPaciente {
         PersMedico medico = (PersMedico)Controller.findById(PersMedico.class, atencion.getIdPersAtiende().getIdPersonalMedico());
         //Obtener día
         Date date = atencion.getFechor();
-        HorasDisponibles horasDisponibles = this.horasDisponibles(medico, date);
+        HorasDisponibles horasDisponibles = this.horasDisponiblesMedico(medico, date);
         //Si medico no tiene horas disponibles, excepcion
-        if (horasDisponibles.getHoras().size() < 1){
+        if (horasDisponibles.getHoras().size() > 1){
             throw new Exception("El médico no tiene horas disponibles");
         }
         //si está en las horas disponibles, entonces ingresar
@@ -220,41 +204,68 @@ public class AccionesPaciente {
         return atencion;
     }
     
-    private DiaSem buscarDiaPorDate(Date date) throws Exception{
+    public DiaSem buscarDiaPorDate(Date date) throws Exception{
         Calendar cal = Calendar.getInstance();
         int numDia = cal.get(Calendar.DAY_OF_WEEK);
         String nomDiaBuscar = "";
         switch(numDia){
-            case 0:
+            case 1:
                 nomDiaBuscar = "Domingo";
                 break;
-            case 1:
+            case 2:
                 nomDiaBuscar = "Lunes";
                 break;
-            case 2:
+            case 3:
                 nomDiaBuscar = "Martes";
                 break;
-            case 3:
+            case 4:
                 nomDiaBuscar = "Miercoles";
                 break;
-            case 4:
+            case 5:
                 nomDiaBuscar = "Jueves";
                 break;
-            case 5:
+            case 6:
                 nomDiaBuscar = "Viernes";
                 break;
-            case 6:
+            case 7:
                 nomDiaBuscar = "Sábado";
                 break;
             default:
                 throw new Exception("Dia invalido");
         }
         Map<String, Object> params = new HashMap<>();
-        params.put("NombreDia", nomDiaBuscar);
+        params.put("nombreDia", nomDiaBuscar);
         List<? extends Object>  diaSemList = Controller.findByQuery("DiaSem.findByNombreDia", params);
         if(diaSemList.size() < 1){
             throw new Exception("No hay dia con nombre " + nomDiaBuscar);
         }
         return (DiaSem)diaSemList.get(0);
+    }
+    
+    private Collection<AtencionAgen> buscarAtencionMedicoPorEstado(PersMedico medico, String nombreEstado){
+        Collection<AtencionAgen> atencionList = medico.getAtencionAgenCollection1();
+        Collection<AtencionAgen> atencionesFiltradas = new ArrayList<>();
+        for(AtencionAgen atencion : atencionList){
+            if(atencion.getIdEstadoAten().getNomEstadoAten().equalsIgnoreCase(nombreEstado)){
+                atencionesFiltradas.add(atencion);
+            }
+        }
+        return atencionesFiltradas;
+    }
+    
+    private Collection<AtencionAgen> filtrarAtencionPorDia(Collection<AtencionAgen> atenciones, Date dia){
+        Collection<AtencionAgen> atencionesFiltradas = new ArrayList<>();
+        for(AtencionAgen atencion : atenciones){
+            Calendar cal1 = Calendar.getInstance();
+            Calendar cal2 = Calendar.getInstance();
+            cal1.setTime(atencion.getFechor());
+            cal2.setTime(dia);
+            boolean mismoDia = (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
+                    && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
+            if(mismoDia){
+             atencionesFiltradas.add(atencion);    
+            }
+       }
+       return atencionesFiltradas;
     }
 }

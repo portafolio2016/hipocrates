@@ -34,10 +34,18 @@ public class AccionesPacienteTest {
         paciente.setDigitoVerificador('1');
         paciente.setHashedPass("holamundo");
         paciente.setEmailPaciente("tomasmuniz@peladordenaranjas.com");
+        DiaSem dia2 = crearDiaSem("Lunes");
+        DiaSem dia3 = crearDiaSem("Martes");
+        DiaSem dia = crearDiaSem("Miercoles");
+        DiaSem dia4 = crearDiaSem("Jueves");
+        DiaSem dia5 = crearDiaSem("Viernes");
+        DiaSem dia6 = crearDiaSem("Sábado");
+        DiaSem dia7 = crearDiaSem("Domingo");
     }
     
     @BeforeClass
     public static void setUpClass() {
+        
     }
     
     @AfterClass
@@ -46,10 +54,17 @@ public class AccionesPacienteTest {
     
     @Before
     public void setUp() {
+        Map<String, Object> params = new HashMap<>();
+        List<? extends Object>  atenciones = Controller.findByQuery("AtencionAgen.findAll", params);
+        for(Object obj : atenciones){
+            AtencionAgen atencion = (AtencionAgen) obj;
+            Controller.remove(AtencionAgen.class, atencion.getIdAtencionAgen());
+        }
     }
     
     @After
     public void tearDown() {
+
     }
 
     /**
@@ -237,14 +252,8 @@ public class AccionesPacienteTest {
         System.out.println("testHorasDisponibles");
         //Preparación
         //Crear dias
-        
-        DiaSem dia2 = crearDiaSem("Lunes");
-        DiaSem dia3 = crearDiaSem("Martes");
-        DiaSem dia = crearDiaSem("Miercoles");
-        DiaSem dia4 = crearDiaSem("Jueves");
-        DiaSem dia5 = crearDiaSem("Viernes");
-        DiaSem dia6 = crearDiaSem("Sábado");
-        DiaSem dia7 = crearDiaSem("Domingo");
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        DiaSem dia = accionesPaciente.buscarDiaPorDate(new Date());
         //Crear bloques
         Bloque bloque = crearBloque(dia, (short)2, (short)9, (short)0, (short)9, (short)15);
         Bloque bloque2 = crearBloque(dia, (short)3, (short)9, (short)16, (short)9, (short)30);
@@ -262,18 +271,16 @@ public class AccionesPacienteTest {
         //Crear Atencion, asignarestado Vigente, medico
         AtencionAgen atencion = crearAtencionAgendada(estadoVigente, medico, bloque);
         //Caso 1: obtener 1 horas disponibles
-        AccionesPaciente accionesPaciente = new AccionesPaciente();
-        HorasDisponibles horasDisponibles = accionesPaciente.horasDisponibles(medico, new Date());
-        HorasDisponibles expectedResult = new HorasDisponibles();
-        if(horasDisponibles.getHoras().size() == 1){
+        HorasDisponibles horasDisponibles = accionesPaciente.horasDisponiblesMedico(medico, new Date());
+        if(horasDisponibles.getHoras().size() > 1){
             
         }else{
             fail();
         }
-        //Caso 2: obtener 0 horas disponibles
+//        Caso 2: obtener 0 horas disponibles
         Personal personal2 = crearPersonal((short)1, "test","test",1231,'l');
         PersMedico medico2 = crearPersonalMedico(personal2, especialidad);
-        HorasDisponibles horasDisponibles2 = accionesPaciente.horasDisponibles(medico2, new Date());
+        HorasDisponibles horasDisponibles2 = accionesPaciente.horasDisponiblesMedico(medico2, new Date());
         if(horasDisponibles2.getHoras().isEmpty()){
             
         }else{
@@ -296,9 +303,9 @@ public class AccionesPacienteTest {
         Especialidad especialidad = crearEspecialidad("EspecialidadTest");
         //Crear personal médico y asignar personal y especialidad
         PersMedico personalMedico = crearPersonalMedico(personal, especialidad);
-        //Crear dia
-        DiaSem dia = crearDiaSem("Martes");
         //crear bloque
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        DiaSem dia = accionesPaciente.buscarDiaPorDate(new Date());
         Bloque bloque = crearBloque(dia, 1, (short)8, (short)0, (short)8, (short)15);
         Bloque bloque2 = crearBloque(dia, 2, (short)8, (short)15, (short)8, (short)30);
         //crear horario
@@ -307,7 +314,7 @@ public class AccionesPacienteTest {
         //crear paciente
         Random random = new Random();
         Paciente p = crearPaciente(random.nextInt(9999999), '0');
-        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        
         //Caso 1: agendado correctamente
         AtencionAgen atencion = new AtencionAgen();
         atencion.setIdBloque(bloque);
@@ -590,5 +597,11 @@ public class AccionesPacienteTest {
         List<? extends Object>  pacienteList = Controller.findByQuery("Paciente.findByRut", params);
         return (Paciente)pacienteList.get(0);
     }
-
+    
+    private DiaSem buscarDiaPorNombre(String nombreDia){
+        Map<String, Object> params = new HashMap<>();
+        params.put("nombreDia", nombreDia);
+        List<? extends Object>  diaList = Controller.findByQuery("DiaSem.findByNombreDia", params);
+        return (DiaSem)diaList.get(0);
+    }
 }
