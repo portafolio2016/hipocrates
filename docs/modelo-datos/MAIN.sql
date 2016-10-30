@@ -9,4 +9,4 @@ ALTER SESSION SET CURRENT_SCHEMA = dev;
 ALTER SESSION SET CURRENT_SCHEMA = devseguro;
 @@seguroWS.sql -- DDL SeguroWS
 -- aqui va el script de insercion de datos
-@@cargaCMHseguro.sql
+-- @@cargaCMHseguro.sql
