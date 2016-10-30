@@ -30,18 +30,17 @@ public class ServPago {
     
     //Tiene que sacar todas las atenciones realizadas con sus respectivos pagos de el mes (Solo de los medicos) sumarlo y el total restarle un 40%
     public boolean pagarMedicos(){
-        Controller ctr = new Controller();
         boolean result = false;
         //Se obtiene una lista con la especialidad "Medico" de la cual solo se saca el primer registro [0]
         Map<String, Object> params = new HashMap<>();
         params.put("nomEspecialidad", "Medico");
-        List<? extends Object> especialidadList = ctr.findByQuery("Especialidad.findByNomEspecialidad", params);
+        List<? extends Object> especialidadList = Controller.findByQuery("Especialidad.findByNomEspecialidad", params);
         if(!especialidadList.isEmpty()){
             Especialidad especialidad = (Especialidad)especialidadList.get(0);
             //Se obtiene una lista con el personal medico con la especialidad "Medico"
             params = new HashMap<>();
             params.put("idEspecialidad", especialidad);
-            List<? extends Object> personalMedicos = ctr.findByQuery("PersMedico.findByIdEspecialidad", params);
+            List<? extends Object> personalMedicos = Controller.findByQuery("PersMedico.findByIdEspecialidad", params);
             ArrayList<PersMedico> medicos = new ArrayList<>();
             for (Object x : personalMedicos) {
                 medicos.add((PersMedico)x);
@@ -90,18 +89,17 @@ public class ServPago {
     }
  
     public boolean pagarMedicos(String esp){
-        Controller ctr = new Controller();
         boolean result = false;
         //Se obtiene una lista con la especialidad "Medico" de la cual solo se saca el primer registro [0]
         Map<String, Object> params = new HashMap<>();
         params.put("nomEspecialidad", esp);
-        List<? extends Object> especialidadList = ctr.findByQuery("Especialidad.findByNomEspecialidad", params);
+        List<? extends Object> especialidadList = Controller.findByQuery("Especialidad.findByNomEspecialidad", params);
         if(!especialidadList.isEmpty()){
             Especialidad especialidad = (Especialidad)especialidadList.get(0);
             //Se obtiene una lista con el personal medico con la especialidad "Medico"
             params = new HashMap<>();
             params.put("idEspecialidad", especialidad);
-            List<? extends Object> personalMedicos = ctr.findByQuery("PersMedico.findByIdEspecialidad", params);
+            List<? extends Object> personalMedicos = Controller.findByQuery("PersMedico.findByIdEspecialidad", params);
             ArrayList<PersMedico> medicos = new ArrayList<>();
             for (Object x : personalMedicos) {
                 medicos.add((PersMedico)x);

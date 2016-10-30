@@ -60,7 +60,7 @@ public class Controller {
         }
     }
     
-    public List<? extends Object> findByQuery(String query, Map<String, Object> params){
+    public static List<? extends Object> findByQuery(String query, Map<String, Object> params){
         EntityManager em = EMFProvider.getEMF().createEntityManager();
         List ret = null;
         try {

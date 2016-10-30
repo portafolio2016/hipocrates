@@ -118,9 +118,8 @@ public class ControllerTest {
         System.out.println("findByQuery");
         String query = "Paciente.findAll";
         Map<String, Object> params = null;
-        Controller instance = new Controller();
 //        List<? extends Object> expResult = null;
-        List<? extends Object> result = instance.findByQuery(query, params);
+        List<? extends Object> result = Controller.findByQuery(query, params);
         if (result.size() > 0) {
             System.out.println(result.toString());
         } else {
@@ -129,8 +128,7 @@ public class ControllerTest {
         String query2 = "Paciente.findByNombresPaciente";
         Map<String, Object> params2 = new HashMap<>();
         params2.put("nombresPaciente", "Pablo");
-        Controller instance2 = new Controller();
-        List<? extends Object> result2 = instance2.findByQuery(query2, params2);
+        List<? extends Object> result2 = Controller.findByQuery(query2, params2);
         if (result2.size() > 0) {
             System.out.println(result2.toString());
         } else {

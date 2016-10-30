@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="0" hostname="DESKTOP-JCP54BV" name="cl.cheekibreeki.cmh.servpago.ServPagoTest" skipped="0" tests="1" time="0.196" timestamp="2016-10-30T18:05:50">
+<testsuite errors="1" failures="0" hostname="DESKTOP-JCP54BV" name="cl.cheekibreeki.cmh.servpago.ServPagoTest" skipped="0" tests="1" time="0.481" timestamp="2016-10-30T22:08:42">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="CL" />
@@ -62,7 +62,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner cl.cheekibreeki.cmh.servpago.ServPagoTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\results\TEST-cl.cheekibreeki.cmh.servpago.ServPagoTest.xml crashfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junitvmwatcher1354150965024263733.properties propsfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junit3400382099862255358.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner cl.cheekibreeki.cmh.servpago.ServPagoTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\results\TEST-cl.cheekibreeki.cmh.servpago.ServPagoTest.xml crashfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junitvmwatcher8588262576072973081.properties propsfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junit1071440046950040418.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -424,11 +424,11 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="cl.cheekibreeki.cmh.servpago.ServPagoTest" name="testPagarMedicos" time="0.017">
+  <testcase classname="cl.cheekibreeki.cmh.servpago.ServPagoTest" name="testPagarMedicos" time="0.033">
     <error message="javax/persistence/Persistence" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: javax/persistence/Persistence
 	at cl.cheekibreeki.cmh.lib.dal.dbcontrol.EMFProvider.&lt;clinit&gt;(EMFProvider.java:19)
 	at cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller.findByQuery(Controller.java:64)
-	at cl.cheekibreeki.cmh.servpago.ServPago.pagarMedicos(ServPago.java:99)
+	at cl.cheekibreeki.cmh.servpago.ServPago.pagarMedicos(ServPago.java:96)
 	at cl.cheekibreeki.cmh.servpago.ServPagoTest.testPagarMedicos(ServPagoTest.java:43)
 Caused by: java.lang.ClassNotFoundException: javax.persistence.Persistence
 	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
