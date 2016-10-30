@@ -68,7 +68,7 @@ public class AccionesPaciente {
      * @param dia dia el cual se quiere tomar hora
      * @return El ArrayList contiene tas atenciones de una prestación
      */
-    public HorasDisponibles horasDisponibles(PersMedico medico, Date dia){
+    public HorasDisponibles horasDisponibles(PersMedico medico, Date dia) throws Exception{
        HorasDisponibles horas = new HorasDisponibles();
        //Obtener todas las atenciones Vigentes del médico
        Map<String, Object> paramAtencion = new HashMap<>();
@@ -98,7 +98,7 @@ public class AccionesPaciente {
        }
        //Filtrar bloques por dia de la semana
        //No agregar bloques si hay una atencion en el mismo bloque
-       DiaSem diaPorBuscar = atencionesVigentes.get(0).getIdBloque().getIdDiaSem();
+       DiaSem diaPorBuscar = buscarDiaPorDate(dia);
        ArrayList<Bloque> bloquesFiltrados = new ArrayList<>();
        for(Bloque bloque : bloques){
            if(bloque.getIdDiaSem().getNombreIda().equalsIgnoreCase(diaPorBuscar.getNombreIda())){
@@ -205,5 +205,43 @@ public class AccionesPaciente {
         Controller.upsert(atencion);
         //retornar atencion
         return atencion;
+    }
+    
+    private DiaSem buscarDiaPorDate(Date date) throws Exception{
+        Calendar cal = Calendar.getInstance();
+        int numDia = cal.get(Calendar.DAY_OF_WEEK);
+        String nomDiaBuscar = "";
+        switch(numDia){
+            case 0:
+                nomDiaBuscar = "Domingo";
+                break;
+            case 1:
+                nomDiaBuscar = "Lunes";
+                break;
+            case 2:
+                nomDiaBuscar = "Martes";
+                break;
+            case 3:
+                nomDiaBuscar = "Miercoles";
+                break;
+            case 4:
+                nomDiaBuscar = "Jueves";
+                break;
+            case 5:
+                nomDiaBuscar = "Viernes";
+                break;
+            case 6:
+                nomDiaBuscar = "Sábado";
+                break;
+            default:
+                throw new Exception("Dia invalido");
+        }
+        Map<String, Object> params = new HashMap<>();
+        params.put("nombreIda", nomDiaBuscar);
+        List<? extends Object>  diaSemList = Controller.findByQuery("DiaSem.findByNombreIda", params);
+        if(diaSemList.size() < 1){
+            throw new Exception("No hay dia con nombre " + nomDiaBuscar);
+        }
+        return (DiaSem)diaSemList.get(0);
     }
 }

@@ -232,11 +232,18 @@ public class AccionesPacienteTest {
      * Test of obtenerAtenciones method, of class AccionesPaciente.
      */
     @Test
-    public void testHorasDisponibles() {
+    public void testHorasDisponibles() throws Exception {
         System.out.println("testHorasDisponibles");
         //Preparación
         //Crear dias
+        
+        DiaSem dia2 = crearDiaSem("Lunes");
+        DiaSem dia3 = crearDiaSem("Martes");
         DiaSem dia = crearDiaSem("Miercoles");
+        DiaSem dia4 = crearDiaSem("Jueves");
+        DiaSem dia5 = crearDiaSem("Viernes");
+        DiaSem dia6 = crearDiaSem("Sábado");
+        DiaSem dia7 = crearDiaSem("Domingo");
         //Crear bloques
         Bloque bloque = crearBloque(dia, (short)2, (short)9, (short)0, (short)9, (short)15);
         Bloque bloque2 = crearBloque(dia, (short)3, (short)9, (short)16, (short)9, (short)30);
