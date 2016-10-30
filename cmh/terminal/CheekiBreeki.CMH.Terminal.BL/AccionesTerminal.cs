@@ -130,9 +130,16 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-011
+        #region Cerrar consulta médica
+        /// <summary>
+        /// Se cierra una consulta médica con estado de atención "Vigente"
+        /// </summary>
+        /// <param name="resultadoAtencion">Resultado de dicha atención</param>
+        /// <param name="atencionAgendada">Atención agendada para cambiarle la llave foranea de estado atención</param>
+        /// <returns></returns>
         public Boolean cerrarConsultaMedica(RES_ATENCION resultadoAtencion, ATENCION_AGEN atencionAgendada)
         {
-            try 
+            try
             {
                 if (Util.isObjetoNulo(atencionAgendada))
                 {
@@ -156,6 +163,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
+        #endregion
 
         //ECU-012
         public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, ORDEN_ANALISIS ordenAnalisis)
