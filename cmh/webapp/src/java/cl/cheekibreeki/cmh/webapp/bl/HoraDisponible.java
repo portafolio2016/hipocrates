@@ -14,10 +14,13 @@ import java.util.Date;
  */
 public class HoraDisponible {
     private Date date;
+    private Bloque bloque;
     private int horaIni;
     private int horaFin;
     private int minuIni;
     private int minuFin;
+    
+    
 
     public HoraDisponible() {
     }
@@ -27,9 +30,17 @@ public class HoraDisponible {
         this.horaFin = bloque.getNumHoraFin();
         this.minuIni = bloque.getNumMinuIni();
         this.minuFin = bloque.getNumMinuFin();
+        this.bloque = bloque;
     }
 
-    
+    public Bloque getBloque() {
+        return bloque;
+    }
+
+    public void setBloque(Bloque bloque) {
+        this.bloque = bloque;
+    }
+
     
     public Date getDate() {
         return date;

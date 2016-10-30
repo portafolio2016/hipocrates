@@ -132,10 +132,23 @@ public class AccionesPaciente {
      * @param atencion La atencion a registrar
      * @return Si es true la atencion fue registrada
      */
-    public boolean agendarAtencion(AtencionAgen atencion){
-        Object obj = atencion;
-        boolean result = Controller.upsert(obj);
-        return result;
+    public boolean agendarAtencion(AtencionAgen atencion) throws Exception{
+        //Revisar si el bloque de la atención está en las horas disponibles del médico
+        //obtener médico
+        PersMedico medico = (PersMedico)Controller.findById(PersMedico.class, atencion.getIdPersAtiende().getIdPersonalMedico());
+        //Obtener día
+        Date date = atencion.getFechor();
+        HorasDisponibles horasDisponibles = this.horasDisponibles(medico, date);
+        //Si medico no tiene horas disponibles, excepcion
+        if (horasDisponibles.getHoras().size() < 1){
+            throw new Exception("El médico no tiene horas disponibles");
+        }
+        //si está en las horas disponibles, entonces ingresar
+        if(horasDisponibles.bloqueDisponible(atencion.getIdBloque())){
+            return Controller.upsert(atencion);    
+        }else{//de lo contrario levantar excepción
+            throw new Exception("Hora ocupada.");
+        }
     }
     
     /**

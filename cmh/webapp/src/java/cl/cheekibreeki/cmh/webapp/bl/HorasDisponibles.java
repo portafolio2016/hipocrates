@@ -11,6 +11,15 @@ public class HorasDisponibles {
         this.horas = new ArrayList<>();
     }
     
+    public boolean bloqueDisponible(Bloque bloque){
+        for(HoraDisponible hora : this.horas){
+            if(hora.getBloque().getIdBloque() == bloque.getIdBloque()){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public HorasDisponibles(Date date, ArrayList<Bloque> bloques){
         this.horas = new ArrayList<>();
         for(Bloque bloque: bloques){
