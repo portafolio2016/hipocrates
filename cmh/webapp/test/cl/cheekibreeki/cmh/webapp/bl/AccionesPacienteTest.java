@@ -538,8 +538,8 @@ public class AccionesPacienteTest {
         dia.setNombreDia(nombreDia);
         Controller.upsert(dia);
         Map<String, Object> params = new HashMap<>();
-        params.put("nombreIda", nombreDia);
-        List<? extends Object>  diaList = Controller.findByQuery("DiaSem.findByNombreIda", params);
+        params.put("nombreDia", nombreDia);
+        List<? extends Object>  diaList = Controller.findByQuery("DiaSem.findByNombreDia", params);
         return (DiaSem)diaList.get(0);
     }
     
