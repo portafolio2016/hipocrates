@@ -250,8 +250,8 @@ public class AccionesPaciente {
                 throw new Exception("Dia invalido");
         }
         Map<String, Object> params = new HashMap<>();
-        params.put("nombreIda", nomDiaBuscar);
-        List<? extends Object>  diaSemList = Controller.findByQuery("DiaSem.findByNombreIda", params);
+        params.put("NombreDia", nomDiaBuscar);
+        List<? extends Object>  diaSemList = Controller.findByQuery("DiaSem.findByNombreDia", params);
         if(diaSemList.size() < 1){
             throw new Exception("No hay dia con nombre " + nomDiaBuscar);
         }
