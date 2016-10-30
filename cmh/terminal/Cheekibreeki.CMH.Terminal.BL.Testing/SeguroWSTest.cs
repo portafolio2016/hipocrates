@@ -179,7 +179,7 @@ namespace Cheekibreeki.CMH.Terminal.BL.Testing
             int idPlan = TestUtil.crearPlan("Plan ejemplo", idEmpresa);
             //crear afiliado
             Random random = new Random();
-            int rutAfiliado = random.Next();
+            int rutAfiliado = random.Next(999999999);
             int idAfiliado = TestUtil.crearAfiliado(rutAfiliado, "q",idPlan);
             //crear prestación
             //los codigos deben ser únicos, por lo que se usa la hora actual como diferenciador
