@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "RES_ATENCION")
@@ -30,8 +30,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ResAtencion.findByIdResultadoAtencion", query = "SELECT r FROM ResAtencion r WHERE r.idResultadoAtencion = :idResultadoAtencion"),
     @NamedQuery(name = "ResAtencion.findByAtencionAbierta", query = "SELECT r FROM ResAtencion r WHERE r.atencionAbierta = :atencionAbierta"),
     @NamedQuery(name = "ResAtencion.findByComentario", query = "SELECT r FROM ResAtencion r WHERE r.comentario = :comentario"),
-    @NamedQuery(name = "ResAtencion.findByIdAtencionAgen", query = "SELECT r FROM ResAtencion r WHERE r.idAtencionAgen = :idAtencionAgen"),
-    @NamedQuery(name = "ResAtencion.findByIdPersonalMedico", query = "SELECT r FROM ResAtencion r WHERE r.idPersonalMedico = :idPersonalMedico"),
     @NamedQuery(name = "ResAtencion.findByExtArchivo", query = "SELECT r FROM ResAtencion r WHERE r.extArchivo = :extArchivo")})
 public class ResAtencion implements Serializable {
 
@@ -44,8 +42,6 @@ public class ResAtencion implements Serializable {
     private Short atencionAbierta;
     @Column(name = "COMENTARIO")
     private String comentario;
-    @Column(name = "ID_PERSONAL_MEDICO")
-    private Integer idPersonalMedico;
     @Lob
     @Column(name = "ARCHIVO_B64")
     private String archivoB64;
@@ -87,14 +83,6 @@ public class ResAtencion implements Serializable {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
-    }
-
-    public Integer getIdPersonalMedico() {
-        return idPersonalMedico;
-    }
-
-    public void setIdPersonalMedico(Integer idPersonalMedico) {
-        this.idPersonalMedico = idPersonalMedico;
     }
 
     public String getArchivoB64() {
