@@ -101,7 +101,7 @@ public class AccionesPaciente {
        DiaSem diaPorBuscar = buscarDiaPorDate(dia);
        ArrayList<Bloque> bloquesFiltrados = new ArrayList<>();
        for(Bloque bloque : bloques){
-           if(bloque.getIdDiaSem().getNombreIda().equalsIgnoreCase(diaPorBuscar.getNombreIda())){
+           if(bloque.getIdDiaSem().getNombreDia().equalsIgnoreCase(diaPorBuscar.getNombreDia())){
                for(AtencionAgen atencion : atencionesVigentes){
                    if(!(atencion.getIdBloque().getIdBloque() == bloque.getIdBloque())){
                        bloquesFiltrados.add(bloque);

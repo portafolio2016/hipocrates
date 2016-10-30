@@ -140,7 +140,7 @@ public class AccionesPacienteTest {
             if(!dias.isEmpty()){
                 dia = (DiaSem)dias.get(dias.size()-1);
             }else{
-                dia.setNombreIda("DiaTest");
+                dia.setNombreDia("DiaTest");
                 Object objDia = dia;
                 Controller.upsert(objDia);
                 List<? extends Object> diasAux = ctr.findByQuery("DiaSem.findAll", para);
@@ -535,7 +535,7 @@ public class AccionesPacienteTest {
     
     private DiaSem crearDiaSem(String nombreDia){
         DiaSem dia = new DiaSem();
-        dia.setNombreIda(nombreDia);
+        dia.setNombreDia(nombreDia);
         Controller.upsert(dia);
         Map<String, Object> params = new HashMap<>();
         params.put("nombreIda", nombreDia);
