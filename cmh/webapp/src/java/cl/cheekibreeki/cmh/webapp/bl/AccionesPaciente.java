@@ -10,6 +10,8 @@ import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten;
 import cl.cheekibreeki.cmh.lib.dal.entities.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +70,48 @@ public class AccionesPaciente {
      */
     public HorasDisponibles horasDisponibles(PersMedico medico, Date dia){
        HorasDisponibles horas = new HorasDisponibles();
-       
+       //Obtener todas las atenciones Vigentes del médico
+       Map<String, Object> paramAtencion = new HashMap<>();
+       paramAtencion.put("idPersAtiende", medico);
+       List<? extends Object>  atencionList = Controller.findByQuery("AtencionAgen.findByIdPersonalMedico", paramAtencion);
+       List<AtencionAgen> atencionesVigentes = new ArrayList<>();
+       for(Object a : atencionList){
+           AtencionAgen atencion = (AtencionAgen)a;
+           if(atencion.getIdEstadoAten().getNomEstadoAten().equals("Vigente")){
+               Calendar cal1 = Calendar.getInstance();
+               Calendar cal2 = Calendar.getInstance();
+               cal1.setTime(atencion.getFechor());
+               cal2.setTime(dia);
+               boolean mismoDia = (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
+                       && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
+               if(mismoDia){
+                atencionesVigentes.add(atencion);    
+               }
+           }
+       }
+       //Obtener el horario del medico
+       Collection<Horario> horarios = medico.getHorarioCollection();
+       //Obtener lista de bloques
+       ArrayList<Bloque> bloques = new ArrayList<>();
+       for(Horario horario : horarios){
+           bloques.add(horario.getIdBloque());
+       }
+       //Filtrar bloques por dia de la semana
+       //No agregar bloques si hay una atencion en el mismo bloque
+       DiaSem diaPorBuscar = atencionesVigentes.get(0).getIdBloque().getIdDiaSem();
+       ArrayList<Bloque> bloquesFiltrados = new ArrayList<>();
+       for(Bloque bloque : bloques){
+           if(bloque.getIdDiaSem().getNombreIda().equalsIgnoreCase(diaPorBuscar.getNombreIda())){
+               for(AtencionAgen atencion : atencionesVigentes){
+                   if(!(atencion.getIdBloque().getIdBloque() == bloque.getIdBloque())){
+                       bloquesFiltrados.add(bloque);
+                   }
+               }
+               
+           }
+       }
+       //convertir bloque a hora disponible
+       horas = new HorasDisponibles(dia, bloquesFiltrados);
        return horas;
     }
     

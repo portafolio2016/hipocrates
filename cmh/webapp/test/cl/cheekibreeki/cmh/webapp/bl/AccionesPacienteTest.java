@@ -234,17 +234,43 @@ public class AccionesPacienteTest {
     @Test
     public void testHorasDisponibles() {
         System.out.println("testHorasDisponibles");
-        AccionesPaciente accionesPaciente = new AccionesPaciente();
         //Preparación
         //Crear dias
+        DiaSem dia = crearDiaSem("Miercoles");
         //Crear bloques
+        Bloque bloque = crearBloque(dia, (short)2, (short)9, (short)0, (short)9, (short)15);
+        Bloque bloque2 = crearBloque(dia, (short)3, (short)9, (short)16, (short)9, (short)30);
         //Crear personal
+        Personal personal = crearPersonal((short)0, "TestHorasNombre", "TestHorasApellidos", 123, '0');
         //Crear especialidad
+        Especialidad especialidad = crearEspecialidad("TestEspecialidad");
         //Crear personal médico
-        //Crear horario
-        //Caso 1: obtener 3 horas disponibles
+        PersMedico medico = crearPersonalMedico(personal, especialidad);
+        //Crear horarioº
+        Horario horario = crearHorario(bloque, medico);
+        Horario horario2 = crearHorario(bloque2, medico);
+        //Crear estado Atencion Vigente
+        EstadoAten estadoVigente = crearEstadoAten("Vigente");
+        //Crear Atencion, asignarestado Vigente, medico
+        AtencionAgen atencion = crearAtencionAgendada(estadoVigente, medico, bloque);
+        //Caso 1: obtener 1 horas disponibles
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        HorasDisponibles horasDisponibles = accionesPaciente.horasDisponibles(medico, new Date());
+        HorasDisponibles expectedResult = new HorasDisponibles();
+        if(horasDisponibles.getHoras().size() == 1){
+            
+        }else{
+            fail();
+        }
         //Caso 2: obtener 0 horas disponibles
-        
+        Personal personal2 = crearPersonal((short)1, "test","test",1231,'l');
+        PersMedico medico2 = crearPersonalMedico(personal2, especialidad);
+        HorasDisponibles horasDisponibles2 = accionesPaciente.horasDisponibles(medico2, new Date());
+        if(horasDisponibles2.getHoras().isEmpty()){
+            
+        }else{
+            fail();
+        }
     }
 
     /**

@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "AtencionAgen.findByFechor", query = "SELECT a FROM AtencionAgen a WHERE a.fechor = :fechor"),
     @NamedQuery(name = "AtencionAgen.findByIdPaciente", query = "SELECT a FROM AtencionAgen a WHERE a.idPaciente = :idPaciente"),
     @NamedQuery(name = "AtencionAgen.findByIdPersonalMedico", query = "SELECT a FROM AtencionAgen a WHERE a.idPersAtiende = :idPersAtiende")})
+//falta un named query que obtenga atenciones por medico solicitante
 public class AtencionAgen implements Serializable {
 
     private static final long serialVersionUID = 1L;
