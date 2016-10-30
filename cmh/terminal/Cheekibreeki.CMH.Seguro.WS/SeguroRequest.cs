@@ -9,8 +9,17 @@ namespace Cheekibreeki.CMH.Seguro.WS
     [DataContract]
     public class SeguroRequest
     {
-        private string afiliadoRut;
+        private int afiliadoRut;
         private string codigoPrestacion;
+        private int precioPrestacion;
+
+        [DataMember]
+        public int PrecioPrestacion
+        {
+            get { return precioPrestacion; }
+            set { precioPrestacion = value; }
+        }
+        
         [DataMember]
         public string CodigoPrestacion
         {
@@ -18,7 +27,7 @@ namespace Cheekibreeki.CMH.Seguro.WS
             set { codigoPrestacion = value; }
         }
         [DataMember]
-        public string AfiliadoRut
+        public int AfiliadoRut
         {
             get { return afiliadoRut; }
             set { afiliadoRut = value; }
