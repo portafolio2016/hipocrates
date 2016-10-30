@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="0" hostname="DESKTOP-JCP54BV" name="cl.cheekibreeki.cmh.servpago.ServPagoTest" skipped="0" tests="1" time="0.119" timestamp="2016-10-29T23:20:06">
+<testsuite errors="1" failures="0" hostname="DESKTOP-JCP54BV" name="cl.cheekibreeki.cmh.servpago.ServPagoTest" skipped="0" tests="1" time="0.159" timestamp="2016-10-30T00:07:55">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="CL" />
-    <property name="javac.test.classpath" value="lib\ojdbc7.jar:../cmhlib/dist/cmhlib.jar:build/classes:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/junit_4/junit-4.12.jar:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/hamcrest/hamcrest-core-1.3.jar" />
+    <property name="javac.test.classpath" value="../cmhlib/dist/cmhlib.jar:lib\ojdbc7.jar:build/classes:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/junit_4/junit-4.12.jar:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/hamcrest/hamcrest-core-1.3.jar" />
     <property name="libs.jsf20.maven-pom" value="" />
     <property name="libs.DataBindingME.src" value="C:\Program Files\NetBeans 8.1\mobility\sources\netbeans_databindingme-src.zip" />
     <property name="libs.spring-webmvc4.0.src" value="" />
@@ -62,7 +62,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner cl.cheekibreeki.cmh.servpago.ServPagoTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\results\TEST-cl.cheekibreeki.cmh.servpago.ServPagoTest.xml crashfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junitvmwatcher8163871742190136646.properties propsfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junit1457659208589724692.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner cl.cheekibreeki.cmh.servpago.ServPagoTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\results\TEST-cl.cheekibreeki.cmh.servpago.ServPagoTest.xml crashfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junitvmwatcher4078121096698863138.properties propsfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junit3569988815964474289.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -75,7 +75,7 @@
     <property name="user.country" value="CL" />
     <property name="manifest.file" value="manifest.mf" />
     <property name="javadoc.encoding" value="UTF-8" />
-    <property name="javac.classpath" value="lib\ojdbc7.jar:../cmhlib/dist/cmhlib.jar" />
+    <property name="javac.classpath" value="../cmhlib/dist/cmhlib.jar:lib\ojdbc7.jar" />
     <property name="libs.jsp-compilation-syscp.src" value="" />
     <property name="libs.JAVADB_DRIVER_LABEL.src" value="" />
     <property name="libs.spring-framework400.classpath" value="C:\Program Files\NetBeans 8.1\ide\modules\org-apache-commons-logging.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\cglib-2.2.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-aop-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-aspects-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-beans-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-build-src-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-context-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-context-support-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-core-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-expression-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-framework-bom-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-instrument-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-instrument-tomcat-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-jdbc-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-jms-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-messaging-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-orm-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-oxm-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-test-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-tx-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-web-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-webmvc-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-webmvc-portlet-4.0.1.RELEASE.jar;C:\Program Files\NetBeans 8.1\java\modules\ext\spring-4\spring-websocket-4.0.1.RELEASE.jar" />
@@ -107,7 +107,7 @@
     <property name="libs.Java-EE-GlassFish-v3-Prelude.maven-pom" value="" />
     <property name="libs.junit_4.maven-pom" value="" />
     <property name="mkdist.disabled" value="false" />
-    <property name="javac.test.processorpath" value="lib\ojdbc7.jar:../cmhlib/dist/cmhlib.jar:build/classes:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/junit_4/junit-4.12.jar:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/hamcrest/hamcrest-core-1.3.jar" />
+    <property name="javac.test.processorpath" value="../cmhlib/dist/cmhlib.jar:lib\ojdbc7.jar:build/classes:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/junit_4/junit-4.12.jar:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/hamcrest/hamcrest-core-1.3.jar" />
     <property name="netbeans.buildnumber" value="201510222201" />
     <property name="libs.JWSAntTasks.javadoc" value="" />
     <property name="build.generated.sources.dir" value="build/generated-sources" />
@@ -152,7 +152,7 @@
     <property name="manifest.available" value="true" />
     <property name="libs.primefaces.javadoc" value="" />
     <property name="libs.spring-framework300.maven-pom" value="" />
-    <property name="run.test.classpath" value="lib\ojdbc7.jar:../cmhlib/dist/cmhlib.jar:build/classes:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/junit_4/junit-4.12.jar:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/hamcrest/hamcrest-core-1.3.jar:build/test/classes" />
+    <property name="run.test.classpath" value="../cmhlib/dist/cmhlib.jar:lib\ojdbc7.jar:build/classes:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/junit_4/junit-4.12.jar:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/hamcrest/hamcrest-core-1.3.jar:build/test/classes" />
     <property name="ant.project.invoked-targets" value="test" />
     <property name="test.binaryexcludes" value="" />
     <property name="libs.swing-layout.javadoc" value="C:\Program Files\NetBeans 8.1\platform\docs\swing-layout-1.0.4-doc.zip" />
@@ -186,7 +186,7 @@
     <property name="libs.jpa20-persistence.javadoc" value="C:\Program Files\NetBeans 8.1\java\modules\ext\docs\javax.persistence-2.1.0-doc.zip" />
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_65\jre" />
     <property name="libs.jsp-compilation.src" value="" />
-    <property name="debug.test.classpath" value="lib\ojdbc7.jar:../cmhlib/dist/cmhlib.jar:build/classes:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/junit_4/junit-4.12.jar:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/hamcrest/hamcrest-core-1.3.jar:build/test/classes" />
+    <property name="debug.test.classpath" value="../cmhlib/dist/cmhlib.jar:lib\ojdbc7.jar:build/classes:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/junit_4/junit-4.12.jar:C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/hamcrest/hamcrest-core-1.3.jar:build/test/classes" />
     <property name="libs.javaee-endorsed-api-6.0.classpath" value="C:\Program Files\NetBeans 8.1\enterprise\modules\ext\javaee6-endorsed\javax.annotation.jar;C:\Program Files\NetBeans 8.1\enterprise\modules\ext\javaee6-endorsed\jaxb-api-osgi.jar;C:\Program Files\NetBeans 8.1\enterprise\modules\ext\javaee6-endorsed\webservices-api-osgi.jar" />
     <property name="libs.javaee-api-6.0.src" value="" />
     <property name="netbeans.importclass" value="org.netbeans.upgrade.AutoUpgrade" />
@@ -202,7 +202,7 @@
     <property name="libs.junit_4.javadoc" value="C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/junit_4/junit-4.12-javadoc.jar" />
     <property name="libs.EclipseLink-GlassFish-v3.maven-pom" value="" />
     <property name="libs.javaee-web-api-6.0.maven-pom" value="" />
-    <property name="run.classpath" value="lib\ojdbc7.jar:../cmhlib/dist/cmhlib.jar:build/classes" />
+    <property name="run.classpath" value="../cmhlib/dist/cmhlib.jar:lib\ojdbc7.jar:build/classes" />
     <property name="jna.boot.library.name" value="jnidispatch-410" />
     <property name="libs.javaee-endorsed-api-6.0.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
     <property name="libs.javaee-api-7.0.classpath" value="C:\Program Files\NetBeans 8.1\enterprise\modules\ext\javaee-api-7.0.jar" />
@@ -219,7 +219,7 @@
     <property name="javadoc.use" value="true" />
     <property name="sun.java2d.noddraw" value="true" />
     <property name="libs.jsp-compiler.classpath" value="C:\Program Files\NetBeans 8.1\enterprise\ant\extra\jspcompile.jar" />
-    <property name="javac.processorpath" value="lib\ojdbc7.jar:../cmhlib/dist/cmhlib.jar" />
+    <property name="javac.processorpath" value="../cmhlib/dist/cmhlib.jar:lib\ojdbc7.jar" />
     <property name="libs.hamcrest.maven-pom" value="" />
     <property name="javac.compilerargs" value="" />
     <property name="ant.file" value="C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build.xml" />
@@ -246,7 +246,7 @@
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_65\jre\bin" />
     <property name="have.sources" value="true" />
     <property name="libs.hamcrest.javadoc" value="" />
-    <property name="debug.classpath" value="lib\ojdbc7.jar:../cmhlib/dist/cmhlib.jar:build/classes" />
+    <property name="debug.classpath" value="../cmhlib/dist/cmhlib.jar:lib\ojdbc7.jar:build/classes" />
     <property name="javac.external.vm" value="true" />
     <property name="javadoc.private" value="false" />
     <property name="test.src.dir" value="test" />
@@ -369,7 +369,7 @@
     <property name="libs.metro.classpath" value="C:\Program Files\NetBeans 8.1\ide\modules\ext\jaxb\activation.jar;C:\Program Files\NetBeans 8.1\enterprise\modules\ext\metro\webservices-api.jar;C:\Program Files\NetBeans 8.1\enterprise\modules\ext\metro\webservices-extra-api.jar;C:\Program Files\NetBeans 8.1\enterprise\modules\ext\metro\webservices-extra.jar;C:\Program Files\NetBeans 8.1\enterprise\modules\ext\metro\webservices-rt.jar;C:\Program Files\NetBeans 8.1\enterprise\modules\ext\metro\webservices-tools.jar" />
     <property name="libs.jpa2-persistence.javadoc" value="C:\Program Files\NetBeans 8.1\java\modules\ext\docs\javax.persistence-2.1.0-doc.zip" />
     <property name="libs.DataBindingME.javadoc" value="C:\Program Files\NetBeans 8.1\mobility\modules\docs\netbeans_databindingme-api.zip" />
-    <property name="java.class.path" value="C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\lib\ojdbc7.jar;C:\Users\palan\Documents\Git\hipocrates\cmh\cmhlib\dist\cmhlib.jar;C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\classes;C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\lib\junit_4\junit-4.12.jar;C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\lib\hamcrest\hamcrest-core-1.3.jar;C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\classes;C:\Program Files\NetBeans 8.1\extide\ant\lib\ant-launcher.jar;C:\Program Files\NetBeans 8.1\extide\ant\lib\ant.jar;C:\Program Files\NetBeans 8.1\extide\ant\lib\ant-junit.jar;C:\Program Files\NetBeans 8.1\extide\ant\lib\ant-junit4.jar" />
+    <property name="java.class.path" value="C:\Users\palan\Documents\Git\hipocrates\cmh\cmhlib\dist\cmhlib.jar;C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\lib\ojdbc7.jar;C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\classes;C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\lib\junit_4\junit-4.12.jar;C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\lib\hamcrest\hamcrest-core-1.3.jar;C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\classes;C:\Program Files\NetBeans 8.1\extide\ant\lib\ant-launcher.jar;C:\Program Files\NetBeans 8.1\extide\ant\lib\ant.jar;C:\Program Files\NetBeans 8.1\extide\ant\lib\ant-junit.jar;C:\Program Files\NetBeans 8.1\extide\ant\lib\ant-junit4.jar" />
     <property name="apple.laf.useScreenMenuBar" value="true" />
     <property name="do.mkdist" value="true" />
     <property name="libs.absolutelayout.src" value="" />
@@ -424,12 +424,12 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="cl.cheekibreeki.cmh.servpago.ServPagoTest" name="testPagarMedicos" time="0.014">
+  <testcase classname="cl.cheekibreeki.cmh.servpago.ServPagoTest" name="testPagarMedicos" time="0.02">
     <error message="javax/persistence/Persistence" type="java.lang.NoClassDefFoundError">java.lang.NoClassDefFoundError: javax/persistence/Persistence
 	at cl.cheekibreeki.cmh.lib.dal.dbcontrol.EMFProvider.&lt;clinit&gt;(EMFProvider.java:19)
 	at cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller.findByQuery(Controller.java:64)
-	at cl.cheekibreeki.cmh.servpago.ServPago.pagarMedicos(ServPago.java:101)
-	at cl.cheekibreeki.cmh.servpago.ServPagoTest.testPagarMedicos(ServPagoTest.java:48)
+	at cl.cheekibreeki.cmh.servpago.ServPago.pagarMedicos(ServPago.java:97)
+	at cl.cheekibreeki.cmh.servpago.ServPagoTest.testPagarMedicos(ServPagoTest.java:43)
 Caused by: java.lang.ClassNotFoundException: javax.persistence.Persistence
 	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
