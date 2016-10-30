@@ -123,11 +123,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-010
-        public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
+        /*public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
         {
             //TODO: implementar
             return false;
-        }
+        }*/
 
         //ECU-011
         #region Cerrar consulta médica
