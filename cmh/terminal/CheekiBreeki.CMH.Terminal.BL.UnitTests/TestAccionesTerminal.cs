@@ -2844,7 +2844,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.SaveChangesAsync();
 
                 orden1.FECHOR_EMISION = DateTime.Today;
-                orden1.FECHOR_RECEP = DateTime.Today.AddDays(3);
                 context.ORDEN_ANALISIS.Add(orden1);
                 context.SaveChangesAsync();
 

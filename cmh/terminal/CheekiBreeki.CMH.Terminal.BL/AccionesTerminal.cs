@@ -250,9 +250,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
                 else
                 {
-                    conexionDB.ORDEN_ANALISIS.Where(d => d.ID_ORDEN_ANALISIS == ordenAnalisis.ID_ORDEN_ANALISIS).FirstOrDefault();
+                    ordenAnalisis = conexionDB.ORDEN_ANALISIS.Find(ordenAnalisis.ID_ORDEN_ANALISIS);
                     ordenAnalisis.FECHOR_RECEP = DateTime.Today;
-                    conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
