@@ -98,11 +98,16 @@ public class ServPago {
     private boolean AtencionDeEsteMes(Date dat){
         Date now = Date.from(Instant.now());
         Date composeDate;
-        if(now.getMonth()-1 < 0)
-            composeDate = new Date(now.getYear()-1, 11, now.getDate());
-        else 
+        int year;
+        if(now.getMonth()-1 < 0){
+            composeDate = new Date(now.getYear()-1, 11, 1);
+            year = Year.now().getValue()-1;
+        }
+        else {
             composeDate = new Date(now.getYear(), now.getMonth()-1, 1);
-        if(dat.getMonth()==composeDate.getMonth() && dat.getYear()==Year.now().getValue()){
+            year = Year.now().getValue();
+        }
+        if(dat.getMonth()==composeDate.getMonth() && dat.getYear()==year){
             return true;
         }else{
             return false;
