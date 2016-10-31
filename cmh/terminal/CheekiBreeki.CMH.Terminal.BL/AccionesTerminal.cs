@@ -342,8 +342,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     ESTADO_ATEN estadoatencion = new ESTADO_ATEN();
                     estadoatencion.NOM_ESTADO_ATEN = "Anulado";
                     estadoatencion = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == estadoatencion.NOM_ESTADO_ATEN).FirstOrDefault();
+
+                    atencion = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
                     atencion.ID_ESTADO_ATEN = estadoatencion.ID_ESTADO_ATEN;
-                    conexionDB.ATENCION_AGEN.Add(atencion);
                     conexionDB.SaveChangesAsync();
                     return true;
                 }

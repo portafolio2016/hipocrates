@@ -1625,7 +1625,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         {
             // Caso 1: Envío correcto
             string receptor1, titulo1, cuerpo1, archivo1;
-            receptor1 = "fjaqueg@gmail.com";
+            receptor1 = "gonzalo.lopezsa@gmail.com";
             titulo1 = "Prueba de correos CMH";
             cuerpo1 = "Esta es una prueba exitosa del envío de correos para el portafolio 2016";
             archivo1 = "../../file.pdf";
@@ -2223,7 +2223,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
                 context.ATENCION_AGEN.Add(aten_agen1);
                 context.SaveChangesAsync();
-
 
                 Boolean res1 = at.anularAtencion(aten_agen1);
                 Boolean resultadoEsperado1 = true;
@@ -3054,7 +3053,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 personal1.HASHED_PASS = "4231";
                 personal1.RUT = rut1;
                 personal1.VERIFICADOR = "K";
-                personal1.EMAIL = "fjaqueg@gmail.com";
+                personal1.EMAIL = "tmunizq@gmail.com";
                 context.PERSONAL.Add(personal1);
                 context.SaveChangesAsync();
 
@@ -3085,10 +3084,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
             using (var context = new CMHEntities())
             {
-                PERSONAL personalEliminar = context.PERSONAL.Where(d => d.RUT == rut1).FirstOrDefault();
-                context.PERS_MEDICO.Remove(personalEliminar.PERS_MEDICO.FirstOrDefault());
-                context.PERSONAL.Remove(personalEliminar);
-                context.SaveChangesAsync();
+                try
+                {
+                    PERSONAL personalEliminar = context.PERSONAL.Where(d => d.RUT == rut1).FirstOrDefault();
+                    context.PERS_MEDICO.Remove(personalEliminar.PERS_MEDICO.FirstOrDefault());
+                    context.PERSONAL.Remove(personalEliminar);
+                    context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                { }
             }
         }
         #endregion
