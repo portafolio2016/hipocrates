@@ -1656,5 +1656,15 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         }
         #endregion
 
+        #region Generar reporte caja
+        [TestMethod]
+        public void testGenerarReporteCaja() 
+        {
+            //TODO: preparar test
+            //TODO: implementar test
+            //TODO: implementar test 2
+        }
+        #endregion
+
     }
 }
