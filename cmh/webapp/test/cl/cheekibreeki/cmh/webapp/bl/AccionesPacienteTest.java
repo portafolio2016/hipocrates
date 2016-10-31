@@ -272,7 +272,7 @@ public class AccionesPacienteTest {
         AtencionAgen atencion = crearAtencionAgendada(estadoVigente, medico, bloque);
         //Caso 1: obtener 1 horas disponibles
         HorasDisponibles horasDisponibles = accionesPaciente.horasDisponiblesMedico(medico, new Date());
-        if(horasDisponibles.getHoras().size() > 1){
+        if(horasDisponibles.getHoras().size() >= 1){
             
         }else{
             fail();
