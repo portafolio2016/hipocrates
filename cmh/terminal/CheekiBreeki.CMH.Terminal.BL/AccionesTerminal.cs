@@ -14,8 +14,35 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-001
         public Boolean agendarAtencion(ATENCION_AGEN atencion)
         {
-            //TODO: implementar
-            return false;
+            
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion invalida");
+                }
+                else if (atencion.FECHOR == DateTime.MinValue || 
+                         atencion.FECHOR == null)
+                {
+                    throw new Exception("Fecha vacía");
+                }
+                else if (atencion.OBSERVACIONES == String.Empty ||
+                         atencion.OBSERVACIONES == null)
+                {
+                    throw new Exception("Observacion vacia");
+                }
+                else
+                {
+                    conexionDB.ATENCION_AGEN.Add(atencion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-005
@@ -134,6 +161,13 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        //ECU-009
+        //public Boolean crearFichaMedica(FICHA ficha)
+        //{
+        //    //TODO: implementar
+        //    return false;
+        //}
+
         //ECU-010
         /*public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
         {
@@ -178,17 +212,86 @@ namespace CheekiBreeki.CMH.Terminal.BL
         #endregion
 
         //ECU-012
-        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, ORDEN_ANALISIS ordenAnalisis)
+        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, RES_ATENCION resultadoAtencion) 
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion agendada nula");
+                }
+
+                else if (atencion.FECHOR == null)
+                {
+                    throw new Exception("Fecha nula");
+                }
+
+                else if (atencion.OBSERVACIONES == null || atencion.OBSERVACIONES == String.Empty)
+                {
+                    throw new Exception("Observacion nula o vacía");
+                }
+
+                else if (resultadoAtencion.ID_ATENCION_AGEN == null)
+                {
+                    throw new Exception("ID de atencion agendada es nulo");
+                }
+
+                else if (resultadoAtencion.ID_ORDEN_ANALISIS == null)
+                {
+                    throw new Exception("ID de orden de analisis es nulo");
+                }
+                
+                else
+                {
+                    ORDEN_ANALISIS ordenAnalisis = new ORDEN_ANALISIS();
+                    ordenAnalisis.FECHOR_EMISION = DateTime.Today;
+                    conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
+                    conexionDB.SaveChangesAsync();
+
+                    resultadoAtencion.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                    resultadoAtencion.ID_ORDEN_ANALISIS = ordenAnalisis.ID_ORDEN_ANALISIS;
+                    conexionDB.RES_ATENCION.Add(resultadoAtencion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-013
         public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(ordenAnalisis))
+                {
+                    throw new Exception("Orden nula");
+                }
+
+                else if (ordenAnalisis.FECHOR_RECEP <= DateTime.Today)
+                {
+                    throw new Exception("Fecha invalida");
+                }
+
+                else
+                {
+                    ordenAnalisis = conexionDB.ORDEN_ANALISIS.Find(ordenAnalisis.ID_ORDEN_ANALISIS);
+                    ordenAnalisis.FECHOR_RECEP = DateTime.Today;
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+
         }
 
         //ECU-014
@@ -202,10 +305,41 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-016
         public Boolean anularAtencion(ATENCION_AGEN atencion)
         {
-            //TODO: implementar
-            return false;
+            
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion invalida");
+                }
+                else if (atencion.FECHOR == DateTime.MinValue ||
+                         atencion.FECHOR == null)
+                {
+                    throw new Exception("Fecha vacía");
+                }
+                else if (atencion.OBSERVACIONES == String.Empty ||
+                         atencion.OBSERVACIONES == null)
+                {
+                    throw new Exception("Observacion vacia");
+                }
+                else
+                {
+                    ESTADO_ATEN estadoatencion = new ESTADO_ATEN();
+                    estadoatencion.NOM_ESTADO_ATEN = "Anulado";
+                    estadoatencion = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == estadoatencion.NOM_ESTADO_ATEN).FirstOrDefault();
+                    atencion.ID_ESTADO_ATEN = estadoatencion.ID_ESTADO_ATEN;
+                    conexionDB.ATENCION_AGEN.Add(atencion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
-
+        
         //ECU-017
         /// <summary>
         /// Se registra una caja con el respectivo funcionario que la abrio.
@@ -322,8 +456,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
             ReporteCaja reporteCaja = null;
             return reporteCaja;
         }
+        
+        public Boolean orualizarInventarioEquipo(INVENTARIO inventario)
 
-        public Boolean actualizarInventarioEquipo(INVENTARIO inventario)
         {
             //TODO: implementar
             return false;
@@ -810,7 +945,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Nombre, código o precio vacío");
                 }
-                else if (prestacion.CODIGO_PRESTACION == null || prestacion.CODIGO_PRESTACION == "")
+                else if (prestacion.CODIGO_PRESTACION == null || prestacion.CODIGO_PRESTACION == String.Empty)
                 {
                     throw new Exception("Código vacío");
                 }
