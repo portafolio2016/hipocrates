@@ -102,12 +102,13 @@ public class AccionesPaciente {
     public boolean agendarAtencion(AtencionAgen atencion) throws Exception{
         //Revisar si el bloque de la atención está en las horas disponibles del médico
         //obtener médico
-        PersMedico medico = atencion.getIdPersAtiende();
+//        PersMedico medico = atencion.getIdPersAtiende();
+        PersMedico medico = (PersMedico)Controller.findById(PersMedico.class, atencion.getIdPersAtiende().getIdPersonalMedico());
         //Obtener día
         Date date = atencion.getFechor();
         HorasDisponibles horasDisponibles = this.horasDisponiblesMedico(medico, date);
         //Si medico no tiene horas disponibles, excepcion
-        if (horasDisponibles.getHoras().size() >= 1){
+        if (horasDisponibles.getHoras().size() < 1){
             throw new Exception("El médico no tiene horas disponibles");
         }
         //si está en las horas disponibles, entonces ingresar
