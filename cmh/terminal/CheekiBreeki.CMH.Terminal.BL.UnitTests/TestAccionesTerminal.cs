@@ -402,9 +402,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             using (var context = new CMHEntities())
             {
                 int rut = 18861423;
-                PACIENTE previo = context.PACIENTE.Where(d => d.RUT == rut).FirstOrDefault();
+                List<PACIENTE> previo = context.PACIENTE.Where(d => d.RUT == rut).ToList();
                 if (!Util.isObjetoNulo(previo))
-                    context.PACIENTE.Remove(previo);
+                    context.PACIENTE.RemoveRange(previo);
 
                 PACIENTE paciente1 = new PACIENTE();
 
@@ -442,7 +442,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                            select p;
                 if (pac1.Count<PACIENTE>() > 0)
                 {
-                    entities.PACIENTE.Remove(pac1.First<PACIENTE>());
+                    entities.PACIENTE.RemoveRange(pac1);
                     entities.SaveChangesAsync();
                 }
             }
