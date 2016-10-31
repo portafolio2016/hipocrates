@@ -70,32 +70,15 @@ public class AccionesPaciente {
      */
     public HorasDisponibles horasDisponiblesMedico(PersMedico medico, Date dia) throws Exception{
        //Obtener todas las atenciones Vigentes del médico
-       Collection<AtencionAgen> atencionesVigentes = buscarAtencionMedicoPorEstado(medico, "Vigente");
+       ArrayList<AtencionAgen> atencionesVigentes = buscarAtencionMedicoPorEstado(medico, "Vigente");
        //Obtener todas las atenciones para el día
-       Collection<AtencionAgen> atencionesFiltradasPorDia = filtrarAtencionPorDia(atencionesVigentes, dia);
-       //Obtener los horarios del medico
-       Collection<Horario> horarios = medico.getHorarioCollection();
-       //Obtener lista de bloques
-       ArrayList<Bloque> bloques = new ArrayList<>();
-       for(Horario horario : horarios){
-           bloques.add(horario.getIdBloque());
-       }
-       //Filtrar bloques por dia de la semana
-       //No agregar bloques si hay una atencion en el mismo bloque
-       DiaSem diaPorBuscar = buscarDiaPorDate(dia);
-       ArrayList<Bloque> bloquesFiltrados = new ArrayList<>();
-       for(Bloque bloque : bloques){
-           if(bloque.getIdDiaSem().getIdDia() == diaPorBuscar.getIdDia()){
-               for(AtencionAgen atencion : atencionesVigentes){
-                   if(!(atencion.getIdBloque().getIdBloque() == bloque.getIdBloque())){
-                       bloquesFiltrados.add(bloque);
-                   }
-               }
-               
-           }
-       }
+       ArrayList<AtencionAgen> atencionesFiltradasPorDia = filtrarAtencionPorDia(atencionesVigentes, dia);
+       //Obtener los bloques del medico para el día solicitado
+       ArrayList<Bloque> bloquesDia = getBloquesMedico(medico, dia);
+       //Remover bloques que tengan una atencion agendada
+       ArrayList<Bloque> bloquesLibres = removerBloquesAgendados(bloquesDia, atencionesVigentes);
        //convertir bloque a hora disponible
-       HorasDisponibles horas = new HorasDisponibles(dia, bloquesFiltrados);
+       HorasDisponibles horas = new HorasDisponibles(dia, bloquesLibres);
        return horas;
     }
     
@@ -119,12 +102,12 @@ public class AccionesPaciente {
     public boolean agendarAtencion(AtencionAgen atencion) throws Exception{
         //Revisar si el bloque de la atención está en las horas disponibles del médico
         //obtener médico
-        PersMedico medico = (PersMedico)Controller.findById(PersMedico.class, atencion.getIdPersAtiende().getIdPersonalMedico());
+        PersMedico medico = atencion.getIdPersAtiende();
         //Obtener día
         Date date = atencion.getFechor();
         HorasDisponibles horasDisponibles = this.horasDisponiblesMedico(medico, date);
         //Si medico no tiene horas disponibles, excepcion
-        if (horasDisponibles.getHoras().size() > 1){
+        if (horasDisponibles.getHoras().size() >= 1){
             throw new Exception("El médico no tiene horas disponibles");
         }
         //si está en las horas disponibles, entonces ingresar
@@ -242,9 +225,9 @@ public class AccionesPaciente {
         return (DiaSem)diaSemList.get(0);
     }
     
-    private Collection<AtencionAgen> buscarAtencionMedicoPorEstado(PersMedico medico, String nombreEstado){
+    private ArrayList<AtencionAgen> buscarAtencionMedicoPorEstado(PersMedico medico, String nombreEstado){
         Collection<AtencionAgen> atencionList = medico.getAtencionAgenCollection1();
-        Collection<AtencionAgen> atencionesFiltradas = new ArrayList<>();
+        ArrayList<AtencionAgen> atencionesFiltradas = new ArrayList<>();
         for(AtencionAgen atencion : atencionList){
             if(atencion.getIdEstadoAten().getNomEstadoAten().equalsIgnoreCase(nombreEstado)){
                 atencionesFiltradas.add(atencion);
@@ -253,8 +236,8 @@ public class AccionesPaciente {
         return atencionesFiltradas;
     }
     
-    private Collection<AtencionAgen> filtrarAtencionPorDia(Collection<AtencionAgen> atenciones, Date dia){
-        Collection<AtencionAgen> atencionesFiltradas = new ArrayList<>();
+    private ArrayList<AtencionAgen> filtrarAtencionPorDia(Collection<AtencionAgen> atenciones, Date dia){
+        ArrayList<AtencionAgen> atencionesFiltradas = new ArrayList<>();
         for(AtencionAgen atencion : atenciones){
             Calendar cal1 = Calendar.getInstance();
             Calendar cal2 = Calendar.getInstance();
@@ -267,5 +250,40 @@ public class AccionesPaciente {
             }
        }
        return atencionesFiltradas;
+    }
+    
+    private ArrayList<Bloque> getBloquesMedico(PersMedico medico, Date date) throws Exception{
+        ArrayList<Bloque> bloquesFiltrados = new ArrayList<>();
+        Collection<Horario> horarios = medico.getHorarioCollection();
+        DiaSem dia = buscarDiaPorDate(date);
+        for(Horario horario : horarios){
+            if(horario.getIdBloque().getIdDiaSem().getIdDia() == dia.getIdDia()){
+                bloquesFiltrados.add(horario.getIdBloque());
+            }
+        }
+        return bloquesFiltrados;
+    }
+    
+    private ArrayList<Bloque> removerBloquesAgendados(ArrayList<Bloque> bloques, ArrayList<AtencionAgen> atenciones){
+        ArrayList<Bloque> result = new ArrayList<>();
+        outer:
+        for(Bloque bloque : bloques){
+            if(isBloqueInAtenciones(bloque, atenciones)){
+                
+            }else{
+                result.add(bloque);
+            }
+        }
+        return result;
+    }
+    
+    private boolean isBloqueInAtenciones(Bloque bloque, ArrayList<AtencionAgen> atenciones){
+        boolean result = false;
+        for(AtencionAgen atencion : atenciones){
+            if(bloque.getIdBloque() == atencion.getIdBloque().getIdBloque()){
+                result = true;
+            }
+        }
+        return result;
     }
 }

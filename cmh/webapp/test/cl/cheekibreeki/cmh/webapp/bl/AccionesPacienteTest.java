@@ -298,7 +298,8 @@ public class AccionesPacienteTest {
         EstadoAten estadoVigente = crearEstadoAten("Vigente");
         EstadoAten estadoAnulada = crearEstadoAten("Anulada");
         //Crear personal
-        Personal personal = crearPersonal((short)0, "El Hombre Test", "Apellido Test", 1234567, '1');
+        Random random = new Random();
+        Personal personal = crearPersonal((short)0, "El Hombre Test", "Apellido Test", random.nextInt(999999), '1');
         //Crear especialidad
         Especialidad especialidad = crearEspecialidad("EspecialidadTest");
         //Crear personal médico y asignar personal y especialidad
@@ -312,7 +313,6 @@ public class AccionesPacienteTest {
         Horario horario = crearHorario(bloque, personalMedico);
         Horario horario2 = crearHorario(bloque2, personalMedico);
         //crear paciente
-        Random random = new Random();
         Paciente p = crearPaciente(random.nextInt(9999999), '0');
         
         //Caso 1: agendado correctamente
