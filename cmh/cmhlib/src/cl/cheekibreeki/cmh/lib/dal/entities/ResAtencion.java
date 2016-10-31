@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ResAtencion.findByExtArchivo", query = "SELECT r FROM ResAtencion r WHERE r.extArchivo = :extArchivo"),
     @NamedQuery(name = "ResAtencion.findByIdAtencionAgen", query = "SELECT r FROM ResAtencion r WHERE r.idAtencionAgen = :idAtencionAgen")
 //    ,@NamedQuery(name = "ResAtencion.findByIdPersonalMedico", query = "SELECT r FROM ResAtencion r WHERE r.idPersonalMedico = :idPersonalMedico")
-})
+    @NamedQuery(name = "ResAtencion.findByExtArchivo", query = "SELECT r FROM ResAtencion r WHERE r.extArchivo = :extArchivo")})
 public class ResAtencion implements Serializable {
 
     private static final long serialVersionUID = 1L;
