@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="DESKTOP-JCP54BV" name="cl.cheekibreeki.cmh.servpago.ServPagoTest" skipped="0" tests="1" time="2.54" timestamp="2016-10-30T23:23:39">
+<testsuite errors="0" failures="0" hostname="DESKTOP-JCP54BV" name="cl.cheekibreeki.cmh.servpago.ServPagoTest" skipped="0" tests="1" time="1.784" timestamp="2016-10-31T01:18:36">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="CL" />
@@ -49,7 +49,6 @@
     <property name="libs.JWSAntTasks.maven-pom" value="" />
     <property name="libs.jstl.classpath" value="C:\Program Files\NetBeans 8.1\enterprise\modules\ext\jstl-impl.jar;C:\Program Files\NetBeans 8.1\enterprise\modules\ext\jstl-api.jar" />
     <property name="libs.testng.src" value="" />
-    <property name="nu.validator.spec.alt-advice" value="jar:file:/C:/Program%20Files/NetBeans%208.1/ide/modules/ext/validator.jar!/nu/validator/localentities/files/wiki_whatwg_org_wiki_Validator_nu_alt_advice" />
     <property name="libs.spring-webmvc3.0.src" value="" />
     <property name="libs.restapi.classpath" value="C:\Program Files\NetBeans 8.1\enterprise\modules\ext\jaxrs-2.0\javax.ws.rs-api-2.0.jar" />
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/" />
@@ -63,7 +62,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner cl.cheekibreeki.cmh.servpago.ServPagoTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\results\TEST-cl.cheekibreeki.cmh.servpago.ServPagoTest.xml crashfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junitvmwatcher1744447028674636939.properties propsfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junit2832591794624532921.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner cl.cheekibreeki.cmh.servpago.ServPagoTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\results\TEST-cl.cheekibreeki.cmh.servpago.ServPagoTest.xml crashfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junitvmwatcher6292869196977197762.properties propsfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junit5488399807883517103.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -285,19 +284,18 @@
     <property name="libs.spring-framework300.javadoc" value="" />
     <property name="libs.absolutelayout.javadoc" value="" />
     <property name="java.specification.name" value="Java Platform API Specification" />
-    <property name="nu.validator.spec.microsyntax-descriptions" value="jar:file:/C:/Program%20Files/NetBeans%208.1/ide/modules/ext/validator.jar!/nu/validator/localentities/files/wiki_whatwg_org_wiki_MicrosyntaxDescriptions" />
     <property name="libs.CopyLibs.prop-version" value="2.0" />
     <property name="libraries.dir" value="C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib" />
     <property name="do.archive+main.class.available" value="true" />
     <property name="java.specification.vendor" value="Oracle Corporation" />
     <property name="libs.javac-api.classpath" value="C:\Program Files\NetBeans 8.1\java\modules\ext\nb-javac-api.jar" />
     <property name="java.version" value="1.8.0_65" />
-    <property name="javadoc.version" value="false" />
     <property name="run.jvmargs.ide" value="" />
+    <property name="javadoc.version" value="false" />
     <property name="libs.MySQLDriver.javadoc" value="" />
     <property name="org.openide.version" value="deprecated" />
-    <property name="platform.java" value="C:\Program Files\Java\jdk1.8.0_65\jre/bin/java" />
     <property name="source.encoding" value="UTF-8" />
+    <property name="platform.java" value="C:\Program Files\Java\jdk1.8.0_65\jre/bin/java" />
     <property name="ap.cmd.line.internal" value="" />
     <property name="libs.eclipselinkmodelgen.maven-pom" value="" />
     <property name="libs.jsp-compilation-syscp.javadoc" value="" />
@@ -313,20 +311,20 @@
     <property name="work.dir" value="C:\Users\palan\Documents\Git\hipocrates\cmh\servPago" />
     <property name="libs.jaxb.classpath" value="C:\Program Files\NetBeans 8.1\ide\modules\ext\jaxb\jaxb-impl.jar;C:\Program Files\NetBeans 8.1\ide\modules\ext\jaxb\jaxb-xjc.jar;C:\Program Files\NetBeans 8.1\ide\modules\ext\jaxb\jaxb1-impl.jar;C:\Program Files\NetBeans 8.1\ide\modules\ext\jaxb\activation.jar;C:\Program Files\NetBeans 8.1\ide\modules\ext\jaxb\api\jaxb-api.jar;C:\Program Files\NetBeans 8.1\ide\modules\ext\jaxb\api\jsr173_1.0_api.jar" />
     <property name="do.depend" value="false" />
-    <property name="has.persistence.xml" value="true" />
     <property name="dist.javadoc.dir" value="dist/javadoc" />
+    <property name="has.persistence.xml" value="true" />
     <property name="libs.j2me_common_ant.classpath" value="C:\Program Files\NetBeans 8.1\mobility\modules\org-netbeans-modules-j2me-common-ant.jar;C:\Program Files\NetBeans 8.1\java\modules\org-netbeans-modules-classfile.jar" />
-    <property name="libs.swing-layout.classpath" value="C:\Program Files\NetBeans 8.1\platform\modules\ext\swing-layout-1.0.4.jar" />
     <property name="libs.spring-webmvc3.0.classpath" value="C:\Program Files\NetBeans 8.1\java\modules\ext\spring-3.0\spring-webmvc-3.2.7.RELEASE.jar" />
+    <property name="libs.swing-layout.classpath" value="C:\Program Files\NetBeans 8.1\platform\modules\ext\swing-layout-1.0.4.jar" />
     <property name="libs.javaee-web-api-7.0.maven-pom" value="" />
     <property name="libs.restlib.src" value="" />
     <property name="javac.source" value="1.8" />
     <property name="build.generated.dir" value="build/generated" />
     <property name="line.separator" value="&#xd;&#xa;" />
     <property name="java.specification.version" value="1.8" />
-    <property name="libraries.path" value="C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\lib\nblibraries.properties" />
     <property name="java.vm.info" value="mixed mode" />
     <property name="libs.jaxws21.maven-pom" value="" />
+    <property name="libraries.path" value="C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\lib\nblibraries.properties" />
     <property name="nb.junit.batch" value="true" />
     <property name="junit.forkmode" value="perTest" />
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_65\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_65\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_65\jre\classes" />
@@ -335,12 +333,12 @@
     <property name="build.test.classes.dir" value="build/test/classes" />
     <property name="src.dir" value="src" />
     <property name="sun.awt.keepWorkingSetOnMinimize" value="true" />
-    <property name="annotation.processing.enabled" value="true" />
     <property name="libs.jpa2-persistence.src" value="" />
+    <property name="annotation.processing.enabled" value="true" />
     <property name="libs.jsf20.src" value="" />
     <property name="libs.jpa20-persistence.src" value="" />
-    <property name="libs.jsf12.src" value="" />
     <property name="libs.DataBindingME-SVG.maven-pom" value="" />
+    <property name="libs.jsf12.src" value="" />
     <property name="libs.JAVADB_DRIVER_LABEL.maven-pom" value="" />
     <property name="libs.struts.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\struts-1.3.10-javadoc.zip" />
     <property name="ignore.failing.tests" value="true" />
@@ -367,11 +365,11 @@
     <property name="nb.junit.single" value="false" />
     <property name="do.jar" value="true" />
     <property name="libs.junit_4.displayName" value="JUnit 4.12" />
-    <property name="libs.JAVADB_DRIVER_LABEL.javadoc" value="" />
     <property name="libs.javaee-endorsed-api-6.0.maven-pom" value="" />
+    <property name="libs.JAVADB_DRIVER_LABEL.javadoc" value="" />
     <property name="netbeans.dirs" value="C:\Program Files\NetBeans 8.1\nb;C:\Program Files\NetBeans 8.1\ergonomics;C:\Program Files\NetBeans 8.1\ide;C:\Program Files\NetBeans 8.1\extide;C:\Program Files\NetBeans 8.1\java;C:\Program Files\NetBeans 8.1\apisupport;C:\Program Files\NetBeans 8.1\webcommon;C:\Program Files\NetBeans 8.1\websvccommon;C:\Program Files\NetBeans 8.1\enterprise;C:\Program Files\NetBeans 8.1\mobility;C:\Program Files\NetBeans 8.1\profiler;C:\Program Files\NetBeans 8.1\python;C:\Program Files\NetBeans 8.1\php;C:\Program Files\NetBeans 8.1\identity;C:\Program Files\NetBeans 8.1\harness;C:\Program Files\NetBeans 8.1\cnd;C:\Program Files\NetBeans 8.1\cndext;C:\Program Files\NetBeans 8.1\dlight;C:\Program Files\NetBeans 8.1\groovy;C:\Program Files\NetBeans 8.1\extra;C:\Program Files\NetBeans 8.1\javacard;C:\Program Files\NetBeans 8.1\javafx" />
-    <property name="libs.jstl.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
     <property name="libs.jsf20.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
+    <property name="libs.jstl.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
     <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_65\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext" />
     <property name="libs.metro.src" value="" />
     <property name="endorsed.classpath" value="" />
@@ -390,8 +388,8 @@
     <property name="application.args" value="" />
     <property name="libs.EclipseLink-GlassFish-v3.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
     <property name="libs.javaee-api-7.0.maven-pom" value="" />
-    <property name="main.class.available" value="true" />
     <property name="sun.awt.enableExtraMouseButtons" value="true" />
+    <property name="main.class.available" value="true" />
     <property name="sun.desktop" value="windows" />
     <property name="ant.file.type.servpago-impl" value="file" />
     <property name="libs.hibernate4-persistence.src" value="" />
@@ -400,8 +398,8 @@
     <property name="libs.restlib.javadoc" value="" />
     <property name="libs.JAXB-ENDORSED.classpath" value="C:\Program Files\NetBeans 8.1\ide\modules\ext\jaxb\api\jaxb-api.jar" />
     <property name="nb.internal.action.name" value="test" />
-    <property name="libs.eclipselink.classpath" value="C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/eclipselink/eclipselink.jar;C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/eclipselink/javax.persistence_2.1.0.v201304241213.jar;C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/eclipselink/org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar" />
     <property name="libs.javaee-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
+    <property name="libs.eclipselink.classpath" value="C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/eclipselink/eclipselink.jar;C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/eclipselink/javax.persistence_2.1.0.v201304241213.jar;C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/lib/eclipselink/org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar" />
     <property name="libs.beans-binding.javadoc" value="C:\Program Files\NetBeans 8.1\java\docs\beansbinding-1.2.1-doc.zip" />
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment" />
     <property name="java.vm.vendor" value="Oracle Corporation" />
@@ -436,11 +434,11 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="cl.cheekibreeki.cmh.servpago.ServPagoTest" name="testPagarMedicos" time="2.353" />
+  <testcase classname="cl.cheekibreeki.cmh.servpago.ServPagoTest" name="testPagarMedicos" time="1.653" />
   <system-out><![CDATA[pagarMedicos
-[EL Info]: 2016-10-30 20:23:41.115--ServerSession(602928593)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Info]: connection: 2016-10-30 20:23:41.921--ServerSession(602928593)--file:/C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/build/classes/_cmhlibPU login successful
-[EL Warning]: metamodel: 2016-10-30 20:23:41.936--The collection of metamodel types is empty. Model classes may not have been found during entity search for Java SE and some Java EE container managed persistence units.  Please verify that your entity classes are referenced in persistence.xml using either <class> elements or a global <exclude-unlisted-classes>false</exclude-unlisted-classes> element
+[EL Info]: 2016-10-30 22:18:38.09--ServerSession(602928593)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
+[EL Info]: connection: 2016-10-30 22:18:38.654--ServerSession(602928593)--file:/C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/build/classes/_cmhlibPU login successful
+[EL Warning]: metamodel: 2016-10-30 22:18:38.667--The collection of metamodel types is empty. Model classes may not have been found during entity search for Java SE and some Java EE container managed persistence units.  Please verify that your entity classes are referenced in persistence.xml using either <class> elements or a global <exclude-unlisted-classes>false</exclude-unlisted-classes> element
 NamedQuery of name: Especialidad.findByNomEspecialidad not found.
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
