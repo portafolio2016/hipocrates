@@ -161,16 +161,13 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
-<<<<<<< HEAD
         //ECU-009
-        public Boolean crearFichaMedica(FICHA ficha)
-        {
-            //TODO: implementar
-            return false;
-        }
+        //public Boolean crearFichaMedica(FICHA ficha)
+        //{
+        //    //TODO: implementar
+        //    return false;
+        //}
 
-=======
->>>>>>> dev
         //ECU-010
         public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
         {
@@ -186,10 +183,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-012
-        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, ORDEN_ANALISIS ordenAnalisis) 
+        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, ORDEN_ANALISIS ordenAnalisis, RES_ATENCION resultadoAtencion) 
         {
-            //tablas res_atencion... orden_analisis CAMPOS fechor_emision fechor_recep
-            //Al generar una orden de análisis, tiene que ir relacionada con una atencion
             try
             {
                 if (Util.isObjetoNulo(ordenAnalisis))
@@ -212,16 +207,28 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     throw new Exception("Fecha nula");
                 }
 
-                else if (atencion.OBSERVACIONES == null || atencion.OBSERVACIONES == "")
+                else if (atencion.OBSERVACIONES == null || atencion.OBSERVACIONES == String.Empty)
                 {
                     throw new Exception("Observacion nula o vacía");
+                }
+
+                else if (resultadoAtencion.ID_ATENCION_AGEN == null)
+                {
+                    throw new Exception("ID de atencion agendada es nulo");
+                }
+
+                else if (resultadoAtencion.ID_ORDEN_ANALISIS == null)
+                {
+                    throw new Exception("ID de orden de analisis es nulo");
                 }
                 
                 else
                 {
-                    ATENCION_AGEN aten1 = new ATENCION_AGEN();
-                    aten1.ID_ATENCION_AGEN = ordenAnalisis.ID_ORDEN_ANALISIS;
+                    ordenAnalisis.FECHOR_EMISION = DateTime.Today;
                     conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
+                    resultadoAtencion.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                    resultadoAtencion.ID_ORDEN_ANALISIS = resultadoAtencion.ID_ORDEN_ANALISIS;
+                    conexionDB.RES_ATENCION.Add(resultadoAtencion);
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
@@ -231,15 +238,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 Console.WriteLine(ex.Message);
                 return false;
             }
-
-        
         }
 
         //ECU-013
         public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis)
         {
-            //tablas res_atencion... orden_analisis CAMPOS fechor_emision fechor_recep
-            //Al generar una orden de análisis, tiene que ir relacionada con una atencion
             try
             {
                 if (Util.isObjetoNulo(ordenAnalisis))
@@ -254,6 +257,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
                 else
                 {
+                    conexionDB.ORDEN_ANALISIS.Where(d => d.ID_ORDEN_ANALISIS == ordenAnalisis.ID_ORDEN_ANALISIS).FirstOrDefault();
                     ordenAnalisis.FECHOR_RECEP = DateTime.Today;
                     conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
                     conexionDB.SaveChangesAsync();
@@ -301,8 +305,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     ESTADO_ATEN estadoatencion = new ESTADO_ATEN();
                     estadoatencion.NOM_ESTADO_ATEN = "Anulado";
-                    conexionDB.ESTADO_ATEN.Add(estadoatencion);
-                    atencion.ID_ESTADO_ATEN = estadoatencion.ID_ESTADO_ATEN;
+                    conexionDB.ESTADO_ATEN.Where(d => d.ID_ESTADO_ATEN == estadoatencion.ID_ESTADO_ATEN).FirstOrDefault();
                     conexionDB.ATENCION_AGEN.Add(atencion);
                     conexionDB.SaveChangesAsync();
                     return true;
@@ -431,13 +434,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
             ReporteCaja reporteCaja = null;
             return reporteCaja;
         }
-<<<<<<< HEAD
         
         public Boolean orualizarInventarioEquipo(INVENTARIO inventario)
-=======
 
-        public Boolean actualizarInventarioEquipo(INVENTARIO inventario)
->>>>>>> dev
         {
             //TODO: implementar
             return false;
@@ -924,7 +923,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Nombre, código o precio vacío");
                 }
-                else if (prestacion.CODIGO_PRESTACION == null || prestacion.CODIGO_PRESTACION == "")
+                else if (prestacion.CODIGO_PRESTACION == null || prestacion.CODIGO_PRESTACION == String.Empty)
                 {
                     throw new Exception("Código vacío");
                 }
