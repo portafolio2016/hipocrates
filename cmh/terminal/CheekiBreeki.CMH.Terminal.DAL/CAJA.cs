@@ -23,6 +23,9 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public Nullable<System.DateTime> FECHOR_APERTURA { get; set; }
         public Nullable<System.DateTime> FECHOR_CIERRE { get; set; }
         public Nullable<int> ID_FUNCIONARIO { get; set; }
+        public Nullable<int> CANT_EFECTIVO_INI { get; set; }
+        public Nullable<int> CANT_EFECTIVO_FIN { get; set; }
+        public Nullable<int> CANT_CHEQUE_FIN { get; set; }
     
         public virtual ICollection<PAGO> PAGO { get; set; }
         public virtual FUNCIONARIO FUNCIONARIO { get; set; }

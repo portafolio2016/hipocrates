@@ -62,6 +62,9 @@
           <Property Name="FECHOR_APERTURA" Type="date" />
           <Property Name="FECHOR_CIERRE" Type="date" />
           <Property Name="ID_FUNCIONARIO" Type="number" Precision="8" Scale="0" />
+          <Property Name="CANT_EFECTIVO_INI" Type="number" Precision="8" Scale="0" />
+          <Property Name="CANT_EFECTIVO_FIN" Type="number" Precision="8" Scale="0" />
+          <Property Name="CANT_CHEQUE_FIN" Type="number" Precision="8" Scale="0" />
         </EntityType>
         <EntityType Name="CARGO">
           <Key>
@@ -931,6 +934,9 @@
           <Property Name="FECHOR_APERTURA" Type="DateTime" />
           <Property Name="FECHOR_CIERRE" Type="DateTime" />
           <Property Name="ID_FUNCIONARIO" Type="Int32" />
+          <Property Name="CANT_EFECTIVO_INI" Type="Int32" />
+          <Property Name="CANT_EFECTIVO_FIN" Type="Int32" />
+          <Property Name="CANT_CHEQUE_FIN" Type="Int32" />
           <NavigationProperty Name="PAGO" Relationship="Self.FK_CAJA_PAGO" FromRole="CAJA" ToRole="PAGO" />
           <NavigationProperty Name="FUNCIONARIO" Relationship="Self.FK_FUNCIONARIO_CAJA" FromRole="CAJA" ToRole="FUNCIONARIO" />
         </EntityType>
@@ -1837,6 +1843,9 @@
                 <ScalarProperty Name="FECHOR_APERTURA" ColumnName="FECHOR_APERTURA" />
                 <ScalarProperty Name="FECHOR_CIERRE" ColumnName="FECHOR_CIERRE" />
                 <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
+                <ScalarProperty Name="CANT_EFECTIVO_INI" ColumnName="CANT_EFECTIVO_INI" />
+                <ScalarProperty Name="CANT_EFECTIVO_FIN" ColumnName="CANT_EFECTIVO_FIN" />
+                <ScalarProperty Name="CANT_CHEQUE_FIN" ColumnName="CANT_CHEQUE_FIN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
