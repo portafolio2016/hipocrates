@@ -1,5 +1,7 @@
 package cl.cheekibreeki.cmh.servpago;
 
+import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
+import cl.cheekibreeki.cmh.lib.dal.entities.Especialidad;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

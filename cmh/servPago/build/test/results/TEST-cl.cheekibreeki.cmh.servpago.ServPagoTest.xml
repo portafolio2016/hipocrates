@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="0" hostname="DESKTOP-JCP54BV" name="cl.cheekibreeki.cmh.servpago.ServPagoTest" skipped="0" tests="1" time="8.16" timestamp="2016-10-30T22:38:49">
+<testsuite errors="0" failures="0" hostname="DESKTOP-JCP54BV" name="cl.cheekibreeki.cmh.servpago.ServPagoTest" skipped="0" tests="1" time="2.54" timestamp="2016-10-30T23:23:39">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="CL" />
@@ -63,7 +63,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner cl.cheekibreeki.cmh.servpago.ServPagoTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\results\TEST-cl.cheekibreeki.cmh.servpago.ServPagoTest.xml crashfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junitvmwatcher1701241153292564328.properties propsfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junit1543330688330518627.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner cl.cheekibreeki.cmh.servpago.ServPagoTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\test\results\TEST-cl.cheekibreeki.cmh.servpago.ServPagoTest.xml crashfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junitvmwatcher1744447028674636939.properties propsfile=C:\Users\palan\Documents\Git\hipocrates\cmh\servPago\build\junit2832591794624532921.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -436,16 +436,11 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.1\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="cl.cheekibreeki.cmh.servpago.ServPagoTest" name="testPagarMedicos" time="7.832">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at cl.cheekibreeki.cmh.servpago.ServPago.pagarMedicos(ServPago.java:97)
-	at cl.cheekibreeki.cmh.servpago.ServPagoTest.testPagarMedicos(ServPagoTest.java:43)
-</error>
-  </testcase>
+  <testcase classname="cl.cheekibreeki.cmh.servpago.ServPagoTest" name="testPagarMedicos" time="2.353" />
   <system-out><![CDATA[pagarMedicos
-[EL Info]: 2016-10-30 19:38:55.573--ServerSession(602928593)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Info]: connection: 2016-10-30 19:38:57.631--ServerSession(602928593)--file:/C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/build/classes/_cmhlibPU login successful
-[EL Warning]: metamodel: 2016-10-30 19:38:57.693--The collection of metamodel types is empty. Model classes may not have been found during entity search for Java SE and some Java EE container managed persistence units.  Please verify that your entity classes are referenced in persistence.xml using either <class> elements or a global <exclude-unlisted-classes>false</exclude-unlisted-classes> element
+[EL Info]: 2016-10-30 20:23:41.115--ServerSession(602928593)--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
+[EL Info]: connection: 2016-10-30 20:23:41.921--ServerSession(602928593)--file:/C:/Users/palan/Documents/Git/hipocrates/cmh/servPago/build/classes/_cmhlibPU login successful
+[EL Warning]: metamodel: 2016-10-30 20:23:41.936--The collection of metamodel types is empty. Model classes may not have been found during entity search for Java SE and some Java EE container managed persistence units.  Please verify that your entity classes are referenced in persistence.xml using either <class> elements or a global <exclude-unlisted-classes>false</exclude-unlisted-classes> element
 NamedQuery of name: Especialidad.findByNomEspecialidad not found.
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

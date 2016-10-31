@@ -35,44 +35,57 @@ public class ServPago {
         Map<String, Object> params = new HashMap<>();
         params.put("nomEspecialidad", "Medico");
         List<? extends Object> especialidadList = Controller.findByQuery("Especialidad.findByNomEspecialidad", params);
-        if(!especialidadList.isEmpty()){
-            Especialidad especialidad = (Especialidad)especialidadList.get(0);
-            //Se obtiene una lista con el personal medico con la especialidad "Medico"
-            params = new HashMap<>();
-            params.put("idEspecialidad", especialidad);
-            List<? extends Object> personalMedicos = Controller.findByQuery("PersMedico.findByIdEspecialidad", params);
-            ArrayList<PersMedico> medicos = new ArrayList<>();
-            for (Object x : personalMedicos) {
-                medicos.add((PersMedico)x);
-            }
-            //Se filtra uno por uno el personal medico para sacar y almacenar sus datos;
-            ArrayList<PagoHonorario> pagosHonorario = new ArrayList<>();
-            for (PersMedico x : medicos) {
-                PagoHonorario ph = new PagoHonorario();
-                ph.setNombre(x.getIdPersonal().getNombres()+" "+x.getIdPersonal().getApellidos());
-                ArrayList<CuenBancaria> cuentaBancaria = new ArrayList<>(x.getCuenBancariaCollection());
-                //Saca la primera cuenta bancaria
-                ph.setBanco(cuentaBancaria.get(0).getIdBanco().getNombre());
-                ph.setTipoCuenta(cuentaBancaria.get(0).getIdTipoCBancaria().getNomCBancaria());
-                ph.setCuenta(cuentaBancaria.get(0).getIdCuenBancaria());
-                //Calcular todos los pagos del mes
-                int subtotal = 0;
-                ArrayList<AtencionAgen> atenciones = new ArrayList<>(x.getAtencionAgenCollection());
-                for (AtencionAgen at : atenciones) {
-                    if(at.getIdEstadoAten().getNomEstadoAten().equals("Terminado") && AtencionDeEsteMes(at.getFechor())){
-                        ArrayList<Pago> pagos = new ArrayList<>(at.getPagoCollection());
-                        for (Pago pago : pagos) {
-                            subtotal += pago.getMontoPago();
-                        }
+        if(especialidadList != null){
+                if(!especialidadList.isEmpty()){
+                    Especialidad especialidad = (Especialidad)especialidadList.get(0);
+                    //Se obtiene una lista con el personal medico con la especialidad "Medico"
+                    params = new HashMap<>();
+                    params.put("idEspecialidad", especialidad);
+                    List<? extends Object> personalMedicos = Controller.findByQuery("PersMedico.findByIdEspecialidad", params);
+                    ArrayList<PersMedico> medicos = new ArrayList<>();
+                    for (Object x : personalMedicos) {
+                        medicos.add((PersMedico)x);
                     }
-                }
-                ph.setSubTotal(subtotal);
-                ph.setTotal(Math.round(subtotal+subtotal*descuento));
-                //Se guarda el pago de honorario en el ArrayList
-                pagosHonorario.add(ph);
-            }
-            //Se tiene que guardar el resgitro en la base de datos
-            
+                    //Se filtra uno por uno el personal medico para sacar y almacenar sus datos;
+                    ArrayList<PagoHonorario> pagosHonorario = new ArrayList<>();
+                    for (PersMedico x : medicos) {
+                        PagoHonorario ph = new PagoHonorario();
+                        ph.setNombre(x.getIdPersonal().getNombres()+" "+x.getIdPersonal().getApellidos());
+                        ArrayList<CuenBancaria> cuentaBancaria = new ArrayList<>(x.getCuenBancariaCollection());
+                        //Saca la primera cuenta bancaria
+                        ph.setBanco(cuentaBancaria.get(0).getIdBanco().getNombre());
+                        ph.setTipoCuenta(cuentaBancaria.get(0).getIdTipoCBancaria().getNomCBancaria());
+                        ph.setCuenta(cuentaBancaria.get(0).getIdCuenBancaria());
+                        //Calcular todos los pagos del mes
+                        int subtotal = 0;
+                        ArrayList<AtencionAgen> atenciones = new ArrayList<>(x.getAtencionAgenCollection());
+                        for (AtencionAgen at : atenciones) {
+                            if(at.getIdEstadoAten().getNomEstadoAten().equals("Terminado") && AtencionDeEsteMes(at.getFechor())){
+                                ArrayList<Pago> pagos = new ArrayList<>(at.getPagoCollection());
+                                for (Pago pago : pagos) {
+                                    subtotal += pago.getMontoPago();
+                                }
+                            }
+                        }
+                        ph.setSubTotal(subtotal);
+                        ph.setTotal(Math.round(subtotal+subtotal*descuento));
+                        //Se guarda el pago de honorario en el ArrayList
+                        pagosHonorario.add(ph);
+                    }
+                    //Se tiene que guardar el resgitro en la base de datos
+                    for (PagoHonorario pago : pagosHonorario) {
+                            //LogPagoHonorario lph = new LogPagoHonorario();
+                            //lph.setNombre(pago.getNombre());
+                            //lph.setBanco(pago.getBanco());
+                            //lph.setTipoCuenta(pago.getTipoCuenta();
+                            //lph.setCuenta(pago.getCuenta());
+                            //lph.setSubTotal(pago.getSubTotal());
+                            //lph.setTotal(Math.round(pago.getTotal());
+                            //lph.setFechor(new Date.from(Instant.now()));
+                            //Object obj = lph;
+                            //result = Controller.upsert(obj);
+                        }
+                 }
         }
         return result;
     }
@@ -94,46 +107,59 @@ public class ServPago {
         Map<String, Object> params = new HashMap<>();
         params.put("nomEspecialidad", esp);
         List<? extends Object> especialidadList = Controller.findByQuery("Especialidad.findByNomEspecialidad", params);
-        if(!especialidadList.isEmpty()){
-            Especialidad especialidad = (Especialidad)especialidadList.get(0);
-            //Se obtiene una lista con el personal medico con la especialidad "Medico"
-            params = new HashMap<>();
-            params.put("idEspecialidad", especialidad);
-            List<? extends Object> personalMedicos = Controller.findByQuery("PersMedico.findByIdEspecialidad", params);
-            ArrayList<PersMedico> medicos = new ArrayList<>();
-            for (Object x : personalMedicos) {
-                medicos.add((PersMedico)x);
-            }
-            //Se filtra uno por uno el personal medico para sacar y almacenar sus datos;
-            ArrayList<PagoHonorario> pagosHonorario = new ArrayList<>();
-            for (PersMedico x : medicos) {
-                PagoHonorario ph = new PagoHonorario();
-                String nombreFull = x.getIdPersonal().getNombres()+" "+x.getIdPersonal().getApellidos();
-                ph.setNombre(nombreFull);
-                ArrayList<CuenBancaria> cuentaBancaria = new ArrayList<>(x.getCuenBancariaCollection());
-                //Saca la primera cuenta bancaria
-                ph.setBanco(cuentaBancaria.get(0).getIdBanco().getNombre());
-                ph.setTipoCuenta(cuentaBancaria.get(0).getIdTipoCBancaria().getNomCBancaria());
-                ph.setCuenta(cuentaBancaria.get(0).getIdCuenBancaria());
-                //Calcular todos los pagos del mes
-                int subtotal = 0;
-                ArrayList<AtencionAgen> atenciones = new ArrayList<>(x.getAtencionAgenCollection());
-                for (AtencionAgen at : atenciones) {
-                    if(at.getIdEstadoAten().getNomEstadoAten().equals("Terminado") && AtencionDeEsteMes(at.getFechor())){
-                        ArrayList<Pago> pagos = new ArrayList<>(at.getPagoCollection());
-                        for (Pago pago : pagos) {
-                            subtotal += pago.getMontoPago();
-                        }
+       if(especialidadList != null){
+                if(!especialidadList.isEmpty()){
+                    Especialidad especialidad = (Especialidad)especialidadList.get(0);
+                    //Se obtiene una lista con el personal medico con la especialidad "Medico"
+                    params = new HashMap<>();
+                    params.put("idEspecialidad", especialidad);
+                    List<? extends Object> personalMedicos = Controller.findByQuery("PersMedico.findByIdEspecialidad", params);
+                    ArrayList<PersMedico> medicos = new ArrayList<>();
+                    for (Object x : personalMedicos) {
+                        medicos.add((PersMedico)x);
                     }
-                }
-                ph.setSubTotal(subtotal);
-                ph.setTotal(Math.round(subtotal+subtotal*descuento));
-                //Se guarda el pago de honorario en el ArrayList
-                pagosHonorario.add(ph);
+                    //Se filtra uno por uno el personal medico para sacar y almacenar sus datos;
+                    ArrayList<PagoHonorario> pagosHonorario = new ArrayList<>();
+                    for (PersMedico x : medicos) {
+                        PagoHonorario ph = new PagoHonorario();
+                        String nombreFull = x.getIdPersonal().getNombres()+" "+x.getIdPersonal().getApellidos();
+                        ph.setNombre(nombreFull);
+                        ArrayList<CuenBancaria> cuentaBancaria = new ArrayList<>(x.getCuenBancariaCollection());
+                        //Saca la primera cuenta bancaria
+                        ph.setBanco(cuentaBancaria.get(0).getIdBanco().getNombre());
+                        ph.setTipoCuenta(cuentaBancaria.get(0).getIdTipoCBancaria().getNomCBancaria());
+                        ph.setCuenta(cuentaBancaria.get(0).getIdCuenBancaria());
+                        //Calcular todos los pagos del mes
+                        int subtotal = 0;
+                        ArrayList<AtencionAgen> atenciones = new ArrayList<>(x.getAtencionAgenCollection());
+                        for (AtencionAgen at : atenciones) {
+                            if(at.getIdEstadoAten().getNomEstadoAten().equals("Terminado") && AtencionDeEsteMes(at.getFechor())){
+                                ArrayList<Pago> pagos = new ArrayList<>(at.getPagoCollection());
+                                for (Pago pago : pagos) {
+                                    subtotal += pago.getMontoPago();
+                                }
+                            }
+                        }
+                        ph.setSubTotal(subtotal);
+                        ph.setTotal(Math.round(subtotal+subtotal*descuento));
+                        //Se guarda el pago de honorario en el ArrayList
+                        pagosHonorario.add(ph);
+                    }
+                    //Se tiene que guardar el resgitro en la base de datos
+                    for (PagoHonorario pago : pagosHonorario) {
+                        //LogPagoHonorario lph = new LogPagoHonorario();
+                        //lph.setNombre(pago.getNombre());
+                        //lph.setBanco(pago.getBanco());
+                        //lph.setTipoCuenta(pago.getTipoCuenta();
+                        //lph.setCuenta(pago.getCuenta());
+                        //lph.setSubTotal(pago.getSubTotal());
+                        //lph.setTotal(Math.round(pago.getTotal());
+                        //lph.setFechor(new Date.from(Instant.now()));
+                        //Object obj = lph;
+                        //result = Controller.upsert(obj);
+                    }
             }
-            //Se tiene que guardar el resgitro en la base de datos
-            
-        }
+       }
         return result;
     }
 }
