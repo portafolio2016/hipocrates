@@ -152,6 +152,19 @@
           <Property Name="CANT_BODEGA" Type="number" Precision="8" Scale="0" />
           <Property Name="ID_TIPO_EQUIPO" Type="number" Precision="8" Scale="0" />
         </EntityType>
+        <EntityType Name="LOGPAGOHONORARIO">
+          <Key>
+            <PropertyRef Name="IDLOGPAGOHONORARIO" />
+          </Key>
+          <Property Name="IDLOGPAGOHONORARIO" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="100" />
+          <Property Name="BANCO" Type="varchar2" MaxLength="64" />
+          <Property Name="TIPOCUENTA" Type="varchar2" MaxLength="50" />
+          <Property Name="CUENTA" Type="number" Precision="8" Scale="0" />
+          <Property Name="SUBTOTAL" Type="number" Precision="8" Scale="0" />
+          <Property Name="TOTAL" Type="number" Precision="8" Scale="0" />
+          <Property Name="FECHOR" Type="date" />
+        </EntityType>
         <EntityType Name="ORDEN_ANALISIS">
           <Key>
             <PropertyRef Name="ID_ORDEN_ANALISIS" />
@@ -704,6 +717,7 @@
           <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="HORARIO" EntityType="Self.HORARIO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="INVENTARIO" EntityType="Self.INVENTARIO" Schema="DEV" store:Type="Tables" />
+          <EntitySet Name="LOGPAGOHONORARIO" EntityType="Self.LOGPAGOHONORARIO" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="ORDEN_ANALISIS" EntityType="Self.ORDEN_ANALISIS" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="PACIENTE" EntityType="Self.PACIENTE" Schema="DEV" store:Type="Tables" />
           <EntitySet Name="PAGO" EntityType="Self.PAGO" Schema="DEV" store:Type="Tables" />
@@ -1027,6 +1041,19 @@
           <Property Name="CANT_BODEGA" Type="Int32" />
           <Property Name="ID_TIPO_EQUIPO" Type="Int32" />
           <NavigationProperty Name="TIPO_EQUIPO" Relationship="Self.FK_TIPO_EQUIPO_INVENTARIO" FromRole="INVENTARIO" ToRole="TIPO_EQUIPO" />
+        </EntityType>
+        <EntityType Name="LOGPAGOHONORARIO">
+          <Key>
+            <PropertyRef Name="IDLOGPAGOHONORARIO" />
+          </Key>
+          <Property Name="IDLOGPAGOHONORARIO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BANCO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="TIPOCUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUENTA" Type="Int32" />
+          <Property Name="SUBTOTAL" Type="Int32" />
+          <Property Name="TOTAL" Type="Int32" />
+          <Property Name="FECHOR" Type="DateTime" />
         </EntityType>
         <EntityType Name="ORDEN_ANALISIS">
           <Key>
@@ -1606,6 +1633,7 @@
           <EntitySet Name="FUNCIONARIO" EntityType="Self.FUNCIONARIO" />
           <EntitySet Name="HORARIO" EntityType="Self.HORARIO" />
           <EntitySet Name="INVENTARIO" EntityType="Self.INVENTARIO" />
+          <EntitySet Name="LOGPAGOHONORARIO" EntityType="Self.LOGPAGOHONORARIO" />
           <EntitySet Name="ORDEN_ANALISIS" EntityType="Self.ORDEN_ANALISIS" />
           <EntitySet Name="PACIENTE" EntityType="Self.PACIENTE" />
           <EntitySet Name="PAGO" EntityType="Self.PAGO" />
@@ -1909,6 +1937,20 @@
                 <ScalarProperty Name="ID_INVENTARIO_EQUIPO" ColumnName="ID_INVENTARIO_EQUIPO" />
                 <ScalarProperty Name="CANT_BODEGA" ColumnName="CANT_BODEGA" />
                 <ScalarProperty Name="ID_TIPO_EQUIPO" ColumnName="ID_TIPO_EQUIPO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOGPAGOHONORARIO">
+            <EntityTypeMapping TypeName="CMHModel.LOGPAGOHONORARIO">
+              <MappingFragment StoreEntitySet="LOGPAGOHONORARIO">
+                <ScalarProperty Name="IDLOGPAGOHONORARIO" ColumnName="IDLOGPAGOHONORARIO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="BANCO" ColumnName="BANCO" />
+                <ScalarProperty Name="TIPOCUENTA" ColumnName="TIPOCUENTA" />
+                <ScalarProperty Name="CUENTA" ColumnName="CUENTA" />
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
