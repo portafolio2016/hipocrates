@@ -1969,6 +1969,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     idPaciente = 0,
                     idPrestacion = 0,
                     idEstadoAtencion = 0,
+                    idEstadoAtencion2 = 0,
                     idTipoPrestacion = 0,
                     idBloque = 0;
                 for (int i = 0; i < 2; i++)
@@ -1980,7 +1981,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                         context.PACIENTE.Remove(pacientePrevio);
                         context.SaveChangesAsync();
                     }
-
 
                     ESPECIALIDAD especialidadPrevia = context.ESPECIALIDAD.Where(d => d.NOM_ESPECIALIDAD == "Oculista").FirstOrDefault();
                     if (!Util.isObjetoNulo(especialidadPrevia))
@@ -2014,6 +2014,12 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                         context.ESTADO_ATEN.Remove(estadoAtencionPrevia);
                     }
 
+                    ESTADO_ATEN estadoAtencionPrevia2 = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "Anulado").FirstOrDefault();
+                    if (!Util.isObjetoNulo(estadoAtencionPrevia2))
+                    {
+                        idEstadoAtencion2 = estadoAtencionPrevia2.ID_ESTADO_ATEN;
+                        context.ESTADO_ATEN.Remove(estadoAtencionPrevia2);
+                    }
 
                     PERSONAL personalPrevia = context.PERSONAL.Where(d => d.RUT == 12345678).FirstOrDefault();
                     if (!Util.isObjetoNulo(personalPrevia))
@@ -2049,7 +2055,8 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                         Where(d =>
                                      d.ID_PACIENTE == idPaciente &&
                                      d.ID_PRESTACION == idPrestacion &&
-                                     d.ID_ESTADO_ATEN == idEstadoAtencion &&
+                                     (d.ID_ESTADO_ATEN == idEstadoAtencion ||
+                                     d.ID_ESTADO_ATEN == idEstadoAtencion2) &&
                                      d.ID_PERS_ATIENDE == idPersonal
                                   && d.ID_BLOQUE == idBloque).FirstOrDefault();
 
@@ -2061,7 +2068,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
                     context.SaveChangesAsync();
                 }
-
 
                 //CASO 1: Cerrado correcto de agendamiento
 
@@ -2151,11 +2157,13 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 Boolean res1 = at.anularAtencion(aten_agen1);
                 Boolean resultadoEsperado1 = true;
                 Assert.AreEqual(res1, resultadoEsperado1);
-
+            }
 
 
                 //CASO 2: Fecha minima o invalida
 
+            using (var context = new CMHEntities())
+            {
                 ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
                 PACIENTE paciente2 = new PACIENTE();
                 TIPO_PRES tipopres2 = new TIPO_PRES();
