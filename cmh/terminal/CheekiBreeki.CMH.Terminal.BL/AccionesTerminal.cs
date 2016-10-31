@@ -82,11 +82,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-009
-        //public Boolean crearFichaMedica(FICHA ficha)
-        //{
-        //    //TODO: implementar
-        //    return false;
-        //}
+        public Boolean crearFichaMedica(FICHA ficha)
+        {
+            //TODO: implementar
+            return false;
+        }
 
         //ECU-010
         public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
@@ -136,7 +136,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 
                 else
                 {
-                    conexionDB.ATENCION_AGEN.Add(atencion);
+                    ATENCION_AGEN aten1 = new ATENCION_AGEN();
+                    aten1.ID_ATENCION_AGEN = ordenAnalisis.ID_ORDEN_ANALISIS;
+                    conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
@@ -169,6 +171,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
                 else
                 {
+                    ordenAnalisis.FECHOR_RECEP = DateTime.Today;
                     conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
                     conexionDB.SaveChangesAsync();
                     return true;
