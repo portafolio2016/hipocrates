@@ -620,9 +620,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             using (var context = new CMHEntities())
             {
                 int rut = 12345678;
-                PERSONAL previo = context.PERSONAL.Where(d => d.RUT == rut).FirstOrDefault();
+                List<PERSONAL> previo = context.PERSONAL.Where(d => d.RUT == rut).ToList();
                 if (!Util.isObjetoNulo(previo))
-                    context.PERSONAL.Remove(previo);
+                    context.PERSONAL.RemoveRange(previo);
 
                 PERSONAL personal1 = new PERSONAL();
                 personal1.NOMBRES = "Moka";
@@ -636,7 +636,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
                 context.PERSONAL.Add(personal1);
                 context.SaveChangesAsync();
-                return(previo);
+                return (personal1);
             }
         }
 
@@ -665,7 +665,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                            select p;
                 if (pers.Count<PERSONAL>() > 0)
                 {
-                    context.PERSONAL.Remove(pers.First<PERSONAL>());
+                    context.PERSONAL.RemoveRange(pers);
                     context.SaveChangesAsync();
                 }
             }
