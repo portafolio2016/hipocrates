@@ -1619,6 +1619,77 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean resultadoEsperado5 = false;
             Assert.AreEqual(res5, resultadoEsperado5);
         }
+
+        [TestMethod]
+        public void enviarCorreoConArchivoTest()
+        {
+            Emailer emailer = new Emailer();
+            // Caso 1: Envío correcto
+            string receptor1, titulo1, cuerpo1, archivo1;
+            receptor1 = "fjaqueg@gmail.com";
+            titulo1 = "Prueba de correos CMH";
+            cuerpo1 = "Esta es una prueba exitosa del envío de correos para el portafolio 2016";
+            archivo1 = "../../file.pdf";
+
+            Boolean res1 = emailer.enviarCorreo(receptor1, titulo1, cuerpo1, archivo1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+
+            // Caso 2: Receptor vacío
+            string receptor2, titulo2, cuerpo2, archivo2;
+            receptor2 = null;
+            titulo2 = "Prueba de correos CMH";
+            cuerpo2 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
+            archivo2 = "../../file.pdf";
+
+            Boolean res2 = emailer.enviarCorreo(receptor2, titulo2, cuerpo2, archivo2);
+            Boolean resultadoEsperado2 = false;
+            Assert.AreEqual(res2, resultadoEsperado2);
+
+            // Caso 3: Título vacío
+            string receptor3, titulo3, cuerpo3, archivo3;
+            receptor3 = "fjaqueg@gmail.com";
+            titulo3 = string.Empty;
+            cuerpo3 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
+            archivo3 = "../../file.pdf";
+
+            Boolean res3 = emailer.enviarCorreo(receptor3, titulo3, cuerpo3, archivo3);
+            Boolean resultadoEsperado3 = false;
+            Assert.AreEqual(res3, resultadoEsperado3);
+
+            // Caso 4: Cuerpo vacío
+            string receptor4, titulo4, cuerpo4, archivo4;
+            receptor4 = "fjaqueg@gmail.com";
+            titulo4 = "Prueba de correos CMH";
+            cuerpo4 = "";
+            archivo4 = "../../file.pdf";
+
+            Boolean res4 = emailer.enviarCorreo(receptor4, titulo4, cuerpo4, archivo4);
+            Boolean resultadoEsperado4 = false;
+            Assert.AreEqual(res4, resultadoEsperado4);
+
+            // Caso 5: Receptor inválido
+            string receptor5, titulo5, cuerpo5, archivo5;
+            receptor5 = "correoinvalido";
+            titulo5 = "Prueba de correos CMH";
+            cuerpo5 = "Esta es una prueba fallida del envío de correos para el portafolio 5016";
+            archivo5 = "../../file.pdf";
+
+            Boolean res5 = emailer.enviarCorreo(receptor5, titulo5, cuerpo5, archivo5);
+            Boolean resultadoEsperado5 = false;
+            Assert.AreEqual(res5, resultadoEsperado5);
+
+            // Caso 5: Receptor inválido
+            string receptor6, titulo6, cuerpo6, archivo6;
+            receptor6 = "fjaqueg@gmail.com";
+            titulo6 = "Prueba de correos CMH";
+            cuerpo6 = "Esta es una prueba fallida del envío de correos para el portafolio 5016";
+            archivo6 = "../../noexistente.pdf";
+
+            Boolean res6 = emailer.enviarCorreo(receptor6, titulo6, cuerpo6, archivo6);
+            Boolean resultadoEsperado6 = false;
+            Assert.AreEqual(res6, resultadoEsperado6);
+        }
         #endregion
 
         #region Archivo base64
