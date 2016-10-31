@@ -1665,9 +1665,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             ESTADO_ATEN estadoatenCerrada1 = new ESTADO_ATEN();
             RES_ATENCION res_atencion1 = new RES_ATENCION();
             ORDEN_ANALISIS orden_analisis1 = new ORDEN_ANALISIS();
-            ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
+           /* ESPECIALIDAD especialidad1 = new ESPECIALIDAD();
             PERSONAL personal1 = new PERSONAL();
-            PERS_MEDICO pers_medico1 = new PERS_MEDICO();
+            PERS_MEDICO pers_medico1 = new PERS_MEDICO();*/
 
             using (var context = new CMHEntities())
             {
@@ -1687,7 +1687,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.ORDEN_ANALISIS.Add(orden_analisis1);
                 context.SaveChangesAsync();
 
-                //Especialidad
+               /* //Especialidad
                 especialidad1.NOM_ESPECIALIDAD = "Traumatología";
                 context.ESPECIALIDAD.Add(especialidad1);
                 context.SaveChangesAsync();
@@ -1705,13 +1705,13 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 pers_medico1.ID_ESPECIALIDAD = especialidad1.ID_ESPECIALIDAD;
                 pers_medico1.ID_PERSONAL = personal1.ID_PERSONAL;
                 context.PERS_MEDICO.Add(pers_medico1);
-                context.SaveChangesAsync();
+                context.SaveChangesAsync();*/
                 //Resultado de la atención
                 res_atencion1.ATENCION_ABIERTA = true;
                 res_atencion1.COMENTARIO = "Comentario";
                 res_atencion1.ID_ATENCION_AGEN = atencionagendada1.ID_ATENCION_AGEN;
                 res_atencion1.ID_ORDEN_ANALISIS = orden_analisis1.ID_ORDEN_ANALISIS;
-                res_atencion1.ID_PERSONAL_MEDICO = pers_medico1.ID_PERSONAL_MEDICO;
+                //res_atencion1.ID_PERSONAL_MEDICO = pers_medico1.ID_PERSONAL_MEDICO;
                 res_atencion1.ARCHIVO_B64 = "Archivo B64";
                 res_atencion1.EXT_ARCHIVO = "as";
                 context.RES_ATENCION.Add(res_atencion1);
