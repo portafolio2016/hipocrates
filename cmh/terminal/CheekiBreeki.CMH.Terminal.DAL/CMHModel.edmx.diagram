@@ -4,7 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+<<<<<<< HEAD
       <Diagram DiagramId="0a1a468271624da2bdbf85b4ae027d24" Name="Diagram1" ZoomLevel="62">
+=======
+      <Diagram DiagramId="0a1a468271624da2bdbf85b4ae027d24" Name="Diagram1" ZoomLevel="52">
+>>>>>>> dev
         <EntityTypeShape EntityType="CMHModel.ASEGURADORA" Width="1.5" PointX="9" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.ATENCION_AGEN" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CMHModel.BANCO" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
