@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CheekiBreeki.CMH.Terminal.DAL;
+using CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference;
 namespace CheekiBreeki.CMH.Terminal.BL
 {
     public class AccionesTerminal
@@ -80,11 +81,22 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-007
-        public ResultadoVerificacionSeguro verificarSeguro(ATENCION_AGEN atencion)
+        public ResultadoVerificacionSeguro verificarSeguro(PRESTACION prestacion, PACIENTE paciente)
         {
-            ResultadoVerificacionSeguro resultadoVerificacionSeguro = null;
-            //TODO: implementar
-            return resultadoVerificacionSeguro;
+
+            int precioPrestacion = prestacion.PRECIO_PRESTACION.Value;
+            int rutPaciente = paciente.RUT;
+            SeguroWSClient client = new SeguroWSClient();
+            SeguroRequest request = new SeguroRequest();
+            request.AfiliadoRut = paciente.RUT;
+            request.CodigoPrestacion = prestacion.CODIGO_PRESTACION;
+            Task<SeguroResponse> tResponse = client.obtenerDescuentoAsync(request);
+            tResponse.Wait();
+            SeguroResponse response = tResponse.Result;
+            ResultadoVerificacionSeguro resultado = new ResultadoVerificacionSeguro();
+            resultado.TieneSeguro = response.AfiliadoTieneSeguro;
+            resultado.Descuento = response.DescuentoPesos;
+            return resultado;
         }
 
         //ECU-008
