@@ -183,21 +183,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-012
-        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, ORDEN_ANALISIS ordenAnalisis, RES_ATENCION resultadoAtencion) 
+        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, RES_ATENCION resultadoAtencion) 
         {
             try
             {
-                if (Util.isObjetoNulo(ordenAnalisis))
-                {
-                    throw new Exception("Orden nula");
-                }
-                
-                else if (ordenAnalisis.FECHOR_EMISION < DateTime.Today || ordenAnalisis.FECHOR_RECEP < DateTime.Today)
-                {
-                    throw new Exception("Fecha invalida");
-                }
-
-                else if (Util.isObjetoNulo(atencion))
+                if (Util.isObjetoNulo(atencion))
                 {
                     throw new Exception("Atencion agendada nula");
                 }
@@ -224,10 +214,13 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 
                 else
                 {
+                    ORDEN_ANALISIS ordenAnalisis = new ORDEN_ANALISIS();
                     ordenAnalisis.FECHOR_EMISION = DateTime.Today;
                     conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
+                    conexionDB.SaveChangesAsync();
+
                     resultadoAtencion.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
-                    resultadoAtencion.ID_ORDEN_ANALISIS = resultadoAtencion.ID_ORDEN_ANALISIS;
+                    resultadoAtencion.ID_ORDEN_ANALISIS = ordenAnalisis.ID_ORDEN_ANALISIS;
                     conexionDB.RES_ATENCION.Add(resultadoAtencion);
                     conexionDB.SaveChangesAsync();
                     return true;

@@ -2160,7 +2160,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             }
 
 
-                //CASO 2: Fecha minima o invalida
+            //CASO 2: Fecha minima o invalida
 
             using (var context = new CMHEntities())
             {
@@ -2534,21 +2534,18 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.ATENCION_AGEN.Add(aten_agen1);
                 context.SaveChangesAsync();
 
-                orden1.FECHOR_EMISION = DateTime.Today;
-                orden1.FECHOR_RECEP = DateTime.Today.AddDays(1);
-                context.ORDEN_ANALISIS.Add(orden1);
-                context.SaveChangesAsync();
-
                 res_atencion1.ID_ATENCION_AGEN = aten_agen1.ID_ATENCION_AGEN;
                 res_atencion1.ID_ORDEN_ANALISIS = orden1.ID_ORDEN_ANALISIS;
 
 
-                Boolean res1 = at.generarOrdenDeAnalisis(aten_agen1, orden1, res_atencion1);
+                Boolean res1 = at.generarOrdenDeAnalisis(aten_agen1, res_atencion1);
                 Boolean resultadoEsperado1 = true;
                 Assert.AreEqual(res1, resultadoEsperado1);
 
+            }
 
-
+            using (var context = new CMHEntities())
+            {
                 //CASO 2: Fecha minima o invalida
                 ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
                 PACIENTE paciente2 = new PACIENTE();
@@ -2633,26 +2630,20 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.ATENCION_AGEN.Add(aten_agen2);
                 context.SaveChangesAsync();
 
-                orden2.FECHOR_EMISION = DateTime.MinValue;
-                orden2.FECHOR_RECEP = DateTime.MinValue;
-                context.ORDEN_ANALISIS.Add(orden2);
-                context.SaveChangesAsync();
-
                 res_atencion2.ID_ATENCION_AGEN = aten_agen2.ID_ATENCION_AGEN;
                 res_atencion2.ID_ORDEN_ANALISIS = orden2.ID_ORDEN_ANALISIS;
 
-                Boolean res2 = at.generarOrdenDeAnalisis(aten_agen2, orden2, res_atencion2);
+                Boolean res2 = at.generarOrdenDeAnalisis(aten_agen2, res_atencion2);
                 Boolean resultadoEsperado2 = false;
                 Assert.AreEqual(res2, resultadoEsperado2);
 
 
                 //CASO 3: Observación vacía o nula
 
-                ORDEN_ANALISIS orden3 = null;
                 ATENCION_AGEN aten_agen3 = null;
                 RES_ATENCION res_atencion3 = null;
 
-                Boolean res3 = at.generarOrdenDeAnalisis(aten_agen3, orden3, res_atencion3);
+                Boolean res3 = at.generarOrdenDeAnalisis(aten_agen3, res_atencion3);
                 Boolean resultadoEsperado3 = false;
                 Assert.AreEqual(res3, resultadoEsperado3);
 
@@ -2861,7 +2852,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 Boolean resultadoEsperado1 = true;
                 Assert.AreEqual(res1, resultadoEsperado1);
 
-
+            }
+            using (var context = new CMHEntities())
+            {
 
                 //CASO 2: Fecha minima o invalida
                 ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
