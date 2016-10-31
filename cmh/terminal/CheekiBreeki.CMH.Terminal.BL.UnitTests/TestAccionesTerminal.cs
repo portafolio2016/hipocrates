@@ -1855,94 +1855,99 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 Boolean res1 = at.agendarAtencion(aten_agen1);
                 Boolean resultadoEsperado1 = true;
                 Assert.AreEqual(res1, resultadoEsperado1);
+            }
+                
 
+                using (var context = new CMHEntities())
+                {
+                    //CASO 2: Fecha minima o invalida
+                    ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
+                    PACIENTE paciente2 = new PACIENTE();
+                    TIPO_PRES tipopres2 = new TIPO_PRES();
+                    PRESTACION prestacion2 = new PRESTACION();
+                    ESTADO_ATEN estadoaten2 = new ESTADO_ATEN();
+                    ESPECIALIDAD especialidad2 = new ESPECIALIDAD();
+                    PERSONAL personal2 = new PERSONAL();
+                    BLOQUE bloque2 = new BLOQUE();
+                    DIA_SEM dia2 = new DIA_SEM();
+                    PERS_MEDICO persmedico2 = new PERS_MEDICO();
+                    ATENCION_AGEN aten_agen2 = new ATENCION_AGEN();
 
-                //CASO 2: Fecha minima o invalida
-                ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
-                PACIENTE paciente2 = new PACIENTE();
-                TIPO_PRES tipopres2 = new TIPO_PRES();
-                PRESTACION prestacion2 = new PRESTACION();
-                ESTADO_ATEN estadoaten2 = new ESTADO_ATEN();
-                ESPECIALIDAD especialidad2 = new ESPECIALIDAD();
-                PERSONAL personal2 = new PERSONAL();
-                BLOQUE bloque2 = new BLOQUE();
-                DIA_SEM dia2 = new DIA_SEM();
-                PERS_MEDICO persmedico2 = new PERS_MEDICO();
-                ATENCION_AGEN aten_agen2 = new ATENCION_AGEN();
+                    paciente2.NOMBRES_PACIENTE = "Miku";
+                    paciente2.APELLIDOS_PACIENTE = "Hatsune";
+                    paciente2.RUT = 18861423;
+                    paciente2.DIGITO_VERIFICADOR = "K";
+                    paciente2.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+                    paciente2.HASHED_PASS = "4231";
+                    paciente2.SEXO = "F";
+                    paciente2.FEC_NAC = DateTime.Today;
+                    context.PACIENTE.Add(paciente2);
+                    context.SaveChangesAsync();
 
-                paciente2.NOMBRES_PACIENTE = "Miku";
-                paciente2.APELLIDOS_PACIENTE = "Hatsune";
-                paciente2.RUT = 18861423;
-                paciente2.DIGITO_VERIFICADOR = "K";
-                paciente2.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
-                paciente2.HASHED_PASS = "4231";
-                paciente2.SEXO = "F";
-                paciente2.FEC_NAC = DateTime.Today;
-                context.PACIENTE.Add(paciente2);
-                context.SaveChangesAsync();
+                    especialidad2.NOM_ESPECIALIDAD = "Oculista";
+                    context.ESPECIALIDAD.Add(especialidad2);
+                    context.SaveChangesAsync();
 
-                especialidad2.NOM_ESPECIALIDAD = "Oculista";
-                context.ESPECIALIDAD.Add(especialidad2);
-                context.SaveChangesAsync();
+                    tipopres2.NOM_TIPO_PREST = "Test";
+                    context.TIPO_PRES.Add(tipopres2);
+                    context.SaveChangesAsync();
 
-                tipopres2.NOM_TIPO_PREST = "Test";
-                context.TIPO_PRES.Add(tipopres2);
-                context.SaveChangesAsync();
+                    prestacion2.NOM_PRESTACION = "Chubi";
+                    prestacion2.PRECIO_PRESTACION = 50000;
+                    prestacion2.CODIGO_PRESTACION = "A002";
+                    prestacion2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
+                    prestacion2.ID_TIPO_PRESTACION = tipopres2.ID_TIPO_PRESTACION;
+                    context.PRESTACION.Add(prestacion2);
+                    context.SaveChangesAsync();
 
-                prestacion2.NOM_PRESTACION = "Chubi";
-                prestacion2.PRECIO_PRESTACION = 50000;
-                prestacion2.CODIGO_PRESTACION = "A002";
-                prestacion2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
-                prestacion2.ID_TIPO_PRESTACION = tipopres2.ID_TIPO_PRESTACION;
-                context.PRESTACION.Add(prestacion2);
-                context.SaveChangesAsync();
+                    estadoaten2.NOM_ESTADO_ATEN = "Vigente";
+                    context.ESTADO_ATEN.Add(estadoaten2);
+                    context.SaveChangesAsync();
 
-                estadoaten2.NOM_ESTADO_ATEN = "Vigente";
-                context.ESTADO_ATEN.Add(estadoaten2);
-                context.SaveChangesAsync();
+                    personal2.NOMBRES = "Moka";
+                    personal2.APELLIDOS = "Akashiya";
+                    personal2.REMUNERACION = 850000;
+                    personal2.PORCENT_DESCUENTO = 7;
+                    personal2.HASHED_PASS = "4231";
+                    personal2.RUT = 12345678;
+                    personal2.VERIFICADOR = "K";
+                    context.PERSONAL.Add(personal2);
+                    context.SaveChangesAsync();
 
-                personal2.NOMBRES = "Moka";
-                personal2.APELLIDOS = "Akashiya";
-                personal2.REMUNERACION = 850000;
-                personal2.PORCENT_DESCUENTO = 7;
-                personal2.HASHED_PASS = "4231";
-                personal2.RUT = 12345678;
-                personal2.VERIFICADOR = "K";
-                context.PERSONAL.Add(personal2);
-                context.SaveChangesAsync();
+                    dia2.NOMBRE_IDA = "LuMaMiJuVi";
+                    context.DIA_SEM.Add(dia2);
+                    context.SaveChangesAsync();
 
-                dia2.NOMBRE_IDA = "LuMaMiJuVi";
-                context.DIA_SEM.Add(dia2);
-                context.SaveChangesAsync();
+                    bloque2.ID_DIA_SEM = dia2.ID_DIA;
+                    bloque2.NUM_BLOQUE = 5;
+                    bloque2.NUM_HORA_INI = 11;
+                    bloque2.NUM_MINU_INI = 22;
+                    bloque2.NUM_HORA_FIN = 16;
+                    bloque2.NUM_MINU_FIN = 45;
+                    context.BLOQUE.Add(bloque2);
+                    context.SaveChangesAsync();
 
-                bloque2.ID_DIA_SEM = dia2.ID_DIA;
-                bloque2.NUM_BLOQUE = 5;
-                bloque2.NUM_HORA_INI = 11;
-                bloque2.NUM_MINU_INI = 22;
-                bloque2.NUM_HORA_FIN = 16;
-                bloque2.NUM_MINU_FIN = 45;
-                context.BLOQUE.Add(bloque2);
-                context.SaveChangesAsync();
+                    persmedico2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
+                    persmedico2.ID_PERSONAL = personal2.ID_PERSONAL;
+                    context.PERS_MEDICO.Add(persmedico2);
+                    context.SaveChangesAsync();
 
-                persmedico2.ID_ESPECIALIDAD = especialidad2.ID_ESPECIALIDAD;
-                persmedico2.ID_PERSONAL = personal2.ID_PERSONAL;
-                context.PERS_MEDICO.Add(persmedico2);
-                context.SaveChangesAsync();
+                    aten_agen2.FECHOR = null;
+                    aten_agen2.OBSERVACIONES = null;
+                    aten_agen2.ID_PACIENTE = 0;
+                    aten_agen2.ID_ESTADO_ATEN = 0;
+                    aten_agen2.ID_PRESTACION = 0;
+                    aten_agen2.ID_BLOQUE = 0;
+                    aten_agen2.ID_PERS_ATIENDE = 0;
 
-                aten_agen2.FECHOR = null;
-                aten_agen2.OBSERVACIONES = null;
-                aten_agen2.ID_PACIENTE = 0;
-                aten_agen2.ID_ESTADO_ATEN = 0;
-                aten_agen2.ID_PRESTACION = 0;
-                aten_agen2.ID_BLOQUE = 0;
-                aten_agen2.ID_PERS_ATIENDE = 0;
+                    context.ATENCION_AGEN.Add(aten_agen2);
+                    context.SaveChangesAsync();
 
-                context.ATENCION_AGEN.Add(aten_agen2);
-                context.SaveChangesAsync();
-
-                Boolean res2 = at.agendarAtencion(aten_agen2);
-                Boolean resultadoEsperado2 = false;
-                Assert.AreEqual(res2, resultadoEsperado2);
+                    Boolean res2 = at.agendarAtencion(aten_agen2);
+                    Boolean resultadoEsperado2 = false;
+                    Assert.AreEqual(res2, resultadoEsperado2);
+                }
+              
 
                 //CASO 3: Observación vacía o nula
 
@@ -1953,7 +1958,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 Boolean resultadoEsperado3 = false;
                 Assert.AreEqual(res3, resultadoEsperado3);
 
-            }
+            
         }
 
         [TestMethod]
@@ -2960,6 +2965,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             }
         }
         #endregion
+
         #region Cerrar atención médica
         [TestMethod]
         public void cerrarAtencionMedica()
