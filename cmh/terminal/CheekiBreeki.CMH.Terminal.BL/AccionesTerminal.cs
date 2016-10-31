@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CheekiBreeki.CMH.Terminal.DAL;
 using CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference;
+using System.IO;
 namespace CheekiBreeki.CMH.Terminal.BL
 {
     public class AccionesTerminal
@@ -247,7 +248,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Fecha invalida");
                 }
-
                 else
                 {
                     ordenAnalisis = conexionDB.ORDEN_ANALISIS.Find(ordenAnalisis.ID_ORDEN_ANALISIS);
@@ -261,8 +261,52 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 Console.WriteLine(ex.Message);
                 return false;
             }
+        }
 
+        public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis, string archivo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(ordenAnalisis))
+                {
+                    throw new Exception("Orden nula");
+                }
 
+                else if (ordenAnalisis.FECHOR_RECEP <= DateTime.Today)
+                {
+                    throw new Exception("Fecha invalida");
+                }
+                else
+                {
+                    ordenAnalisis = conexionDB.ORDEN_ANALISIS.Find(ordenAnalisis.ID_ORDEN_ANALISIS);
+                    ordenAnalisis.FECHOR_RECEP = DateTime.Today;
+                    conexionDB.SaveChangesAsync();
+
+                    if (ordenAnalisis.RES_ATENCION.FirstOrDefault().ATENCION_AGEN.ID_PERS_SOLICITA != null)
+                    {
+                        string receptor, titulo, cuerpo;
+                        receptor = ordenAnalisis.RES_ATENCION.FirstOrDefault().ATENCION_AGEN.PERS_MEDICO1.PERSONAL.EMAIL;
+                        titulo = "Cerrada orden de análisis";
+                        cuerpo = "La orden de análisis con número " + ordenAnalisis.ID_ORDEN_ANALISIS + " se ha cerrado";
+                        if (File.Exists(archivo))
+                        {
+                            Emailer.enviarCorreo(receptor, titulo, cuerpo, archivo);
+                            Console.WriteLine("Correo enviado");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Archivo no existente");
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-014

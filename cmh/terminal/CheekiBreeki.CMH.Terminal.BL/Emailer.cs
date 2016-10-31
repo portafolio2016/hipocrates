@@ -17,7 +17,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         /// <param name="titulo">Título del correo</param>
         /// <param name="cuerpo">Mensaje del correo</param>
         /// <returns></returns>
-        public Boolean enviarCorreo(string receptor, string titulo, string cuerpo)
+        public static Boolean enviarCorreo(string receptor, string titulo, string cuerpo)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         /// <param name="cuerpo">Mensaje del correo</param>
         /// <param name="archivo">Ruta archivo adjunto</param>
         /// <returns></returns>
-        public Boolean enviarCorreo(string receptor, string titulo, string cuerpo, string archivo)
+        public static Boolean enviarCorreo(string receptor, string titulo, string cuerpo, string archivo)
         {
             try
             {
