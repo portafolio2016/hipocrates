@@ -124,22 +124,37 @@ public class AccionesPaciente {
      * @param rut rut del paciente
      * @return Un ArrayList con todas las atenciones que no tengan respuesta, si es null significa que no fue encontrado el paciente o que no existen atenciones pendientes
      */
-    public ArrayList<AtencionAgen> obtenerAtencionesPendientes(String rut){
-        Map<String, Object> params1 = new HashMap<>();
-        params1.put("rut", rut);
-        List<? extends Object> pacientes = Controller.findByQuery("Paciente.findByRut", params1);
-        if(pacientes.isEmpty()){
-            return null;
+    public ArrayList<AtencionAgen> obtenerAtencionesPendientes(int rut) throws Exception{
+        Map<String, Object> params = new HashMap<>();
+        params.put("rut", rut);
+        List<? extends Object> pacienteList = Controller.findByQuery("Paciente.findByRut", params);
+        if(null == pacienteList){
+            throw new Exception("Paciente no existe");
         }
-        Map<String, Object> params2 = new HashMap<>();
-        params2.put("idPaciente", pacientes.get(0));
-        ArrayList<AtencionAgen> atenciones = (ArrayList<AtencionAgen>)Controller.findByQuery("AtencionAgen.findByIdPaciente", params2);
-        for (AtencionAgen x : atenciones) {
-            if(!x.getResAtencionCollection().isEmpty()){
-                atenciones.remove(x);
+        Paciente paciente = (Paciente)pacienteList.get(0);
+        Collection<AtencionAgen> atenciones = paciente.getAtencionAgenCollection();
+        ArrayList<AtencionAgen> atencionesPendientes = new ArrayList<>();
+        if(atenciones.isEmpty()) {
+            return atencionesPendientes;
+        }
+        for(AtencionAgen atencion: atenciones){
+            if(atencionTieneEstado(atencion, "Vigente") && atencionEsFutura(atencion)){
+                atencionesPendientes.add(atencion);
             }
         }
-        return atenciones;
+        return atencionesPendientes;
+    }
+    
+    private boolean atencionTieneEstado(AtencionAgen atencion, String nombreEstado){
+        boolean result = false;
+        result = atencion.getIdEstadoAten().getNomEstadoAten().equalsIgnoreCase(nombreEstado);
+        return result;
+    }
+    
+    private boolean atencionEsFutura(AtencionAgen atencion){
+        Date fechaAtencion = atencion.getFechor();
+        Date fechaHoy = new Date();
+        return(fechaAtencion.after(fechaHoy));
     }
     
      /** 

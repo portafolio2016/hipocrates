@@ -4,6 +4,7 @@ import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.*;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -345,7 +346,53 @@ public class AccionesPacienteTest {
      * Test of obtenerAtenciones method, of class AccionesPaciente.
      */
     @Test
-    public void testObtenerAtencionesPendientes() {
+    public void testObtenerAtencionesPendientes() throws Exception {
+        //prep
+        //Crear estado atención Vigente y Anulado
+        EstadoAten estadoVigente = crearEstadoAten("Vigente");
+        EstadoAten estadoAnulada = crearEstadoAten("Anulada");
+        //Crear personal
+        Random random = new Random();
+        Personal personal = crearPersonal((short)0, "El Hombre Test", "Apellido Test", random.nextInt(999999), '1');
+        //Crear especialidad
+        Especialidad especialidad = crearEspecialidad("EspecialidadTest");
+        //Crear personal médico y asignar personal y especialidad
+        PersMedico personalMedico = crearPersonalMedico(personal, especialidad);
+        //crear bloque
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        DiaSem dia = accionesPaciente.buscarDiaPorDate(new Date());
+        Bloque bloque = crearBloque(dia, 1, (short)8, (short)0, (short)8, (short)15);
+        Bloque bloque2 = crearBloque(dia, 2, (short)8, (short)15, (short)8, (short)30);
+        //crear horario
+        Horario horario = crearHorario(bloque, personalMedico);
+        Horario horario2 = crearHorario(bloque2, personalMedico);
+        //crear paciente
+        int rut = random.nextInt(999999);
+        Paciente p = crearPaciente(rut, '0');
+        AtencionAgen atencion = new AtencionAgen();
+        atencion.setIdBloque(bloque);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, 1);
+        Date fechor = cal.getTime();
+        atencion.setFechor(fechor);
+        atencion.setIdEstadoAten(estadoVigente);
+        atencion.setIdPersAtiende(personalMedico);
+        atencion.setIdPaciente(p);
+        Controller.upsert(atencion);
+        //Caso 1: tiene una atencion pendiente
+        ArrayList<AtencionAgen> result = accionesPaciente.obtenerAtencionesPendientes(rut);
+        if(result.size() != 1){
+            fail("Deberia tener un solo pendiente");
+        }
+        //Caso 2: tiene 0 atenciones pendientes
+        AtencionAgen singleResult = result.get(0);
+        singleResult.setIdEstadoAten(estadoAnulada);
+        Controller.upsert(singleResult);
+        ArrayList<AtencionAgen> result2 = accionesPaciente.obtenerAtencionesPendientes(rut);
+        if(result2.size() != 0){
+            fail("Debería tener 0 pendientes");
+        }
     }
 
     /**
