@@ -14,8 +14,35 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-001
         public Boolean agendarAtencion(ATENCION_AGEN atencion)
         {
-            //TODO: implementar
-            return false;
+
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion invalida");
+                }
+                else if (atencion.FECHOR == DateTime.MinValue ||
+                         atencion.FECHOR == null)
+                {
+                    throw new Exception("Fecha vacía");
+                }
+                else if (atencion.OBSERVACIONES == String.Empty ||
+                         atencion.OBSERVACIONES == null)
+                {
+                    throw new Exception("Observacion vacia");
+                }
+                else
+                {
+                    conexionDB.ATENCION_AGEN.Add(atencion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-005
@@ -149,17 +176,92 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-012
-        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, ORDEN_ANALISIS ordenAnalisis)
+        public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, ORDEN_ANALISIS ordenAnalisis, RES_ATENCION resultadoAtencion)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(ordenAnalisis))
+                {
+                    throw new Exception("Orden nula");
+                }
+
+                else if (ordenAnalisis.FECHOR_EMISION < DateTime.Today || ordenAnalisis.FECHOR_RECEP < DateTime.Today)
+                {
+                    throw new Exception("Fecha invalida");
+                }
+
+                else if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion agendada nula");
+                }
+
+                else if (atencion.FECHOR == null)
+                {
+                    throw new Exception("Fecha nula");
+                }
+
+                else if (atencion.OBSERVACIONES == null || atencion.OBSERVACIONES == String.Empty)
+                {
+                    throw new Exception("Observacion nula o vacía");
+                }
+
+                else if (resultadoAtencion.ID_ATENCION_AGEN == null)
+                {
+                    throw new Exception("ID de atencion agendada es nulo");
+                }
+
+                else if (resultadoAtencion.ID_ORDEN_ANALISIS == null)
+                {
+                    throw new Exception("ID de orden de analisis es nulo");
+                }
+
+                else
+                {
+                    ordenAnalisis.FECHOR_EMISION = DateTime.Today;
+                    conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
+                    resultadoAtencion.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                    resultadoAtencion.ID_ORDEN_ANALISIS = ordenAnalisis.ID_ORDEN_ANALISIS;
+                    conexionDB.RES_ATENCION.Add(resultadoAtencion);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-013
         public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(ordenAnalisis))
+                {
+                    throw new Exception("Orden nula");
+                }
+
+                else if (ordenAnalisis.FECHOR_RECEP <= DateTime.Today)
+                {
+                    throw new Exception("Fecha invalida");
+                }
+
+                else
+                {
+                    conexionDB.ORDEN_ANALISIS.Where(d => d.ID_ORDEN_ANALISIS == ordenAnalisis.ID_ORDEN_ANALISIS).FirstOrDefault();
+                    ordenAnalisis.FECHOR_RECEP = DateTime.Today;
+                    conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         //ECU-014
