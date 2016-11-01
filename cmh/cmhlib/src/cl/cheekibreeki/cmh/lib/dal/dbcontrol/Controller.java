@@ -24,6 +24,7 @@ public class Controller {
             success = true;
         } catch (Exception e) {
             em.getTransaction().rollback();
+            System.out.println(e.getMessage());
         }finally{
            em.close();
            return success;

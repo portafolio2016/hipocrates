@@ -108,7 +108,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     idBloque = bloquePrevia.ID_BLOQUE;
                     context.BLOQUE.Remove(bloquePrevia);
                 }
-                DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "Lumamijunes").FirstOrDefault();
+                DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_DIA == "Lumamijunes").FirstOrDefault();
                 if (!Util.isObjetoNulo(diaPrevia))
                     context.DIA_SEM.Remove(diaPrevia);
                 ATENCION_AGEN atencionagenPrevia = context.ATENCION_AGEN.
@@ -179,7 +179,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.FUNCIONARIO.Add(funcionario1);
                 context.SaveChangesAsync();
 
-                dia1.NOMBRE_IDA = "Lumamijunes";
+                dia1.NOMBRE_DIA = "Lumamijunes";
                 context.DIA_SEM.Add(dia1);
                 context.SaveChangesAsync();
 
@@ -1804,7 +1804,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     }
 
 
-                    DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "LuMaMiJuVi").FirstOrDefault();
+                    DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_DIA == "LuMaMiJuVi").FirstOrDefault();
                     if (!Util.isObjetoNulo(diaPrevia))
                     {
                         context.DIA_SEM.Remove(diaPrevia);
@@ -1892,7 +1892,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal1);
                 context.SaveChangesAsync();
 
-                dia1.NOMBRE_IDA = "LuMaMiJuVi";
+                dia1.NOMBRE_DIA = "LuMaMiJuVi";
                 context.DIA_SEM.Add(dia1);
                 context.SaveChangesAsync();
 
@@ -1971,7 +1971,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     context.PERSONAL.Add(personal2);
                     context.SaveChangesAsync();
 
-                    dia2.NOMBRE_IDA = "LuMaMiJuVi";
+                    dia2.NOMBRE_DIA = "LuMaMiJuVi";
                     context.DIA_SEM.Add(dia2);
                     context.SaveChangesAsync();
 
@@ -2099,7 +2099,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     }
 
 
-                    DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "LuMaMiJuVi").FirstOrDefault();
+                    DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_DIA == "LuMaMiJuVi").FirstOrDefault();
                     if (!Util.isObjetoNulo(diaPrevia))
                     {
                         context.DIA_SEM.Remove(diaPrevia);
@@ -2186,7 +2186,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal1);
                 context.SaveChangesAsync();
 
-                dia1.NOMBRE_IDA = "LuMaMiJuVi";
+                dia1.NOMBRE_DIA = "LuMaMiJuVi";
                 context.DIA_SEM.Add(dia1);
                 context.SaveChangesAsync();
 
@@ -2278,7 +2278,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal2);
                 context.SaveChangesAsync();
 
-                dia2.NOMBRE_IDA = "LuMaMiJuVi";
+                dia2.NOMBRE_DIA = "LuMaMiJuVi";
                 context.DIA_SEM.Add(dia2);
                 context.SaveChangesAsync();
 
@@ -2367,7 +2367,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal3);
                 context.SaveChangesAsync();
 
-                dia3.NOMBRE_IDA = "LuMaMiJuVi";
+                dia3.NOMBRE_DIA = "LuMaMiJuVi";
                 context.DIA_SEM.Add(dia3);
                 context.SaveChangesAsync();
 
@@ -2479,7 +2479,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     }
 
 
-                    DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "LuMaMiJuVi").FirstOrDefault();
+                    DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_DIA == "LuMaMiJuVi").FirstOrDefault();
                     if (!Util.isObjetoNulo(diaPrevia))
                     {
                         context.DIA_SEM.Remove(diaPrevia);
@@ -2566,7 +2566,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal1);
                 context.SaveChangesAsync();
 
-                dia1.NOMBRE_IDA = "LuMaMiJuVi";
+                dia1.NOMBRE_DIA = "LuMaMiJuVi";
                 context.DIA_SEM.Add(dia1);
                 context.SaveChangesAsync();
 
@@ -2662,7 +2662,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal2);
                 context.SaveChangesAsync();
 
-                dia2.NOMBRE_IDA = "LuMaMiJuVi";
+                dia2.NOMBRE_DIA = "LuMaMiJuVi";
                 context.DIA_SEM.Add(dia2);
                 context.SaveChangesAsync();
 
@@ -2788,7 +2788,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     }
 
 
-                    DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_IDA == "LuMaMiJuVi").FirstOrDefault();
+                    DIA_SEM diaPrevia = context.DIA_SEM.Where(d => d.NOMBRE_DIA == "LuMaMiJuVi").FirstOrDefault();
                     if (!Util.isObjetoNulo(diaPrevia))
                     {
                         context.DIA_SEM.Remove(diaPrevia);
@@ -2875,7 +2875,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal1);
                 context.SaveChangesAsync();
 
-                dia1.NOMBRE_IDA = "LuMaMiJuVi";
+                dia1.NOMBRE_DIA = "LuMaMiJuVi";
                 context.DIA_SEM.Add(dia1);
                 context.SaveChangesAsync();
 
@@ -2970,7 +2970,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.PERSONAL.Add(personal2);
                 context.SaveChangesAsync();
 
-                dia2.NOMBRE_IDA = "LuMaMiJuVi";
+                dia2.NOMBRE_DIA = "LuMaMiJuVi";
                 context.DIA_SEM.Add(dia2);
                 context.SaveChangesAsync();
 

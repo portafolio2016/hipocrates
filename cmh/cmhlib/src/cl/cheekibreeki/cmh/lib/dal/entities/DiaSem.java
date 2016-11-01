@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author pdelasotta
  */
 @Entity
 @Table(name = "DIA_SEM")
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "DiaSem.findAll", query = "SELECT d FROM DiaSem d"),
     @NamedQuery(name = "DiaSem.findByIdDia", query = "SELECT d FROM DiaSem d WHERE d.idDia = :idDia"),
-    @NamedQuery(name = "DiaSem.findByNombreIda", query = "SELECT d FROM DiaSem d WHERE d.nombreIda = :nombreIda")})
+    @NamedQuery(name = "DiaSem.findByNombreDia", query = "SELECT d FROM DiaSem d WHERE d.nombreDia = :nombreDia")})
 public class DiaSem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,8 +37,8 @@ public class DiaSem implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_DIA")
     private Integer idDia;
-    @Column(name = "NOMBRE_IDA")
-    private String nombreIda;
+    @Column(name = "NOMBRE_DIA")
+    private String nombreDia;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDiaSem")
     private Collection<Bloque> bloqueCollection;
 
@@ -57,12 +57,12 @@ public class DiaSem implements Serializable {
         this.idDia = idDia;
     }
 
-    public String getNombreIda() {
-        return nombreIda;
+    public String getNombreDia() {
+        return nombreDia;
     }
 
-    public void setNombreIda(String nombreIda) {
-        this.nombreIda = nombreIda;
+    public void setNombreDia(String nombreDia) {
+        this.nombreDia = nombreDia;
     }
 
     @XmlTransient

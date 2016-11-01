@@ -34,7 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Caja.findAll", query = "SELECT c FROM Caja c"),
     @NamedQuery(name = "Caja.findByIdCaja", query = "SELECT c FROM Caja c WHERE c.idCaja = :idCaja"),
     @NamedQuery(name = "Caja.findByFechorApertura", query = "SELECT c FROM Caja c WHERE c.fechorApertura = :fechorApertura"),
-    @NamedQuery(name = "Caja.findByFechorCierre", query = "SELECT c FROM Caja c WHERE c.fechorCierre = :fechorCierre")})
+    @NamedQuery(name = "Caja.findByFechorCierre", query = "SELECT c FROM Caja c WHERE c.fechorCierre = :fechorCierre"),
+    @NamedQuery(name = "Caja.findByCantEfectivoIni", query = "SELECT c FROM Caja c WHERE c.cantEfectivoIni = :cantEfectivoIni"),
+    @NamedQuery(name = "Caja.findByCantEfectivoFin", query = "SELECT c FROM Caja c WHERE c.cantEfectivoFin = :cantEfectivoFin"),
+    @NamedQuery(name = "Caja.findByCantChequeFin", query = "SELECT c FROM Caja c WHERE c.cantChequeFin = :cantChequeFin")})
 public class Caja implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,6 +51,12 @@ public class Caja implements Serializable {
     @Column(name = "FECHOR_CIERRE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechorCierre;
+    @Column(name = "CANT_EFECTIVO_INI")
+    private Integer cantEfectivoIni;
+    @Column(name = "CANT_EFECTIVO_FIN")
+    private Integer cantEfectivoFin;
+    @Column(name = "CANT_CHEQUE_FIN")
+    private Integer cantChequeFin;
     @JoinColumn(name = "ID_FUNCIONARIO", referencedColumnName = "ID_FUNCIONARIO")
     @ManyToOne
     private Funcionario idFuncionario;
@@ -83,6 +92,30 @@ public class Caja implements Serializable {
 
     public void setFechorCierre(Date fechorCierre) {
         this.fechorCierre = fechorCierre;
+    }
+
+    public Integer getCantEfectivoIni() {
+        return cantEfectivoIni;
+    }
+
+    public void setCantEfectivoIni(Integer cantEfectivoIni) {
+        this.cantEfectivoIni = cantEfectivoIni;
+    }
+
+    public Integer getCantEfectivoFin() {
+        return cantEfectivoFin;
+    }
+
+    public void setCantEfectivoFin(Integer cantEfectivoFin) {
+        this.cantEfectivoFin = cantEfectivoFin;
+    }
+
+    public Integer getCantChequeFin() {
+        return cantChequeFin;
+    }
+
+    public void setCantChequeFin(Integer cantChequeFin) {
+        this.cantChequeFin = cantChequeFin;
     }
 
     public Funcionario getIdFuncionario() {

@@ -467,7 +467,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Caja nulo");
                 }
-                    //VERIFICAR HORA DE CIERRE PARA VER SI ESTA CERRADA O NO
+                //VERIFICAR HORA DE CIERRE PARA VER SI ESTA CERRADA O NO
                 else if (caja.FECHOR_APERTURA == null)
                 {
                     throw new Exception("Fecha y hora apertura nula");
@@ -480,6 +480,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
                        CAJA cajaUpdate = null;
                        cajaUpdate = buscarCaja(caja.ID_CAJA);
                        cajaUpdate.FECHOR_CIERRE = fechor_cierre;
+                       //TODO: verificar si caja está descuadrada
+                       //TODO: si caja está descuadrada, entonces mandar mail a jefes de operadores
                        conexionDB.SaveChangesAsync();
                    }
                     return true;
@@ -495,10 +497,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
         #endregion
 
         //ECU-019
-        public ReporteCaja generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
+        public List<ReporteCaja> generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
         {
             //TODO: implementar
-            ReporteCaja reporteCaja = null;
+            List<ReporteCaja> reporteCaja = null;
+            //Buscar todas las cajas
+            //Instanciar un reporte de caja por caja
             return reporteCaja;
         }
         

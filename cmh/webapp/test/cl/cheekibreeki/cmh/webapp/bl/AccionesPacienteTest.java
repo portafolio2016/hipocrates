@@ -1,25 +1,17 @@
 package cl.cheekibreeki.cmh.webapp.bl;
 
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
-import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
-import cl.cheekibreeki.cmh.lib.dal.entities.Bloque;
-import cl.cheekibreeki.cmh.lib.dal.entities.DiaSem;
-import cl.cheekibreeki.cmh.lib.dal.entities.Especialidad;
-import cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten;
-import cl.cheekibreeki.cmh.lib.dal.entities.OrdenAnalisis;
-import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
-import cl.cheekibreeki.cmh.lib.dal.entities.Pago;
-import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
-import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
-import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
-import cl.cheekibreeki.cmh.lib.dal.entities.ResAtencion;
-import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
+import cl.cheekibreeki.cmh.lib.dal.entities.*;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,10 +35,18 @@ public class AccionesPacienteTest {
         paciente.setDigitoVerificador('1');
         paciente.setHashedPass("holamundo");
         paciente.setEmailPaciente("tomasmuniz@peladordenaranjas.com");
+        DiaSem dia2 = crearDiaSem("Lunes");
+        DiaSem dia3 = crearDiaSem("Martes");
+        DiaSem dia = crearDiaSem("Miercoles");
+        DiaSem dia4 = crearDiaSem("Jueves");
+        DiaSem dia5 = crearDiaSem("Viernes");
+        DiaSem dia6 = crearDiaSem("Sábado");
+        DiaSem dia7 = crearDiaSem("Domingo");
     }
     
     @BeforeClass
     public static void setUpClass() {
+        
     }
     
     @AfterClass
@@ -55,10 +55,17 @@ public class AccionesPacienteTest {
     
     @Before
     public void setUp() {
+        Map<String, Object> params = new HashMap<>();
+        List<? extends Object>  atenciones = Controller.findByQuery("AtencionAgen.findAll", params);
+        for(Object obj : atenciones){
+            AtencionAgen atencion = (AtencionAgen) obj;
+            Controller.remove(AtencionAgen.class, atencion.getIdAtencionAgen());
+        }
     }
     
     @After
     public void tearDown() {
+
     }
 
     /**
@@ -149,7 +156,7 @@ public class AccionesPacienteTest {
             if(!dias.isEmpty()){
                 dia = (DiaSem)dias.get(dias.size()-1);
             }else{
-                dia.setNombreIda("DiaTest");
+                dia.setNombreDia("DiaTest");
                 Object objDia = dia;
                 Controller.upsert(objDia);
                 List<? extends Object> diasAux = ctr.findByQuery("DiaSem.findAll", para);
@@ -242,21 +249,150 @@ public class AccionesPacienteTest {
      * Test of obtenerAtenciones method, of class AccionesPaciente.
      */
     @Test
-    public void testHorasDisponibles() {
+    public void testHorasDisponibles() throws Exception {
+        System.out.println("testHorasDisponibles");
+        //Preparación
+        //Crear dias
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        DiaSem dia = accionesPaciente.buscarDiaPorDate(new Date());
+        //Crear bloques
+        Bloque bloque = crearBloque(dia, (short)2, (short)9, (short)0, (short)9, (short)15);
+        Bloque bloque2 = crearBloque(dia, (short)3, (short)9, (short)16, (short)9, (short)30);
+        //Crear personal
+        Personal personal = crearPersonal((short)0, "TestHorasNombre", "TestHorasApellidos", 123, '0');
+        //Crear especialidad
+        Especialidad especialidad = crearEspecialidad("TestEspecialidad");
+        //Crear personal médico
+        PersMedico medico = crearPersonalMedico(personal, especialidad);
+        //Crear horarioº
+        Horario horario = crearHorario(bloque, medico);
+        Horario horario2 = crearHorario(bloque2, medico);
+        //Crear estado Atencion Vigente
+        EstadoAten estadoVigente = crearEstadoAten("Vigente");
+        //Crear Atencion, asignarestado Vigente, medico
+        AtencionAgen atencion = crearAtencionAgendada(estadoVigente, medico, bloque);
+        //Caso 1: obtener 1 horas disponibles
+        HorasDisponibles horasDisponibles = accionesPaciente.horasDisponiblesMedico(medico, new Date());
+        if(horasDisponibles.getHoras().size() >= 1){
+            
+        }else{
+            fail();
+        }
+//        Caso 2: obtener 0 horas disponibles
+        Personal personal2 = crearPersonal((short)1, "test","test",1231,'l');
+        PersMedico medico2 = crearPersonalMedico(personal2, especialidad);
+        HorasDisponibles horasDisponibles2 = accionesPaciente.horasDisponiblesMedico(medico2, new Date());
+        if(horasDisponibles2.getHoras().isEmpty()){
+            
+        }else{
+            fail();
+        }
     }
 
     /**
      * Test of agendarAtencion method, of class AccionesPaciente.
      */
     @Test
-    public void testAgendarAtencion() {
+    public void testAgendarAtencion() throws Exception {
+        //prep
+        //Crear estado atención Vigente y Anulado
+        EstadoAten estadoVigente = crearEstadoAten("Vigente");
+        EstadoAten estadoAnulada = crearEstadoAten("Anulada");
+        //Crear personal
+        Random random = new Random();
+        Personal personal = crearPersonal((short)0, "El Hombre Test", "Apellido Test", random.nextInt(999999), '1');
+        //Crear especialidad
+        Especialidad especialidad = crearEspecialidad("EspecialidadTest");
+        //Crear personal médico y asignar personal y especialidad
+        PersMedico personalMedico = crearPersonalMedico(personal, especialidad);
+        //crear bloque
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        DiaSem dia = accionesPaciente.buscarDiaPorDate(new Date());
+        Bloque bloque = crearBloque(dia, 1, (short)8, (short)0, (short)8, (short)15);
+        Bloque bloque2 = crearBloque(dia, 2, (short)8, (short)15, (short)8, (short)30);
+        //crear horario
+        Horario horario = crearHorario(bloque, personalMedico);
+        Horario horario2 = crearHorario(bloque2, personalMedico);
+        //crear paciente
+        Paciente p = crearPaciente(random.nextInt(9999999), '0');
+        
+        //Caso 1: agendado correctamente
+        AtencionAgen atencion = new AtencionAgen();
+        atencion.setIdBloque(bloque);
+        atencion.setIdPersAtiende(personalMedico);
+        atencion.setIdPaciente(p);
+        atencion.setIdEstadoAten(estadoVigente);
+        atencion.setFechor(new Date());
+        boolean result = accionesPaciente.agendarAtencion(atencion);
+        boolean expectedResult = true;
+        if(result != expectedResult){
+            fail();
+        }
+        //Caso 2: no se puede agendar, hora ocupada
+        AtencionAgen atencion2 = new AtencionAgen();
+        atencion2.setIdBloque(bloque);
+        atencion2.setIdPersAtiende(personalMedico);
+        atencion2.setIdPaciente(p);
+        try {
+            boolean result2 = accionesPaciente.agendarAtencion(atencion2);//deberia levantar una excepcion
+            fail();//no debería tocar esto.
+        } catch (Exception e) {
+            System.out.println("Todo bien :)");
+        }
+        
     }
     
       /**
      * Test of obtenerAtenciones method, of class AccionesPaciente.
      */
     @Test
-    public void testObtenerAtencionesPendientes() {
+    public void testObtenerAtencionesPendientes() throws Exception {
+        //prep
+        //Crear estado atención Vigente y Anulado
+        EstadoAten estadoVigente = crearEstadoAten("Vigente");
+        EstadoAten estadoAnulada = crearEstadoAten("Anulada");
+        //Crear personal
+        Random random = new Random();
+        Personal personal = crearPersonal((short)0, "El Hombre Test", "Apellido Test", random.nextInt(999999), '1');
+        //Crear especialidad
+        Especialidad especialidad = crearEspecialidad("EspecialidadTest");
+        //Crear personal médico y asignar personal y especialidad
+        PersMedico personalMedico = crearPersonalMedico(personal, especialidad);
+        //crear bloque
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        DiaSem dia = accionesPaciente.buscarDiaPorDate(new Date());
+        Bloque bloque = crearBloque(dia, 1, (short)8, (short)0, (short)8, (short)15);
+        Bloque bloque2 = crearBloque(dia, 2, (short)8, (short)15, (short)8, (short)30);
+        //crear horario
+        Horario horario = crearHorario(bloque, personalMedico);
+        Horario horario2 = crearHorario(bloque2, personalMedico);
+        //crear paciente
+        int rut = random.nextInt(999999);
+        Paciente p = crearPaciente(rut, '0');
+        AtencionAgen atencion = new AtencionAgen();
+        atencion.setIdBloque(bloque);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, 1);
+        Date fechor = cal.getTime();
+        atencion.setFechor(fechor);
+        atencion.setIdEstadoAten(estadoVigente);
+        atencion.setIdPersAtiende(personalMedico);
+        atencion.setIdPaciente(p);
+        Controller.upsert(atencion);
+        //Caso 1: tiene una atencion pendiente
+        ArrayList<AtencionAgen> result = accionesPaciente.obtenerAtencionesPendientes(rut);
+        if(result.size() != 1){
+            fail("Deberia tener un solo pendiente");
+        }
+        //Caso 2: tiene 0 atenciones pendientes
+        AtencionAgen singleResult = result.get(0);
+        singleResult.setIdEstadoAten(estadoAnulada);
+        Controller.upsert(singleResult);
+        ArrayList<AtencionAgen> result2 = accionesPaciente.obtenerAtencionesPendientes(rut);
+        if(result2.size() != 0){
+            fail("Debería tener 0 pendientes");
+        }
     }
 
     /**
@@ -351,7 +487,168 @@ public class AccionesPacienteTest {
      * Test of anularAtencion method, of class AccionesPaciente.
      */
     @Test
-    public void testAnularAtencion() {
+    public void testAnularAtencion() throws Exception {
+        //Preparación
+        //Crear estado atención Vigente y Anulado
+        EstadoAten estadoVigente = crearEstadoAten("Vigente");
+        EstadoAten estadoAnulada = crearEstadoAten("Anulada");
+        //Crear personal
+        Personal personal = crearPersonal((short)0, "El Hombre Test", "Apellido Test", 1234567, '1');
+        //Crear especialidad
+        Especialidad especialidad = crearEspecialidad("EspecialidadTest");
+        //Crear personal médico y asignar personal y especialidad
+        PersMedico personalMedico = crearPersonalMedico(personal, especialidad);
+        //Crear dia
+        DiaSem dia = crearDiaSem("Martes");
+        //crear bloque
+        Bloque bloque = crearBloque(dia, 1, (short)8, (short)0, (short)8, (short)15);
+        //crear horario
+        Horario horario = crearHorario(bloque, personalMedico);
+        //Crear Atención agendada
+        AtencionAgen atencion = crearAtencionAgendada(estadoVigente, personalMedico, bloque);
+        //Caso 1: anular una atención pendiente correctamente
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        EstadoAten result = accionesPaciente.anularAtencion(atencion).getIdEstadoAten();
+        EstadoAten expectedResult = new EstadoAten();
+        expectedResult.setNomEstadoAten("Anulada");
+        try {
+            if(result.getNomEstadoAten().equals(expectedResult.getNomEstadoAten())){
+            
+            }else{
+                fail();
+            }
+        } catch (Exception e) {
+            fail();
+        }
+        
+        //Caso 2: fallar al intentar anular una atención no pendiente
+        try{
+            accionesPaciente.anularAtencion(atencion); //si esto no levanta una excepción, falla la prueba
+            fail();
+        }catch(Exception ex){
+            System.out.println("Exito test anular atencion caso 2");
+        }
     }
     
+    private EstadoAten crearEstadoAten(String nomEstado){
+        Map<String, Object> params = new HashMap<>();
+        params.put("nomEstadoAten", nomEstado);
+        List<? extends Object>  estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
+        if(estadoAtenList.size() > 0){
+            return (EstadoAten) estadoAtenList.get(0);
+        }
+        EstadoAten estado = new EstadoAten();
+        estado.setNomEstadoAten(nomEstado);
+        Controller.upsert(estado);
+        Map<String, Object> params2 = new HashMap<>();
+        params.put("nomEstadoAten", nomEstado);
+        List<? extends Object>  estadoAtenList2 = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
+        return (EstadoAten)estadoAtenList2.get(0);
+    }
+    
+    private Personal crearPersonal(short isActivo, String nombres, String apellidos, int rut, char verificador){
+        Personal personal = new Personal();
+        personal.setIdPersonal(0);
+        personal.setActivo(isActivo);
+        personal.setNombres(nombres);
+        personal.setApellidos(apellidos);
+        personal.setRut(rut);
+        personal.setEmail("test@test.com");
+        personal.setRemuneracion(0);
+        personal.setPorcentDescuento((short)0);
+        personal.setHashedPass("safasdfasd");
+        personal.setVerificador(verificador);
+        Controller.upsert(personal);
+        Map<String, Object> params = new HashMap<>();
+        params.put("rut", rut);
+        List<? extends Object>  personalList = Controller.findByQuery("Personal.findByRut", params);
+        Personal personalInsertado = (Personal)personalList.get(0);
+        return personalInsertado;
+    }
+    
+    private Especialidad crearEspecialidad(String nomEspecialidad){
+        Especialidad especialidad = new Especialidad();
+        especialidad.setNomEspecialidad(nomEspecialidad);
+        Controller.upsert(especialidad);
+        Map<String, Object> params = new HashMap<>();
+        params.put("nomEspecialidad", nomEspecialidad);
+        List<? extends Object>  especialidadList = Controller.findByQuery("Especialidad.findByNomEspecialidad", params);
+        return (Especialidad)especialidadList.get(0);
+    }
+    
+    private PersMedico crearPersonalMedico(Personal personal, Especialidad especialidad){
+        PersMedico personalMedico = new PersMedico();
+        personalMedico.setIdPersonal(personal);
+        personalMedico.setIdEspecialidad(especialidad);
+        Controller.upsert(personalMedico);
+        Map<String, Object> params = new HashMap<>();
+        params.put("idPersonal", personal);
+        List<? extends Object>  personalMedicoList = Controller.findByQuery("PersMedico.findByIdPersonal", params);
+        return (PersMedico)personalMedicoList.get(0);
+    }
+    
+    private DiaSem crearDiaSem(String nombreDia){
+        DiaSem dia = new DiaSem();
+        dia.setNombreDia(nombreDia);
+        Controller.upsert(dia);
+        Map<String, Object> params = new HashMap<>();
+        params.put("nombreDia", nombreDia);
+        List<? extends Object>  diaList = Controller.findByQuery("DiaSem.findByNombreDia", params);
+        return (DiaSem)diaList.get(0);
+    }
+    
+    private Bloque crearBloque(DiaSem dia, int numBloque, short numHoraIni, short numMinuIni, short numHoraFin, short numMinuFin){
+        Bloque bloque = new Bloque();
+        bloque.setNumBloque(numBloque);
+        bloque.setIdDiaSem(dia);
+        bloque.setNumHoraIni(numHoraIni);
+        bloque.setNumMinuIni(numMinuIni);
+        bloque.setNumHoraFin(numHoraFin);
+        bloque.setNumMinuFin(numMinuFin);
+        Controller.upsert(bloque);
+        Map<String, Object> params = new HashMap<>();
+        List<? extends Object>  bloqueList = Controller.findByQuery("Bloque.findAll", params);
+        return (Bloque)bloqueList.get(bloqueList.size()-1);
+    }
+    
+    private Horario crearHorario(Bloque bloque, PersMedico personalMedico){
+        Horario horario = new Horario();
+        horario.setIdBloque(bloque);
+        horario.setIdPersMedico(personalMedico);
+        Controller.upsert(horario);
+        Map<String, Object> params = new HashMap<>();
+        List<? extends Object>  horarioList = Controller.findByQuery("Horario.findAll", params);
+        return (Horario)horarioList.get(horarioList.size()-1);
+    }
+    
+    private AtencionAgen crearAtencionAgendada(EstadoAten estadoAten, PersMedico personalMedico, Bloque bloque){
+        AtencionAgen atencion = new AtencionAgen();
+        atencion.setFechor(new Date());
+        atencion.setObservaciones("TestAtencion");
+        atencion.setIdEstadoAten(estadoAten);
+        atencion.setIdPersAtiende(personalMedico);
+        atencion.setIdBloque(bloque);
+        Controller.upsert(atencion);
+        Map<String, Object> params = new HashMap<>();
+        List<? extends Object>  atencionList = Controller.findByQuery("AtencionAgen.findAll", params);
+        return (AtencionAgen)atencionList.get(atencionList.size()-1);
+    }
+    
+    private Paciente crearPaciente(int rut, char digitoVerificador){
+        Paciente paciente = new Paciente();
+        paciente.setRut(rut);
+        paciente.setDigitoVerificador(digitoVerificador);
+        Controller.upsert(paciente);
+        Map<String, Object> params = new HashMap<>();
+        params.put("rut", rut);
+        List<? extends Object>  pacienteList = Controller.findByQuery("Paciente.findByRut", params);
+        return (Paciente)pacienteList.get(0);
+    }
+    
+    private DiaSem buscarDiaPorNombre(String nombreDia){
+        Map<String, Object> params = new HashMap<>();
+        params.put("nombreDia", nombreDia);
+        List<? extends Object>  diaList = Controller.findByQuery("DiaSem.findByNombreDia", params);
+        return (DiaSem)diaList.get(0);
+    }
 }

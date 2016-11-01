@@ -12,16 +12,15 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ENTRADA_FICHA
+    public partial class LOGPAGOHONORARIO
     {
-        public int ID_ENTRADA_FICHA { get; set; }
-        public string NOMBRE_ENTRADA { get; set; }
-        public string CONTENIDO_ENTRADA { get; set; }
-        public Nullable<System.DateTime> FECHA_ENTRADA { get; set; }
-        public Nullable<int> ID_PACIENTE { get; set; }
-        public int ID_TIPO_FICHA { get; set; }
-    
-        public virtual PACIENTE PACIENTE { get; set; }
-        public virtual TIPO_FICHA TIPO_FICHA { get; set; }
+        public int IDLOGPAGOHONORARIO { get; set; }
+        public string NOMBRE { get; set; }
+        public string BANCO { get; set; }
+        public string TIPOCUENTA { get; set; }
+        public Nullable<int> CUENTA { get; set; }
+        public Nullable<int> SUBTOTAL { get; set; }
+        public Nullable<int> TOTAL { get; set; }
+        public Nullable<System.DateTime> FECHOR { get; set; }
     }
 }

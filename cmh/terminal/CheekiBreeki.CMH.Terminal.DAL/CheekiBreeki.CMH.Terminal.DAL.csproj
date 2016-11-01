@@ -121,6 +121,9 @@
     <Compile Include="INVENTARIO.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LOGPAGOHONORARIO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ORDEN_ANALISIS.cs">
       <DependentUpon>CMHModel.tt</DependentUpon>
     </Compile>
