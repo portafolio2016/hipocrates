@@ -1971,7 +1971,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                     context.PERSONAL.Add(personal2);
                     context.SaveChangesAsync();
 
-                    dia2.NOMBRE_IDA = "LuMaMiJuVi";
+                    dia2.NOMBRE_DIA = "LuMaMiJuVi";
                     context.DIA_SEM.Add(dia2);
                     context.SaveChangesAsync();
 
