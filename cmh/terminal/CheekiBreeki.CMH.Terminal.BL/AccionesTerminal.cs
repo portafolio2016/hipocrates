@@ -457,7 +457,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         /// <param name="fechor_cierre">Fecha en la que se cierra la caja</param>
         /// <returns>Si es true la caja fue cerrada con exito</returns>
         #region Cerrar Caja
-        public Boolean cerrarCaja(CAJA caja, DateTime fechor_cierre)
+        public Boolean cerrarCaja(CAJA caja, DateTime fechor_cierre, CARGO cargoAuditor)
         {
             try
             {
@@ -480,8 +480,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
                        CAJA cajaUpdate = null;
                        cajaUpdate = buscarCaja(caja.ID_CAJA);
                        cajaUpdate.FECHOR_CIERRE = fechor_cierre;
-                       //TODO: verificar si caja está descuadrada
-                       //TODO: si caja está descuadrada, entonces mandar mail a jefes de operadores
+                       //si caja descuadrada entonces enviar correo
+                       this.auditarCaja(caja, cargoAuditor);
+                       
                        conexionDB.SaveChangesAsync();
                    }
                     return true;
@@ -494,16 +495,71 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
+        /// <summary>
+        /// Si una caja presenta diferencias, envia un correo notificando a todos los funcionarios con el cargo especificado
+        /// </summary>
+        /// <param name="caja">Caja a evaluar</param>
+        /// <param name="nombreCargo">Nombre del cargo a notificar</param>
+        /// <returns>Cantidad de mails enviados</returns>
+        public int auditarCaja(CAJA caja, CARGO cargo)
+        {
+            using (var cmhEntities = new CMHEntities())
+            {
+                ReporteCaja reporteCaja = new ReporteCaja(caja);
+                int result = 0;
+                if (reporteCaja.Diferencia != 0)
+                {
+                    //si caja está descuadrada, entonces mandar mail a jefes de operadores
+                    ICollection<FUNCIONARIO> jefesOperadores = cargo.FUNCIONARIO;
+                    Emailer emailer = new Emailer();
+                    String tituloMail = "Caja descuadrada";
+                    foreach (FUNCIONARIO jefe in jefesOperadores)
+                    {
+                        String cuerpoMail = "Estimado " + jefe.PERSONAL.NOMBRES +
+                            " se le comunica que " + caja.FUNCIONARIO.PERSONAL.NOMBRES +
+                            " " + caja.FUNCIONARIO.PERSONAL.APELLIDOS +
+                            " ha registrado una inconsistencia en su caja con diferencia de " +
+                            reporteCaja.Diferencia + " en la fecha " + reporteCaja.FechorCierre;
+                        emailer.enviarCorreo(jefe.PERSONAL.EMAIL, tituloMail, cuerpoMail);
+                        result++;
+                    }
+                }
+                return result;
+            }
+        }
+
         #endregion
 
         //ECU-019
         public List<ReporteCaja> generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
         {
-            //TODO: implementar
-            List<ReporteCaja> reporteCaja = null;
-            //Buscar todas las cajas
-            //Instanciar un reporte de caja por caja
-            return reporteCaja;
+            using (var context = new CMHEntities())
+            {
+                //Todas las cajas del funcionario
+                ICollection<CAJA> cajasFuncionario = funcionario.CAJA;
+                //Si no hay cajas, levantar excepcion
+                if (cajasFuncionario == null || cajasFuncionario.Count() == 0)
+                {
+                    throw new Exception("No hay cajas para este funcionario");
+                }
+                //Filtrar por día
+                List<CAJA> cajasDelDia = new List<CAJA>();
+                foreach (CAJA caja in cajasFuncionario)
+                {
+                    if (caja.FECHOR_CIERRE.Value.Date == dia.Date)
+                    {
+                        cajasDelDia.Add(caja);
+                    }
+                }
+                List<ReporteCaja> reportesCaja = new List<ReporteCaja>();
+                //Instanciar un reporte de caja por caja
+                foreach (CAJA caja in cajasDelDia)
+                {
+                    ReporteCaja reporteCaja = new ReporteCaja(caja);
+                    reportesCaja.Add(reporteCaja);
+                }
+                return reportesCaja;
+            }
         }
         
         public Boolean orualizarInventarioEquipo(INVENTARIO inventario)
