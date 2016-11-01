@@ -1493,7 +1493,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             DateTime fechor_cierre = DateTime.Today;
             fechor_cierre = fechor_cierre.AddDays(1);
 
-            Boolean res1 = at.cerrarCaja(caja1,fechor_cierre);
+            Boolean res1 = at.cerrarCaja(caja1,fechor_cierre, cargo1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
             
@@ -3086,6 +3086,98 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
                 List<ReporteCaja> reportesCaja2 = accionesTerminal.generarReporteCaja(funcionario, DateTime.Now);
                 Assert.IsTrue(reportesCaja2.Count() == 2);
+            }
+            
+        }
+        [TestMethod]
+        public void auditarCajaTest()
+        {
+            using(var cmhEntities = new CMHEntities())
+            {
+                //Preparar tests
+                //Crear cargo
+                CARGO cargo = new CARGO();
+                cargo.NOMBRE_CARGO = "CargoTest";
+                CARGO cargo2 = new CARGO();
+                cargo2.NOMBRE_CARGO = "Jefe de operadores";
+                cmhEntities.CARGO.Add(cargo);
+                cmhEntities.CARGO.Add(cargo2);
+                cmhEntities.SaveChangesAsync();
+                //Crear personal
+                PERSONAL personal = new PERSONAL();
+                Random random = new Random();
+                personal.RUT = random.Next(999999);
+                personal.VERIFICADOR = "C";
+                personal.ACTIVO = true;
+                PERSONAL personal2= new PERSONAL();
+                personal2.RUT = random.Next(999999);
+                personal2.VERIFICADOR = "C";
+                personal2.ACTIVO = true;
+                personal2.EMAIL = "p.delasotta@alumnos.duoc.cl";
+                cmhEntities.PERSONAL.Add(personal);
+                cmhEntities.PERSONAL.Add(personal2);
+                cmhEntities.SaveChangesAsync();
+                //Crear funcionario
+                FUNCIONARIO funcionario = new FUNCIONARIO();
+                funcionario.ID_PERSONAL = personal.ID_PERSONAL;
+                funcionario.ID_CARGO_FUNCI = cargo.ID_CARGO_FUNCI;
+                cmhEntities.FUNCIONARIO.Add(funcionario);
+                FUNCIONARIO funcionario2 = new FUNCIONARIO();
+                funcionario2.ID_PERSONAL = personal2.ID_PERSONAL;
+                funcionario2.ID_CARGO_FUNCI = cargo2.ID_CARGO_FUNCI;
+                cmhEntities.FUNCIONARIO.Add(funcionario2);
+                cmhEntities.SaveChangesAsync();
+                //Crear caja
+                CAJA caja = new CAJA();
+                caja.FECHOR_APERTURA = DateTime.Now;
+                caja.FECHOR_CIERRE = DateTime.Now;
+                caja.CANT_EFECTIVO_INI = 0;
+                caja.CANT_EFECTIVO_FIN = 0;
+                caja.CANT_CHEQUE_FIN = 0;
+                caja.ID_FUNCIONARIO = funcionario.ID_FUNCIONARIO;
+                cmhEntities.CAJA.Add(caja);
+                cmhEntities.SaveChangesAsync();
+                //Crear personal
+                PERSONAL pers = new PERSONAL();
+                pers.RUT = random.Next(999999);
+                pers.VERIFICADOR = "C";
+                pers.ACTIVO = true;
+                cmhEntities.PERSONAL.Add(pers);
+                cmhEntities.SaveChangesAsync();
+                //Crear personal medico
+                PERS_MEDICO persMedico = new PERS_MEDICO();
+                persMedico.ID_PERSONAL = pers.ID_PERSONAL;
+                cmhEntities.PERS_MEDICO.Add(persMedico);
+                cmhEntities.SaveChangesAsync();
+                //Crear dia semana
+                DIA_SEM diaSem = new DIA_SEM();
+                diaSem.NOMBRE_DIA = "Lunes";
+                cmhEntities.DIA_SEM.Add(diaSem);
+                cmhEntities.SaveChangesAsync();
+                //Crear bloque
+                BLOQUE bloque = new BLOQUE();
+                bloque.ID_DIA_SEM = diaSem.ID_DIA;
+                cmhEntities.BLOQUE.Add(bloque);
+                cmhEntities.SaveChangesAsync();
+                //Crear atencion agendada
+                ATENCION_AGEN atencion = new ATENCION_AGEN();
+                atencion.ID_PERS_ATIENDE = persMedico.ID_PERSONAL_MEDICO;
+                atencion.ID_BLOQUE = bloque.ID_BLOQUE;
+                cmhEntities.ATENCION_AGEN.Add(atencion);
+                cmhEntities.SaveChangesAsync();
+                //Crear pago
+                PAGO pago = new PAGO();
+                pago.MONTO_PAGO = 100;
+                pago.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                pago.FECHOR = caja.FECHOR_APERTURA;
+                pago.ID_CAJA = caja.ID_CAJA;
+                cmhEntities.PAGO.Add(pago);
+                cmhEntities.SaveChangesAsync();
+
+                AccionesTerminal accionesTerminal = new AccionesTerminal();
+                int result = accionesTerminal.auditarCaja(caja, cargo2);
+                int expectedResult = 1;
+                Assert.IsTrue(result >= expectedResult, "Fueron enviados menos de 1 mail");
             }
             
         }
