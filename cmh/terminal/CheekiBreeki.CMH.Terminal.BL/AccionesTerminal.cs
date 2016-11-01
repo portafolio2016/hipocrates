@@ -511,7 +511,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     //si caja está descuadrada, entonces mandar mail a jefes de operadores
                     ICollection<FUNCIONARIO> jefesOperadores = cargo.FUNCIONARIO;
-                    Emailer emailer = new Emailer();
                     String tituloMail = "Caja descuadrada";
                     foreach (FUNCIONARIO jefe in jefesOperadores)
                     {
@@ -520,7 +519,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                             " " + caja.FUNCIONARIO.PERSONAL.APELLIDOS +
                             " ha registrado una inconsistencia en su caja con diferencia de " +
                             reporteCaja.Diferencia + " en la fecha " + reporteCaja.FechorCierre;
-                        emailer.enviarCorreo(jefe.PERSONAL.EMAIL, tituloMail, cuerpoMail);
+                        Emailer.enviarCorreo(jefe.PERSONAL.EMAIL, tituloMail, cuerpoMail);
                         result++;
                     }
                 }
