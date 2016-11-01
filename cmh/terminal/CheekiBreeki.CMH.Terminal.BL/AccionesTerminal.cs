@@ -170,18 +170,47 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //}
 
         //ECU-010
-        public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
+        /*public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
         {
             //TODO: implementar
             return false;
-        }
+        }*/
 
         //ECU-011
-        public Boolean cerrarConsultaMedica(RES_ATENCION resultadoAtencion)
+        #region Cerrar consulta médica
+        /// <summary>
+        /// Se cierra una consulta médica con estado de atención "Vigente"
+        /// </summary>
+        /// <param name="resultadoAtencion">Resultado de dicha atención</param>
+        /// <param name="atencionAgendada">Atención agendada para cambiarle la llave foranea de estado atención</param>
+        /// <returns></returns>
+        public Boolean cerrarConsultaMedica(RES_ATENCION resultadoAtencion, ATENCION_AGEN atencionAgendada)
         {
-            //TODO: implementar
-            return false;
+            try
+            {
+                if (Util.isObjetoNulo(atencionAgendada))
+                {
+                    throw new Exception("Atención nula");
+                }
+                else if (atencionAgendada.ESTADO_ATEN.NOM_ESTADO_ATEN != "Vigente")
+                {
+                    throw new Exception("Estado no válido de la atención");
+                }
+                else
+                {
+                    ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencionAgendada.ID_ATENCION_AGEN);
+                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "Cerrada").FirstOrDefault().ID_ESTADO_ATEN;
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
+        #endregion
 
         //ECU-012
         public Boolean generarOrdenDeAnalisis(ATENCION_AGEN atencion, RES_ATENCION resultadoAtencion) 
