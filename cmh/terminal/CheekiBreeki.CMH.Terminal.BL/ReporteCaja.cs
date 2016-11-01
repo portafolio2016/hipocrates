@@ -29,6 +29,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
             this.Funcionario = caja.FUNCIONARIO;
             this.fechorApertura = caja.FECHOR_APERTURA.Value;
             this.fechorCierre = caja.FECHOR_CIERRE.Value;
+            this.pagos = new List<PAGO>();
+            this.devoluciones = new List<PAGO>();
             foreach (PAGO pago in caja.PAGO)
             {
                 if(pago.DEVOLUCION == null)
@@ -40,9 +42,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     this.devoluciones.Add(pago);
                 }
             }
-            //this.dineroEnBilletesInicial = caja.dineroEnBilletesInicial;
-            //this.dineroEnBilletesFinal = caja.dineroEnBilletesFinal;
-            //this.dineroEnChequesFinal = caja.dineroEnChequesFinal;
+            this.dineroEnBilletesInicial = caja.CANT_EFECTIVO_INI.Value;
+            this.dineroEnBilletesFinal = caja.CANT_EFECTIVO_FIN.Value;
+            this.dineroEnChequesFinal = caja.CANT_CHEQUE_FIN.Value;
         }
         #endregion
 
@@ -102,32 +104,26 @@ namespace CheekiBreeki.CMH.Terminal.BL
             set { Pagos = value; }
         }
 
-        public int TotalDevoluciones
+        public int TotalDevoluciones()
         {
-            get 
+            int totalDevoluciones = 0;
+            foreach (PAGO devolucion in this.Devoluciones)
             {
-                int totalDevoluciones = 0;
-                foreach (PAGO devolucion in this.Devoluciones)
-                {
-                    totalDevoluciones += devolucion.MONTO_PAGO.Value + devolucion.BONO.CANT_BONO.Value;
-                }
-                return totalDevoluciones;
+                totalDevoluciones += devolucion.MONTO_PAGO.Value + devolucion.BONO.CANT_BONO.Value;
             }
+            return totalDevoluciones;            
         }
 
 
-        public int TotalVentasConBono
+        public int TotalVentasConBono()
         {
-            get 
+            int totalVentas = 0;
+            foreach (PAGO pago in this.pagos)
             {
-                int totalVentas = 0;
-                foreach (PAGO pago in this.pagos)
-                {
-                    totalVentas += pago.MONTO_PAGO.Value + pago.BONO.CANT_BONO.Value;
-                }
-                totalVentas -= this.TotalDevoluciones;
-                return totalVentas;
+                totalVentas += pago.MONTO_PAGO.Value + ((pago.BONO == null) ? 0 : pago.BONO.CANT_BONO.Value);
             }
+            totalVentas -= this.TotalDevoluciones();
+            return totalVentas;
         }
         /// <summary>
         /// Retorna el total de ventas sin contar los bonos, es decir

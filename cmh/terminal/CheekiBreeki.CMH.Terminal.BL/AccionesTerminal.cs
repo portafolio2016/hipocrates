@@ -429,6 +429,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
             {
                 //Todas las cajas del funcionario
                 ICollection<CAJA> cajasFuncionario = funcionario.CAJA;
+                //Si no hay cajas, levantar excepcion
+                if (cajasFuncionario == null || cajasFuncionario.Count() == 0)
+                {
+                    throw new Exception("No hay cajas para este funcionario");
+                }
                 //Filtrar por día
                 List<CAJA> cajasDelDia = new List<CAJA>();
                 foreach (CAJA caja in cajasFuncionario)

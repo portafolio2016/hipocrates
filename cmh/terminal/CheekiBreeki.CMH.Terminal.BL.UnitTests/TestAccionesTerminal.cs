@@ -2965,12 +2965,129 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         [TestMethod]
         public void testReporteCaja() 
         {
-            //Preparar tests
-            //Caso 1: reporte caja sin diferencia
-            //Caso 2: reporte caja con diferencia
-            //Caso 3: reporte caja total ventas = 100
-            //Caso 4: caja no existe
-            //Caso 5: multiples cajas por dia
+            using(var cmhEntities = new CMHEntities())
+            {
+                //Preparar tests
+                //Crear cargo
+                CARGO cargo = new CARGO();
+                cargo.NOMBRE_CARGO = "CargoTest";
+                cmhEntities.CARGO.Add(cargo);
+                cmhEntities.SaveChangesAsync();
+                //Crear personal
+                PERSONAL personal = new PERSONAL();
+                Random random = new Random();
+                personal.RUT = random.Next(999999);
+                personal.VERIFICADOR = "C";
+                personal.ACTIVO = true;
+                cmhEntities.PERSONAL.Add(personal);
+                cmhEntities.SaveChangesAsync();
+                //Crear funcionario
+                FUNCIONARIO funcionario = new FUNCIONARIO();
+                funcionario.ID_PERSONAL = personal.ID_PERSONAL;
+                funcionario.ID_CARGO_FUNCI= cargo.ID_CARGO_FUNCI;
+                cmhEntities.FUNCIONARIO.Add(funcionario);
+                cmhEntities.SaveChangesAsync();
+                //Crear caja
+                CAJA caja = new CAJA();
+                caja.FECHOR_APERTURA = DateTime.Now;
+                caja.FECHOR_CIERRE = DateTime.Now;
+                caja.CANT_EFECTIVO_INI = 100;
+                caja.CANT_EFECTIVO_FIN = 100;
+                caja.CANT_CHEQUE_FIN = 100;
+                caja.ID_FUNCIONARIO = funcionario.ID_FUNCIONARIO;
+                cmhEntities.CAJA.Add(caja);
+                cmhEntities.SaveChangesAsync();
+                //Crear personal
+                PERSONAL pers = new PERSONAL();
+                pers.RUT = random.Next(999999);
+                pers.VERIFICADOR = "C";
+                pers.ACTIVO = true;
+                cmhEntities.PERSONAL.Add(pers);
+                cmhEntities.SaveChangesAsync();
+                //Crear personal medico
+                PERS_MEDICO persMedico = new PERS_MEDICO();
+                persMedico.ID_PERSONAL = pers.ID_PERSONAL;
+                cmhEntities.PERS_MEDICO.Add(persMedico);
+                cmhEntities.SaveChangesAsync();
+                //Crear dia semana
+                DIA_SEM diaSem = new DIA_SEM();
+                diaSem.NOMBRE_DIA = "Lunes";
+                cmhEntities.DIA_SEM.Add(diaSem);
+                cmhEntities.SaveChangesAsync();
+                //Crear bloque
+                BLOQUE bloque = new BLOQUE();
+                bloque.ID_DIA_SEM = diaSem.ID_DIA;
+                cmhEntities.BLOQUE.Add(bloque);
+                cmhEntities.SaveChangesAsync();
+                //Crear atencion agendada
+                ATENCION_AGEN atencion = new ATENCION_AGEN();
+                atencion.ID_PERS_ATIENDE = persMedico.ID_PERSONAL_MEDICO;
+                atencion.ID_BLOQUE = bloque.ID_BLOQUE;
+                cmhEntities.ATENCION_AGEN.Add(atencion);
+                cmhEntities.SaveChangesAsync();
+                //Crear pago
+                PAGO pago = new PAGO();
+                pago.MONTO_PAGO = 100;
+                pago.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                pago.FECHOR = caja.FECHOR_APERTURA;
+                pago.ID_CAJA = caja.ID_CAJA;
+                cmhEntities.PAGO.Add(pago);
+                cmhEntities.SaveChangesAsync();
+
+                AccionesTerminal accionesTerminal = new AccionesTerminal();
+                //Caso 1: reporte caja sin diferencia
+                List<ReporteCaja> reportesCaja;
+                reportesCaja = accionesTerminal.generarReporteCaja(funcionario, DateTime.Today);
+                Assert.IsTrue(reportesCaja.Count() >= 1, "No hay cajas registradas");
+                Assert.IsTrue(reportesCaja.First<ReporteCaja>().Diferencia == 0, "Diferencia con la primera caja distinta de 0");
+                
+                //Caso 2: reporte caja con diferencia
+                caja.CANT_EFECTIVO_FIN = 0;
+                cmhEntities.SaveChangesAsync();
+
+                reportesCaja = accionesTerminal.generarReporteCaja(funcionario, DateTime.Today);
+                Assert.IsTrue(reportesCaja.Count() == 1, "Solo debe haber una caja registrada");
+                Assert.IsTrue(reportesCaja.First<ReporteCaja>().Diferencia == 100, "Diferencia no es 100");
+                //Caso 3: reporte caja total ventas = 200
+                PAGO pago2 = new PAGO();
+                pago2.MONTO_PAGO = 100;
+                pago2.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                pago2.FECHOR = caja.FECHOR_APERTURA;
+                pago2.ID_CAJA = caja.ID_CAJA;
+                cmhEntities.PAGO.Add(pago2);
+                cmhEntities.SaveChangesAsync();
+                caja = accionesTerminal.buscarCaja(caja.ID_CAJA);
+                reportesCaja = accionesTerminal.generarReporteCaja(funcionario, DateTime.Today);
+                int result = reportesCaja.First<ReporteCaja>().TotalVentasConBono();
+                Assert.IsTrue( result == 200);
+                //Caso 4: caja no existe
+                FUNCIONARIO funcionario2 = new FUNCIONARIO();
+                funcionario2.ID_PERSONAL = pers.ID_PERSONAL;
+                cmhEntities.FUNCIONARIO.Add(funcionario2);
+                cmhEntities.SaveChangesAsync();
+                try
+                {
+                    accionesTerminal.generarReporteCaja(funcionario2, DateTime.Now);
+                    Assert.Fail();//no deberia tocar esta línea
+                }
+                catch (Exception)
+                {
+                }
+                //Caso 5: multiples cajas por dia
+                CAJA caja2 = new CAJA();
+                caja2.FECHOR_APERTURA = DateTime.Now;
+                caja2.FECHOR_CIERRE = DateTime.Now;
+                caja2.CANT_EFECTIVO_INI = 100;
+                caja2.CANT_EFECTIVO_FIN = 100;
+                caja2.CANT_CHEQUE_FIN = 100;
+                caja2.ID_FUNCIONARIO = funcionario.ID_FUNCIONARIO;
+                cmhEntities.CAJA.Add(caja2);
+                cmhEntities.SaveChangesAsync();
+
+                List<ReporteCaja> reportesCaja2 = accionesTerminal.generarReporteCaja(funcionario, DateTime.Now);
+                Assert.IsTrue(reportesCaja2.Count() == 2);
+            }
+            
         }
         #endregion
     }
