@@ -425,11 +425,28 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-019
         public List<ReporteCaja> generarReporteCaja(FUNCIONARIO funcionario, DateTime dia)
         {
-            //TODO: implementar
-            List<ReporteCaja> reporteCaja = null;
-            //Buscar todas las cajas
-            //Instanciar un reporte de caja por caja
-            return reporteCaja;
+            using (var context = new CMHEntities())
+            {
+                //Todas las cajas del funcionario
+                ICollection<CAJA> cajasFuncionario = funcionario.CAJA;
+                //Filtrar por día
+                List<CAJA> cajasDelDia = new List<CAJA>();
+                foreach (CAJA caja in cajasFuncionario)
+                {
+                    if (caja.FECHOR_CIERRE.Value.Date == dia.Date)
+                    {
+                        cajasDelDia.Add(caja);
+                    }
+                }
+                List<ReporteCaja> reportesCaja = new List<ReporteCaja>();
+                //Instanciar un reporte de caja por caja
+                foreach (CAJA caja in cajasDelDia)
+                {
+                    ReporteCaja reporteCaja = new ReporteCaja(caja);
+                    reportesCaja.Add(reporteCaja);
+                }
+                return reportesCaja;
+            }
         }
         
         public Boolean orualizarInventarioEquipo(INVENTARIO inventario)

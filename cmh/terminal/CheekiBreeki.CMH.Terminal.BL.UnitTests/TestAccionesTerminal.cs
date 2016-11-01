@@ -2960,5 +2960,18 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             }
         }
         #endregion
+
+        #region Reporte caja
+        [TestMethod]
+        public void testReporteCaja() 
+        {
+            //Preparar tests
+            //Caso 1: reporte caja sin diferencia
+            //Caso 2: reporte caja con diferencia
+            //Caso 3: reporte caja total ventas = 100
+            //Caso 4: caja no existe
+            //Caso 5: multiples cajas por dia
+        }
+        #endregion
     }
 }
