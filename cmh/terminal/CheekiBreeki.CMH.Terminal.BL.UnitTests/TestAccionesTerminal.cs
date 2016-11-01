@@ -402,9 +402,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             using (var context = new CMHEntities())
             {
                 int rut = 18861423;
-                PACIENTE previo = context.PACIENTE.Where(d => d.RUT == rut).FirstOrDefault();
+                List<PACIENTE> previo = context.PACIENTE.Where(d => d.RUT == rut).ToList();
                 if (!Util.isObjetoNulo(previo))
-                    context.PACIENTE.Remove(previo);
+                    context.PACIENTE.RemoveRange(previo);
 
                 PACIENTE paciente1 = new PACIENTE();
 
@@ -442,7 +442,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                            select p;
                 if (pac1.Count<PACIENTE>() > 0)
                 {
-                    entities.PACIENTE.Remove(pac1.First<PACIENTE>());
+                    entities.PACIENTE.RemoveRange(pac1);
                     entities.SaveChangesAsync();
                 }
             }
@@ -621,9 +621,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             using (var context = new CMHEntities())
             {
                 int rut = 12345678;
-                PERSONAL previo = context.PERSONAL.Where(d => d.RUT == rut).FirstOrDefault();
+                List<PERSONAL> previo = context.PERSONAL.Where(d => d.RUT == rut).ToList();
                 if (!Util.isObjetoNulo(previo))
-                    context.PERSONAL.Remove(previo);
+                    context.PERSONAL.RemoveRange(previo);
 
                 PERSONAL personal1 = new PERSONAL();
                 personal1.NOMBRES = "Moka";
@@ -637,7 +637,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
                 context.PERSONAL.Add(personal1);
                 context.SaveChangesAsync();
-                return(previo);
+                return (personal1);
             }
         }
 
@@ -666,7 +666,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                            select p;
                 if (pers.Count<PERSONAL>() > 0)
                 {
-                    context.PERSONAL.Remove(pers.First<PERSONAL>());
+                    context.PERSONAL.RemoveRange(pers);
                     context.SaveChangesAsync();
                 }
             }
@@ -1569,14 +1569,13 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         [TestMethod]
         public void enviarCorreoTest()
         {
-            Emailer emailer = new Emailer();
             // Caso 1: Envío correcto
             string receptor1, titulo1, cuerpo1;
             receptor1 = "fjaqueg@gmail.com";
             titulo1 = "Prueba de correos CMH";
             cuerpo1 = "Esta es una prueba exitosa del envío de correos para el portafolio 2016";
 
-            Boolean res1 = emailer.enviarCorreo(receptor1, titulo1, cuerpo1);
+            Boolean res1 = Emailer.enviarCorreo(receptor1, titulo1, cuerpo1);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(res1, resultadoEsperado1);
 
@@ -1586,7 +1585,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             titulo2 = "Prueba de correos CMH";
             cuerpo2 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
 
-            Boolean res2 = emailer.enviarCorreo(receptor2, titulo2, cuerpo2);
+            Boolean res2 = Emailer.enviarCorreo(receptor2, titulo2, cuerpo2);
             Boolean resultadoEsperado2 = false;
             Assert.AreEqual(res2, resultadoEsperado2);
 
@@ -1596,7 +1595,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             titulo3 = string.Empty;
             cuerpo3 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
 
-            Boolean res3 = emailer.enviarCorreo(receptor3, titulo3, cuerpo3);
+            Boolean res3 = Emailer.enviarCorreo(receptor3, titulo3, cuerpo3);
             Boolean resultadoEsperado3 = false;
             Assert.AreEqual(res3, resultadoEsperado3);
 
@@ -1606,7 +1605,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             titulo4 = "Prueba de correos CMH";
             cuerpo4 = "";
 
-            Boolean res4 = emailer.enviarCorreo(receptor4, titulo4, cuerpo4);
+            Boolean res4 = Emailer.enviarCorreo(receptor4, titulo4, cuerpo4);
             Boolean resultadoEsperado4 = false;
             Assert.AreEqual(res4, resultadoEsperado4);
 
@@ -1616,9 +1615,79 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             titulo5 = "Prueba de correos CMH";
             cuerpo5 = "Esta es una prueba fallida del envío de correos para el portafolio 5016";
 
-            Boolean res5 = emailer.enviarCorreo(receptor5, titulo5, cuerpo5);
+            Boolean res5 = Emailer.enviarCorreo(receptor5, titulo5, cuerpo5);
             Boolean resultadoEsperado5 = false;
             Assert.AreEqual(res5, resultadoEsperado5);
+        }
+
+        [TestMethod]
+        public void enviarCorreoConArchivoTest()
+        {
+            // Caso 1: Envío correcto
+            string receptor1, titulo1, cuerpo1, archivo1;
+            receptor1 = "gonzalo.lopezsa@gmail.com";
+            titulo1 = "Prueba de correos CMH";
+            cuerpo1 = "Esta es una prueba exitosa del envío de correos para el portafolio 2016";
+            archivo1 = "../../file.pdf";
+
+            Boolean res1 = Emailer.enviarCorreo(receptor1, titulo1, cuerpo1, archivo1);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+
+            // Caso 2: Receptor vacío
+            string receptor2, titulo2, cuerpo2, archivo2;
+            receptor2 = null;
+            titulo2 = "Prueba de correos CMH";
+            cuerpo2 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
+            archivo2 = "../../file.pdf";
+
+            Boolean res2 = Emailer.enviarCorreo(receptor2, titulo2, cuerpo2, archivo2);
+            Boolean resultadoEsperado2 = false;
+            Assert.AreEqual(res2, resultadoEsperado2);
+
+            // Caso 3: Título vacío
+            string receptor3, titulo3, cuerpo3, archivo3;
+            receptor3 = "fjaqueg@gmail.com";
+            titulo3 = string.Empty;
+            cuerpo3 = "Esta es una prueba fallida del envío de correos para el portafolio 2016";
+            archivo3 = "../../file.pdf";
+
+            Boolean res3 = Emailer.enviarCorreo(receptor3, titulo3, cuerpo3, archivo3);
+            Boolean resultadoEsperado3 = false;
+            Assert.AreEqual(res3, resultadoEsperado3);
+
+            // Caso 4: Cuerpo vacío
+            string receptor4, titulo4, cuerpo4, archivo4;
+            receptor4 = "fjaqueg@gmail.com";
+            titulo4 = "Prueba de correos CMH";
+            cuerpo4 = "";
+            archivo4 = "../../file.pdf";
+
+            Boolean res4 = Emailer.enviarCorreo(receptor4, titulo4, cuerpo4, archivo4);
+            Boolean resultadoEsperado4 = false;
+            Assert.AreEqual(res4, resultadoEsperado4);
+
+            // Caso 5: Receptor inválido
+            string receptor5, titulo5, cuerpo5, archivo5;
+            receptor5 = "correoinvalido";
+            titulo5 = "Prueba de correos CMH";
+            cuerpo5 = "Esta es una prueba fallida del envío de correos para el portafolio 5016";
+            archivo5 = "../../file.pdf";
+
+            Boolean res5 = Emailer.enviarCorreo(receptor5, titulo5, cuerpo5, archivo5);
+            Boolean resultadoEsperado5 = false;
+            Assert.AreEqual(res5, resultadoEsperado5);
+
+            // Caso 5: Receptor inválido
+            string receptor6, titulo6, cuerpo6, archivo6;
+            receptor6 = "fjaqueg@gmail.com";
+            titulo6 = "Prueba de correos CMH";
+            cuerpo6 = "Esta es una prueba fallida del envío de correos para el portafolio 5016";
+            archivo6 = "../../noexistente.pdf";
+
+            Boolean res6 = Emailer.enviarCorreo(receptor6, titulo6, cuerpo6, archivo6);
+            Boolean resultadoEsperado6 = false;
+            Assert.AreEqual(res6, resultadoEsperado6);
         }
         #endregion
 
@@ -1855,8 +1924,10 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 Boolean res1 = at.agendarAtencion(aten_agen1);
                 Boolean resultadoEsperado1 = true;
                 Assert.AreEqual(res1, resultadoEsperado1);
+            }
 
-
+            using (var context = new CMHEntities())
+            {
                 //CASO 2: Fecha minima o invalida
                 ORDEN_ANALISIS orden2 = new ORDEN_ANALISIS();
                 PACIENTE paciente2 = new PACIENTE();
@@ -2153,7 +2224,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.ATENCION_AGEN.Add(aten_agen1);
                 context.SaveChangesAsync();
 
-
                 Boolean res1 = at.anularAtencion(aten_agen1);
                 Boolean resultadoEsperado1 = true;
                 Assert.AreEqual(res1, resultadoEsperado1);
@@ -2342,7 +2412,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         }
         #endregion
 
-        #region OrdendeAnalisis
+        #region Orden de Análisis
 
         [TestMethod]
         public void generarOrdenDeAnalisisTest()
@@ -2957,6 +3027,72 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 Boolean resultadoEsperado3 = false;
                 Assert.AreEqual(res3, resultadoEsperado3);
 
+            }
+        }
+
+        [TestMethod]
+        public void cerrarOrdenDeAnalisisConMailTest()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            // Ingresar atenciones
+            ATENCION_AGEN atencion1 = agregarAtencionAgendada();
+            RES_ATENCION resultado1 = new RES_ATENCION();
+            ORDEN_ANALISIS orden1 = new ORDEN_ANALISIS();
+            int rut1 = 12345678;
+            string archivo = "../../file.pdf";
+
+            using (var context = new CMHEntities())
+            {
+                atencion1 = context.ATENCION_AGEN.Find(atencion1.ID_ATENCION_AGEN);
+
+                PERSONAL personal1 = new PERSONAL();
+                personal1.NOMBRES = "Moka";
+                personal1.APELLIDOS = "Akashiya";
+                personal1.REMUNERACION = 850000;
+                personal1.PORCENT_DESCUENTO = 7;
+                personal1.HASHED_PASS = "4231";
+                personal1.RUT = rut1;
+                personal1.VERIFICADOR = "K";
+                personal1.EMAIL = "tmunizq@gmail.com";
+                context.PERSONAL.Add(personal1);
+                context.SaveChangesAsync();
+
+                PERS_MEDICO pers1 = new PERS_MEDICO();
+                pers1.ID_PERSONAL = personal1.ID_PERSONAL;
+                pers1.ID_ESPECIALIDAD = atencion1.PERS_MEDICO.ID_ESPECIALIDAD;
+                context.PERS_MEDICO.Add(pers1);
+                context.SaveChangesAsync();
+
+                atencion1.ID_PERS_SOLICITA = pers1.ID_PERSONAL_MEDICO;
+                context.SaveChangesAsync();
+
+                orden1.FECHOR_EMISION = DateTime.Today.AddDays(-5);
+                context.ORDEN_ANALISIS.Add(orden1);
+                context.SaveChangesAsync();
+
+                resultado1.ID_ORDEN_ANALISIS = orden1.ID_ORDEN_ANALISIS;
+                resultado1.ATENCION_ABIERTA = true;
+                resultado1.COMENTARIO = "Se envía correo";
+                resultado1.ID_ATENCION_AGEN = atencion1.ID_ATENCION_AGEN;
+                context.RES_ATENCION.Add(resultado1);
+                context.SaveChangesAsync();
+            }
+
+            Boolean res1 = at.cerrarOrdenDeAnalisis(orden1, archivo);
+            Boolean resultadoEsperado1 = true;
+            Assert.AreEqual(res1, resultadoEsperado1);
+
+            using (var context = new CMHEntities())
+            {
+                try
+                {
+                    PERSONAL personalEliminar = context.PERSONAL.Where(d => d.RUT == rut1).FirstOrDefault();
+                    context.PERS_MEDICO.Remove(personalEliminar.PERS_MEDICO.FirstOrDefault());
+                    context.PERSONAL.Remove(personalEliminar);
+                    context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                { }
             }
         }
         #endregion
