@@ -121,7 +121,7 @@ public class ServPagoTest {
         assertEquals(true, x);
         //Agregar Dia
         DiaSem diasem1 =new  DiaSem();
-        diasem1.setNombreDia("Lunes");
+        diasem1.setNombreIda("Lunes");
         obj = diasem1;
         x = Controller.upsert(obj);
         assertEquals(true, x);
