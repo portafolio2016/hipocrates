@@ -3312,5 +3312,41 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             
         }
         #endregion
+
+        #region Agregar entrada de ficha
+        [TestMethod]
+        public void agregarEntradaFichaTest()
+        {
+            //CASO 1: Entrada ficha correcta
+            using (var cmhEntities = new CMHEntities())
+            {
+                //Atención terminal
+                AccionesTerminal at = new AccionesTerminal();
+
+                //Paciente
+                PACIENTE paciente1 = crearPaciente();
+
+                //Tipo_Ficha
+                TIPO_FICHA tipo_ficha1 = new TIPO_FICHA();
+                tipo_ficha1.NOM_TIPO_FICHA = "TestAgregarEntradaFicha";
+                cmhEntities.TIPO_FICHA.Add(tipo_ficha1);
+                cmhEntities.SaveChangesAsync();
+
+                //Entrada_Ficha
+                ENTRADA_FICHA entrada_ficha1 = new ENTRADA_FICHA();
+                entrada_ficha1.NOMBRE_ENTRADA = "COD-1";
+                entrada_ficha1.CONTENIDO_ENTRADA = "Contenido Entrada";
+                entrada_ficha1.FECHA_ENTRADA = DateTime.Today;
+                entrada_ficha1.ID_PACIENTE = paciente1.ID_PACIENTE;
+                entrada_ficha1.ID_TIPO_FICHA = tipo_ficha1.ID_TIPO_FICHA;
+
+                Boolean res1 = at.agregarEntradaFicha(entrada_ficha1);
+                Boolean resultadoEsperado1 = true;
+                Assert.AreEqual(res1, resultadoEsperado1);
+
+            }
+            
+        }
+        #endregion
     }
 }
