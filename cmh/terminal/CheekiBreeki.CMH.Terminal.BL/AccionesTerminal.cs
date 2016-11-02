@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CheekiBreeki.CMH.Terminal.DAL;
 using CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference;
 using System.IO;
-using System.Web;
+using System.Security.Cryptography;
 
 namespace CheekiBreeki.CMH.Terminal.BL
 {
@@ -1100,8 +1100,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    string password = Membership.GeneratePassword(12, 1);
-
                     conexionDB.PACIENTE.Add(paciente);
                     conexionDB.SaveChangesAsync();
                     return true;
