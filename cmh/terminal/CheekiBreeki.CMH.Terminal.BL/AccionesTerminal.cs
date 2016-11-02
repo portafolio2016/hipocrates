@@ -1100,6 +1100,18 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
+                    string titulo, cuerpo, pass, md5;
+                    // Crear contraseña
+                    pass = Util.generarPass();
+                    md5 = Util.hashMD5(pass);
+                    paciente.HASHED_PASS = md5;
+                    // Enviar correo
+                    titulo = "Bienvenido a Centro Médico Hipócrates";
+                    cuerpo = "Estimado/a " + paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE + ",\n\n";
+                    cuerpo += "Gracias por atenderse en Centro Médico Hipócrates\n";
+                    cuerpo += "Su contraseña es " + pass;
+                    Emailer.enviarCorreo(paciente.EMAIL_PACIENTE, titulo, cuerpo);
+
                     conexionDB.PACIENTE.Add(paciente);
                     conexionDB.SaveChangesAsync();
                     return true;
@@ -1202,8 +1214,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         #endregion
-
-
-     
+  
     }
 }
