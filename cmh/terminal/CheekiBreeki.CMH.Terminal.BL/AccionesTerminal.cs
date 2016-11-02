@@ -1236,6 +1236,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         #endregion
-  
+
+        //Devolucion
+        #region devolucion
+        public bool DevolucionPago(PAGO pago)
+        {
+            bool result = false;
+            try
+            {
+                if (Util.isObjetoNulo(pago))
+                {
+                    throw new Exception("pago nulo");
+                }
+                else if (pago.ID_PAGO == null)
+                {
+                    throw new Exception("No tiene el ID del pago");
+                }
+                //
+                //
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            return result;
+        }
+        #endregion
+
     }
 }
