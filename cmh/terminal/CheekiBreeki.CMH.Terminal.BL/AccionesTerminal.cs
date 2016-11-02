@@ -476,14 +476,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                    if (caja.FECHOR_CIERRE == null)
                    {
-                       //caja.FECHOR_CIERRE = fechor_cierre;
-                       CAJA cajaUpdate = null;
-                       cajaUpdate = buscarCaja(caja.ID_CAJA);
-                       cajaUpdate.FECHOR_CIERRE = fechor_cierre;
-                       //si caja descuadrada entonces enviar correo
-                       this.auditarCaja(caja, cargoAuditor);
-                       
+                       caja = buscarCaja(caja.ID_CAJA);
+                       caja.FECHOR_CIERRE = fechor_cierre;
+                       //si caja descuadrada entonces enviar correo                      
                        conexionDB.SaveChangesAsync();
+                       this.auditarCaja(caja, cargoAuditor);
                    }
                     return true;
                 }

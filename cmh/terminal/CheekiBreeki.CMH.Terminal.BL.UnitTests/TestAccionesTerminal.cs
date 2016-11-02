@@ -1478,6 +1478,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 
                 caja1.FECHOR_APERTURA = DateTime.Today;
                 caja1.ID_FUNCIONARIO = funcionario1.ID_FUNCIONARIO;
+                caja1.CANT_EFECTIVO_INI = 1000;
+                caja1.CANT_EFECTIVO_FIN = 1000;
+                caja1.CANT_CHEQUE_FIN = 5;
                 conexionBD.CAJA.Add(caja1);
                 conexionBD.SaveChangesAsync();
                 Console.WriteLine("ID CAJA: " + caja1.ID_CAJA);
