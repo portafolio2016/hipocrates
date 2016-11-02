@@ -170,11 +170,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //}
 
         //ECU-010
-        /*public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
+        public Boolean agregarEntradaFicha(ENTRADA_FICHA entradaFicha)
         {
-            //TODO: implementar
-            return false;
-        }*/
+            try 
+            {
+                if (entradaFicha.CONTENIDO_ENTRADA == "" || entradaFicha.CONTENIDO_ENTRADA == null)
+                {
+                    throw new Exception("Contenido de entrada nula o vacía");
+                }
+                else if (entradaFicha.FECHA_ENTRADA == null)
+                {
+                    throw new Exception("Fecha de entrada nula o vacía");
+                }
+                else
+                {
+                    conexionDB.ENTRADA_FICHA.Add(entradaFicha);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+
+               
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
 
         //ECU-011
         #region Cerrar consulta médica
