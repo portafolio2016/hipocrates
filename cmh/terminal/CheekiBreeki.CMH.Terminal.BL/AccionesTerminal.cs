@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using CheekiBreeki.CMH.Terminal.DAL;
 using CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference;
 using System.IO;
+using System.Web;
+
 namespace CheekiBreeki.CMH.Terminal.BL
 {
     public class AccionesTerminal
@@ -161,13 +163,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
-
-        //ECU-009
-        //public Boolean crearFichaMedica(FICHA ficha)
-        //{
-        //    //TODO: implementar
-        //    return false;
-        //}
 
         //ECU-010
         /*public Boolean actualizarFichaMedica(PACIENTE paciente, ENTRADA_FICHA entradaFicha)
@@ -338,18 +333,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
-        //ECU-014
-        public List<ATENCION_AGEN> revisarNotificaciones(PERS_MEDICO personalMedico)
-        {
-            List<ATENCION_AGEN> atenciones = null;
-            //TODO: implementar
-            return atenciones;
-        }
-
         //ECU-016
         public Boolean anularAtencion(ATENCION_AGEN atencion)
-        {
-            
+        { 
             try
             {
                 if (Util.isObjetoNulo(atencion))
@@ -558,13 +544,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         
-        public Boolean orualizarInventarioEquipo(INVENTARIO inventario)
-
-        {
-            //TODO: implementar
-            return false;
-        }
-
         //ECU-022
         #region Equipos
         public Boolean nuevoEquipo(TIPO_EQUIPO equipo)
@@ -1121,6 +1100,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
+                    string password = Membership.GeneratePassword(12, 1);
+
                     conexionDB.PACIENTE.Add(paciente);
                     conexionDB.SaveChangesAsync();
                     return true;
