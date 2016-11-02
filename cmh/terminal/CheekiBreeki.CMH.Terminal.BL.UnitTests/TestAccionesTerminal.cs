@@ -432,7 +432,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             paciente1.APELLIDOS_PACIENTE = "Hatsune";
             paciente1.RUT = 18861423;
             paciente1.DIGITO_VERIFICADOR = "K";
-            paciente1.EMAIL_PACIENTE = "netflixtrucho1@gmail.com";
+            paciente1.EMAIL_PACIENTE = "baezahuertaelias@gmail.com";
             paciente1.HASHED_PASS = "4231";
             CMHEntities entities = new CMHEntities();
             using (var context = entities)

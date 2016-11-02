@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using CheekiBreeki.CMH.Terminal.DAL;
 using CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference;
 using System.IO;
+using System.Security.Cryptography;
+
 namespace CheekiBreeki.CMH.Terminal.BL
 {
     public class AccionesTerminal
@@ -161,13 +163,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
-
-        //ECU-009
-        //public Boolean crearFichaMedica(FICHA ficha)
-        //{
-        //    //TODO: implementar
-        //    return false;
-        //}
 
         //ECU-010
         public Boolean agregarEntradaFicha(ENTRADA_FICHA entradaFicha)
@@ -360,18 +355,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
-        //ECU-014
-        public List<ATENCION_AGEN> revisarNotificaciones(PERS_MEDICO personalMedico)
-        {
-            List<ATENCION_AGEN> atenciones = null;
-            //TODO: implementar
-            return atenciones;
-        }
-
         //ECU-016
         public Boolean anularAtencion(ATENCION_AGEN atencion)
-        {
-            
+        { 
             try
             {
                 if (Util.isObjetoNulo(atencion))
@@ -580,13 +566,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         
-        public Boolean orualizarInventarioEquipo(INVENTARIO inventario)
-
-        {
-            //TODO: implementar
-            return false;
-        }
-
         //ECU-022
         #region Equipos
         public Boolean nuevoEquipo(TIPO_EQUIPO equipo)
@@ -1143,6 +1122,18 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
+                    string titulo, cuerpo, pass, md5;
+                    // Crear contraseña
+                    pass = Util.generarPass();
+                    md5 = Util.hashMD5(pass);
+                    paciente.HASHED_PASS = md5;
+                    // Enviar correo
+                    titulo = "Bienvenido a Centro Médico Hipócrates";
+                    cuerpo = "Estimado/a " + paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE + ",\n\n";
+                    cuerpo += "Gracias por atenderse en Centro Médico Hipócrates\n";
+                    cuerpo += "Su contraseña es " + pass;
+                    Emailer.enviarCorreo(paciente.EMAIL_PACIENTE, titulo, cuerpo);
+
                     conexionDB.PACIENTE.Add(paciente);
                     conexionDB.SaveChangesAsync();
                     return true;
@@ -1245,8 +1236,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         #endregion
-
-
-     
+  
     }
 }
