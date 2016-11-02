@@ -3315,7 +3315,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
 
         #region Agregar entrada de ficha
         [TestMethod]
-        public void testAgregarEntradaFicha()
+        public void agregarEntradaFichaTest()
         {
             //CASO 1: Entrada ficha correcta
             using (var cmhEntities = new CMHEntities())
@@ -3339,8 +3339,6 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 entrada_ficha1.FECHA_ENTRADA = DateTime.Today;
                 entrada_ficha1.ID_PACIENTE = paciente1.ID_PACIENTE;
                 entrada_ficha1.ID_TIPO_FICHA = tipo_ficha1.ID_TIPO_FICHA;
-                cmhEntities.ENTRADA_FICHA.Add(entrada_ficha1);
-                cmhEntities.SaveChangesAsync();
 
                 Boolean res1 = at.agregarEntradaFicha(entrada_ficha1);
                 Boolean resultadoEsperado1 = true;
