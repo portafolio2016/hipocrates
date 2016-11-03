@@ -1241,7 +1241,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
         #region devolucion
         public bool DevolucionPago(PAGO pago)
         {
-            bool result = false;
             try
             {
                 if (Util.isObjetoNulo(pago))
@@ -1256,18 +1255,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 devo.NOM_TIPO_DEV = "Test";
                 conexionDB.DEVOLUCION.Add(devo);
                 conexionDB.SaveChangesAsync();
-                DEVOLUCION devAux = conexionDB.DEVOLUCION.LastOrDefault();
-                if (devo.NOM_TIPO_DEV != devAux.NOM_TIPO_DEV)
-                {
-                    throw new Exception("La devolucion ingresada no es la misma que la devuelta");
-                }
-                else
-                {
-                    devo = devAux;
-                }
                 pago = conexionDB.PAGO.Where(d => d.ID_PAGO == pago.ID_PAGO).FirstOrDefault();
-                
-
+                if (pago.ID_DEVOLUCION != null)
+                {
+                    conexionDB.DEVOLUCION.Remove(devo);
+                    conexionDB.SaveChangesAsync();
+                    throw new Exception("el pago ya tiene una devolucion");
+                }
+                pago.ID_DEVOLUCION = devo.ID_DEVOLUCION;
+                conexionDB.SaveChangesAsync();
 
                 return true;
             }
@@ -1276,7 +1272,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 Console.WriteLine(ex.Message);
                 return false;
             }
-            return result;
         }
         #endregion
 

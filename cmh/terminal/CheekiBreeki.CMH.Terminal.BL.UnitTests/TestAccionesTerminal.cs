@@ -3348,5 +3348,13 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             
         }
         #endregion
+
+        #region devolución
+        [TestMethod]
+        public void DevolucionPagoTest()
+        {
+
+        }
+        #endregion
     }
 }
