@@ -1248,12 +1248,28 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("pago nulo");
                 }
-                else if (pago.ID_PAGO == null)
+                else if (pago.ID_PAGO == 0 || pago.ID_DEVOLUCION != null)
                 {
-                    throw new Exception("No tiene el ID del pago");
+                    throw new Exception("No tiene el ID del pago ya existe una devolucion");
                 }
-                //
-                //
+                DEVOLUCION devo = new DEVOLUCION();
+                devo.NOM_TIPO_DEV = "Test";
+                conexionDB.DEVOLUCION.Add(devo);
+                conexionDB.SaveChangesAsync();
+                DEVOLUCION devAux = conexionDB.DEVOLUCION.LastOrDefault();
+                if (devo.NOM_TIPO_DEV != devAux.NOM_TIPO_DEV)
+                {
+                    throw new Exception("La devolucion ingresada no es la misma que la devuelta");
+                }
+                else
+                {
+                    devo = devAux;
+                }
+                pago = conexionDB.PAGO.Where(d => d.ID_PAGO == pago.ID_PAGO).FirstOrDefault();
+                
+
+
+                return true;
             }
             catch (Exception ex)
             {
