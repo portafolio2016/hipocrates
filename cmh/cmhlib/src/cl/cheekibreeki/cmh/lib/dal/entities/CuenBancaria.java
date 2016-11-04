@@ -6,7 +6,9 @@
 package cl.cheekibreeki.cmh.lib.dal.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,8 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,6 +41,8 @@ public class CuenBancaria implements Serializable {
     private Integer idCuenBancaria;
     @Column(name = "NUM_C_BANCARIA")
     private String numCBancaria;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCuenBancaria")
+    private Collection<Logpagohonorario> logpagohonorarioCollection;
     @JoinColumn(name = "ID_BANCO", referencedColumnName = "ID_BANCO")
     @ManyToOne
     private Banco idBanco;
@@ -68,6 +74,15 @@ public class CuenBancaria implements Serializable {
 
     public void setNumCBancaria(String numCBancaria) {
         this.numCBancaria = numCBancaria;
+    }
+
+    @XmlTransient
+    public Collection<Logpagohonorario> getLogpagohonorarioCollection() {
+        return logpagohonorarioCollection;
+    }
+
+    public void setLogpagohonorarioCollection(Collection<Logpagohonorario> logpagohonorarioCollection) {
+        this.logpagohonorarioCollection = logpagohonorarioCollection;
     }
 
     public Banco getIdBanco() {
