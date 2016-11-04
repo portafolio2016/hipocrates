@@ -160,13 +160,9 @@
             <PropertyRef Name="IDLOGPAGOHONORARIO" />
           </Key>
           <Property Name="IDLOGPAGOHONORARIO" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NOMBRE" Type="varchar2" MaxLength="100" />
-          <Property Name="BANCO" Type="varchar2" MaxLength="64" />
-          <Property Name="TIPOCUENTA" Type="varchar2" MaxLength="50" />
-          <Property Name="CUENTA" Type="number" Precision="8" Scale="0" />
-          <Property Name="SUBTOTAL" Type="number" Precision="8" Scale="0" />
           <Property Name="TOTAL" Type="number" Precision="8" Scale="0" />
           <Property Name="FECHOR" Type="date" />
+          <Property Name="ID_CUEN_BANCARIA" Type="number" Precision="8" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="ORDEN_ANALISIS">
           <Key>
@@ -592,6 +588,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LOGPAGOHONORA_CUEN_BANCARIA">
+          <End Role="CUEN_BANCARIA" Type="Self.CUEN_BANCARIA" Multiplicity="1" />
+          <End Role="LOGPAGOHONORARIO" Type="Self.LOGPAGOHONORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUEN_BANCARIA">
+              <PropertyRef Name="ID_CUEN_BANCARIA" />
+            </Principal>
+            <Dependent Role="LOGPAGOHONORARIO">
+              <PropertyRef Name="ID_CUEN_BANCARIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ORDEN_ANALISIS_RES_ATENCION">
           <End Role="ORDEN_ANALISIS" Type="Self.ORDEN_ANALISIS" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -824,6 +832,10 @@
             <End Role="PERS_MEDICO" EntitySet="PERS_MEDICO" />
             <End Role="HORARIO" EntitySet="HORARIO" />
           </AssociationSet>
+          <AssociationSet Name="FK_LOGPAGOHONORA_CUEN_BANCARIA" Association="Self.FK_LOGPAGOHONORA_CUEN_BANCARIA">
+            <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
+            <End Role="LOGPAGOHONORARIO" EntitySet="LOGPAGOHONORARIO" />
+          </AssociationSet>
           <AssociationSet Name="FK_ORDEN_ANALISIS_RES_ATENCION" Association="Self.FK_ORDEN_ANALISIS_RES_ATENCION">
             <End Role="ORDEN_ANALISIS" EntitySet="ORDEN_ANALISIS" />
             <End Role="RES_ATENCION" EntitySet="RES_ATENCION" />
@@ -960,6 +972,7 @@
           <NavigationProperty Name="BANCO" Relationship="Self.FK_CUEN_BANCARIA_BANCO" FromRole="CUEN_BANCARIA" ToRole="BANCO" />
           <NavigationProperty Name="PERS_MEDICO" Relationship="Self.FK_CUEN_BANCARIA_PERS_MEDICO" FromRole="CUEN_BANCARIA" ToRole="PERS_MEDICO" />
           <NavigationProperty Name="TIPO_C_BANCARIA" Relationship="Self.FK_CUEN_BANCARIA_TIPO_C_BANCA" FromRole="CUEN_BANCARIA" ToRole="TIPO_C_BANCARIA" />
+          <NavigationProperty Name="LOGPAGOHONORARIO" Relationship="Self.FK_LOGPAGOHONORA_CUEN_BANCARIA" FromRole="CUEN_BANCARIA" ToRole="LOGPAGOHONORARIO" />
         </EntityType>
         <EntityType Name="DEVOLUCION">
           <Key>
@@ -1053,13 +1066,10 @@
             <PropertyRef Name="IDLOGPAGOHONORARIO" />
           </Key>
           <Property Name="IDLOGPAGOHONORARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="BANCO" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="TIPOCUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CUENTA" Type="Int32" />
-          <Property Name="SUBTOTAL" Type="Int32" />
           <Property Name="TOTAL" Type="Int32" />
           <Property Name="FECHOR" Type="DateTime" />
+          <Property Name="ID_CUEN_BANCARIA" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CUEN_BANCARIA" Relationship="Self.FK_LOGPAGOHONORA_CUEN_BANCARIA" FromRole="LOGPAGOHONORARIO" ToRole="CUEN_BANCARIA" />
         </EntityType>
         <EntityType Name="ORDEN_ANALISIS">
           <Key>
@@ -1441,6 +1451,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LOGPAGOHONORA_CUEN_BANCARIA">
+          <End Role="CUEN_BANCARIA" Type="Self.CUEN_BANCARIA" Multiplicity="1" />
+          <End Role="LOGPAGOHONORARIO" Type="Self.LOGPAGOHONORARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUEN_BANCARIA">
+              <PropertyRef Name="ID_CUEN_BANCARIA" />
+            </Principal>
+            <Dependent Role="LOGPAGOHONORARIO">
+              <PropertyRef Name="ID_CUEN_BANCARIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DEVOLUCION_PAGO">
           <End Role="DEVOLUCION" Type="Self.DEVOLUCION" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1723,6 +1745,10 @@
             <End Role="TIPO_C_BANCARIA" EntitySet="TIPO_C_BANCARIA" />
             <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
           </AssociationSet>
+          <AssociationSet Name="FK_LOGPAGOHONORA_CUEN_BANCARIA" Association="Self.FK_LOGPAGOHONORA_CUEN_BANCARIA">
+            <End Role="CUEN_BANCARIA" EntitySet="CUEN_BANCARIA" />
+            <End Role="LOGPAGOHONORARIO" EntitySet="LOGPAGOHONORARIO" />
+          </AssociationSet>
           <AssociationSet Name="FK_DEVOLUCION_PAGO" Association="Self.FK_DEVOLUCION_PAGO">
             <End Role="DEVOLUCION" EntitySet="DEVOLUCION" />
             <End Role="PAGO" EntitySet="PAGO" />
@@ -1953,13 +1979,9 @@
             <EntityTypeMapping TypeName="CMHModel.LOGPAGOHONORARIO">
               <MappingFragment StoreEntitySet="LOGPAGOHONORARIO">
                 <ScalarProperty Name="IDLOGPAGOHONORARIO" ColumnName="IDLOGPAGOHONORARIO" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="BANCO" ColumnName="BANCO" />
-                <ScalarProperty Name="TIPOCUENTA" ColumnName="TIPOCUENTA" />
-                <ScalarProperty Name="CUENTA" ColumnName="CUENTA" />
-                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
                 <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
                 <ScalarProperty Name="FECHOR" ColumnName="FECHOR" />
+                <ScalarProperty Name="ID_CUEN_BANCARIA" ColumnName="ID_CUEN_BANCARIA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
