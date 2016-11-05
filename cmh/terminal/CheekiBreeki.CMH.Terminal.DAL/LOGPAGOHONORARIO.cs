@@ -15,12 +15,10 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     public partial class LOGPAGOHONORARIO
     {
         public int IDLOGPAGOHONORARIO { get; set; }
-        public string NOMBRE { get; set; }
-        public string BANCO { get; set; }
-        public string TIPOCUENTA { get; set; }
-        public Nullable<int> CUENTA { get; set; }
-        public Nullable<int> SUBTOTAL { get; set; }
         public Nullable<int> TOTAL { get; set; }
         public Nullable<System.DateTime> FECHOR { get; set; }
+        public int ID_CUEN_BANCARIA { get; set; }
+    
+        public virtual CUEN_BANCARIA CUEN_BANCARIA { get; set; }
     }
 }

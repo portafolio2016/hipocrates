@@ -14,6 +14,11 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     
     public partial class CUEN_BANCARIA
     {
+        public CUEN_BANCARIA()
+        {
+            this.LOGPAGOHONORARIO = new HashSet<LOGPAGOHONORARIO>();
+        }
+    
         public int ID_CUEN_BANCARIA { get; set; }
         public Nullable<int> ID_PERS_MEDICO { get; set; }
         public Nullable<int> ID_TIPO_C_BANCARIA { get; set; }
@@ -23,5 +28,6 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public virtual BANCO BANCO { get; set; }
         public virtual PERS_MEDICO PERS_MEDICO { get; set; }
         public virtual TIPO_C_BANCARIA TIPO_C_BANCARIA { get; set; }
+        public virtual ICollection<LOGPAGOHONORARIO> LOGPAGOHONORARIO { get; set; }
     }
 }
