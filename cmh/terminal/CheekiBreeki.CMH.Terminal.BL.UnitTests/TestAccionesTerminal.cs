@@ -3353,7 +3353,31 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         [TestMethod]
         public void DevolucionPagoTest()
         {
-
+            AccionesTerminal at = new AccionesTerminal();
+            CMHEntities cmhEntities = new CMHEntities();
+            PAGO pago = new PAGO();
+            pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).LastOrDefault();
+            if (pago == null)
+            {
+                return;
+            }
+            //Se genera la devolución
+            bool result = at.DevolucionPago(pago, "Test");
+            Assert.AreEqual(result, true);
+            //No generara la devolución por que ya existe
+            result = at.DevolucionPago(pago, "Test");
+            Assert.AreEqual(result, false);
+            //Pago no valido
+            pago.ID_PAGO = 0;
+            result = at.DevolucionPago(pago, "Test");
+            Assert.AreEqual(result, false);
+            //Revertir cambios
+            DEVOLUCION devo = pago.DEVOLUCION;
+            pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).LastOrDefault();
+            pago.ID_DEVOLUCION = null;
+            cmhEntities.SaveChangesAsync();
+            cmhEntities.DEVOLUCION.Remove(pago.DEVOLUCION);
+            cmhEntities.SaveChangesAsync();
         }
         #endregion
     }

@@ -1239,7 +1239,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         //Devolucion
         #region devolucion
-        public bool DevolucionPago(PAGO pago)
+        public bool DevolucionPago(PAGO pago, string nombre_dev)
         {
             try
             {
@@ -1249,10 +1249,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else if (pago.ID_PAGO == 0 || pago.ID_DEVOLUCION != null)
                 {
-                    throw new Exception("No tiene el ID del pago ya existe una devolucion");
+                    return false;
                 }
                 DEVOLUCION devo = new DEVOLUCION();
-                devo.NOM_TIPO_DEV = "Test";
+                devo.NOM_TIPO_DEV = nombre_dev;
                 conexionDB.DEVOLUCION.Add(devo);
                 conexionDB.SaveChangesAsync();
                 pago = conexionDB.PAGO.Where(d => d.ID_PAGO == pago.ID_PAGO).FirstOrDefault();
@@ -1260,7 +1260,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     conexionDB.DEVOLUCION.Remove(devo);
                     conexionDB.SaveChangesAsync();
-                    throw new Exception("el pago ya tiene una devolucion");
+                    return false;
                 }
                 pago.ID_DEVOLUCION = devo.ID_DEVOLUCION;
                 conexionDB.SaveChangesAsync();
