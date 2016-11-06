@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.DAL", "CheekiBreeki.CMH.Terminal.DAL\CheekiBreeki.CMH.Terminal.DAL.csproj", "{25E6B751-8868-485B-8999-2BDF13B835E8}"
 EndProject
