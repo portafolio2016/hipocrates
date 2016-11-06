@@ -1236,6 +1236,44 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         #endregion
-  
+
+        //Devolucion
+        #region devolucion
+        public bool DevolucionPago(PAGO pago, string nombre_dev)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(pago))
+                {
+                    throw new Exception("Pago nulo");
+                }
+                else if (pago.ID_PAGO == 0 || pago.ID_DEVOLUCION != null)
+                {
+                    throw new Exception("El pago es invalido o ya tiene una devolucion");
+                }
+                DEVOLUCION devo = new DEVOLUCION();
+                devo.NOM_TIPO_DEV = nombre_dev;
+                conexionDB.DEVOLUCION.Add(devo);
+                conexionDB.SaveChangesAsync();
+                pago = conexionDB.PAGO.Where(d => d.ID_PAGO == pago.ID_PAGO).FirstOrDefault();
+                if (pago.ID_DEVOLUCION != null)
+                {
+                    //conexionDB.DEVOLUCION.Remove(devo);
+                    //conexionDB.SaveChangesAsync();
+                    return false;
+                }
+                pago.ID_DEVOLUCION = devo.ID_DEVOLUCION;
+                conexionDB.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
+
     }
 }
