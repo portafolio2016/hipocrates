@@ -3356,27 +3356,28 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             AccionesTerminal at = new AccionesTerminal();
             CMHEntities cmhEntities = new CMHEntities();
             PAGO pago = new PAGO();
-            pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).LastOrDefault();
+            pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).FirstOrDefault();
             if (pago == null)
             {
                 return;
             }
+            pago.ID_DEVOLUCION = null;
+            cmhEntities.SaveChangesAsync();
             //Se genera la devolución
             bool result = at.DevolucionPago(pago, "Test");
-            Assert.AreEqual(result, true);
+            Assert.AreEqual(result, true); //Si documento esta linea funciona
             //No generara la devolución por que ya existe
             result = at.DevolucionPago(pago, "Test");
             Assert.AreEqual(result, false);
             //Pago no valido
-            pago.ID_PAGO = 0;
-            result = at.DevolucionPago(pago, "Test");
+            PAGO pagoaux = null;
+            result = at.DevolucionPago(pagoaux, "Test");
             Assert.AreEqual(result, false);
             //Revertir cambios
             DEVOLUCION devo = pago.DEVOLUCION;
-            pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).LastOrDefault();
+            pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).FirstOrDefault();
             pago.ID_DEVOLUCION = null;
-            cmhEntities.SaveChangesAsync();
-            cmhEntities.DEVOLUCION.Remove(pago.DEVOLUCION);
+            cmhEntities.DEVOLUCION.Remove(devo);
             cmhEntities.SaveChangesAsync();
         }
         #endregion
