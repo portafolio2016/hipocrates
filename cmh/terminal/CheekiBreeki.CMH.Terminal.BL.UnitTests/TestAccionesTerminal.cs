@@ -3354,15 +3354,17 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
         public void DevolucionPagoTest()
         {
             AccionesTerminal at = new AccionesTerminal();
-            CMHEntities cmhEntities = new CMHEntities();
             PAGO pago = new PAGO();
-            pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).FirstOrDefault();
-            if (pago == null)
+            using (CMHEntities cmhEntities = new CMHEntities())
             {
-                return;
+                pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).FirstOrDefault();
+                if (pago == null)
+                {
+                    return;
+                }
+                pago.ID_DEVOLUCION = null;
+                cmhEntities.SaveChangesAsync();
             }
-            pago.ID_DEVOLUCION = null;
-            cmhEntities.SaveChangesAsync();
             //Se genera la devolución
             bool result = at.DevolucionPago(pago, "Test");
             Assert.AreEqual(result, true); //Si documento esta linea funciona
@@ -3374,11 +3376,14 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             result = at.DevolucionPago(pagoaux, "Test");
             Assert.AreEqual(result, false);
             //Revertir cambios
-            DEVOLUCION devo = pago.DEVOLUCION;
-            pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).FirstOrDefault();
-            pago.ID_DEVOLUCION = null;
-            cmhEntities.DEVOLUCION.Remove(devo);
-            cmhEntities.SaveChangesAsync();
+            using (CMHEntities cmhEntities = new CMHEntities())
+            {
+                pago = cmhEntities.PAGO.Where(d => d.ID_PAGO == d.ID_PAGO).FirstOrDefault();
+                DEVOLUCION devo = pago.DEVOLUCION;
+                pago.ID_DEVOLUCION = null;
+                cmhEntities.DEVOLUCION.Remove(devo);
+                cmhEntities.SaveChangesAsync();
+            }
         }
         #endregion
     }
