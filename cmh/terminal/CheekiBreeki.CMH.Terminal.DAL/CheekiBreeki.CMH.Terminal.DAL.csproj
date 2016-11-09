@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25E6B751-8868-485B-8999-2BDF13B835E8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CheekiBreeki.CMH.Terminal.DAL</RootNamespace>
+    <AssemblyName>CheekiBreeki.CMH.Terminal.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.24160719\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.1.2400\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ASEGURADORA.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATENCION_AGEN.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BANCO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BLOQUE.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BONO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CAJA.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CARGO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CMHModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMHModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CMHModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CMHModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CMHModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="CUEN_BANCARIA.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DEVOLUCION.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DIA_SEM.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ENTRADA_FICHA.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EQUIPO_REQ.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ESPECIALIDAD.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ESTADO_ATEN.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FUNCIONARIO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HORARIO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INVENTARIO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LOGPAGOHONORARIO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORDEN_ANALISIS.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PACIENTE.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PAGO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PERSONAL.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PERS_MEDICO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRESTACION.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RES_ATENCION.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TIPO_C_BANCARIA.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TIPO_EQUIPO.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TIPO_FICHA.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TIPO_PRES.cs">
+      <DependentUpon>CMHModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="CMHModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CMHModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CMHModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CMHModel.edmx</DependentUpon>
+      <LastGenOutput>CMHModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="CMHModel.edmx.diagram">
+      <DependentUpon>CMHModel.edmx</DependentUpon>
+    </None>
+    <None Include="CMHModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CMHModel.edmx</DependentUpon>
+      <LastGenOutput>CMHModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

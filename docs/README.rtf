@@ -1,10 +1,28 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+Esto se entrega el 2016-08-29
+Presentación del caso: cuenta con la presentación de la empresa, la descripción del modelo de negocios, la problemática y el alcance del proyecto.
+ERS: requerimientos de software en formato IEEE830
+PPT: presentación de todo lo anterior.
 
-\f0\fs24 \cf0 Esto se entrega el 2016-08-29\
-Presentaci\'f3n del caso: cuenta con la presentaci\'f3n de la empresa, la descripci\'f3n del modelo de negocios, la problem\'e1tica y el alcance del proyecto.\
-ERS: requerimientos de software en formato IEEE830\
-PPT: presentaci\'f3n de todo lo anterior.}
+
+Cambiar puerto GlassFish
+1.	Abrir Netbeans
+2.	Ir a pestaña Services
+3.	Abrir la sección de Servers
+4.	Cerrar Glassfish (En caso de que esté corriendo)
+5.	Eliminar Glassfish
+6.	Cerrar Netbeans
+7.	Ir a la ruta C:\Program Files\glassfish-4.1.1\glassfish\domains\domain1\config
+8.	Abrir archivo domains.xml
+9.	Buscar con CTRL+F el número 8080 y cambiarlo por 8090
+10.	Guardar configuración
+11.	Abrir Netbeans
+12.	Ir a pestaña Services
+13.	Abrir con botón secundario la sección de Servers
+14.	Presionar Add server
+15.	Seleccionar Glassfish Server (Viene predefinido)
+16.	Presionar Next
+17.	Dar como direccion de instalación C:\Program Files\glassfish-4.1.1\glassfish
+18.	Presionar Next
+19.	Cambiar HTTP Port a 8090
+20.	Cambiar User Name a admin
+21.	Presionar finish

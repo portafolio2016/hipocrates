@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SeguroModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AFILIADO">
+          <Key>
+            <PropertyRef Name="ID_AFILIADO" />
+          </Key>
+          <Property Name="ID_AFILIADO" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RUT" Type="number" Precision="9" Scale="0" />
+          <Property Name="VERIFICADOR" Type="char" MaxLength="1" />
+          <Property Name="ID_PLAN" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="BENEFICIO">
+          <Key>
+            <PropertyRef Name="ID_BENEFICIO" />
+          </Key>
+          <Property Name="ID_BENEFICIO" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PORCENTAJE" Type="number" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="LIMITE_DINERO" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PLAN" Type="number" Precision="8" Scale="0" />
+          <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="64" />
+          <Property Name="ID_T_EMPRESA" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="PLAN">
+          <Key>
+            <PropertyRef Name="ID_PLAN" />
+          </Key>
+          <Property Name="ID_PLAN" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="256" />
+          <Property Name="ID_EMPRESA" Type="number" Precision="8" Scale="0" />
+        </EntityType>
+        <EntityType Name="PRESTACION">
+          <Key>
+            <PropertyRef Name="ID_PRESTACION" />
+          </Key>
+          <Property Name="ID_PRESTACION" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="128" />
+          <Property Name="CODIGO" Type="varchar2" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_T_EMPRESA" />
+          </Key>
+          <Property Name="ID_T_EMPRESA" Type="number" Precision="8" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="64" />
+        </EntityType>
+        <Association Name="FK_AFILIADO_PLAN">
+          <End Role="PLAN" Type="Self.PLAN" Multiplicity="0..1" />
+          <End Role="AFILIADO" Type="Self.AFILIADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLAN">
+              <PropertyRef Name="ID_PLAN" />
+            </Principal>
+            <Dependent Role="AFILIADO">
+              <PropertyRef Name="ID_PLAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BENEFICIO_PLAN">
+          <End Role="PLAN" Type="Self.PLAN" Multiplicity="0..1" />
+          <End Role="BENEFICIO" Type="Self.BENEFICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLAN">
+              <PropertyRef Name="ID_PLAN" />
+            </Principal>
+            <Dependent Role="BENEFICIO">
+              <PropertyRef Name="ID_PLAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BENEFICIO_PRESTACION">
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="0..1" />
+          <End Role="BENEFICIO" Type="Self.BENEFICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Principal>
+            <Dependent Role="BENEFICIO">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPRESA_T_EMPRESA">
+          <End Role="T_EMPRESA" Type="Self.T_EMPRESA" Multiplicity="0..1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_EMPRESA">
+              <PropertyRef Name="ID_T_EMPRESA" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="ID_T_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLAN_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+          <End Role="PLAN" Type="Self.PLAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="PLAN">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeguroModelStoreContainer">
+          <EntitySet Name="AFILIADO" EntityType="Self.AFILIADO" Schema="DEVSEGURO" store:Type="Tables" />
+          <EntitySet Name="BENEFICIO" EntityType="Self.BENEFICIO" Schema="DEVSEGURO" store:Type="Tables" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="DEVSEGURO" store:Type="Tables" />
+          <EntitySet Name="PLAN" EntityType="Self.PLAN" Schema="DEVSEGURO" store:Type="Tables" />
+          <EntitySet Name="PRESTACION" EntityType="Self.PRESTACION" Schema="DEVSEGURO" store:Type="Tables" />
+          <EntitySet Name="T_EMPRESA" EntityType="Self.T_EMPRESA" Schema="DEVSEGURO" store:Type="Tables" />
+          <AssociationSet Name="FK_AFILIADO_PLAN" Association="Self.FK_AFILIADO_PLAN">
+            <End Role="PLAN" EntitySet="PLAN" />
+            <End Role="AFILIADO" EntitySet="AFILIADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BENEFICIO_PLAN" Association="Self.FK_BENEFICIO_PLAN">
+            <End Role="PLAN" EntitySet="PLAN" />
+            <End Role="BENEFICIO" EntitySet="BENEFICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BENEFICIO_PRESTACION" Association="Self.FK_BENEFICIO_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="BENEFICIO" EntitySet="BENEFICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPRESA_T_EMPRESA" Association="Self.FK_EMPRESA_T_EMPRESA">
+            <End Role="T_EMPRESA" EntitySet="T_EMPRESA" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLAN_EMPRESA" Association="Self.FK_PLAN_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="PLAN" EntitySet="PLAN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SeguroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AFILIADO">
+          <Key>
+            <PropertyRef Name="ID_AFILIADO" />
+          </Key>
+          <Property Name="ID_AFILIADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RUT" Type="Int32" />
+          <Property Name="VERIFICADOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ID_PLAN" Type="Int32" />
+          <NavigationProperty Name="PLAN" Relationship="Self.FK_AFILIADO_PLAN" FromRole="AFILIADO" ToRole="PLAN" />
+        </EntityType>
+        <EntityType Name="BENEFICIO">
+          <Key>
+            <PropertyRef Name="ID_BENEFICIO" />
+          </Key>
+          <Property Name="ID_BENEFICIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PORCENTAJE" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="LIMITE_DINERO" Type="Int32" />
+          <Property Name="ID_PLAN" Type="Int32" />
+          <Property Name="ID_PRESTACION" Type="Int32" />
+          <NavigationProperty Name="PLAN" Relationship="Self.FK_BENEFICIO_PLAN" FromRole="BENEFICIO" ToRole="PLAN" />
+          <NavigationProperty Name="PRESTACION" Relationship="Self.FK_BENEFICIO_PRESTACION" FromRole="BENEFICIO" ToRole="PRESTACION" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_EMPRESA" />
+          </Key>
+          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ID_T_EMPRESA" Type="Int32" />
+          <NavigationProperty Name="T_EMPRESA" Relationship="Self.FK_EMPRESA_T_EMPRESA" FromRole="EMPRESA" ToRole="T_EMPRESA" />
+          <NavigationProperty Name="PLAN" Relationship="Self.FK_PLAN_EMPRESA" FromRole="EMPRESA" ToRole="PLAN" />
+        </EntityType>
+        <EntityType Name="PLAN">
+          <Key>
+            <PropertyRef Name="ID_PLAN" />
+          </Key>
+          <Property Name="ID_PLAN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="ID_EMPRESA" Type="Int32" />
+          <NavigationProperty Name="AFILIADO" Relationship="Self.FK_AFILIADO_PLAN" FromRole="PLAN" ToRole="AFILIADO" />
+          <NavigationProperty Name="BENEFICIO" Relationship="Self.FK_BENEFICIO_PLAN" FromRole="PLAN" ToRole="BENEFICIO" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.FK_PLAN_EMPRESA" FromRole="PLAN" ToRole="EMPRESA" />
+        </EntityType>
+        <EntityType Name="PRESTACION">
+          <Key>
+            <PropertyRef Name="ID_PRESTACION" />
+          </Key>
+          <Property Name="ID_PRESTACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="CODIGO" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BENEFICIO" Relationship="Self.FK_BENEFICIO_PRESTACION" FromRole="PRESTACION" ToRole="BENEFICIO" />
+        </EntityType>
+        <EntityType Name="T_EMPRESA">
+          <Key>
+            <PropertyRef Name="ID_T_EMPRESA" />
+          </Key>
+          <Property Name="ID_T_EMPRESA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.FK_EMPRESA_T_EMPRESA" FromRole="T_EMPRESA" ToRole="EMPRESA" />
+        </EntityType>
+        <Association Name="FK_AFILIADO_PLAN">
+          <End Role="PLAN" Type="Self.PLAN" Multiplicity="0..1" />
+          <End Role="AFILIADO" Type="Self.AFILIADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLAN">
+              <PropertyRef Name="ID_PLAN" />
+            </Principal>
+            <Dependent Role="AFILIADO">
+              <PropertyRef Name="ID_PLAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BENEFICIO_PLAN">
+          <End Role="PLAN" Type="Self.PLAN" Multiplicity="0..1" />
+          <End Role="BENEFICIO" Type="Self.BENEFICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLAN">
+              <PropertyRef Name="ID_PLAN" />
+            </Principal>
+            <Dependent Role="BENEFICIO">
+              <PropertyRef Name="ID_PLAN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BENEFICIO_PRESTACION">
+          <End Role="PRESTACION" Type="Self.PRESTACION" Multiplicity="0..1" />
+          <End Role="BENEFICIO" Type="Self.BENEFICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Principal>
+            <Dependent Role="BENEFICIO">
+              <PropertyRef Name="ID_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPRESA_T_EMPRESA">
+          <End Role="T_EMPRESA" Type="Self.T_EMPRESA" Multiplicity="0..1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_EMPRESA">
+              <PropertyRef Name="ID_T_EMPRESA" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="ID_T_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLAN_EMPRESA">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="0..1" />
+          <End Role="PLAN" Type="Self.PLAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="PLAN">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeguroEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AFILIADO" EntityType="Self.AFILIADO" />
+          <EntitySet Name="BENEFICIO" EntityType="Self.BENEFICIO" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
+          <EntitySet Name="PLAN" EntityType="Self.PLAN" />
+          <EntitySet Name="PRESTACION" EntityType="Self.PRESTACION" />
+          <EntitySet Name="T_EMPRESA" EntityType="Self.T_EMPRESA" />
+          <AssociationSet Name="FK_AFILIADO_PLAN" Association="Self.FK_AFILIADO_PLAN">
+            <End Role="PLAN" EntitySet="PLAN" />
+            <End Role="AFILIADO" EntitySet="AFILIADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BENEFICIO_PLAN" Association="Self.FK_BENEFICIO_PLAN">
+            <End Role="PLAN" EntitySet="PLAN" />
+            <End Role="BENEFICIO" EntitySet="BENEFICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BENEFICIO_PRESTACION" Association="Self.FK_BENEFICIO_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="BENEFICIO" EntitySet="BENEFICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPRESA_T_EMPRESA" Association="Self.FK_EMPRESA_T_EMPRESA">
+            <End Role="T_EMPRESA" EntitySet="T_EMPRESA" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLAN_EMPRESA" Association="Self.FK_PLAN_EMPRESA">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="PLAN" EntitySet="PLAN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SeguroModelStoreContainer" CdmEntityContainer="SeguroEntities">
+          <EntitySetMapping Name="AFILIADO">
+            <EntityTypeMapping TypeName="SeguroModel.AFILIADO">
+              <MappingFragment StoreEntitySet="AFILIADO">
+                <ScalarProperty Name="ID_AFILIADO" ColumnName="ID_AFILIADO" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="VERIFICADOR" ColumnName="VERIFICADOR" />
+                <ScalarProperty Name="ID_PLAN" ColumnName="ID_PLAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BENEFICIO">
+            <EntityTypeMapping TypeName="SeguroModel.BENEFICIO">
+              <MappingFragment StoreEntitySet="BENEFICIO">
+                <ScalarProperty Name="ID_BENEFICIO" ColumnName="ID_BENEFICIO" />
+                <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
+                <ScalarProperty Name="LIMITE_DINERO" ColumnName="LIMITE_DINERO" />
+                <ScalarProperty Name="ID_PLAN" ColumnName="ID_PLAN" />
+                <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA">
+            <EntityTypeMapping TypeName="SeguroModel.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_T_EMPRESA" ColumnName="ID_T_EMPRESA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLAN">
+            <EntityTypeMapping TypeName="SeguroModel.PLAN">
+              <MappingFragment StoreEntitySet="PLAN">
+                <ScalarProperty Name="ID_PLAN" ColumnName="ID_PLAN" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESTACION">
+            <EntityTypeMapping TypeName="SeguroModel.PRESTACION">
+              <MappingFragment StoreEntitySet="PRESTACION">
+                <ScalarProperty Name="ID_PRESTACION" ColumnName="ID_PRESTACION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_EMPRESA">
+            <EntityTypeMapping TypeName="SeguroModel.T_EMPRESA">
+              <MappingFragment StoreEntitySet="T_EMPRESA">
+                <ScalarProperty Name="ID_T_EMPRESA" ColumnName="ID_T_EMPRESA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
