@@ -6,10 +6,8 @@
 package cl.cheekibreeki.cmh.lib.dal.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,16 +15,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlTransient; 
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType; 
+import java.util.Collection; 
 
 /**
  *
- * @author pdelasotta
+ * @author palan
  */
 @Entity
 @Table(name = "ATENCION_AGEN")
@@ -39,7 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "AtencionAgen.findByIdPaciente", query = "SELECT a FROM AtencionAgen a WHERE a.idPaciente = :idPaciente"),
     @NamedQuery(name = "AtencionAgen.findByIdPersonalMedico", query = "SELECT a FROM AtencionAgen a WHERE a.idPersAtiende = :idPersAtiende"),
     @NamedQuery(name = "AtencionAgen.findByObservaciones", query = "SELECT a FROM AtencionAgen a WHERE a.observaciones = :observaciones")})
-//falta un named query que obtenga atenciones por medico solicitante})
 public class AtencionAgen implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,6 +57,9 @@ public class AtencionAgen implements Serializable {
     @JoinColumn(name = "ID_ESTADO_ATEN", referencedColumnName = "ID_ESTADO_ATEN")
     @ManyToOne
     private EstadoAten idEstadoAten;
+    @JoinColumn(name = "ID_ORDEN_ANALISIS", referencedColumnName = "ID_ORDEN_ANALISIS")
+    @ManyToOne
+    private OrdenAnalisis idOrdenAnalisis;
     @JoinColumn(name = "ID_PACIENTE", referencedColumnName = "ID_PACIENTE")
     @ManyToOne
     private Paciente idPaciente;
@@ -70,11 +72,12 @@ public class AtencionAgen implements Serializable {
     @JoinColumn(name = "ID_PRESTACION", referencedColumnName = "ID_PRESTACION")
     @ManyToOne
     private Prestacion idPrestacion;
-    @OneToMany(mappedBy = "idAtencionAgen")
-    private Collection<ResAtencion> resAtencionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAtencionAgen")
-    private Collection<Pago> pagoCollection;
 
+    @OneToMany(mappedBy = "idAtencionAgen") 
+    private Collection<ResAtencion> resAtencionCollection; 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAtencionAgen") 
+    private Collection<Pago> pagoCollection; 
+    
     public AtencionAgen() {
     }
 
@@ -122,6 +125,14 @@ public class AtencionAgen implements Serializable {
         this.idEstadoAten = idEstadoAten;
     }
 
+    public OrdenAnalisis getIdOrdenAnalisis() {
+        return idOrdenAnalisis;
+    }
+
+    public void setIdOrdenAnalisis(OrdenAnalisis idOrdenAnalisis) {
+        this.idOrdenAnalisis = idOrdenAnalisis;
+    }
+
     public Paciente getIdPaciente() {
         return idPaciente;
     }
@@ -153,24 +164,24 @@ public class AtencionAgen implements Serializable {
     public void setIdPrestacion(Prestacion idPrestacion) {
         this.idPrestacion = idPrestacion;
     }
-
-    @XmlTransient
-    public Collection<ResAtencion> getResAtencionCollection() {
-        return resAtencionCollection;
-    }
-
-    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
-        this.resAtencionCollection = resAtencionCollection;
-    }
-
-    @XmlTransient
-    public Collection<Pago> getPagoCollection() {
-        return pagoCollection;
-    }
-
-    public void setPagoCollection(Collection<Pago> pagoCollection) {
-        this.pagoCollection = pagoCollection;
-    }
+    
+    @XmlTransient 
+    public Collection<ResAtencion> getResAtencionCollection() { 
+        return resAtencionCollection; 
+    } 
+ 
+    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) { 
+        this.resAtencionCollection = resAtencionCollection; 
+    } 
+ 
+    @XmlTransient 
+    public Collection<Pago> getPagoCollection() { 
+        return pagoCollection; 
+    } 
+ 
+    public void setPagoCollection(Collection<Pago> pagoCollection) { 
+        this.pagoCollection = pagoCollection; 
+    } 
 
     @Override
     public int hashCode() {

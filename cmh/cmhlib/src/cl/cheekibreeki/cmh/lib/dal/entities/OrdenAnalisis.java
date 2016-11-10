@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author dev
+ * @author palan
  */
 @Entity
 @Table(name = "ORDEN_ANALISIS")
@@ -47,7 +47,7 @@ public class OrdenAnalisis implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechorRecep;
     @OneToMany(mappedBy = "idOrdenAnalisis")
-    private Collection<ResAtencion> resAtencionCollection;
+    private Collection<AtencionAgen> atencionAgenCollection;
 
     public OrdenAnalisis() {
     }
@@ -81,12 +81,12 @@ public class OrdenAnalisis implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ResAtencion> getResAtencionCollection() {
-        return resAtencionCollection;
+    public Collection<AtencionAgen> getAtencionAgenCollection() {
+        return atencionAgenCollection;
     }
 
-    public void setResAtencionCollection(Collection<ResAtencion> resAtencionCollection) {
-        this.resAtencionCollection = resAtencionCollection;
+    public void setAtencionAgenCollection(Collection<AtencionAgen> atencionAgenCollection) {
+        this.atencionAgenCollection = atencionAgenCollection;
     }
 
     @Override
