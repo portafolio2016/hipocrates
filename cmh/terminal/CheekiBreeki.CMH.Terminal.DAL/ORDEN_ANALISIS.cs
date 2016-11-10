@@ -16,6 +16,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
     {
         public ORDEN_ANALISIS()
         {
+            this.ATENCION_AGEN = new HashSet<ATENCION_AGEN>();
             this.RES_ATENCION = new HashSet<RES_ATENCION>();
         }
     
@@ -23,6 +24,7 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public Nullable<System.DateTime> FECHOR_EMISION { get; set; }
         public Nullable<System.DateTime> FECHOR_RECEP { get; set; }
     
+        public virtual ICollection<ATENCION_AGEN> ATENCION_AGEN { get; set; }
         public virtual ICollection<RES_ATENCION> RES_ATENCION { get; set; }
     }
 }

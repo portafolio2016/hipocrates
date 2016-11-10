@@ -29,8 +29,10 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public int ID_PERS_ATIENDE { get; set; }
         public Nullable<int> ID_PERS_SOLICITA { get; set; }
         public int ID_BLOQUE { get; set; }
+        public Nullable<int> ID_ORDEN_ANALISIS { get; set; }
     
         public virtual BLOQUE BLOQUE { get; set; }
+        public virtual ORDEN_ANALISIS ORDEN_ANALISIS { get; set; }
         public virtual PERS_MEDICO PERS_MEDICO { get; set; }
         public virtual PERS_MEDICO PERS_MEDICO1 { get; set; }
         public virtual PRESTACION PRESTACION { get; set; }
