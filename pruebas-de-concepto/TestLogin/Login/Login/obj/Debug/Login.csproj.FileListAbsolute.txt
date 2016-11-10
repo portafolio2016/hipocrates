@@ -1,1 +1,0 @@
-C:\Users\gonza\Documents\Git\hipocrates\pruebas-de-concepto\TestLogin\Login\Login\bin\Debug\Login.exe.config
