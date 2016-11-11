@@ -13,6 +13,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 {
     public partial class frmAgendarAtencion : Form
     {
+        AccionesTerminal at = new AccionesTerminal();
         public frmAgendarAtencion()
         {
             InitializeComponent();
@@ -20,15 +21,26 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void frmAgendarAtencion_Load(object sender, EventArgs e)
         {
-            AccionesTerminal at = new AccionesTerminal();
-            comboBox1.DataSource = at.listaEspecialidad().ToList();
-            comboBox1.ValueMember = "ID_ESPECIALIDAD";
-            comboBox1.DisplayMember = "NOM_ESPECIALIDAD";
+            cmbEspecialidad.DataSource = at.listaEspecialidad();
+            cmbEspecialidad.ValueMember = "ID_ESPECIALIDAD";
+            cmbEspecialidad.DisplayMember = "NOM_ESPECIALIDAD";
         }
 
         private void atencionesMédicasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmbEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string idEspecialidad = cmbEspecialidad.Text;
+            cmbPersonal.DataSource = at.listaPersonales(idEspecialidad);
+            cmbPersonal.ValueMember = "ID_PERSONAL";
+            cmbPersonal.DisplayMember = "NOMBRES";
+        }
+
+        private void btnAgendar_Click(object sender, EventArgs e)
+        {
         }
     }
 }

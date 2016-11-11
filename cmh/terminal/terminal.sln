@@ -25,8 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheekibreeki.CMH.Seguro.BL"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheekibreeki.CMH.Terminal.BL.Testing", "Cheekibreeki.CMH.Terminal.BL.Testing\Cheekibreeki.CMH.Terminal.BL.Testing.csproj", "{AB740407-CBA1-4A73-9E04-B6D5F3847B16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.Views", "CheekiBreeki.CMH.Terminal.Views\CheekiBreeki.CMH.Terminal.Views.csproj", "{041A3D84-34AC-4774-80F4-DDD05E4EFF8A}"
 EndProject
 Global
@@ -63,10 +61,6 @@ Global
 		{AB740407-CBA1-4A73-9E04-B6D5F3847B16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB740407-CBA1-4A73-9E04-B6D5F3847B16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB740407-CBA1-4A73-9E04-B6D5F3847B16}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{041A3D84-34AC-4774-80F4-DDD05E4EFF8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{041A3D84-34AC-4774-80F4-DDD05E4EFF8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{041A3D84-34AC-4774-80F4-DDD05E4EFF8A}.Release|Any CPU.ActiveCfg = Release|Any CPU

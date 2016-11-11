@@ -1283,9 +1283,20 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
 
         #region Devolver listas
-        public DbSet<ESPECIALIDAD> listaEspecialidad()
+        public List<ESPECIALIDAD> listaEspecialidad()
         {
-            return (conexionDB.ESPECIALIDAD);
+            return (conexionDB.ESPECIALIDAD.ToList());
+        }
+
+        public List<PERSONAL> listaPersonales(string nombreEspecialidad)
+        {
+            List<PERS_MEDICO> personalesMedicos = conexionDB.PERS_MEDICO.Where(d => d.ESPECIALIDAD.NOM_ESPECIALIDAD == nombreEspecialidad).ToList();
+            List<PERSONAL> personales = new List<PERSONAL>();
+            foreach (PERS_MEDICO p in personalesMedicos)
+	        {
+	            personales.Add(p.PERSONAL);
+	        }
+            return (personales);
         }
         #endregion
     }
