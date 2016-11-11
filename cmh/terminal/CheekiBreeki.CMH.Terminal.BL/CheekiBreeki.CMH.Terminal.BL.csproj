@@ -63,7 +63,6 @@
     <Compile Include="AccionesTerminal.cs" />
     <Compile Include="ConversorBase64.cs" />
     <Compile Include="Emailer.cs" />
-    <Compile Include="Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReporteCaja.cs" />
     <Compile Include="ResultadoVerificacionSeguro.cs" />
@@ -72,7 +71,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="UsuarioLogeado.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>

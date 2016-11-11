@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CheekiBreeki.CMH.Terminal.DAL;
-
-namespace CheekiBreeki.CMH.Terminal.BL
+using CheekiBreeki.CMH.Terminal.BL;
+namespace CheekiBreeki.CMH.Terminal.Views
 {
     public class Login
     {
-        
         #region Verificar Usuario
-        public static PERSONAL verificarUsuario(string usuario,string password)
+        public static PERSONAL verificarUsuario(string usuario, string password)
         {
             try
             {
@@ -39,11 +38,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 PERSONAL personal = conexionBD.PERSONAL.
                     Where(d => d.EMAIL == usuario && d.HASHED_PASS == passwordHasheada).FirstOrDefault();
 
-               //Validar usuario(email)
-                if (!Util.isObjetoNulo(personal))
+                //Validar usuario(email)
+                if (Util.isObjetoNulo(personal))
                 {
                     throw new Exception("Usuario y contraseña incorrecto");
-                }                    
+                }
                 else
                 {
                     return personal;
@@ -58,11 +57,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
         #endregion
 
         #region Inicio sesión
-        public static UsuarioLogeado iniciarSesion(string usuario,string password)
+        public static UsuarioLogeado iniciarSesion(string usuario, string password)
         {
             PERSONAL personal = verificarUsuario(usuario, password);
             UsuarioLogeado usuarioIniciado = null;
-            if (Util.isObjetoNulo(personal))
+            if (!Util.isObjetoNulo(personal))
             {
                 usuarioIniciado = new UsuarioLogeado(personal);
             }

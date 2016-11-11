@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class Form1 : Form
+    public partial class FrmLogin : Form
     {
-        public Form1()
+        public FrmLogin()
         {
             InitializeComponent();
         }
@@ -29,7 +29,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            string usuario = txtUsuario.Text;
+            string password = txtContrasena.Text;
+            UsuarioLogeado usuarioLogeado = null;
+            usuarioLogeado = Login.iniciarSesion(usuario, password);
+            MessageBox.Show(usuarioLogeado.NombreUsuario);
         }
 
         private void Form1_Load(object sender, EventArgs e)

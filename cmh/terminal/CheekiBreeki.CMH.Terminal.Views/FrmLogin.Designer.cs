@@ -1,6 +1,6 @@
 ﻿namespace CheekiBreeki.CMH.Terminal.Views
 {
-    partial class Form1
+    partial class FrmLogin
     {
         /// <summary>
         /// Required designer variable.

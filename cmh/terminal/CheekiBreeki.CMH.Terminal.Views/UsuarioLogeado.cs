@@ -1,11 +1,12 @@
 ﻿using CheekiBreeki.CMH.Terminal.DAL;
+using CheekiBreeki.CMH.Terminal.BL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CheekiBreeki.CMH.Terminal.BL
+namespace CheekiBreeki.CMH.Terminal.Views
 {
     public class UsuarioLogeado
     {
@@ -32,7 +33,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             get { return _privilegio; }
             set { _privilegio = value; }
         }
-        #endregion 
+        #endregion
 
         #region Contructores
         public UsuarioLogeado()
@@ -55,13 +56,13 @@ namespace CheekiBreeki.CMH.Terminal.BL
             _personal = new PERSONAL();
             _privilegio = string.Empty;
         }
-        
+
         public void definirPrivilegio()
         {
             if (Util.isObjetoNulo(_personal.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO))
                 _privilegio = _personal.PERS_MEDICO.FirstOrDefault().ESPECIALIDAD.NOM_ESPECIALIDAD;
             else
-                _privilegio = _personal.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO;       
+                _privilegio = _personal.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO;
         }
         #endregion
     }
