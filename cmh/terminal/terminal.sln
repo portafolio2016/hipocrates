@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cheekibreeki.CMH.Terminal.B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheekiBreeki.CMH.Terminal.Views", "CheekiBreeki.CMH.Terminal.Views\CheekiBreeki.CMH.Terminal.Views.csproj", "{C6DE7526-9CE3-4F66-A74D-E99A995C2AF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{C6DE7526-9CE3-4F66-A74D-E99A995C2AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6DE7526-9CE3-4F66-A74D-E99A995C2AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6DE7526-9CE3-4F66-A74D-E99A995C2AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF686AEA-D4C0-4343-9B2E-4B7D1B503FB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
