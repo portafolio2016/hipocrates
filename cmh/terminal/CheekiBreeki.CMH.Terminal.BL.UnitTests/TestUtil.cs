@@ -86,5 +86,16 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             Boolean resultadoEsperado2 = false;
             Assert.AreEqual(resultadoEsperado2, res2);
         }
+
+        [TestMethod]
+        public void inicioSesionTest()
+        {
+            //Caso 1: Iniciar sesión
+            //Cargo
+            //Funcionario
+            //Pers_medico
+            //Especilidad
+            //Personal 
+        }
     }
 }

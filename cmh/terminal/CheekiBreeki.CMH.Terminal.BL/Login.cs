@@ -11,7 +11,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
     {
         
         #region Verificar Usuario
-        public static Boolean verificarUsuario(string usuario,string password)
+        public static PERSONAL verificarUsuario(string usuario,string password)
         {
             try
             {
@@ -31,45 +31,52 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
                 CMHEntities conexionBD = new CMHEntities();
 
-                string emailBuscado = conexionBD.PERSONAL.
+                /*string emailBuscado = conexionBD.PERSONAL.
                     Where(d => d.EMAIL == usuario).FirstOrDefault().EMAIL;
                 string passBuscada = conexionBD.PERSONAL.
-                    Where(d => d.HASHED_PASS == passwordHasheada).FirstOrDefault().HASHED_PASS;
+                    Where(d => d.HASHED_PASS == passwordHasheada).FirstOrDefault().HASHED_PASS;*/
+
+                PERSONAL personal = conexionBD.PERSONAL.
+                    Where(d => d.EMAIL == usuario && d.HASHED_PASS == passwordHasheada).FirstOrDefault();
+
                //Validar usuario(email)
-                if (emailBuscado != usuario)
+                if (!Util.isObjetoNulo(personal))
                 {
-                    throw new Exception("Usuario incorrecto");
+                    throw new Exception("Usuario y contraseña incorrecto");
                 }                    
-               //Validar contraseña
-                else if (passBuscada != passwordHasheada)
-                {
-                    throw new Exception("Contraseña incorrecta");
-                }
                 else
                 {
-                    return true;
+                    return personal;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                return null;
             }
         }
         #endregion
 
         #region Inicio sesión
-        public static Boolean iniciarSesion(string usuario,string password)
+        public static UsuarioLogeado iniciarSesion(string usuario,string password)
         {
-            if (verificarUsuario(usuario, password) == true)
+            PERSONAL personal = verificarUsuario(usuario, password);
+            UsuarioLogeado usuarioIniciado = null;
+            if (Util.isObjetoNulo(personal))
             {
-                
+                usuarioIniciado = new UsuarioLogeado(personal);
             }
-            return true;
+            return usuarioIniciado;
         }
         #endregion
 
         #region Cerrar sesión
+        public static Boolean cerrarSesion(UsuarioLogeado usuario)
+        {
+            usuario = null;
+            return true;
+        }
+
         #endregion
     }
 }
