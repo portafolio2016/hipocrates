@@ -1,36 +1,32 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <form action="/Registro.do">
+        <form action="Registro.do" method="POST">
             <div class="form-group">
                 <label for="loginmail">Email</label>
-                <input type="email" class="form-control" id="registromail" placeholder="Email">
+                <input type="email" name="registromail" class="form-control" id="registromail" placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="loginpass">Password</label>
-                <input type="password" class="form-control" id="registropass" placeholder="Password">
+                <input type="password" name="registropass" class="form-control" id="registropass" placeholder="Password">
             </div>
             <div class="form-group">
                 <label for="loginpass">RUT</label>
                 <span>
-                    <input type="number" class="form-control" id="registrorut" placeholder="Password">-
-                    <input type="password" class="form-control" maxlength="1" size="1" id="registroDV">
+                    <input type="number" name="registrorut" class="form-control" id="registrorut" placeholder="Password">-
+                    <input type="password" name="registroDV" class="form-control" maxlength="1" size="1" id="registroDV">
                 </span>
             </div>
             <div class="form-group">
-                <label for="registronombre">Nombres</label>
-                <input type="text" class="form-control" id="registronombre" placeholder="Nombres">
+                <label for="registroNombres">Nombres</label>
+                <input type="text" name="registroNombres" class="form-control" id="registroNombres" placeholder="Nombres">
             </div>
             <div class="form-group">
                 <label for="registroApellidos">Apellidos</label>
-                <input type="text" class="form-control" id="registroApellidos" placeholder="Apellidos">
+                <input type="text" name="registroApellidos" class="form-control" id="registroApellidos" placeholder="Apellidos">
             </div>
             <div class="form-group">
                 <label for="registrofecnac">Fecha de nacimiento</label>
-                <input type="date" class="form-control" id="registrofecnac">
-            </div>
-            <div class="form-group">
-                <label for="registrofecnac">Fecha de nacimiento</label>
-                <input type="date" class="form-control" id="registrofecnac">
+                <input type="date" name="registrofecnac" class="form-control" id="registrofecnac">
             </div>
             <div class="radio">
                 <label>
@@ -40,7 +36,7 @@
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="registroSexo" id="radioF" value="option2">
+                    <input type="radio" name="registroSexo" id="radioF" value="F">
                     Femenino
                 </label>
             </div>
