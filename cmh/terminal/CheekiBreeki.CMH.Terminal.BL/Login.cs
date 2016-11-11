@@ -29,22 +29,26 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
                 string passwordHasheada = Util.hashMD5(password);
                 CMHEntities conexionBD = new CMHEntities();
-                PERSONAL personal = null;
-
-                //en vez de traer personal traer dato propio.
-                personal = conexionBD.PERSONAL.
-                    Where(d => d.EMAIL == usuario && d.HASHED_PASS == passwordHasheada).FirstOrDefault();
+                
+                                //en vez de traer personal traer dato propio.
+                string emailBuscado = conexionBD.PERSONAL.
+                    Where(d => d.EMAIL == usuario).FirstOrDefault().EMAIL;
+                string passBuscada = conexionBD.PERSONAL.
+                    Where(d => d.HASHED_PASS == passwordHasheada).FirstOrDefault().HASHED_PASS;
                //Validar usuario(email)
-                if (personal.EMAIL != usuario)
+                if (emailBuscado != usuario)
                 {
                     throw new Exception("Usuario incorrecto");
                 }                    
                //Validar contraseña
-                else if(personal.HASHED_PASS != passwordHasheada)
+                else if (passBuscada != passwordHasheada)
                 {
                     throw new Exception("Contraseña incorrecta");
                 }
-
+                else
+                {
+                    return true;
+                }
             }
             catch (Exception ex)
             {
