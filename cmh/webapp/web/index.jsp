@@ -136,6 +136,7 @@
                     </div>
                 </div>
             </div>
+            
             <jsp:include page="/segments/footer.jsp" flush="true"/>
         </div>
         <!-- /.container -->

@@ -14,7 +14,7 @@
                    <span class="icon-bar"></span>
                    <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="index.html">
+               <a class="navbar-brand" href="index.jsp">
                                        <span><img src="img/icon1.png" height="30px" width="30px"/><span>
                                        Centro Médico Hipócrates
                                </a>
@@ -23,13 +23,13 @@
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav navbar-right">
                    <li>
-                       <a href="index.html">Home</a>
+                       <a href="index.jsp">Home</a>
                    </li>
                    <li>
-                       <a href="quienes-somos.html">Quiénes Somos</a>
+                       <a href="quienes-somos.jsp">Quiénes Somos</a>
                    </li>
                                        <li>
-                       <a href="servicios.html">Servicios</a>
+                       <a href="servicios.jsp">Servicios</a>
                    </li>
                                        <li>
                        <a href="#">Iniciar sesión</a>
