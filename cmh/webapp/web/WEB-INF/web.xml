@@ -4,9 +4,17 @@
         <servlet-name>Router</servlet-name>
         <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Router</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Login</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Router</servlet-name>
         <url-pattern>/Router.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

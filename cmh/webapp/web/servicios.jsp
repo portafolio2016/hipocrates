@@ -6,7 +6,7 @@
             <small>Disponibles</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="index.jsp">Home</a>
+            <li><a href="master.jsp?page=index">Home</a>
             </li>
             <li class="active">Servicios</li>
         </ol>
