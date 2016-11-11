@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Security;
+using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.BL
 {
@@ -41,6 +42,36 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         /// <summary>
+        /// Método para validar RUT al formato chileno
+        /// </summary>
+        /// <param name="rut">Parte numérica del RUT</param>
+        /// <param name="digito">Dígito verificador</param>
+        /// <returns>Si es RUT válido</returns>
+        public static Boolean rutValido(int rut, string digito)
+        {
+            bool validacion = false;
+            try
+            {
+                int rutAux = rut;
+                char dv = Char.Parse(digito.ToUpper());
+
+                int m = 0, s = 1;
+                for (; rutAux != 0; rutAux /= 10)
+                {
+                    s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+                }
+                if (dv == (char)(s != 0 ? s + 47 : 75))
+                {
+                    validacion = true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return validacion;
+        }
+
+        /// <summary>
         /// Genera una contraseña al azar de largo 12
         /// </summary>
         /// <returns>Contraseña</returns>
@@ -68,6 +99,26 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
 
             return convertida.ToString();
+        }
+
+        /// <summary>
+        /// Comprueba todos los TextBox del Form para ver si tienen algún valor
+        /// </summary>
+        /// <param name="formulario">Windows Form</param>
+        /// <returns>true si tienen valores</returns>
+        public static Boolean validarTextBoxVacios(Form formulario)
+        {
+            foreach (Control control in formulario.Controls)
+            {
+                if (control.GetType().Equals(typeof(TextBox)))
+                {
+                    if (control.Text.Equals(""))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }
