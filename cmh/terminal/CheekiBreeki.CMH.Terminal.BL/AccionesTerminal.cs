@@ -7,6 +7,7 @@ using CheekiBreeki.CMH.Terminal.DAL;
 using CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference;
 using System.IO;
 using System.Security.Cryptography;
+using System.Data.Entity;
 
 namespace CheekiBreeki.CMH.Terminal.BL
 {
@@ -1280,5 +1281,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
         #endregion
 
+
+        #region Devolver listas
+        public DbSet<ESPECIALIDAD> listaEspecialidad()
+        {
+            return (conexionDB.ESPECIALIDAD);
+        }
+        #endregion
     }
 }
