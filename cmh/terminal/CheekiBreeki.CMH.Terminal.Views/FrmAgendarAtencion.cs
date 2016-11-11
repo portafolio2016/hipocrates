@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class frmAgendarAtencion : Form
+    public partial class FrmAgendarAtencion : Form
     {
         AccionesTerminal at = new AccionesTerminal();
-        public frmAgendarAtencion()
+        public FrmAgendarAtencion()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace CheekiBreeki.CMH.Terminal.Views
 {
-    partial class frmAgendarAtencion
+    partial class FrmAgendarAtencion
     {
         /// <summary>
         /// Required designer variable.
