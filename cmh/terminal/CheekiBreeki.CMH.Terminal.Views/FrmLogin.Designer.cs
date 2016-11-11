@@ -34,12 +34,15 @@
             this.txtContrasena = new System.Windows.Forms.TextBox();
             this.lblContrasena = new System.Windows.Forms.Label();
             this.btnIniciar = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblContrasenaOlvidada = new System.Windows.Forms.Label();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(276, 182);
+            this.lblUsuario.Location = new System.Drawing.Point(127, 32);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(49, 13);
             this.lblUsuario.TabIndex = 0;
@@ -49,16 +52,16 @@
             // lblBienvenido
             // 
             this.lblBienvenido.AutoSize = true;
-            this.lblBienvenido.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBienvenido.Location = new System.Drawing.Point(222, 66);
+            this.lblBienvenido.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBienvenido.Location = new System.Drawing.Point(163, 140);
             this.lblBienvenido.Name = "lblBienvenido";
-            this.lblBienvenido.Size = new System.Drawing.Size(342, 31);
+            this.lblBienvenido.Size = new System.Drawing.Size(432, 39);
             this.lblBienvenido.TabIndex = 1;
             this.lblBienvenido.Text = "Bienvenido a terminal CMH";
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(383, 179);
+            this.txtUsuario.Location = new System.Drawing.Point(235, 29);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(123, 20);
             this.txtUsuario.TabIndex = 2;
@@ -66,7 +69,7 @@
             // 
             // txtContrasena
             // 
-            this.txtContrasena.Location = new System.Drawing.Point(383, 220);
+            this.txtContrasena.Location = new System.Drawing.Point(234, 65);
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.PasswordChar = '*';
             this.txtContrasena.Size = new System.Drawing.Size(123, 20);
@@ -75,7 +78,7 @@
             // lblContrasena
             // 
             this.lblContrasena.AutoSize = true;
-            this.lblContrasena.Location = new System.Drawing.Point(276, 223);
+            this.lblContrasena.Location = new System.Drawing.Point(127, 68);
             this.lblContrasena.Name = "lblContrasena";
             this.lblContrasena.Size = new System.Drawing.Size(64, 13);
             this.lblContrasena.TabIndex = 3;
@@ -83,7 +86,7 @@
             // 
             // btnIniciar
             // 
-            this.btnIniciar.Location = new System.Drawing.Point(332, 269);
+            this.btnIniciar.Location = new System.Drawing.Point(192, 123);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(102, 23);
             this.btnIniciar.TabIndex = 5;
@@ -91,20 +94,43 @@
             this.btnIniciar.UseVisualStyleBackColor = true;
             this.btnIniciar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblContrasenaOlvidada);
+            this.groupBox1.Controls.Add(this.btnIniciar);
+            this.groupBox1.Controls.Add(this.lblUsuario);
+            this.groupBox1.Controls.Add(this.txtContrasena);
+            this.groupBox1.Controls.Add(this.txtUsuario);
+            this.groupBox1.Controls.Add(this.lblContrasena);
+            this.groupBox1.Location = new System.Drawing.Point(137, 224);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(488, 164);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Inicio Sesión";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lblContrasenaOlvidada
+            // 
+            this.lblContrasenaOlvidada.AutoSize = true;
+            this.lblContrasenaOlvidada.Location = new System.Drawing.Point(96, 97);
+            this.lblContrasenaOlvidada.Name = "lblContrasenaOlvidada";
+            this.lblContrasenaOlvidada.Size = new System.Drawing.Size(299, 13);
+            this.lblContrasenaOlvidada.TabIndex = 6;
+            this.lblContrasenaOlvidada.Text = "¿Olvidó la contraseña? Contáctese con el Jefe de operadores";
+            // 
+            // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.btnIniciar);
-            this.Controls.Add(this.txtContrasena);
-            this.Controls.Add(this.lblContrasena);
-            this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.lblBienvenido);
-            this.Controls.Add(this.lblUsuario);
-            this.Name = "Form1";
+            this.Controls.Add(this.groupBox1);
+            this.Name = "FrmLogin";
             this.Text = "Iniciar sesión";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,6 +144,8 @@
         private System.Windows.Forms.TextBox txtContrasena;
         private System.Windows.Forms.Label lblContrasena;
         private System.Windows.Forms.Button btnIniciar;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblContrasenaOlvidada;
     }
 }
 
