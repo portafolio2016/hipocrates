@@ -804,7 +804,33 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             // Caso 2: Personal existe
             at.borrarPersonal(personal1);
             Object resultadoEsperado1 = null;
-            Assert.AreEqual(at.buscarPersonal(rut1, dv1), resultadoEsperado1);
+            Assert.AreEqual(resultadoEsperado1, at.buscarPersonal(rut1, dv1));
+
+            // Caso 3: Personal es único jefe de operadores
+            int rut3 = 12345678;
+            string dv3 = "K";
+            string nombre = "Jefe de operadores";
+            crearPersonal();
+            PERSONAL personal3 = at.buscarPersonal(rut1, dv1);
+            using (var context = new CMHEntities())
+            {
+                CARGO cargo3 = context.CARGO.Where(d => d.NOMBRE_CARGO == nombre).FirstOrDefault();
+                if (Util.isObjetoNulo(cargo3))
+                {
+                    cargo3.NOMBRE_CARGO = nombre;
+                    context.CARGO.Add(cargo3);
+                    context.SaveChangesAsync();
+                }
+
+                FUNCIONARIO funcionario3 = new FUNCIONARIO();
+                funcionario3.ID_CARGO_FUNCI = cargo3.ID_CARGO_FUNCI;
+                funcionario3.ID_PERSONAL = personal3.ID_PERSONAL;
+                context.FUNCIONARIO.Add(funcionario3);
+                context.SaveChangesAsync();
+            }
+            at.borrarPersonal(personal3);
+            Object resultadoEsperado3 = null;
+            Assert.AreNotEqual(resultadoEsperado3, at.buscarPersonal(rut3, dv3));
         }
         #endregion
 

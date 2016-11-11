@@ -824,6 +824,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
+                    if (personal.FUNCIONARIO.Count > 0 && personal.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO == "Jefe de operadores")
+                    { 
+                        if (conexionDB.FUNCIONARIO.Where(d => d.CARGO.NOMBRE_CARGO == "Jefe de operadores").Count() <= 1)
+                            throw new Exception("Tiene que haber por lo menos un jefe de operadores");
+                    }
                     conexionDB.PERSONAL.Remove(personal);
                     conexionDB.SaveChangesAsync();
                     return true;
