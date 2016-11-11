@@ -9,7 +9,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 {
     public class Login
     {
-
+        
         #region Verificar Usuario
         public static Boolean verificarUsuario(string usuario,string password)
         {
@@ -28,9 +28,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 //Comprobar de que el usuario y la contraseña sean iguales en la base de datos
 
                 string passwordHasheada = Util.hashMD5(password);
+
                 CMHEntities conexionBD = new CMHEntities();
-                
-                                //en vez de traer personal traer dato propio.
+
                 string emailBuscado = conexionBD.PERSONAL.
                     Where(d => d.EMAIL == usuario).FirstOrDefault().EMAIL;
                 string passBuscada = conexionBD.PERSONAL.
@@ -59,6 +59,14 @@ namespace CheekiBreeki.CMH.Terminal.BL
         #endregion
 
         #region Inicio sesión
+        public static Boolean iniciarSesion(string usuario,string password)
+        {
+            if (verificarUsuario(usuario, password) == true)
+            {
+                
+            }
+            return true;
+        }
         #endregion
 
         #region Cerrar sesión
