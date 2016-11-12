@@ -36,6 +36,7 @@
             this.btnIniciar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblContrasenaOlvidada = new System.Windows.Forms.Label();
+            this.lblAdvertencia = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,6 +97,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblAdvertencia);
             this.groupBox1.Controls.Add(this.lblContrasenaOlvidada);
             this.groupBox1.Controls.Add(this.btnIniciar);
             this.groupBox1.Controls.Add(this.lblUsuario);
@@ -118,6 +120,16 @@
             this.lblContrasenaOlvidada.Size = new System.Drawing.Size(299, 13);
             this.lblContrasenaOlvidada.TabIndex = 6;
             this.lblContrasenaOlvidada.Text = "¿Olvidó la contraseña? Contáctese con el Jefe de operadores";
+            // 
+            // lblAdvertencia
+            // 
+            this.lblAdvertencia.AutoSize = true;
+            this.lblAdvertencia.Location = new System.Drawing.Point(159, 16);
+            this.lblAdvertencia.Name = "lblAdvertencia";
+            this.lblAdvertencia.Size = new System.Drawing.Size(64, 13);
+            this.lblAdvertencia.TabIndex = 7;
+            this.lblAdvertencia.Text = "Advertencia";
+            this.lblAdvertencia.Click += new System.EventHandler(this.lblAdvertencia_Click);
             // 
             // FrmLogin
             // 
@@ -146,6 +158,7 @@
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblContrasenaOlvidada;
+        private System.Windows.Forms.Label lblAdvertencia;
     }
 }
 

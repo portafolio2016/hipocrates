@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CheekiBreeki.CMH.Terminal.BL;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
@@ -15,6 +16,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
         public FrmLogin()
         {
             InitializeComponent();
+            lblAdvertencia.Visible = false;
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -29,11 +32,32 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string usuario = txtUsuario.Text;
-            string password = txtContrasena.Text;
-            UsuarioLogeado usuarioLogeado = null;
-            usuarioLogeado = Login.iniciarSesion(usuario, password);
-            MessageBox.Show(usuarioLogeado.NombreUsuario);
+
+            string usuario = string.Empty;
+            string password = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(txtUsuario.Text) && !string.IsNullOrWhiteSpace(txtContrasena.Text))
+            {
+                usuario = txtUsuario.Text;
+                password = txtContrasena.Text;
+                if (Util.isEmailValido(usuario))
+                {
+                    UsuarioLogeado usuarioLogeado = null;
+                    usuarioLogeado = Login.iniciarSesion(usuario, password);
+                    MessageBox.Show(usuarioLogeado.NombreUsuario);
+                }
+                else
+                {
+                    lblAdvertencia.Visible = true;
+                    lblAdvertencia.Text = "Email no válido";
+                }
+            }
+            else
+            {
+                lblAdvertencia.Visible = true;
+                lblAdvertencia.Text = "Usuario ó contraseña vacía";
+            }
+              
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,6 +66,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAdvertencia_Click(object sender, EventArgs e)
         {
 
         }
