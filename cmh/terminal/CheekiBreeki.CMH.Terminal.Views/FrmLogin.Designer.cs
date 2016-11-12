@@ -35,8 +35,9 @@
             this.lblContrasena = new System.Windows.Forms.Label();
             this.btnIniciar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblAdvertenciaUsuario = new System.Windows.Forms.Label();
             this.lblContrasenaOlvidada = new System.Windows.Forms.Label();
-            this.lblAdvertencia = new System.Windows.Forms.Label();
+            this.lblAdvertenciaContrasena = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,7 +98,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblAdvertencia);
+            this.groupBox1.Controls.Add(this.lblAdvertenciaContrasena);
+            this.groupBox1.Controls.Add(this.lblAdvertenciaUsuario);
             this.groupBox1.Controls.Add(this.lblContrasenaOlvidada);
             this.groupBox1.Controls.Add(this.btnIniciar);
             this.groupBox1.Controls.Add(this.lblUsuario);
@@ -112,6 +114,16 @@
             this.groupBox1.Text = "Inicio Sesión";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // lblAdvertenciaUsuario
+            // 
+            this.lblAdvertenciaUsuario.AutoSize = true;
+            this.lblAdvertenciaUsuario.Location = new System.Drawing.Point(364, 32);
+            this.lblAdvertenciaUsuario.Name = "lblAdvertenciaUsuario";
+            this.lblAdvertenciaUsuario.Size = new System.Drawing.Size(103, 13);
+            this.lblAdvertenciaUsuario.TabIndex = 7;
+            this.lblAdvertenciaUsuario.Text = "Advertencia Usuario";
+            this.lblAdvertenciaUsuario.Click += new System.EventHandler(this.lblAdvertencia_Click);
+            // 
             // lblContrasenaOlvidada
             // 
             this.lblContrasenaOlvidada.AutoSize = true;
@@ -121,15 +133,14 @@
             this.lblContrasenaOlvidada.TabIndex = 6;
             this.lblContrasenaOlvidada.Text = "¿Olvidó la contraseña? Contáctese con el Jefe de operadores";
             // 
-            // lblAdvertencia
+            // lblAdvertenciaContrasena
             // 
-            this.lblAdvertencia.AutoSize = true;
-            this.lblAdvertencia.Location = new System.Drawing.Point(159, 16);
-            this.lblAdvertencia.Name = "lblAdvertencia";
-            this.lblAdvertencia.Size = new System.Drawing.Size(64, 13);
-            this.lblAdvertencia.TabIndex = 7;
-            this.lblAdvertencia.Text = "Advertencia";
-            this.lblAdvertencia.Click += new System.EventHandler(this.lblAdvertencia_Click);
+            this.lblAdvertenciaContrasena.AutoSize = true;
+            this.lblAdvertenciaContrasena.Location = new System.Drawing.Point(364, 68);
+            this.lblAdvertenciaContrasena.Name = "lblAdvertenciaContrasena";
+            this.lblAdvertenciaContrasena.Size = new System.Drawing.Size(121, 13);
+            this.lblAdvertenciaContrasena.TabIndex = 8;
+            this.lblAdvertenciaContrasena.Text = "Advertencia Contraseña";
             // 
             // FrmLogin
             // 
@@ -158,7 +169,8 @@
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblContrasenaOlvidada;
-        private System.Windows.Forms.Label lblAdvertencia;
+        private System.Windows.Forms.Label lblAdvertenciaUsuario;
+        private System.Windows.Forms.Label lblAdvertenciaContrasena;
     }
 }
 

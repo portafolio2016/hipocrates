@@ -16,8 +16,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
         public FrmLogin()
         {
             InitializeComponent();
-            lblAdvertencia.Visible = false;
-            
+            lblAdvertenciaUsuario.Visible = false;
+            lblAdvertenciaContrasena.Visible = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -33,31 +33,45 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string usuario = string.Empty;
-            string password = string.Empty;
+            string usuario = txtUsuario.Text;
+            string password = txtContrasena.Text;
 
-            if (!string.IsNullOrWhiteSpace(txtUsuario.Text) && !string.IsNullOrWhiteSpace(txtContrasena.Text))
+            if (string.IsNullOrWhiteSpace(txtUsuario.Text) || !Util.isEmailValido(usuario))
             {
-                usuario = txtUsuario.Text;
-                password = txtContrasena.Text;
-                if (Util.isEmailValido(usuario))
-                {
-                    UsuarioLogeado usuarioLogeado = null;
-                    usuarioLogeado = Login.iniciarSesion(usuario, password);
-                    MessageBox.Show(usuarioLogeado.NombreUsuario);
-                }
-                else
-                {
-                    lblAdvertencia.Visible = true;
-                    lblAdvertencia.Text = "Email no válido";
-                }
+                lblAdvertenciaUsuario.Visible = true;
+                lblAdvertenciaUsuario.Text = "Email no valido";
             }
             else
             {
-                lblAdvertencia.Visible = true;
-                lblAdvertencia.Text = "Usuario ó contraseña vacía";
+                lblAdvertenciaUsuario.Visible = false;
+
             }
-              
+
+            if (string.IsNullOrWhiteSpace(txtContrasena.Text))
+            {
+                lblAdvertenciaContrasena.Visible = true;
+                lblAdvertenciaContrasena.Text = "Contraseña vacía";
+            }
+            else
+            {
+                lblAdvertenciaContrasena.Visible = false;
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtUsuario.Text) && !string.IsNullOrWhiteSpace(txtContrasena.Text)
+                && Util.isEmailValido(usuario))
+            {
+                UsuarioLogeado usuarioLogeado = null;
+                usuarioLogeado = Login.iniciarSesion(usuario, password);
+                if (usuarioLogeado != null)
+                {
+                    MessageBox.Show(usuarioLogeado.Privilegio);
+                }
+                else
+                {
+                    MessageBox.Show("Usuario y contraseña invalidas!");
+                }
+            }
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
