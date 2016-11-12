@@ -7,6 +7,7 @@ package cl.cheekibreeki.cmh.webapp.servlet;
 
 import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
 import cl.cheekibreeki.cmh.webapp.bl.AccionesPaciente;
+import cl.cheekibreeki.cmh.webapp.util.PassHasher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -64,10 +65,7 @@ public class Registro extends HttpServlet {
                 //parsear sexo a char
                 char sexoChar = sexo.toCharArray()[0];
                 //Hashear pass
-                byte[] passBytes = pass.getBytes("UTF-8");
-                MessageDigest md = MessageDigest.getInstance("MD5");
-                byte[] hashedPassBytes = md.digest(passBytes);
-                String hashedPass = Arrays.toString(hashedPassBytes);
+                String hashedPass = PassHasher.hashToMD5(pass);
                 //Instanciar objeto
                 Paciente paciente = new Paciente();
                 paciente.setIdPaciente(0);
