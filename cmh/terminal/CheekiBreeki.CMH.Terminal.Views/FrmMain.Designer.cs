@@ -36,7 +36,7 @@
             // lblUsuarioConectado
             // 
             this.lblUsuarioConectado.AutoSize = true;
-            this.lblUsuarioConectado.Location = new System.Drawing.Point(263, 24);
+            this.lblUsuarioConectado.Location = new System.Drawing.Point(281, 29);
             this.lblUsuarioConectado.Name = "lblUsuarioConectado";
             this.lblUsuarioConectado.Size = new System.Drawing.Size(98, 13);
             this.lblUsuarioConectado.TabIndex = 0;
@@ -45,7 +45,7 @@
             // lblPrivilegio
             // 
             this.lblPrivilegio.AutoSize = true;
-            this.lblPrivilegio.Location = new System.Drawing.Point(263, 37);
+            this.lblPrivilegio.Location = new System.Drawing.Point(281, 42);
             this.lblPrivilegio.Name = "lblPrivilegio";
             this.lblPrivilegio.Size = new System.Drawing.Size(52, 13);
             this.lblPrivilegio.TabIndex = 1;
@@ -53,6 +53,7 @@
             // 
             // btnSesion
             // 
+            this.btnSesion.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSesion.Location = new System.Drawing.Point(499, 24);
             this.btnSesion.Name = "btnSesion";
             this.btnSesion.Size = new System.Drawing.Size(141, 23);
@@ -71,7 +72,6 @@
             this.Controls.Add(this.lblUsuarioConectado);
             this.Name = "FrmMain";
             this.Text = "Inicio";
-            
             this.ResumeLayout(false);
             this.PerformLayout();
 

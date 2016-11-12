@@ -26,27 +26,19 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             else
             {
-                lblUsuarioConectado.Text = "Inicia sesión";
+                lblUsuarioConectado.Text = "Debes iniciar sesión";
                 lblPrivilegio.Text = "";
                 btnSesion.Text = "Iniciar sesión";
             }
-
         }
-
 
         private void btnSesion_Click(object sender, EventArgs e)
         {
-            if (FrmLogin.usuarioLogeado != null)
-            {
-                Login.cerrarSesion(FrmLogin.usuarioLogeado);
-                this.Close();
-            }
-            else
-            {
-                FrmLogin frmLogin = new FrmLogin();
-                frmLogin.Activate();
-                frmLogin.Show();
-            }
+           if(MessageBox.Show("¿Seguro que desea salir?", "Cerrar sesión",
+                               MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+           {
+               Application.Restart();
+           }
             
         }
 

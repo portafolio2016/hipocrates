@@ -35,10 +35,10 @@
             this.lblContrasena = new System.Windows.Forms.Label();
             this.btnIniciar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblDatosInvalidos = new System.Windows.Forms.Label();
             this.lblAdvertenciaContrasena = new System.Windows.Forms.Label();
             this.lblAdvertenciaUsuario = new System.Windows.Forms.Label();
             this.lblContrasenaOlvidada = new System.Windows.Forms.Label();
-            this.lblDatosInvalidos = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +50,6 @@
             this.lblUsuario.Size = new System.Drawing.Size(49, 13);
             this.lblUsuario.TabIndex = 0;
             this.lblUsuario.Text = "Usuario: ";
-            
             // 
             // lblBienvenido
             // 
@@ -68,7 +67,6 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(123, 20);
             this.txtUsuario.TabIndex = 2;
-            
             // 
             // txtContrasena
             // 
@@ -114,7 +112,15 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inicio Sesión";
-            
+            // 
+            // lblDatosInvalidos
+            // 
+            this.lblDatosInvalidos.AutoSize = true;
+            this.lblDatosInvalidos.Location = new System.Drawing.Point(169, 13);
+            this.lblDatosInvalidos.Name = "lblDatosInvalidos";
+            this.lblDatosInvalidos.Size = new System.Drawing.Size(151, 13);
+            this.lblDatosInvalidos.TabIndex = 9;
+            this.lblDatosInvalidos.Text = "Usuario y contraseña invalidas";
             // 
             // lblAdvertenciaContrasena
             // 
@@ -133,7 +139,6 @@
             this.lblAdvertenciaUsuario.Size = new System.Drawing.Size(103, 13);
             this.lblAdvertenciaUsuario.TabIndex = 7;
             this.lblAdvertenciaUsuario.Text = "Advertencia Usuario";
-            
             // 
             // lblContrasenaOlvidada
             // 
@@ -144,16 +149,6 @@
             this.lblContrasenaOlvidada.TabIndex = 6;
             this.lblContrasenaOlvidada.Text = "¿Olvidó la contraseña? Contáctese con el Jefe de operadores";
             // 
-            // lblDatosInvalidos
-            // 
-            this.lblDatosInvalidos.AutoSize = true;
-            this.lblDatosInvalidos.Location = new System.Drawing.Point(169, 13);
-            this.lblDatosInvalidos.Name = "lblDatosInvalidos";
-            this.lblDatosInvalidos.Size = new System.Drawing.Size(151, 13);
-            this.lblDatosInvalidos.TabIndex = 9;
-            this.lblDatosInvalidos.Text = "Usuario y contraseña invalidas";
-            
-            // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,7 +158,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmLogin";
             this.Text = "Iniciar sesión";
-            
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

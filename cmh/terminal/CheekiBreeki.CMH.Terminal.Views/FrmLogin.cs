@@ -25,7 +25,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         #region Botón iniciar sesión
         public static UsuarioLogeado usuarioLogeado = null;
-        
+       
+
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -36,6 +37,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 lblAdvertenciaUsuario.Visible = true;
                 lblAdvertenciaUsuario.Text = "Email no valido";
+                
             }
             else
             {
@@ -47,6 +49,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 lblAdvertenciaContrasena.Visible = true;
                 lblAdvertenciaContrasena.Text = "Contraseña vacía";
+               
             }
             else
             {
@@ -60,22 +63,23 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 usuarioLogeado = Login.iniciarSesion(usuario, password);
                 if (usuarioLogeado != null)
                 {
-                    this.Close();
                     lblDatosInvalidos.Visible = false;
-                    
-
+                    this.Hide();
+                    FrmMain frmMain = new FrmMain();
+                    frmMain.Show();
+                    frmMain.Activate();
                 }
                 else
                 {
                     lblDatosInvalidos.Visible = true;
-           
+                    
                 }
+               
             }
 
         }
         #endregion
 
-        
 
     }
 }
