@@ -16,20 +16,16 @@ namespace CheekiBreeki.CMH.Terminal.Views
         public FrmLogin()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            //Label de validaciones iniciados invisibles
             lblAdvertenciaUsuario.Visible = false;
             lblAdvertenciaContrasena.Visible = false;
+            lblDatosInvalidos.Visible = false;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        #region Botón iniciar sesión
+        public static UsuarioLogeado usuarioLogeado = null;
+        
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -60,33 +56,26 @@ namespace CheekiBreeki.CMH.Terminal.Views
             if (!string.IsNullOrWhiteSpace(txtUsuario.Text) && !string.IsNullOrWhiteSpace(txtContrasena.Text)
                 && Util.isEmailValido(usuario))
             {
-                UsuarioLogeado usuarioLogeado = null;
+                 
                 usuarioLogeado = Login.iniciarSesion(usuario, password);
                 if (usuarioLogeado != null)
                 {
-                    MessageBox.Show(usuarioLogeado.Privilegio);
+                    this.Close();
+                    lblDatosInvalidos.Visible = false;
+                    
+
                 }
                 else
                 {
-                    MessageBox.Show("Usuario y contraseña invalidas!");
+                    lblDatosInvalidos.Visible = true;
+           
                 }
             }
-            
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
         }
+        #endregion
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
+        
 
-        }
-
-        private void lblAdvertencia_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
