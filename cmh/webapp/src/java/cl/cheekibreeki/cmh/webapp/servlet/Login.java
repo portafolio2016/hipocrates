@@ -5,8 +5,11 @@
  */
 package cl.cheekibreeki.cmh.webapp.servlet;
 
+import cl.cheekibreeki.cmh.webapp.util.LoginController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,11 +31,25 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //
-            out.println("<script>location.href = 'master.jsp?page=index';</script>");
+            String method = request.getMethod();
+            if("POST".equals(method)){
+                //Capturar inputs
+                String email = request.getParameter("loginMail");
+                String passPlano = request.getParameter("loginPass");
+                if(email == null || passPlano == null){
+                    out.println("<script>alert('Email o password incorrecto');location.href = 'master.jsp?page=login';</script>");        
+                }
+                boolean loginSuccess = LoginController.login(request.getSession(), email, passPlano);
+                if(loginSuccess){
+                    out.println("<script>console.log('login exitoso'); location.href = 'master.jsp?page=index';</script>");        
+                }else{
+                    out.println("<script>alert('Email o password incorrecto');location.href = 'master.jsp?page=login';</script>");        
+                }
+            }
+            
         }
     }
 
@@ -48,7 +65,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -62,7 +83,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
