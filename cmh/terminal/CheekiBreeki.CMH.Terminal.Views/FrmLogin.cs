@@ -65,9 +65,35 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 {
                     lblDatosInvalidos.Visible = false;
                     this.Hide();
-                    FrmMain frmMain = new FrmMain();
-                    frmMain.Show();
-                    frmMain.Activate();
+
+                    switch (usuarioLogeado.Privilegio.ToUpper())
+                    {
+                        case "OPERADOR":
+                            FrmMain frmMain = new FrmMain(this);
+                            frmMain.Show();
+                            frmMain.Activate();
+                        break;
+
+                        case "JEFE DE OPERADOR":
+
+                        break;
+
+                        case "MEDICO":
+
+                        break;
+
+                        case "ENFERMERO":
+
+                        break;
+
+                        case "TECNOLOGO":
+
+                        break;
+
+
+                            
+                    }
+
                 }
                 else
                 {
@@ -77,6 +103,17 @@ namespace CheekiBreeki.CMH.Terminal.Views
                
             }
 
+        }
+        #endregion
+
+        #region Campos vacíos
+        public void camposVacios()
+        {
+            txtUsuario.Text = "";
+            txtContrasena.Text = "";
+            lblDatosInvalidos.Visible = false;
+            lblAdvertenciaUsuario.Visible = false;
+            lblAdvertenciaContrasena.Visible = false;
         }
         #endregion
 

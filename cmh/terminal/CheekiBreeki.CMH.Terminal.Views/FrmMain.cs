@@ -12,8 +12,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
 {
     public partial class FrmMain : Form
     {
+        FrmLogin login = null;
 
-        public FrmMain()
+        public FrmMain(FrmLogin padre)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -30,22 +31,24 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblPrivilegio.Text = "";
                 btnSesion.Text = "Iniciar sesión";
             }
+
+            login = padre;
         }
 
         private void btnSesion_Click(object sender, EventArgs e)
         {
-           if(MessageBox.Show("¿Seguro que desea salir?", "Cerrar sesión",
+           if(MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión",
                                MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
            {
-               Application.Restart();
+               login.camposVacios();
+               login.Show();
+               this.Close();
+               
            }
             
         }
 
-       
-
-       
-
+      
 
     }
 }
