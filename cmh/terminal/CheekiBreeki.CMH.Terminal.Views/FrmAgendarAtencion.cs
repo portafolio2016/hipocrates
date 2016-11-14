@@ -1,4 +1,5 @@
 ﻿using CheekiBreeki.CMH.Terminal.BL;
+using CheekiBreeki.CMH.Terminal.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,17 @@ namespace CheekiBreeki.CMH.Terminal.Views
         public FrmAgendarAtencion()
         {
             InitializeComponent();
+        }
+
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public string Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
         }
 
         private void frmAgendarAtencion_Load(object sender, EventArgs e)
@@ -47,6 +59,27 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnAgendar_Click(object sender, EventArgs e)
         {
+        }
+
+        private void dtFecha_ValueChanged(object sender, EventArgs e)
+        {
+            PERSONAL personal = new PERSONAL();
+            personal.ID_PERSONAL = (int)cmbPersonal.SelectedValue;
+            PERS_MEDICO persMedico = at.buscarPersonalMedico(personal);
+            DateTime dia = dtFecha.Value;
+
+            HorasDisponibles horas = at.horasDisponiblesMedico(persMedico, dia);
+            MessageBox.Show(horas.ToString());
+
+            foreach (HoraDisponible hora in horas.Horas)
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Text = hora.HoraFin + ":" + hora.MinuIni + " - " + hora.HoraFin + ":" + hora.MinuFin;
+                item.Value = hora.Bloque.ID_BLOQUE.ToString();
+                cmbHora.Items.Add(item);
+                cmbHora.SelectedIndex = 0;
+            }
+            //at.horasDisponiblesMedico()
         }
     }
 }

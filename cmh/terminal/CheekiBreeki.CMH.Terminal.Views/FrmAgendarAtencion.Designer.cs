@@ -40,15 +40,15 @@
             this.lblEspecialidad = new System.Windows.Forms.Label();
             this.cmbEspecialidad = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmbPersonal = new System.Windows.Forms.ComboBox();
-            this.lblPersonal = new System.Windows.Forms.Label();
-            this.cmbPrestacion = new System.Windows.Forms.ComboBox();
-            this.lblPrestación = new System.Windows.Forms.Label();
-            this.cmbFecha = new System.Windows.Forms.ComboBox();
-            this.lblFecha = new System.Windows.Forms.Label();
+            this.btnAgendar = new System.Windows.Forms.Button();
             this.cmbHora = new System.Windows.Forms.ComboBox();
             this.lblHora = new System.Windows.Forms.Label();
-            this.btnAgendar = new System.Windows.Forms.Button();
+            this.lblFecha = new System.Windows.Forms.Label();
+            this.cmbPrestacion = new System.Windows.Forms.ComboBox();
+            this.lblPrestación = new System.Windows.Forms.Label();
+            this.cmbPersonal = new System.Windows.Forms.ComboBox();
+            this.lblPersonal = new System.Windows.Forms.Label();
+            this.dtFecha = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -142,10 +142,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dtFecha);
             this.groupBox1.Controls.Add(this.btnAgendar);
             this.groupBox1.Controls.Add(this.cmbHora);
             this.groupBox1.Controls.Add(this.lblHora);
-            this.groupBox1.Controls.Add(this.cmbFecha);
             this.groupBox1.Controls.Add(this.lblFecha);
             this.groupBox1.Controls.Add(this.cmbPrestacion);
             this.groupBox1.Controls.Add(this.lblPrestación);
@@ -162,22 +162,41 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agendar atención";
             // 
-            // cmbPersonal
+            // btnAgendar
             // 
-            this.cmbPersonal.FormattingEnabled = true;
-            this.cmbPersonal.Location = new System.Drawing.Point(160, 96);
-            this.cmbPersonal.Name = "cmbPersonal";
-            this.cmbPersonal.Size = new System.Drawing.Size(121, 21);
-            this.cmbPersonal.TabIndex = 6;
+            this.btnAgendar.Location = new System.Drawing.Point(79, 252);
+            this.btnAgendar.Name = "btnAgendar";
+            this.btnAgendar.Size = new System.Drawing.Size(123, 23);
+            this.btnAgendar.TabIndex = 13;
+            this.btnAgendar.Text = "Agendar";
+            this.btnAgendar.UseVisualStyleBackColor = true;
+            this.btnAgendar.Click += new System.EventHandler(this.btnAgendar_Click);
             // 
-            // lblPersonal
+            // cmbHora
             // 
-            this.lblPersonal.AutoSize = true;
-            this.lblPersonal.Location = new System.Drawing.Point(32, 104);
-            this.lblPersonal.Name = "lblPersonal";
-            this.lblPersonal.Size = new System.Drawing.Size(85, 13);
-            this.lblPersonal.TabIndex = 5;
-            this.lblPersonal.Text = "Personal médico";
+            this.cmbHora.FormattingEnabled = true;
+            this.cmbHora.Location = new System.Drawing.Point(160, 198);
+            this.cmbHora.Name = "cmbHora";
+            this.cmbHora.Size = new System.Drawing.Size(121, 21);
+            this.cmbHora.TabIndex = 12;
+            // 
+            // lblHora
+            // 
+            this.lblHora.AutoSize = true;
+            this.lblHora.Location = new System.Drawing.Point(32, 206);
+            this.lblHora.Name = "lblHora";
+            this.lblHora.Size = new System.Drawing.Size(30, 13);
+            this.lblHora.TabIndex = 11;
+            this.lblHora.Text = "Hora";
+            // 
+            // lblFecha
+            // 
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.Location = new System.Drawing.Point(32, 172);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(37, 13);
+            this.lblFecha.TabIndex = 9;
+            this.lblFecha.Text = "Fecha";
             // 
             // cmbPrestacion
             // 
@@ -196,51 +215,34 @@
             this.lblPrestación.TabIndex = 7;
             this.lblPrestación.Text = "Prestación";
             // 
-            // cmbFecha
+            // cmbPersonal
             // 
-            this.cmbFecha.FormattingEnabled = true;
-            this.cmbFecha.Location = new System.Drawing.Point(160, 164);
-            this.cmbFecha.Name = "cmbFecha";
-            this.cmbFecha.Size = new System.Drawing.Size(121, 21);
-            this.cmbFecha.TabIndex = 10;
+            this.cmbPersonal.FormattingEnabled = true;
+            this.cmbPersonal.Location = new System.Drawing.Point(160, 96);
+            this.cmbPersonal.Name = "cmbPersonal";
+            this.cmbPersonal.Size = new System.Drawing.Size(121, 21);
+            this.cmbPersonal.TabIndex = 6;
             // 
-            // lblFecha
+            // lblPersonal
             // 
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(32, 172);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(37, 13);
-            this.lblFecha.TabIndex = 9;
-            this.lblFecha.Text = "Fecha";
+            this.lblPersonal.AutoSize = true;
+            this.lblPersonal.Location = new System.Drawing.Point(32, 104);
+            this.lblPersonal.Name = "lblPersonal";
+            this.lblPersonal.Size = new System.Drawing.Size(85, 13);
+            this.lblPersonal.TabIndex = 5;
+            this.lblPersonal.Text = "Personal médico";
             // 
-            // cmbHora
+            // dtFecha
             // 
-            this.cmbHora.FormattingEnabled = true;
-            this.cmbHora.Location = new System.Drawing.Point(160, 198);
-            this.cmbHora.Name = "cmbHora";
-            this.cmbHora.Size = new System.Drawing.Size(121, 21);
-            this.cmbHora.TabIndex = 12;
+            this.dtFecha.Location = new System.Drawing.Point(160, 166);
+            this.dtFecha.MaxDate = new System.DateTime(2999, 12, 31, 0, 0, 0, 0);
+            this.dtFecha.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
+            this.dtFecha.Name = "dtFecha";
+            this.dtFecha.Size = new System.Drawing.Size(121, 20);
+            this.dtFecha.TabIndex = 14;
+            this.dtFecha.ValueChanged += new System.EventHandler(this.dtFecha_ValueChanged);
             // 
-            // lblHora
-            // 
-            this.lblHora.AutoSize = true;
-            this.lblHora.Location = new System.Drawing.Point(32, 206);
-            this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(67, 13);
-            this.lblHora.TabIndex = 11;
-            this.lblHora.Text = "Especialidad";
-            // 
-            // btnAgendar
-            // 
-            this.btnAgendar.Location = new System.Drawing.Point(79, 252);
-            this.btnAgendar.Name = "btnAgendar";
-            this.btnAgendar.Size = new System.Drawing.Size(123, 23);
-            this.btnAgendar.TabIndex = 13;
-            this.btnAgendar.Text = "Agendar";
-            this.btnAgendar.UseVisualStyleBackColor = true;
-            this.btnAgendar.Click += new System.EventHandler(this.btnAgendar_Click);
-            // 
-            // frmAgendarAtencion
+            // FrmAgendarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -248,7 +250,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "frmAgendarAtencion";
+            this.Name = "FrmAgendarAtencion";
             this.Text = "Centro Médico Hipócrates";
             this.Load += new System.EventHandler(this.frmAgendarAtencion_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -277,12 +279,12 @@
         private System.Windows.Forms.Button btnAgendar;
         private System.Windows.Forms.ComboBox cmbHora;
         private System.Windows.Forms.Label lblHora;
-        private System.Windows.Forms.ComboBox cmbFecha;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.ComboBox cmbPrestacion;
         private System.Windows.Forms.Label lblPrestación;
         private System.Windows.Forms.ComboBox cmbPersonal;
         private System.Windows.Forms.Label lblPersonal;
+        private System.Windows.Forms.DateTimePicker dtFecha;
     }
 }
 

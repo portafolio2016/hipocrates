@@ -11,6 +11,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
     {
         private List<HoraDisponible> horas;
 
+        public List<HoraDisponible> Horas
+        {
+            get { return horas; }
+            set { horas = value; }
+        }
+
         public HorasDisponibles()
         {
             this.horas = new List<HoraDisponible>();
@@ -35,16 +41,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
             {
                 this.horas.Add(new HoraDisponible(date, bloque));
             }
-        }
-
-        public List<HoraDisponible> getHoras()
-        {
-            return horas;
-        }
-
-        public void setHoras(List<HoraDisponible> horas)
-        {
-            this.horas = horas;
         }
     }
 }
