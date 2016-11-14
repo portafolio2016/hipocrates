@@ -40,6 +40,7 @@
             this.lblEspecialidad = new System.Windows.Forms.Label();
             this.cmbEspecialidad = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtFecha = new System.Windows.Forms.DateTimePicker();
             this.btnAgendar = new System.Windows.Forms.Button();
             this.cmbHora = new System.Windows.Forms.ComboBox();
             this.lblHora = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.lblPrestación = new System.Windows.Forms.Label();
             this.cmbPersonal = new System.Windows.Forms.ComboBox();
             this.lblPersonal = new System.Windows.Forms.Label();
-            this.dtFecha = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -162,6 +162,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agendar atención";
             // 
+            // dtFecha
+            // 
+            this.dtFecha.Location = new System.Drawing.Point(160, 166);
+            this.dtFecha.MaxDate = new System.DateTime(2999, 12, 31, 0, 0, 0, 0);
+            this.dtFecha.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
+            this.dtFecha.Name = "dtFecha";
+            this.dtFecha.Size = new System.Drawing.Size(121, 20);
+            this.dtFecha.TabIndex = 14;
+            this.dtFecha.ValueChanged += new System.EventHandler(this.dtFecha_ValueChanged);
+            // 
             // btnAgendar
             // 
             this.btnAgendar.Location = new System.Drawing.Point(79, 252);
@@ -222,6 +232,7 @@
             this.cmbPersonal.Name = "cmbPersonal";
             this.cmbPersonal.Size = new System.Drawing.Size(121, 21);
             this.cmbPersonal.TabIndex = 6;
+            this.cmbPersonal.SelectedIndexChanged += new System.EventHandler(this.cmbPersonal_SelectedIndexChanged);
             // 
             // lblPersonal
             // 
@@ -231,16 +242,6 @@
             this.lblPersonal.Size = new System.Drawing.Size(85, 13);
             this.lblPersonal.TabIndex = 5;
             this.lblPersonal.Text = "Personal médico";
-            // 
-            // dtFecha
-            // 
-            this.dtFecha.Location = new System.Drawing.Point(160, 166);
-            this.dtFecha.MaxDate = new System.DateTime(2999, 12, 31, 0, 0, 0, 0);
-            this.dtFecha.MinDate = new System.DateTime(2016, 1, 1, 0, 0, 0, 0);
-            this.dtFecha.Name = "dtFecha";
-            this.dtFecha.Size = new System.Drawing.Size(121, 20);
-            this.dtFecha.TabIndex = 14;
-            this.dtFecha.ValueChanged += new System.EventHandler(this.dtFecha_ValueChanged);
             // 
             // FrmAgendarAtencion
             // 

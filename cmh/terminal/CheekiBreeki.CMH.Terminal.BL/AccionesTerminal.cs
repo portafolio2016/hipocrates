@@ -745,11 +745,37 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     PERS_MEDICO personalMed = null;
                     personalMed = conexionDB.PERS_MEDICO.Where(d => d.ID_PERSONAL == personal.ID_PERSONAL).FirstOrDefault();
+                    //personalMed.HORARIO = conexionDB.HORARIO.Where(d => d.ID_PERS_MEDICO == personalMed.ID_PERSONAL_MEDICO).ToList();
                     if (Util.isObjetoNulo(personal))
                     {
                         throw new Exception("Personal no existe");
                     }
                     return personalMed;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public PERSONAL buscarPersonal(PERSONAL personal)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(personal))
+                {
+                    throw new Exception("RUT o vacío");
+                }
+                else
+                {
+                    PERSONAL encontrado = conexionDB.PERSONAL.Find(personal.ID_PERSONAL);
+                    if (Util.isObjetoNulo(personal))
+                    {
+                        throw new Exception("Personal no existe");
+                    }
+                    return encontrado;
                 }
             }
             catch (Exception ex)
@@ -1361,25 +1387,25 @@ namespace CheekiBreeki.CMH.Terminal.BL
             String nomDiaBuscar = "";
             switch(numDia){
                 case 1:
-                    nomDiaBuscar = "Domingo";
-                    break;
-                case 2:
                     nomDiaBuscar = "Lunes";
                     break;
-                case 3:
+                case 2:
                     nomDiaBuscar = "Martes";
                     break;
-                case 4:
+                case 3:
                     nomDiaBuscar = "Miercoles";
                     break;
-                case 5:
+                case 4:
                     nomDiaBuscar = "Jueves";
                     break;
-                case 6:
+                case 5:
                     nomDiaBuscar = "Viernes";
                     break;
-                case 7:
+                case 6:
                     nomDiaBuscar = "Sábado";
+                    break;
+                case 7:
+                    nomDiaBuscar = "Domingo";
                     break;
                 default:
                     throw new Exception("Dia invalido");
@@ -1393,7 +1419,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         private bool isBloqueInAtenciones(BLOQUE bloque, List<ATENCION_AGEN> atenciones){
             bool result = false;
-            if (!Util.isObjetoNulo(atenciones.Where(d => d.BLOQUE.ID_BLOQUE == bloque.ID_BLOQUE)))
+            if (atenciones.Where(d => d.BLOQUE.ID_BLOQUE == bloque.ID_BLOQUE).Count() > 0)
                 result = true;
             return result;
         }

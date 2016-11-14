@@ -55,31 +55,47 @@ namespace CheekiBreeki.CMH.Terminal.Views
             cmbPrestacion.DataSource = at.listaPrestaciones(idEspecialidad);
             cmbPrestacion.ValueMember = "ID_PRESTACION";
             cmbPrestacion.DisplayMember = "NOM_PRESTACION";
+            
+            //actualizarBloques();
+        }
+
+        private void dtFecha_ValueChanged(object sender, EventArgs e)
+        {
+            actualizarBloques();
         }
 
         private void btnAgendar_Click(object sender, EventArgs e)
         {
         }
 
-        private void dtFecha_ValueChanged(object sender, EventArgs e)
+        private void actualizarBloques()
         {
+            cmbHora.Items.Clear();
             PERSONAL personal = new PERSONAL();
             personal.ID_PERSONAL = (int)cmbPersonal.SelectedValue;
             PERS_MEDICO persMedico = at.buscarPersonalMedico(personal);
+            
             DateTime dia = dtFecha.Value;
 
             HorasDisponibles horas = at.horasDisponiblesMedico(persMedico, dia);
-            MessageBox.Show(horas.ToString());
-
             foreach (HoraDisponible hora in horas.Horas)
             {
                 ComboboxItem item = new ComboboxItem();
-                item.Text = hora.HoraFin + ":" + hora.MinuIni + " - " + hora.HoraFin + ":" + hora.MinuFin;
+                if (hora.MinuIni == 0)
+                    item.Text = hora.HoraFin + ":00 - " + hora.HoraFin + ":" + hora.MinuFin;
+                else if ((hora.MinuFin == 0))
+                    item.Text = hora.HoraFin + ":" + hora.MinuIni + " - " + hora.HoraFin + ":00";
+                else
+                    item.Text = hora.HoraFin + ":" + hora.MinuIni + " - " + hora.HoraFin + ":" + hora.MinuFin;
                 item.Value = hora.Bloque.ID_BLOQUE.ToString();
                 cmbHora.Items.Add(item);
                 cmbHora.SelectedIndex = 0;
             }
-            //at.horasDisponiblesMedico()
+        }
+
+        private void cmbPersonal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //actualizarBloques();
         }
     }
 }
