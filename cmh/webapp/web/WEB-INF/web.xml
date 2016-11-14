@@ -18,7 +18,11 @@
     </servlet>
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>cl.cheekibreeki.cmh.webapp.util.Logout</servlet-class>
+        <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Agendamiento</servlet-name>
+        <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Agendamiento</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Router</servlet-name>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Agendamiento</servlet-name>
+        <url-pattern>/Agendamiento.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

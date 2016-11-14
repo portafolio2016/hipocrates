@@ -1,15 +1,17 @@
-package cl.cheekibreeki.cmh.webapp.util;
+package cl.cheekibreeki.cmh.webapp.servlet;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import cl.cheekibreeki.cmh.webapp.servlet.Login;
-import cl.cheekibreeki.cmh.webapp.util.LoginController;
+import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
+import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
+import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
+import cl.cheekibreeki.cmh.webapp.util.AgendamientoController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dev
  */
-public class Logout extends HttpServlet {
+public class Agendamiento extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,14 +36,18 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //Obtener si está logueado
-            boolean estaLogueado = (null != LoginController.obtenerPacienteEnSesion(request.getSession()));
-            if (estaLogueado) {//si está logueado
-                LoginController.logout(request.getSession());
-                out.println("<script>alert('Logout exitoso'); location.href = 'master.jsp?page=index';</script>");
-            } else {//si no está logueado
-                out.println("<script>location.href = 'master.jsp?page=index';</script>");
+            ArrayList<TipoPres> tiposPres = AgendamientoController.obtenerTipoPres();
+            request.setAttribute("tiposPres", tiposPres);
+            String idTipoPrestacionStr = (request.getParameter("idTipoPrestacion"));
+            ArrayList<Prestacion> prestaciones = new ArrayList<Prestacion>();
+            if (null != idTipoPrestacionStr) {
+                int idTipoPrestacion = Integer.parseInt(idTipoPrestacionStr);
+                prestaciones = AgendamientoController.obtenerPrestaciones(idTipoPrestacion);
+                
+            } else {
+                prestaciones = AgendamientoController.obtenerPrestaciones();
             }
+            request.setAttribute("prestaciones", prestaciones);
         }
     }
 

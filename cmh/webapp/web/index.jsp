@@ -12,7 +12,7 @@
             </div>
             <div class="panel-body">
                 <p>Agende su atención con cualquiera de nuestros especialistas</p>
-                <a href="#" class="btn btn-default">Ir a reservar una hora</a>
+                <a href="master.jsp?page=agendar" class="btn btn-default">Ir a reservar una hora</a>
             </div>
         </div>
     </div>
