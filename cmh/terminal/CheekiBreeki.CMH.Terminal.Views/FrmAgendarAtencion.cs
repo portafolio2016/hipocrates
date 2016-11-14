@@ -55,8 +55,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
             cmbPrestacion.DataSource = at.listaPrestaciones(idEspecialidad);
             cmbPrestacion.ValueMember = "ID_PRESTACION";
             cmbPrestacion.DisplayMember = "NOM_PRESTACION";
-            
-            //actualizarBloques();
         }
 
         private void dtFecha_ValueChanged(object sender, EventArgs e)
@@ -71,7 +69,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void actualizarBloques()
         {
             cmbHora.Items.Clear();
-            PERSONAL personal = new PERSONAL();
+            PERSONAL personal = new PERSONAL();        
             personal.ID_PERSONAL = (int)cmbPersonal.SelectedValue;
             PERS_MEDICO persMedico = at.buscarPersonalMedico(personal);
             
@@ -95,7 +93,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void cmbPersonal_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //actualizarBloques();
+            if (!Util.isObjetoNulo(cmbPersonal.SelectedValue))
+                actualizarBloques();
         }
     }
 }
