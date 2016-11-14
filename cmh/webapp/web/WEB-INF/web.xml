@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>Logout</servlet-class>
+        <servlet-class>cl.cheekibreeki.cmh.webapp.util.Logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Router</servlet-name>
