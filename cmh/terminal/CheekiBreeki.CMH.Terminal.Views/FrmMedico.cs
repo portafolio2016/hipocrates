@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class FrmMain : Form
+    public partial class FrmMedico : Form
     {
 
-        public FrmMain()
+        public FrmMedico()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;

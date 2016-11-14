@@ -65,7 +65,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 {
                     lblDatosInvalidos.Visible = false;
                     this.Hide();
-                    FrmMain frmMain = new FrmMain();
+                    FrmMedico frmMain = new FrmMedico();
                     frmMain.Show();
                     frmMain.Activate();
                 }
