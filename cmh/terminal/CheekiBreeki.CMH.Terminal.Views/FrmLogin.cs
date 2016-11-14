@@ -64,34 +64,43 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 if (usuarioLogeado != null)
                 {
                     lblDatosInvalidos.Visible = false;
-                    this.Hide();
-
                     switch (usuarioLogeado.Privilegio.ToUpper())
                     {
                         case "OPERADOR":
                             FrmMain frmMain = new FrmMain(this);
                             frmMain.Show();
                             frmMain.Activate();
-                        break;
+                            this.Hide();
+                            break;
 
                         case "JEFE DE OPERADOR":
-
-                        break;
+                            FrmMain frmMain1 = new FrmMain(this);
+                            frmMain1.Show();
+                            frmMain1.Activate();
+                            this.Hide();
+                            break;
 
                         case "MEDICO":
-
-                        break;
+                            FrmMain frmMain2 = new FrmMain(this);
+                            frmMain2.Show();
+                            frmMain2.Activate();
+                            this.Hide();
+                            break;
 
                         case "ENFERMERO":
-
-                        break;
+                            FrmMain frmMain3 = new FrmMain(this);
+                            frmMain3.Show();
+                            frmMain3.Activate();
+                            this.Hide();
+                            break;
 
                         case "TECNOLOGO":
-
-                        break;
-
-
-                            
+                            FrmMain frmMain4 = new FrmMain(this);
+                            frmMain4.Show();
+                            frmMain4.Activate();
+                            this.Hide();
+                            break;
+                    
                     }
 
                 }

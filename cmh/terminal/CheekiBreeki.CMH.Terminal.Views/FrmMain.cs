@@ -13,11 +13,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
     public partial class FrmMain : Form
     {
         FrmLogin login = null;
+        bool closeApp;
 
         public FrmMain(FrmLogin padre)
         {
             InitializeComponent();
+            closeApp = true;
             this.StartPosition = FormStartPosition.CenterScreen;
+                
 
             if (FrmLogin.usuarioLogeado != null)
             {
@@ -40,15 +43,21 @@ namespace CheekiBreeki.CMH.Terminal.Views
            if(MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión",
                                MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
            {
+               closeApp = false;
                login.camposVacios();
                login.Show();
                this.Close();
                
            }
-            
+
         }
 
-      
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (closeApp)
+                Application.Exit();
+        }
+
 
     }
 }
