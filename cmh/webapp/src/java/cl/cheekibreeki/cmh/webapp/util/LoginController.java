@@ -10,6 +10,7 @@ import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.jms.Session;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -46,6 +47,11 @@ public class LoginController {
         }else{//Si la sesion es nula
             return false;
         }
+    }
+    
+    public static void logout(HttpSession session){
+        //asignar nulo a session atribute "paciente"
+        session.setAttribute("paciente", null);
     }
     
     private static Paciente getPacientePorEmail(String email) throws Exception{

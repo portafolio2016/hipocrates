@@ -12,6 +12,14 @@
         <servlet-name>Registro</servlet-name>
         <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Registro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Nav</servlet-name>
+        <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Nav</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Router</servlet-name>
         <url-pattern>/Router.do</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>Registro</servlet-name>
         <url-pattern>/Registro.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Nav</servlet-name>
+        <url-pattern>/Nav.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
