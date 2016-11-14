@@ -2,7 +2,6 @@ package cl.cheekibreeki.cmh.webapp.bl;
 
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.*;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -145,7 +144,7 @@ public class AccionesPacienteTest {
             Map<String, Object> params1 = new HashMap<>();
             params1.put("rut", this.paciente.getRut());
             Paciente pacienteAux = (Paciente)ctr.findByQuery("Paciente.findByRut", params1).get(0);
-            atencion.setFechor(Date.from(Instant.now()));
+            atencion.setFechor(new Date());
             atencion.setObservaciones("Test");
             //Crear Bloque
             Bloque bloque = new Bloque();

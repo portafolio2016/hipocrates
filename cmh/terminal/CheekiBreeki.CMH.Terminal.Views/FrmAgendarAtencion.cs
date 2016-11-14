@@ -34,9 +34,15 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void cmbEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             string idEspecialidad = cmbEspecialidad.Text;
+            cmbPersonal.DataSource = null;
             cmbPersonal.DataSource = at.listaPersonales(idEspecialidad);
             cmbPersonal.ValueMember = "ID_PERSONAL";
             cmbPersonal.DisplayMember = "NOMBRES";
+
+            cmbPrestacion.DataSource = null;
+            cmbPrestacion.DataSource = at.listaPrestaciones(idEspecialidad);
+            cmbPrestacion.ValueMember = "ID_PRESTACION";
+            cmbPrestacion.DisplayMember = "NOM_PRESTACION";
         }
 
         private void btnAgendar_Click(object sender, EventArgs e)
