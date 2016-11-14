@@ -16,7 +16,10 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+
             Application.Run(new FrmLogin());
+            
         }
     }
 }
