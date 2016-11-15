@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -71,7 +72,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 else
                 {
                     PERSONAL personal = Login.verificarUsuario(FrmLogin.usuarioLogeado.Personal.EMAIL, tbContrasenaActual.Text);
-                    personal.HASHED_PASS = Util.hashMD5(tbContrasenaNueva.Text);
+                    personal.HASHED_PASS = Util.hashMD5(tbContrasenaNueva.Text.TrimStart().TrimEnd());
                     bool x = acciones.actualizarPersonal(personal);
                     if(x)
                         MessageBox.Show("Contraseña actualizada con exito", "Contraseña", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -95,8 +96,31 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnCambiarEmail_Click(object sender, EventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(tbNuevoMail.Text.Trim()) && Util.isEmailValido(tbNuevoMail.Text.Trim()))
+            {
+                if (MessageBox.Show("¿Seguro que desea cambiar su email?", "Cambiar Email",
+                               MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+                {
+                    PERSONAL personal = FrmLogin.usuarioLogeado.Personal;
+;
+                    personal.EMAIL = tbNuevoMail.Text.Trim();
+                    bool x = acciones.actualizarPersonal(personal);
+                    //
+                    //DEVOLVER AL LOGIN
+                    //
+                }
+                
+            }
+            else if (string.IsNullOrEmpty(tbNuevoMail.Text.Trim()))
+            {
+                MessageBox.Show("Campo de email vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (!Util.isEmailValido(tbNuevoMail.Text.Trim()))
+            {
+                MessageBox.Show("Email invalido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private void btnModificarUser_Click(object sender, EventArgs e)
         {
@@ -108,6 +132,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
             gbAbrirConsultaMedica.Hide();
             gbCerrarConsultaMedica.Hide();
             gbOpcionesUsuario.Show();
+            //
+            //AGREGAR LOS OTROS GB QUE FALTEN
+            //
         }
 
        
