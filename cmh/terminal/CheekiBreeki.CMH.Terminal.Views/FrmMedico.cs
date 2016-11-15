@@ -124,17 +124,57 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnModificarUser_Click(object sender, EventArgs e)
         {
-            InitModificarUser();
+            InitGB(gbOpcionesUsuario);
         }
 
-        private void InitModificarUser()
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   INIT GB                                                                                                                    //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void InitGB(GroupBox x)
         {
             gbAbrirConsultaMedica.Hide();
             gbCerrarConsultaMedica.Hide();
-            gbOpcionesUsuario.Show();
+            gbOpcionesUsuario.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
+            x.Show();
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   AGENDA DIARIA                                                                                                              //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void agendaDiariaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            InitGB(gbAgendaDiaria);
+            CargarAgendaDiaria();
+        }
+
+        private void CargarAgendaDiaria()
+        {
+            List<ATENCION_AGEN> listaAtenciones = acciones.revisarAgendaDiaria(FrmLogin.usuarioLogeado.Personal.RUT, DateTime.Now);
+            List<AgendaDiaria> agendaDiaria = new List<AgendaDiaria>();
+            if (listaAtenciones.Count > 0)
+            {
+                
+                foreach (ATENCION_AGEN x in listaAtenciones)
+                {
+                    bool estado = false;
+                    if (x.ESTADO_ATEN.NOM_ESTADO_ATEN == "Cerrado")
+                        estado = true;
+                    agendaDiaria.Add(new AgendaDiaria(x.PRESTACION.NOM_PRESTACION, x.PACIENTE.NOMBRES_PACIENTE+" "+x.PACIENTE.APELLIDOS_PACIENTE, x.FECHOR.ToString(), estado));
+                }
+               
+            }
+            //TEST
+            agendaDiaria.Add(new AgendaDiaria("testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttts", "testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttts", "testtttttttttttttttttttttttttttttttttttttttttttt", true));
+            //TEST
+            dgAgendaDiaria.DataSource = agendaDiaria;
+           
         }
 
        
