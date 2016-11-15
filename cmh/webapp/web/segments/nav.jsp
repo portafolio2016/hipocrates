@@ -36,12 +36,15 @@
                                 <c:if test="${requestScope.mostrarLogin}">
                                     <li>
                                         <a href="master.jsp?page=login">Iniciar sesión</a>
-                                    </li>    
+                                    </li>
                                 </c:if>
                                 <c:if test="${!requestScope.mostrarLogin}">
                                     <li>
+                                        <a href="/webapp/master.jsp?page=editar">Editar perfil</a>
+                                    </li>
+                                    <li>
                                         <a href="Logout.do">Cerrar sesión</a>
-                                    </li>    
+                                    </li>
                                 </c:if>
                             </ul>
                         </div>

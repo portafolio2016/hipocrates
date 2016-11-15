@@ -24,6 +24,10 @@
         <servlet-name>Agendamiento</servlet-name>
         <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Agendamiento</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Actualizar</servlet-name>
+        <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Actualizar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Router</servlet-name>
         <url-pattern>/Router.do</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>Agendamiento</servlet-name>
         <url-pattern>/Agendamiento.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Actualizar</servlet-name>
+        <url-pattern>/Actualizar.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
