@@ -94,7 +94,6 @@
             this.atencionesMédicasToolStripMenuItem.Name = "atencionesMédicasToolStripMenuItem";
             this.atencionesMédicasToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.atencionesMédicasToolStripMenuItem.Text = "Atenciones";
-            this.atencionesMédicasToolStripMenuItem.Click += new System.EventHandler(this.atencionesMédicasToolStripMenuItem_Click);
             // 
             // agendarAtenciónToolStripMenuItem
             // 

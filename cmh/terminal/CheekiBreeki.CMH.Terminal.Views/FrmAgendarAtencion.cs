@@ -51,11 +51,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
             cmbEspecialidad.DataSource = at.listaEspecialidad();
         }
 
-        private void atencionesMédicasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void cmbEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idEspecialidad = (int)cmbEspecialidad.SelectedValue;
