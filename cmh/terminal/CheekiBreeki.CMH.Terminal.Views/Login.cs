@@ -9,6 +9,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
 {
     public class Login
     {
+        private static UsuarioLogeado usuarioLogueado;
+
         #region Verificar Usuario
         public static PERSONAL verificarUsuario(string usuario, string password)
         {
@@ -36,7 +38,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     Where(d => d.HASHED_PASS == passwordHasheada).FirstOrDefault().HASHED_PASS;*/
 
                 PERSONAL personal = conexionBD.PERSONAL.
-                    Where(d => d.EMAIL == usuario && d.HASHED_PASS == passwordHasheada).FirstOrDefault();
+                    Where(d => d.EMAIL.ToUpper() == usuario.ToUpper() && d.HASHED_PASS == passwordHasheada).FirstOrDefault();
 
                 //Validar usuario(email)
                 if (Util.isObjetoNulo(personal))
@@ -77,5 +79,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
 
         #endregion
+
+        #region GetUsuarioLogueado
+        #endregion 
+
+        #region SetUsuarioLogueado
+        #endregion
+
     }
 }
