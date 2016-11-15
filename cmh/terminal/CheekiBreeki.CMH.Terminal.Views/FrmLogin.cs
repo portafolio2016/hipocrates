@@ -64,10 +64,45 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 if (usuarioLogeado != null)
                 {
                     lblDatosInvalidos.Visible = false;
-                    this.Hide();
-                    FrmMedico frmMain = new FrmMedico();
-                    frmMain.Show();
-                    frmMain.Activate();
+                    switch (usuarioLogeado.Privilegio.ToUpper())
+                    {
+                        case "OPERADOR":
+                            FrmMain frmMain = new FrmMain(this);
+                            frmMain.Show();
+                            frmMain.Activate();
+                            this.Hide();
+                            break;
+
+                        case "JEFE DE OPERADOR":
+                            FrmMain frmMain1 = new FrmMain(this);
+                            frmMain1.Show();
+                            frmMain1.Activate();
+                            this.Hide();
+                            break;
+
+                        case "MEDICO":
+                            FrmMain frmMain2 = new FrmMain(this);
+                            frmMain2.Show();
+                            frmMain2.Activate();
+                            this.Hide();
+                            break;
+
+                        case "ENFERMERO":
+                            FrmMain frmMain3 = new FrmMain(this);
+                            frmMain3.Show();
+                            frmMain3.Activate();
+                            this.Hide();
+                            break;
+
+                        case "TECNOLOGO":
+                            FrmMain frmMain4 = new FrmMain(this);
+                            frmMain4.Show();
+                            frmMain4.Activate();
+                            this.Hide();
+                            break;
+                    
+                    }
+
                 }
                 else
                 {
@@ -77,6 +112,17 @@ namespace CheekiBreeki.CMH.Terminal.Views
                
             }
 
+        }
+        #endregion
+
+        #region Campos vacíos
+        public void camposVacios()
+        {
+            txtUsuario.Text = "";
+            txtContrasena.Text = "";
+            lblDatosInvalidos.Visible = false;
+            lblAdvertenciaUsuario.Visible = false;
+            lblAdvertenciaContrasena.Visible = false;
         }
         #endregion
 
