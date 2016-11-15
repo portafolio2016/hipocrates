@@ -15,6 +15,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
 {
     public partial class FrmMedico : Form
     {
+        FrmLogin login = null;
+        bool closeApp;
         private static AccionesTerminal acciones = new AccionesTerminal();
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,9 +24,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   CONSTRUCTOR                                                                                                                //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public FrmMedico()
+        public FrmMedico(FrmLogin fLogin)
         {
             InitializeComponent();
+            closeApp = true;
+            login = fLogin;
             this.StartPosition = FormStartPosition.CenterScreen;
 
             if (FrmLogin.usuarioLogeado != null)
@@ -48,11 +52,15 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void btnSesion_Click(object sender, EventArgs e)
         {
-           if(MessageBox.Show("¿Seguro que desea salir?", "Cerrar sesión",
-                               MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
-           {
-               Application.Restart();
-           }
+            if (MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+            {
+                closeApp = false;
+                login.camposVacios();
+                login.Show();
+                this.Close();
+
+            }
             
         }
 
@@ -174,7 +182,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
             agendaDiaria.Add(new AgendaDiaria("testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttts", "testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttts", "testtttttttttttttttttttttttttttttttttttttttttttt", true));
             //TEST
             dgAgendaDiaria.DataSource = agendaDiaria;
-           
+
+        }
+
+        private void FrmMedico_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (closeApp)
+                Application.Exit();
         }
 
        
