@@ -15,9 +15,15 @@ namespace CheekiBreeki.CMH.Terminal.Views
     public partial class FrmAgendarAtencion : Form
     {
         AccionesTerminal at = new AccionesTerminal();
-        public FrmAgendarAtencion()
+        FrmLogin login = null;
+        bool closeApp;
+
+        public FrmAgendarAtencion(FrmLogin padre)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            login = padre;
+            closeApp = true;
         }
 
         public class ComboboxItem
@@ -163,6 +169,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 e.Handled = true;
             }
+        }
+
+        private void FrmAgendarAtencion_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (closeApp)
+                Application.Exit();
         }
     }
 }

@@ -40,6 +40,8 @@
             this.lblEspecialidad = new System.Windows.Forms.Label();
             this.cmbEspecialidad = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblError = new System.Windows.Forms.Label();
+            this.txtDv = new System.Windows.Forms.TextBox();
             this.dtFecha = new System.Windows.Forms.DateTimePicker();
             this.btnAgendar = new System.Windows.Forms.Button();
             this.cmbHora = new System.Windows.Forms.ComboBox();
@@ -49,8 +51,6 @@
             this.lblPrestación = new System.Windows.Forms.Label();
             this.cmbPersonal = new System.Windows.Forms.ComboBox();
             this.lblPersonal = new System.Windows.Forms.Label();
-            this.txtDv = new System.Windows.Forms.TextBox();
-            this.lblError = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -168,6 +168,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agendar atención";
             // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(34, 240);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(39, 13);
+            this.lblError.TabIndex = 16;
+            this.lblError.Text = "lblError";
+            this.lblError.Visible = false;
+            // 
+            // txtDv
+            // 
+            this.txtDv.Location = new System.Drawing.Point(266, 32);
+            this.txtDv.MaxLength = 1;
+            this.txtDv.Name = "txtDv";
+            this.txtDv.Size = new System.Drawing.Size(15, 20);
+            this.txtDv.TabIndex = 15;
+            this.txtDv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
             // dtFecha
             // 
             this.dtFecha.Location = new System.Drawing.Point(160, 166);
@@ -249,25 +268,6 @@
             this.lblPersonal.TabIndex = 5;
             this.lblPersonal.Text = "Personal médico";
             // 
-            // txtDv
-            // 
-            this.txtDv.Location = new System.Drawing.Point(266, 32);
-            this.txtDv.MaxLength = 1;
-            this.txtDv.Name = "txtDv";
-            this.txtDv.Size = new System.Drawing.Size(15, 20);
-            this.txtDv.TabIndex = 15;
-            this.txtDv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
-            // 
-            // lblError
-            // 
-            this.lblError.AutoSize = true;
-            this.lblError.Location = new System.Drawing.Point(34, 240);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(39, 13);
-            this.lblError.TabIndex = 16;
-            this.lblError.Text = "lblError";
-            this.lblError.Visible = false;
-            // 
             // FrmAgendarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,6 +278,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmAgendarAtencion";
             this.Text = "Centro Médico Hipócrates";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAgendarAtencion_FormClosed);
             this.Load += new System.EventHandler(this.frmAgendarAtencion_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

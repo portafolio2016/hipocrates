@@ -58,6 +58,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 Application.Exit();
         }
 
+        private void btnAgendarAtencion_Click(object sender, EventArgs e)
+        {
+            FrmAgendarAtencion frmAgendar = new FrmAgendarAtencion(login);
+            frmAgendar.Show();
+            frmAgendar.Activate();
+            this.Hide();
+        }
+
 
     }
 }
