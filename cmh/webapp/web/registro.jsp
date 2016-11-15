@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label for="loginpass">RUT</label>
                 <span>
-                    <input type="number" name="registrorut" class="form-control" id="registrorut" placeholder="Password" required>-
+                    <input type="number" maxlength="8" size="8" name="registrorut" class="form-control" id="registrorut" required>-
                     <input type="text" name="registroDV" class="form-control" maxlength="1" size="1" id="registroDV" required>
                 </span>
             </div>
