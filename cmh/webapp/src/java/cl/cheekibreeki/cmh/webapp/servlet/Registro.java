@@ -8,6 +8,7 @@ package cl.cheekibreeki.cmh.webapp.servlet;
 import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
 import cl.cheekibreeki.cmh.webapp.bl.AccionesPaciente;
 import cl.cheekibreeki.cmh.webapp.util.PassHasher;
+import cl.cheekibreeki.cmh.webapp.util.Validador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -66,6 +67,32 @@ public class Registro extends HttpServlet {
                 char sexoChar = sexo.toCharArray()[0];
                 //Hashear pass
                 String hashedPass = PassHasher.hashToMD5(pass);
+                //*** INICIO VALIDACIONES ***
+                //validacion RUT
+                boolean rutValido = Validador.validarRut(rut, dvChar);
+                if(!rutValido){//Si rut no es valido
+                    out.println("<script>alert('Rut inválido'); location.href = 'master.jsp?page=registro';</script>");
+                    return;
+                }
+                //validacion email
+                boolean emailValido = Validador.validarMail(email);
+                if(!emailValido){
+                    out.println("<script>alert('Email inválido'); location.href = 'master.jsp?page=registro';</script>");
+                    return;
+                }
+                //Email único
+                boolean emailUnico = Validador.emailUnico(email);
+                if(!emailUnico){
+                    out.println("<script>alert('Email ya utilizado'); location.href = 'master.jsp?page=registro';</script>");
+                    return;
+                }
+                //Fecha no futura;
+                boolean fechaNoFutura = Validador.fechaNoFutura(fecnacDate);
+                if(!fechaNoFutura){
+                    out.println("<script>alert('Fecha nacimiento debe ser en el pasado'); location.href = 'master.jsp?page=registro';</script>");
+                    return;
+                }
+                //*** FIN VALIDACIONES ***
                 //Instanciar objeto
                 Paciente paciente = new Paciente();
                 paciente.setIdPaciente(0);
@@ -78,6 +105,7 @@ public class Registro extends HttpServlet {
                 paciente.setHashedPass(hashedPass);
                 paciente.setFecNac(fecnacDate);
                 paciente.setActivo((short)1);
+                
                 //Llamar método de registro
                 AccionesPaciente accionesPaciente = new AccionesPaciente();
                 boolean result = accionesPaciente.registrarPaciente(paciente);

@@ -54,7 +54,7 @@ public class LoginController {
         session.setAttribute("paciente", null);
     }
     
-    private static Paciente getPacientePorEmail(String email) throws Exception{
+    public static Paciente getPacientePorEmail(String email) throws Exception{
         Map<String, Object> params1 = new HashMap<>();
         params1.put("emailPaciente", email);
         List<? extends Object>  pacienteList = Controller.findByQuery("Paciente.findByEmailPaciente", params1);
