@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CheekiBreeki.CMH.Terminal.BL;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
@@ -15,30 +16,116 @@ namespace CheekiBreeki.CMH.Terminal.Views
         public FrmLogin()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            //Label de validaciones iniciados invisibles
+            lblAdvertenciaUsuario.Visible = false;
+            lblAdvertenciaContrasena.Visible = false;
+            lblDatosInvalidos.Visible = false;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        #region Botón iniciar sesión
+        public static UsuarioLogeado usuarioLogeado = null;
+       
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             string usuario = txtUsuario.Text;
             string password = txtContrasena.Text;
-            UsuarioLogeado usuarioLogeado = null;
-            usuarioLogeado = Login.iniciarSesion(usuario, password);
-            MessageBox.Show(usuarioLogeado.NombreUsuario);
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
+            if (string.IsNullOrWhiteSpace(txtUsuario.Text) || !Util.isEmailValido(usuario))
+            {
+                lblAdvertenciaUsuario.Visible = true;
+                lblAdvertenciaUsuario.Text = "Email no valido";
+                
+            }
+            else
+            {
+                lblAdvertenciaUsuario.Visible = false;
+
+            }
+
+            if (string.IsNullOrWhiteSpace(txtContrasena.Text))
+            {
+                lblAdvertenciaContrasena.Visible = true;
+                lblAdvertenciaContrasena.Text = "Contraseña vacía";
+               
+            }
+            else
+            {
+                lblAdvertenciaContrasena.Visible = false;
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtUsuario.Text) && !string.IsNullOrWhiteSpace(txtContrasena.Text)
+                && Util.isEmailValido(usuario))
+            {
+                 
+                usuarioLogeado = Login.iniciarSesion(usuario, password);
+                if (usuarioLogeado != null)
+                {
+                    lblDatosInvalidos.Visible = false;
+                    switch (usuarioLogeado.Privilegio.ToUpper())
+                    {
+                        case "OPERADOR":
+                            FrmMain frmMain = new FrmMain(this);
+                            frmMain.Show();
+                            frmMain.Activate();
+                            this.Hide();
+                            break;
+
+                        case "JEFE DE OPERADOR":
+                            FrmMain frmMain1 = new FrmMain(this);
+                            frmMain1.Show();
+                            frmMain1.Activate();
+                            this.Hide();
+                            break;
+
+                        case "MEDICO":
+                            FrmMain frmMain2 = new FrmMain(this);
+                            frmMain2.Show();
+                            frmMain2.Activate();
+                            this.Hide();
+                            break;
+
+                        case "ENFERMERO":
+                            FrmMain frmMain3 = new FrmMain(this);
+                            frmMain3.Show();
+                            frmMain3.Activate();
+                            this.Hide();
+                            break;
+
+                        case "TECNOLOGO":
+                            FrmMain frmMain4 = new FrmMain(this);
+                            frmMain4.Show();
+                            frmMain4.Activate();
+                            this.Hide();
+                            break;
+                    
+                    }
+
+                }
+                else
+                {
+                    lblDatosInvalidos.Visible = true;
+                    
+                }
+               
+            }
+
+        }
+        #endregion
+
+        #region Campos vacíos
+        public void camposVacios()
         {
-
+            txtUsuario.Text = "";
+            txtContrasena.Text = "";
+            lblDatosInvalidos.Visible = false;
+            lblAdvertenciaUsuario.Visible = false;
+            lblAdvertenciaContrasena.Visible = false;
         }
+        #endregion
+
+
     }
 }
