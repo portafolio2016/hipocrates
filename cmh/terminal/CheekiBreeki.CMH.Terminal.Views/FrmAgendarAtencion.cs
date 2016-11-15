@@ -98,6 +98,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     atencion.ID_PERS_ATIENDE = (int)cmbPersonal.SelectedValue;
                     atencion.ID_BLOQUE = ((ComboboxItem)cmbHora.SelectedItem).Value;
                     res = at.agendarAtencion(atencion);
+                    actualizarBloques();
                 }
             }
             catch (Exception ex)

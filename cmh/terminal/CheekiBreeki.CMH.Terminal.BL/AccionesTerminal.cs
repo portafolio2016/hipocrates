@@ -1333,7 +1333,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             List<ATENCION_AGEN> atencionList = medico.ATENCION_AGEN.ToList();
             List<ATENCION_AGEN> atencionesFiltradas = new List<ATENCION_AGEN>();
             foreach(ATENCION_AGEN atencion in atencionList){
-                if(atencion.ESTADO_ATEN.NOM_ESTADO_ATEN == nombreEstado){
+                if(atencion.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == nombreEstado.ToUpper()){
                     atencionesFiltradas.Add(atencion);
                 }
             }
