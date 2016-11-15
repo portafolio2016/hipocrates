@@ -30,6 +30,14 @@ namespace CheekiBreeki.CMH.Terminal.DAL
         public string VERIFICADOR { get; set; }
         public string EMAIL { get; set; }
         public bool ACTIVO { get; set; }
+
+        public string NOMBREFULL
+        {
+            get
+            {
+                return NOMBRES + " " + APELLIDOS;
+            }
+        }
     
         public virtual ICollection<FUNCIONARIO> FUNCIONARIO { get; set; }
         public virtual ICollection<PERS_MEDICO> PERS_MEDICO { get; set; }

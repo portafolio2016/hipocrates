@@ -57,7 +57,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
             cmbPersonal.DataSource = null;
             cmbPersonal.ValueMember = "ID_PERSONAL";
-            cmbPersonal.DisplayMember = "NOMBRES";
+            cmbPersonal.DisplayMember = "NOMBREFULL";
             cmbPersonal.DataSource = at.listaPersonales(idEspecialidad);
 
             cmbPrestacion.DataSource = null;
