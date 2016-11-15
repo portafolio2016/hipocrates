@@ -59,10 +59,21 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         public void definirPrivilegio()
         {
+            /*
             if (Util.isObjetoNulo(_personal.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO))
                 _privilegio = _personal.PERS_MEDICO.FirstOrDefault().ESPECIALIDAD.NOM_ESPECIALIDAD;
             else
+                _privilegio = _personal.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO;*/
+
+            if (!Util.isObjetoNulo(_personal.FUNCIONARIO.FirstOrDefault()))
+            {
                 _privilegio = _personal.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO;
+            }
+            else if (!Util.isObjetoNulo(_personal.PERS_MEDICO.FirstOrDefault()))
+            {
+                _privilegio = _personal.PERS_MEDICO.FirstOrDefault().ESPECIALIDAD.NOM_ESPECIALIDAD;
+            }
+            
         }
         #endregion
     }
