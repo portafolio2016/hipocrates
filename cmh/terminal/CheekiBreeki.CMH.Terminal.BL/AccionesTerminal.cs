@@ -30,11 +30,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Fecha vacía");
                 }
-                else if (atencion.OBSERVACIONES == String.Empty ||
-                         atencion.OBSERVACIONES == null)
-                {
-                    throw new Exception("Observacion vacia");
-                }
                 else
                 {
                     conexionDB.ATENCION_AGEN.Add(atencion);
@@ -88,7 +83,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Atención nula");
                 }
-                if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN != "Vigente")
+                if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() != "VIGENTE")
                 {
                     throw new Exception("Estado no válido de la atención");
                 }
@@ -99,7 +94,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 else
                 {
                     ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
-                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "En proceso").FirstOrDefault().ID_ESTADO_ATEN;
+                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "PAGADO").FirstOrDefault().ID_ESTADO_ATEN;
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
@@ -210,14 +205,14 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Atención nula");
                 }
-                else if (atencionAgendada.ESTADO_ATEN.NOM_ESTADO_ATEN != "Vigente")
+                else if (atencionAgendada.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() != "VIGENTE")
                 {
                     throw new Exception("Estado no válido de la atención");
                 }
                 else
                 {
                     ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencionAgendada.ID_ATENCION_AGEN);
-                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == "Cerrada").FirstOrDefault().ID_ESTADO_ATEN;
+                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "PAGADO").FirstOrDefault().ID_ESTADO_ATEN;
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
@@ -378,7 +373,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 else
                 {
                     ESTADO_ATEN estadoatencion = new ESTADO_ATEN();
-                    estadoatencion.NOM_ESTADO_ATEN = "Anulado";
+                    estadoatencion.NOM_ESTADO_ATEN = "ANULADO";
                     estadoatencion = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == estadoatencion.NOM_ESTADO_ATEN).FirstOrDefault();
 
                     atencion = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
@@ -1446,9 +1441,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return (conexionDB.ESPECIALIDAD.ToList());
         }
 
-        public List<PERSONAL> listaPersonales(string nombreEspecialidad)
+        public List<PERSONAL> listaPersonales(int idEspecialidad)
         {
-            List<PERS_MEDICO> personalesMedicos = conexionDB.PERS_MEDICO.Where(d => d.ESPECIALIDAD.NOM_ESPECIALIDAD == nombreEspecialidad).ToList();
+            List<PERS_MEDICO> personalesMedicos = conexionDB.PERS_MEDICO.Where(d => d.ESPECIALIDAD.ID_ESPECIALIDAD == idEspecialidad).ToList();
             List<PERSONAL> personales = new List<PERSONAL>();
             foreach (PERS_MEDICO p in personalesMedicos)
             {
@@ -1457,9 +1452,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return (personales);
         }
 
-        public List<PRESTACION> listaPrestaciones(string nombreEspecialidad)
+        public List<PRESTACION> listaPrestaciones(int idEspecialidad)
         {
-            List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d => d.ESPECIALIDAD.NOM_ESPECIALIDAD == nombreEspecialidad).ToList();
+            List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d => d.ESPECIALIDAD.ID_ESPECIALIDAD == idEspecialidad).ToList();
             return (prestaciones);
         }
         #endregion

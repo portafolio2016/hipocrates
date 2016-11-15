@@ -35,7 +35,7 @@
             this.atencionesMédicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agendarAtenciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.anularAtenciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtPaciente = new System.Windows.Forms.TextBox();
+            this.txtRut = new System.Windows.Forms.TextBox();
             this.lblPaciente = new System.Windows.Forms.Label();
             this.lblEspecialidad = new System.Windows.Forms.Label();
             this.cmbEspecialidad = new System.Windows.Forms.ComboBox();
@@ -49,6 +49,8 @@
             this.lblPrestación = new System.Windows.Forms.Label();
             this.cmbPersonal = new System.Windows.Forms.ComboBox();
             this.lblPersonal = new System.Windows.Forms.Label();
+            this.txtDv = new System.Windows.Forms.TextBox();
+            this.lblError = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -106,12 +108,14 @@
             this.anularAtenciónToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.anularAtenciónToolStripMenuItem.Text = "Anular atención";
             // 
-            // txtPaciente
+            // txtRut
             // 
-            this.txtPaciente.Location = new System.Drawing.Point(160, 32);
-            this.txtPaciente.Name = "txtPaciente";
-            this.txtPaciente.Size = new System.Drawing.Size(121, 20);
-            this.txtPaciente.TabIndex = 1;
+            this.txtRut.Location = new System.Drawing.Point(160, 32);
+            this.txtRut.MaxLength = 8;
+            this.txtRut.Name = "txtRut";
+            this.txtRut.Size = new System.Drawing.Size(99, 20);
+            this.txtRut.TabIndex = 1;
+            this.txtRut.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRut_KeyPress);
             // 
             // lblPaciente
             // 
@@ -142,6 +146,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblError);
+            this.groupBox1.Controls.Add(this.txtDv);
             this.groupBox1.Controls.Add(this.dtFecha);
             this.groupBox1.Controls.Add(this.btnAgendar);
             this.groupBox1.Controls.Add(this.cmbHora);
@@ -151,7 +157,7 @@
             this.groupBox1.Controls.Add(this.lblPrestación);
             this.groupBox1.Controls.Add(this.cmbPersonal);
             this.groupBox1.Controls.Add(this.lblPersonal);
-            this.groupBox1.Controls.Add(this.txtPaciente);
+            this.groupBox1.Controls.Add(this.txtRut);
             this.groupBox1.Controls.Add(this.cmbEspecialidad);
             this.groupBox1.Controls.Add(this.lblPaciente);
             this.groupBox1.Controls.Add(this.lblEspecialidad);
@@ -174,7 +180,7 @@
             // 
             // btnAgendar
             // 
-            this.btnAgendar.Location = new System.Drawing.Point(79, 252);
+            this.btnAgendar.Location = new System.Drawing.Point(88, 269);
             this.btnAgendar.Name = "btnAgendar";
             this.btnAgendar.Size = new System.Drawing.Size(123, 23);
             this.btnAgendar.TabIndex = 13;
@@ -243,6 +249,25 @@
             this.lblPersonal.TabIndex = 5;
             this.lblPersonal.Text = "Personal médico";
             // 
+            // txtDv
+            // 
+            this.txtDv.Location = new System.Drawing.Point(266, 32);
+            this.txtDv.MaxLength = 1;
+            this.txtDv.Name = "txtDv";
+            this.txtDv.Size = new System.Drawing.Size(15, 20);
+            this.txtDv.TabIndex = 15;
+            this.txtDv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(34, 240);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(39, 13);
+            this.lblError.TabIndex = 16;
+            this.lblError.Text = "lblError";
+            this.lblError.Visible = false;
+            // 
             // FrmAgendarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,7 +297,7 @@
         private System.Windows.Forms.ToolStripMenuItem atencionesMédicasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agendarAtenciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem anularAtenciónToolStripMenuItem;
-        private System.Windows.Forms.TextBox txtPaciente;
+        private System.Windows.Forms.TextBox txtRut;
         private System.Windows.Forms.Label lblPaciente;
         private System.Windows.Forms.Label lblEspecialidad;
         private System.Windows.Forms.ComboBox cmbEspecialidad;
@@ -286,6 +311,8 @@
         private System.Windows.Forms.ComboBox cmbPersonal;
         private System.Windows.Forms.Label lblPersonal;
         private System.Windows.Forms.DateTimePicker dtFecha;
+        private System.Windows.Forms.TextBox txtDv;
+        private System.Windows.Forms.Label lblError;
     }
 }
 
