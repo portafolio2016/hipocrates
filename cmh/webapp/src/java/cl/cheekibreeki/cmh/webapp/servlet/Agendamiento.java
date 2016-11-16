@@ -44,9 +44,14 @@ public class Agendamiento extends HttpServlet {
                 TipoPres tipoPrestacion = (TipoPres)Controller.findById(TipoPres.class, Integer.parseInt(request.getParameter("tipoPrestacion")));
                 request.setAttribute("tipoPrestacion", tipoPrestacion);
             }
-//            //Obtener prestaciones filtradas
-//            ArrayList<Prestacion> prestaciones = AgendamientoController.obtenerPrestaciones(request);
-//            request.setAttribute("prestaciones", prestaciones);
+            //Obtener prestaciones filtradas
+            ArrayList<Prestacion> prestaciones = AgendamientoController.obtenerPrestaciones(request);
+            request.setAttribute("prestaciones", prestaciones);
+            if(request.getParameter("prestacion")!= null){
+                Prestacion prestacion = (Prestacion)Controller.findById(Prestacion.class, Integer.parseInt(request.getParameter("prestacion")));
+                
+                request.setAttribute("prestacion", prestacion);
+            }
 //            //Obtener personal medico
 //            ArrayList<PersMedico> personalMedico = AgendamientoController.obtenerPersonalMedico(request);
 //            request.setAttribute("personalMedico", personalMedico);
