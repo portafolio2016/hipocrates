@@ -85,22 +85,25 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 BLOQUE bloque = new BLOQUE();
                 if (dtFecha.Value < DateTime.Today)
                     res = false;
-                using (var context = new CMHEntities())
+                else
                 {
-                    estado = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE").FirstOrDefault();
-                    personalMedico = context.PERS_MEDICO.Find((int)cmbPersonal.SelectedValue);
-                }
-                paciente = at.buscarPaciente(int.Parse(txtRut.Text), txtDv.Text.ToUpper());
-                if (!Util.isObjetoNulo(paciente))
-                {
-                    atencion.FECHOR = dtFecha.Value;
-                    atencion.ID_PACIENTE = paciente.ID_PACIENTE;
-                    atencion.ID_PRESTACION = (int)cmbPrestacion.SelectedValue;
-                    atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
-                    atencion.ID_PERS_ATIENDE = (int)cmbPersonal.SelectedValue;
-                    atencion.ID_BLOQUE = ((ComboboxItem)cmbHora.SelectedItem).Value;
-                    res = at.agendarAtencion(atencion);
-                    actualizarBloques();
+                    using (var context = new CMHEntities())
+                    {
+                        estado = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE").FirstOrDefault();
+                        personalMedico = context.PERS_MEDICO.Find((int)cmbPersonal.SelectedValue);
+                    }
+                    paciente = at.buscarPaciente(int.Parse(txtRut.Text), txtDv.Text.ToUpper());
+                    if (!Util.isObjetoNulo(paciente))
+                    {
+                        atencion.FECHOR = dtFecha.Value;
+                        atencion.ID_PACIENTE = paciente.ID_PACIENTE;
+                        atencion.ID_PRESTACION = (int)cmbPrestacion.SelectedValue;
+                        atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
+                        atencion.ID_PERS_ATIENDE = (int)cmbPersonal.SelectedValue;
+                        atencion.ID_BLOQUE = ((ComboboxItem)cmbHora.SelectedItem).Value;
+                        res = at.agendarAtencion(atencion);
+                        actualizarBloques();
+                    }
                 }
             }
             catch (Exception ex)
