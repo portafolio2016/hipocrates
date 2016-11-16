@@ -31,6 +31,7 @@
             this.lblUsuarioConectado = new System.Windows.Forms.Label();
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.btnSesion = new System.Windows.Forms.Button();
+            this.btnAgendarAtencion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -62,11 +63,22 @@
             this.btnSesion.UseVisualStyleBackColor = true;
             this.btnSesion.Click += new System.EventHandler(this.btnSesion_Click);
             // 
+            // btnAgendarAtencion
+            // 
+            this.btnAgendarAtencion.Location = new System.Drawing.Point(55, 112);
+            this.btnAgendarAtencion.Name = "btnAgendarAtencion";
+            this.btnAgendarAtencion.Size = new System.Drawing.Size(128, 23);
+            this.btnAgendarAtencion.TabIndex = 3;
+            this.btnAgendarAtencion.Text = "Agendar atención";
+            this.btnAgendarAtencion.UseVisualStyleBackColor = true;
+            this.btnAgendarAtencion.Click += new System.EventHandler(this.btnAgendarAtencion_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnAgendarAtencion);
             this.Controls.Add(this.btnSesion);
             this.Controls.Add(this.lblPrivilegio);
             this.Controls.Add(this.lblUsuarioConectado);
@@ -83,5 +95,6 @@
         private System.Windows.Forms.Label lblUsuarioConectado;
         private System.Windows.Forms.Label lblPrivilegio;
         private System.Windows.Forms.Button btnSesion;
+        private System.Windows.Forms.Button btnAgendarAtencion;
     }
 }
