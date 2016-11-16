@@ -18,6 +18,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         FrmLogin login = null;
         bool closeApp;
         private static AccionesTerminal acciones = new AccionesTerminal();
+        private static List<ENTRADA_FICHA> entradaList;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                                                              //
@@ -28,6 +29,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             InitializeComponent();
             closeApp = true;
+            entradaList = new List<ENTRADA_FICHA>();
             login = fLogin;
             this.StartPosition = FormStartPosition.CenterScreen;
 
@@ -153,6 +155,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
             gbAbrirConsultaMedica.Hide();
             gbCerrarConsultaMedica.Hide();
             gbOpcionesUsuario.Hide();
+            gbAgendaDiaria.Hide();
+            gbVerFichaMedica.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
@@ -197,6 +201,45 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             if (closeApp)
                 Application.Exit();
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   VER FICHA MEDICA                                                                                                           //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void verFichaMédicaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbVerFichaMedica);
+        }
+
+        private void btnBuscarVFM_Click(object sender, EventArgs e)
+        {
+            //TEST
+            ENTRADA_FICHA x = new ENTRADA_FICHA();
+            ENTRADA_FICHA z = new ENTRADA_FICHA();
+            x.FECHA_ENTRADA = DateTime.Now;
+            x.NOMBRE_ENTRADA = "test";
+            x.CONTENIDO_ENTRADA = "123456789";
+            entradaList.Add(x);
+            z.FECHA_ENTRADA = DateTime.Now;
+            z.NOMBRE_ENTRADA = "test2";
+            z.CONTENIDO_ENTRADA = "123456789----2";
+            entradaList.Add(z);
+            foreach (ENTRADA_FICHA y in entradaList)
+            {
+                dgEntradaVFM.Rows.Add(y.NOMBRE_ENTRADA, "Ver", y.FECHA_ENTRADA.ToString());  
+            }
+            
+            //TEST
+        }
+
+        private void dgEntradaVFM_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                MessageBox.Show(entradaList[e.RowIndex].CONTENIDO_ENTRADA);
+            }
         }
 
        
