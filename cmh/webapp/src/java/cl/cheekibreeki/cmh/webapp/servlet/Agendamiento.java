@@ -6,6 +6,7 @@ package cl.cheekibreeki.cmh.webapp.servlet;
  * and open the template in the editor.
  */
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
+import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
 import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
 import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
 import cl.cheekibreeki.cmh.webapp.util.AgendamientoController;
@@ -35,20 +36,21 @@ public class Agendamiento extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            ArrayList<TipoPres> tiposPres = AgendamientoController.obtenerTipoPres();
-            request.setAttribute("tiposPres", tiposPres);
-            String idTipoPrestacionStr = (request.getParameter("idTipoPrestacion"));
-            ArrayList<Prestacion> prestaciones = new ArrayList<Prestacion>();
-            if (null != idTipoPrestacionStr) {
-                int idTipoPrestacion = Integer.parseInt(idTipoPrestacionStr);
-                prestaciones = AgendamientoController.obtenerPrestaciones(idTipoPrestacion);
-                
-            } else {
-                prestaciones = AgendamientoController.obtenerPrestaciones();
+//        try (PrintWriter out = response.getWriter())
+            //Obtener todos los tipos de prestacion
+            ArrayList<TipoPres> tiposPrestacion = AgendamientoController.obtenerTipoPres();
+            request.setAttribute("tiposPrestacion", tiposPrestacion);
+            if(request.getParameter("tipoPrestacion")!= null){
+                TipoPres tipoPrestacion = (TipoPres)Controller.findById(TipoPres.class, Integer.parseInt(request.getParameter("tipoPrestacion")));
+                request.setAttribute("tipoPrestacion", tipoPrestacion);
             }
-            request.setAttribute("prestaciones", prestaciones);
-        }
+//            //Obtener prestaciones filtradas
+//            ArrayList<Prestacion> prestaciones = AgendamientoController.obtenerPrestaciones(request);
+//            request.setAttribute("prestaciones", prestaciones);
+//            //Obtener personal medico
+//            ArrayList<PersMedico> personalMedico = AgendamientoController.obtenerPersonalMedico(request);
+//            request.setAttribute("personalMedico", personalMedico);
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
