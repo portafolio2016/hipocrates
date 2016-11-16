@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CheekiBreeki.CMH.Terminal.BL;
+using CheekiBreeki.CMH.Terminal.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 {
     public partial class FrmMain : Form
     {
+        AccionesTerminal at = new AccionesTerminal();
         FrmLogin login = null;
         bool closeApp;
 
@@ -36,6 +39,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
 
             login = padre;
+
+            comprobarCajaAbierta();
         }
 
         private void btnSesion_Click(object sender, EventArgs e)
@@ -90,6 +95,23 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
 
+        private void comprobarCajaAbierta()
+        { 
+            UsuarioLogeado usuario = FrmLogin.usuarioLogeado;
+            if (usuario.Privilegio.ToUpper() == "OPERADOR")
+            {
+                if (!Util.isObjetoNulo(at.buscarCajaAbierta(usuario.Personal.FUNCIONARIO.FirstOrDefault())))
+                {
+                    btnAbrirCaja.Text = "Ya hay una caja abierta";
+                    btnAbrirCaja.Enabled = false;
+                }
+            }
+            else
+            {
+                btnAbrirCaja.Text = "No puede abrir caja";
+                btnAbrirCaja.Enabled = false;
+            }
 
+        }
     }
 }

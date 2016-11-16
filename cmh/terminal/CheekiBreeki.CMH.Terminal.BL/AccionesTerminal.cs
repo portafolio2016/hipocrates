@@ -453,7 +453,34 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
-
+        public CAJA buscarCajaAbierta(FUNCIONARIO funcionario)
+        {
+            CAJA caja = null;
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario nula.");
+                }
+                else if (Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Funcionario no encontrado.");
+                }
+                else
+                {
+                    List<CAJA> cajas = new List<CAJA>();
+                    cajas = conexionDB.CAJA.Where(d => d.FUNCIONARIO.ID_FUNCIONARIO == funcionario.ID_FUNCIONARIO && d.FECHOR_CIERRE == null).ToList();
+                    caja = cajas.Where(d => d.FECHOR_APERTURA.Value.Date == DateTime.Today.Date).FirstOrDefault();
+                    conexionDB.SaveChangesAsync();
+                    return caja;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return caja;
+            }
+        }
 
         #endregion
 
