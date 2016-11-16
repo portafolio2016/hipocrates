@@ -1381,6 +1381,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
             int numDia = (int)date.DayOfWeek;
             String nomDiaBuscar = "";
             switch(numDia){
+                case 0:
+                    nomDiaBuscar = "Domingo";
+                    break;
                 case 1:
                     nomDiaBuscar = "Lunes";
                     break;
@@ -1397,10 +1400,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     nomDiaBuscar = "Viernes";
                     break;
                 case 6:
-                    nomDiaBuscar = "Sábado";
-                    break;
-                case 7:
-                    nomDiaBuscar = "Domingo";
+                    nomDiaBuscar = "Sabado";
                     break;
                 default:
                     throw new Exception("Dia invalido");

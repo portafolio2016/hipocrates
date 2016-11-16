@@ -83,6 +83,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 ESTADO_ATEN estado = new ESTADO_ATEN();
                 PERS_MEDICO personalMedico = new PERS_MEDICO();
                 BLOQUE bloque = new BLOQUE();
+                if (dtFecha.Value < DateTime.Today)
+                    res = false;
                 using (var context = new CMHEntities())
                 {
                     estado = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE").FirstOrDefault();
@@ -91,7 +93,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 paciente = at.buscarPaciente(int.Parse(txtRut.Text), txtDv.Text.ToUpper());
                 if (!Util.isObjetoNulo(paciente))
                 {
-                    atencion.FECHOR = DateTime.Today;
+                    atencion.FECHOR = dtFecha.Value;
                     atencion.ID_PACIENTE = paciente.ID_PACIENTE;
                     atencion.ID_PRESTACION = (int)cmbPrestacion.SelectedValue;
                     atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
