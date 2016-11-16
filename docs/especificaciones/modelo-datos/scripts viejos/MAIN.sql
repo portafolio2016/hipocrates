@@ -1,4 +1,5 @@
 --****** ATENCION!!! DEBE SER EJECUTADO COMO SYSTEM
+@@sqlformat.sql
 @@crear_dev.sql -- crea usuario DEV
 ALTER SESSION SET CURRENT_SCHEMA = dev;
 @@cmh.sql -- DDL CMHDB
