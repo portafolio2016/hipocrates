@@ -215,28 +215,80 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnBuscarVFM_Click(object sender, EventArgs e)
         {
-            //TEST
-            ENTRADA_FICHA x = new ENTRADA_FICHA();
-            ENTRADA_FICHA z = new ENTRADA_FICHA();
-            x.FECHA_ENTRADA = DateTime.Now;
-            x.NOMBRE_ENTRADA = "test";
-            x.CONTENIDO_ENTRADA = "123456789";
-            entradaList.Add(x);
-            z.FECHA_ENTRADA = DateTime.Now;
-            z.NOMBRE_ENTRADA = "test2";
-            z.CONTENIDO_ENTRADA = "123456789----2";
-            entradaList.Add(z);
-            foreach (ENTRADA_FICHA y in entradaList)
+            if (!string.IsNullOrEmpty(tbRUNVFM.Text.Trim()) && !string.IsNullOrEmpty(tbVerificadorVFM.Text.Trim()))
             {
-                dgEntradaVFM.Rows.Add(y.NOMBRE_ENTRADA, "Ver", y.FECHA_ENTRADA.ToString());  
+                if (ValidaRut(tbRUNVFM.Text + tbVerificadorVFM))
+                {
+                    PACIENTE paciente = acciones.buscarPaciente(Int32.Parse(tbRUNVFM.Text),tbVerificadorVFM.Text);
+                    if (!string.IsNullOrEmpty(paciente.NOMBRES_PACIENTE))
+                    {
+                        //Ruta buena
+                        lbNombreVFM.Text = "Nombre: "+paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE;
+                        lbEmailVFM.Text = "Email: " + paciente.EMAIL_PACIENTE;
+                        lbRun.Text = "RUN: " + paciente.RUT + "-" + paciente.DIGITO_VERIFICADOR;
+                        lbSexoVFM.Text = "Sexo: " + paciente.SEXO;
+                        lbFechaNacVFM.Text = "Fecha nacimiento: " + paciente.FEC_NAC.Value.ToShortDateString();
+
+                        entradaList = new List<ENTRADA_FICHA>(paciente.ENTRADA_FICHA);
+                        if (entradaList != null)
+                        {
+                            foreach (ENTRADA_FICHA aux in entradaList)
+                            {
+                                dgEntradaVFM.Rows.Add(aux.NOMBRE_ENTRADA, "Ver", aux.FECHA_ENTRADA.ToString());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Paciente no encontrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Run invalido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            
-            //TEST
+            else if (string.IsNullOrEmpty(tbRUNVFM.Text.Trim()))
+            {
+                MessageBox.Show("Campo de RUN vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(tbRUNVFM.Text.Trim()))
+            {
+                MessageBox.Show("Campo de digito verificador vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool ValidaRut(string rut)
+        {
+            bool validacion = false;
+            try
+            {
+                rut = rut.ToUpper();
+                rut = rut.Replace(".", "");
+                rut = rut.Replace("-", "");
+                int rutAux = int.Parse(rut.Substring(0, rut.Length - 1));
+
+                char dv = char.Parse(rut.Substring(rut.Length - 1, 1));
+
+                int m = 0, s = 1;
+                for (; rutAux != 0; rutAux /= 10)
+                {
+                    s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+                }
+                if (dv == (char)(s != 0 ? s + 47 : 75))
+                {
+                    validacion = true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return validacion;
         }
 
         private void dgEntradaVFM_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 1)
+            if (e.ColumnIndex == 1 && e.RowIndex >=0)
             {
                 MessageBox.Show(entradaList[e.RowIndex].CONTENIDO_ENTRADA);
             }
