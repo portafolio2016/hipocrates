@@ -40,7 +40,7 @@ public class AccionesPacienteTest {
         DiaSem dia = crearDiaSem("Miercoles");
         DiaSem dia4 = crearDiaSem("Jueves");
         DiaSem dia5 = crearDiaSem("Viernes");
-        DiaSem dia6 = crearDiaSem("Sábado");
+        DiaSem dia6 = crearDiaSem("Sabado");
         DiaSem dia7 = crearDiaSem("Domingo");
     }
     
