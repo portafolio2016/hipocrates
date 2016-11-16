@@ -35,15 +35,15 @@
             this.lblSexo = new System.Windows.Forms.Label();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtNombres = new System.Windows.Forms.TextBox();
-            this.txtApellidos = new System.Windows.Forms.TextBox();
-            this.txtRut = new System.Windows.Forms.TextBox();
-            this.txtDv = new System.Windows.Forms.TextBox();
-            this.txtFalse = new System.Windows.Forms.TextBox();
-            this.cmbSexo = new System.Windows.Forms.ComboBox();
-            this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
-            this.btnCrear = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
+            this.btnCrear = new System.Windows.Forms.Button();
+            this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.cmbSexo = new System.Windows.Forms.ComboBox();
+            this.txtFalse = new System.Windows.Forms.TextBox();
+            this.txtDv = new System.Windows.Forms.TextBox();
+            this.txtRut = new System.Windows.Forms.TextBox();
+            this.txtApellidos = new System.Windows.Forms.TextBox();
+            this.txtNombres = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,55 +125,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Crear paciente";
             // 
-            // txtNombres
+            // lblError
             // 
-            this.txtNombres.Location = new System.Drawing.Point(168, 37);
-            this.txtNombres.Name = "txtNombres";
-            this.txtNombres.Size = new System.Drawing.Size(121, 20);
-            this.txtNombres.TabIndex = 7;
-            // 
-            // txtApellidos
-            // 
-            this.txtApellidos.Location = new System.Drawing.Point(168, 70);
-            this.txtApellidos.Name = "txtApellidos";
-            this.txtApellidos.Size = new System.Drawing.Size(121, 20);
-            this.txtApellidos.TabIndex = 8;
-            // 
-            // txtRut
-            // 
-            this.txtRut.Location = new System.Drawing.Point(168, 100);
-            this.txtRut.Name = "txtRut";
-            this.txtRut.Size = new System.Drawing.Size(95, 20);
-            this.txtRut.TabIndex = 9;
-            // 
-            // txtDv
-            // 
-            this.txtDv.Location = new System.Drawing.Point(272, 100);
-            this.txtDv.Name = "txtDv";
-            this.txtDv.Size = new System.Drawing.Size(17, 20);
-            this.txtDv.TabIndex = 10;
-            // 
-            // txtFalse
-            // 
-            this.txtFalse.Location = new System.Drawing.Point(168, 134);
-            this.txtFalse.Name = "txtFalse";
-            this.txtFalse.Size = new System.Drawing.Size(121, 20);
-            this.txtFalse.TabIndex = 12;
-            // 
-            // cmbSexo
-            // 
-            this.cmbSexo.FormattingEnabled = true;
-            this.cmbSexo.Location = new System.Drawing.Point(168, 168);
-            this.cmbSexo.Name = "cmbSexo";
-            this.cmbSexo.Size = new System.Drawing.Size(121, 21);
-            this.cmbSexo.TabIndex = 13;
-            // 
-            // dtFechaNacimiento
-            // 
-            this.dtFechaNacimiento.Location = new System.Drawing.Point(168, 200);
-            this.dtFechaNacimiento.Name = "dtFechaNacimiento";
-            this.dtFechaNacimiento.Size = new System.Drawing.Size(121, 20);
-            this.dtFechaNacimiento.TabIndex = 14;
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(28, 241);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(39, 13);
+            this.lblError.TabIndex = 16;
+            this.lblError.Text = "lblError";
+            this.lblError.Visible = false;
             // 
             // btnCrear
             // 
@@ -185,15 +145,56 @@
             this.btnCrear.UseVisualStyleBackColor = true;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 
-            // lblError
+            // dtFechaNacimiento
             // 
-            this.lblError.AutoSize = true;
-            this.lblError.Location = new System.Drawing.Point(28, 241);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(39, 13);
-            this.lblError.TabIndex = 16;
-            this.lblError.Text = "lblError";
-            this.lblError.Visible = false;
+            this.dtFechaNacimiento.Location = new System.Drawing.Point(168, 200);
+            this.dtFechaNacimiento.Name = "dtFechaNacimiento";
+            this.dtFechaNacimiento.Size = new System.Drawing.Size(121, 20);
+            this.dtFechaNacimiento.TabIndex = 14;
+            // 
+            // cmbSexo
+            // 
+            this.cmbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSexo.FormattingEnabled = true;
+            this.cmbSexo.Location = new System.Drawing.Point(168, 168);
+            this.cmbSexo.Name = "cmbSexo";
+            this.cmbSexo.Size = new System.Drawing.Size(121, 21);
+            this.cmbSexo.TabIndex = 13;
+            // 
+            // txtFalse
+            // 
+            this.txtFalse.Location = new System.Drawing.Point(168, 134);
+            this.txtFalse.Name = "txtFalse";
+            this.txtFalse.Size = new System.Drawing.Size(121, 20);
+            this.txtFalse.TabIndex = 12;
+            // 
+            // txtDv
+            // 
+            this.txtDv.Location = new System.Drawing.Point(272, 100);
+            this.txtDv.Name = "txtDv";
+            this.txtDv.Size = new System.Drawing.Size(17, 20);
+            this.txtDv.TabIndex = 10;
+            // 
+            // txtRut
+            // 
+            this.txtRut.Location = new System.Drawing.Point(168, 100);
+            this.txtRut.Name = "txtRut";
+            this.txtRut.Size = new System.Drawing.Size(95, 20);
+            this.txtRut.TabIndex = 9;
+            // 
+            // txtApellidos
+            // 
+            this.txtApellidos.Location = new System.Drawing.Point(168, 70);
+            this.txtApellidos.Name = "txtApellidos";
+            this.txtApellidos.Size = new System.Drawing.Size(121, 20);
+            this.txtApellidos.TabIndex = 8;
+            // 
+            // txtNombres
+            // 
+            this.txtNombres.Location = new System.Drawing.Point(168, 37);
+            this.txtNombres.Name = "txtNombres";
+            this.txtNombres.Size = new System.Drawing.Size(121, 20);
+            this.txtNombres.TabIndex = 7;
             // 
             // FrmCrearPaciente
             // 
@@ -203,6 +204,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmCrearPaciente";
             this.Text = "Crear paciente";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmCrearPaciente_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

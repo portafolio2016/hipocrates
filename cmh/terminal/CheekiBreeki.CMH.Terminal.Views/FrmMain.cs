@@ -66,6 +66,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
 
+        private void btnCrearPaciente_Click(object sender, EventArgs e)
+        {
+            FrmCrearPaciente frmCrearPaciente = new FrmCrearPaciente(login);
+            frmCrearPaciente.Show();
+            frmCrearPaciente.Activate();
+            this.Hide();
+        }
+
 
     }
 }

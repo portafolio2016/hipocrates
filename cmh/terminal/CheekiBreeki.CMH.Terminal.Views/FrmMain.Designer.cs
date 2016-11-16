@@ -32,6 +32,7 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.btnSesion = new System.Windows.Forms.Button();
             this.btnAgendarAtencion = new System.Windows.Forms.Button();
+            this.btnCrearPaciente = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -73,11 +74,22 @@
             this.btnAgendarAtencion.UseVisualStyleBackColor = true;
             this.btnAgendarAtencion.Click += new System.EventHandler(this.btnAgendarAtencion_Click);
             // 
+            // btnCrearPaciente
+            // 
+            this.btnCrearPaciente.Location = new System.Drawing.Point(55, 154);
+            this.btnCrearPaciente.Name = "btnCrearPaciente";
+            this.btnCrearPaciente.Size = new System.Drawing.Size(128, 23);
+            this.btnCrearPaciente.TabIndex = 4;
+            this.btnCrearPaciente.Text = "Crear paciente";
+            this.btnCrearPaciente.UseVisualStyleBackColor = true;
+            this.btnCrearPaciente.Click += new System.EventHandler(this.btnCrearPaciente_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnCrearPaciente);
             this.Controls.Add(this.btnAgendarAtencion);
             this.Controls.Add(this.btnSesion);
             this.Controls.Add(this.lblPrivilegio);
@@ -96,5 +108,6 @@
         private System.Windows.Forms.Label lblPrivilegio;
         private System.Windows.Forms.Button btnSesion;
         private System.Windows.Forms.Button btnAgendarAtencion;
+        private System.Windows.Forms.Button btnCrearPaciente;
     }
 }
