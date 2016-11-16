@@ -92,6 +92,11 @@ public class Registro extends HttpServlet {
                     out.println("<script>alert('Fecha nacimiento debe ser en el pasado'); location.href = 'master.jsp?page=registro';</script>");
                     return;
                 }
+                boolean rutUnico = Validador.rutUnico(rut);
+                if(!rutUnico){
+                    out.println("<script>alert('Rut ya está siendo utilizado'); location.href = 'master.jsp?page=registro';</script>");
+                    return;
+                }
                 //*** FIN VALIDACIONES ***
                 //Instanciar objeto
                 Paciente paciente = new Paciente();

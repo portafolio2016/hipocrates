@@ -5,8 +5,12 @@
  */
 package cl.cheekibreeki.cmh.webapp.util;
 
+import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.mail.internet.InternetAddress;
 
 /**
@@ -79,6 +83,13 @@ public class Validador {
         Date hoy = new Date();
         boolean fechaNoFutura = hoy.after(fecha);//si hoy viene despues que fecha entonces true
         return fechaNoFutura;
+    }
+
+    public static boolean rutUnico(String rut) {
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("rut", rut);
+        List<? extends Object>  pacienteAux = Controller.findByQuery("Paciente.findByRut", params1);
+        return pacienteAux.isEmpty();
     }
     
 }
