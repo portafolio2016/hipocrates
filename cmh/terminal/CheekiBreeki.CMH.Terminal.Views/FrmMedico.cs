@@ -113,9 +113,17 @@ namespace CheekiBreeki.CMH.Terminal.Views
 ;
                     personal.EMAIL = tbNuevoMail.Text.Trim();
                     bool x = acciones.actualizarPersonal(personal);
-                    //
-                    //DEVOLVER AL LOGIN
-                    //
+                    if(x)
+                    {
+                        closeApp = false;
+                        login.camposVacios();
+                        login.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al modificar el email", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 
             }
@@ -179,7 +187,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                
             }
             //TEST
-            agendaDiaria.Add(new AgendaDiaria("testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttts", "testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttts", "testtttttttttttttttttttttttttttttttttttttttttttt", true));
+            //agendaDiaria.Add(new AgendaDiaria("testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttts", "testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttts", "testtttttttttttttttttttttttttttttttttttttttttttt", true));
             //TEST
             dgAgendaDiaria.DataSource = agendaDiaria;
 

@@ -141,6 +141,7 @@
             this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
             this.dgAgendaDiaria.Name = "dgAgendaDiaria";
             this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
