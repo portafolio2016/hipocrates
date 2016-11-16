@@ -64,6 +64,12 @@
     <Compile Include="FrmAgendarAtencion.Designer.cs">
       <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCrearPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCrearPaciente.Designer.cs">
+      <DependentUpon>FrmCrearPaciente.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +88,9 @@
     <Compile Include="UsuarioLogeado.cs" />
     <EmbeddedResource Include="FrmAgendarAtencion.resx">
       <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCrearPaciente.resx">
+      <DependentUpon>FrmCrearPaciente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>

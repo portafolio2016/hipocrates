@@ -39,7 +39,7 @@
             this.btnCrear = new System.Windows.Forms.Button();
             this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.cmbSexo = new System.Windows.Forms.ComboBox();
-            this.txtFalse = new System.Windows.Forms.TextBox();
+            this.txtCorreo = new System.Windows.Forms.TextBox();
             this.txtDv = new System.Windows.Forms.TextBox();
             this.txtRut = new System.Windows.Forms.TextBox();
             this.txtApellidos = new System.Windows.Forms.TextBox();
@@ -107,7 +107,7 @@
             this.groupBox1.Controls.Add(this.btnCrear);
             this.groupBox1.Controls.Add(this.dtFechaNacimiento);
             this.groupBox1.Controls.Add(this.cmbSexo);
-            this.groupBox1.Controls.Add(this.txtFalse);
+            this.groupBox1.Controls.Add(this.txtCorreo);
             this.groupBox1.Controls.Add(this.txtDv);
             this.groupBox1.Controls.Add(this.txtRut);
             this.groupBox1.Controls.Add(this.txtApellidos);
@@ -161,12 +161,12 @@
             this.cmbSexo.Size = new System.Drawing.Size(121, 21);
             this.cmbSexo.TabIndex = 13;
             // 
-            // txtFalse
+            // txtCorreo
             // 
-            this.txtFalse.Location = new System.Drawing.Point(168, 134);
-            this.txtFalse.Name = "txtFalse";
-            this.txtFalse.Size = new System.Drawing.Size(121, 20);
-            this.txtFalse.TabIndex = 12;
+            this.txtCorreo.Location = new System.Drawing.Point(168, 134);
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.Size = new System.Drawing.Size(121, 20);
+            this.txtCorreo.TabIndex = 12;
             // 
             // txtDv
             // 
@@ -174,6 +174,7 @@
             this.txtDv.Name = "txtDv";
             this.txtDv.Size = new System.Drawing.Size(17, 20);
             this.txtDv.TabIndex = 10;
+            this.txtDv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
             // 
             // txtRut
             // 
@@ -181,6 +182,7 @@
             this.txtRut.Name = "txtRut";
             this.txtRut.Size = new System.Drawing.Size(95, 20);
             this.txtRut.TabIndex = 9;
+            this.txtRut.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRut_KeyPress);
             // 
             // txtApellidos
             // 
@@ -224,7 +226,7 @@
         private System.Windows.Forms.Button btnCrear;
         private System.Windows.Forms.DateTimePicker dtFechaNacimiento;
         private System.Windows.Forms.ComboBox cmbSexo;
-        private System.Windows.Forms.TextBox txtFalse;
+        private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.TextBox txtDv;
         private System.Windows.Forms.TextBox txtRut;
         private System.Windows.Forms.TextBox txtApellidos;

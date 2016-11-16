@@ -1180,6 +1180,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     pass = Util.generarPass();
                     md5 = Util.hashMD5(pass);
                     paciente.HASHED_PASS = md5;
+                    // Cambiar estado activo
+                    paciente.ACTIVO = true;
                     // Enviar correo
                     titulo = "Bienvenido a Centro Médico Hipócrates";
                     cuerpo = "Estimado/a " + paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE + ",\n\n";
