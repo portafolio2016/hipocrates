@@ -1329,59 +1329,66 @@ namespace CheekiBreeki.CMH.Terminal.BL
         #endregion
 
         #region Horas disponibles
-        private List<ATENCION_AGEN> buscarAtencionMedicoPorEstado(PERS_MEDICO medico, String nombreEstado){
+        private List<ATENCION_AGEN> buscarAtencionMedicoPorEstado(PERS_MEDICO medico, String nombreEstado)
+        {
             List<ATENCION_AGEN> atencionList = medico.ATENCION_AGEN.ToList();
             List<ATENCION_AGEN> atencionesFiltradas = new List<ATENCION_AGEN>();
-            foreach(ATENCION_AGEN atencion in atencionList){
+            foreach (ATENCION_AGEN atencion in atencionList)
+            {
                 ESTADO_ATEN estado = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == nombreEstado.ToUpper()).FirstOrDefault();
-                if(atencion.ID_ESTADO_ATEN == estado.ID_ESTADO_ATEN){
+                if (atencion.ID_ESTADO_ATEN == estado.ID_ESTADO_ATEN)
+                {
                     atencionesFiltradas.Add(atencion);
                 }
             }
             return atencionesFiltradas;
         }
 
-        private List<ATENCION_AGEN> filtrarAtencionPorDia(List<ATENCION_AGEN> atenciones, DateTime dia){
+        private List<ATENCION_AGEN> filtrarAtencionPorDia(List<ATENCION_AGEN> atenciones, DateTime dia)
+        {
             List<ATENCION_AGEN> atencionesFiltradas = new List<ATENCION_AGEN>();
-            foreach(ATENCION_AGEN atencion in atenciones){
-                bool mismoDia = (atencion.FECHOR.Value.DayOfYear == dia.DayOfYear) &&
-                        (atencion.FECHOR.Value.Year == dia.Year);
-                if(mismoDia){
-                    atencionesFiltradas.Add(atencion);    
-                }
-           }
-           return atencionesFiltradas;
+            atencionesFiltradas = atenciones.Where(d => d.FECHOR.Value.Date == dia.Date).ToList();
+            return atencionesFiltradas;
         }
 
-        private List<BLOQUE> bloquesMedico(PERS_MEDICO medico, DateTime date){
+        private List<BLOQUE> bloquesMedico(PERS_MEDICO medico, DateTime date)
+        {
             List<BLOQUE> bloquesFiltrados = new List<BLOQUE>();
             List<HORARIO> horarios = medico.HORARIO.ToList();
             DIA_SEM dia = buscarDiaPorDate(date);
-            foreach(HORARIO horario in horarios){
-                if(horario.BLOQUE.ID_DIA_SEM == dia.ID_DIA){
+            foreach (HORARIO horario in horarios)
+            {
+                if (horario.BLOQUE.ID_DIA_SEM == dia.ID_DIA)
+                {
                     bloquesFiltrados.Add(horario.BLOQUE);
                 }
             }
             return bloquesFiltrados;
         }
-    
-        private List<BLOQUE> removerBloquesAgendados(List<BLOQUE> bloques, List<ATENCION_AGEN> atenciones){
+
+        private List<BLOQUE> removerBloquesAgendados(List<BLOQUE> bloques, List<ATENCION_AGEN> atenciones)
+        {
             List<BLOQUE> result = new List<BLOQUE>();
-            foreach(BLOQUE bloque in bloques){
+            foreach (BLOQUE bloque in bloques)
+            {
                 if (isBloqueInAtenciones(bloque, atenciones))
                 {
-                
-                }else{
+
+                }
+                else
+                {
                     result.Add(bloque);
                 }
             }
             return result;
         }
 
-        public DIA_SEM buscarDiaPorDate(DateTime date){
+        public DIA_SEM buscarDiaPorDate(DateTime date)
+        {
             int numDia = (int)date.DayOfWeek;
             String nomDiaBuscar = "";
-            switch(numDia){
+            switch (numDia)
+            {
                 case 0:
                     nomDiaBuscar = "Domingo";
                     break;
@@ -1407,13 +1414,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     throw new Exception("Dia invalido");
             }
             DIA_SEM dia = conexionDB.DIA_SEM.Where(d => d.NOMBRE_DIA == nomDiaBuscar).FirstOrDefault();
-            if(Util.isObjetoNulo(dia)){
+            if (Util.isObjetoNulo(dia))
+            {
                 throw new Exception("No hay dia con nombre " + nomDiaBuscar);
             }
             return dia;
         }
 
-        private bool isBloqueInAtenciones(BLOQUE bloque, List<ATENCION_AGEN> atenciones){
+        private bool isBloqueInAtenciones(BLOQUE bloque, List<ATENCION_AGEN> atenciones)
+        {
             bool result = false;
             if (atenciones.Where(d => d.BLOQUE.ID_BLOQUE == bloque.ID_BLOQUE).Count() > 0)
                 result = true;
@@ -1429,7 +1438,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             //Obtener los bloques del medico para el día solicitado
             List<BLOQUE> bloquesDia = bloquesMedico(medico, dia);
             //Remover bloques que tengan una atencion agendada
-            List<BLOQUE> bloquesLibres = removerBloquesAgendados(bloquesDia, atencionesVigentes);
+            List<BLOQUE> bloquesLibres = removerBloquesAgendados(bloquesDia, atencionesFiltradasPorDia);
             //convertir bloque a hora disponible
             HorasDisponibles horas = new HorasDisponibles(dia, bloquesLibres);
             return horas;
