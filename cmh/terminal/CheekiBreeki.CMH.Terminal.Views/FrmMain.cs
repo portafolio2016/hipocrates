@@ -82,6 +82,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
 
+        private void btnAbrirCaja_Click(object sender, EventArgs e)
+        {
+            FrmAbrirCaja frmAbrirCaja = new FrmAbrirCaja(login);
+            frmAbrirCaja.Show();
+            frmAbrirCaja.Activate();
+            this.Hide();
+        }
+
 
     }
 }
