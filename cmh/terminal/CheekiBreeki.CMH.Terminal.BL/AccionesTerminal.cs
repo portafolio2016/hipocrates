@@ -79,11 +79,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             try
             {
-                if (Util.isObjetoNulo(atencion))
+                ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
+                if (Util.isObjetoNulo(atencionFinal))
                 {
                     throw new Exception("Atención nula");
                 }
-                if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() != "VIGENTE")
+                if (atencionFinal.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() != "VIGENTE")
                 {
                     throw new Exception("Estado no válido de la atención");
                 }
@@ -93,7 +94,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
                     atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "PAGADO").FirstOrDefault().ID_ESTADO_ATEN;
                     conexionDB.SaveChangesAsync();
                     return true;
@@ -1468,6 +1468,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d => d.ESPECIALIDAD.ID_ESPECIALIDAD == idEspecialidad).ToList();
             return (prestaciones);
+        }
+
+        public List<ATENCION_AGEN> listaAtenciones(int rut)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => d.PACIENTE.RUT == rut && 
+                    d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE").ToList();
+            atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
+            return (atenciones);
         }
         #endregion
     }

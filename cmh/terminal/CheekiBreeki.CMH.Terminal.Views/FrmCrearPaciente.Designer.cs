@@ -40,10 +40,10 @@
             this.dtFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.cmbSexo = new System.Windows.Forms.ComboBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
-            this.txtDv = new System.Windows.Forms.TextBox();
-            this.txtRut = new System.Windows.Forms.TextBox();
             this.txtApellidos = new System.Windows.Forms.TextBox();
             this.txtNombres = new System.Windows.Forms.TextBox();
+            this.txtDv = new System.Windows.Forms.TextBox();
+            this.txtRut = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,13 +103,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtDv);
+            this.groupBox1.Controls.Add(this.txtRut);
             this.groupBox1.Controls.Add(this.lblError);
             this.groupBox1.Controls.Add(this.btnCrear);
             this.groupBox1.Controls.Add(this.dtFechaNacimiento);
             this.groupBox1.Controls.Add(this.cmbSexo);
             this.groupBox1.Controls.Add(this.txtCorreo);
-            this.groupBox1.Controls.Add(this.txtDv);
-            this.groupBox1.Controls.Add(this.txtRut);
             this.groupBox1.Controls.Add(this.txtApellidos);
             this.groupBox1.Controls.Add(this.txtNombres);
             this.groupBox1.Controls.Add(this.lblApellidos);
@@ -168,22 +168,6 @@
             this.txtCorreo.Size = new System.Drawing.Size(121, 20);
             this.txtCorreo.TabIndex = 12;
             // 
-            // txtDv
-            // 
-            this.txtDv.Location = new System.Drawing.Point(272, 100);
-            this.txtDv.Name = "txtDv";
-            this.txtDv.Size = new System.Drawing.Size(17, 20);
-            this.txtDv.TabIndex = 10;
-            this.txtDv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
-            // 
-            // txtRut
-            // 
-            this.txtRut.Location = new System.Drawing.Point(168, 100);
-            this.txtRut.Name = "txtRut";
-            this.txtRut.Size = new System.Drawing.Size(95, 20);
-            this.txtRut.TabIndex = 9;
-            this.txtRut.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRut_KeyPress);
-            // 
             // txtApellidos
             // 
             this.txtApellidos.Location = new System.Drawing.Point(168, 70);
@@ -197,6 +181,22 @@
             this.txtNombres.Name = "txtNombres";
             this.txtNombres.Size = new System.Drawing.Size(121, 20);
             this.txtNombres.TabIndex = 7;
+            // 
+            // txtDv
+            // 
+            this.txtDv.Location = new System.Drawing.Point(274, 104);
+            this.txtDv.MaxLength = 1;
+            this.txtDv.Name = "txtDv";
+            this.txtDv.Size = new System.Drawing.Size(15, 20);
+            this.txtDv.TabIndex = 18;
+            // 
+            // txtRut
+            // 
+            this.txtRut.Location = new System.Drawing.Point(168, 104);
+            this.txtRut.MaxLength = 8;
+            this.txtRut.Name = "txtRut";
+            this.txtRut.Size = new System.Drawing.Size(99, 20);
+            this.txtRut.TabIndex = 17;
             // 
             // FrmCrearPaciente
             // 
@@ -227,9 +227,9 @@
         private System.Windows.Forms.DateTimePicker dtFechaNacimiento;
         private System.Windows.Forms.ComboBox cmbSexo;
         private System.Windows.Forms.TextBox txtCorreo;
-        private System.Windows.Forms.TextBox txtDv;
-        private System.Windows.Forms.TextBox txtRut;
         private System.Windows.Forms.TextBox txtApellidos;
         private System.Windows.Forms.TextBox txtNombres;
+        private System.Windows.Forms.TextBox txtDv;
+        private System.Windows.Forms.TextBox txtRut;
     }
 }
