@@ -70,6 +70,12 @@
     <Compile Include="FrmCrearPaciente.Designer.cs">
       <DependentUpon>FrmCrearPaciente.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmIngresarPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIngresarPaciente.Designer.cs">
+      <DependentUpon>FrmIngresarPaciente.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCrearPaciente.resx">
       <DependentUpon>FrmCrearPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmIngresarPaciente.resx">
+      <DependentUpon>FrmIngresarPaciente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
