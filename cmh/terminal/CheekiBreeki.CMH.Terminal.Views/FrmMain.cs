@@ -74,6 +74,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
 
+        private void btnIngresarPaciente_Click(object sender, EventArgs e)
+        {
+            FrmIngresarPaciente frmIngresarPaciente = new FrmIngresarPaciente(login);
+            frmIngresarPaciente.Show();
+            frmIngresarPaciente.Activate();
+            this.Hide();
+        }
+
 
     }
 }

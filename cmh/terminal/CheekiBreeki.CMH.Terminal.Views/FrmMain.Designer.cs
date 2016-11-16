@@ -33,6 +33,7 @@
             this.btnSesion = new System.Windows.Forms.Button();
             this.btnAgendarAtencion = new System.Windows.Forms.Button();
             this.btnCrearPaciente = new System.Windows.Forms.Button();
+            this.btnIngresarPaciente = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -84,11 +85,22 @@
             this.btnCrearPaciente.UseVisualStyleBackColor = true;
             this.btnCrearPaciente.Click += new System.EventHandler(this.btnCrearPaciente_Click);
             // 
+            // btnIngresarPaciente
+            // 
+            this.btnIngresarPaciente.Location = new System.Drawing.Point(55, 193);
+            this.btnIngresarPaciente.Name = "btnIngresarPaciente";
+            this.btnIngresarPaciente.Size = new System.Drawing.Size(128, 23);
+            this.btnIngresarPaciente.TabIndex = 5;
+            this.btnIngresarPaciente.Text = "Ingresar paciente";
+            this.btnIngresarPaciente.UseVisualStyleBackColor = true;
+            this.btnIngresarPaciente.Click += new System.EventHandler(this.btnIngresarPaciente_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnIngresarPaciente);
             this.Controls.Add(this.btnCrearPaciente);
             this.Controls.Add(this.btnAgendarAtencion);
             this.Controls.Add(this.btnSesion);
@@ -109,5 +121,6 @@
         private System.Windows.Forms.Button btnSesion;
         private System.Windows.Forms.Button btnAgendarAtencion;
         private System.Windows.Forms.Button btnCrearPaciente;
+        private System.Windows.Forms.Button btnIngresarPaciente;
     }
 }
