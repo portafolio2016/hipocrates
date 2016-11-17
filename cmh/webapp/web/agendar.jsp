@@ -46,7 +46,13 @@
                     </select>
                 </div>
             </c:if>
-            
+            <c:if test="${not empty requestScope.medico}">
+                <div class="form-group">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" required name="fecha" id="fecha"/>
+                </div>
+            </c:if>
+
 
 
             <button type="submit" class="btn btn-default">Reservar</button>

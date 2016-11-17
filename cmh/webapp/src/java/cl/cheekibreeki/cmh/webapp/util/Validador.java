@@ -84,7 +84,24 @@ public class Validador {
         boolean fechaNoFutura = hoy.after(fecha);//si hoy viene despues que fecha entonces true
         return fechaNoFutura;
     }
+    
+    /***
+     * 
+     * @param fecha fecha a evaluar
+     * @return Si es futura u hoy o no
+     */
+    public static boolean fechaFutura(Date fecha){
+        Date hoy = new Date();
+        boolean fechaFutura = hoy.before(fecha);
+        boolean fechaHoy = hoy.equals(fecha);
+        return fechaFutura || fechaHoy;
+    }
 
+    /***
+     * Retorna si es rut único en la base de datos o no
+     * @param rut
+     * @return si el rut es único o no
+     */
     public static boolean rutUnico(String rut) {
         Map<String, Object> params1 = new HashMap<>();
         params1.put("rut", rut);

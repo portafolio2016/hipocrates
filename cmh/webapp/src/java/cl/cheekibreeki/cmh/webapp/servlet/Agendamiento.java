@@ -13,7 +13,9 @@ import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
 import cl.cheekibreeki.cmh.webapp.util.AgendamientoController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -71,6 +73,16 @@ public class Agendamiento extends HttpServlet {
                 esMismoMedico = (idMedicoAnterior == medico.getIdPersonal());
             }else{
                 request.setAttribute("medico", null);
+            }
+            
+            if(request.getParameter("fecha") != null && esMismoMedico){
+                String fecnac = request.getParameter("fecha");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date fecnacDate = format.parse(fecnac);    
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
 //        }
     }
