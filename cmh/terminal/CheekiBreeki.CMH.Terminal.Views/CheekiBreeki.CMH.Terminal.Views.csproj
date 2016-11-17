@@ -58,6 +58,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgendaDiaria.cs" />
+    <Compile Include="FrmAgendarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAgendarAtencion.Designer.cs">
+      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmContenidoEntrada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmContenidoEntrada.Designer.cs">
+      <DependentUpon>FrmContenidoEntrada.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
