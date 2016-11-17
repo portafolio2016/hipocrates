@@ -62,12 +62,12 @@ public class AccionesPaciente {
         return resAtencion;
     }
     
-     /**
-     * Método que devuelve un ArrayList con las horas libres 
-     * @param medico El medico
-     * @param dia dia el cual se quiere tomar hora
-     * @return El ArrayList contiene tas atenciones de una prestación
-     */
+    /**
+    * 
+    * @param medico El medico
+    * @param dia dia el cual se quiere tomar hora
+    * @return 
+    */
     public HorasDisponibles horasDisponiblesMedico(PersMedico medico, Date dia) throws Exception{
        //Obtener todas las atenciones Vigentes del médico
        ArrayList<AtencionAgen> atencionesVigentes = buscarAtencionMedicoPorEstado(medico, "Vigente");
