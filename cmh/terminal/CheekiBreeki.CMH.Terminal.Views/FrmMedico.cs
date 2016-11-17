@@ -233,7 +233,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 if (ValidaRut(tbRUNVFM.Text +"-"+ tbVerificadorVFM.Text))
                 {
                     AccionesTerminal ac = new AccionesTerminal();
-                    paciente = ac.buscarPaciente(Int32.Parse(tbRUNVFM.Text), tbVerificadorVFM.Text);
+                    string rut = tbRUNVFM.Text.Replace(".", "").ToUpper();
+                    paciente = ac.buscarPaciente(Int32.Parse(rut), tbVerificadorVFM.Text);
                     if (paciente != null)
                     {
                         //Ruta buena
@@ -353,7 +354,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 if (ValidaRut(tbRUNAFM.Text + "-" + tbVerificadorAFM.Text))
                 {
-                    paciente = acciones.buscarPaciente(Int32.Parse(tbRUNAFM.Text), tbVerificadorAFM.Text);
+                    AccionesTerminal ac = new AccionesTerminal();
+                    string rut = tbRUNVFM.Text.Replace(".", "").ToUpper();
+                    paciente = ac.buscarPaciente(Int32.Parse(rut), tbVerificadorVFM.Text);
                     if (paciente != null)
                     {
                         //Ruta buena
