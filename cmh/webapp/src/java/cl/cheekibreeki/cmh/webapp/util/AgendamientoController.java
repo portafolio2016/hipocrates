@@ -103,7 +103,7 @@ public class AgendamientoController {
     }
 
     public static void cargarHorasLibres(HttpServletRequest request) {
-        if(request.getParameter("fecha") == null){
+        if (request.getParameter("fecha") == null) {
             return;
         }
         String fecString = request.getParameter("fecha");
@@ -118,11 +118,11 @@ public class AgendamientoController {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
-                request.setAttribute("fecha", year + "-" + (month+1) + "-" + day);
+                request.setAttribute("fecha", year + "-" + (month + 1) + "-" + day);
                 //Obtener las horas libres del médico
                 AccionesPaciente accionesPaciente = new AccionesPaciente();
-                int idPersonal = (int)request.getAttribute("medico");
-                Personal personal = (Personal)Controller.findById(Personal.class, idPersonal);
+                int idPersonal = (int) request.getAttribute("medico");
+                Personal personal = (Personal) Controller.findById(Personal.class, idPersonal);
                 Collection<PersMedico> personalMedicoCollection = personal.getPersMedicoCollection();
                 PersMedico medico = null;
                 for (PersMedico persMedico : personalMedicoCollection) {
@@ -134,5 +134,37 @@ public class AgendamientoController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void registrarAtencion(HttpServletRequest request) throws Exception {
+        AtencionAgen atencion = new AtencionAgen();
+        Paciente paciente = LoginController.obtenerPacienteEnSesion(request.getSession());
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechor = sdf.parse((String)request.getAttribute("fecha"));
+        atencion.setFechor(fechor);
+        int idBloque = Integer.parseInt((String)request.getAttribute("hora"));
+        Bloque bloque = (Bloque)Controller.findById(Bloque.class, idBloque);
+        atencion.setIdBloque(bloque);
+        
+        Map<String, Object> paramsEstadoAten = new HashMap<String, Object>();
+        paramsEstadoAten.put("nomEstadoAten", "Vigente");
+        List<? extends Object> resultEstado = Controller.findByQuery("EstadoAten.findByNomEstadoAten", paramsEstadoAten);
+        EstadoAten estadoAten = (EstadoAten)resultEstado.get(0);
+        atencion.setIdEstadoAten(estadoAten);
+        
+        Personal personal = (Personal)Controller.findById(Personal.class, Integer.parseInt((String)request.getAttribute("medico")));
+        Collection<PersMedico> personalMedicoCollection = personal.getPersMedicoCollection();
+        for(PersMedico persMedico: personalMedicoCollection){
+            atencion.setIdPersAtiende(persMedico);
+        }
+        
+        Prestacion prestacion = (Prestacion)Controller.findById(Prestacion.class, Integer.parseInt((String)request.getAttribute("prestacion")));
+
+        atencion.setIdPrestacion(prestacion);
+        atencion.setIdPaciente(paciente);
+
+        AccionesPaciente accionesPaciente = new AccionesPaciente();
+        accionesPaciente.agendarAtencion(atencion);
     }
 }

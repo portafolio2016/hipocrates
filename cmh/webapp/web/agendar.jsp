@@ -75,7 +75,7 @@
                     </select>
                 </div>
             </c:if>
-            <button type="submit" class="btn btn-default">Reservar</button>
+            <input type="button" value="registrar" name="btnRegistrar" class="btn btn-default">Reservar</button>
         </form>  
     </div>
 </div>

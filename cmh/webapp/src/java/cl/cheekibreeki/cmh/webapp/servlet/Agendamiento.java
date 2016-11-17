@@ -6,6 +6,7 @@ package cl.cheekibreeki.cmh.webapp.servlet;
  * and open the template in the editor.
  */
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
+import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
 import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
 import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
 import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
@@ -14,6 +15,7 @@ import cl.cheekibreeki.cmh.webapp.bl.AccionesPaciente;
 import cl.cheekibreeki.cmh.webapp.bl.HoraDisponible;
 import cl.cheekibreeki.cmh.webapp.bl.HorasDisponibles;
 import cl.cheekibreeki.cmh.webapp.util.AgendamientoController;
+import cl.cheekibreeki.cmh.webapp.util.LoginController;
 import cl.cheekibreeki.cmh.webapp.util.Validador;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,12 +46,23 @@ public class Agendamiento extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        AgendamientoController.cargarTodosTiposPrestaciones(request);
-        AgendamientoController.cargarPrestaciones(request);
-        AgendamientoController.cargarPersonal(request);
-        AgendamientoController.cargarHorasLibres(request);
+        try (PrintWriter out = response.getWriter()) {
+            AgendamientoController.cargarTodosTiposPrestaciones(request);
+            AgendamientoController.cargarPrestaciones(request);
+            AgendamientoController.cargarPersonal(request);
+            AgendamientoController.cargarHorasLibres(request);
+            if (request.getParameter("btnRegistrar") != null) {
+                boolean isLoggedIn = LoginController.obtenerPacienteEnSesion(request.getSession()) != null;
+                if(isLoggedIn){
+                    AgendamientoController.registrarAtencion(request);
+                }else{
+                    out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=registro';</script>");
+                }
+                
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +77,11 @@ public class Agendamiento extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Agendamiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -76,7 +95,11 @@ public class Agendamiento extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Agendamiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
