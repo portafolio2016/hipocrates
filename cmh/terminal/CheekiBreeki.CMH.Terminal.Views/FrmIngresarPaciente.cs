@@ -94,6 +94,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         item.Text = "Atención: " + atencion.ID_ATENCION_AGEN + " - Médico: " + atencion.PERS_MEDICO.PERSONAL.NOMBREFULL;
                         lstAtenciones.Items.Add(item);
                     }
+                    mostrarEsconderLabel();
+                    PACIENTE paciente = at.buscarPaciente(rut, txtDv.Text);
+                    lblNombre.Text = paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE;
+                    lblEdad.Text = paciente.FEC_NAC.Value.Date.ToShortDateString();
+                    lblSexo.Text = paciente.SEXO;
+                    lblRutInfo.Text = paciente.RUT + "-" + paciente.DIGITO_VERIFICADOR;
                     res = true;
                 }
             }
@@ -107,6 +113,48 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblError.Text = "Error al buscar atenciones";
                 lblError.ForeColor = System.Drawing.Color.Red;
             }
+        }
+
+        private void mostrarEsconderLabel()
+        {
+            bool estado = !lblNombre.Visible;
+            lblNombre.Visible = estado;
+            lblEdad.Visible = estado;
+            lblSexo.Visible = estado;
+            lblRutInfo.Visible = estado;
+
+            //lblSubtotal.Visible = estado;
+            //lblDescuento.Visible = estado;
+            //lblTotal.Visible = estado;
+        }
+
+        private void lstAtenciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lblError.Visible = true;
+            lblError.Text = "Consultando aseguradora";
+            lblError.ForeColor = System.Drawing.Color.Violet;
+            try
+            {
+                ATENCION_AGEN atencion = new ATENCION_AGEN();
+                PACIENTE paciente = new PACIENTE();
+                PRESTACION prestacion = new PRESTACION();
+                ResultadoVerificacionSeguro seguro = new ResultadoVerificacionSeguro();
+                using (var context = new CMHEntities())
+                {
+                    atencion = context.ATENCION_AGEN.Find(((ComboboxItem)lstAtenciones.SelectedItem).Value);
+                    paciente = context.PACIENTE.Find(atencion.ID_PACIENTE);
+                    prestacion = context.PRESTACION.Find(atencion.ID_PRESTACION);
+                }
+
+                seguro = at.verificarSeguro(prestacion, paciente);
+                lblSubtotal.Text = atencion.PRESTACION.PRECIO_PRESTACION.ToString();
+                lblDescuento.Text = seguro.Descuento.ToString();
+                lblTotal.Text = (int.Parse(lblSubtotal.Text) - int.Parse(lblDescuento.Text)).ToString();
+            }
+            catch (Exception ex)
+            {
+            }
+            lblError.Visible = false;
         }
 
         private void FrmIngresarPaciente_FormClosed(object sender, FormClosedEventArgs e)

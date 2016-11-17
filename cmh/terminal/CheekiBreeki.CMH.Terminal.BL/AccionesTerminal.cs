@@ -1569,7 +1569,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
             atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
             return (atenciones);
         }
-
         #endregion
     }
 }
