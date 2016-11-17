@@ -365,16 +365,11 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Fecha vacía");
                 }
-                else if (atencion.OBSERVACIONES == String.Empty ||
-                         atencion.OBSERVACIONES == null)
-                {
-                    throw new Exception("Observacion vacia");
-                }
                 else
                 {
                     ESTADO_ATEN estadoatencion = new ESTADO_ATEN();
                     estadoatencion.NOM_ESTADO_ATEN = "ANULADO";
-                    estadoatencion = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == estadoatencion.NOM_ESTADO_ATEN).FirstOrDefault();
+                    estadoatencion = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == estadoatencion.NOM_ESTADO_ATEN).FirstOrDefault();
 
                     atencion = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
                     atencion.ID_ESTADO_ATEN = estadoatencion.ID_ESTADO_ATEN;
@@ -1556,7 +1551,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return (prestaciones);
         }
 
-        public List<ATENCION_AGEN> listaAtenciones(int rut)
+        public List<ATENCION_AGEN> listaAtencionesVigentes(int rut)
         {
             List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
                 .Where(d => d.PACIENTE.RUT == rut &&
@@ -1564,6 +1559,17 @@ namespace CheekiBreeki.CMH.Terminal.BL
             atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
             return (atenciones);
         }
+
+        public List<ATENCION_AGEN> listaAtencionesVigentesPagadas(int rut)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => d.PACIENTE.RUT == rut &&
+                    (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE" ||
+                    d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
+            atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
+            return (atenciones);
+        }
+
         #endregion
     }
 }

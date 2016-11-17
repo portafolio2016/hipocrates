@@ -36,6 +36,7 @@
             this.btnIngresarPaciente = new System.Windows.Forms.Button();
             this.btnAbrirCaja = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
+            this.btnAnularAtencion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -117,11 +118,22 @@
             this.btnCerrarCaja.UseVisualStyleBackColor = true;
             this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
             // 
+            // btnAnularAtencion
+            // 
+            this.btnAnularAtencion.Location = new System.Drawing.Point(55, 315);
+            this.btnAnularAtencion.Name = "btnAnularAtencion";
+            this.btnAnularAtencion.Size = new System.Drawing.Size(128, 23);
+            this.btnAnularAtencion.TabIndex = 8;
+            this.btnAnularAtencion.Text = "Anular atención";
+            this.btnAnularAtencion.UseVisualStyleBackColor = true;
+            this.btnAnularAtencion.Click += new System.EventHandler(this.btnAnularAtencion_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnAnularAtencion);
             this.Controls.Add(this.btnCerrarCaja);
             this.Controls.Add(this.btnAbrirCaja);
             this.Controls.Add(this.btnIngresarPaciente);
@@ -148,5 +160,6 @@
         private System.Windows.Forms.Button btnIngresarPaciente;
         private System.Windows.Forms.Button btnAbrirCaja;
         private System.Windows.Forms.Button btnCerrarCaja;
+        private System.Windows.Forms.Button btnAnularAtencion;
     }
 }

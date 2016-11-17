@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class FrmIngresarPaciente : Form
+    public partial class FrmAnularAtencion : Form
     {
         AccionesTerminal at = new AccionesTerminal();
         FrmLogin login = null;
         bool closeApp;
 
-        public FrmIngresarPaciente(FrmLogin padre)
+        public FrmAnularAtencion(FrmLogin padre)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -42,7 +42,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             ActualizarLista();
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private void btnAnular_Click(object sender, EventArgs e)
         {
             bool res = false;
             try
@@ -52,7 +52,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 {
                     atencion = context.ATENCION_AGEN.Find(((ComboboxItem)lstAtenciones.SelectedItem).Value);
                 }
-                res = at.ingresarPaciente(atencion);
+                res = at.anularAtencion(atencion);
                 ActualizarLista();
                 res = true;
             }
@@ -63,13 +63,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
             if (res)
             {
                 lblError.Visible = true;
-                lblError.Text = "Paciente ingresado correctamente";
+                lblError.Text = "Atención anulada correctamente";
                 lblError.ForeColor = System.Drawing.Color.Green;
             }
             else
             {
                 lblError.Visible = true;
-                lblError.Text = "Error al ingresar paciente";
+                lblError.Text = "Error al anular atención";
                 lblError.ForeColor = System.Drawing.Color.Red;
             }
         }
@@ -86,7 +86,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     res = false;
                 else
                 {
-                    List<ATENCION_AGEN> atenciones = at.listaAtencionesVigentes(rut).ToList();
+                    List<ATENCION_AGEN> atenciones = at.listaAtencionesVigentesPagadas(rut).ToList();
                     foreach (ATENCION_AGEN atencion in atenciones)
                     {
                         ComboboxItem item = new ComboboxItem();

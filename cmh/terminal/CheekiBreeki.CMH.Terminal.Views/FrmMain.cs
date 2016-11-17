@@ -103,6 +103,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
 
+        private void btnAnularAtencion_Click(object sender, EventArgs e)
+        {
+            FrmAnularAtencion frmAnularAtencion = new FrmAnularAtencion(login);
+            frmAnularAtencion.Show();
+            frmAnularAtencion.Activate();
+            this.Hide();
+        }
+
         private void comprobarCajaAbierta()
         { 
             UsuarioLogeado usuario = FrmLogin.usuarioLogeado;
