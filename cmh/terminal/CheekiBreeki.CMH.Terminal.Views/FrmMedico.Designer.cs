@@ -42,10 +42,8 @@
             this.cerrarConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.atencionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbActualizarFichaMedica = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.rtContenidoEntradaAFM = new System.Windows.Forms.RichTextBox();
             this.tbNombreEntradaAFM = new System.Windows.Forms.TextBox();
-            this.mcFechaEntradaAFM = new System.Windows.Forms.MonthCalendar();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.btnAgregarEntradaAFM = new System.Windows.Forms.Button();
@@ -143,10 +141,10 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Controls.Add(this.gbActualizarFichaMedica);
             this.groupBox1.Controls.Add(this.gbVerFichaMedica);
             this.groupBox1.Controls.Add(this.gbAgendaDiaria);
-            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Location = new System.Drawing.Point(1, 35);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
@@ -227,10 +225,8 @@
             // 
             this.gbActualizarFichaMedica.Controls.Add(this.label2);
             this.gbActualizarFichaMedica.Controls.Add(this.cbTipoEntradaAFM);
-            this.gbActualizarFichaMedica.Controls.Add(this.label1);
             this.gbActualizarFichaMedica.Controls.Add(this.rtContenidoEntradaAFM);
             this.gbActualizarFichaMedica.Controls.Add(this.tbNombreEntradaAFM);
-            this.gbActualizarFichaMedica.Controls.Add(this.mcFechaEntradaAFM);
             this.gbActualizarFichaMedica.Controls.Add(this.label14);
             this.gbActualizarFichaMedica.Controls.Add(this.label13);
             this.gbActualizarFichaMedica.Controls.Add(this.btnAgregarEntradaAFM);
@@ -248,43 +244,27 @@
             this.gbActualizarFichaMedica.Text = "Actualizar ficha médica";
             this.gbActualizarFichaMedica.Visible = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(505, 220);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Fecha entrada:";
-            // 
             // rtContenidoEntradaAFM
             // 
-            this.rtContenidoEntradaAFM.Location = new System.Drawing.Point(106, 247);
+            this.rtContenidoEntradaAFM.Location = new System.Drawing.Point(137, 243);
             this.rtContenidoEntradaAFM.MaxLength = 1028;
             this.rtContenidoEntradaAFM.Name = "rtContenidoEntradaAFM";
-            this.rtContenidoEntradaAFM.Size = new System.Drawing.Size(393, 162);
+            this.rtContenidoEntradaAFM.Size = new System.Drawing.Size(590, 162);
             this.rtContenidoEntradaAFM.TabIndex = 21;
             this.rtContenidoEntradaAFM.Text = "";
             // 
             // tbNombreEntradaAFM
             // 
-            this.tbNombreEntradaAFM.Location = new System.Drawing.Point(106, 217);
+            this.tbNombreEntradaAFM.Location = new System.Drawing.Point(137, 217);
             this.tbNombreEntradaAFM.MaxLength = 64;
             this.tbNombreEntradaAFM.Name = "tbNombreEntradaAFM";
-            this.tbNombreEntradaAFM.Size = new System.Drawing.Size(393, 20);
+            this.tbNombreEntradaAFM.Size = new System.Drawing.Size(588, 20);
             this.tbNombreEntradaAFM.TabIndex = 20;
-            // 
-            // mcFechaEntradaAFM
-            // 
-            this.mcFechaEntradaAFM.Location = new System.Drawing.Point(508, 247);
-            this.mcFechaEntradaAFM.MaxSelectionCount = 1;
-            this.mcFechaEntradaAFM.Name = "mcFechaEntradaAFM";
-            this.mcFechaEntradaAFM.TabIndex = 19;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 250);
+            this.label14.Location = new System.Drawing.Point(32, 250);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(97, 13);
             this.label14.TabIndex = 18;
@@ -293,7 +273,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 220);
+            this.label13.Location = new System.Drawing.Point(32, 220);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(86, 13);
             this.label13.TabIndex = 17;
@@ -302,9 +282,9 @@
             // btnAgregarEntradaAFM
             // 
             this.btnAgregarEntradaAFM.Enabled = false;
-            this.btnAgregarEntradaAFM.Location = new System.Drawing.Point(508, 413);
+            this.btnAgregarEntradaAFM.Location = new System.Drawing.Point(546, 415);
             this.btnAgregarEntradaAFM.Name = "btnAgregarEntradaAFM";
-            this.btnAgregarEntradaAFM.Size = new System.Drawing.Size(248, 23);
+            this.btnAgregarEntradaAFM.Size = new System.Drawing.Size(181, 23);
             this.btnAgregarEntradaAFM.TabIndex = 16;
             this.btnAgregarEntradaAFM.Text = "Agregar Entrada";
             this.btnAgregarEntradaAFM.UseVisualStyleBackColor = true;
@@ -391,6 +371,7 @@
             // tbVerificadorAFM
             // 
             this.tbVerificadorAFM.Location = new System.Drawing.Point(440, 30);
+            this.tbVerificadorAFM.MaxLength = 1;
             this.tbVerificadorAFM.Name = "tbVerificadorAFM";
             this.tbVerificadorAFM.Size = new System.Drawing.Size(23, 20);
             this.tbVerificadorAFM.TabIndex = 13;
@@ -407,6 +388,7 @@
             // tbRUNAFM
             // 
             this.tbRUNAFM.Location = new System.Drawing.Point(280, 30);
+            this.tbRUNAFM.MaxLength = 10;
             this.tbRUNAFM.Name = "tbRUNAFM";
             this.tbRUNAFM.Size = new System.Drawing.Size(143, 20);
             this.tbRUNAFM.TabIndex = 12;
@@ -517,6 +499,7 @@
             // tbVerificadorVFM
             // 
             this.tbVerificadorVFM.Location = new System.Drawing.Point(434, 70);
+            this.tbVerificadorVFM.MaxLength = 1;
             this.tbVerificadorVFM.Name = "tbVerificadorVFM";
             this.tbVerificadorVFM.Size = new System.Drawing.Size(23, 20);
             this.tbVerificadorVFM.TabIndex = 4;
@@ -524,6 +507,7 @@
             // tbRUNVFM
             // 
             this.tbRUNVFM.Location = new System.Drawing.Point(274, 70);
+            this.tbRUNVFM.MaxLength = 10;
             this.tbRUNVFM.Name = "tbRUNVFM";
             this.tbRUNVFM.Size = new System.Drawing.Size(143, 20);
             this.tbRUNVFM.TabIndex = 3;
@@ -608,6 +592,7 @@
             // tbNuevoMail
             // 
             this.tbNuevoMail.Location = new System.Drawing.Point(205, 59);
+            this.tbNuevoMail.MaxLength = 80;
             this.tbNuevoMail.Name = "tbNuevoMail";
             this.tbNuevoMail.Size = new System.Drawing.Size(409, 20);
             this.tbNuevoMail.TabIndex = 7;
@@ -648,6 +633,7 @@
             // tbContrasenaActual
             // 
             this.tbContrasenaActual.Location = new System.Drawing.Point(206, 62);
+            this.tbContrasenaActual.MaxLength = 40;
             this.tbContrasenaActual.Name = "tbContrasenaActual";
             this.tbContrasenaActual.PasswordChar = '*';
             this.tbContrasenaActual.Size = new System.Drawing.Size(408, 20);
@@ -666,6 +652,7 @@
             // tbContrasenaNueva
             // 
             this.tbContrasenaNueva.Location = new System.Drawing.Point(206, 136);
+            this.tbContrasenaNueva.MaxLength = 40;
             this.tbContrasenaNueva.Name = "tbContrasenaNueva";
             this.tbContrasenaNueva.PasswordChar = '*';
             this.tbContrasenaNueva.Size = new System.Drawing.Size(408, 20);
@@ -714,7 +701,7 @@
             // cbTipoEntradaAFM
             // 
             this.cbTipoEntradaAFM.FormattingEnabled = true;
-            this.cbTipoEntradaAFM.Location = new System.Drawing.Point(106, 415);
+            this.cbTipoEntradaAFM.Location = new System.Drawing.Point(137, 415);
             this.cbTipoEntradaAFM.Name = "cbTipoEntradaAFM";
             this.cbTipoEntradaAFM.Size = new System.Drawing.Size(393, 21);
             this.cbTipoEntradaAFM.TabIndex = 23;
@@ -722,7 +709,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 418);
+            this.label2.Location = new System.Drawing.Point(32, 418);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 24;
@@ -861,11 +848,9 @@
         private System.Windows.Forms.TextBox tbRUNAFM;
         private System.Windows.Forms.RichTextBox rtContenidoEntradaAFM;
         private System.Windows.Forms.TextBox tbNombreEntradaAFM;
-        private System.Windows.Forms.MonthCalendar mcFechaEntradaAFM;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnAgregarEntradaAFM;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbTipoEntradaAFM;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreEntrada;

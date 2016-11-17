@@ -397,7 +397,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 ENTRADA_FICHA aux = new ENTRADA_FICHA();
                 aux.CONTENIDO_ENTRADA = rtContenidoEntradaAFM.Text;
                 aux.NOMBRE_ENTRADA = tbNombreEntradaAFM.Text;
-                aux.FECHA_ENTRADA = mcFechaEntradaAFM.SelectionStart;
+                aux.FECHA_ENTRADA = DateTime.Now;
                 aux.ID_PACIENTE = paciente.ID_PACIENTE;
                 aux.ID_TIPO_FICHA = ((ComboboxItem)cbTipoEntradaAFM.SelectedItem).Value;
                 bool result = acciones.agregarEntradaFicha(aux);
