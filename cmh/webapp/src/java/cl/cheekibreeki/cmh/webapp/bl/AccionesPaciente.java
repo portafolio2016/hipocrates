@@ -228,7 +228,7 @@ public class AccionesPaciente {
                 nomDiaBuscar = "Viernes";
                 break;
             case 7:
-                nomDiaBuscar = "Sábado";
+                nomDiaBuscar = "Sabado";
                 break;
             default:
                 throw new Exception("Dia invalido");

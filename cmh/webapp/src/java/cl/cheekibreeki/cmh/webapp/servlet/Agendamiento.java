@@ -52,9 +52,11 @@ public class Agendamiento extends HttpServlet {
             if(request.getParameter("tipoPrestacion")!= null){
                 TipoPres tipoPrestacion = (TipoPres)Controller.findById(TipoPres.class, Integer.parseInt(request.getParameter("tipoPrestacion")));
                 request.setAttribute("tipoPrestacion", tipoPrestacion);
-                int idTipoPrestacionAnterior = Integer.parseInt(request.getParameter("tipoPrestacion"));
-                //si se selecciona un nuevo tipo prestacion
-                esMismoIdTipoPrestacion =  idTipoPrestacionAnterior == tipoPrestacion.getIdTipoPrestacion();
+                if(tipoPrestacion != null){
+                    int idTipoPrestacionAnterior = Integer.parseInt(request.getParameter("tipoPrestacion"));    
+                    esMismoIdTipoPrestacion =  idTipoPrestacionAnterior == tipoPrestacion.getIdTipoPrestacion();
+                }
+                
             }
             //Obtener prestaciones filtradas
             ArrayList<Prestacion> prestaciones = AgendamientoController.obtenerPrestaciones(request);
@@ -64,7 +66,9 @@ public class Agendamiento extends HttpServlet {
                 Prestacion prestacion = (Prestacion)Controller.findById(Prestacion.class, Integer.parseInt(request.getParameter("prestacion")));    
                 request.setAttribute("prestacion", prestacion);
                 int idPresatcionAnterior = Integer.parseInt(request.getParameter("prestacion"));
-                esMismaPrestacion = idPresatcionAnterior == prestacion.getIdPrestacion();
+                if(prestacion != null){
+                    esMismaPrestacion = idPresatcionAnterior == prestacion.getIdPrestacion();    
+                }
                 ArrayList<Personal> medicos = AgendamientoController.obtenerPersonal(request);
                 request.setAttribute("medicos", medicos);
             }else{
