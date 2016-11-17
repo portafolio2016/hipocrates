@@ -1,26 +1,12 @@
-package cl.cheekibreeki.cmh.webapp.servlet;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
-import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
-import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
-import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
-import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
-import cl.cheekibreeki.cmh.webapp.bl.AccionesPaciente;
-import cl.cheekibreeki.cmh.webapp.bl.HoraDisponible;
-import cl.cheekibreeki.cmh.webapp.bl.HorasDisponibles;
-import cl.cheekibreeki.cmh.webapp.util.AgendamientoController;
-import cl.cheekibreeki.cmh.webapp.util.Validador;
+package cl.cheekibreeki.cmh.webapp.servlet;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dev
  */
-public class Agendamiento extends HttpServlet {
+public class Agendar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +30,18 @@ public class Agendamiento extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        AgendamientoController.cargarTodosTiposPrestaciones(request);
-        AgendamientoController.cargarPrestaciones(request);
-        AgendamientoController.cargarPersonal(request);
-        AgendamientoController.cargarHorasLibres(request);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Agendar</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Agendar at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

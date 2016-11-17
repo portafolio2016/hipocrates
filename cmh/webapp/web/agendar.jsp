@@ -47,14 +47,34 @@
                 </div>
             </c:if>
             <c:if test="${not empty requestScope.medico}">
+                <c:if test="${not empty requestScope.fecha}">
+                    <div class="form-group">
+                        <label for="fecha">Fecha</label>
+                        <input type="date" required name="fecha" value="${requestScope.fecha}" id="fecha" onchange="this.form.submit()"/>
+                    </div>
+                </c:if>
+                <c:if test="${empty requestScope.fecha}">
+                    <div class="form-group">
+                        <label for="fecha">Fecha</label>
+                        <input type="date" required name="fecha" id="fecha" onchange="this.form.submit()"/>
+                    </div>
+                </c:if>
+            </c:if>
+            <c:if test="${not empty requestScope.horas}">
                 <div class="form-group">
-                    <label for="fecha">Fecha</label>
-                    <input type="date" required name="fecha" id="fecha" onchange="this.form.submit()"/>
+                    <label for="hora">Horas disponibles</label>
+                    <select class="form-control" id="hora" name="hora">
+                        <c:if test="${empty requestScope.hora}">
+                            <option value='-1'>---</option>
+                        </c:if>
+                        <c:forEach var="hora" items="${requestScope.horas.getHoras()}">
+                            <option value="${hora.getBloque().getIdBloque()}">
+                                ${hora.toString()}
+                            </option>
+                        </c:forEach>
+                    </select>
                 </div>
             </c:if>
-          
-
-
             <button type="submit" class="btn btn-default">Reservar</button>
         </form>  
     </div>
