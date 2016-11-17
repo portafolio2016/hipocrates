@@ -10,11 +10,16 @@ import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
 import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
 import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
 import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
+import cl.cheekibreeki.cmh.webapp.bl.AccionesPaciente;
+import cl.cheekibreeki.cmh.webapp.bl.HoraDisponible;
+import cl.cheekibreeki.cmh.webapp.bl.HorasDisponibles;
 import cl.cheekibreeki.cmh.webapp.util.AgendamientoController;
+import cl.cheekibreeki.cmh.webapp.util.Validador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -76,13 +81,29 @@ public class Agendamiento extends HttpServlet {
             }
             
             if(request.getParameter("fecha") != null && esMismoMedico){
-                String fecnac = request.getParameter("fecha");
+                String fecString = request.getParameter("fecha");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 try {
-                    Date fecnacDate = format.parse(fecnac);    
+                    Date fecha = format.parse(fecString);
+                    //valido la fecha
+                    boolean fechaValida = Validador.fechaFutura(fecha);
+                    if(fechaValida){
+                        request.setAttribute("fecha", fecha);
+                        //Obtener las horas libres del médico
+                        AccionesPaciente accionesPaciente = new AccionesPaciente();
+                        Personal personal = (Personal)request.getAttribute("medico");
+                        Collection<PersMedico> personalMedicoCollection = personal.getPersMedicoCollection();
+                        PersMedico medico = null;
+                        for(PersMedico persMedico : personalMedicoCollection){
+                            medico = persMedico;
+                        }
+                        HorasDisponibles horasDisponibles = accionesPaciente.horasDisponiblesMedico(medico, fecha);
+                        request.setAttribute("horas", horasDisponibles);
+                    }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
+                
             }
 //        }
     }
