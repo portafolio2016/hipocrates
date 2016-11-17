@@ -81,9 +81,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             break;
 
                         case "MEDICO":
-                            FrmMain frmMain2 = new FrmMain(this);
-                            frmMain2.Show();
-                            frmMain2.Activate();
+                            FrmMedico frmMedico = new FrmMedico(this);
+                            frmMedico.Show();
+                            frmMedico.Activate();
                             this.Hide();
                             break;
 
