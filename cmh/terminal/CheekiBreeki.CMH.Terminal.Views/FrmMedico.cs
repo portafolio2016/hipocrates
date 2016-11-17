@@ -19,6 +19,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         bool closeApp;
         private static AccionesTerminal acciones = new AccionesTerminal();
         private static List<ENTRADA_FICHA> entradaList;
+        private static PACIENTE paciente;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                                                              //
@@ -84,8 +85,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     PERSONAL personal = Login.verificarUsuario(FrmLogin.usuarioLogeado.Personal.EMAIL, tbContrasenaActual.Text);
                     personal.HASHED_PASS = Util.hashMD5(tbContrasenaNueva.Text.TrimStart().TrimEnd());
                     bool x = acciones.actualizarPersonal(personal);
-                    if(x)
+                    if (x)
+                    {
                         MessageBox.Show("Contraseña actualizada con exito", "Contraseña", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        tbContrasenaActual.Text = "";
+                        tbContrasenaNueva.Text = "";
+                    }
                     else
                         MessageBox.Show("Error al actualizar contraseña", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -152,11 +157,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void InitGB(GroupBox x)
         {
-            gbAbrirConsultaMedica.Hide();
-            gbCerrarConsultaMedica.Hide();
+            gbActualizarFichaMedica.Hide();
             gbOpcionesUsuario.Hide();
             gbAgendaDiaria.Hide();
             gbVerFichaMedica.Hide();
+            gbActualizarFichaMedica.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
@@ -211,6 +216,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void verFichaMédicaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InitGB(gbVerFichaMedica);
+            tbRUNVFM.Text = "";
+            tbVerificadorVFM.Text = "";
+            lbNombreVFM.Text = "";
+            lbEmailVFM.Text = "";
+            lbRun.Text = "";
+            lbSexoVFM.Text = "";
+            lbFechaNacVFM.Text = "";
+            dgEntradaVFM.Rows.Clear();
         }
 
         private void btnBuscarVFM_Click(object sender, EventArgs e)
@@ -219,7 +232,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 if (ValidaRut(tbRUNVFM.Text +"-"+ tbVerificadorVFM.Text))
                 {
-                    PACIENTE paciente = acciones.buscarPaciente(Int32.Parse(tbRUNVFM.Text),tbVerificadorVFM.Text);
+                    paciente = acciones.buscarPaciente(Int32.Parse(tbRUNVFM.Text),tbVerificadorVFM.Text);
                     if (paciente != null)
                     {
                         //Ruta buena
@@ -230,6 +243,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         lbFechaNacVFM.Text = "Fecha nacimiento: " + paciente.FEC_NAC.Value.ToShortDateString();
 
                         entradaList = new List<ENTRADA_FICHA>(paciente.ENTRADA_FICHA);
+                        dgEntradaVFM.Rows.Clear();
                         if (entradaList != null)
                         {
                             foreach (ENTRADA_FICHA aux in entradaList)
@@ -310,6 +324,94 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 FrmContenidoEntrada frmCont = new FrmContenidoEntrada(entradaList[e.RowIndex].CONTENIDO_ENTRADA);
                 frmCont.Show();
                 frmCont.Activate();
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   ACTUALIZAR FICHAS MEDICAS                                                                                                  //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void actualizarFichaMédicaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbActualizarFichaMedica);
+            tbRUNAFM.Text = "";
+            tbVerificadorAFM.Text = "";
+            btnAgregarEntradaAFM.Enabled = false;
+            lbNombreAFM.Text = "";
+            lbEmailAFM.Text = "";
+            lbRunAFM.Text = "";
+            lbSexoAFM.Text = "";
+            lbFechaNacAFM.Text = "";
+        }
+
+        private void btnBuscarAFM_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbRUNAFM.Text.Trim()) && !string.IsNullOrEmpty(tbVerificadorAFM.Text.Trim()))
+            {
+                if (ValidaRut(tbRUNAFM.Text + "-" + tbVerificadorAFM.Text))
+                {
+                    paciente = acciones.buscarPaciente(Int32.Parse(tbRUNAFM.Text), tbVerificadorAFM.Text);
+                    if (paciente != null)
+                    {
+                        //Ruta buena
+                        lbNombreAFM.Text = "Nombre: " + paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE;
+                        lbEmailAFM.Text = "Email: " + paciente.EMAIL_PACIENTE;
+                        lbRunAFM.Text = "RUN: " + paciente.RUT + "-" + paciente.DIGITO_VERIFICADOR;
+                        lbSexoAFM.Text = "Sexo: " + paciente.SEXO;
+                        lbFechaNacAFM.Text = "Fecha nacimiento: " + paciente.FEC_NAC.Value.ToShortDateString();
+                        btnAgregarEntradaAFM.Enabled = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Paciente no encontrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Run invalido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (string.IsNullOrEmpty(tbRUNVFM.Text.Trim()))
+            {
+                MessageBox.Show("Campo de RUN vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(tbRUNVFM.Text.Trim()))
+            {
+                MessageBox.Show("Campo de digito verificador vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAgregarEntradaAFM_Click(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(tbNombreEntradaAFM.Text.Trim()) && !string.IsNullOrEmpty(rtContenidoEntradaAFM.Text.Trim())){
+                ENTRADA_FICHA aux = new ENTRADA_FICHA();
+                aux.CONTENIDO_ENTRADA = rtContenidoEntradaAFM.Text;
+                aux.NOMBRE_ENTRADA = tbNombreEntradaAFM.Text;
+                aux.FECHA_ENTRADA = mcFechaEntradaAFM.SelectionStart;
+                aux.ID_PACIENTE = paciente.ID_PACIENTE;
+                //HAY QUE CAMBIAR ESTO
+                aux.ID_TIPO_FICHA = 1;
+                //HAY QUE CAMBIARLOOO
+                bool result = acciones.agregarEntradaFicha(aux);
+                if (result)
+                {
+                    MessageBox.Show("Entrada ingresada con exito", "Entrada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    tbNombreEntradaAFM.Text = "";
+                    rtContenidoEntradaAFM.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("La entrada no ha sido ingresada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (string.IsNullOrEmpty(tbNombreEntradaAFM.Text.Trim()))
+            {
+                MessageBox.Show("El nombre de entrada esta vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(rtContenidoEntradaAFM.Text.Trim()))
+            {
+                MessageBox.Show("El contenido de entrada esta vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

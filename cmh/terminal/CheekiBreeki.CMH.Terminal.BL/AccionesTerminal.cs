@@ -179,8 +179,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    conexionDB.ENTRADA_FICHA.Add(entradaFicha);
-                    conexionDB.SaveChangesAsync();
+                    using (var con = new CMHEntities()) {
+                        con.ENTRADA_FICHA.Add(entradaFicha);
+                        con.SaveChangesAsync();
+                    }
                     return true;
                 }
 
