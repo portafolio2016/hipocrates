@@ -81,5 +81,12 @@ public class HoraDisponible {
     public void setMinuFin(int minuFin) {
         this.minuFin = minuFin;
     }
+
+    @Override
+    public String toString() {
+        return this.getHoraIni() +":"+ this.getMinuIni() + " - " +
+                this.getHoraFin() + ":" + this.getMinuFin();
+    }
+    
     
 }
