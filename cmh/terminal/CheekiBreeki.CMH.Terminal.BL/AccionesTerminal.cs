@@ -124,21 +124,18 @@ namespace CheekiBreeki.CMH.Terminal.BL
             ResultadoVerificacionSeguro resultado = new ResultadoVerificacionSeguro();
             resultado.TieneSeguro = response.AfiliadoTieneSeguro;
             resultado.Descuento = response.DescuentoPesos;
+            resultado.Aseguradora = response.NombreAseguradora;
             return resultado;
         }
 
         //ECU-008
-        public Boolean registrarPago(PAGO pago)
+        public Boolean registrarPago(PAGO pago, string aseguradora, int cantBono)
         {
             try
             {
                 if (Util.isObjetoNulo(pago))
                 {
                     throw new Exception("Pago nulo");
-                }
-                else if (Util.isObjetoNulo(conexionDB.BONO.Find(pago.ID_BONO)))
-                {
-                    throw new Exception("Bono no existe");
                 }
                 else if (Util.isObjetoNulo(conexionDB.CAJA.Find(pago.ID_CAJA)))
                 {
@@ -150,6 +147,14 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
+                    BONO bono = new BONO();
+                    bono.CANT_BONO = cantBono;
+                    bono.ID_ASEGURADORA = conexionDB.ASEGURADORA.Where(d => d.NOM_ASEGURADORA == aseguradora).FirstOrDefault().ID_ASEGURADORA;
+                    conexionDB.BONO.Add(bono);
+                    conexionDB.SaveChangesAsync();
+
+                    pago.ID_BONO = bono.ID_BONO;
+                    pago.FECHOR = DateTime.Today;
                     conexionDB.PAGO.Add(pago);
                     conexionDB.SaveChangesAsync();
                     return true;

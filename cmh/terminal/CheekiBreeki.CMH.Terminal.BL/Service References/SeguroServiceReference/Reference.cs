@@ -105,6 +105,9 @@ namespace CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int DescuentoPesosField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreAseguradoraField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -137,6 +140,19 @@ namespace CheekiBreeki.CMH.Terminal.BL.SeguroServiceReference {
                 if ((this.DescuentoPesosField.Equals(value) != true)) {
                     this.DescuentoPesosField = value;
                     this.RaisePropertyChanged("DescuentoPesos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NombreAseguradora {
+            get {
+                return this.NombreAseguradoraField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreAseguradoraField, value) != true)) {
+                    this.NombreAseguradoraField = value;
+                    this.RaisePropertyChanged("NombreAseguradora");
                 }
             }
         }

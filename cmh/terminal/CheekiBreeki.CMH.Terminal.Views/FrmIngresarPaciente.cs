@@ -24,6 +24,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.StartPosition = FormStartPosition.CenterScreen;
             login = padre;
             closeApp = true;
+            btnIngresar.Enabled = false;
         }
 
         public class ComboboxItem
@@ -45,23 +46,33 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            bool res = false;
+            bool res1 = false, res2 = false;
             try
             {
+                UsuarioLogeado usuario = FrmLogin.usuarioLogeado;
                 ATENCION_AGEN atencion = new ATENCION_AGEN();
+                PAGO pago = new PAGO();
+                CAJA caja = new CAJA();
                 using (var context = new CMHEntities())
                 {
                     atencion = context.ATENCION_AGEN.Find(((ComboboxItem)lstAtenciones.SelectedItem).Value);
                 }
-                res = at.ingresarPaciente(atencion);
+                caja = at.buscarCajaAbierta(usuario.Personal.FUNCIONARIO.FirstOrDefault());
+
+                pago.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                pago.MONTO_PAGO = int.Parse(lblTotal.Text);
+                pago.ID_CAJA = caja.ID_CAJA;
+
+                res1 = at.ingresarPaciente(atencion);
+                res2 = at.registrarPago(pago, lblAseguradora.Text, int.Parse(lblDescuento.Text));
                 ActualizarLista();
-                res = true;
+                res1 = true;
             }
             catch (Exception ex)
             {
-                res = false;
+                res1 = false;
             }
-            if (res)
+            if (res1 && res2)
             {
                 lblError.Visible = true;
                 lblError.Text = "Paciente ingresado correctamente";
@@ -113,6 +124,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblError.Text = "Error al buscar atenciones";
                 lblError.ForeColor = System.Drawing.Color.Red;
             }
+            if (Util.isObjetoNulo(lstAtenciones.SelectedValue))
+                btnIngresar.Enabled = false;
         }
 
         private void mostrarLabelPaciente()
@@ -130,16 +143,18 @@ namespace CheekiBreeki.CMH.Terminal.Views
             lblSubtotal.Visible = estado;
             lblDescuento.Visible = estado;
             lblTotal.Visible = estado;
+            lblAseguradora.Visible = estado;
 
             lblSubtotal.Text = string.Empty;
             lblTotal.Text = string.Empty;
             lblDescuento.Text = string.Empty;
+            lblAseguradora.Text = string.Empty;
         }
 
         private void lstAtenciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             lblError.Visible = true;
-            lblError.Text = "Consultando aseguradora";
+            lblError.Text = "Consultando aseguradora...";
             lblError.ForeColor = System.Drawing.Color.Violet;
             mostrarLabelDescuento();
             try
@@ -159,6 +174,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblSubtotal.Text = atencion.PRESTACION.PRECIO_PRESTACION.ToString();
                 lblTotal.Text = seguro.Descuento.ToString();
                 lblDescuento.Text = (int.Parse(lblSubtotal.Text) - int.Parse(lblTotal.Text)).ToString();
+                lblAseguradora.Text = seguro.Aseguradora;
+                btnIngresar.Enabled = true;
                 lblError.Visible = false;
             }
             catch (Exception ex)
@@ -169,6 +186,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblSubtotal.Text = string.Empty;
                 lblTotal.Text = string.Empty;
                 lblDescuento.Text = string.Empty;
+                btnIngresar.Enabled = false;
             }
         }
 

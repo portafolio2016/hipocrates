@@ -105,6 +105,7 @@ namespace Cheekibreeki.CMH.Seguro.BL
                 }
             }
         }
+
         public BENEFICIO obtenerBeneficioPrestacion(PRESTACION prestacion, List<BENEFICIO> beneficios)
         {
             BENEFICIO beneficio = null;
@@ -113,6 +114,18 @@ namespace Cheekibreeki.CMH.Seguro.BL
                 beneficio = entities.BENEFICIO.Where(d => d.ID_PRESTACION == prestacion.ID_PRESTACION).FirstOrDefault();
             }
             return beneficio;
+        }
+
+        public string obtenerNombreEmpresa(int afiliadoRut)
+        { 
+            AFILIADO afiliado = obtenerAfiliado(afiliadoRut);
+            EMPRESA empresa = new EMPRESA();
+            using (var context = new SeguroEntities())
+            {
+                afiliado.PLAN = context.PLAN.Find(afiliado.ID_PLAN);
+                empresa = afiliado.PLAN.EMPRESA;
+            }
+            return (empresa.NOMBRE);
         }
     }
 }
