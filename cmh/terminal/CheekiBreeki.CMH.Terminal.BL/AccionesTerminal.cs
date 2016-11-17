@@ -175,8 +175,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    conexionDB.ENTRADA_FICHA.Add(entradaFicha);
-                    conexionDB.SaveChangesAsync();
+                    using (var con = new CMHEntities()) {
+                        con.ENTRADA_FICHA.Add(entradaFicha);
+                        con.SaveChangesAsync();
+                    }
                     return true;
                 }
 
@@ -851,7 +853,20 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    conexionDB.SaveChangesAsync();
+                    using (var context = new CMHEntities())
+                    {
+                        PERSONAL buscado = context.PERSONAL.Where(d => d.ID_PERSONAL == personal.ID_PERSONAL).FirstOrDefault();
+                        buscado.EMAIL = personal.EMAIL;
+                        buscado.NOMBRES = personal.NOMBRES;
+                        buscado.APELLIDOS = personal.APELLIDOS;
+                        buscado.HASHED_PASS = personal.HASHED_PASS;
+                        buscado.PORCENT_DESCUENTO = personal.PORCENT_DESCUENTO;
+                        buscado.REMUNERACION = personal.REMUNERACION;
+                        buscado.RUT = personal.RUT;
+                        buscado.VERIFICADOR = personal.VERIFICADOR;
+                        buscado.ACTIVO = personal.ACTIVO;
+                        context.SaveChangesAsync();
+                    }
                     return true;
                 }
             }
@@ -1466,6 +1481,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d => d.ESPECIALIDAD.ID_ESPECIALIDAD == idEspecialidad).ToList();
             return (prestaciones);
+        }
+        #endregion
+
+        //Tipo Ficha
+        #region TipoFicha
+        public List<TIPO_FICHA> ObtenerTiposFicha()
+        {
+            List<TIPO_FICHA> tipos = conexionDB.TIPO_FICHA.ToList();
+            return tipos;
         }
         #endregion
     }
