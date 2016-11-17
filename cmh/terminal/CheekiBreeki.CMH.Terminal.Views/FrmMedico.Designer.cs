@@ -143,10 +143,10 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.Controls.Add(this.gbActualizarFichaMedica);
             this.groupBox1.Controls.Add(this.gbVerFichaMedica);
             this.groupBox1.Controls.Add(this.gbAgendaDiaria);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
-            this.groupBox1.Controls.Add(this.gbActualizarFichaMedica);
             this.groupBox1.Location = new System.Drawing.Point(1, 35);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
@@ -724,9 +724,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 418);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 13);
+            this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 24;
-            this.label2.Text = "Nombre entrada:";
+            this.label2.Text = "Tipo entrada:";
             // 
             // NombreEntrada
             // 

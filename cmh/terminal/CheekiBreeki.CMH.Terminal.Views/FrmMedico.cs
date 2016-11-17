@@ -232,7 +232,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 if (ValidaRut(tbRUNVFM.Text +"-"+ tbVerificadorVFM.Text))
                 {
-                    paciente = acciones.buscarPaciente(Int32.Parse(tbRUNVFM.Text),tbVerificadorVFM.Text);
+                    AccionesTerminal ac = new AccionesTerminal();
+                    paciente = ac.buscarPaciente(Int32.Parse(tbRUNVFM.Text), tbVerificadorVFM.Text);
                     if (paciente != null)
                     {
                         //Ruta buena
@@ -343,6 +344,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             lbRunAFM.Text = "";
             lbSexoAFM.Text = "";
             lbFechaNacAFM.Text = "";
+            cbTipoEntradaAFM.Items.Clear();
         }
 
         private void btnBuscarAFM_Click(object sender, EventArgs e)
@@ -397,7 +399,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 aux.NOMBRE_ENTRADA = tbNombreEntradaAFM.Text;
                 aux.FECHA_ENTRADA = mcFechaEntradaAFM.SelectionStart;
                 aux.ID_PACIENTE = paciente.ID_PACIENTE;
-                aux.ID_TIPO_FICHA = Int32.Parse(cbTipoEntradaAFM.SelectedValue.ToString());
+                aux.ID_TIPO_FICHA = ((ComboboxItem)cbTipoEntradaAFM.SelectedItem).Value;
                 bool result = acciones.agregarEntradaFicha(aux);
                 if (result)
                 {
