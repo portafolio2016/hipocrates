@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class FrmOrdenAnalisis : Form
+    public partial class FrmAgendarAtencionDerivacion : Form
     {
         AccionesTerminal at = new AccionesTerminal();
         FrmLogin login = null;
         bool closeApp;
 
-        public FrmOrdenAnalisis(FrmLogin padre)
+        public FrmAgendarAtencionDerivacion(FrmLogin padre)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;

@@ -32,7 +32,9 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.btnSesion = new System.Windows.Forms.Button();
             this.btnAgendarAtencion = new System.Windows.Forms.Button();
-            this.btnAbrirOrdenAnalisis = new System.Windows.Forms.Button();
+            this.btnAgendarPorDerivacion = new System.Windows.Forms.Button();
+            this.btnAnularAtencionPorDerivacion = new System.Windows.Forms.Button();
+            this.lblPrivilegioMedico = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -74,22 +76,43 @@
             this.btnAgendarAtencion.UseVisualStyleBackColor = true;
             this.btnAgendarAtencion.Click += new System.EventHandler(this.btnAgendarAtencion_Click);
             // 
-            // btnAbrirOrdenAnalisis
+            // btnAgendarPorDerivacion
             // 
-            this.btnAbrirOrdenAnalisis.Location = new System.Drawing.Point(470, 112);
-            this.btnAbrirOrdenAnalisis.Name = "btnAbrirOrdenAnalisis";
-            this.btnAbrirOrdenAnalisis.Size = new System.Drawing.Size(128, 23);
-            this.btnAbrirOrdenAnalisis.TabIndex = 4;
-            this.btnAbrirOrdenAnalisis.Text = "Abrir Orden Analisis";
-            this.btnAbrirOrdenAnalisis.UseVisualStyleBackColor = true;
-            this.btnAbrirOrdenAnalisis.Click += new System.EventHandler(this.btnOrdenAnalisis_Click);
+            this.btnAgendarPorDerivacion.Location = new System.Drawing.Point(426, 112);
+            this.btnAgendarPorDerivacion.Name = "btnAgendarPorDerivacion";
+            this.btnAgendarPorDerivacion.Size = new System.Drawing.Size(171, 23);
+            this.btnAgendarPorDerivacion.TabIndex = 4;
+            this.btnAgendarPorDerivacion.Text = "Agendar atención por derivación";
+            this.btnAgendarPorDerivacion.UseVisualStyleBackColor = true;
+            this.btnAgendarPorDerivacion.Click += new System.EventHandler(this.btnAgendarPorDerivacion_Click);
+            // 
+            // btnAnularAtencionPorDerivacion
+            // 
+            this.btnAnularAtencionPorDerivacion.Location = new System.Drawing.Point(426, 141);
+            this.btnAnularAtencionPorDerivacion.Name = "btnAnularAtencionPorDerivacion";
+            this.btnAnularAtencionPorDerivacion.Size = new System.Drawing.Size(172, 23);
+            this.btnAnularAtencionPorDerivacion.TabIndex = 5;
+            this.btnAnularAtencionPorDerivacion.Text = "Anular atención por derivación";
+            this.btnAnularAtencionPorDerivacion.UseVisualStyleBackColor = true;
+            this.btnAnularAtencionPorDerivacion.Click += new System.EventHandler(this.btnAnularAtencionPorDerivacion_Click);
+            // 
+            // lblPrivilegioMedico
+            // 
+            this.lblPrivilegioMedico.AutoSize = true;
+            this.lblPrivilegioMedico.Location = new System.Drawing.Point(466, 96);
+            this.lblPrivilegioMedico.Name = "lblPrivilegioMedico";
+            this.lblPrivilegioMedico.Size = new System.Drawing.Size(103, 13);
+            this.lblPrivilegioMedico.TabIndex = 6;
+            this.lblPrivilegioMedico.Text = "Acciones de médico";
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.btnAbrirOrdenAnalisis);
+            this.Controls.Add(this.lblPrivilegioMedico);
+            this.Controls.Add(this.btnAnularAtencionPorDerivacion);
+            this.Controls.Add(this.btnAgendarPorDerivacion);
             this.Controls.Add(this.btnAgendarAtencion);
             this.Controls.Add(this.btnSesion);
             this.Controls.Add(this.lblPrivilegio);
@@ -108,6 +131,8 @@
         private System.Windows.Forms.Label lblPrivilegio;
         private System.Windows.Forms.Button btnSesion;
         private System.Windows.Forms.Button btnAgendarAtencion;
-        private System.Windows.Forms.Button btnAbrirOrdenAnalisis;
+        private System.Windows.Forms.Button btnAgendarPorDerivacion;
+        private System.Windows.Forms.Button btnAnularAtencionPorDerivacion;
+        private System.Windows.Forms.Label lblPrivilegioMedico;
     }
 }

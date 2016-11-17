@@ -66,13 +66,23 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
 
-        private void btnOrdenAnalisis_Click(object sender, EventArgs e)
+        private void btnAgendarPorDerivacion_Click(object sender, EventArgs e)
         {
-            FrmOrdenAnalisis frmOrden = new FrmOrdenAnalisis(login);
-            frmOrden.Show();
-            frmOrden.Activate();
+            FrmAgendarAtencionDerivacion frmAgendarDerivacion = new FrmAgendarAtencionDerivacion(login);
+            frmAgendarDerivacion.Show();
+            frmAgendarDerivacion.Activate();
             this.Hide();
         }
+
+        private void btnAnularAtencionPorDerivacion_Click(object sender, EventArgs e)
+        {
+            FrmAnularAtencionDerivacion frmAnularDerivacion = new FrmAnularAtencionDerivacion(login);
+            frmAnularDerivacion.Show();
+            frmAnularDerivacion.Activate();
+            this.Hide();
+        }
+
+        
 
 
     }

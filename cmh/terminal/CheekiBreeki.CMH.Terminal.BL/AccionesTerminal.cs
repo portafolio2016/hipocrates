@@ -389,6 +389,43 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public Boolean cerrarOrdenAnalisis(ATENCION_AGEN atencion)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion invalida");
+                }
+                else if (atencion.FECHOR == DateTime.MinValue ||
+                         atencion.FECHOR == null)
+                {
+                    throw new Exception("Fecha vacía");
+                }
+                else if (atencion.OBSERVACIONES == String.Empty ||
+                         atencion.OBSERVACIONES == null)
+                {
+                    throw new Exception("Observacion vacia");
+                }
+                else
+                {
+                    ESTADO_ATEN estadoatencion = new ESTADO_ATEN();
+                    estadoatencion.NOM_ESTADO_ATEN = "CERRADO";
+                    estadoatencion = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == estadoatencion.NOM_ESTADO_ATEN.ToUpper()).FirstOrDefault();
+
+                    atencion = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
+                    atencion.ID_ESTADO_ATEN = estadoatencion.ID_ESTADO_ATEN;
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
         //ECU-017
         /// <summary>
         /// Se registra una caja con el respectivo funcionario que la abrio.
@@ -1466,6 +1503,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d => d.ESPECIALIDAD.ID_ESPECIALIDAD == idEspecialidad).ToList();
             return (prestaciones);
+        }
+
+        public List<ATENCION_AGEN> listaAtencionPorDerivacion(int rut)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => d.PACIENTE.RUT == rut &&
+                    d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO" &&
+                    d.ID_PERS_SOLICITA != null).ToList();
+            return (atenciones);
         }
         #endregion
     }
