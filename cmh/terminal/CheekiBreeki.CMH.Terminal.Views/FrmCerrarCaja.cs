@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class FrmAbrirCaja : Form
+    public partial class FrmCerrarCaja : Form
     {
         AccionesTerminal at = new AccionesTerminal();
         FrmLogin login = null;
         bool closeApp;
 
-        public FrmAbrirCaja(FrmLogin padre)
+        public FrmCerrarCaja(FrmLogin padre)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -26,14 +26,15 @@ namespace CheekiBreeki.CMH.Terminal.Views
             closeApp = true;
         }
 
-        private void btnAbrirCaja_Click(object sender, EventArgs e)
+        private void btnCerrarCaja_Click(object sender, EventArgs e)
         {
             bool res = false;
             try
             {
                 FUNCIONARIO funcionario = FrmLogin.usuarioLogeado.Personal.FUNCIONARIO.FirstOrDefault();
                 int dinero = int.Parse(txtDinero.Text);
-                res = at.abrirCaja(funcionario, dinero);
+                int cheques = int.Parse(txtCheques.Text);
+                res = at.cerrarCaja(funcionario, dinero, cheques);
             }
             catch (Exception ex)
             {
@@ -49,7 +50,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             else
             {
                 lblError.Visible = true;
-                lblError.Text = "Error al abrir caja";
+                lblError.Text = "Error al cerrar caja";
                 lblError.ForeColor = System.Drawing.Color.Red;
             }
         }
@@ -62,7 +63,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
-        private void FrmAbrirCaja_FormClosed(object sender, FormClosedEventArgs e)
+        private void FrmCerrarCaja_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (closeApp)
                 Application.Exit();

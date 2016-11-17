@@ -70,6 +70,12 @@
     <Compile Include="FrmAgendarAtencion.Designer.cs">
       <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCerrarCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCerrarCaja.Designer.cs">
+      <DependentUpon>FrmCerrarCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmCrearPaciente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAgendarAtencion.resx">
       <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCerrarCaja.resx">
+      <DependentUpon>FrmCerrarCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCrearPaciente.resx">
       <DependentUpon>FrmCrearPaciente.cs</DependentUpon>

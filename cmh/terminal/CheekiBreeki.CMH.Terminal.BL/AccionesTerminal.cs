@@ -555,6 +555,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
+
+        public Boolean cerrarCaja(FUNCIONARIO funcionario, int dinero, int cheques)
+        {
+            try
+            {
+                List<CAJA> cajas = conexionDB.CAJA.Where(d => d.FUNCIONARIO.ID_FUNCIONARIO == funcionario.ID_FUNCIONARIO && d.FECHOR_CIERRE == null).ToList();
+                CAJA caja = cajas.Where(d => d.FECHOR_APERTURA.Value.Date == DateTime.Today).FirstOrDefault();
+                if (caja.FECHOR_CIERRE == null)
+                {
+                    caja.FECHOR_CIERRE = DateTime.Today;
+                    caja.CANT_EFECTIVO_FIN = dinero;
+                    caja.CANT_CHEQUE_FIN = cheques;
+
+                    conexionDB.SaveChangesAsync();
+
+                    CARGO cargoAuditor = conexionDB.CARGO.Where(d => d.NOMBRE_CARGO.ToUpper() == "JEFE DE OPERADOR").FirstOrDefault();
+                    this.auditarCaja(caja, cargoAuditor);
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
         /// <summary>
         /// Si una caja presenta diferencias, envia un correo notificando a todos los funcionarios con el cargo especificado
         /// </summary>
@@ -1532,7 +1559,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         public List<ATENCION_AGEN> listaAtenciones(int rut)
         {
             List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
-                .Where(d => d.PACIENTE.RUT == rut && 
+                .Where(d => d.PACIENTE.RUT == rut &&
                     d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE").ToList();
             atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
             return (atenciones);

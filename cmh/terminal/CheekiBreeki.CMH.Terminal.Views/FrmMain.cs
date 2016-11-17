@@ -95,6 +95,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
 
+        private void btnCerrarCaja_Click(object sender, EventArgs e)
+        {
+            FrmCerrarCaja frmCerrarCaja = new FrmCerrarCaja(login);
+            frmCerrarCaja.Show();
+            frmCerrarCaja.Activate();
+            this.Hide();
+        }
+
         private void comprobarCajaAbierta()
         { 
             UsuarioLogeado usuario = FrmLogin.usuarioLogeado;
@@ -104,12 +112,21 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 {
                     btnAbrirCaja.Text = "Ya hay una caja abierta";
                     btnAbrirCaja.Enabled = false;
+                    btnCerrarCaja.Text = "Cerrar caja";
+                    btnCerrarCaja.Enabled = true;
+                }
+                else
+                {
+                    btnCerrarCaja.Text = "No hay caja abierta";
+                    btnCerrarCaja.Enabled = false;
                 }
             }
             else
             {
-                btnAbrirCaja.Text = "No puede abrir caja";
+                btnAbrirCaja.Text = "Privilegio inválido";
                 btnAbrirCaja.Enabled = false;
+                btnCerrarCaja.Text = "Privilegio inválido";
+                btnCerrarCaja.Enabled = false;
             }
 
         }
