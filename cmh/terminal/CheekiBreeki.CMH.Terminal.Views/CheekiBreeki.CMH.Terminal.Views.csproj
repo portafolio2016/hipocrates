@@ -58,13 +58,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgendaDiaria.cs" />
-    <Compile Include="FrmContenidoEntrada.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmContenidoEntrada.Designer.cs">
-      <DependentUpon>FrmContenidoEntrada.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +82,9 @@
     <Compile Include="UsuarioLogeado.cs" />
     <EmbeddedResource Include="FrmContenidoEntrada.resx">
       <DependentUpon>FrmContenidoEntrada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAgendarAtencion.resx">
+      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>

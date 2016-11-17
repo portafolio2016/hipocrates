@@ -205,6 +205,7 @@ public class AccionesPaciente {
     
     public DiaSem buscarDiaPorDate(Date date) throws Exception{
         Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
         int numDia = cal.get(Calendar.DAY_OF_WEEK);
         String nomDiaBuscar = "";
         switch(numDia){
