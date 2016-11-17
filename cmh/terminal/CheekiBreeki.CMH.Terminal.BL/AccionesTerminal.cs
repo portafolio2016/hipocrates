@@ -1295,5 +1295,14 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
         #endregion
 
+
+        //Tipo Ficha
+        #region TipoFicha
+        public List<TIPO_FICHA> ObtenerTiposFicha()
+        {
+            List<TIPO_FICHA> tipos = conexionDB.TIPO_FICHA.ToList();
+            return tipos;
+        }
+        #endregion
     }
 }

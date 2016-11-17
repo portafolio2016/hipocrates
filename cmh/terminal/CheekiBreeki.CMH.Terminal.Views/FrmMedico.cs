@@ -248,7 +248,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         {
                             foreach (ENTRADA_FICHA aux in entradaList)
                             {
-                                dgEntradaVFM.Rows.Add(aux.NOMBRE_ENTRADA, "Ver", aux.FECHA_ENTRADA.ToString());
+                                dgEntradaVFM.Rows.Add(aux.NOMBRE_ENTRADA, "Ver", aux.TIPO_FICHA.NOM_TIPO_FICHA, aux.FECHA_ENTRADA.ToString());
                             }
                         }
                     }
@@ -360,7 +360,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         lbRunAFM.Text = "RUN: " + paciente.RUT + "-" + paciente.DIGITO_VERIFICADOR;
                         lbSexoAFM.Text = "Sexo: " + paciente.SEXO;
                         lbFechaNacAFM.Text = "Fecha nacimiento: " + paciente.FEC_NAC.Value.ToShortDateString();
-                        btnAgregarEntradaAFM.Enabled = true;
+                        bool x = InitComboBox();
+                        if(x)
+                            btnAgregarEntradaAFM.Enabled = true;
+                        else
+                        {
+                            btnAgregarEntradaAFM.Enabled = false;
+                            MessageBox.Show("No se pueden cargar los tipos de entrada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
@@ -390,9 +397,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 aux.NOMBRE_ENTRADA = tbNombreEntradaAFM.Text;
                 aux.FECHA_ENTRADA = mcFechaEntradaAFM.SelectionStart;
                 aux.ID_PACIENTE = paciente.ID_PACIENTE;
-                //HAY QUE CAMBIAR ESTO
-                aux.ID_TIPO_FICHA = 1;
-                //HAY QUE CAMBIARLOOO
+                aux.ID_TIPO_FICHA = Int32.Parse(cbTipoEntradaAFM.SelectedValue.ToString());
                 bool result = acciones.agregarEntradaFicha(aux);
                 if (result)
                 {
@@ -415,7 +420,45 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
-       
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public int Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
+        private bool InitComboBox()
+        {
+            List<TIPO_FICHA> tipoFichas = acciones.ObtenerTiposFicha();
+            cbTipoEntradaAFM.Items.Clear();
+            if (tipoFichas != null)
+            {
+                if (tipoFichas.Count != 0)
+                {
+                    foreach (TIPO_FICHA tipo in tipoFichas)
+                    {
+                        ComboboxItem aux = new ComboboxItem();
+                        aux.Text = tipo.NOM_TIPO_FICHA;
+                        aux.Value = tipo.ID_TIPO_FICHA;
+                        cbTipoEntradaAFM.Items.Add(aux);
+                    }
+                    cbTipoEntradaAFM.SelectedIndex = 0; 
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
 
        
 
