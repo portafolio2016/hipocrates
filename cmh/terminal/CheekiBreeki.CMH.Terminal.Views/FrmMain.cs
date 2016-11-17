@@ -66,6 +66,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
 
+        private void btnOrdenAnalisis_Click(object sender, EventArgs e)
+        {
+            FrmOrdenAnalisis frmOrden = new FrmOrdenAnalisis(login);
+            frmOrden.Show();
+            frmOrden.Activate();
+            this.Hide();
+        }
+
 
     }
 }
