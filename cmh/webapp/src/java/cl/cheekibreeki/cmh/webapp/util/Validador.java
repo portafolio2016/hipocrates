@@ -18,7 +18,11 @@ import javax.mail.internet.InternetAddress;
  * @author dev
  */
 public class Validador {
-
+    /***
+     * Retorna si el rut es válido o no
+     * @param rut
+     * @return 
+     */
     public static boolean validarRut(String rut) {
         boolean resultado = false;
         try {
@@ -39,7 +43,12 @@ public class Validador {
         }
         return resultado;
     }
-
+/***
+ * Retorna si el rut es válido o no
+ * @param rut
+ * @param digitoVerificador
+ * @return 
+ */
     public static boolean validarRut(String rut, char digitoVerificador) {
         boolean resultado = false;
         try {
