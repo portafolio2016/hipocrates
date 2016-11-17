@@ -7,6 +7,7 @@ package cl.cheekibreeki.cmh.webapp.servlet;
  */
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
+import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
 import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
 import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
 import cl.cheekibreeki.cmh.webapp.util.AgendamientoController;
@@ -40,21 +41,37 @@ public class Agendamiento extends HttpServlet {
             //Obtener todos los tipos de prestacion
             ArrayList<TipoPres> tiposPrestacion = AgendamientoController.obtenerTipoPres();
             request.setAttribute("tiposPrestacion", tiposPrestacion);
+            boolean esMismoIdTipoPrestacion = false;
             if(request.getParameter("tipoPrestacion")!= null){
                 TipoPres tipoPrestacion = (TipoPres)Controller.findById(TipoPres.class, Integer.parseInt(request.getParameter("tipoPrestacion")));
                 request.setAttribute("tipoPrestacion", tipoPrestacion);
+                int idTipoPrestacionAnterior = Integer.parseInt(request.getParameter("tipoPrestacion"));
+                //si se selecciona un nuevo tipo prestacion
+                esMismoIdTipoPrestacion =  idTipoPrestacionAnterior == tipoPrestacion.getIdTipoPrestacion();
             }
             //Obtener prestaciones filtradas
             ArrayList<Prestacion> prestaciones = AgendamientoController.obtenerPrestaciones(request);
             request.setAttribute("prestaciones", prestaciones);
-            if(request.getParameter("prestacion")!= null){
-                Prestacion prestacion = (Prestacion)Controller.findById(Prestacion.class, Integer.parseInt(request.getParameter("prestacion")));
-                
+            boolean esMismaPrestacion = false;
+            if(request.getParameter("prestacion")!= null && esMismoIdTipoPrestacion){
+                Prestacion prestacion = (Prestacion)Controller.findById(Prestacion.class, Integer.parseInt(request.getParameter("prestacion")));    
                 request.setAttribute("prestacion", prestacion);
+                int idPresatcionAnterior = Integer.parseInt(request.getParameter("prestacion"));
+                esMismaPrestacion = idPresatcionAnterior == prestacion.getIdPrestacion();
+                ArrayList<Personal> medicos = AgendamientoController.obtenerPersonal(request);
+                request.setAttribute("medicos", medicos);
+            }else{
+                request.setAttribute("medico", null);
             }
-//            //Obtener personal medico
-//            ArrayList<PersMedico> personalMedico = AgendamientoController.obtenerPersonalMedico(request);
-//            request.setAttribute("personalMedico", personalMedico);
+            boolean esMismoMedico = false;
+            if(request.getParameter("medico")!= null && esMismaPrestacion){
+                Personal medico = (Personal)Controller.findById(Personal.class, Integer.parseInt(request.getParameter("medico")));    
+                request.setAttribute("medico", medico);
+                int idMedicoAnterior = Integer.parseInt(request.getParameter("medico"));
+                esMismoMedico = (idMedicoAnterior == medico.getIdPersonal());
+            }else{
+                request.setAttribute("medico", null);
+            }
 //        }
     }
 

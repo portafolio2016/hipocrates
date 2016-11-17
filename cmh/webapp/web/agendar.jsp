@@ -31,6 +31,22 @@
                     </select>
                 </div>
             </c:if>
+            <c:if test="${not empty requestScope.medicos}">
+                <div class="form-group">
+                    <label for="medicos">Médicos</label>
+                    <select class="form-control" id="medicos" name="medico" onchange="this.form.submit()">
+                        <c:if test="${empty requestScope.medico}">
+                            <option value='-1'>---</option>
+                        </c:if>
+                        <c:forEach var="medico" items="${requestScope.medicos}">
+                            <option value="${medico.getIdPersonal()}" ${medico.getIdPersonal() == requestScope.medico.getIdPersonal()? 'selected' : ''}>
+                                ${medico.getNombres()} ${medico.getApellidos()}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:if>
+            
 
 
             <button type="submit" class="btn btn-default">Reservar</button>

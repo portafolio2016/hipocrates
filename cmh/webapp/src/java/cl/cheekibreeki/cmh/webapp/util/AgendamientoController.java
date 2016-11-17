@@ -6,10 +6,7 @@
 package cl.cheekibreeki.cmh.webapp.util;
 
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
-import cl.cheekibreeki.cmh.lib.dal.entities.Especialidad;
-import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
-import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
-import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
+import cl.cheekibreeki.cmh.lib.dal.entities.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -81,7 +78,7 @@ public class AgendamientoController {
     
     
     
-    public static ArrayList<PersMedico> obtenerPersonalMedico(HttpServletRequest request){
+    public static ArrayList<Personal> obtenerPersonal(HttpServletRequest request){
         //si no hay prestacion seleccionada
         int idPrestacionSeleccionada = prestacionSeleccionada(request);
         if(idPrestacionSeleccionada == 0){
@@ -93,10 +90,14 @@ public class AgendamientoController {
         Especialidad especialidad = prestacion.getIdEspecialidad();
         //buscar todos los medicos de la especialidad
         Collection<PersMedico> personalMedicoCollection = especialidad.getPersMedicoCollection();
+        ArrayList<Personal> personalList = new ArrayList<>();
+        for(PersMedico persMedico : personalMedicoCollection){
+            personalList.add(persMedico.getIdPersonal());
+        }
         if(null == personalMedicoCollection){
             return null;
         }else{
-            return new ArrayList<PersMedico>(personalMedicoCollection);
+            return personalList;
         }
     }
 }
