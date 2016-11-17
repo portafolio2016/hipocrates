@@ -107,11 +107,12 @@ namespace Cheekibreeki.CMH.Seguro.BL
         }
         public BENEFICIO obtenerBeneficioPrestacion(PRESTACION prestacion, List<BENEFICIO> beneficios)
         {
-            BENEFICIO beneficio = (from b in beneficios
-                                        where b.ID_PRESTACION == prestacion.ID_PRESTACION
-                                        select b).First<BENEFICIO>();
+            BENEFICIO beneficio = null;
+            using (var entities = new SeguroEntities())
+            {
+                beneficio = entities.BENEFICIO.Where(d => d.ID_PRESTACION == prestacion.ID_PRESTACION).FirstOrDefault();
+            }
             return beneficio;
-            
         }
     }
 }

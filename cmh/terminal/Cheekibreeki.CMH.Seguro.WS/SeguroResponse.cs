@@ -31,7 +31,5 @@ namespace Cheekibreeki.CMH.Seguro.WS
             get { return descuentoPesos; }
             set { descuentoPesos = value; }
         }
-
-        
     }
 }

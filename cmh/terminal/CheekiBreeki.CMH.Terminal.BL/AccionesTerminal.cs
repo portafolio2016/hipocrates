@@ -112,13 +112,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
             int precioPrestacion = prestacion.PRECIO_PRESTACION.Value;
             int rutPaciente = paciente.RUT;
-            SeguroWSClient client = new SeguroWSClient();
             SeguroRequest request = new SeguroRequest();
+            SeguroWSClient client = new SeguroWSClient();
             request.AfiliadoRut = paciente.RUT;
             request.CodigoPrestacion = prestacion.CODIGO_PRESTACION;
-            Task<SeguroResponse> tResponse = client.obtenerDescuentoAsync(request);
-            tResponse.Wait();
-            SeguroResponse response = tResponse.Result;
+            request.PrecioPrestacion = prestacion.PRECIO_PRESTACION.Value;
+            //Task<SeguroResponse> tResponse = client.obtenerDescuentoAsync(request);
+            //tResponse.Wait();
+            //SeguroResponse response = tResponse.Result;
+            SeguroResponse response = client.obtenerDescuento(request);
             ResultadoVerificacionSeguro resultado = new ResultadoVerificacionSeguro();
             resultado.TieneSeguro = response.AfiliadoTieneSeguro;
             resultado.Descuento = response.DescuentoPesos;

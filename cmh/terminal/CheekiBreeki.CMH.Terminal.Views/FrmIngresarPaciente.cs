@@ -40,6 +40,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void brnBuscarAtenciones_Click(object sender, EventArgs e)
         {
             ActualizarLista();
+            mostrarLabelPaciente();
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -94,7 +95,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         item.Text = "Atención: " + atencion.ID_ATENCION_AGEN + " - Médico: " + atencion.PERS_MEDICO.PERSONAL.NOMBREFULL;
                         lstAtenciones.Items.Add(item);
                     }
-                    mostrarEsconderLabel();
                     PACIENTE paciente = at.buscarPaciente(rut, txtDv.Text);
                     lblNombre.Text = paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE;
                     lblEdad.Text = paciente.FEC_NAC.Value.Date.ToShortDateString();
@@ -115,17 +115,25 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
-        private void mostrarEsconderLabel()
+        private void mostrarLabelPaciente()
         {
-            bool estado = !lblNombre.Visible;
+            bool estado = true;
             lblNombre.Visible = estado;
             lblEdad.Visible = estado;
             lblSexo.Visible = estado;
             lblRutInfo.Visible = estado;
+        }
 
-            //lblSubtotal.Visible = estado;
-            //lblDescuento.Visible = estado;
-            //lblTotal.Visible = estado;
+        private void mostrarLabelDescuento()
+        {
+            bool estado = true;
+            lblSubtotal.Visible = estado;
+            lblDescuento.Visible = estado;
+            lblTotal.Visible = estado;
+
+            lblSubtotal.Text = string.Empty;
+            lblTotal.Text = string.Empty;
+            lblDescuento.Text = string.Empty;
         }
 
         private void lstAtenciones_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,6 +141,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             lblError.Visible = true;
             lblError.Text = "Consultando aseguradora";
             lblError.ForeColor = System.Drawing.Color.Violet;
+            mostrarLabelDescuento();
             try
             {
                 ATENCION_AGEN atencion = new ATENCION_AGEN();
@@ -148,13 +157,19 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
                 seguro = at.verificarSeguro(prestacion, paciente);
                 lblSubtotal.Text = atencion.PRESTACION.PRECIO_PRESTACION.ToString();
-                lblDescuento.Text = seguro.Descuento.ToString();
-                lblTotal.Text = (int.Parse(lblSubtotal.Text) - int.Parse(lblDescuento.Text)).ToString();
+                lblTotal.Text = seguro.Descuento.ToString();
+                lblDescuento.Text = (int.Parse(lblSubtotal.Text) - int.Parse(lblTotal.Text)).ToString();
+                lblError.Visible = false;
             }
             catch (Exception ex)
             {
+                lblError.Visible = true;
+                lblError.Text = "Error al buscar descuento";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                lblSubtotal.Text = string.Empty;
+                lblTotal.Text = string.Empty;
+                lblDescuento.Text = string.Empty;
             }
-            lblError.Visible = false;
         }
 
         private void FrmIngresarPaciente_FormClosed(object sender, FormClosedEventArgs e)
