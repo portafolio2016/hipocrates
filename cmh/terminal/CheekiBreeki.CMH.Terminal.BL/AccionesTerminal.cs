@@ -1501,5 +1501,88 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return logs;
         }
         #endregion
+
+        //Banco
+        #region Banco
+        public List<BANCO> ObtenerBancos()
+        {
+            List<BANCO> bancos = conexionDB.BANCO.ToList();
+            return bancos;
+        }
+        #endregion
+
+        //TipoCuentaBancaria
+        #region TipoCuentaBancaria
+        public List<TIPO_C_BANCARIA> ObtenerTiposCuentaBancaria()
+        {
+            List<TIPO_C_BANCARIA> tipcuentab = conexionDB.TIPO_C_BANCARIA.ToList();
+            return tipcuentab;
+        }
+        #endregion
+
+        //CuentaBancaria
+        #region CuentaBancaria
+        public bool crearCuentaBancaria(CUEN_BANCARIA cuenta)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(cuenta))
+                {
+                    throw new Exception("Paciente nulo");
+                }
+                else if (cuenta.ID_BANCO == null ||
+                         cuenta.ID_PERS_MEDICO == null ||
+                         cuenta.ID_TIPO_C_BANCARIA == null)
+                {
+                    throw new Exception("Cuenta bancaria invalida");
+                }
+                else
+                {
+                    conexionDB.CUEN_BANCARIA.Add(cuenta);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        public bool actualizarCuentaBancaria(CUEN_BANCARIA cuenta, int personalID)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(cuenta))
+                {
+                    throw new Exception("Paciente nulo");
+                }
+                else if (cuenta.ID_BANCO == null ||
+                         cuenta.ID_TIPO_C_BANCARIA == null)
+                {
+                    throw new Exception("Cuenta bancaria invalida");
+                }
+                else
+                {
+                    using (var con = new CMHEntities())
+                    {
+                        CUEN_BANCARIA x = new CUEN_BANCARIA();
+                        x = con.CUEN_BANCARIA.Where(d => d.PERS_MEDICO.ID_PERSONAL == personalID).FirstOrDefault();
+                        x.ID_BANCO = cuenta.ID_BANCO;
+                        x.ID_TIPO_C_BANCARIA = cuenta.ID_TIPO_C_BANCARIA;
+                        x.NUM_C_BANCARIA = cuenta.NUM_C_BANCARIA;
+                        con.SaveChangesAsync();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
+
     }
 }

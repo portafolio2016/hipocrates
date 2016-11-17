@@ -143,10 +143,74 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
+        private void btnCambiarCuentaOC_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbNroCuenta.Text))
+            {
+                CUEN_BANCARIA cuenta = new CUEN_BANCARIA();
+                cuenta.ID_BANCO = ((ComboboxItem)cbBanco.SelectedItem).Value;
+                cuenta.ID_TIPO_C_BANCARIA = ((ComboboxItem)cbTipoCuenta.SelectedItem).Value;
+                cuenta.NUM_C_BANCARIA = tbNroCuenta.Text;
+                bool x = acciones.actualizarCuentaBancaria(cuenta, FrmLogin.usuarioLogeado.Personal.ID_PERSONAL);
+                if (x)
+                {
+                    MessageBox.Show("Se ha actualizado la cuenta bancaria con exito", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    tbNroCuenta.Text = "";
+                }
+                else
+                    MessageBox.Show("No se pudo actualizar la cuenta bancaria", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("El numero de cuenta bancaria esta vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void btnModificarUser_Click(object sender, EventArgs e)
         {
             InitGB(gbOpcionesUsuario);
+            LoadCB();
+            tbNroCuenta.Text = "";
+        }
+
+        private void LoadCB()
+        {
+            List<BANCO> bancos = acciones.ObtenerBancos();
+            List<TIPO_C_BANCARIA> tiposcuenta = acciones.ObtenerTiposCuentaBancaria();
+            cbBanco.Items.Clear();
+            cbTipoCuenta.Items.Clear();
+            foreach (BANCO x in bancos)
+            {
+                ComboboxItem cbi = new ComboboxItem();
+                cbi.Value = x.ID_BANCO;
+                cbi.Text = x.NOMBRE;
+                cbBanco.Items.Add(cbi);
+            }
+            foreach (TIPO_C_BANCARIA x in tiposcuenta)
+            {
+                ComboboxItem cbi = new ComboboxItem();
+                cbi.Value = x.ID_TIPO_C_BANCARIA;
+                cbi.Text = x.NOM_C_BANCARIA;
+                cbTipoCuenta.Items.Add(cbi);
+            }
+            if (cbBanco.Items.Count > 0)
+            {
+                cbBanco.SelectedIndex = 0;
+            }
+            else
+            {
+                btnCambiarCuentaOC.Enabled = false;
+                MessageBox.Show("No se encontraron bancos para listar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (cbTipoCuenta.Items.Count > 0)
+            {
+                cbTipoCuenta.SelectedIndex = 0;
+            }
+            else
+            {
+                btnCambiarCuentaOC.Enabled = false;
+                MessageBox.Show("No se encontraron tipos de cuentas bancarias para listar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -469,9 +533,5 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 return false;
             }
         }
-
-       
-
-
     }
 }
