@@ -10,7 +10,7 @@
                         <option value='-1'>---</option>
                     </c:if>
                     <c:forEach var="tipoPrestacion" items="${requestScope.tiposPrestacion}">
-                        <option value="${tipoPrestacion.getIdTipoPrestacion()}" ${tipoPrestacion.getIdTipoPrestacion() == requestScope.tipoPrestacion.getIdTipoPrestacion()? 'selected' : ''}>
+                        <option value="${tipoPrestacion.getIdTipoPrestacion()}" ${tipoPrestacion.getIdTipoPrestacion() == requestScope.tipoPrestacion? 'selected' : ''}>
                             ${tipoPrestacion.getNomTipoPrest()}
                         </option>
                     </c:forEach>
@@ -24,7 +24,7 @@
                             <option value='-1'>---</option>
                         </c:if>
                         <c:forEach var="prestacion" items="${requestScope.prestaciones}">
-                            <option value="${prestacion.getIdPrestacion()}" ${prestacion.getIdPrestacion() == requestScope.prestacion.getIdPrestacion()? 'selected' : ''}>
+                            <option value="${prestacion.getIdPrestacion()}" ${prestacion.getIdPrestacion() == requestScope.prestacion? 'selected' : ''}>
                                 ${prestacion.getNomPrestacion()}
                             </option>
                         </c:forEach>
@@ -39,7 +39,7 @@
                             <option value='-1'>---</option>
                         </c:if>
                         <c:forEach var="medico" items="${requestScope.medicos}">
-                            <option value="${medico.getIdPersonal()}" ${medico.getIdPersonal() == requestScope.medico.getIdPersonal()? 'selected' : ''}>
+                            <option value="${medico.getIdPersonal()}" ${medico.getIdPersonal() == requestScope.medico? 'selected' : ''}>
                                 ${medico.getNombres()} ${medico.getApellidos()}
                             </option>
                         </c:forEach>
@@ -52,21 +52,7 @@
                     <input type="date" required name="fecha" id="fecha" onchange="this.form.submit()"/>
                 </div>
             </c:if>
-            <c:if test="${not empty requestScope.horas}">
-                <div class="form-group">
-                    <label for="hora">Horas disponibles</label>
-                    <select class="form-control" id="hora" name="hora">
-                        <c:if test="${empty requestScope.hora}">
-                            <option value='-1'>---</option>
-                        </c:if>
-                        <c:forEach var="hora" items="${requestScope.horas}">
-                            <option value="${hora.getBloque().getIdBloque()}">
-                                ${hora.toString()}
-                            </option>
-                        </c:forEach>
-                    </select>
-                </div>
-            </c:if>
+          
 
 
             <button type="submit" class="btn btn-default">Reservar</button>

@@ -44,72 +44,77 @@ public class Agendamiento extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter())
-            //Obtener todos los tipos de prestacion
-            ArrayList<TipoPres> tiposPrestacion = AgendamientoController.obtenerTipoPres();
-            request.setAttribute("tiposPrestacion", tiposPrestacion);
-            boolean esMismoIdTipoPrestacion = false;
-            if(request.getParameter("tipoPrestacion")!= null){
-                TipoPres tipoPrestacion = (TipoPres)Controller.findById(TipoPres.class, Integer.parseInt(request.getParameter("tipoPrestacion")));
-                request.setAttribute("tipoPrestacion", tipoPrestacion);
-                if(tipoPrestacion != null){
-                    int idTipoPrestacionAnterior = Integer.parseInt(request.getParameter("tipoPrestacion"));    
-                    esMismoIdTipoPrestacion =  idTipoPrestacionAnterior == tipoPrestacion.getIdTipoPrestacion();
-                }
-                
-            }
-            //Obtener prestaciones filtradas
-            ArrayList<Prestacion> prestaciones = AgendamientoController.obtenerPrestaciones(request);
-            request.setAttribute("prestaciones", prestaciones);
-            boolean esMismaPrestacion = false;
-            if(request.getParameter("prestacion")!= null && esMismoIdTipoPrestacion){
-                Prestacion prestacion = (Prestacion)Controller.findById(Prestacion.class, Integer.parseInt(request.getParameter("prestacion")));    
-                request.setAttribute("prestacion", prestacion);
-                int idPresatcionAnterior = Integer.parseInt(request.getParameter("prestacion"));
-                if(prestacion != null){
-                    esMismaPrestacion = idPresatcionAnterior == prestacion.getIdPrestacion();    
-                }
-                ArrayList<Personal> medicos = AgendamientoController.obtenerPersonal(request);
-                request.setAttribute("medicos", medicos);
-            }else{
-                request.setAttribute("medico", null);
-            }
-            boolean esMismoMedico = false;
-            if(request.getParameter("medico")!= null && esMismaPrestacion){
-                Personal medico = (Personal)Controller.findById(Personal.class, Integer.parseInt(request.getParameter("medico")));    
-                request.setAttribute("medico", medico);
-                int idMedicoAnterior = Integer.parseInt(request.getParameter("medico"));
-                esMismoMedico = (idMedicoAnterior == medico.getIdPersonal());
-            }else{
-                request.setAttribute("medico", null);
-            }
-            
-            if(request.getParameter("fecha") != null && esMismoMedico){
-                String fecString = request.getParameter("fecha");
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    Date fecha = format.parse(fecString);
-                    //valido la fecha
-                    boolean fechaValida = Validador.fechaFutura(fecha);
-                    if(fechaValida){
-                        request.setAttribute("fecha", fecha);
-                        //Obtener las horas libres del médico
-                        AccionesPaciente accionesPaciente = new AccionesPaciente();
-                        Personal personal = (Personal)request.getAttribute("medico");
-                        Collection<PersMedico> personalMedicoCollection = personal.getPersMedicoCollection();
-                        PersMedico medico = null;
-                        for(PersMedico persMedico : personalMedicoCollection){
-                            medico = persMedico;
-                        }
-                        HorasDisponibles horasDisponibles = accionesPaciente.horasDisponiblesMedico(medico, fecha);
-                        request.setAttribute("horas", horasDisponibles);
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-                
-            }
-//        }
+        AgendamientoController.cargarTodosTiposPrestaciones(request);
+        AgendamientoController.cargarPrestaciones(request);
+        AgendamientoController.cargarPersonal(request);
+        AgendamientoController.cargarHorasLibres(request);
+////        try (PrintWriter out = response.getWriter())
+//            //Obtener todos los tipos de prestacion
+//            ArrayList<TipoPres> tiposPrestacion = AgendamientoController.obtenerTodoTipoPres();
+//            //Cargar como atributo los tipos de prestación
+//            request.setAttribute("tiposPrestacion", tiposPrestacion);
+//            boolean esMismoIdTipoPrestacion = false;
+//            if(request.getParameter("tipoPrestacion")!= null){
+//                TipoPres tipoPrestacion = (TipoPres)Controller.findById(TipoPres.class, Integer.parseInt(request.getParameter("tipoPrestacion")));
+//                request.setAttribute("tipoPrestacion", tipoPrestacion);
+//                if(tipoPrestacion != null){
+//                    int idTipoPrestacionAnterior = Integer.parseInt(request.getParameter("tipoPrestacion"));    
+//                    esMismoIdTipoPrestacion =  idTipoPrestacionAnterior == tipoPrestacion.getIdTipoPrestacion();
+//                }
+//                
+//            }
+//            //Obtener prestaciones filtradas
+//            ArrayList<Prestacion> prestaciones = AgendamientoController.obtenerPrestaciones(request);
+//            request.setAttribute("prestaciones", prestaciones);
+//            boolean esMismaPrestacion = false;
+//            if(request.getParameter("prestacion")!= null && esMismoIdTipoPrestacion){
+//                Prestacion prestacion = (Prestacion)Controller.findById(Prestacion.class, Integer.parseInt(request.getParameter("prestacion")));    
+//                request.setAttribute("prestacion", prestacion);
+//                int idPresatcionAnterior = Integer.parseInt(request.getParameter("prestacion"));
+//                if(prestacion != null){
+//                    esMismaPrestacion = idPresatcionAnterior == prestacion.getIdPrestacion();    
+//                }
+//                ArrayList<Personal> medicos = AgendamientoController.obtenerPersonal(request);
+//                request.setAttribute("medicos", medicos);
+//            }else{
+//                request.setAttribute("medico", null);
+//            }
+//            boolean esMismoMedico = false;
+//            if(request.getParameter("medico")!= null && esMismaPrestacion){
+//                Personal medico = (Personal)Controller.findById(Personal.class, Integer.parseInt(request.getParameter("medico")));    
+//                request.setAttribute("medico", medico);
+//                int idMedicoAnterior = Integer.parseInt(request.getParameter("medico"));
+//                esMismoMedico = (idMedicoAnterior == medico.getIdPersonal());
+//            }else{
+//                request.setAttribute("medico", null);
+//            }
+//            
+//            if(request.getParameter("fecha") != null && esMismoMedico){
+//                String fecString = request.getParameter("fecha");
+//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//                try {
+//                    Date fecha = format.parse(fecString);
+//                    //valido la fecha
+//                    boolean fechaValida = Validador.fechaFutura(fecha);
+//                    if(fechaValida){
+//                        request.setAttribute("fecha", fecha);
+//                        //Obtener las horas libres del médico
+//                        AccionesPaciente accionesPaciente = new AccionesPaciente();
+//                        Personal personal = (Personal)request.getAttribute("medico");
+//                        Collection<PersMedico> personalMedicoCollection = personal.getPersMedicoCollection();
+//                        PersMedico medico = null;
+//                        for(PersMedico persMedico : personalMedicoCollection){
+//                            medico = persMedico;
+//                        }
+//                        HorasDisponibles horasDisponibles = accionesPaciente.horasDisponiblesMedico(medico, fecha);
+//                        request.setAttribute("horas", horasDisponibles);
+//                    }
+//                } catch (Exception e) {
+//                    System.out.println(e.getMessage());
+//                }
+//                
+//            }
+////        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
