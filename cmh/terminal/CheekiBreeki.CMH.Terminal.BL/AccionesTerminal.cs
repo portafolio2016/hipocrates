@@ -1492,5 +1492,14 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return tipos;
         }
         #endregion
+
+        //LogPAgo
+        #region LogPago
+        public List<LOGPAGOHONORARIO> ObtenerLogPagoHonorario()
+        {
+            List<LOGPAGOHONORARIO> logs = conexionDB.LOGPAGOHONORARIO.ToList();
+            return logs;
+        }
+        #endregion
     }
 }
