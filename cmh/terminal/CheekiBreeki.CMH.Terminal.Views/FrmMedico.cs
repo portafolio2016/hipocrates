@@ -217,10 +217,10 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             if (!string.IsNullOrEmpty(tbRUNVFM.Text.Trim()) && !string.IsNullOrEmpty(tbVerificadorVFM.Text.Trim()))
             {
-                if (ValidaRut(tbRUNVFM.Text + tbVerificadorVFM))
+                if (ValidaRut(tbRUNVFM.Text +"-"+ tbVerificadorVFM.Text))
                 {
                     PACIENTE paciente = acciones.buscarPaciente(Int32.Parse(tbRUNVFM.Text),tbVerificadorVFM.Text);
-                    if (!string.IsNullOrEmpty(paciente.NOMBRES_PACIENTE))
+                    if (paciente != null)
                     {
                         //Ruta buena
                         lbNombreVFM.Text = "Nombre: "+paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE;
@@ -258,39 +258,58 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
-        private bool ValidaRut(string rut)
+        public static bool ValidaRut(string rut)
         {
-            bool validacion = false;
-            try
+            rut = rut.Replace(".", "").ToUpper();
+            Regex expresion = new Regex("^([0-9]+-[0-9K])$");
+            string dv = rut.Substring(rut.Length - 1, 1);
+            if (!expresion.IsMatch(rut))
             {
-                rut = rut.ToUpper();
-                rut = rut.Replace(".", "");
-                rut = rut.Replace("-", "");
-                int rutAux = int.Parse(rut.Substring(0, rut.Length - 1));
-
-                char dv = char.Parse(rut.Substring(rut.Length - 1, 1));
-
-                int m = 0, s = 1;
-                for (; rutAux != 0; rutAux /= 10)
-                {
-                    s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
-                }
-                if (dv == (char)(s != 0 ? s + 47 : 75))
-                {
-                    validacion = true;
-                }
+                return false;
             }
-            catch (Exception)
+            char[] charCorte = { '-' };
+            string[] rutTemp = rut.Split(charCorte);
+            if (dv != Digito(int.Parse(rutTemp[0])))
             {
+                return false;
             }
-            return validacion;
+            return true;
+        }
+
+        public static string Digito(int rut)
+        {
+            int suma = 0;
+            int multiplicador = 1;
+            while (rut != 0)
+            {
+                multiplicador++;
+                if (multiplicador == 8)
+                    multiplicador = 2;
+                suma += (rut % 10) * multiplicador;
+                rut = rut / 10;
+            }
+            suma = 11 - (suma % 11);
+            if (suma == 11)
+            {
+                return "0";
+            }
+            else if (suma == 10)
+            {
+                return "K";
+            }
+            else
+            {
+                return suma.ToString();
+            }
         }
 
         private void dgEntradaVFM_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 1 && e.RowIndex >=0)
             {
-                MessageBox.Show(entradaList[e.RowIndex].CONTENIDO_ENTRADA);
+                FrmContenidoEntrada frmCont = new FrmContenidoEntrada(entradaList[e.RowIndex].CONTENIDO_ENTRADA);
+                frmCont.Show();
+                frmCont.Activate();
             }
         }
 
