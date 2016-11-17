@@ -1,12 +1,13 @@
 --****** ATENCION!!! DEBE SER EJECUTADO COMO SYSTEM
+@@sqlformat.sql
 @@crear_dev.sql -- crea usuario DEV
 ALTER SESSION SET CURRENT_SCHEMA = dev;
 @@cmh.sql -- DDL CMHDB
 -- aqui va el script de insercion de datos
---@@cargaCMH.sql
+@@cargaCMH.sql
 
 @@crear_devseguro.sql -- crea usuario DEVSEGURO
 ALTER SESSION SET CURRENT_SCHEMA = devseguro;
 @@seguroWS.sql -- DDL SeguroWS
 -- aqui va el script de insercion de datos
--- @@cargaCMHseguro.sql
+@@cargaCMHseguro.sql
