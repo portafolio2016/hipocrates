@@ -18,10 +18,13 @@ import javax.mail.internet.InternetAddress;
  * @author dev
  */
 public class Validador {
-    /***
+
+    /**
+     * *
      * Retorna si el rut es válido o no
+     *
      * @param rut
-     * @return 
+     * @return
      */
     public static boolean validarRut(String rut) {
         boolean resultado = false;
@@ -43,12 +46,15 @@ public class Validador {
         }
         return resultado;
     }
-/***
- * Retorna si el rut es válido o no
- * @param rut
- * @param digitoVerificador
- * @return 
- */
+
+    /**
+     * *
+     * Retorna si el rut es válido o no
+     *
+     * @param rut
+     * @param digitoVerificador
+     * @return
+     */
     public static boolean validarRut(String rut, char digitoVerificador) {
         boolean resultado = false;
         try {
@@ -83,39 +89,41 @@ public class Validador {
     }
 
     public static boolean emailUnico(String email) throws Exception {
-       Paciente paciente = LoginController.getPacientePorEmail(email);
-       boolean emailEsUnico = null == paciente;
-       return emailEsUnico;
+        Paciente paciente = LoginController.getPacientePorEmail(email);
+        boolean emailEsUnico = null == paciente;
+        return emailEsUnico;
     }
-    
-    public static boolean fechaNoFutura(Date fecha){
+
+    public static boolean fechaNoFutura(Date fecha) {
         Date hoy = new Date();
         boolean fechaNoFutura = hoy.after(fecha);//si hoy viene despues que fecha entonces true
         return fechaNoFutura;
     }
-    
-    /***
-     * 
+
+    /**
+     * *
+     *
      * @param fecha fecha a evaluar
-     * @return Si es futura u hoy o no
+     * @return Si es hoy, futura o no
      */
-    public static boolean fechaFutura(Date fecha){
+    public static boolean fechaFutura(Date fecha) {
         Date hoy = new Date();
-        boolean fechaFutura = hoy.before(fecha);
-        boolean fechaHoy = hoy.equals(fecha);
-        return fechaFutura || fechaHoy;
+        boolean fechaValida = !hoy.before(fecha); //retorna negativo solamente si es un día anterior al de hoy.
+        return fechaValida;
     }
 
-    /***
+    /**
+     * *
      * Retorna si es rut único en la base de datos o no
+     *
      * @param rut
      * @return si el rut es único o no
      */
     public static boolean rutUnico(int rut) {
         Map<String, Object> params1 = new HashMap<>();
         params1.put("rut", rut);
-        List<? extends Object>  pacienteAux = Controller.findByQuery("Paciente.findByRut", params1);
+        List<? extends Object> pacienteAux = Controller.findByQuery("Paciente.findByRut", params1);
         return pacienteAux.isEmpty();
     }
-    
+
 }
