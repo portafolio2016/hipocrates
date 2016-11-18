@@ -126,12 +126,13 @@ public class AccionesPaciente {
      * @param rut rut del paciente
      * @return Un ArrayList con todas las atenciones que no tengan respuesta, si es null significa que no fue encontrado el paciente o que no existen atenciones pendientes
      */
-    public ArrayList<AtencionAgen> obtenerAtencionesPendientes(int rut) throws Exception{
+    public ArrayList<AtencionAgen> obtenerAtencionesPendientes(int rut) {
         Map<String, Object> params = new HashMap<>();
         params.put("rut", rut);
         List<? extends Object> pacienteList = Controller.findByQuery("Paciente.findByRut", params);
         if(null == pacienteList){
-            throw new Exception("Paciente no existe");
+            System.out.println("Paciente no existe");
+            return null;
         }
         Paciente paciente = (Paciente)pacienteList.get(0);
         Collection<AtencionAgen> atenciones = paciente.getAtencionAgenCollection();
