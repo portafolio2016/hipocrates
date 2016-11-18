@@ -34,7 +34,7 @@
             </div>
             <div class="panel-body">
                 <p>¿Se equivocó de hora o no va a poder asistir a su hora agendada? No hay problema, anúlela y vuelva a agendar una nueva.</p>
-                <a href="#" class="btn btn-default">Ir a anular horas</a>
+                <a href="master.jsp?page=anular" class="btn btn-default">Ir a anular horas</a>
             </div>
         </div>
     </div>
