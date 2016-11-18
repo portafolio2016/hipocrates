@@ -62,7 +62,7 @@ public class Agendamiento extends HttpServlet {
                 AgendamientoController.registrarAtencion(request);
             } else {
                 PrintWriter out = response.getWriter();
-                out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=registro';</script>");
+                out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=login';</script>");
             }
 
         }
