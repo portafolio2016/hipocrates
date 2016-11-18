@@ -245,5 +245,10 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
         #endregion
 
+        private void btnAbrirCaja_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

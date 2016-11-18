@@ -165,14 +165,14 @@
             // abrirCajaToolStripMenuItem
             // 
             this.abrirCajaToolStripMenuItem.Name = "abrirCajaToolStripMenuItem";
-            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.abrirCajaToolStripMenuItem.Text = "Abrir caja";
             this.abrirCajaToolStripMenuItem.Click += new System.EventHandler(this.abrirCajaToolStripMenuItem_Click);
             // 
             // cerrarCjaToolStripMenuItem
             // 
             this.cerrarCjaToolStripMenuItem.Name = "cerrarCjaToolStripMenuItem";
-            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.cerrarCjaToolStripMenuItem.Text = "Cerrar caja";
             this.cerrarCjaToolStripMenuItem.Click += new System.EventHandler(this.cerrarCjaToolStripMenuItem_Click);
             // 
