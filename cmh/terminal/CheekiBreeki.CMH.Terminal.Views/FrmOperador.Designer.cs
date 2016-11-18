@@ -32,6 +32,15 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.btnSesion = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.agendarHoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agendarHoraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.anularHoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearPacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ingresarPacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cerrarCjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -46,22 +55,13 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnModificarUser = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.agendarHoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cerrarCjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crearPacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ingresarPacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agendarHoraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.anularHoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -102,6 +102,79 @@
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agendarHoraToolStripMenuItem,
+            this.crearPacienteToolStripMenuItem,
+            this.ingresarPacienteToolStripMenuItem,
+            this.cajaToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // agendarHoraToolStripMenuItem
+            // 
+            this.agendarHoraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agendarHoraToolStripMenuItem1,
+            this.anularHoraToolStripMenuItem});
+            this.agendarHoraToolStripMenuItem.Name = "agendarHoraToolStripMenuItem";
+            this.agendarHoraToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.agendarHoraToolStripMenuItem.Text = "Agendamiento";
+            // 
+            // agendarHoraToolStripMenuItem1
+            // 
+            this.agendarHoraToolStripMenuItem1.Name = "agendarHoraToolStripMenuItem1";
+            this.agendarHoraToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
+            this.agendarHoraToolStripMenuItem1.Text = "Agendar hora";
+            this.agendarHoraToolStripMenuItem1.Click += new System.EventHandler(this.agendarHoraToolStripMenuItem1_Click);
+            // 
+            // anularHoraToolStripMenuItem
+            // 
+            this.anularHoraToolStripMenuItem.Name = "anularHoraToolStripMenuItem";
+            this.anularHoraToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.anularHoraToolStripMenuItem.Text = "Anular hora";
+            this.anularHoraToolStripMenuItem.Click += new System.EventHandler(this.anularHoraToolStripMenuItem_Click);
+            // 
+            // crearPacienteToolStripMenuItem
+            // 
+            this.crearPacienteToolStripMenuItem.Name = "crearPacienteToolStripMenuItem";
+            this.crearPacienteToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.crearPacienteToolStripMenuItem.Text = "Crear paciente";
+            this.crearPacienteToolStripMenuItem.Click += new System.EventHandler(this.crearPacienteToolStripMenuItem_Click);
+            // 
+            // ingresarPacienteToolStripMenuItem
+            // 
+            this.ingresarPacienteToolStripMenuItem.Name = "ingresarPacienteToolStripMenuItem";
+            this.ingresarPacienteToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.ingresarPacienteToolStripMenuItem.Text = "Ingresar paciente";
+            this.ingresarPacienteToolStripMenuItem.Click += new System.EventHandler(this.ingresarPacienteToolStripMenuItem_Click);
+            // 
+            // cajaToolStripMenuItem
+            // 
+            this.cajaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirCajaToolStripMenuItem,
+            this.cerrarCjaToolStripMenuItem});
+            this.cajaToolStripMenuItem.Name = "cajaToolStripMenuItem";
+            this.cajaToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
+            this.cajaToolStripMenuItem.Text = "Caja";
+            // 
+            // abrirCajaToolStripMenuItem
+            // 
+            this.abrirCajaToolStripMenuItem.Name = "abrirCajaToolStripMenuItem";
+            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abrirCajaToolStripMenuItem.Text = "Abrir caja";
+            this.abrirCajaToolStripMenuItem.Click += new System.EventHandler(this.abrirCajaToolStripMenuItem_Click);
+            // 
+            // cerrarCjaToolStripMenuItem
+            // 
+            this.cerrarCjaToolStripMenuItem.Name = "cerrarCjaToolStripMenuItem";
+            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cerrarCjaToolStripMenuItem.Text = "Cerrar caja";
+            this.cerrarCjaToolStripMenuItem.Click += new System.EventHandler(this.cerrarCjaToolStripMenuItem_Click);
             // 
             // gbOpcionesUsuario
             // 
@@ -245,79 +318,6 @@
             this.btnModificarUser.UseVisualStyleBackColor = true;
             this.btnModificarUser.Click += new System.EventHandler(this.btnModificarUser_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agendarHoraToolStripMenuItem,
-            this.crearPacienteToolStripMenuItem,
-            this.ingresarPacienteToolStripMenuItem,
-            this.cajaToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // agendarHoraToolStripMenuItem
-            // 
-            this.agendarHoraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agendarHoraToolStripMenuItem1,
-            this.anularHoraToolStripMenuItem});
-            this.agendarHoraToolStripMenuItem.Name = "agendarHoraToolStripMenuItem";
-            this.agendarHoraToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.agendarHoraToolStripMenuItem.Text = "Agendamiento";
-            // 
-            // cajaToolStripMenuItem
-            // 
-            this.cajaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.abrirCajaToolStripMenuItem,
-            this.cerrarCjaToolStripMenuItem});
-            this.cajaToolStripMenuItem.Name = "cajaToolStripMenuItem";
-            this.cajaToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.cajaToolStripMenuItem.Text = "Caja";
-            // 
-            // abrirCajaToolStripMenuItem
-            // 
-            this.abrirCajaToolStripMenuItem.Name = "abrirCajaToolStripMenuItem";
-            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.abrirCajaToolStripMenuItem.Text = "Abrir caja";
-            this.abrirCajaToolStripMenuItem.Click += new System.EventHandler(this.abrirCajaToolStripMenuItem_Click);
-            // 
-            // cerrarCjaToolStripMenuItem
-            // 
-            this.cerrarCjaToolStripMenuItem.Name = "cerrarCjaToolStripMenuItem";
-            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cerrarCjaToolStripMenuItem.Text = "Cerrar cja";
-            this.cerrarCjaToolStripMenuItem.Click += new System.EventHandler(this.cerrarCjaToolStripMenuItem_Click);
-            // 
-            // crearPacienteToolStripMenuItem
-            // 
-            this.crearPacienteToolStripMenuItem.Name = "crearPacienteToolStripMenuItem";
-            this.crearPacienteToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
-            this.crearPacienteToolStripMenuItem.Text = "Crear paciente";
-            this.crearPacienteToolStripMenuItem.Click += new System.EventHandler(this.crearPacienteToolStripMenuItem_Click);
-            // 
-            // ingresarPacienteToolStripMenuItem
-            // 
-            this.ingresarPacienteToolStripMenuItem.Name = "ingresarPacienteToolStripMenuItem";
-            this.ingresarPacienteToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-            this.ingresarPacienteToolStripMenuItem.Text = "Ingresar paciente";
-            this.ingresarPacienteToolStripMenuItem.Click += new System.EventHandler(this.ingresarPacienteToolStripMenuItem_Click);
-            // 
-            // agendarHoraToolStripMenuItem1
-            // 
-            this.agendarHoraToolStripMenuItem1.Name = "agendarHoraToolStripMenuItem1";
-            this.agendarHoraToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.agendarHoraToolStripMenuItem1.Text = "Agendar hora";
-            this.agendarHoraToolStripMenuItem1.Click += new System.EventHandler(this.agendarHoraToolStripMenuItem1_Click);
-            // 
-            // anularHoraToolStripMenuItem
-            // 
-            this.anularHoraToolStripMenuItem.Name = "anularHoraToolStripMenuItem";
-            this.anularHoraToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.anularHoraToolStripMenuItem.Text = "Anular hora";
-            this.anularHoraToolStripMenuItem.Click += new System.EventHandler(this.anularHoraToolStripMenuItem_Click);
-            // 
             // FrmOperador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,6 +332,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmOperador_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -341,8 +343,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }

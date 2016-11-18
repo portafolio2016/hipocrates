@@ -347,15 +347,15 @@
             // abrirCajaToolStripMenuItem
             // 
             this.abrirCajaToolStripMenuItem.Name = "abrirCajaToolStripMenuItem";
-            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.abrirCajaToolStripMenuItem.Text = "Abrir caja";
             this.abrirCajaToolStripMenuItem.Click += new System.EventHandler(this.abrirCajaToolStripMenuItem_Click);
             // 
             // cerrarCjaToolStripMenuItem
             // 
             this.cerrarCjaToolStripMenuItem.Name = "cerrarCjaToolStripMenuItem";
-            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.cerrarCjaToolStripMenuItem.Text = "Cerrar cja";
+            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cerrarCjaToolStripMenuItem.Text = "Cerrar caja";
             this.cerrarCjaToolStripMenuItem.Click += new System.EventHandler(this.cerrarCjaToolStripMenuItem_Click);
             // 
             // gbOpcionesUsuario
@@ -500,7 +500,7 @@
             this.btnModificarUser.UseVisualStyleBackColor = true;
             this.btnModificarUser.Click += new System.EventHandler(this.btnModificarUser_Click);
             // 
-            // FrmPrueba
+            // FrmAgendarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -509,7 +509,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "FrmPrueba";
+            this.Name = "FrmAgendarAtencion";
             this.Text = "Inicio";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmPrueba_FormClosed);
             this.Load += new System.EventHandler(this.frmAgendarAtencion_Load);
