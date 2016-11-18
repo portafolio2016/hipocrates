@@ -114,6 +114,18 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPrueba.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPrueba.Designer.cs">
+      <DependentUpon>FrmPrueba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOperador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOperador.Designer.cs">
+      <DependentUpon>FrmOperador.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMedico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +159,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPrueba.resx">
+      <DependentUpon>FrmPrueba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOperador.resx">
+      <DependentUpon>FrmOperador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMedico.resx">
       <DependentUpon>FrmMedico.cs</DependentUpon>

@@ -41,6 +41,25 @@
             this.abrirConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.atencionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbVerFichaMedica = new System.Windows.Forms.GroupBox();
+            this.gbDatosPacienteVFM = new System.Windows.Forms.GroupBox();
+            this.lbFechaNacVFM = new System.Windows.Forms.Label();
+            this.lbSexoVFM = new System.Windows.Forms.Label();
+            this.lbRun = new System.Windows.Forms.Label();
+            this.lbEmailVFM = new System.Windows.Forms.Label();
+            this.lbNombreVFM = new System.Windows.Forms.Label();
+            this.dgEntradaVFM = new System.Windows.Forms.DataGridView();
+            this.NombreEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContenidoEntrada = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.TipoEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbVerificadorVFM = new System.Windows.Forms.TextBox();
+            this.tbRUNVFM = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnBuscarVFM = new System.Windows.Forms.Button();
+            this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
+            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -71,40 +90,21 @@
             this.tbVerificadorAFM = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tbRUNAFM = new System.Windows.Forms.TextBox();
-            this.gbVerFichaMedica = new System.Windows.Forms.GroupBox();
-            this.gbDatosPacienteVFM = new System.Windows.Forms.GroupBox();
-            this.lbFechaNacVFM = new System.Windows.Forms.Label();
-            this.lbSexoVFM = new System.Windows.Forms.Label();
-            this.lbRun = new System.Windows.Forms.Label();
-            this.lbEmailVFM = new System.Windows.Forms.Label();
-            this.lbNombreVFM = new System.Windows.Forms.Label();
-            this.dgEntradaVFM = new System.Windows.Forms.DataGridView();
-            this.NombreEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContenidoEntrada = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.TipoEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEntrada = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbVerificadorVFM = new System.Windows.Forms.TextBox();
-            this.tbRUNVFM = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnBuscarVFM = new System.Windows.Forms.Button();
-            this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
-            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnModificarUser = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.gbOpcionesUsuario.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.gbActualizarFichaMedica.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.gbVerFichaMedica.SuspendLayout();
             this.gbDatosPacienteVFM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgEntradaVFM)).BeginInit();
             this.gbAgendaDiaria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).BeginInit();
+            this.gbOpcionesUsuario.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.gbActualizarFichaMedica.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -220,6 +220,204 @@
             this.atencionesToolStripMenuItem.Name = "atencionesToolStripMenuItem";
             this.atencionesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.atencionesToolStripMenuItem.Text = "Atenciones";
+            // 
+            // gbVerFichaMedica
+            // 
+            this.gbVerFichaMedica.Controls.Add(this.gbDatosPacienteVFM);
+            this.gbVerFichaMedica.Controls.Add(this.dgEntradaVFM);
+            this.gbVerFichaMedica.Controls.Add(this.label11);
+            this.gbVerFichaMedica.Controls.Add(this.tbVerificadorVFM);
+            this.gbVerFichaMedica.Controls.Add(this.tbRUNVFM);
+            this.gbVerFichaMedica.Controls.Add(this.label10);
+            this.gbVerFichaMedica.Controls.Add(this.btnBuscarVFM);
+            this.gbVerFichaMedica.Location = new System.Drawing.Point(6, 43);
+            this.gbVerFichaMedica.Name = "gbVerFichaMedica";
+            this.gbVerFichaMedica.Size = new System.Drawing.Size(768, 462);
+            this.gbVerFichaMedica.TabIndex = 5;
+            this.gbVerFichaMedica.TabStop = false;
+            this.gbVerFichaMedica.Text = "Ver ficha médica";
+            this.gbVerFichaMedica.Visible = false;
+            // 
+            // gbDatosPacienteVFM
+            // 
+            this.gbDatosPacienteVFM.Controls.Add(this.lbFechaNacVFM);
+            this.gbDatosPacienteVFM.Controls.Add(this.lbSexoVFM);
+            this.gbDatosPacienteVFM.Controls.Add(this.lbRun);
+            this.gbDatosPacienteVFM.Controls.Add(this.lbEmailVFM);
+            this.gbDatosPacienteVFM.Controls.Add(this.lbNombreVFM);
+            this.gbDatosPacienteVFM.Location = new System.Drawing.Point(67, 113);
+            this.gbDatosPacienteVFM.Name = "gbDatosPacienteVFM";
+            this.gbDatosPacienteVFM.Size = new System.Drawing.Size(621, 134);
+            this.gbDatosPacienteVFM.TabIndex = 7;
+            this.gbDatosPacienteVFM.TabStop = false;
+            this.gbDatosPacienteVFM.Text = "Datos paciente";
+            // 
+            // lbFechaNacVFM
+            // 
+            this.lbFechaNacVFM.AutoSize = true;
+            this.lbFechaNacVFM.Location = new System.Drawing.Point(354, 95);
+            this.lbFechaNacVFM.Name = "lbFechaNacVFM";
+            this.lbFechaNacVFM.Size = new System.Drawing.Size(94, 13);
+            this.lbFechaNacVFM.TabIndex = 4;
+            this.lbFechaNacVFM.Text = "Fecha nacimiento:";
+            // 
+            // lbSexoVFM
+            // 
+            this.lbSexoVFM.AutoSize = true;
+            this.lbSexoVFM.Location = new System.Drawing.Point(227, 95);
+            this.lbSexoVFM.Name = "lbSexoVFM";
+            this.lbSexoVFM.Size = new System.Drawing.Size(34, 13);
+            this.lbSexoVFM.TabIndex = 3;
+            this.lbSexoVFM.Text = "Sexo:";
+            // 
+            // lbRun
+            // 
+            this.lbRun.AutoSize = true;
+            this.lbRun.Location = new System.Drawing.Point(21, 95);
+            this.lbRun.Name = "lbRun";
+            this.lbRun.Size = new System.Drawing.Size(30, 13);
+            this.lbRun.TabIndex = 2;
+            this.lbRun.Text = "Run:";
+            // 
+            // lbEmailVFM
+            // 
+            this.lbEmailVFM.AutoSize = true;
+            this.lbEmailVFM.Location = new System.Drawing.Point(21, 61);
+            this.lbEmailVFM.Name = "lbEmailVFM";
+            this.lbEmailVFM.Size = new System.Drawing.Size(35, 13);
+            this.lbEmailVFM.TabIndex = 1;
+            this.lbEmailVFM.Text = "Email:";
+            // 
+            // lbNombreVFM
+            // 
+            this.lbNombreVFM.AutoSize = true;
+            this.lbNombreVFM.Location = new System.Drawing.Point(21, 29);
+            this.lbNombreVFM.Name = "lbNombreVFM";
+            this.lbNombreVFM.Size = new System.Drawing.Size(50, 13);
+            this.lbNombreVFM.TabIndex = 0;
+            this.lbNombreVFM.Text = "Nombre: ";
+            // 
+            // dgEntradaVFM
+            // 
+            this.dgEntradaVFM.AllowUserToAddRows = false;
+            this.dgEntradaVFM.AllowUserToDeleteRows = false;
+            this.dgEntradaVFM.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgEntradaVFM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgEntradaVFM.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NombreEntrada,
+            this.ContenidoEntrada,
+            this.TipoEntrada,
+            this.FechaEntrada});
+            this.dgEntradaVFM.Location = new System.Drawing.Point(67, 276);
+            this.dgEntradaVFM.Name = "dgEntradaVFM";
+            this.dgEntradaVFM.ReadOnly = true;
+            this.dgEntradaVFM.Size = new System.Drawing.Size(621, 150);
+            this.dgEntradaVFM.TabIndex = 6;
+            this.dgEntradaVFM.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEntradaVFM_CellClick);
+            // 
+            // NombreEntrada
+            // 
+            this.NombreEntrada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.NombreEntrada.HeaderText = "Nombre entrada";
+            this.NombreEntrada.Name = "NombreEntrada";
+            this.NombreEntrada.ReadOnly = true;
+            this.NombreEntrada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.NombreEntrada.Width = 80;
+            // 
+            // ContenidoEntrada
+            // 
+            this.ContenidoEntrada.HeaderText = "ContenidoEntrada";
+            this.ContenidoEntrada.Name = "ContenidoEntrada";
+            this.ContenidoEntrada.ReadOnly = true;
+            this.ContenidoEntrada.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ContenidoEntrada.Text = "Ver";
+            this.ContenidoEntrada.Width = 98;
+            // 
+            // TipoEntrada
+            // 
+            this.TipoEntrada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.TipoEntrada.HeaderText = "Tipo entrada";
+            this.TipoEntrada.Name = "TipoEntrada";
+            this.TipoEntrada.ReadOnly = true;
+            this.TipoEntrada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.TipoEntrada.Width = 66;
+            // 
+            // FechaEntrada
+            // 
+            this.FechaEntrada.HeaderText = "Fecha de entrada";
+            this.FechaEntrada.Name = "FechaEntrada";
+            this.FechaEntrada.ReadOnly = true;
+            this.FechaEntrada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FechaEntrada.Width = 87;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(421, 73);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(10, 13);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "-";
+            // 
+            // tbVerificadorVFM
+            // 
+            this.tbVerificadorVFM.Location = new System.Drawing.Point(434, 70);
+            this.tbVerificadorVFM.MaxLength = 1;
+            this.tbVerificadorVFM.Name = "tbVerificadorVFM";
+            this.tbVerificadorVFM.Size = new System.Drawing.Size(23, 20);
+            this.tbVerificadorVFM.TabIndex = 4;
+            // 
+            // tbRUNVFM
+            // 
+            this.tbRUNVFM.Location = new System.Drawing.Point(274, 70);
+            this.tbRUNVFM.MaxLength = 10;
+            this.tbRUNVFM.Name = "tbRUNVFM";
+            this.tbRUNVFM.Size = new System.Drawing.Size(143, 20);
+            this.tbRUNVFM.TabIndex = 3;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(128, 73);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(129, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Buscar paciente por RUN";
+            // 
+            // btnBuscarVFM
+            // 
+            this.btnBuscarVFM.Location = new System.Drawing.Point(490, 68);
+            this.btnBuscarVFM.Name = "btnBuscarVFM";
+            this.btnBuscarVFM.Size = new System.Drawing.Size(113, 23);
+            this.btnBuscarVFM.TabIndex = 1;
+            this.btnBuscarVFM.Text = "Buscar";
+            this.btnBuscarVFM.UseVisualStyleBackColor = true;
+            this.btnBuscarVFM.Click += new System.EventHandler(this.btnBuscarVFM_Click);
+            // 
+            // gbAgendaDiaria
+            // 
+            this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
+            this.gbAgendaDiaria.Location = new System.Drawing.Point(6, 43);
+            this.gbAgendaDiaria.Name = "gbAgendaDiaria";
+            this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
+            this.gbAgendaDiaria.TabIndex = 4;
+            this.gbAgendaDiaria.TabStop = false;
+            this.gbAgendaDiaria.Text = "Agenda diaria";
+            this.gbAgendaDiaria.Visible = false;
+            // 
+            // dgAgendaDiaria
+            // 
+            this.dgAgendaDiaria.AllowUserToAddRows = false;
+            this.dgAgendaDiaria.AllowUserToDeleteRows = false;
+            this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
+            this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
+            this.dgAgendaDiaria.Name = "dgAgendaDiaria";
+            this.dgAgendaDiaria.ReadOnly = true;
+            this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
+            this.dgAgendaDiaria.TabIndex = 1;
             // 
             // gbOpcionesUsuario
             // 
@@ -521,204 +719,6 @@
             this.tbRUNAFM.Size = new System.Drawing.Size(143, 20);
             this.tbRUNAFM.TabIndex = 12;
             // 
-            // gbVerFichaMedica
-            // 
-            this.gbVerFichaMedica.Controls.Add(this.gbDatosPacienteVFM);
-            this.gbVerFichaMedica.Controls.Add(this.dgEntradaVFM);
-            this.gbVerFichaMedica.Controls.Add(this.label11);
-            this.gbVerFichaMedica.Controls.Add(this.tbVerificadorVFM);
-            this.gbVerFichaMedica.Controls.Add(this.tbRUNVFM);
-            this.gbVerFichaMedica.Controls.Add(this.label10);
-            this.gbVerFichaMedica.Controls.Add(this.btnBuscarVFM);
-            this.gbVerFichaMedica.Location = new System.Drawing.Point(6, 43);
-            this.gbVerFichaMedica.Name = "gbVerFichaMedica";
-            this.gbVerFichaMedica.Size = new System.Drawing.Size(768, 462);
-            this.gbVerFichaMedica.TabIndex = 5;
-            this.gbVerFichaMedica.TabStop = false;
-            this.gbVerFichaMedica.Text = "Ver ficha médica";
-            this.gbVerFichaMedica.Visible = false;
-            // 
-            // gbDatosPacienteVFM
-            // 
-            this.gbDatosPacienteVFM.Controls.Add(this.lbFechaNacVFM);
-            this.gbDatosPacienteVFM.Controls.Add(this.lbSexoVFM);
-            this.gbDatosPacienteVFM.Controls.Add(this.lbRun);
-            this.gbDatosPacienteVFM.Controls.Add(this.lbEmailVFM);
-            this.gbDatosPacienteVFM.Controls.Add(this.lbNombreVFM);
-            this.gbDatosPacienteVFM.Location = new System.Drawing.Point(67, 113);
-            this.gbDatosPacienteVFM.Name = "gbDatosPacienteVFM";
-            this.gbDatosPacienteVFM.Size = new System.Drawing.Size(621, 134);
-            this.gbDatosPacienteVFM.TabIndex = 7;
-            this.gbDatosPacienteVFM.TabStop = false;
-            this.gbDatosPacienteVFM.Text = "Datos paciente";
-            // 
-            // lbFechaNacVFM
-            // 
-            this.lbFechaNacVFM.AutoSize = true;
-            this.lbFechaNacVFM.Location = new System.Drawing.Point(354, 95);
-            this.lbFechaNacVFM.Name = "lbFechaNacVFM";
-            this.lbFechaNacVFM.Size = new System.Drawing.Size(94, 13);
-            this.lbFechaNacVFM.TabIndex = 4;
-            this.lbFechaNacVFM.Text = "Fecha nacimiento:";
-            // 
-            // lbSexoVFM
-            // 
-            this.lbSexoVFM.AutoSize = true;
-            this.lbSexoVFM.Location = new System.Drawing.Point(227, 95);
-            this.lbSexoVFM.Name = "lbSexoVFM";
-            this.lbSexoVFM.Size = new System.Drawing.Size(34, 13);
-            this.lbSexoVFM.TabIndex = 3;
-            this.lbSexoVFM.Text = "Sexo:";
-            // 
-            // lbRun
-            // 
-            this.lbRun.AutoSize = true;
-            this.lbRun.Location = new System.Drawing.Point(21, 95);
-            this.lbRun.Name = "lbRun";
-            this.lbRun.Size = new System.Drawing.Size(30, 13);
-            this.lbRun.TabIndex = 2;
-            this.lbRun.Text = "Run:";
-            // 
-            // lbEmailVFM
-            // 
-            this.lbEmailVFM.AutoSize = true;
-            this.lbEmailVFM.Location = new System.Drawing.Point(21, 61);
-            this.lbEmailVFM.Name = "lbEmailVFM";
-            this.lbEmailVFM.Size = new System.Drawing.Size(35, 13);
-            this.lbEmailVFM.TabIndex = 1;
-            this.lbEmailVFM.Text = "Email:";
-            // 
-            // lbNombreVFM
-            // 
-            this.lbNombreVFM.AutoSize = true;
-            this.lbNombreVFM.Location = new System.Drawing.Point(21, 29);
-            this.lbNombreVFM.Name = "lbNombreVFM";
-            this.lbNombreVFM.Size = new System.Drawing.Size(50, 13);
-            this.lbNombreVFM.TabIndex = 0;
-            this.lbNombreVFM.Text = "Nombre: ";
-            // 
-            // dgEntradaVFM
-            // 
-            this.dgEntradaVFM.AllowUserToAddRows = false;
-            this.dgEntradaVFM.AllowUserToDeleteRows = false;
-            this.dgEntradaVFM.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgEntradaVFM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgEntradaVFM.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NombreEntrada,
-            this.ContenidoEntrada,
-            this.TipoEntrada,
-            this.FechaEntrada});
-            this.dgEntradaVFM.Location = new System.Drawing.Point(67, 276);
-            this.dgEntradaVFM.Name = "dgEntradaVFM";
-            this.dgEntradaVFM.ReadOnly = true;
-            this.dgEntradaVFM.Size = new System.Drawing.Size(621, 150);
-            this.dgEntradaVFM.TabIndex = 6;
-            this.dgEntradaVFM.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEntradaVFM_CellClick);
-            // 
-            // NombreEntrada
-            // 
-            this.NombreEntrada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.NombreEntrada.HeaderText = "Nombre entrada";
-            this.NombreEntrada.Name = "NombreEntrada";
-            this.NombreEntrada.ReadOnly = true;
-            this.NombreEntrada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.NombreEntrada.Width = 80;
-            // 
-            // ContenidoEntrada
-            // 
-            this.ContenidoEntrada.HeaderText = "ContenidoEntrada";
-            this.ContenidoEntrada.Name = "ContenidoEntrada";
-            this.ContenidoEntrada.ReadOnly = true;
-            this.ContenidoEntrada.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ContenidoEntrada.Text = "Ver";
-            this.ContenidoEntrada.Width = 98;
-            // 
-            // TipoEntrada
-            // 
-            this.TipoEntrada.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.TipoEntrada.HeaderText = "Tipo entrada";
-            this.TipoEntrada.Name = "TipoEntrada";
-            this.TipoEntrada.ReadOnly = true;
-            this.TipoEntrada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.TipoEntrada.Width = 66;
-            // 
-            // FechaEntrada
-            // 
-            this.FechaEntrada.HeaderText = "Fecha de entrada";
-            this.FechaEntrada.Name = "FechaEntrada";
-            this.FechaEntrada.ReadOnly = true;
-            this.FechaEntrada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FechaEntrada.Width = 87;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(421, 73);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(10, 13);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "-";
-            // 
-            // tbVerificadorVFM
-            // 
-            this.tbVerificadorVFM.Location = new System.Drawing.Point(434, 70);
-            this.tbVerificadorVFM.MaxLength = 1;
-            this.tbVerificadorVFM.Name = "tbVerificadorVFM";
-            this.tbVerificadorVFM.Size = new System.Drawing.Size(23, 20);
-            this.tbVerificadorVFM.TabIndex = 4;
-            // 
-            // tbRUNVFM
-            // 
-            this.tbRUNVFM.Location = new System.Drawing.Point(274, 70);
-            this.tbRUNVFM.MaxLength = 10;
-            this.tbRUNVFM.Name = "tbRUNVFM";
-            this.tbRUNVFM.Size = new System.Drawing.Size(143, 20);
-            this.tbRUNVFM.TabIndex = 3;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(128, 73);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(129, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Buscar paciente por RUN";
-            // 
-            // btnBuscarVFM
-            // 
-            this.btnBuscarVFM.Location = new System.Drawing.Point(490, 68);
-            this.btnBuscarVFM.Name = "btnBuscarVFM";
-            this.btnBuscarVFM.Size = new System.Drawing.Size(113, 23);
-            this.btnBuscarVFM.TabIndex = 1;
-            this.btnBuscarVFM.Text = "Buscar";
-            this.btnBuscarVFM.UseVisualStyleBackColor = true;
-            this.btnBuscarVFM.Click += new System.EventHandler(this.btnBuscarVFM_Click);
-            // 
-            // gbAgendaDiaria
-            // 
-            this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
-            this.gbAgendaDiaria.Location = new System.Drawing.Point(6, 43);
-            this.gbAgendaDiaria.Name = "gbAgendaDiaria";
-            this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
-            this.gbAgendaDiaria.TabIndex = 4;
-            this.gbAgendaDiaria.TabStop = false;
-            this.gbAgendaDiaria.Text = "Agenda diaria";
-            this.gbAgendaDiaria.Visible = false;
-            // 
-            // dgAgendaDiaria
-            // 
-            this.dgAgendaDiaria.AllowUserToAddRows = false;
-            this.dgAgendaDiaria.AllowUserToDeleteRows = false;
-            this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
-            this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
-            this.dgAgendaDiaria.Name = "dgAgendaDiaria";
-            this.dgAgendaDiaria.ReadOnly = true;
-            this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
-            this.dgAgendaDiaria.TabIndex = 1;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lblPrivilegio);
@@ -766,6 +766,13 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.gbVerFichaMedica.ResumeLayout(false);
+            this.gbVerFichaMedica.PerformLayout();
+            this.gbDatosPacienteVFM.ResumeLayout(false);
+            this.gbDatosPacienteVFM.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgEntradaVFM)).EndInit();
+            this.gbAgendaDiaria.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
             this.gbOpcionesUsuario.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -775,13 +782,6 @@
             this.gbActualizarFichaMedica.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.gbVerFichaMedica.ResumeLayout(false);
-            this.gbVerFichaMedica.PerformLayout();
-            this.gbDatosPacienteVFM.ResumeLayout(false);
-            this.gbDatosPacienteVFM.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgEntradaVFM)).EndInit();
-            this.gbAgendaDiaria.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);

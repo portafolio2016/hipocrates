@@ -80,7 +80,7 @@
             // 
             // btnCrearPaciente
             // 
-            this.btnCrearPaciente.Location = new System.Drawing.Point(55, 154);
+            this.btnCrearPaciente.Location = new System.Drawing.Point(205, 112);
             this.btnCrearPaciente.Name = "btnCrearPaciente";
             this.btnCrearPaciente.Size = new System.Drawing.Size(128, 23);
             this.btnCrearPaciente.TabIndex = 4;
@@ -90,7 +90,7 @@
             // 
             // btnIngresarPaciente
             // 
-            this.btnIngresarPaciente.Location = new System.Drawing.Point(55, 193);
+            this.btnIngresarPaciente.Location = new System.Drawing.Point(354, 112);
             this.btnIngresarPaciente.Name = "btnIngresarPaciente";
             this.btnIngresarPaciente.Size = new System.Drawing.Size(128, 23);
             this.btnIngresarPaciente.TabIndex = 5;
@@ -100,7 +100,7 @@
             // 
             // btnAbrirCaja
             // 
-            this.btnAbrirCaja.Location = new System.Drawing.Point(55, 236);
+            this.btnAbrirCaja.Location = new System.Drawing.Point(499, 112);
             this.btnAbrirCaja.Name = "btnAbrirCaja";
             this.btnAbrirCaja.Size = new System.Drawing.Size(128, 23);
             this.btnAbrirCaja.TabIndex = 6;
@@ -110,7 +110,7 @@
             // 
             // btnCerrarCaja
             // 
-            this.btnCerrarCaja.Location = new System.Drawing.Point(55, 276);
+            this.btnCerrarCaja.Location = new System.Drawing.Point(499, 154);
             this.btnCerrarCaja.Name = "btnCerrarCaja";
             this.btnCerrarCaja.Size = new System.Drawing.Size(128, 23);
             this.btnCerrarCaja.TabIndex = 7;
@@ -120,7 +120,7 @@
             // 
             // btnAnularAtencion
             // 
-            this.btnAnularAtencion.Location = new System.Drawing.Point(55, 315);
+            this.btnAnularAtencion.Location = new System.Drawing.Point(55, 154);
             this.btnAnularAtencion.Name = "btnAnularAtencion";
             this.btnAnularAtencion.Size = new System.Drawing.Size(128, 23);
             this.btnAnularAtencion.TabIndex = 8;
