@@ -323,6 +323,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 p1.PORCENT_DESCUENTO = byte.Parse(txtDescuento_MP.Text);
                 p1.ACTIVO = true;
 
+
+
                 p1.ID_PERSONAL = at.nuevoPersonalId(p1);
 
                 if (p1.ID_PERSONAL == 0)
@@ -337,11 +339,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     switch (privi)
                     {
                         case 0: // Médico
+                            string cuentaBancaria = txtCuentaBanc_MP.Text;
                             PERS_MEDICO persMedico = new PERS_MEDICO();
                             persMedico.ID_ESPECIALIDAD = context.ESPECIALIDAD.Where(d => d.NOM_ESPECIALIDAD.ToUpper() == "MEDICO").FirstOrDefault().ID_ESPECIALIDAD;
                             persMedico.ID_PERSONAL = p1.ID_PERSONAL;
                             at.nuevoPersonalMedico(persMedico);
                             at.asignarBloques(persMedico);
+
                             
                             break;
 
