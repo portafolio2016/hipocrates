@@ -9,7 +9,6 @@
                         <th>Prestacion</th>
                         <th>Fecha</th> 
                         <th>Hora</th>
-                        <th>Atiende</th>
                     </tr>
                     <c:forEach items="${requestScope.atenciones}" var="atencion">
                         <tr>
@@ -19,7 +18,9 @@
                             <td>
                                 ${atencion.getFechor()}
                             </td>
-                            
+                            <td>
+                                ${atencion.get}
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
