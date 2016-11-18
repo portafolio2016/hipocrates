@@ -85,8 +85,8 @@ public class Registro extends HttpServlet {
                     return;
                 }
                 //Fecha no futura;
-                boolean fechaNoFutura = Validador.fechaNoFutura(fecnacDate);
-                if(!fechaNoFutura){
+                boolean fechaFutura = Validador.fechaFutura(fecnacDate);
+                if(fechaFutura){
                     out.println("<script>alert('Fecha nacimiento debe ser en el pasado'); location.href = 'master.jsp?page=registro';</script>");
                     return;
                 }

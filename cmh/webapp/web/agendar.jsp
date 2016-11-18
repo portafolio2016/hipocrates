@@ -67,11 +67,15 @@
                         <c:if test="${empty requestScope.hora}">
                             <option value='-1'>---</option>
                         </c:if>
-                        <c:forEach var="hora" items="${requestScope.horas.getHoras()}">
-                            <option value="${hora.getBloque().getIdBloque()}">
-                                ${hora.toString()}
-                            </option>
-                        </c:forEach>
+                        <c:if test="${not empty requestScope.horas}">
+                            <c:if test="${not empty requestScope.horas.getHoras()}">
+                                <c:forEach var="hora" items="${requestScope.horas.getHoras()}">
+                                    <option value="${hora.getBloque().getIdBloque()}">
+                                        ${hora.toString()}
+                                    </option>
+                                </c:forEach>
+                            </c:if>
+                        </c:if>
                     </select>
                 </div>
             </c:if>

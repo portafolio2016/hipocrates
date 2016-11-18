@@ -7,9 +7,11 @@ package cl.cheekibreeki.cmh.webapp.util;
 
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.mail.internet.InternetAddress;
 
@@ -18,10 +20,13 @@ import javax.mail.internet.InternetAddress;
  * @author dev
  */
 public class Validador {
-    /***
+
+    /**
+     * *
      * Retorna si el rut es válido o no
+     *
      * @param rut
-     * @return 
+     * @return
      */
     public static boolean validarRut(String rut) {
         boolean resultado = false;
@@ -43,12 +48,15 @@ public class Validador {
         }
         return resultado;
     }
-/***
- * Retorna si el rut es válido o no
- * @param rut
- * @param digitoVerificador
- * @return 
- */
+
+    /**
+     * *
+     * Retorna si el rut es válido o no
+     *
+     * @param rut
+     * @param digitoVerificador
+     * @return
+     */
     public static boolean validarRut(String rut, char digitoVerificador) {
         boolean resultado = false;
         try {
@@ -83,39 +91,63 @@ public class Validador {
     }
 
     public static boolean emailUnico(String email) throws Exception {
-       Paciente paciente = LoginController.getPacientePorEmail(email);
-       boolean emailEsUnico = null == paciente;
-       return emailEsUnico;
-    }
-    
-    public static boolean fechaNoFutura(Date fecha){
-        Date hoy = new Date();
-        boolean fechaNoFutura = hoy.after(fecha);//si hoy viene despues que fecha entonces true
-        return fechaNoFutura;
-    }
-    
-    /***
-     * 
-     * @param fecha fecha a evaluar
-     * @return Si es futura u hoy o no
-     */
-    public static boolean fechaFutura(Date fecha){
-        Date hoy = new Date();
-        boolean fechaFutura = hoy.before(fecha);
-        boolean fechaHoy = hoy.equals(fecha);
-        return fechaFutura || fechaHoy;
+        Paciente paciente = LoginController.getPacientePorEmail(email);
+        boolean emailEsUnico = null == paciente;
+        return emailEsUnico;
     }
 
-    /***
+
+    /**
+     * *
+     *
+     * @param fecha fecha a evaluar
+     * @return Si es hoy, futura o no
+     */
+    public static boolean fechaFutura(Date fecha) {
+        Date hoy = new Date();
+        Calendar calendarParam = Calendar.getInstance();
+        Calendar calendarHoy = Calendar.getInstance();
+        calendarParam.setTime(fecha);
+        calendarHoy.setTime(hoy);
+        
+        if(calendarHoy.get(Calendar.YEAR)< calendarParam.get(Calendar.YEAR)){
+            return true;
+        }else if(calendarHoy.get(Calendar.YEAR) == calendarParam.get(Calendar.YEAR)){
+            if(calendarHoy.get(Calendar.DAY_OF_YEAR) < calendarParam.get(Calendar.DAY_OF_YEAR)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+    
+    public static boolean mismoDia(Date fecha) {
+        Date hoy = new Date();
+        Calendar calendarParam = Calendar.getInstance();
+        Calendar calendarHoy = Calendar.getInstance();
+        calendarParam.setTime(fecha);
+        calendarHoy.setTime(hoy);
+        
+        return ((calendarHoy.get(Calendar.YEAR) == calendarParam.get(Calendar.YEAR) 
+                && (calendarHoy.get(Calendar.DAY_OF_YEAR) == calendarParam.get(Calendar.DAY_OF_YEAR))));
+    }
+    
+    
+
+    /**
+     * *
      * Retorna si es rut único en la base de datos o no
+     *
      * @param rut
      * @return si el rut es único o no
      */
     public static boolean rutUnico(int rut) {
         Map<String, Object> params1 = new HashMap<>();
         params1.put("rut", rut);
-        List<? extends Object>  pacienteAux = Controller.findByQuery("Paciente.findByRut", params1);
+        List<? extends Object> pacienteAux = Controller.findByQuery("Paciente.findByRut", params1);
         return pacienteAux.isEmpty();
     }
-    
+
 }
