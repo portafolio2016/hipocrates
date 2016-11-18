@@ -60,6 +60,8 @@ public class Agendamiento extends HttpServlet {
             boolean isLoggedIn = LoginController.obtenerPacienteEnSesion(request.getSession()) != null;
             if (isLoggedIn) {
                 AgendamientoController.registrarAtencion(request);
+                PrintWriter out = response.getWriter();
+                out.println("<script>alert('Atencion agendada exitosamente'); location.href = 'master.jsp?page=index';</script>");
             } else {
                 PrintWriter out = response.getWriter();
                 out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=login';</script>");
