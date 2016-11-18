@@ -13,14 +13,13 @@ import java.util.Date;
  * @author dev
  */
 public class HoraDisponible {
+
     private Date date;
     private Bloque bloque;
     private int horaIni;
     private int horaFin;
     private int minuIni;
     private int minuFin;
-    
-    
 
     public HoraDisponible() {
     }
@@ -41,7 +40,6 @@ public class HoraDisponible {
         this.bloque = bloque;
     }
 
-    
     public Date getDate() {
         return date;
     }
@@ -81,5 +79,15 @@ public class HoraDisponible {
     public void setMinuFin(int minuFin) {
         this.minuFin = minuFin;
     }
-    
+
+    @Override
+    public String toString() {
+        String result = "";
+        result = result + this.getHoraIni() + ":";
+        result = result + ((this.getMinuIni() == 0) ? "00" : this.getMinuIni()) + " - ";
+        result = result + this.getHoraFin() + ":";
+        result = result + ((this.getMinuFin()== 0) ? "00" : this.getMinuFin());
+        return result;
+    }
+
 }
