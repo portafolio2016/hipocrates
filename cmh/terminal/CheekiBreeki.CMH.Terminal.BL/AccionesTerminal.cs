@@ -730,6 +730,43 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public int nuevoPersonalId(PERSONAL personal)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(personal))
+                {
+                    throw new Exception("Personal nulo");
+                }
+                else if (personal.NOMBRES == null ||
+                         personal.APELLIDOS == null ||
+                         personal.NOMBRES == String.Empty ||
+                         personal.APELLIDOS == String.Empty)
+                {
+                    throw new Exception("Nombre o apellido vacío");
+                }
+                else if (personal.RUT == null || personal.RUT == 0)
+                {
+                    throw new Exception("RUT vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarPersonal(personal.RUT, personal.VERIFICADOR)))
+                {
+                    throw new Exception("Personal ya ingresado");
+                }
+                else
+                {
+                    conexionDB.PERSONAL.Add(personal);
+                    conexionDB.SaveChangesAsync();
+                    return personal.ID_PERSONAL;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
         public PERS_MEDICO buscarPersonalMedico(PERSONAL personal)
         {
             try
@@ -820,7 +857,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     PERSONAL personal = null;
                     personal = conexionDB.PERSONAL.Where(d => d.RUT == rut
-                                                         && d.VERIFICADOR == dv)
+                                                         && d.VERIFICADOR.ToUpper() == dv.ToUpper())
                                                          .FirstOrDefault();
                     if (Util.isObjetoNulo(personal))
                     {
@@ -855,11 +892,17 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     using (var context = new CMHEntities())
                     {
-                        PERSONAL buscado = context.PERSONAL.Where(d => d.ID_PERSONAL == personal.ID_PERSONAL).FirstOrDefault();
+                        PERSONAL buscado = context.PERSONAL.Where(d => d.RUT == personal.RUT).FirstOrDefault();
                         buscado.EMAIL = personal.EMAIL;
                         buscado.NOMBRES = personal.NOMBRES;
                         buscado.APELLIDOS = personal.APELLIDOS;
-                        buscado.HASHED_PASS = personal.HASHED_PASS;
+                        bool hashedNotNull = personal.HASHED_PASS != null;
+                        bool hashedNoVacio = personal.HASHED_PASS != string.Empty;
+                       
+                        if (hashedNotNull && hashedNoVacio)
+                        {
+                            buscado.HASHED_PASS = personal.HASHED_PASS;
+                        }
                         buscado.PORCENT_DESCUENTO = personal.PORCENT_DESCUENTO;
                         buscado.REMUNERACION = personal.REMUNERACION;
                         buscado.RUT = personal.RUT;
@@ -877,6 +920,53 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public Boolean actualizarPersonal(PERSONAL personal, int rutBuscado)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(personal))
+                {
+                    throw new Exception("Personal nulo");
+                }
+                else if (personal.NOMBRES == null ||
+                         personal.APELLIDOS == null ||
+                         personal.NOMBRES == String.Empty ||
+                         personal.APELLIDOS == String.Empty)
+                {
+                    throw new Exception("Nombre o apellido vacío");
+                }
+                else
+                {
+                    using (var context = new CMHEntities())
+                    {
+                        PERSONAL buscado = context.PERSONAL.Where(d => d.RUT == rutBuscado).FirstOrDefault();
+                        buscado.EMAIL = personal.EMAIL;
+                        buscado.NOMBRES = personal.NOMBRES;
+                        buscado.APELLIDOS = personal.APELLIDOS;
+                        bool hashedNotNull = personal.HASHED_PASS != null;
+                        bool hashedNoVacio = personal.HASHED_PASS != string.Empty;
+
+                        if (hashedNotNull && hashedNoVacio)
+                        {
+                            buscado.HASHED_PASS = personal.HASHED_PASS;
+                        }
+                        buscado.PORCENT_DESCUENTO = personal.PORCENT_DESCUENTO;
+                        buscado.REMUNERACION = personal.REMUNERACION;
+                        buscado.RUT = personal.RUT;
+                        buscado.VERIFICADOR = personal.VERIFICADOR;
+                        buscado.ACTIVO = personal.ACTIVO;
+                        context.SaveChangesAsync();
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }       
+
         public Boolean borrarPersonal(PERSONAL personal)
         {
             try
@@ -893,6 +983,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
                             throw new Exception("Tiene que haber por lo menos un jefe de operadores");
                     }
                     conexionDB.PERSONAL.Remove(personal);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean desactivarPersonal(PERSONAL personal)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(personal))
+                {
+                    throw new Exception("Paciente no existe");
+                }
+                else
+                {
+                    if (personal.FUNCIONARIO.Count > 0 && personal.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO == "Jefe de operadores")
+                    {
+                        if (conexionDB.FUNCIONARIO.Where(d => d.CARGO.NOMBRE_CARGO == "Jefe de operadores").Count() <= 1)
+                            throw new Exception("Tiene que haber por lo menos un jefe de operadores");
+                    }
+                    personal.ACTIVO = false;
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
@@ -1490,6 +1607,197 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             List<TIPO_FICHA> tipos = conexionDB.TIPO_FICHA.ToList();
             return tipos;
+        }
+        #endregion
+
+        #region Personal médico
+        public Boolean nuevoPersonalMedico(PERS_MEDICO persMedico)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(persMedico))
+                {
+                    throw new Exception("Especialidad nulo");
+                }
+                else if (persMedico.ID_ESPECIALIDAD == null ||
+                         persMedico.ID_ESPECIALIDAD == 0 ||
+                         persMedico.ID_PERSONAL == null ||
+                         persMedico.ID_PERSONAL == 0)
+                {
+                    throw new Exception("Especialidad o personal no vacío");
+                }
+                else if (Util.isObjetoNulo(conexionDB.ESPECIALIDAD.Find(persMedico.ID_ESPECIALIDAD)))
+                {
+                    throw new Exception("Especialidad no existe");
+                }
+                else
+                {
+                    conexionDB.PERS_MEDICO.Add(persMedico);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public int nuevoPersonalMedicoID(PERS_MEDICO persMedico)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(persMedico))
+                {
+                    throw new Exception("Especialidad nulo");
+                }
+                else if (persMedico.ID_ESPECIALIDAD == null ||
+                         persMedico.ID_ESPECIALIDAD == 0 ||
+                         persMedico.ID_PERSONAL == null ||
+                         persMedico.ID_PERSONAL == 0)
+                {
+                    throw new Exception("Especialidad o personal no vacío");
+                }
+                else if (Util.isObjetoNulo(conexionDB.ESPECIALIDAD.Find(persMedico.ID_ESPECIALIDAD)))
+                {
+                    throw new Exception("Especialidad no existe");
+                }
+                else
+                {
+                    conexionDB.PERS_MEDICO.Add(persMedico);
+                    conexionDB.SaveChangesAsync();
+                    return persMedico.ID_PERSONAL_MEDICO;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+        #endregion
+
+        #region Horarios
+        public Boolean asignarBloques(PERS_MEDICO pers)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(pers))
+                {
+                    throw new Exception("Especialidad nulo");
+                }
+                else if (pers.ID_ESPECIALIDAD == null ||
+                         pers.ID_ESPECIALIDAD == 0 ||
+                         pers.ID_PERSONAL == null ||
+                         pers.ID_PERSONAL == 0)
+                {
+                    throw new Exception("Especialidad o personal no vacío");
+                }
+                else if (Util.isObjetoNulo(conexionDB.ESPECIALIDAD.Find(pers.ID_ESPECIALIDAD)))
+                {
+                    throw new Exception("Especialidad no existe");
+                }
+                else
+                {
+                    HORARIO horario = new HORARIO();
+                    List<BLOQUE> bloques = conexionDB.BLOQUE.ToList();
+                    foreach (BLOQUE b in bloques)
+                    {
+                        horario.ID_BLOQUE = b.ID_BLOQUE;
+                        horario.ID_PERS_MEDICO = pers.ID_PERSONAL_MEDICO;
+                        conexionDB.HORARIO.Add(horario);
+                        conexionDB.SaveChangesAsync();
+                    }
+                   
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        #endregion
+
+       
+        #region Bancaria 
+        public bool crearCuentaBancaria(CUEN_BANCARIA cuenta)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(cuenta))
+                {
+                    throw new Exception("Paciente nulo");
+                }
+                else if (cuenta.ID_BANCO == null ||
+                         cuenta.ID_PERS_MEDICO == null ||
+                         cuenta.ID_TIPO_C_BANCARIA == null)
+                {
+                    throw new Exception("Cuenta bancaria invalida");
+                }
+                else
+                {
+                    conexionDB.CUEN_BANCARIA.Add(cuenta);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public bool actualizarCuentaBancaria(CUEN_BANCARIA cuenta)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(cuenta))
+                {
+                    throw new Exception("Paciente nulo");
+                }
+                else if (cuenta.ID_BANCO == null || cuenta.ID_TIPO_C_BANCARIA == null)
+                {
+                    throw new Exception("Cuenta bancaria invalida");
+                }
+                else
+                {
+                    using (var context = new CMHEntities())
+                    {
+                        CUEN_BANCARIA buscado = context.CUEN_BANCARIA.Where(d => d.ID_PERS_MEDICO == cuenta.ID_PERS_MEDICO).FirstOrDefault();
+                        buscado.ID_TIPO_C_BANCARIA = cuenta.ID_TIPO_C_BANCARIA;
+                        buscado.NUM_C_BANCARIA = cuenta.NUM_C_BANCARIA;
+                        buscado.ID_BANCO = cuenta.ID_BANCO;
+                        context.SaveChangesAsync();
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
+       
+        #region Banco
+        public List<BANCO> ObtenerBancos()
+        {
+            List<BANCO> bancos = conexionDB.BANCO.ToList();
+            return bancos;
+        }
+        #endregion
+       
+        #region TipoCuentaBancaria
+        public List<TIPO_C_BANCARIA> ObtenerTiposCuentaBancaria()
+        {
+            List<TIPO_C_BANCARIA> tipcuentab = conexionDB.TIPO_C_BANCARIA.ToList();
+            return tipcuentab;
         }
         #endregion
     }
