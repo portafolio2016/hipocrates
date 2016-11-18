@@ -53,7 +53,6 @@ public class Agendamiento extends HttpServlet {
         AgendamientoController.cargarPrestaciones(request);
         AgendamientoController.cargarPersonal(request);
         AgendamientoController.cargarHorasLibres(request);
-//        try (PrintWriter out = response.getWriter()) {
         String paramBtnRegistrar = request.getParameter("hiddenRegistrar");
         boolean btnRegistrarClick = null != paramBtnRegistrar && "registrar".compareTo(paramBtnRegistrar) == 0;
         if (btnRegistrarClick) {
@@ -66,11 +65,7 @@ public class Agendamiento extends HttpServlet {
                 PrintWriter out = response.getWriter();
                 out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=login';</script>");
             }
-
         }
-//        } catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
