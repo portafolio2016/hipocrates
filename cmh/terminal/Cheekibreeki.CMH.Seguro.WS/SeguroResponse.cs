@@ -10,14 +10,16 @@ namespace Cheekibreeki.CMH.Seguro.WS
     [DataContract]
     public class SeguroResponse
     {
+        private bool afiliadoTieneSeguro;
+        int descuentoPesos = 0;
+        string nombreAseguradora;
+
         public SeguroResponse()
         {
             this.descuentoPesos = 0;
             this.afiliadoTieneSeguro = false;
         }
-        int descuentoPesos = 0;
-
-        private bool afiliadoTieneSeguro;
+        
         [DataMember]
         public bool AfiliadoTieneSeguro
         {
@@ -32,6 +34,11 @@ namespace Cheekibreeki.CMH.Seguro.WS
             set { descuentoPesos = value; }
         }
 
-        
+        [DataMember]
+        public string NombreAseguradora
+        {
+            get { return nombreAseguradora; }
+            set { nombreAseguradora = value; }
+        }
     }
 }

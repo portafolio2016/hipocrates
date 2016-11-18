@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f833354d-4ab4-4dd3-9169-87026f1d0dca" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="67843fab-7c07-4b24-98b8-92d6e9aa937b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/Cheekibreeki.CMH.Seguro.WS/Service1/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="464f507a-64b0-44bc-ac1a-444532f7c3df" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Cheekibreeki.CMH.Seguro.WS/Service1/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="a9462934-aa96-42de-a93b-a59a06f5ee7a" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Cheekibreeki.CMH.Seguro.WS/Service1/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="967116d8-43fa-4dfd-8a25-24059d50c0c6" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Cheekibreeki.CMH.Seguro.WS/Service1/mex" />
-    <MetadataFile FileName="Cheekibreeki.CMH.Seguro.WS.xsd" MetadataType="Schema" ID="5acd8295-80b8-4b1f-81d0-0ca78a7f207e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Cheekibreeki.CMH.Seguro.WS/Service1/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="107bb1b9-22eb-49cb-b14b-35c95c2d2c0d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Cheekibreeki.CMH.Seguro.WS/Service1/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c059f65c-5be3-4a5d-a581-238530f3d711" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Cheekibreeki.CMH.Seguro.WS/Service1/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="b7315da8-d549-426b-8440-a9adf7e5dfff" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Cheekibreeki.CMH.Seguro.WS/Service1/mex" />
+    <MetadataFile FileName="Cheekibreeki.CMH.Seguro.WS.xsd" MetadataType="Schema" ID="5a8de72d-50df-437b-a75c-49812292c1df" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Cheekibreeki.CMH.Seguro.WS/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

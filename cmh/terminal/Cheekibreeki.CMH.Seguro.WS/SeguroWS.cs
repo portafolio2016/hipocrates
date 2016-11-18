@@ -16,6 +16,7 @@ namespace Cheekibreeki.CMH.Seguro.WS
             int descuento = accionesSeguro.obtenerDescuentoPrestacion(seguroRequest.AfiliadoRut, seguroRequest.CodigoPrestacion, seguroRequest.PrecioPrestacion);
             SeguroResponse response = new SeguroResponse();
             response.DescuentoPesos = descuento;
+            response.NombreAseguradora = accionesSeguro.obtenerNombreEmpresa(seguroRequest.AfiliadoRut);
             if (descuento > 0)
             {
                 response.AfiliadoTieneSeguro = true;

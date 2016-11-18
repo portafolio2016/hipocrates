@@ -79,11 +79,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             try
             {
-                if (Util.isObjetoNulo(atencion))
+                ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
+                if (Util.isObjetoNulo(atencionFinal))
                 {
                     throw new Exception("Atención nula");
                 }
-                if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() != "VIGENTE")
+                if (atencionFinal.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() != "VIGENTE")
                 {
                     throw new Exception("Estado no válido de la atención");
                 }
@@ -93,7 +94,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
                     atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "PAGADO").FirstOrDefault().ID_ESTADO_ATEN;
                     conexionDB.SaveChangesAsync();
                     return true;
@@ -112,31 +112,30 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
             int precioPrestacion = prestacion.PRECIO_PRESTACION.Value;
             int rutPaciente = paciente.RUT;
-            SeguroWSClient client = new SeguroWSClient();
             SeguroRequest request = new SeguroRequest();
+            SeguroWSClient client = new SeguroWSClient();
             request.AfiliadoRut = paciente.RUT;
             request.CodigoPrestacion = prestacion.CODIGO_PRESTACION;
-            Task<SeguroResponse> tResponse = client.obtenerDescuentoAsync(request);
-            tResponse.Wait();
-            SeguroResponse response = tResponse.Result;
+            request.PrecioPrestacion = prestacion.PRECIO_PRESTACION.Value;
+            //Task<SeguroResponse> tResponse = client.obtenerDescuentoAsync(request);
+            //tResponse.Wait();
+            //SeguroResponse response = tResponse.Result;
+            SeguroResponse response = client.obtenerDescuento(request);
             ResultadoVerificacionSeguro resultado = new ResultadoVerificacionSeguro();
             resultado.TieneSeguro = response.AfiliadoTieneSeguro;
             resultado.Descuento = response.DescuentoPesos;
+            resultado.Aseguradora = response.NombreAseguradora;
             return resultado;
         }
 
         //ECU-008
-        public Boolean registrarPago(PAGO pago)
+        public Boolean registrarPago(PAGO pago, string aseguradora, int cantBono)
         {
             try
             {
                 if (Util.isObjetoNulo(pago))
                 {
                     throw new Exception("Pago nulo");
-                }
-                else if (Util.isObjetoNulo(conexionDB.BONO.Find(pago.ID_BONO)))
-                {
-                    throw new Exception("Bono no existe");
                 }
                 else if (Util.isObjetoNulo(conexionDB.CAJA.Find(pago.ID_CAJA)))
                 {
@@ -148,6 +147,17 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
+                    if (aseguradora != "No tiene seguro")
+                    {
+                        BONO bono = new BONO();
+                        bono.CANT_BONO = cantBono;
+                        bono.ID_ASEGURADORA = conexionDB.ASEGURADORA.Where(d => d.NOM_ASEGURADORA == aseguradora).FirstOrDefault().ID_ASEGURADORA;
+                        conexionDB.BONO.Add(bono);
+                        conexionDB.SaveChangesAsync();
+                        pago.ID_BONO = bono.ID_BONO;
+                    }
+
+                    pago.FECHOR = DateTime.Today;
                     conexionDB.PAGO.Add(pago);
                     conexionDB.SaveChangesAsync();
                     return true;
@@ -358,28 +368,19 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             try
             {
-                if (Util.isObjetoNulo(atencion))
+                ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
+                if (Util.isObjetoNulo(atencionFinal))
                 {
                     throw new Exception("Atencion invalida");
                 }
-                else if (atencion.FECHOR == DateTime.MinValue ||
-                         atencion.FECHOR == null)
+                else if (atencionFinal.FECHOR == DateTime.MinValue ||
+                         atencionFinal.FECHOR == null)
                 {
                     throw new Exception("Fecha vacía");
                 }
-                else if (atencion.OBSERVACIONES == String.Empty ||
-                         atencion.OBSERVACIONES == null)
-                {
-                    throw new Exception("Observacion vacia");
-                }
                 else
                 {
-                    ESTADO_ATEN estadoatencion = new ESTADO_ATEN();
-                    estadoatencion.NOM_ESTADO_ATEN = "ANULADO";
-                    estadoatencion = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN == estadoatencion.NOM_ESTADO_ATEN).FirstOrDefault();
-
-                    atencion = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
-                    atencion.ID_ESTADO_ATEN = estadoatencion.ID_ESTADO_ATEN;
+                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "ANULADO").FirstOrDefault().ID_ESTADO_ATEN;
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
@@ -422,6 +423,65 @@ namespace CheekiBreeki.CMH.Terminal.BL
             {
                 Console.WriteLine(ex.Message);
                 return false;
+            }
+        }
+
+        public Boolean abrirCaja(FUNCIONARIO funcionario, int dinero)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario nula.");
+                }
+                else if (Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Funcionario no encontrado.");
+                }
+                else
+                {
+                    CAJA caja = new CAJA();
+                    caja.FECHOR_APERTURA = DateTime.Today;
+                    caja.ID_FUNCIONARIO = funcionario.ID_FUNCIONARIO;
+                    caja.CANT_EFECTIVO_INI = dinero;
+                    conexionDB.CAJA.Add(caja);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public CAJA buscarCajaAbierta(FUNCIONARIO funcionario)
+        {
+            CAJA caja = null;
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario nula.");
+                }
+                else if (Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Funcionario no encontrado.");
+                }
+                else
+                {
+                    List<CAJA> cajas = new List<CAJA>();
+                    cajas = conexionDB.CAJA.Where(d => d.FUNCIONARIO.ID_FUNCIONARIO == funcionario.ID_FUNCIONARIO && d.FECHOR_CIERRE == null).ToList();
+                    caja = cajas.Where(d => d.FECHOR_APERTURA.Value.Date == DateTime.Today.Date).FirstOrDefault();
+                    conexionDB.SaveChangesAsync();
+                    return caja;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return caja;
             }
         }
 
@@ -490,6 +550,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     }
                     return true;
                 }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean cerrarCaja(FUNCIONARIO funcionario, int dinero, int cheques)
+        {
+            try
+            {
+                List<CAJA> cajas = conexionDB.CAJA.Where(d => d.FUNCIONARIO.ID_FUNCIONARIO == funcionario.ID_FUNCIONARIO && d.FECHOR_CIERRE == null).ToList();
+                CAJA caja = cajas.Where(d => d.FECHOR_APERTURA.Value.Date == DateTime.Today).FirstOrDefault();
+                if (caja.FECHOR_CIERRE == null)
+                {
+                    caja.FECHOR_CIERRE = DateTime.Today;
+                    caja.CANT_EFECTIVO_FIN = dinero;
+                    caja.CANT_CHEQUE_FIN = cheques;
+
+                    conexionDB.SaveChangesAsync();
+
+                    CARGO cargoAuditor = conexionDB.CARGO.Where(d => d.NOMBRE_CARGO.ToUpper() == "JEFE DE OPERADOR").FirstOrDefault();
+                    this.auditarCaja(caja, cargoAuditor);
+                }
+                return true;
 
             }
             catch (Exception ex)
@@ -1312,6 +1399,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     pass = Util.generarPass();
                     md5 = Util.hashMD5(pass);
                     paciente.HASHED_PASS = md5;
+                    // Cambiar estado activo
+                    paciente.ACTIVO = true;
                     // Enviar correo
                     titulo = "Bienvenido a Centro Médico Hipócrates";
                     cuerpo = "Estimado/a " + paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE + ",\n\n";
@@ -1424,7 +1513,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         //Devolucion
         #region Devolución
-        public bool DevolucionPago(PAGO pago, string nombre_dev)
+        public bool devolverPago(PAGO pago, string nombre_dev)
         {
             try
             {
@@ -1440,16 +1529,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 devo.NOM_TIPO_DEV = nombre_dev;
                 conexionDB.DEVOLUCION.Add(devo);
                 conexionDB.SaveChangesAsync();
-                pago = conexionDB.PAGO.Where(d => d.ID_PAGO == pago.ID_PAGO).FirstOrDefault();
-                if (pago.ID_DEVOLUCION != null)
-                {
-                    //conexionDB.DEVOLUCION.Remove(devo);
-                    //conexionDB.SaveChangesAsync();
-                    return false;
-                }
+
+                pago = conexionDB.PAGO.Find(pago.ID_PAGO);
                 pago.ID_DEVOLUCION = devo.ID_DEVOLUCION;
                 conexionDB.SaveChangesAsync();
-
                 return true;
             }
             catch (Exception ex)
@@ -1598,6 +1681,25 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d => d.ESPECIALIDAD.ID_ESPECIALIDAD == idEspecialidad).ToList();
             return (prestaciones);
+        }
+
+        public List<ATENCION_AGEN> listaAtencionesVigentes(int rut)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => d.PACIENTE.RUT == rut &&
+                    d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE").ToList();
+            atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
+            return (atenciones);
+        }
+
+        public List<ATENCION_AGEN> listaAtencionesVigentesPagadas(int rut)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => d.PACIENTE.RUT == rut &&
+                    (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE" ||
+                    d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
+            atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
+            return (atenciones);
         }
         #endregion
 

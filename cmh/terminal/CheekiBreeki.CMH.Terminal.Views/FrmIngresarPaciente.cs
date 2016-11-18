@@ -13,15 +13,15 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class FrmAgendarAtencion : Form
+    public partial class FrmIngresarPaciente : Form
     {
-        AccionesTerminal at = new AccionesTerminal();
+        private static AccionesTerminal at = new AccionesTerminal();
         private static List<ENTRADA_FICHA> entradaList;
         //private static PACIENTE paciente;
         FrmLogin login = null;
         bool closeApp;
 
-        public FrmAgendarAtencion(FrmLogin fLogin)
+        public FrmIngresarPaciente(FrmLogin fLogin)
         {
             InitializeComponent();
             closeApp = true;
@@ -62,7 +62,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
-        private void FrmPrueba_FormClosed(object sender, FormClosedEventArgs e)
+        private void FrmIngresarPaciente_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (closeApp)
                 Application.Exit();
@@ -248,7 +248,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         public class ComboboxItem
         {
             public string Text { get; set; }
-            public int Value { get; set; }
+            public Object Value { get; set; }
 
             public override string ToString()
             {
@@ -256,122 +256,165 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
-        public class ObjetoMistico
+        private void brnBuscarAtenciones_Click(object sender, EventArgs e)
         {
-            public PERS_MEDICO Personal { get; set; }
-            public PRESTACION Prestacion { get; set; }
+            ActualizarLista();
+            mostrarLabelPaciente();
         }
 
-        private void frmAgendarAtencion_Load(object sender, EventArgs e)
+        private void btnIngresar_Click(object sender, EventArgs e)
         {
-            cmbEspecialidad.DataSource = null;
-            cmbEspecialidad.ValueMember = "ID_ESPECIALIDAD";
-            cmbEspecialidad.DisplayMember = "NOM_ESPECIALIDAD";
-            cmbEspecialidad.DataSource = at.listaEspecialidad();
-        }
-
-        private void cmbEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int idEspecialidad = (int)cmbEspecialidad.SelectedValue;
-
-            cmbPersonal.DataSource = null;
-            cmbPersonal.ValueMember = "ID_PERSONAL";
-            cmbPersonal.DisplayMember = "NOMBREFULL";
-            cmbPersonal.DataSource = at.listaPersonales(idEspecialidad);
-
-            cmbPrestacion.DataSource = null;
-            cmbPrestacion.ValueMember = "ID_PRESTACION";
-            cmbPrestacion.DisplayMember = "NOM_PRESTACION";
-            cmbPrestacion.DataSource = at.listaPrestaciones(idEspecialidad);
-        }
-
-        private void dtFecha_ValueChanged(object sender, EventArgs e)
-        {
-            actualizarBloques();
-        }
-
-        private void btnAgendar_Click(object sender, EventArgs e)
-        {
-            lblError.Visible = false;
-            bool res = false;
+            bool res1 = false, res2 = false;
             try
             {
+                UsuarioLogeado usuario = FrmLogin.usuarioLogeado;
                 ATENCION_AGEN atencion = new ATENCION_AGEN();
-                PACIENTE paciente = new PACIENTE();
-                PRESTACION prestacion = new PRESTACION();
-                ESTADO_ATEN estado = new ESTADO_ATEN();
-                PERS_MEDICO personalMedico = new PERS_MEDICO();
-                BLOQUE bloque = new BLOQUE();
-                if (dtFecha.Value < DateTime.Today)
+                PAGO pago = new PAGO();
+                CAJA caja = new CAJA();
+                using (var context = new CMHEntities())
+                {
+                    atencion = context.ATENCION_AGEN.Find(((ComboboxItem)lstAtenciones.SelectedItem).Value);
+                }
+                caja = at.buscarCajaAbierta(usuario.Personal.FUNCIONARIO.FirstOrDefault());
+
+                pago.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                pago.MONTO_PAGO = int.Parse(lblTotal.Text);
+                pago.ID_CAJA = caja.ID_CAJA;
+
+                res1 = at.ingresarPaciente(atencion);
+                res2 = at.registrarPago(pago, lblAseguradora.Text, int.Parse(lblDescuento.Text));
+                ActualizarLista();
+                res1 = true;
+            }
+            catch (Exception ex)
+            {
+                res1 = false;
+            }
+            if (res1 && res2)
+            {
+                lblError.Visible = true;
+                lblError.Text = "Paciente ingresado correctamente";
+                lblError.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                lblError.Visible = true;
+                lblError.Text = "Error al ingresar paciente";
+                lblError.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        private void ActualizarLista()
+        {
+            bool res = false;
+            lblError.Visible = false;
+            lstAtenciones.Items.Clear();
+            try
+            {
+                int rut = int.Parse(txtRut.Text);
+                if (!Util.rutValido(rut, txtDv.Text))
                     res = false;
                 else
                 {
-                    using (var context = new CMHEntities())
+                    List<ATENCION_AGEN> atenciones = at.listaAtencionesVigentes(rut).ToList();
+                    foreach (ATENCION_AGEN atencion in atenciones)
                     {
-                        estado = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE").FirstOrDefault();
-                        personalMedico = context.PERS_MEDICO.Find((int)cmbPersonal.SelectedValue);
+                        ComboboxItem item = new ComboboxItem();
+                        item.Value = atencion.ID_ATENCION_AGEN;
+                        item.Text = "Atención: " + atencion.ID_ATENCION_AGEN + " - Médico: " + atencion.PERS_MEDICO.PERSONAL.NOMBREFULL;
+                        lstAtenciones.Items.Add(item);
                     }
-                    paciente = at.buscarPaciente(int.Parse(txtRut.Text), txtDv.Text.ToUpper());
-                    if (!Util.isObjetoNulo(paciente))
-                    {
-                        atencion.FECHOR = dtFecha.Value;
-                        atencion.ID_PACIENTE = paciente.ID_PACIENTE;
-                        atencion.ID_PRESTACION = (int)cmbPrestacion.SelectedValue;
-                        atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
-                        atencion.ID_PERS_ATIENDE = (int)cmbPersonal.SelectedValue;
-                        atencion.ID_BLOQUE = ((ComboboxItem)cmbHora.SelectedItem).Value;
-                        res = at.agendarAtencion(atencion);
-                        actualizarBloques();
-                    }
+                    PACIENTE paciente = at.buscarPaciente(rut, txtDv.Text);
+                    lblNombre.Text = paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE;
+                    lblEdad.Text = paciente.FEC_NAC.Value.Date.ToShortDateString();
+                    lblSexo.Text = paciente.SEXO;
+                    lblRutInfo.Text = paciente.RUT + "-" + paciente.DIGITO_VERIFICADOR;
+                    res = true;
                 }
             }
             catch (Exception ex)
             {
                 res = false;
             }
-            if (res)
+            if (!res)
             {
                 lblError.Visible = true;
-                lblError.Text = "Atención agendada correctamente";
-                lblError.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al agendar atención";
+                lblError.Text = "Error al buscar atenciones";
                 lblError.ForeColor = System.Drawing.Color.Red;
             }
+            if (Util.isObjetoNulo(lstAtenciones.SelectedValue))
+                btnIngresar.Enabled = false;
         }
 
-        private void actualizarBloques()
+        private void mostrarLabelPaciente()
         {
-            cmbHora.Items.Clear();
-            PERSONAL personal = new PERSONAL();
-            personal.ID_PERSONAL = (int)cmbPersonal.SelectedValue;
-            PERS_MEDICO persMedico = at.buscarPersonalMedico(personal);
+            bool estado = true;
+            lblNombre.Visible = estado;
+            lblEdad.Visible = estado;
+            lblSexo.Visible = estado;
+            lblRutInfo.Visible = estado;
+        }
 
-            DateTime dia = dtFecha.Value;
+        private void mostrarLabelDescuento()
+        {
+            bool estado = true;
+            lblSubtotal.Visible = estado;
+            lblDescuento.Visible = estado;
+            lblTotal.Visible = estado;
+            lblAseguradora.Visible = estado;
 
-            HorasDisponibles horas = at.horasDisponiblesMedico(persMedico, dia);
-            foreach (HoraDisponible hora in horas.Horas)
+            lblSubtotal.Text = string.Empty;
+            lblTotal.Text = string.Empty;
+            lblDescuento.Text = string.Empty;
+            lblAseguradora.Text = string.Empty;
+        }
+
+        private void lstAtenciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lblError.Visible = true;
+            lblError.Text = "Consultando aseguradora...";
+            lblError.ForeColor = System.Drawing.Color.Violet;
+            mostrarLabelDescuento();
+            try
             {
-                ComboboxItem item = new ComboboxItem();
-                if (hora.MinuIni == 0)
-                    item.Text = hora.HoraFin + ":00 - " + hora.HoraFin + ":" + hora.MinuFin;
-                else if ((hora.MinuFin == 0))
-                    item.Text = hora.HoraFin + ":" + hora.MinuIni + " - " + hora.HoraFin + ":00";
-                else
-                    item.Text = hora.HoraFin + ":" + hora.MinuIni + " - " + hora.HoraFin + ":" + hora.MinuFin;
-                item.Value = hora.Bloque.ID_BLOQUE;
-                cmbHora.Items.Add(item);
-                cmbHora.SelectedIndex = 0;
-            }
-        }
+                ATENCION_AGEN atencion = new ATENCION_AGEN();
+                PACIENTE paciente = new PACIENTE();
+                PRESTACION prestacion = new PRESTACION();
+                ResultadoVerificacionSeguro seguro = new ResultadoVerificacionSeguro();
+                using (var context = new CMHEntities())
+                {
+                    atencion = context.ATENCION_AGEN.Find(((ComboboxItem)lstAtenciones.SelectedItem).Value);
+                    paciente = context.PACIENTE.Find(atencion.ID_PACIENTE);
+                    prestacion = context.PRESTACION.Find(atencion.ID_PRESTACION);
+                }
 
-        private void cmbPersonal_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!Util.isObjetoNulo(cmbPersonal.SelectedValue))
-                actualizarBloques();
+                seguro = at.verificarSeguro(prestacion, paciente);
+                lblSubtotal.Text = atencion.PRESTACION.PRECIO_PRESTACION.ToString();
+                lblTotal.Text = seguro.Descuento.ToString();
+                if (seguro.Aseguradora == "No tiene seguro")
+                {
+                    lblTotal.Text = atencion.PRESTACION.PRECIO_PRESTACION.ToString();
+                    lblDescuento.Text = "0";
+                }
+                else
+                {
+                    lblTotal.Text = seguro.Descuento.ToString();
+                    lblDescuento.Text = (int.Parse(lblSubtotal.Text) - int.Parse(lblTotal.Text)).ToString();
+                }
+                lblAseguradora.Text = seguro.Aseguradora;
+                btnIngresar.Enabled = true;
+                lblError.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                lblError.Visible = true;
+                lblError.Text = "Error al buscar descuento";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                lblSubtotal.Text = string.Empty;
+                lblTotal.Text = string.Empty;
+                lblDescuento.Text = string.Empty;
+                btnIngresar.Enabled = false;
+            }
         }
 
         private void txtRut_KeyPress(object sender, KeyPressEventArgs e)
@@ -390,13 +433,5 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 e.Handled = true;
             }
         }
-
-        private void FrmAgendarAtencion_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (closeApp)
-                Application.Exit();
-        }
-
-
     }
 }

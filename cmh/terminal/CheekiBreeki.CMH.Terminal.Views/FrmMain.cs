@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CheekiBreeki.CMH.Terminal.BL;
+using CheekiBreeki.CMH.Terminal.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 {
     public partial class FrmMain : Form
     {
+        AccionesTerminal at = new AccionesTerminal();
         FrmLogin login = null;
         bool closeApp;
 
@@ -36,6 +39,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
 
             login = padre;
+
+            comprobarCajaAbierta();
         }
 
         private void btnSesion_Click(object sender, EventArgs e)
@@ -66,6 +71,72 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
 
+        private void btnCrearPaciente_Click(object sender, EventArgs e)
+        {
+            FrmCrearPaciente frmCrearPaciente = new FrmCrearPaciente(login);
+            frmCrearPaciente.Show();
+            frmCrearPaciente.Activate();
+            this.Hide();
+        }
 
+        private void btnIngresarPaciente_Click(object sender, EventArgs e)
+        {
+            FrmIngresarPaciente frmIngresarPaciente = new FrmIngresarPaciente(login);
+            frmIngresarPaciente.Show();
+            frmIngresarPaciente.Activate();
+            this.Hide();
+        }
+
+        private void btnAbrirCaja_Click(object sender, EventArgs e)
+        {
+            FrmAbrirCaja frmAbrirCaja = new FrmAbrirCaja(login);
+            frmAbrirCaja.Show();
+            frmAbrirCaja.Activate();
+            this.Hide();
+        }
+
+        private void btnCerrarCaja_Click(object sender, EventArgs e)
+        {
+            FrmCerrarCaja frmCerrarCaja = new FrmCerrarCaja(login);
+            frmCerrarCaja.Show();
+            frmCerrarCaja.Activate();
+            this.Hide();
+        }
+
+        private void btnAnularAtencion_Click(object sender, EventArgs e)
+        {
+            FrmAnularAtencion frmAnularAtencion = new FrmAnularAtencion(login);
+            frmAnularAtencion.Show();
+            frmAnularAtencion.Activate();
+            this.Hide();
+        }
+
+        private void comprobarCajaAbierta()
+        { 
+            UsuarioLogeado usuario = FrmLogin.usuarioLogeado;
+            if (usuario.Privilegio.ToUpper() == "OPERADOR")
+            {
+                if (!Util.isObjetoNulo(at.buscarCajaAbierta(usuario.Personal.FUNCIONARIO.FirstOrDefault())))
+                {
+                    btnAbrirCaja.Text = "Ya hay una caja abierta";
+                    btnAbrirCaja.Enabled = false;
+                    btnCerrarCaja.Text = "Cerrar caja";
+                    btnCerrarCaja.Enabled = true;
+                }
+                else
+                {
+                    btnCerrarCaja.Text = "No hay caja abierta";
+                    btnCerrarCaja.Enabled = false;
+                }
+            }
+            else
+            {
+                btnAbrirCaja.Text = "Privilegio inválido";
+                btnAbrirCaja.Enabled = false;
+                btnCerrarCaja.Text = "Privilegio inválido";
+                btnCerrarCaja.Enabled = false;
+            }
+
+        }
     }
 }

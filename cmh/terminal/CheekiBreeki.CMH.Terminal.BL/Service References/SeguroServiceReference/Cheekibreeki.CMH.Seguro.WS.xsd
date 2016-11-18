@@ -12,6 +12,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="AfiliadoTieneSeguro" type="xs:boolean" />
       <xs:element minOccurs="0" name="DescuentoPesos" type="xs:int" />
+      <xs:element minOccurs="0" name="NombreAseguradora" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SeguroResponse" nillable="true" type="tns:SeguroResponse" />
