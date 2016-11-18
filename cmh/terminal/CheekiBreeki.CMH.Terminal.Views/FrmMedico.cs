@@ -117,7 +117,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
                                MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
                 {
                     PERSONAL personal = FrmLogin.usuarioLogeado.Personal;
-;
                     personal.EMAIL = tbNuevoMail.Text.Trim();
                     bool x = acciones.actualizarPersonal(personal);
                     if(x)
@@ -202,6 +201,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         }
 
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   FORM CLOSED                                                                                                                //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void FrmMedico_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (closeApp)
