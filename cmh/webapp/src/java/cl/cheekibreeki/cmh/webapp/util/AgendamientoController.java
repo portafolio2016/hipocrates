@@ -140,7 +140,7 @@ public class AgendamientoController {
                 }
                 HorasDisponibles horasDisponibles = accionesPaciente.horasDisponiblesMedico(medico, fecha);
                 request.setAttribute("horas", horasDisponibles);
-                if (request.getParameter("hora") != null) {
+                if (null != request.getParameter("hora")) {
                     request.setAttribute("hora", request.getParameter("hora"));
                 }
             }

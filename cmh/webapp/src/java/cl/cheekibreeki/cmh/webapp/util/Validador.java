@@ -7,9 +7,11 @@ package cl.cheekibreeki.cmh.webapp.util;
 
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.mail.internet.InternetAddress;
 
@@ -94,11 +96,6 @@ public class Validador {
         return emailEsUnico;
     }
 
-    public static boolean fechaNoFutura(Date fecha) {
-        Date hoy = new Date();
-        boolean fechaNoFutura = hoy.after(fecha);//si hoy viene despues que fecha entonces true
-        return fechaNoFutura;
-    }
 
     /**
      * *
@@ -108,9 +105,36 @@ public class Validador {
      */
     public static boolean fechaFutura(Date fecha) {
         Date hoy = new Date();
-        boolean fechaValida = !hoy.before(fecha); //retorna negativo solamente si es un día anterior al de hoy.
-        return fechaValida;
+        Calendar calendarParam = Calendar.getInstance();
+        Calendar calendarHoy = Calendar.getInstance();
+        calendarParam.setTime(fecha);
+        calendarHoy.setTime(hoy);
+        
+        if(calendarHoy.get(Calendar.YEAR)< calendarParam.get(Calendar.YEAR)){
+            return true;
+        }else if(calendarHoy.get(Calendar.YEAR) == calendarParam.get(Calendar.YEAR)){
+            if(calendarHoy.get(Calendar.DAY_OF_YEAR) < calendarParam.get(Calendar.DAY_OF_YEAR)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
+    
+    public static boolean mismoDia(Date fecha) {
+        Date hoy = new Date();
+        Calendar calendarParam = Calendar.getInstance();
+        Calendar calendarHoy = Calendar.getInstance();
+        calendarParam.setTime(fecha);
+        calendarHoy.setTime(hoy);
+        
+        return ((calendarHoy.get(Calendar.YEAR) == calendarParam.get(Calendar.YEAR) 
+                && (calendarHoy.get(Calendar.DAY_OF_YEAR) == calendarParam.get(Calendar.DAY_OF_YEAR))));
+    }
+    
+    
 
     /**
      * *

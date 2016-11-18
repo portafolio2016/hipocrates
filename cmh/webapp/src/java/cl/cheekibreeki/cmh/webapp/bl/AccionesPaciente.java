@@ -5,10 +5,10 @@
  */
 package cl.cheekibreeki.cmh.webapp.bl;
 
-
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten;
 import cl.cheekibreeki.cmh.lib.dal.entities.*;
+import cl.cheekibreeki.cmh.webapp.util.Validador;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -22,181 +22,203 @@ import java.util.List;
  * @author pdelasotta
  */
 public class AccionesPaciente {
-     /**
+
+    /**
      * Método que registra un paciente
+     *
      * @param paciente El paciente que se quiere registrar
      * @return Si es true el paciente fue registrado
      */
-    public boolean registrarPaciente(Paciente paciente){
+    public boolean registrarPaciente(Paciente paciente) {
         Map<String, Object> params1 = new HashMap<>();
         params1.put("rut", paciente.getRut());
-        List<? extends Object>  pacienteAux = Controller.findByQuery("Paciente.findByRut", params1);
-        if(pacienteAux.isEmpty()){
+        List<? extends Object> pacienteAux = Controller.findByQuery("Paciente.findByRut", params1);
+        if (pacienteAux.isEmpty()) {
             Object obj = paciente;
             boolean result = Controller.upsert(obj);
             return result;
-        }else{
+        } else {
             return false;
         }
     }
-    
-     /**
+
+    /**
      * Método que entrega los examenes de un paciente
+     *
      * @param paciente El paciente a quien pertenecen los examenes.
-     * @return Un ArrayList con todos los examenes del paciente, si esta vacio no hay examenes asociados.
+     * @return Un ArrayList con todos los examenes del paciente, si esta vacio
+     * no hay examenes asociados.
      */
-    public ArrayList<ResAtencion> obtenerExamenes(Paciente paciente){
+    public ArrayList<ResAtencion> obtenerExamenes(Paciente paciente) {
         Map<String, Object> params = new HashMap<>();
         params.put("idPaciente", paciente);
-        List<? extends Object>  atenciones = Controller.findByQuery("AtencionAgen.findByIdPaciente", params);
+        List<? extends Object> atenciones = Controller.findByQuery("AtencionAgen.findByIdPaciente", params);
         ArrayList<ResAtencion> resAtencion = new ArrayList<>();
-        for(Object  x : atenciones){
+        for (Object x : atenciones) {
             Map<String, Object> paramsAux = new HashMap<>();
-            AtencionAgen atencionAux = (AtencionAgen)x;
+            AtencionAgen atencionAux = (AtencionAgen) x;
             paramsAux.put("idAtencionAgen", atencionAux);
-            List<? extends Object>  resultado = Controller.findByQuery("ResAtencion.findByIdAtencionAgen", paramsAux);
-            for(Object  y : resultado){
-                resAtencion.add((ResAtencion)y);
+            List<? extends Object> resultado = Controller.findByQuery("ResAtencion.findByIdAtencionAgen", paramsAux);
+            for (Object y : resultado) {
+                resAtencion.add((ResAtencion) y);
             }
         }
         return resAtencion;
     }
-    
+
     /**
-    * 
-    * @param medico El medico
-    * @param dia dia el cual se quiere tomar hora
-    * @return 
-    */
-    public HorasDisponibles horasDisponiblesMedico(PersMedico medico, Date dia){
-       //Obtener todas las atenciones Vigentes del médico
-       ArrayList<AtencionAgen> atencionesVigentes = buscarAtencionMedicoPorEstado(medico, "Vigente");
-       //Obtener todas las atenciones para el día
-       ArrayList<AtencionAgen> atencionesFiltradasPorDia = filtrarAtencionPorDia(atencionesVigentes, dia);
-       //Obtener los bloques del medico para el día solicitado
-       ArrayList<Bloque> bloquesDia = getBloquesMedico(medico, dia);
-       //Remover bloques que tengan una atencion agendada
-       ArrayList<Bloque> bloquesLibres = removerBloquesAgendados(bloquesDia, atencionesVigentes);
-       //convertir bloque a hora disponible
-       HorasDisponibles horas = new HorasDisponibles(dia, bloquesLibres);
-       return horas;
+     *
+     * @param medico El medico
+     * @param dia dia el cual se quiere tomar hora
+     * @return
+     */
+    public HorasDisponibles horasDisponiblesMedico(PersMedico medico, Date dia) {
+        //Obtener todas las atenciones Vigentes del médico
+        ArrayList<AtencionAgen> atencionesVigentes = buscarAtencionMedicoPorEstado(medico, "Vigente");
+        //Obtener todas las atenciones para el día
+        ArrayList<AtencionAgen> atencionesFiltradasPorDia = filtrarAtencionPorDia(atencionesVigentes, dia);
+        //Obtener los bloques del medico para el día solicitado
+        ArrayList<Bloque> bloquesDia = getBloquesMedico(medico, dia);
+        //Remover bloques que tengan una atencion agendada
+        ArrayList<Bloque> bloquesLibres = removerBloquesAgendados(bloquesDia, atencionesVigentes);
+        //Comprobar si dia es hoy
+        ArrayList<Bloque> bloquesLibresFiltrados = new ArrayList<>();
+        if (Validador.mismoDia(dia)) {
+            //remover bloques libres antes de la hora actual
+            for (Bloque bloque : bloquesLibres) {
+                if(bloqueNoSuperaHoraActual(bloque)){
+                    bloquesLibresFiltrados.add(bloque);
+                }
+            }
+        } else {
+            bloquesLibresFiltrados = bloquesLibres;
+        }
+        //convertir bloque a hora disponible
+        HorasDisponibles horas = new HorasDisponibles(dia, bloquesLibresFiltrados);
+        return horas;
     }
-    
+
     /**
      * Método que concatena los dos parametros
+     *
      * @param hora La hora
      * @param minuto La minuto
      * @return Lods dos parametros concatenados
      */
-    private int ConcatenarHora(int hora, int minuto){
-        int x = hora*100 + minuto;
+    private int ConcatenarHora(int hora, int minuto) {
+        int x = hora * 100 + minuto;
         return x;
     }
-    
-    
+
     /**
      * Método que agenda una atencion
+     *
      * @param atencion La atencion a registrar
      * @return Si es true la atencion fue registrada
      */
-    public boolean agendarAtencion(AtencionAgen atencion){
+    public boolean agendarAtencion(AtencionAgen atencion) {
         //Revisar si el bloque de la atención está en las horas disponibles del médico
         //obtener médico
 //        PersMedico medico = atencion.getIdPersAtiende();
-        PersMedico medico = (PersMedico)Controller.findById(PersMedico.class, atencion.getIdPersAtiende().getIdPersonalMedico());
+        PersMedico medico = (PersMedico) Controller.findById(PersMedico.class, atencion.getIdPersAtiende().getIdPersonalMedico());
         //Obtener día
         Date date = atencion.getFechor();
         HorasDisponibles horasDisponibles = this.horasDisponiblesMedico(medico, date);
         //Si medico no tiene horas disponibles, excepcion
-        if (horasDisponibles.getHoras().size() < 1){
+        if (horasDisponibles.getHoras().size() < 1) {
 //            throw new Exception("El médico no tiene horas disponibles");
             return false;
         }
         //si está en las horas disponibles, entonces ingresar
-        if(horasDisponibles.bloqueDisponible(atencion.getIdBloque())){
-            return Controller.upsert(atencion);    
-        }else{//de lo contrario levantar excepción
+        if (horasDisponibles.bloqueDisponible(atencion.getIdBloque())) {
+            return Controller.upsert(atencion);
+        } else {//de lo contrario levantar excepción
 //            throw new Exception("Hora ocupada.");
             return false;
         }
     }
-    
+
     /**
      * Método que retorna las atenciones pendientes
+     *
      * @param rut rut del paciente
-     * @return Un ArrayList con todas las atenciones que no tengan respuesta, si es null significa que no fue encontrado el paciente o que no existen atenciones pendientes
+     * @return Un ArrayList con todas las atenciones que no tengan respuesta, si
+     * es null significa que no fue encontrado el paciente o que no existen
+     * atenciones pendientes
      */
-    public ArrayList<AtencionAgen> obtenerAtencionesPendientes(int rut) throws Exception{
+    public ArrayList<AtencionAgen> obtenerAtencionesPendientes(int rut) throws Exception {
         Map<String, Object> params = new HashMap<>();
         params.put("rut", rut);
         List<? extends Object> pacienteList = Controller.findByQuery("Paciente.findByRut", params);
-        if(null == pacienteList){
+        if (null == pacienteList) {
             throw new Exception("Paciente no existe");
         }
-        Paciente paciente = (Paciente)pacienteList.get(0);
+        Paciente paciente = (Paciente) pacienteList.get(0);
         Collection<AtencionAgen> atenciones = paciente.getAtencionAgenCollection();
         ArrayList<AtencionAgen> atencionesPendientes = new ArrayList<>();
-        if(atenciones.isEmpty()) {
+        if (atenciones.isEmpty()) {
             return atencionesPendientes;
         }
-        for(AtencionAgen atencion: atenciones){
-            if(atencionTieneEstado(atencion, "Vigente") && atencionEsFutura(atencion)){
+        for (AtencionAgen atencion : atenciones) {
+            if (atencionTieneEstado(atencion, "Vigente") && atencionEsFutura(atencion)) {
                 atencionesPendientes.add(atencion);
             }
         }
         return atencionesPendientes;
     }
-    
-    private boolean atencionTieneEstado(AtencionAgen atencion, String nombreEstado){
+
+    private boolean atencionTieneEstado(AtencionAgen atencion, String nombreEstado) {
         boolean result = false;
         result = atencion.getIdEstadoAten().getNomEstadoAten().equalsIgnoreCase(nombreEstado);
         return result;
     }
-    
-    private boolean atencionEsFutura(AtencionAgen atencion){
+
+    private boolean atencionEsFutura(AtencionAgen atencion) {
         Date fechaAtencion = atencion.getFechor();
         Date fechaHoy = new Date();
-        return(fechaAtencion.after(fechaHoy));
+        return (fechaAtencion.after(fechaHoy));
     }
-    
-     /** 
+
+    /**
      * Método que develve todo el personal medico que realize la prestación
+     *
      * @param prestacion La prestacion
-     * @return  un ArrayList de personal medico que realiza la prestacion
+     * @return un ArrayList de personal medico que realiza la prestacion
      */
-    public ArrayList<PersMedico> obtenerMedicosPorPrestacion(Prestacion prestacion){
+    public ArrayList<PersMedico> obtenerMedicosPorPrestacion(Prestacion prestacion) {
         ArrayList<PersMedico> atenciones = new ArrayList<>();
         Map<String, Object> params1 = new HashMap<>();
         params1.put("idEspecialidad", prestacion.getIdEspecialidad());
         List<? extends Object> atencionesAux = Controller.findByQuery("PersMedico.findByIdEspecialidad", params1);
-        if(!atencionesAux.isEmpty()){
+        if (!atencionesAux.isEmpty()) {
             for (Object x : atencionesAux) {
-                atenciones.add((PersMedico)x);
+                atenciones.add((PersMedico) x);
             }
         }
         return atenciones;
     }
-    
+
     /**
      * Método que anula una atencion agendada
+     *
      * @param atencion atencion agendada
-     * @return  Si es true significa que se pudo anular la atencion
+     * @return Si es true significa que se pudo anular la atencion
      */
-    public AtencionAgen anularAtencion(AtencionAgen atencion) throws Exception{
+    public AtencionAgen anularAtencion(AtencionAgen atencion) throws Exception {
         //Buscar estado actual de la atencion
         EstadoAten estadoAtencion = atencion.getIdEstadoAten();
         //si la atencion está anulada, lanzar excepción
-        if(estadoAtencion.getNomEstadoAten().equals("Anulada")){
+        if (estadoAtencion.getNomEstadoAten().equals("Anulada")) {
             throw new Exception("La atención ya está anulada");
         }
         //si la atención no está anulada, buscar estado anulada    
         Map<String, Object> params = new HashMap<>();
         params.put("nomEstadoAten", "Anulada");
-        List<? extends Object>  estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
-        if(estadoAtenList.size() < 1){
+        List<? extends Object> estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
+        if (estadoAtenList.size() < 1) {
             throw new Exception("No hay estado con nombre Anulada");
         }
-        EstadoAten estadoAnulada = (EstadoAten)estadoAtenList.get(0);
+        EstadoAten estadoAnulada = (EstadoAten) estadoAtenList.get(0);
         //asignar estado anulada a atencion
         atencion.setIdEstadoAten(estadoAnulada);
         //upsert atencion
@@ -204,13 +226,13 @@ public class AccionesPaciente {
         //retornar atencion
         return atencion;
     }
-    
-    public DiaSem buscarDiaPorDate(Date date){
+
+    public DiaSem buscarDiaPorDate(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int numDia = cal.get(Calendar.DAY_OF_WEEK);
         String nomDiaBuscar = "";
-        switch(numDia){
+        switch (numDia) {
             case 1:
                 nomDiaBuscar = "Domingo";
                 break;
@@ -237,73 +259,97 @@ public class AccionesPaciente {
         }
         Map<String, Object> params = new HashMap<>();
         params.put("nombreDia", nomDiaBuscar);
-        List<? extends Object>  diaSemList = Controller.findByQuery("DiaSem.findByNombreDia", params);
-        if(diaSemList.size() < 1){
+        List<? extends Object> diaSemList = Controller.findByQuery("DiaSem.findByNombreDia", params);
+        if (diaSemList.size() < 1) {
 //            throw new Exception("No hay dia con nombre " + nomDiaBuscar);        
             System.out.println("No hay dia con ese nombre");
         }
-        return (DiaSem)diaSemList.get(0);
+        return (DiaSem) diaSemList.get(0);
     }
-    
-    private ArrayList<AtencionAgen> buscarAtencionMedicoPorEstado(PersMedico medico, String nombreEstado){
+
+    private ArrayList<AtencionAgen> buscarAtencionMedicoPorEstado(PersMedico medico, String nombreEstado) {
         Collection<AtencionAgen> atencionList = medico.getAtencionAgenCollection1();
         ArrayList<AtencionAgen> atencionesFiltradas = new ArrayList<>();
-        for(AtencionAgen atencion : atencionList){
-            if(atencion.getIdEstadoAten().getNomEstadoAten().equalsIgnoreCase(nombreEstado)){
+        for (AtencionAgen atencion : atencionList) {
+            if (atencion.getIdEstadoAten().getNomEstadoAten().equalsIgnoreCase(nombreEstado)) {
                 atencionesFiltradas.add(atencion);
             }
         }
         return atencionesFiltradas;
     }
-    
-    private ArrayList<AtencionAgen> filtrarAtencionPorDia(Collection<AtencionAgen> atenciones, Date dia){
+
+    private ArrayList<AtencionAgen> filtrarAtencionPorDia(Collection<AtencionAgen> atenciones, Date dia) {
         ArrayList<AtencionAgen> atencionesFiltradas = new ArrayList<>();
-        for(AtencionAgen atencion : atenciones){
+        for (AtencionAgen atencion : atenciones) {
             Calendar cal1 = Calendar.getInstance();
             Calendar cal2 = Calendar.getInstance();
             cal1.setTime(atencion.getFechor());
             cal2.setTime(dia);
             boolean mismoDia = (cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
                     && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
-            if(mismoDia){
-             atencionesFiltradas.add(atencion);    
+            if (mismoDia) {
+                atencionesFiltradas.add(atencion);
             }
-       }
-       return atencionesFiltradas;
+        }
+        return atencionesFiltradas;
     }
-    
+
     private ArrayList<Bloque> getBloquesMedico(PersMedico medico, Date date) {
         ArrayList<Bloque> bloquesFiltrados = new ArrayList<>();
         Collection<Horario> horarios = medico.getHorarioCollection();
         DiaSem dia = buscarDiaPorDate(date);
-        for(Horario horario : horarios){
-            if(horario.getIdBloque().getIdDiaSem().getIdDia() == dia.getIdDia()){
+        for (Horario horario : horarios) {
+            if (horario.getIdBloque().getIdDiaSem().getIdDia() == dia.getIdDia()) {
                 bloquesFiltrados.add(horario.getIdBloque());
             }
         }
         return bloquesFiltrados;
     }
-    
-    private ArrayList<Bloque> removerBloquesAgendados(ArrayList<Bloque> bloques, ArrayList<AtencionAgen> atenciones){
+
+    private ArrayList<Bloque> removerBloquesAgendados(ArrayList<Bloque> bloques, ArrayList<AtencionAgen> atenciones) {
         ArrayList<Bloque> result = new ArrayList<>();
         outer:
-        for(Bloque bloque : bloques){
-            if(isBloqueInAtenciones(bloque, atenciones)){
-                
-            }else{
+        for (Bloque bloque : bloques) {
+            if (isBloqueInAtenciones(bloque, atenciones)) {
+
+            } else {
                 result.add(bloque);
             }
         }
         return result;
     }
-    
-    private boolean isBloqueInAtenciones(Bloque bloque, ArrayList<AtencionAgen> atenciones){
+
+    private boolean isBloqueInAtenciones(Bloque bloque, ArrayList<AtencionAgen> atenciones) {
         boolean result = false;
-        for(AtencionAgen atencion : atenciones){
-            if(bloque.getIdBloque() == atencion.getIdBloque().getIdBloque()){
+        for (AtencionAgen atencion : atenciones) {
+            if (bloque.getIdBloque() == atencion.getIdBloque().getIdBloque()) {
                 result = true;
             }
         }
         return result;
+    }
+
+    /**
+     * *
+     * Retorna si la hora del bloque es inferior a la hora actual
+     *
+     * @return
+     */
+    private boolean bloqueNoSuperaHoraActual(Bloque bloque) {
+        Date date = new Date();   
+        Calendar calendar = Calendar.getInstance(); 
+        calendar.setTime(date);
+        int numHora = calendar.get(Calendar.HOUR_OF_DAY);
+        int numMinuto = calendar.get(Calendar.MINUTE);
+        //si la hora actual es inferior a la hora del bloque
+        if(numHora > bloque.getNumHoraIni()){
+            return false;
+        }
+        //si la hora del bloque es igual a la hora actual
+        if(numHora == bloque.getNumHoraIni()){
+            //true si el bloque es menor en minutos que la hora actual
+            return numMinuto > bloque.getNumMinuIni();
+        }
+        return false;
     }
 }
