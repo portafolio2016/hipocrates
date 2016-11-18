@@ -68,7 +68,7 @@ public class AccionesPaciente {
     * @param dia dia el cual se quiere tomar hora
     * @return 
     */
-    public HorasDisponibles horasDisponiblesMedico(PersMedico medico, Date dia) throws Exception{
+    public HorasDisponibles horasDisponiblesMedico(PersMedico medico, Date dia){
        //Obtener todas las atenciones Vigentes del médico
        ArrayList<AtencionAgen> atencionesVigentes = buscarAtencionMedicoPorEstado(medico, "Vigente");
        //Obtener todas las atenciones para el día
@@ -99,7 +99,7 @@ public class AccionesPaciente {
      * @param atencion La atencion a registrar
      * @return Si es true la atencion fue registrada
      */
-    public boolean agendarAtencion(AtencionAgen atencion) throws Exception{
+    public boolean agendarAtencion(AtencionAgen atencion){
         //Revisar si el bloque de la atención está en las horas disponibles del médico
         //obtener médico
 //        PersMedico medico = atencion.getIdPersAtiende();
@@ -109,13 +109,15 @@ public class AccionesPaciente {
         HorasDisponibles horasDisponibles = this.horasDisponiblesMedico(medico, date);
         //Si medico no tiene horas disponibles, excepcion
         if (horasDisponibles.getHoras().size() < 1){
-            throw new Exception("El médico no tiene horas disponibles");
+//            throw new Exception("El médico no tiene horas disponibles");
+            return false;
         }
         //si está en las horas disponibles, entonces ingresar
         if(horasDisponibles.bloqueDisponible(atencion.getIdBloque())){
             return Controller.upsert(atencion);    
         }else{//de lo contrario levantar excepción
-            throw new Exception("Hora ocupada.");
+//            throw new Exception("Hora ocupada.");
+            return false;
         }
     }
     
@@ -203,7 +205,7 @@ public class AccionesPaciente {
         return atencion;
     }
     
-    public DiaSem buscarDiaPorDate(Date date) throws Exception{
+    public DiaSem buscarDiaPorDate(Date date){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int numDia = cal.get(Calendar.DAY_OF_WEEK);
@@ -231,13 +233,14 @@ public class AccionesPaciente {
                 nomDiaBuscar = "Sabado";
                 break;
             default:
-                throw new Exception("Dia invalido");
+                break;
         }
         Map<String, Object> params = new HashMap<>();
         params.put("nombreDia", nomDiaBuscar);
         List<? extends Object>  diaSemList = Controller.findByQuery("DiaSem.findByNombreDia", params);
         if(diaSemList.size() < 1){
-            throw new Exception("No hay dia con nombre " + nomDiaBuscar);
+//            throw new Exception("No hay dia con nombre " + nomDiaBuscar);        
+            System.out.println("No hay dia con ese nombre");
         }
         return (DiaSem)diaSemList.get(0);
     }
@@ -269,7 +272,7 @@ public class AccionesPaciente {
        return atencionesFiltradas;
     }
     
-    private ArrayList<Bloque> getBloquesMedico(PersMedico medico, Date date) throws Exception{
+    private ArrayList<Bloque> getBloquesMedico(PersMedico medico, Date date) {
         ArrayList<Bloque> bloquesFiltrados = new ArrayList<>();
         Collection<Horario> horarios = medico.getHorarioCollection();
         DiaSem dia = buscarDiaPorDate(date);

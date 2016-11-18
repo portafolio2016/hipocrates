@@ -46,23 +46,29 @@ public class Agendamiento extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            AgendamientoController.cargarTodosTiposPrestaciones(request);
-            AgendamientoController.cargarPrestaciones(request);
-            AgendamientoController.cargarPersonal(request);
-            AgendamientoController.cargarHorasLibres(request);
-            if (request.getParameter("btnRegistrar") != null) {
-                boolean isLoggedIn = LoginController.obtenerPacienteEnSesion(request.getSession()) != null;
-                if(isLoggedIn){
-                    AgendamientoController.registrarAtencion(request);
-                }else{
-                    out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=registro';</script>");
-                }
-                
+
+        AgendamientoController.cargarTodosTiposPrestaciones(request);
+        AgendamientoController.cargarPrestaciones(request);
+        AgendamientoController.cargarPersonal(request);
+        AgendamientoController.cargarHorasLibres(request);
+//        try (PrintWriter out = response.getWriter()) {
+        String paramBtnRegistrar = request.getParameter("hiddenRegistrar");
+        boolean btnRegistrarClick = null != paramBtnRegistrar && "registrar".compareTo(paramBtnRegistrar) == 0;
+        if (btnRegistrarClick) {
+            boolean isLoggedIn = LoginController.obtenerPacienteEnSesion(request.getSession()) != null;
+            if (isLoggedIn) {
+                AgendamientoController.registrarAtencion(request);
+            } else {
+                PrintWriter out = response.getWriter();
+                out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=registro';</script>");
             }
+
         }
+//        } catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,11 +83,9 @@ public class Agendamiento extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(Agendamiento.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        processRequest(request, response);
+
     }
 
     /**
@@ -95,11 +99,9 @@ public class Agendamiento extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(Agendamiento.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        processRequest(request, response);
+
     }
 
     /**

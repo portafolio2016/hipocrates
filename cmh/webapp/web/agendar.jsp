@@ -75,7 +75,8 @@
                     </select>
                 </div>
             </c:if>
-            <input type="button" value="registrar" name="btnRegistrar" class="btn btn-default">Reservar</button>
+            <input id="btnRegistrar" type="submit" name="btnRegistrar" value="Registrar" onclick="$('#hiddenRegistrar').val('registrar');" class="btn btn-default" />
+            <input type="hidden" value="" name="hiddenRegistrar" id="hiddenRegistrar"/>
         </form>  
     </div>
 </div>

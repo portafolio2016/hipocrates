@@ -6,7 +6,16 @@
 package cl.cheekibreeki.cmh.webapp.util;
 
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
-import cl.cheekibreeki.cmh.lib.dal.entities.*;
+import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
+import cl.cheekibreeki.cmh.lib.dal.entities.Bloque;
+import cl.cheekibreeki.cmh.lib.dal.entities.Especialidad;
+import cl.cheekibreeki.cmh.lib.dal.entities.EstadoAten;
+import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
+import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
+import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
+import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
+import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
+
 import cl.cheekibreeki.cmh.webapp.bl.AccionesPaciente;
 import cl.cheekibreeki.cmh.webapp.bl.HorasDisponibles;
 import java.text.SimpleDateFormat;
@@ -30,14 +39,15 @@ public class AgendamientoController {
         Map<String, Object> params = new HashMap<String, Object>();
         List<? extends Object> result = Controller.findByQuery("TipoPres.findAll", params);
         ArrayList<TipoPres> tiposPrestacion = new ArrayList<>();
-        for (Object obj : result) {
-            TipoPres tipoPrestacion = (TipoPres) obj;
+        for (Object tipoPres : result) {
+            TipoPres tipoPrestacion = (TipoPres) tipoPres;
             tiposPrestacion.add(tipoPrestacion);
         }
         request.setAttribute("tiposPrestacion", tiposPrestacion);
         if (request.getParameter(nomParam) != null) {
             request.setAttribute(nomParam, Integer.parseInt(request.getParameter(nomParam)));
         }
+
     }
 
     private static ArrayList<Prestacion> obtenerPrestaciones() {
@@ -130,36 +140,45 @@ public class AgendamientoController {
                 }
                 HorasDisponibles horasDisponibles = accionesPaciente.horasDisponiblesMedico(medico, fecha);
                 request.setAttribute("horas", horasDisponibles);
+                if (request.getParameter("hora") != null) {
+                    request.setAttribute("hora", request.getParameter("hora"));
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void registrarAtencion(HttpServletRequest request) throws Exception {
+    public static void registrarAtencion(HttpServletRequest request) {
         AtencionAgen atencion = new AtencionAgen();
         Paciente paciente = LoginController.obtenerPacienteEnSesion(request.getSession());
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechor = sdf.parse((String)request.getAttribute("fecha"));
-        atencion.setFechor(fechor);
-        int idBloque = Integer.parseInt((String)request.getAttribute("hora"));
-        Bloque bloque = (Bloque)Controller.findById(Bloque.class, idBloque);
+        try {
+            Date fechor = sdf.parse((String) request.getAttribute("fecha"));
+            atencion.setFechor(fechor);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        int idBloque = Integer.parseInt((String) request.getAttribute("hora"));
+        Bloque bloque = (Bloque) Controller.findById(Bloque.class, idBloque);
         atencion.setIdBloque(bloque);
-        
+
         Map<String, Object> paramsEstadoAten = new HashMap<String, Object>();
         paramsEstadoAten.put("nomEstadoAten", "Vigente");
         List<? extends Object> resultEstado = Controller.findByQuery("EstadoAten.findByNomEstadoAten", paramsEstadoAten);
-        EstadoAten estadoAten = (EstadoAten)resultEstado.get(0);
+        EstadoAten estadoAten = (EstadoAten) resultEstado.get(0);
         atencion.setIdEstadoAten(estadoAten);
-        
-        Personal personal = (Personal)Controller.findById(Personal.class, Integer.parseInt((String)request.getAttribute("medico")));
+        Object obj = request.getAttribute("medico");
+        int idMedico = (int) request.getAttribute("medico");
+        Personal personal = (Personal) Controller.findById(Personal.class, idMedico);
         Collection<PersMedico> personalMedicoCollection = personal.getPersMedicoCollection();
-        for(PersMedico persMedico: personalMedicoCollection){
+        for (PersMedico persMedico : personalMedicoCollection) {
             atencion.setIdPersAtiende(persMedico);
         }
-        
-        Prestacion prestacion = (Prestacion)Controller.findById(Prestacion.class, Integer.parseInt((String)request.getAttribute("prestacion")));
+        int idPrestacion = (int) request.getAttribute("prestacion");
+        Prestacion prestacion = (Prestacion) Controller.findById(Prestacion.class, idPrestacion);
 
         atencion.setIdPrestacion(prestacion);
         atencion.setIdPaciente(paciente);
