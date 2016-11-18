@@ -5,8 +5,10 @@ package cl.cheekibreeki.cmh.webapp.servlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
 import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
+import cl.cheekibreeki.cmh.webapp.bl.AccionesPaciente;
 import cl.cheekibreeki.cmh.webapp.util.AnularController;
 import cl.cheekibreeki.cmh.webapp.util.LoginController;
 import java.io.IOException;
@@ -39,8 +41,10 @@ public class Anular extends HttpServlet {
         String metodo = request.getMethod();
         if ("POST".compareTo(metodo) == 0) {
             //si es post
-            int atencionId = Integer.parseInt(request.getParameter("atencion"));
-            
+            int atencionId = Integer.parseInt(request.getParameter("atencionAnulada"));
+            AccionesPaciente accionesPaciente = new AccionesPaciente();
+            AtencionAgen atencion = (AtencionAgen)Controller.findById(AtencionAgen.class, atencionId);
+            accionesPaciente.anularAtencion(atencion);
             
         } else {
             //si GET
