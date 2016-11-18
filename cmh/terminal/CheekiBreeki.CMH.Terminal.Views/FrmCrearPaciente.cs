@@ -207,6 +207,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void abrirCajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FrmAbrirCaja frmAbrirCaja = new FrmAbrirCaja(login);
             frmAbrirCaja.Show();
             frmAbrirCaja.Activate();
             this.Hide();

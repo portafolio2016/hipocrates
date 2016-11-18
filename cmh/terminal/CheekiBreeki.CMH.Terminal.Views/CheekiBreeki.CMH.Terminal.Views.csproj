@@ -84,12 +84,6 @@
     <Compile Include="FrmAnularAtencion.Designer.cs">
       <DependentUpon>FrmAnularAtencion.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmIngresarPaciente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmIngresarPaciente.Designer.cs">
-      <DependentUpon>FrmIngresarPaciente.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmContenidoEntrada.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +107,12 @@
     </Compile>
     <Compile Include="FrmAgendarAtencion.Designer.cs">
       <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIngresarPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIngresarPaciente.Designer.cs">
+      <DependentUpon>FrmIngresarPaciente.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmOperador.cs">
       <SubType>Form</SubType>
@@ -145,9 +145,6 @@
     <EmbeddedResource Include="FrmAnularAtencion.resx">
       <DependentUpon>FrmAnularAtencion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmIngresarPaciente.resx">
-      <DependentUpon>FrmIngresarPaciente.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAgendarAtencion.resx">
       <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmIngresarPaciente.resx">
+      <DependentUpon>FrmIngresarPaciente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmOperador.resx">
       <DependentUpon>FrmOperador.cs</DependentUpon>
