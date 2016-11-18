@@ -54,7 +54,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 btnSesion.Text = "Iniciar sesión";
             }
 
-            #region ComboBox
+            #region ComboBox Cargo
             ComboboxItem item = new ComboboxItem();
             item.Text = "Médico";
             item.Value = 0;
@@ -78,8 +78,21 @@ namespace CheekiBreeki.CMH.Terminal.Views
             ComboboxItem item5 = new ComboboxItem();
             item5.Text = "Jefe de Operador";
             item5.Value = 4;
-            cbCargo_MP.Items.Add(item);
+            cbCargo_MP.Items.Add(item5);
             cbCargo_MP.SelectedIndex = 0;
+            #endregion
+
+            #region ComboBox Tipo cuenta y Banco
+            AccionesTerminal at = new AccionesTerminal();
+            cbBanco_MP.DataSource = null;
+            cbBanco_MP.ValueMember = "ID_BANCO";
+            cbBanco_MP.DisplayMember = "NOMBRE";
+            cbBanco_MP.DataSource = at.ObtenerBancos();
+
+            cbTipoCuenta_MP.DataSource = null;
+            cbTipoCuenta_MP.ValueMember = "ID_TIPO_C_BANCARIA";
+            cbTipoCuenta_MP.DisplayMember = "NOM_C_BANCARIA";
+            cbTipoCuenta_MP.DataSource = at.ObtenerTiposCuentaBancaria();
             #endregion
 
         }
@@ -218,10 +231,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        int rutBuscar_MP = 0;
+
         private void personalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InitGB(gbMantenedorPersonal);
-
         }
 
         #region Validaciones de campos
@@ -249,6 +263,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 AccionesTerminal at = new AccionesTerminal();
                 int rut = int.Parse(txtRutPersonal_MP.Text);
+                rutBuscar_MP = int.Parse(txtRutPersonal_MP.Text);
                 string verificar = txtVerificador_MP.Text;
 
                 PERSONAL p1 = at.buscarPersonal(rut, verificar);
@@ -260,6 +275,43 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 txtVerificadorCargado_MP.Text = p1.VERIFICADOR;
                 txtRemuneracion_MP.Text = p1.REMUNERACION.ToString();
                 txtDescuento_MP.Text = p1.PORCENT_DESCUENTO.ToString();
+
+                if (!Util.isObjetoNulo(p1.FUNCIONARIO.FirstOrDefault()))
+                {
+                    if (p1.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO.ToUpper() == "OPERADOR")
+                    {
+                        cbCargo_MP.SelectedIndex = 3;
+                        cbCargo_MP.Enabled = false;
+                    }
+                    else if (p1.FUNCIONARIO.FirstOrDefault().CARGO.NOMBRE_CARGO.ToUpper() == "JEFE DE OPERADOR")
+                    {
+                        cbCargo_MP.SelectedIndex = 4;
+                        cbCargo_MP.Enabled = false;
+                    }
+                }
+                else if (!Util.isObjetoNulo(p1.PERS_MEDICO.FirstOrDefault()))
+                {
+                    if (p1.PERS_MEDICO.FirstOrDefault().ESPECIALIDAD.NOM_ESPECIALIDAD.ToUpper() == "MEDICO")
+                    {
+                        cbCargo_MP.SelectedIndex = 0;
+                        txtCuentaBanc_MP.Text = p1.PERS_MEDICO.FirstOrDefault().CUEN_BANCARIA.FirstOrDefault().NUM_C_BANCARIA;
+                        cbTipoCuenta_MP.SelectedIndex = cbTipoCuenta_MP.FindStringExact(p1.PERS_MEDICO.FirstOrDefault().CUEN_BANCARIA.FirstOrDefault().TIPO_C_BANCARIA.NOM_C_BANCARIA);
+                        cbBanco_MP.SelectedIndex = cbBanco_MP.FindStringExact(p1.PERS_MEDICO.FirstOrDefault().CUEN_BANCARIA.FirstOrDefault().BANCO.NOMBRE);
+                        cbCargo_MP.Enabled = false;
+                    }
+                    else if (p1.PERS_MEDICO.FirstOrDefault().ESPECIALIDAD.NOM_ESPECIALIDAD.ToUpper() == "ENFERMERO")
+                    {
+                        cbCargo_MP.SelectedIndex = 1;
+                        cbCargo_MP.Enabled = false;
+                    }
+                    else if (p1.PERS_MEDICO.FirstOrDefault().ESPECIALIDAD.NOM_ESPECIALIDAD.ToUpper() == "TECNOLOGO")
+                    {
+                        cbCargo_MP.SelectedIndex = 2;
+                        cbCargo_MP.Enabled = false;
+                    }
+
+                }
+
 
                 btnGuardar_MP.Enabled = true;
                 btnEliminar_MP.Enabled = true;
@@ -274,6 +326,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnCrearPersonal_MP_Click(object sender, EventArgs e)
         {
+            cbCargo_MP.Enabled = true;
             limpiarCampos_MP();
             btnRegistrar_MP.Enabled = true;
             btnGuardar_MP.Enabled = false;
@@ -281,6 +334,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
 
 
+        #region Capturar y limpiar datos 
         private void limpiarCampos_MP()
         {
             txtNombres_MP.Text = string.Empty;
@@ -291,19 +345,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
             txtVerificadorCargado_MP.Text = string.Empty;
             txtRemuneracion_MP.Text = string.Empty;
             txtDescuento_MP.Text = string.Empty;
+            txtCuentaBanc_MP.Text = string.Empty;
+
         }
 
-        private void capturarCampos_MP()
-        {
-            string nombres = txtNombres_MP.Text;
-            string apellidos = txtApellidos_MP.Text;
-            string email = txtEmail_MP.Text;
-            string contrasena = txtContrasena_MP.Text;
-            int rut = int.Parse(txtRutPersonalCargado_MP.Text);
-            string verificador = txtVerificadorCargado_MP.Text;
-            int remuneracion = int.Parse(txtRemuneracion_MP.Text);
-            int descuento = int.Parse(txtDescuento_MP.Text);
-        }
+        
+        #endregion
 
         private void btnRegistrar_MP_Click(object sender, EventArgs e)
         {
@@ -323,8 +370,22 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 p1.PORCENT_DESCUENTO = byte.Parse(txtDescuento_MP.Text);
                 p1.ACTIVO = true;
 
+                if (!Util.isEmailValido(p1.EMAIL))
+                {
+                    throw new Exception();
+                }
 
+                if (!Util.rutValido(p1.RUT,p1.VERIFICADOR))
+                {
+                    throw new Exception();
+                }
 
+                int privi = ((ComboboxItem)cbCargo_MP.SelectedItem).Value;
+                if (privi == 0 && (txtCuentaBanc_MP.Text=="" || (txtCuentaBanc_MP.Text == string.Empty))) 
+                {
+                    throw new Exception();
+                }
+                
                 p1.ID_PERSONAL = at.nuevoPersonalId(p1);
 
                 if (p1.ID_PERSONAL == 0)
@@ -332,21 +393,33 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     throw new Exception();
                 }
                 
+                /*
+                if (((ComboboxItem)cbCargo_MP.SelectedItem).Text == "Médico")
+                {
+                    string cuentaBancaria = txtCuentaBanc_MP.Text;
 
-                int privi = ((ComboboxItem)cbCargo_MP.SelectedItem).Value;
+                }
+                */
+                
                 using (var context = new CMHEntities())
                 {
                     switch (privi)
                     {
                         case 0: // Médico
-                            string cuentaBancaria = txtCuentaBanc_MP.Text;
+                            
                             PERS_MEDICO persMedico = new PERS_MEDICO();
                             persMedico.ID_ESPECIALIDAD = context.ESPECIALIDAD.Where(d => d.NOM_ESPECIALIDAD.ToUpper() == "MEDICO").FirstOrDefault().ID_ESPECIALIDAD;
                             persMedico.ID_PERSONAL = p1.ID_PERSONAL;
-                            at.nuevoPersonalMedico(persMedico);
+                            persMedico.ID_PERSONAL_MEDICO = at.nuevoPersonalMedicoID(persMedico);
                             at.asignarBloques(persMedico);
-
+                            CUEN_BANCARIA cuentaB = new CUEN_BANCARIA();
+                            cuentaB.ID_PERS_MEDICO = persMedico.ID_PERSONAL_MEDICO;
+                            cuentaB.ID_TIPO_C_BANCARIA = ((TIPO_C_BANCARIA)cbTipoCuenta_MP.SelectedItem).ID_TIPO_C_BANCARIA;
                             
+                            cuentaB.NUM_C_BANCARIA = txtCuentaBanc_MP.Text;
+                            cuentaB.ID_BANCO = ((BANCO)cbBanco_MP.SelectedItem).ID_BANCO;
+                            at.crearCuentaBancaria(cuentaB);
+
                             break;
 
                         case 1: // Enfermero
@@ -382,8 +455,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     }
                 }
 
-
-                at.nuevoPersonal(p1);
                 MessageBox.Show("¡Personal creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
                 limpiarCampos_MP();
 
@@ -401,12 +472,89 @@ namespace CheekiBreeki.CMH.Terminal.Views
             if (((ComboboxItem)cbCargo_MP.SelectedItem).Text == "Médico")
             {
                 txtCuentaBanc_MP.Enabled = true;
+                cbTipoCuenta_MP.Enabled = true;
+                cbBanco_MP.Enabled = true;
             }
             else
             {
                 txtCuentaBanc_MP.Enabled = false;
+                cbTipoCuenta_MP.Enabled = false;
+                cbBanco_MP.Enabled = false;
             }
                 
+        }
+
+        private void btnGuardar_MP_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                PERSONAL p1 = at.buscarPersonal(rutBuscar_MP);
+
+                p1.NOMBRES = txtNombres_MP.Text;
+                p1.APELLIDOS = txtApellidos_MP.Text;
+                p1.EMAIL = txtEmail_MP.Text;
+                if (txtContrasena_MP.Text != "" || txtContrasena_MP.Text != string.Empty)
+                {
+                    p1.HASHED_PASS = Util.hashMD5(txtContrasena_MP.Text);
+                }
+                p1.RUT = int.Parse(txtRutPersonalCargado_MP.Text);
+                p1.VERIFICADOR = txtVerificadorCargado_MP.Text;
+                p1.REMUNERACION = int.Parse(txtRemuneracion_MP.Text);
+                p1.PORCENT_DESCUENTO = byte.Parse(txtDescuento_MP.Text);
+                
+
+                if (!Util.isEmailValido(p1.EMAIL))
+                {
+                    throw new Exception();
+                }
+
+                if (!Util.rutValido(p1.RUT, p1.VERIFICADOR))
+                {
+                    throw new Exception();
+                }
+
+                at.actualizarPersonal(p1, int.Parse(txtRutPersonal_MP.Text));
+                
+                if (((ComboboxItem)cbCargo_MP.SelectedItem).Value == 0) //Medico
+                {
+                    CUEN_BANCARIA cuentaBancariaMedica = new CUEN_BANCARIA();
+                    cuentaBancariaMedica.ID_PERS_MEDICO = p1.PERS_MEDICO.FirstOrDefault().ID_PERSONAL_MEDICO;
+                    cuentaBancariaMedica.ID_TIPO_C_BANCARIA = ((TIPO_C_BANCARIA)cbTipoCuenta_MP.SelectedItem).ID_TIPO_C_BANCARIA;
+                    cuentaBancariaMedica.NUM_C_BANCARIA = txtCuentaBanc_MP.Text;
+                    cuentaBancariaMedica.ID_BANCO = ((BANCO)cbBanco_MP.SelectedItem).ID_BANCO;
+                    at.actualizarCuentaBancaria(cuentaBancariaMedica);
+                }
+
+                MessageBox.Show("¡Personal actualizado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                limpiarCampos_MP();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error actualizar datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
+
+
+        }
+
+        private void btnEliminar_MP_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                PERSONAL p1 = at.buscarPersonal(rutBuscar_MP);
+                at.desactivarPersonal(p1);
+                limpiarCampos_MP();
+                txtRutPersonal_MP.Text = string.Empty;
+                txtVerificador_MP.Text = string.Empty;
+                MessageBox.Show("¡Personal desactivado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+            catch (Exception ex) 
+            { 
+                 MessageBox.Show("Error Desactivar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
 

@@ -39,6 +39,13 @@
             this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbMantenedorPersonal = new System.Windows.Forms.GroupBox();
+            this.gpMedico_MP = new System.Windows.Forms.GroupBox();
+            this.cbBanco_MP = new System.Windows.Forms.ComboBox();
+            this.lblBanco_MP = new System.Windows.Forms.Label();
+            this.cbTipoCuenta_MP = new System.Windows.Forms.ComboBox();
+            this.lblTipoCuenta_MP = new System.Windows.Forms.Label();
+            this.lblCuentaBanc_MP = new System.Windows.Forms.Label();
+            this.txtCuentaBanc_MP = new System.Windows.Forms.TextBox();
             this.cbCargo_MP = new System.Windows.Forms.ComboBox();
             this.lblCargo_MP = new System.Windows.Forms.Label();
             this.btnEliminar_MP = new System.Windows.Forms.Button();
@@ -77,13 +84,12 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.lblCuentaBanc_MP = new System.Windows.Forms.Label();
-            this.txtCuentaBanc_MP = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gbMantenedorPersonal.SuspendLayout();
+            this.gpMedico_MP.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -187,8 +193,7 @@
             // 
             // gbMantenedorPersonal
             // 
-            this.gbMantenedorPersonal.Controls.Add(this.txtCuentaBanc_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblCuentaBanc_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.gpMedico_MP);
             this.gbMantenedorPersonal.Controls.Add(this.cbCargo_MP);
             this.gbMantenedorPersonal.Controls.Add(this.lblCargo_MP);
             this.gbMantenedorPersonal.Controls.Add(this.btnEliminar_MP);
@@ -224,11 +229,79 @@
             this.gbMantenedorPersonal.Text = "Mantenedor Personal";
             this.gbMantenedorPersonal.Visible = false;
             // 
+            // gpMedico_MP
+            // 
+            this.gpMedico_MP.Controls.Add(this.cbBanco_MP);
+            this.gpMedico_MP.Controls.Add(this.lblBanco_MP);
+            this.gpMedico_MP.Controls.Add(this.cbTipoCuenta_MP);
+            this.gpMedico_MP.Controls.Add(this.lblTipoCuenta_MP);
+            this.gpMedico_MP.Controls.Add(this.lblCuentaBanc_MP);
+            this.gpMedico_MP.Controls.Add(this.txtCuentaBanc_MP);
+            this.gpMedico_MP.Location = new System.Drawing.Point(351, 81);
+            this.gpMedico_MP.Name = "gpMedico_MP";
+            this.gpMedico_MP.Size = new System.Drawing.Size(397, 238);
+            this.gpMedico_MP.TabIndex = 30;
+            this.gpMedico_MP.TabStop = false;
+            this.gpMedico_MP.Text = "Cuenta Bancaria";
+            // 
+            // cbBanco_MP
+            // 
+            this.cbBanco_MP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBanco_MP.FormattingEnabled = true;
+            this.cbBanco_MP.Location = new System.Drawing.Point(178, 86);
+            this.cbBanco_MP.Name = "cbBanco_MP";
+            this.cbBanco_MP.Size = new System.Drawing.Size(151, 21);
+            this.cbBanco_MP.TabIndex = 33;
+            // 
+            // lblBanco_MP
+            // 
+            this.lblBanco_MP.AutoSize = true;
+            this.lblBanco_MP.Location = new System.Drawing.Point(23, 89);
+            this.lblBanco_MP.Name = "lblBanco_MP";
+            this.lblBanco_MP.Size = new System.Drawing.Size(38, 13);
+            this.lblBanco_MP.TabIndex = 32;
+            this.lblBanco_MP.Text = "Banco";
+            // 
+            // cbTipoCuenta_MP
+            // 
+            this.cbTipoCuenta_MP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoCuenta_MP.FormattingEnabled = true;
+            this.cbTipoCuenta_MP.Location = new System.Drawing.Point(178, 54);
+            this.cbTipoCuenta_MP.Name = "cbTipoCuenta_MP";
+            this.cbTipoCuenta_MP.Size = new System.Drawing.Size(151, 21);
+            this.cbTipoCuenta_MP.TabIndex = 31;
+            // 
+            // lblTipoCuenta_MP
+            // 
+            this.lblTipoCuenta_MP.AutoSize = true;
+            this.lblTipoCuenta_MP.Location = new System.Drawing.Point(23, 57);
+            this.lblTipoCuenta_MP.Name = "lblTipoCuenta_MP";
+            this.lblTipoCuenta_MP.Size = new System.Drawing.Size(110, 13);
+            this.lblTipoCuenta_MP.TabIndex = 30;
+            this.lblTipoCuenta_MP.Text = "Tipo Cuenta Bancaria";
+            // 
+            // lblCuentaBanc_MP
+            // 
+            this.lblCuentaBanc_MP.AutoSize = true;
+            this.lblCuentaBanc_MP.Location = new System.Drawing.Point(23, 31);
+            this.lblCuentaBanc_MP.Name = "lblCuentaBanc_MP";
+            this.lblCuentaBanc_MP.Size = new System.Drawing.Size(86, 13);
+            this.lblCuentaBanc_MP.TabIndex = 28;
+            this.lblCuentaBanc_MP.Text = "Cuenta Bancaria";
+            // 
+            // txtCuentaBanc_MP
+            // 
+            this.txtCuentaBanc_MP.Location = new System.Drawing.Point(178, 24);
+            this.txtCuentaBanc_MP.MaxLength = 64;
+            this.txtCuentaBanc_MP.Name = "txtCuentaBanc_MP";
+            this.txtCuentaBanc_MP.Size = new System.Drawing.Size(151, 20);
+            this.txtCuentaBanc_MP.TabIndex = 29;
+            // 
             // cbCargo_MP
             // 
             this.cbCargo_MP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCargo_MP.FormattingEnabled = true;
-            this.cbCargo_MP.Location = new System.Drawing.Point(360, 303);
+            this.cbCargo_MP.Location = new System.Drawing.Point(163, 303);
             this.cbCargo_MP.Name = "cbCargo_MP";
             this.cbCargo_MP.Size = new System.Drawing.Size(151, 21);
             this.cbCargo_MP.TabIndex = 27;
@@ -237,7 +310,7 @@
             // lblCargo_MP
             // 
             this.lblCargo_MP.AutoSize = true;
-            this.lblCargo_MP.Location = new System.Drawing.Point(235, 306);
+            this.lblCargo_MP.Location = new System.Drawing.Point(38, 306);
             this.lblCargo_MP.Name = "lblCargo_MP";
             this.lblCargo_MP.Size = new System.Drawing.Size(35, 13);
             this.lblCargo_MP.TabIndex = 26;
@@ -246,27 +319,29 @@
             // btnEliminar_MP
             // 
             this.btnEliminar_MP.Enabled = false;
-            this.btnEliminar_MP.Location = new System.Drawing.Point(436, 379);
+            this.btnEliminar_MP.Location = new System.Drawing.Point(437, 425);
             this.btnEliminar_MP.Name = "btnEliminar_MP";
             this.btnEliminar_MP.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar_MP.TabIndex = 25;
             this.btnEliminar_MP.Text = "Eliminar";
             this.btnEliminar_MP.UseVisualStyleBackColor = true;
+            this.btnEliminar_MP.Click += new System.EventHandler(this.btnEliminar_MP_Click);
             // 
             // btnGuardar_MP
             // 
             this.btnGuardar_MP.Enabled = false;
-            this.btnGuardar_MP.Location = new System.Drawing.Point(323, 379);
+            this.btnGuardar_MP.Location = new System.Drawing.Point(324, 425);
             this.btnGuardar_MP.Name = "btnGuardar_MP";
             this.btnGuardar_MP.Size = new System.Drawing.Size(107, 23);
             this.btnGuardar_MP.TabIndex = 24;
             this.btnGuardar_MP.Text = "Guardar cambios";
             this.btnGuardar_MP.UseVisualStyleBackColor = true;
+            this.btnGuardar_MP.Click += new System.EventHandler(this.btnGuardar_MP_Click);
             // 
             // btnRegistrar_MP
             // 
             this.btnRegistrar_MP.Enabled = false;
-            this.btnRegistrar_MP.Location = new System.Drawing.Point(242, 379);
+            this.btnRegistrar_MP.Location = new System.Drawing.Point(243, 425);
             this.btnRegistrar_MP.Name = "btnRegistrar_MP";
             this.btnRegistrar_MP.Size = new System.Drawing.Size(75, 23);
             this.btnRegistrar_MP.TabIndex = 23;
@@ -276,7 +351,7 @@
             // 
             // txtDescuento_MP
             // 
-            this.txtDescuento_MP.Location = new System.Drawing.Point(360, 272);
+            this.txtDescuento_MP.Location = new System.Drawing.Point(163, 272);
             this.txtDescuento_MP.MaxLength = 2;
             this.txtDescuento_MP.Name = "txtDescuento_MP";
             this.txtDescuento_MP.Size = new System.Drawing.Size(151, 20);
@@ -285,35 +360,42 @@
             // 
             // txtRemuneracion_MP
             // 
-            this.txtRemuneracion_MP.Location = new System.Drawing.Point(360, 240);
+            this.txtRemuneracion_MP.Location = new System.Drawing.Point(163, 240);
+            this.txtRemuneracion_MP.MaxLength = 8;
             this.txtRemuneracion_MP.Name = "txtRemuneracion_MP";
             this.txtRemuneracion_MP.Size = new System.Drawing.Size(151, 20);
             this.txtRemuneracion_MP.TabIndex = 21;
+            this.txtRemuneracion_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
             // 
             // txtContrasena_MP
             // 
-            this.txtContrasena_MP.Location = new System.Drawing.Point(360, 177);
+            this.txtContrasena_MP.Location = new System.Drawing.Point(163, 177);
+            this.txtContrasena_MP.MaxLength = 1080;
             this.txtContrasena_MP.Name = "txtContrasena_MP";
+            this.txtContrasena_MP.PasswordChar = '*';
             this.txtContrasena_MP.Size = new System.Drawing.Size(151, 20);
             this.txtContrasena_MP.TabIndex = 20;
             // 
             // txtEmail_MP
             // 
-            this.txtEmail_MP.Location = new System.Drawing.Point(360, 145);
+            this.txtEmail_MP.Location = new System.Drawing.Point(163, 145);
+            this.txtEmail_MP.MaxLength = 512;
             this.txtEmail_MP.Name = "txtEmail_MP";
             this.txtEmail_MP.Size = new System.Drawing.Size(151, 20);
             this.txtEmail_MP.TabIndex = 19;
             // 
             // txtApellidos_MP
             // 
-            this.txtApellidos_MP.Location = new System.Drawing.Point(360, 116);
+            this.txtApellidos_MP.Location = new System.Drawing.Point(163, 116);
+            this.txtApellidos_MP.MaxLength = 64;
             this.txtApellidos_MP.Name = "txtApellidos_MP";
             this.txtApellidos_MP.Size = new System.Drawing.Size(151, 20);
             this.txtApellidos_MP.TabIndex = 18;
             // 
             // txtNombres_MP
             // 
-            this.txtNombres_MP.Location = new System.Drawing.Point(360, 86);
+            this.txtNombres_MP.Location = new System.Drawing.Point(163, 86);
+            this.txtNombres_MP.MaxLength = 64;
             this.txtNombres_MP.Name = "txtNombres_MP";
             this.txtNombres_MP.Size = new System.Drawing.Size(151, 20);
             this.txtNombres_MP.TabIndex = 17;
@@ -321,7 +403,7 @@
             // lblDescuento_MP
             // 
             this.lblDescuento_MP.AutoSize = true;
-            this.lblDescuento_MP.Location = new System.Drawing.Point(234, 275);
+            this.lblDescuento_MP.Location = new System.Drawing.Point(37, 275);
             this.lblDescuento_MP.Name = "lblDescuento_MP";
             this.lblDescuento_MP.Size = new System.Drawing.Size(59, 13);
             this.lblDescuento_MP.TabIndex = 16;
@@ -330,7 +412,7 @@
             // lblRemuneracion
             // 
             this.lblRemuneracion.AutoSize = true;
-            this.lblRemuneracion.Location = new System.Drawing.Point(235, 243);
+            this.lblRemuneracion.Location = new System.Drawing.Point(38, 243);
             this.lblRemuneracion.Name = "lblRemuneracion";
             this.lblRemuneracion.Size = new System.Drawing.Size(76, 13);
             this.lblRemuneracion.TabIndex = 15;
@@ -338,15 +420,17 @@
             // 
             // txtVerificadorCargado_MP
             // 
-            this.txtVerificadorCargado_MP.Location = new System.Drawing.Point(489, 208);
+            this.txtVerificadorCargado_MP.Location = new System.Drawing.Point(292, 208);
+            this.txtVerificadorCargado_MP.MaxLength = 1;
             this.txtVerificadorCargado_MP.Name = "txtVerificadorCargado_MP";
             this.txtVerificadorCargado_MP.Size = new System.Drawing.Size(22, 20);
             this.txtVerificadorCargado_MP.TabIndex = 14;
+            this.txtVerificadorCargado_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
             // 
             // lblGuionCargado_MP
             // 
             this.lblGuionCargado_MP.AutoSize = true;
-            this.lblGuionCargado_MP.Location = new System.Drawing.Point(467, 211);
+            this.lblGuionCargado_MP.Location = new System.Drawing.Point(270, 211);
             this.lblGuionCargado_MP.Name = "lblGuionCargado_MP";
             this.lblGuionCargado_MP.Size = new System.Drawing.Size(10, 13);
             this.lblGuionCargado_MP.TabIndex = 13;
@@ -354,15 +438,17 @@
             // 
             // txtRutPersonalCargado_MP
             // 
-            this.txtRutPersonalCargado_MP.Location = new System.Drawing.Point(360, 208);
+            this.txtRutPersonalCargado_MP.Location = new System.Drawing.Point(163, 208);
+            this.txtRutPersonalCargado_MP.MaxLength = 8;
             this.txtRutPersonalCargado_MP.Name = "txtRutPersonalCargado_MP";
             this.txtRutPersonalCargado_MP.Size = new System.Drawing.Size(100, 20);
             this.txtRutPersonalCargado_MP.TabIndex = 12;
+            this.txtRutPersonalCargado_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
             // 
             // lblRutPersonalCargado_MP
             // 
             this.lblRutPersonalCargado_MP.AutoSize = true;
-            this.lblRutPersonalCargado_MP.Location = new System.Drawing.Point(235, 211);
+            this.lblRutPersonalCargado_MP.Location = new System.Drawing.Point(38, 211);
             this.lblRutPersonalCargado_MP.Name = "lblRutPersonalCargado_MP";
             this.lblRutPersonalCargado_MP.Size = new System.Drawing.Size(83, 13);
             this.lblRutPersonalCargado_MP.TabIndex = 11;
@@ -371,7 +457,7 @@
             // lblContrasena_MP
             // 
             this.lblContrasena_MP.AutoSize = true;
-            this.lblContrasena_MP.Location = new System.Drawing.Point(234, 180);
+            this.lblContrasena_MP.Location = new System.Drawing.Point(37, 180);
             this.lblContrasena_MP.Name = "lblContrasena_MP";
             this.lblContrasena_MP.Size = new System.Drawing.Size(61, 13);
             this.lblContrasena_MP.TabIndex = 10;
@@ -380,7 +466,7 @@
             // lblEmail_MP
             // 
             this.lblEmail_MP.AutoSize = true;
-            this.lblEmail_MP.Location = new System.Drawing.Point(234, 152);
+            this.lblEmail_MP.Location = new System.Drawing.Point(37, 152);
             this.lblEmail_MP.Name = "lblEmail_MP";
             this.lblEmail_MP.Size = new System.Drawing.Size(32, 13);
             this.lblEmail_MP.TabIndex = 9;
@@ -399,7 +485,7 @@
             // lblApellidos_MP
             // 
             this.lblApellidos_MP.AutoSize = true;
-            this.lblApellidos_MP.Location = new System.Drawing.Point(234, 119);
+            this.lblApellidos_MP.Location = new System.Drawing.Point(37, 119);
             this.lblApellidos_MP.Name = "lblApellidos_MP";
             this.lblApellidos_MP.Size = new System.Drawing.Size(49, 13);
             this.lblApellidos_MP.TabIndex = 7;
@@ -408,7 +494,7 @@
             // lblNombre_MP
             // 
             this.lblNombre_MP.AutoSize = true;
-            this.lblNombre_MP.Location = new System.Drawing.Point(235, 89);
+            this.lblNombre_MP.Location = new System.Drawing.Point(38, 89);
             this.lblNombre_MP.Name = "lblNombre_MP";
             this.lblNombre_MP.Size = new System.Drawing.Size(49, 13);
             this.lblNombre_MP.TabIndex = 6;
@@ -571,22 +657,6 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
-            // lblCuentaBanc_MP
-            // 
-            this.lblCuentaBanc_MP.AutoSize = true;
-            this.lblCuentaBanc_MP.Location = new System.Drawing.Point(231, 338);
-            this.lblCuentaBanc_MP.Name = "lblCuentaBanc_MP";
-            this.lblCuentaBanc_MP.Size = new System.Drawing.Size(86, 13);
-            this.lblCuentaBanc_MP.TabIndex = 28;
-            this.lblCuentaBanc_MP.Text = "Cuenta Bancaria";
-            // 
-            // txtCuentaBanc_MP
-            // 
-            this.txtCuentaBanc_MP.Location = new System.Drawing.Point(360, 335);
-            this.txtCuentaBanc_MP.Name = "txtCuentaBanc_MP";
-            this.txtCuentaBanc_MP.Size = new System.Drawing.Size(151, 20);
-            this.txtCuentaBanc_MP.TabIndex = 29;
-            // 
             // FrmJefeOp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -608,6 +678,8 @@
             this.menuStrip1.PerformLayout();
             this.gbMantenedorPersonal.ResumeLayout(false);
             this.gbMantenedorPersonal.PerformLayout();
+            this.gpMedico_MP.ResumeLayout(false);
+            this.gpMedico_MP.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -670,5 +742,10 @@
         private System.Windows.Forms.Label lblCargo_MP;
         private System.Windows.Forms.TextBox txtCuentaBanc_MP;
         private System.Windows.Forms.Label lblCuentaBanc_MP;
+        private System.Windows.Forms.GroupBox gpMedico_MP;
+        private System.Windows.Forms.ComboBox cbBanco_MP;
+        private System.Windows.Forms.Label lblBanco_MP;
+        private System.Windows.Forms.ComboBox cbTipoCuenta_MP;
+        private System.Windows.Forms.Label lblTipoCuenta_MP;
     }
 }
