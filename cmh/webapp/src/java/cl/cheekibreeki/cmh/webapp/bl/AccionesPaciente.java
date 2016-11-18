@@ -194,7 +194,7 @@ public class AccionesPaciente {
         }
         //si la atención no está anulada, buscar estado anulada    
         Map<String, Object> params = new HashMap<>();
-        params.put("nomEstadoAten", "Anulada");
+        params.put("nomEstadoAten", "Anulado");
         List<? extends Object>  estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
         if(estadoAtenList.size() < 1){
 //            throw new Exception("No hay estado con nombre Anulada");

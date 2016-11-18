@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <form action="" method="POST">
-            <input type="hidden" name="atencionAnulada" id="idAtencion" />
+            <input type="hidden" name="atencionAnulada" id="atencionAnulada" />
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <tr>
@@ -21,17 +21,15 @@
                                 ${atencion.getFechor()}
                             </td>
                             <td>
-                                ${atencion.get}
+                                ${atencion.getIdBloque().getNumHoraIni()}:${atencion.getIdBloque().getNumMinuIni()}<c:if test="${atencion.getIdBloque().getNumMinuIni() == 0}">0</c:if>
                             </td>
                             <td>
-                                <input type="submit" value="Anular" onclick="$('#hiddenRegistrar').val(${atencion.getIdAtencionAgen()});" class="btn btn-default"/>
+                                <input type="submit" value="Anular" onclick="$('#atencionAnulada').val(${atencion.getIdAtencionAgen()});" class="btn btn-default"/>
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
             </div>
-
         </form>
-        <a href="master.jsp?page=registro">Registrarse</a>
     </div>
 </div>

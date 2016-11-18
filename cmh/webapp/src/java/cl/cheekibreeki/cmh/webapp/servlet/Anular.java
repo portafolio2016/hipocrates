@@ -41,25 +41,25 @@ public class Anular extends HttpServlet {
         String metodo = request.getMethod();
         if ("POST".compareTo(metodo) == 0) {
             //si es post
+            String atencionAnulada = request.getParameter("atencionAnulada");
             int atencionId = Integer.parseInt(request.getParameter("atencionAnulada"));
             AccionesPaciente accionesPaciente = new AccionesPaciente();
-            AtencionAgen atencion = (AtencionAgen)Controller.findById(AtencionAgen.class, atencionId);
+            AtencionAgen atencion = (AtencionAgen) Controller.findById(AtencionAgen.class, atencionId);
             accionesPaciente.anularAtencion(atencion);
-            
-        } else {
-            //si GET
-            //Redireccionar si no hay login
-            if (null == LoginController.obtenerPacienteEnSesion(request.getSession())) {
-                PrintWriter out = response.getWriter();
-                out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=login';</script>");
-            }
-            //Obtener paciente
-            Paciente paciente = LoginController.obtenerPacienteEnSesion(request.getSession());
-            //Obtener atenciones pendientes
-            ArrayList<AtencionAgen> atencionesPendientes = AnularController.atencionesPaciente(paciente);
-            //Agregar como atributo
-            request.setAttribute("atenciones", atencionesPendientes);
+
         }
+        //si GET
+        //Redireccionar si no hay login
+        if (null == LoginController.obtenerPacienteEnSesion(request.getSession())) {
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=login';</script>");
+        }
+        //Obtener paciente
+        Paciente paciente = LoginController.obtenerPacienteEnSesion(request.getSession());
+        //Obtener atenciones pendientes
+        ArrayList<AtencionAgen> atencionesPendientes = AnularController.atencionesPaciente(paciente);
+        //Agregar como atributo
+        request.setAttribute("atenciones", atencionesPendientes);
 
     }
 

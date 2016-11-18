@@ -1,5 +1,5 @@
 <!-- Header Carousel -->
-<header id="myCarousel" class="carousel slide">
+<header id="myCarousel" class="carousel slide" style="max-height: 250px;">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -8,7 +8,7 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner">
+    <div class="carousel-inner" >
         <div class="item active">
             <div class="fill" style="background-image:url('img/slider1.jpg');"></div>
             <div class="carousel-caption">
