@@ -59,8 +59,6 @@ public class Registro extends HttpServlet {
                 //Parsear fecnac a date
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date fecnacDate = format.parse(fecnac);
-                //parsear rut a numero
-                int rutInt = Integer.parseInt(rut);
                 //parsear dv a char
                 char dvChar = dv.toCharArray()[0];
                 //parsear sexo a char
@@ -92,7 +90,9 @@ public class Registro extends HttpServlet {
                     out.println("<script>alert('Fecha nacimiento debe ser en el pasado'); location.href = 'master.jsp?page=registro';</script>");
                     return;
                 }
-                boolean rutUnico = Validador.rutUnico(rut);
+                //parsear rut a numero
+                int rutInt = Integer.parseInt(rut);
+                boolean rutUnico = Validador.rutUnico(rutInt);
                 if(!rutUnico){
                     out.println("<script>alert('Rut ya está siendo utilizado'); location.href = 'master.jsp?page=registro';</script>");
                     return;

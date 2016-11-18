@@ -111,7 +111,7 @@ public class Validador {
      * @param rut
      * @return si el rut es único o no
      */
-    public static boolean rutUnico(String rut) {
+    public static boolean rutUnico(int rut) {
         Map<String, Object> params1 = new HashMap<>();
         params1.put("rut", rut);
         List<? extends Object>  pacienteAux = Controller.findByQuery("Paciente.findByRut", params1);
