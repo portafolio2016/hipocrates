@@ -188,7 +188,9 @@ public class AccionesPaciente {
         EstadoAten estadoAtencion = atencion.getIdEstadoAten();
         //si la atencion está anulada, lanzar excepción
         if(estadoAtencion.getNomEstadoAten().equals("Anulada")){
-            throw new Exception("La atención ya está anulada");
+//            throw new Exception("La atención ya está anulada");
+            System.out.println("La atención ya está anulada");
+            return null;
         }
         //si la atención no está anulada, buscar estado anulada    
         Map<String, Object> params = new HashMap<>();
