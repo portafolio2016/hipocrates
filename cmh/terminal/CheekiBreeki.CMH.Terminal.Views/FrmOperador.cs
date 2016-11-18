@@ -163,11 +163,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void agendarHoraToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            //FrmAgendarAtencion frmAgendar = new FrmAgendarAtencion(login);
-            //frmAgendar.Show();
-            //frmAgendar.Activate();
-            //this.Hide();
-            FrmPrueba frmAgendar = new FrmPrueba(login);
+            FrmAgendarAtencion frmAgendar = new FrmAgendarAtencion(login);
             frmAgendar.Show();
             frmAgendar.Activate();
             this.Hide();
@@ -248,7 +244,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         }
         #endregion
-
 
     }
 }

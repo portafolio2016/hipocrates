@@ -66,12 +66,6 @@
       <DependentUpon>FrmAbrirCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="AgendaDiaria.cs" />
-    <Compile Include="FrmAgendarAtencion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmAgendarAtencion.Designer.cs">
-      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmCerrarCaja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,11 +108,11 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmPrueba.cs">
+    <Compile Include="FrmAgendarAtencion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPrueba.Designer.cs">
-      <DependentUpon>FrmPrueba.cs</DependentUpon>
+    <Compile Include="FrmAgendarAtencion.Designer.cs">
+      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmOperador.cs">
       <SubType>Form</SubType>
@@ -142,9 +136,6 @@
     <EmbeddedResource Include="FrmContenidoEntrada.resx">
       <DependentUpon>FrmContenidoEntrada.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAgendarAtencion.resx">
-      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmCerrarCaja.resx">
       <DependentUpon>FrmCerrarCaja.cs</DependentUpon>
     </EmbeddedResource>
@@ -163,8 +154,8 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPrueba.resx">
-      <DependentUpon>FrmPrueba.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAgendarAtencion.resx">
+      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmOperador.resx">
       <DependentUpon>FrmOperador.cs</DependentUpon>
