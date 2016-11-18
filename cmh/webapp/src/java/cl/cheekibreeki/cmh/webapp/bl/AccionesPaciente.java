@@ -183,7 +183,7 @@ public class AccionesPaciente {
      * @param atencion atencion agendada
      * @return  Si es true significa que se pudo anular la atencion
      */
-    public AtencionAgen anularAtencion(AtencionAgen atencion) throws Exception{
+    public AtencionAgen anularAtencion(AtencionAgen atencion){
         //Buscar estado actual de la atencion
         EstadoAten estadoAtencion = atencion.getIdEstadoAten();
         //si la atencion está anulada, lanzar excepción
@@ -195,7 +195,9 @@ public class AccionesPaciente {
         params.put("nomEstadoAten", "Anulada");
         List<? extends Object>  estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
         if(estadoAtenList.size() < 1){
-            throw new Exception("No hay estado con nombre Anulada");
+//            throw new Exception("No hay estado con nombre Anulada");
+            System.out.println("No hay estado con nombre Anulada");
+            return null;
         }
         EstadoAten estadoAnulada = (EstadoAten)estadoAtenList.get(0);
         //asignar estado anulada a atencion
