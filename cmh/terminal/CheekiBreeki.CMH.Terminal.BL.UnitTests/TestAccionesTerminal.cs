@@ -3392,14 +3392,14 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 cmhEntities.SaveChangesAsync();
             }
             //Se genera la devolución
-            bool result = at.DevolucionPago(pago, "Test");
+            bool result = at.devolverPago(pago, "Test");
             Assert.AreEqual(result, true); //Si documento esta linea funciona
             //No generara la devolución por que ya existe
-            result = at.DevolucionPago(pago, "Test");
+            result = at.devolverPago(pago, "Test");
             Assert.AreEqual(result, false);
             //Pago no valido
             PAGO pagoaux = null;
-            result = at.DevolucionPago(pagoaux, "Test");
+            result = at.devolverPago(pagoaux, "Test");
             Assert.AreEqual(result, false);
             //Revertir cambios
             using (CMHEntities cmhEntities = new CMHEntities())

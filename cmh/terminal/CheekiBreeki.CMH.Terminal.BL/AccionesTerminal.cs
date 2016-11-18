@@ -365,23 +365,19 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             try
             {
-                if (Util.isObjetoNulo(atencion))
+                ATENCION_AGEN atencionFinal = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
+                if (Util.isObjetoNulo(atencionFinal))
                 {
                     throw new Exception("Atencion invalida");
                 }
-                else if (atencion.FECHOR == DateTime.MinValue ||
-                         atencion.FECHOR == null)
+                else if (atencionFinal.FECHOR == DateTime.MinValue ||
+                         atencionFinal.FECHOR == null)
                 {
                     throw new Exception("Fecha vacía");
                 }
                 else
                 {
-                    ESTADO_ATEN estadoatencion = new ESTADO_ATEN();
-                    estadoatencion.NOM_ESTADO_ATEN = "ANULADO";
-                    estadoatencion = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == estadoatencion.NOM_ESTADO_ATEN).FirstOrDefault();
-
-                    atencion = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
-                    atencion.ID_ESTADO_ATEN = estadoatencion.ID_ESTADO_ATEN;
+                    atencionFinal.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "ANULADO").FirstOrDefault().ID_ESTADO_ATEN;
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
@@ -1397,7 +1393,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         //Devolucion
         #region Devolución
-        public bool DevolucionPago(PAGO pago, string nombre_dev)
+        public bool devolverPago(PAGO pago, string nombre_dev)
         {
             try
             {
@@ -1413,16 +1409,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 devo.NOM_TIPO_DEV = nombre_dev;
                 conexionDB.DEVOLUCION.Add(devo);
                 conexionDB.SaveChangesAsync();
-                pago = conexionDB.PAGO.Where(d => d.ID_PAGO == pago.ID_PAGO).FirstOrDefault();
-                if (pago.ID_DEVOLUCION != null)
-                {
-                    //conexionDB.DEVOLUCION.Remove(devo);
-                    //conexionDB.SaveChangesAsync();
-                    return false;
-                }
+
+                pago = conexionDB.PAGO.Find(pago.ID_PAGO);
                 pago.ID_DEVOLUCION = devo.ID_DEVOLUCION;
                 conexionDB.SaveChangesAsync();
-
                 return true;
             }
             catch (Exception ex)

@@ -18,6 +18,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             Application.SetCompatibleTextRenderingDefault(false);
 
 
+            
             Application.Run(new FrmLogin());
             
         }

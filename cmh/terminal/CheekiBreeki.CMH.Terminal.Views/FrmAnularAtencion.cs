@@ -15,6 +15,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
     public partial class FrmAnularAtencion : Form
     {
         AccionesTerminal at = new AccionesTerminal();
+        PAGO pago = new PAGO();
         FrmLogin login = null;
         bool closeApp;
 
@@ -24,6 +25,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.StartPosition = FormStartPosition.CenterScreen;
             login = padre;
             closeApp = true;
+            btnAnular.Enabled = false;
         }
 
         public class ComboboxItem
@@ -39,28 +41,34 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void brnBuscarAtenciones_Click(object sender, EventArgs e)
         {
+            mostrarLabelPaciente();
             ActualizarLista();
         }
 
         private void btnAnular_Click(object sender, EventArgs e)
         {
-            bool res = false;
+            bool res1 = false, res2 = false;
+            bool necesitaDevolucion = false;
             try
             {
                 ATENCION_AGEN atencion = new ATENCION_AGEN();
                 using (var context = new CMHEntities())
                 {
                     atencion = context.ATENCION_AGEN.Find(((ComboboxItem)lstAtenciones.SelectedItem).Value);
+                    atencion.ESTADO_ATEN = context.ESTADO_ATEN.Find(atencion.ID_ESTADO_ATEN);
+                    if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")
+                        necesitaDevolucion = true;
                 }
-                res = at.anularAtencion(atencion);
+                res1 = at.anularAtencion(atencion);
+                if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")
+                    res2 = at.devolverPago(pago, txtRazon.Text);
                 ActualizarLista();
-                res = true;
             }
             catch (Exception ex)
             {
-                res = false;
+                res1 = false;
             }
-            if (res)
+            if (!necesitaDevolucion && res1)
             {
                 lblError.Visible = true;
                 lblError.Text = "Atención anulada correctamente";
@@ -68,9 +76,19 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             else
             {
-                lblError.Visible = true;
-                lblError.Text = "Error al anular atención";
-                lblError.ForeColor = System.Drawing.Color.Red;
+                if (res1 && res2)
+                {
+                    lblError.Visible = true;
+                    lblError.Text = "Atención anulada correctamente";
+                    lblError.ForeColor = System.Drawing.Color.Green;
+                }
+                else
+                {
+                    lblError.Visible = true;
+                    lblError.Text = "Error al anular atención";
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                    txtRazon.Text = string.Empty;
+                }
             }
         }
 
@@ -94,6 +112,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         item.Text = "Atención: " + atencion.ID_ATENCION_AGEN + " - Médico: " + atencion.PERS_MEDICO.PERSONAL.NOMBREFULL;
                         lstAtenciones.Items.Add(item);
                     }
+                    PACIENTE paciente = at.buscarPaciente(rut, txtDv.Text);
+                    lblNombre.Text = paciente.NOMBRES_PACIENTE + " " + paciente.APELLIDOS_PACIENTE;
+                    lblEdad.Text = paciente.FEC_NAC.Value.Date.ToShortDateString();
+                    lblSexo.Text = paciente.SEXO;
+                    lblRutInfo.Text = paciente.RUT + "-" + paciente.DIGITO_VERIFICADOR;
                     res = true;
                 }
             }
@@ -107,6 +130,31 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblError.Text = "Error al buscar atenciones";
                 lblError.ForeColor = System.Drawing.Color.Red;
             }
+            if (Util.isObjetoNulo(lstAtenciones.SelectedValue))
+                btnAnular.Enabled = false;
+        }
+
+        private void mostrarLabelPaciente()
+        {
+            bool estado = true;
+            lblNombre.Visible = estado;
+            lblEdad.Visible = estado;
+            lblSexo.Visible = estado;
+            lblRutInfo.Visible = estado;
+        }
+
+        private void mostrarLabelDescuento()
+        {
+            bool estado = true;
+            lblSubtotal.Visible = estado;
+            lblDescuento.Visible = estado;
+            lblTotal.Visible = estado;
+            lblAseguradora.Visible = estado;
+
+            lblSubtotal.Text = string.Empty;
+            lblTotal.Text = string.Empty;
+            lblDescuento.Text = string.Empty;
+            lblAseguradora.Text = string.Empty;
         }
 
         private void FrmIngresarPaciente_FormClosed(object sender, FormClosedEventArgs e)
@@ -129,6 +177,59 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     (e.KeyChar != 'k') && (e.KeyChar != 'K'))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void lstAtenciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mostrarLabelDescuento();
+            try
+            {
+                ATENCION_AGEN atencion = new ATENCION_AGEN();
+                PACIENTE paciente = new PACIENTE();
+                PRESTACION prestacion = new PRESTACION();
+                BONO bono = new BONO();
+                ASEGURADORA aseguradora = new ASEGURADORA();
+                ResultadoVerificacionSeguro seguro = new ResultadoVerificacionSeguro();
+                bool necesitaDevolucion = false;
+
+                using (var context = new CMHEntities())
+                {
+                    atencion = context.ATENCION_AGEN.Find(((ComboboxItem)lstAtenciones.SelectedItem).Value);
+                    atencion.ESTADO_ATEN = context.ESTADO_ATEN.Find(atencion.ID_ESTADO_ATEN);
+                    if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")
+                        necesitaDevolucion = true;
+                    if (necesitaDevolucion)
+                    {
+                        paciente = context.PACIENTE.Find(atencion.ID_PACIENTE);
+                        prestacion = context.PRESTACION.Find(atencion.ID_PRESTACION);
+                        pago = context.PAGO.Where(d => d.ID_ATENCION_AGEN == atencion.ID_ATENCION_AGEN).FirstOrDefault();
+                        bono = context.BONO.Find(pago.ID_BONO);
+                        aseguradora = context.ASEGURADORA.Find(bono.ID_ASEGURADORA);
+                    }
+                }
+                if(necesitaDevolucion)
+                {
+                    lblSubtotal.Text = atencion.PRESTACION.PRECIO_PRESTACION.ToString();
+                    lblTotal.Text = pago.MONTO_PAGO.ToString();
+                    lblDescuento.Text = pago.BONO.CANT_BONO.ToString();
+                    lblAseguradora.Text = aseguradora.NOM_ASEGURADORA;
+                    btnAnular.Enabled = true;
+                    lblError.Visible = false;
+                }
+                else
+                    btnAnular.Enabled = true;
+
+            }
+            catch (Exception ex)
+            {
+                lblError.Visible = true;
+                lblError.Text = "Error al buscar pago";
+                lblError.ForeColor = System.Drawing.Color.Red;
+                lblSubtotal.Text = string.Empty;
+                lblTotal.Text = string.Empty;
+                lblDescuento.Text = string.Empty;
+                btnAnular.Enabled = false;
             }
         }
     }

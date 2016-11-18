@@ -30,6 +30,8 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblAseguradora = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblDescuento = new System.Windows.Forms.Label();
             this.lblSubtotal = new System.Windows.Forms.Label();
@@ -52,8 +54,6 @@
             this.lstAtenciones = new System.Windows.Forms.ListBox();
             this.brnBuscarAtenciones = new System.Windows.Forms.Button();
             this.lblRut = new System.Windows.Forms.Label();
-            this.lblAseguradora = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -93,6 +93,25 @@
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pago";
+            // 
+            // lblAseguradora
+            // 
+            this.lblAseguradora.AutoSize = true;
+            this.lblAseguradora.Location = new System.Drawing.Point(131, 136);
+            this.lblAseguradora.Name = "lblAseguradora";
+            this.lblAseguradora.Size = new System.Drawing.Size(77, 13);
+            this.lblAseguradora.TabIndex = 28;
+            this.lblAseguradora.Text = "lblAseguradora";
+            this.lblAseguradora.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(29, 136);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(70, 13);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "Aseguradora:";
             // 
             // lblTotal
             // 
@@ -163,7 +182,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(117, 267);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(248, 216);
+            this.groupBox2.Size = new System.Drawing.Size(248, 176);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Información paciente";
@@ -274,7 +293,7 @@
             // 
             // btnIngresar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(436, 449);
+            this.btnIngresar.Location = new System.Drawing.Point(315, 459);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(131, 34);
             this.btnIngresar.TabIndex = 16;
@@ -309,25 +328,6 @@
             this.lblRut.Size = new System.Drawing.Size(75, 13);
             this.lblRut.TabIndex = 11;
             this.lblRut.Text = "RUT Paciente";
-            // 
-            // lblAseguradora
-            // 
-            this.lblAseguradora.AutoSize = true;
-            this.lblAseguradora.Location = new System.Drawing.Point(131, 136);
-            this.lblAseguradora.Name = "lblAseguradora";
-            this.lblAseguradora.Size = new System.Drawing.Size(77, 13);
-            this.lblAseguradora.TabIndex = 28;
-            this.lblAseguradora.Text = "lblAseguradora";
-            this.lblAseguradora.Visible = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(29, 136);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(70, 13);
-            this.label9.TabIndex = 27;
-            this.label9.Text = "Aseguradora:";
             // 
             // FrmIngresarPaciente
             // 
