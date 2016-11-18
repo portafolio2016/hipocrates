@@ -416,16 +416,27 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         paciente = context.PACIENTE.Find(atencion.ID_PACIENTE);
                         prestacion = context.PRESTACION.Find(atencion.ID_PRESTACION);
                         pago = context.PAGO.Where(d => d.ID_ATENCION_AGEN == atencion.ID_ATENCION_AGEN).FirstOrDefault();
-                        bono = context.BONO.Find(pago.ID_BONO);
-                        aseguradora = context.ASEGURADORA.Find(bono.ID_ASEGURADORA);
+                        if (pago.ID_BONO != null)
+                        {
+                            bono = context.BONO.Find(pago.ID_BONO);
+                            aseguradora = context.ASEGURADORA.Find(bono.ID_ASEGURADORA);
+                        }
                     }
                 }
                 if (necesitaDevolucion)
                 {
                     lblSubtotal.Text = atencion.PRESTACION.PRECIO_PRESTACION.ToString();
                     lblTotal.Text = pago.MONTO_PAGO.ToString();
-                    lblDescuento.Text = pago.BONO.CANT_BONO.ToString();
-                    lblAseguradora.Text = aseguradora.NOM_ASEGURADORA;
+                    if (pago.ID_BONO != null)
+                    {
+                        lblDescuento.Text = pago.BONO.CANT_BONO.ToString();
+                        lblAseguradora.Text = aseguradora.NOM_ASEGURADORA;
+                    }
+                    else
+                    {
+                        lblDescuento.Text = "0";
+                        lblAseguradora.Text = "No tiene seguro";
+                    }
                     btnAnular.Enabled = true;
                     lblError.Visible = false;
                 }

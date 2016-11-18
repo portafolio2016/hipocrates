@@ -253,6 +253,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 FUNCIONARIO funcionario = FrmLogin.usuarioLogeado.Personal.FUNCIONARIO.FirstOrDefault();
                 int dinero = int.Parse(txtDinero.Text);
                 int cheques = int.Parse(txtCheques.Text);
+
+                lblError.Visible = true;
+                lblError.Text = "Cerrando caja...";
+                lblError.ForeColor = System.Drawing.Color.Violet;
+                btnCerrarCaja.Enabled = false;
+
                 res = at.cerrarCaja(funcionario, dinero, cheques);
             }
             catch (Exception ex)
@@ -272,6 +278,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblError.Text = "Error al cerrar caja";
                 lblError.ForeColor = System.Drawing.Color.Red;
             }
+            btnCerrarCaja.Enabled = true;
         }
 
         private void txtDinero_KeyPress(object sender, KeyPressEventArgs e)

@@ -307,11 +307,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void ActualizarLista()
         {
             bool res = false;
-            int rut = int.Parse(txtRut.Text);
             lblError.Visible = false;
             lstAtenciones.Items.Clear();
             try
             {
+                int rut = int.Parse(txtRut.Text);
                 if (!Util.rutValido(rut, txtDv.Text))
                     res = false;
                 else
@@ -391,7 +391,16 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 seguro = at.verificarSeguro(prestacion, paciente);
                 lblSubtotal.Text = atencion.PRESTACION.PRECIO_PRESTACION.ToString();
                 lblTotal.Text = seguro.Descuento.ToString();
-                lblDescuento.Text = (int.Parse(lblSubtotal.Text) - int.Parse(lblTotal.Text)).ToString();
+                if (seguro.Aseguradora == "No tiene seguro")
+                {
+                    lblTotal.Text = atencion.PRESTACION.PRECIO_PRESTACION.ToString();
+                    lblDescuento.Text = "0";
+                }
+                else
+                {
+                    lblTotal.Text = seguro.Descuento.ToString();
+                    lblDescuento.Text = (int.Parse(lblSubtotal.Text) - int.Parse(lblTotal.Text)).ToString();
+                }
                 lblAseguradora.Text = seguro.Aseguradora;
                 btnIngresar.Enabled = true;
                 lblError.Visible = false;

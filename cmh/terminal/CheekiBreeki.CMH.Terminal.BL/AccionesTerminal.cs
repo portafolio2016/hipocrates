@@ -147,13 +147,16 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    BONO bono = new BONO();
-                    bono.CANT_BONO = cantBono;
-                    bono.ID_ASEGURADORA = conexionDB.ASEGURADORA.Where(d => d.NOM_ASEGURADORA == aseguradora).FirstOrDefault().ID_ASEGURADORA;
-                    conexionDB.BONO.Add(bono);
-                    conexionDB.SaveChangesAsync();
+                    if (aseguradora != "No tiene seguro")
+                    {
+                        BONO bono = new BONO();
+                        bono.CANT_BONO = cantBono;
+                        bono.ID_ASEGURADORA = conexionDB.ASEGURADORA.Where(d => d.NOM_ASEGURADORA == aseguradora).FirstOrDefault().ID_ASEGURADORA;
+                        conexionDB.BONO.Add(bono);
+                        conexionDB.SaveChangesAsync();
+                        pago.ID_BONO = bono.ID_BONO;
+                    }
 
-                    pago.ID_BONO = bono.ID_BONO;
                     pago.FECHOR = DateTime.Today;
                     conexionDB.PAGO.Add(pago);
                     conexionDB.SaveChangesAsync();
