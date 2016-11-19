@@ -328,7 +328,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Campo Run vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al cargar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

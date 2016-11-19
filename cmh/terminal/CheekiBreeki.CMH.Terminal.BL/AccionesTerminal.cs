@@ -1432,7 +1432,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     PACIENTE paciente = null;
                     paciente = conexionDB.PACIENTE.Where(d => d.RUT == rut
-                                                         && d.DIGITO_VERIFICADOR == dv)
+                                                         && d.DIGITO_VERIFICADOR.ToUpper() == dv.ToUpper())
                                                          .FirstOrDefault();
                     if (Util.isObjetoNulo(paciente))
                     {

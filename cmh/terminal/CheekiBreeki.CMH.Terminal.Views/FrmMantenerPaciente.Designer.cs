@@ -40,6 +40,29 @@
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbMantenedorPaciente = new System.Windows.Forms.GroupBox();
+            this.dtpFechaNac_Pac = new System.Windows.Forms.DateTimePicker();
+            this.cbSexo_Pac = new System.Windows.Forms.ComboBox();
+            this.txtRutCargado_Pac = new System.Windows.Forms.TextBox();
+            this.txtContrasena_Pac = new System.Windows.Forms.TextBox();
+            this.txtEmail_Pac = new System.Windows.Forms.TextBox();
+            this.txtApellidos_Pac = new System.Windows.Forms.TextBox();
+            this.txtNombres_Pac = new System.Windows.Forms.TextBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnRegistrar_Pac = new System.Windows.Forms.Button();
+            this.lblFechaNac = new System.Windows.Forms.Label();
+            this.lblSexo = new System.Windows.Forms.Label();
+            this.lblRutCargado = new System.Windows.Forms.Label();
+            this.lblContrasena = new System.Windows.Forms.Label();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.lblApellidos = new System.Windows.Forms.Label();
+            this.lblNombres = new System.Windows.Forms.Label();
+            this.btnNuevoPaciente = new System.Windows.Forms.Button();
+            this.btnCargarPaciente = new System.Windows.Forms.Button();
+            this.txtVerificador_Pac = new System.Windows.Forms.TextBox();
+            this.lblGuion = new System.Windows.Forms.Label();
+            this.txtRutPaciente_Pac = new System.Windows.Forms.TextBox();
+            this.lblRutPaciente = new System.Windows.Forms.Label();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -51,10 +74,12 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.txtVerificadorCargado_Pac = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.gbMantenedorPaciente.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -166,12 +191,244 @@
             // 
             // gbMantenedorPaciente
             // 
+            this.gbMantenedorPaciente.Controls.Add(this.txtVerificadorCargado_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.dtpFechaNac_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.cbSexo_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtRutCargado_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtContrasena_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtEmail_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtApellidos_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtNombres_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.btnEliminar);
+            this.gbMantenedorPaciente.Controls.Add(this.btnGuardar);
+            this.gbMantenedorPaciente.Controls.Add(this.btnRegistrar_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.lblFechaNac);
+            this.gbMantenedorPaciente.Controls.Add(this.lblSexo);
+            this.gbMantenedorPaciente.Controls.Add(this.lblRutCargado);
+            this.gbMantenedorPaciente.Controls.Add(this.lblContrasena);
+            this.gbMantenedorPaciente.Controls.Add(this.lblEmail);
+            this.gbMantenedorPaciente.Controls.Add(this.lblApellidos);
+            this.gbMantenedorPaciente.Controls.Add(this.lblNombres);
+            this.gbMantenedorPaciente.Controls.Add(this.btnNuevoPaciente);
+            this.gbMantenedorPaciente.Controls.Add(this.btnCargarPaciente);
+            this.gbMantenedorPaciente.Controls.Add(this.txtVerificador_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.lblGuion);
+            this.gbMantenedorPaciente.Controls.Add(this.txtRutPaciente_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.lblRutPaciente);
             this.gbMantenedorPaciente.Location = new System.Drawing.Point(6, 43);
             this.gbMantenedorPaciente.Name = "gbMantenedorPaciente";
             this.gbMantenedorPaciente.Size = new System.Drawing.Size(768, 462);
             this.gbMantenedorPaciente.TabIndex = 10;
             this.gbMantenedorPaciente.TabStop = false;
             this.gbMantenedorPaciente.Text = "Mantener Paciente";
+            // 
+            // dtpFechaNac_Pac
+            // 
+            this.dtpFechaNac_Pac.Location = new System.Drawing.Point(257, 252);
+            this.dtpFechaNac_Pac.Name = "dtpFechaNac_Pac";
+            this.dtpFechaNac_Pac.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaNac_Pac.TabIndex = 30;
+            // 
+            // cbSexo_Pac
+            // 
+            this.cbSexo_Pac.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSexo_Pac.FormattingEnabled = true;
+            this.cbSexo_Pac.Location = new System.Drawing.Point(245, 228);
+            this.cbSexo_Pac.Name = "cbSexo_Pac";
+            this.cbSexo_Pac.Size = new System.Drawing.Size(121, 21);
+            this.cbSexo_Pac.TabIndex = 29;
+            // 
+            // txtRutCargado_Pac
+            // 
+            this.txtRutCargado_Pac.Location = new System.Drawing.Point(245, 203);
+            this.txtRutCargado_Pac.MaxLength = 8;
+            this.txtRutCargado_Pac.Name = "txtRutCargado_Pac";
+            this.txtRutCargado_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtRutCargado_Pac.TabIndex = 27;
+            this.txtRutCargado_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
+            // 
+            // txtContrasena_Pac
+            // 
+            this.txtContrasena_Pac.Location = new System.Drawing.Point(245, 176);
+            this.txtContrasena_Pac.MaxLength = 1080;
+            this.txtContrasena_Pac.Name = "txtContrasena_Pac";
+            this.txtContrasena_Pac.PasswordChar = '*';
+            this.txtContrasena_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtContrasena_Pac.TabIndex = 26;
+            // 
+            // txtEmail_Pac
+            // 
+            this.txtEmail_Pac.Location = new System.Drawing.Point(245, 149);
+            this.txtEmail_Pac.MaxLength = 512;
+            this.txtEmail_Pac.Name = "txtEmail_Pac";
+            this.txtEmail_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtEmail_Pac.TabIndex = 25;
+            // 
+            // txtApellidos_Pac
+            // 
+            this.txtApellidos_Pac.Location = new System.Drawing.Point(245, 122);
+            this.txtApellidos_Pac.MaxLength = 64;
+            this.txtApellidos_Pac.Name = "txtApellidos_Pac";
+            this.txtApellidos_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtApellidos_Pac.TabIndex = 24;
+            // 
+            // txtNombres_Pac
+            // 
+            this.txtNombres_Pac.Location = new System.Drawing.Point(245, 95);
+            this.txtNombres_Pac.MaxLength = 64;
+            this.txtNombres_Pac.Name = "txtNombres_Pac";
+            this.txtNombres_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtNombres_Pac.TabIndex = 23;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Location = new System.Drawing.Point(459, 306);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 22;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Enabled = false;
+            this.btnGuardar.Location = new System.Drawing.Point(314, 306);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(98, 23);
+            this.btnGuardar.TabIndex = 21;
+            this.btnGuardar.Text = "Guardar Cambios";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            // 
+            // btnRegistrar_Pac
+            // 
+            this.btnRegistrar_Pac.Enabled = false;
+            this.btnRegistrar_Pac.Location = new System.Drawing.Point(193, 306);
+            this.btnRegistrar_Pac.Name = "btnRegistrar_Pac";
+            this.btnRegistrar_Pac.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrar_Pac.TabIndex = 20;
+            this.btnRegistrar_Pac.Text = "Registrar";
+            this.btnRegistrar_Pac.UseVisualStyleBackColor = true;
+            this.btnRegistrar_Pac.Click += new System.EventHandler(this.btnRegistrar_Pac_Click);
+            // 
+            // lblFechaNac
+            // 
+            this.lblFechaNac.AutoSize = true;
+            this.lblFechaNac.Location = new System.Drawing.Point(143, 258);
+            this.lblFechaNac.Name = "lblFechaNac";
+            this.lblFechaNac.Size = new System.Drawing.Size(108, 13);
+            this.lblFechaNac.TabIndex = 12;
+            this.lblFechaNac.Text = "Fecha de Nacimiento";
+            // 
+            // lblSexo
+            // 
+            this.lblSexo.AutoSize = true;
+            this.lblSexo.Location = new System.Drawing.Point(143, 228);
+            this.lblSexo.Name = "lblSexo";
+            this.lblSexo.Size = new System.Drawing.Size(31, 13);
+            this.lblSexo.TabIndex = 11;
+            this.lblSexo.Text = "Sexo";
+            // 
+            // lblRutCargado
+            // 
+            this.lblRutCargado.AutoSize = true;
+            this.lblRutCargado.Location = new System.Drawing.Point(143, 201);
+            this.lblRutCargado.Name = "lblRutCargado";
+            this.lblRutCargado.Size = new System.Drawing.Size(24, 13);
+            this.lblRutCargado.TabIndex = 10;
+            this.lblRutCargado.Text = "Rut";
+            // 
+            // lblContrasena
+            // 
+            this.lblContrasena.AutoSize = true;
+            this.lblContrasena.Location = new System.Drawing.Point(143, 175);
+            this.lblContrasena.Name = "lblContrasena";
+            this.lblContrasena.Size = new System.Drawing.Size(61, 13);
+            this.lblContrasena.TabIndex = 9;
+            this.lblContrasena.Text = "Contraseña";
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new System.Drawing.Point(143, 149);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(32, 13);
+            this.lblEmail.TabIndex = 8;
+            this.lblEmail.Text = "Email";
+            // 
+            // lblApellidos
+            // 
+            this.lblApellidos.AutoSize = true;
+            this.lblApellidos.Location = new System.Drawing.Point(143, 121);
+            this.lblApellidos.Name = "lblApellidos";
+            this.lblApellidos.Size = new System.Drawing.Size(49, 13);
+            this.lblApellidos.TabIndex = 7;
+            this.lblApellidos.Text = "Apellidos";
+            // 
+            // lblNombres
+            // 
+            this.lblNombres.AutoSize = true;
+            this.lblNombres.Location = new System.Drawing.Point(143, 95);
+            this.lblNombres.Name = "lblNombres";
+            this.lblNombres.Size = new System.Drawing.Size(49, 13);
+            this.lblNombres.TabIndex = 6;
+            this.lblNombres.Text = "Nombres";
+            // 
+            // btnNuevoPaciente
+            // 
+            this.btnNuevoPaciente.Location = new System.Drawing.Point(517, 46);
+            this.btnNuevoPaciente.Name = "btnNuevoPaciente";
+            this.btnNuevoPaciente.Size = new System.Drawing.Size(99, 23);
+            this.btnNuevoPaciente.TabIndex = 5;
+            this.btnNuevoPaciente.Text = "Nuevo Paciente";
+            this.btnNuevoPaciente.UseVisualStyleBackColor = true;
+            this.btnNuevoPaciente.Click += new System.EventHandler(this.btnNuevoPaciente_Click);
+            // 
+            // btnCargarPaciente
+            // 
+            this.btnCargarPaciente.Location = new System.Drawing.Point(417, 46);
+            this.btnCargarPaciente.Name = "btnCargarPaciente";
+            this.btnCargarPaciente.Size = new System.Drawing.Size(94, 23);
+            this.btnCargarPaciente.TabIndex = 4;
+            this.btnCargarPaciente.Text = "Cargar Paciente";
+            this.btnCargarPaciente.UseVisualStyleBackColor = true;
+            this.btnCargarPaciente.Click += new System.EventHandler(this.btnCargarPaciente_Click);
+            // 
+            // txtVerificador_Pac
+            // 
+            this.txtVerificador_Pac.Location = new System.Drawing.Point(376, 48);
+            this.txtVerificador_Pac.MaxLength = 1;
+            this.txtVerificador_Pac.Name = "txtVerificador_Pac";
+            this.txtVerificador_Pac.Size = new System.Drawing.Size(24, 20);
+            this.txtVerificador_Pac.TabIndex = 3;
+            this.txtVerificador_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
+            // lblGuion
+            // 
+            this.lblGuion.AutoSize = true;
+            this.lblGuion.Location = new System.Drawing.Point(360, 51);
+            this.lblGuion.Name = "lblGuion";
+            this.lblGuion.Size = new System.Drawing.Size(10, 13);
+            this.lblGuion.TabIndex = 2;
+            this.lblGuion.Text = "-";
+            // 
+            // txtRutPaciente_Pac
+            // 
+            this.txtRutPaciente_Pac.Location = new System.Drawing.Point(245, 48);
+            this.txtRutPaciente_Pac.MaxLength = 8;
+            this.txtRutPaciente_Pac.Name = "txtRutPaciente_Pac";
+            this.txtRutPaciente_Pac.Size = new System.Drawing.Size(108, 20);
+            this.txtRutPaciente_Pac.TabIndex = 1;
+            this.txtRutPaciente_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
+            // 
+            // lblRutPaciente
+            // 
+            this.lblRutPaciente.AutoSize = true;
+            this.lblRutPaciente.Location = new System.Drawing.Point(132, 51);
+            this.lblRutPaciente.Name = "lblRutPaciente";
+            this.lblRutPaciente.Size = new System.Drawing.Size(84, 13);
+            this.lblRutPaciente.TabIndex = 0;
+            this.lblRutPaciente.Text = "Rut de Paciente";
             // 
             // gbOpcionesUsuario
             // 
@@ -284,6 +541,15 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
+            // txtVerificadorCargado_Pac
+            // 
+            this.txtVerificadorCargado_Pac.Location = new System.Drawing.Point(351, 203);
+            this.txtVerificadorCargado_Pac.MaxLength = 1;
+            this.txtVerificadorCargado_Pac.Name = "txtVerificadorCargado_Pac";
+            this.txtVerificadorCargado_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtVerificadorCargado_Pac.TabIndex = 31;
+            this.txtVerificadorCargado_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
             // FrmMantenerPaciente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,6 +569,8 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.gbMantenedorPaciente.ResumeLayout(false);
+            this.gbMantenedorPaciente.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -337,5 +605,29 @@
         private System.Windows.Forms.TextBox tbContrasenaNueva;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolStripMenuItem pacienteToolStripMenuItem;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnRegistrar_Pac;
+        private System.Windows.Forms.Label lblFechaNac;
+        private System.Windows.Forms.Label lblSexo;
+        private System.Windows.Forms.Label lblRutCargado;
+        private System.Windows.Forms.Label lblContrasena;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.Label lblApellidos;
+        private System.Windows.Forms.Label lblNombres;
+        private System.Windows.Forms.Button btnNuevoPaciente;
+        private System.Windows.Forms.Button btnCargarPaciente;
+        private System.Windows.Forms.TextBox txtVerificador_Pac;
+        private System.Windows.Forms.Label lblGuion;
+        private System.Windows.Forms.TextBox txtRutPaciente_Pac;
+        private System.Windows.Forms.Label lblRutPaciente;
+        private System.Windows.Forms.TextBox txtNombres_Pac;
+        private System.Windows.Forms.TextBox txtRutCargado_Pac;
+        private System.Windows.Forms.TextBox txtContrasena_Pac;
+        private System.Windows.Forms.TextBox txtEmail_Pac;
+        private System.Windows.Forms.TextBox txtApellidos_Pac;
+        private System.Windows.Forms.DateTimePicker dtpFechaNac_Pac;
+        private System.Windows.Forms.ComboBox cbSexo_Pac;
+        private System.Windows.Forms.TextBox txtVerificadorCargado_Pac;
     }
 }

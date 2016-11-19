@@ -18,7 +18,17 @@ namespace CheekiBreeki.CMH.Terminal.Views
         FrmLogin login = null;
         bool closeApp;
 
-        
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public int Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                                                              //
         //   CONSTRUCTOR                                                                                                                //
@@ -44,6 +54,18 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 btnSesion.Text = "Iniciar sesión";
             }
 
+            #region ComboBox Sexo
+            ComboboxItem item = new ComboboxItem();
+            item.Text = "Masculino";
+            item.Value = 0;
+            cbSexo_Pac.Items.Add(item);
+
+            ComboboxItem item1 = new ComboboxItem();
+            item1.Text = "Femenino";
+            item1.Value = 1;
+            cbSexo_Pac.Items.Add(item1);
+            cbSexo_Pac.SelectedIndex = 0;
+            #endregion 
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,6 +208,141 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
         #endregion
+
+        #region Limpiar datos
+        public void limpiarDatos()
+        {
+            txtNombres_Pac.Text = string.Empty;
+            txtApellidos_Pac.Text = string.Empty;
+            txtEmail_Pac.Text = string.Empty;
+            txtContrasena_Pac.Text = string.Empty;
+            txtRutCargado_Pac.Text = string.Empty;
+            txtVerificadorCargado_Pac.Text = string.Empty;
+            dtpFechaNac_Pac.Value = (DateTime) DateTime.Today;
+
+            txtRutPaciente_Pac.Text = string.Empty;
+            txtVerificador_Pac.Text = string.Empty;
+
+        }
+        #endregion 
+
+        #region Validaciones de campos
+        private void txtCampo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtDv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                    (e.KeyChar != 'k') && (e.KeyChar != 'K'))
+            {
+                e.Handled = true;
+            }
+        }
+        #endregion
+
+        int rutBuscar = 0;
+        string verificarBuscar = string.Empty;
+
+        private void btnCargarPaciente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                int rut = int.Parse(txtRutPaciente_Pac.Text);
+                rutBuscar = int.Parse(txtRutPaciente_Pac.Text);
+                string verificar = txtVerificador_Pac.Text;
+                verificarBuscar = txtVerificador_Pac.Text;
+
+                PACIENTE p1 = at.buscarPaciente(rut, verificar);
+                txtNombres_Pac.Text = p1.NOMBRES_PACIENTE;
+                txtApellidos_Pac.Text = p1.APELLIDOS_PACIENTE;
+                txtEmail_Pac.Text = p1.EMAIL_PACIENTE;
+                txtRutCargado_Pac.Text = p1.RUT.ToString();
+                txtVerificadorCargado_Pac.Text = p1.DIGITO_VERIFICADOR;
+
+                if (p1.SEXO.ToUpper() == "M")
+                {
+                    cbSexo_Pac.SelectedIndex = 0;
+                }
+                else if (p1.SEXO.ToUpper() == "F")
+                {
+                    cbSexo_Pac.SelectedIndex = 1;
+                }
+
+                dtpFechaNac_Pac.Text = p1.FEC_NAC.ToString();
+
+                btnRegistrar_Pac.Enabled = false;
+                btnGuardar.Enabled = true;
+                btnEliminar.Enabled = true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar paciente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnNuevoPaciente_Click(object sender, EventArgs e)
+        {
+            limpiarDatos();
+            btnRegistrar_Pac.Enabled = true;
+            btnGuardar.Enabled = false;
+            btnEliminar.Enabled = false;
+        }
+
+        private void btnRegistrar_Pac_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                PACIENTE pac = new PACIENTE();
+
+                //capturando datos
+                pac.NOMBRES_PACIENTE = txtNombres_Pac.Text;
+                pac.APELLIDOS_PACIENTE = txtApellidos_Pac.Text;
+                pac.EMAIL_PACIENTE = txtEmail_Pac.Text;
+                pac.HASHED_PASS = Util.hashMD5(txtContrasena_Pac.Text);
+                pac.RUT = int.Parse(txtRutCargado_Pac.Text);
+                pac.DIGITO_VERIFICADOR = txtVerificadorCargado_Pac.Text;
+                pac.FEC_NAC = DateTime.Parse(dtpFechaNac_Pac.Text);
+                pac.ACTIVO = true;
+
+                if (((ComboboxItem)cbSexo_Pac.SelectedItem).Value == 0)
+                {
+                    pac.SEXO = "M";
+                }
+                else if (((ComboboxItem)cbSexo_Pac.SelectedItem).Value == 1)
+                {
+                    pac.SEXO = "F";
+                }
+
+                if (!Util.isEmailValido(pac.EMAIL_PACIENTE))
+                {
+                    throw new Exception();
+                }
+
+                if (!Util.rutValido(pac.RUT, pac.DIGITO_VERIFICADOR))
+                {
+                    throw new Exception();
+                }
+
+                at.nuevoPaciente(pac);
+
+                MessageBox.Show("¡Paciente creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                limpiarDatos();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al crear paciente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
 
