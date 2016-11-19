@@ -98,6 +98,7 @@
             this.btnModificarUser.TabIndex = 3;
             this.btnModificarUser.Text = "Opciones de Cuenta";
             this.btnModificarUser.UseVisualStyleBackColor = true;
+            this.btnModificarUser.Click += new System.EventHandler(this.btnModificarUser_Click_1);
             // 
             // lblUsuarioConectado
             // 
@@ -173,8 +174,8 @@
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
             this.groupBox1.Controls.Add(this.gbCerrarOrdenAnalisis);
-            this.groupBox1.Controls.Add(this.gbAbrirOrdenAnalisis);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
+            this.groupBox1.Controls.Add(this.gbAbrirOrdenAnalisis);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
@@ -414,7 +415,6 @@
             this.dgCerrarOrdenAnalisis.ReadOnly = true;
             this.dgCerrarOrdenAnalisis.Size = new System.Drawing.Size(754, 354);
             this.dgCerrarOrdenAnalisis.TabIndex = 0;
-            this.dgCerrarOrdenAnalisis.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCerrarOrdenAnalisis_CellClick);
             // 
             // dataGridViewTextBoxColumn1
             // 

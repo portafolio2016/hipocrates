@@ -80,7 +80,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   OPCIONES DE CUENTA                                                                                                         //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void btnModificarUser_Click(object sender, EventArgs e)
+        private void btnModificarUser_Click_1(object sender, EventArgs e)
         {
             InitGB(gbOpcionesUsuario);
         }
@@ -165,6 +165,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             gbOpcionesUsuario.Hide();
             gbAbrirOrdenAnalisis.Hide();
+            gbCerrarOrdenAnalisis.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
