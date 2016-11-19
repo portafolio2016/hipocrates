@@ -1471,10 +1471,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("RUT vacío");
                 }
-                else if (Util.isObjetoNulo(buscarPaciente(paciente.RUT, paciente.DIGITO_VERIFICADOR)))
-                {
-                    throw new Exception("Paciente no existe");
-                }
                 else
                 {
                     PACIENTE buscado = conexionDB.PACIENTE.Where(d => d.ID_PACIENTE == paciente.ID_PACIENTE).FirstOrDefault();

@@ -224,69 +224,69 @@
             // 
             // txtVerificadorCargado_Pac
             // 
-            this.txtVerificadorCargado_Pac.Location = new System.Drawing.Point(351, 203);
+            this.txtVerificadorCargado_Pac.Location = new System.Drawing.Point(520, 203);
             this.txtVerificadorCargado_Pac.MaxLength = 1;
             this.txtVerificadorCargado_Pac.Name = "txtVerificadorCargado_Pac";
-            this.txtVerificadorCargado_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtVerificadorCargado_Pac.Size = new System.Drawing.Size(62, 20);
             this.txtVerificadorCargado_Pac.TabIndex = 31;
             this.txtVerificadorCargado_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
             // 
             // dtpFechaNac_Pac
             // 
-            this.dtpFechaNac_Pac.Location = new System.Drawing.Point(257, 252);
+            this.dtpFechaNac_Pac.Location = new System.Drawing.Point(348, 252);
             this.dtpFechaNac_Pac.Name = "dtpFechaNac_Pac";
-            this.dtpFechaNac_Pac.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaNac_Pac.Size = new System.Drawing.Size(234, 20);
             this.dtpFechaNac_Pac.TabIndex = 30;
             // 
             // cbSexo_Pac
             // 
             this.cbSexo_Pac.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSexo_Pac.FormattingEnabled = true;
-            this.cbSexo_Pac.Location = new System.Drawing.Point(245, 228);
+            this.cbSexo_Pac.Location = new System.Drawing.Point(348, 228);
             this.cbSexo_Pac.Name = "cbSexo_Pac";
-            this.cbSexo_Pac.Size = new System.Drawing.Size(121, 21);
+            this.cbSexo_Pac.Size = new System.Drawing.Size(234, 21);
             this.cbSexo_Pac.TabIndex = 29;
             // 
             // txtRutCargado_Pac
             // 
-            this.txtRutCargado_Pac.Location = new System.Drawing.Point(245, 203);
+            this.txtRutCargado_Pac.Location = new System.Drawing.Point(348, 203);
             this.txtRutCargado_Pac.MaxLength = 8;
             this.txtRutCargado_Pac.Name = "txtRutCargado_Pac";
-            this.txtRutCargado_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtRutCargado_Pac.Size = new System.Drawing.Size(155, 20);
             this.txtRutCargado_Pac.TabIndex = 27;
             this.txtRutCargado_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
             // 
             // txtContrasena_Pac
             // 
-            this.txtContrasena_Pac.Location = new System.Drawing.Point(245, 176);
+            this.txtContrasena_Pac.Location = new System.Drawing.Point(348, 176);
             this.txtContrasena_Pac.MaxLength = 1080;
             this.txtContrasena_Pac.Name = "txtContrasena_Pac";
             this.txtContrasena_Pac.PasswordChar = '*';
-            this.txtContrasena_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtContrasena_Pac.Size = new System.Drawing.Size(234, 20);
             this.txtContrasena_Pac.TabIndex = 26;
             // 
             // txtEmail_Pac
             // 
-            this.txtEmail_Pac.Location = new System.Drawing.Point(245, 149);
+            this.txtEmail_Pac.Location = new System.Drawing.Point(348, 149);
             this.txtEmail_Pac.MaxLength = 512;
             this.txtEmail_Pac.Name = "txtEmail_Pac";
-            this.txtEmail_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtEmail_Pac.Size = new System.Drawing.Size(234, 20);
             this.txtEmail_Pac.TabIndex = 25;
             // 
             // txtApellidos_Pac
             // 
-            this.txtApellidos_Pac.Location = new System.Drawing.Point(245, 122);
+            this.txtApellidos_Pac.Location = new System.Drawing.Point(348, 122);
             this.txtApellidos_Pac.MaxLength = 64;
             this.txtApellidos_Pac.Name = "txtApellidos_Pac";
-            this.txtApellidos_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtApellidos_Pac.Size = new System.Drawing.Size(234, 20);
             this.txtApellidos_Pac.TabIndex = 24;
             // 
             // txtNombres_Pac
             // 
-            this.txtNombres_Pac.Location = new System.Drawing.Point(245, 95);
+            this.txtNombres_Pac.Location = new System.Drawing.Point(348, 95);
             this.txtNombres_Pac.MaxLength = 64;
             this.txtNombres_Pac.Name = "txtNombres_Pac";
-            this.txtNombres_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtNombres_Pac.Size = new System.Drawing.Size(234, 20);
             this.txtNombres_Pac.TabIndex = 23;
             // 
             // btnEliminar
