@@ -271,7 +271,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-013
-        public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis)
+        public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis, RES_ATENCION resultadoAtencion)
         {
             try
             {
@@ -285,6 +285,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     {
                         ordenAnalisis = con.ORDEN_ANALISIS.Find(ordenAnalisis.ID_ORDEN_ANALISIS);
                         ordenAnalisis.FECHOR_RECEP = DateTime.Today;
+                        con.SaveChangesAsync();
+                    }
+                    using (var con = new CMHEntities())
+                    {
+                        resultadoAtencion = con.RES_ATENCION.Find(resultadoAtencion.ID_RESULTADO_ATENCION);
+                        resultadoAtencion.ATENCION_ABIERTA = false;
                         con.SaveChangesAsync();
                     }
                     return true;

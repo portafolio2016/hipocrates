@@ -293,7 +293,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             AccionesTerminal ac = new AccionesTerminal();
             if (resAtencion != null)
             {
-                bool x = ac.cerrarOrdenDeAnalisis(resAtencion.ORDEN_ANALISIS);
+                bool x = ac.cerrarOrdenDeAnalisis(resAtencion.ORDEN_ANALISIS, resAtencione);
                 if (x)
                 {
                     InitCerrarOrden();
