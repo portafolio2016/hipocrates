@@ -12,12 +12,13 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class FrmJefeOp : Form
+    public partial class FrmMantenerPersonal : Form
     {
         private static AccionesTerminal acciones = new AccionesTerminal();
         FrmLogin login = null;
         bool closeApp;
 
+        
         public class ComboboxItem
         {
             public string Text { get; set; }
@@ -28,13 +29,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 return Text;
             }
         }
-
+        
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                                                              //
         //   CONSTRUCTOR                                                                                                                //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public FrmJefeOp(FrmLogin fLogin)
+        public FrmMantenerPersonal(FrmLogin fLogin)
         {
             InitializeComponent();
             closeApp = true;
@@ -54,6 +55,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 btnSesion.Text = "Iniciar sesión";
             }
 
+            
             #region ComboBox Cargo
             ComboboxItem item = new ComboboxItem();
             item.Text = "Médico";
@@ -94,7 +96,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             cbTipoCuenta_MP.DisplayMember = "NOM_C_BANCARIA";
             cbTipoCuenta_MP.DataSource = at.ObtenerTiposCuentaBancaria();
             #endregion
-
+            
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -216,27 +218,33 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
 
             gbOpcionesUsuario.Hide();
-            gbMantenedorPersonal.Hide();
-
-            //
-            //AGREGAR LOS OTROS GB QUE FALTEN
-            //
+           // gbMantenedorPersonal.Hide();
             x.Show();
         }
 
+        #region Barra menú
+        private void personalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmMantenerPersonal frmMantenerPersonal = new FrmMantenerPersonal(login);
+            frmMantenerPersonal.Show();
+            frmMantenerPersonal.Activate();
+            this.Hide();
+        }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //                                                                                                                              //
-        //   Mantenedor Personal                                                                                                        //
-        //                                                                                                                              //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void pacienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmMantenerPaciente frmMantenerPaciente = new FrmMantenerPaciente(login);
+            frmMantenerPaciente.Show();
+            frmMantenerPaciente.Activate();
+            this.Hide();
+        }
+        #endregion
+
+        #region Mantenedor Personal
 
         int rutBuscar_MP = 0;
 
-        private void personalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InitGB(gbMantenedorPersonal);
-        }
+        
 
         #region Validaciones de campos
         private void txtCampo_KeyPress(object sender, KeyPressEventArgs e)
@@ -393,13 +401,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     throw new Exception();
                 }
                 
-                /*
+                
                 if (((ComboboxItem)cbCargo_MP.SelectedItem).Text == "Médico")
                 {
                     string cuentaBancaria = txtCuentaBanc_MP.Text;
 
                 }
-                */
+                
                 
                 using (var context = new CMHEntities())
                 {
@@ -453,6 +461,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             at.nuevoFuncionario(funcJefeOperador);
                             break;
                     }
+                     
                 }
 
                 MessageBox.Show("¡Personal creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -469,6 +478,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void cbCargo_MP_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             if (((ComboboxItem)cbCargo_MP.SelectedItem).Text == "Médico")
             {
                 txtCuentaBanc_MP.Enabled = true;
@@ -525,7 +535,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     cuentaBancariaMedica.ID_BANCO = ((BANCO)cbBanco_MP.SelectedItem).ID_BANCO;
                     at.actualizarCuentaBancaria(cuentaBancariaMedica);
                 }
-
+                
                 MessageBox.Show("¡Personal actualizado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
                 limpiarCampos_MP();
             }
@@ -557,6 +567,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         }
 
+        #endregion
+
+       
 
     }
 }

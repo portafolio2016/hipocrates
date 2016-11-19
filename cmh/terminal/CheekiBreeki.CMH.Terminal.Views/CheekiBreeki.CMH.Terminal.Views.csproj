@@ -78,11 +78,23 @@
     <Compile Include="FrmContenidoEntrada.Designer.cs">
       <DependentUpon>FrmContenidoEntrada.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmJefeOp.cs">
+    <Compile Include="FrmJefeOperador.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmJefeOp.Designer.cs">
-      <DependentUpon>FrmJefeOp.cs</DependentUpon>
+    <Compile Include="FrmJefeOperador.Designer.cs">
+      <DependentUpon>FrmJefeOperador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMantenerPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMantenerPaciente.Designer.cs">
+      <DependentUpon>FrmMantenerPaciente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMantenerPersonal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMantenerPersonal.Designer.cs">
+      <DependentUpon>FrmMantenerPersonal.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
@@ -145,8 +157,14 @@
     <EmbeddedResource Include="FrmCrearPaciente.resx">
       <DependentUpon>FrmCrearPaciente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmJefeOp.resx">
-      <DependentUpon>FrmJefeOp.cs</DependentUpon>
+    <EmbeddedResource Include="FrmJefeOperador.resx">
+      <DependentUpon>FrmJefeOperador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMantenerPaciente.resx">
+      <DependentUpon>FrmMantenerPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMantenerPersonal.resx">
+      <DependentUpon>FrmMantenerPersonal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>

@@ -1,6 +1,6 @@
 ﻿namespace CheekiBreeki.CMH.Terminal.Views
 {
-    partial class FrmJefeOp
+    partial class FrmMantenerPersonal
     {
         /// <summary>
         /// Required designer variable.
@@ -38,6 +38,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbMantenedorPersonal = new System.Windows.Forms.GroupBox();
             this.gpMedico_MP = new System.Windows.Forms.GroupBox();
             this.cbBanco_MP = new System.Windows.Forms.ComboBox();
@@ -179,7 +180,8 @@
             // mantenedoresToolStripMenuItem
             // 
             this.mantenedoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.personalToolStripMenuItem});
+            this.personalToolStripMenuItem,
+            this.pacienteToolStripMenuItem});
             this.mantenedoresToolStripMenuItem.Name = "mantenedoresToolStripMenuItem";
             this.mantenedoresToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.mantenedoresToolStripMenuItem.Text = "Mantenedores";
@@ -190,6 +192,13 @@
             this.personalToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.personalToolStripMenuItem.Text = "Personal";
             this.personalToolStripMenuItem.Click += new System.EventHandler(this.personalToolStripMenuItem_Click);
+            // 
+            // pacienteToolStripMenuItem
+            // 
+            this.pacienteToolStripMenuItem.Name = "pacienteToolStripMenuItem";
+            this.pacienteToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.pacienteToolStripMenuItem.Text = "Paciente";
+            this.pacienteToolStripMenuItem.Click += new System.EventHandler(this.pacienteToolStripMenuItem_Click);
             // 
             // gbMantenedorPersonal
             // 
@@ -227,7 +236,6 @@
             this.gbMantenedorPersonal.TabIndex = 10;
             this.gbMantenedorPersonal.TabStop = false;
             this.gbMantenedorPersonal.Text = "Mantenedor Personal";
-            this.gbMantenedorPersonal.Visible = false;
             // 
             // gpMedico_MP
             // 
@@ -657,7 +665,7 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
-            // FrmJefeOp
+            // FrmMantenerPersonal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -665,7 +673,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "FrmJefeOp";
+            this.Name = "FrmMantenerPersonal";
             this.Text = "Centro medico Hipócrates";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmJefeOp_FormClosed);
             this.groupBox3.ResumeLayout(false);
@@ -747,5 +755,6 @@
         private System.Windows.Forms.Label lblBanco_MP;
         private System.Windows.Forms.ComboBox cbTipoCuenta_MP;
         private System.Windows.Forms.Label lblTipoCuenta_MP;
+        private System.Windows.Forms.ToolStripMenuItem pacienteToolStripMenuItem;
     }
 }
