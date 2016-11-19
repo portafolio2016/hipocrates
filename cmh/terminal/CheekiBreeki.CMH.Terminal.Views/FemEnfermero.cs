@@ -171,6 +171,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
             x.Show();
         }
 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   ABRIR ORDEN ANALISIS                                                                                                       //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InitGB(gbAbrirOrdenAnalisis);
@@ -213,6 +218,68 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
 
         private void dgAtencionesAOA_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1 && e.RowIndex >= 0)
+            {
+                resAtencion = resAtenciones[e.RowIndex];
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   CERRAR ORDEN ANALISIS                                                                                                      //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void cerrarOrdenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbCerrarOrdenAnalisis);
+            InitCerrarOrden();
+        }
+
+        private void InitCerrarOrden()
+        {
+            resAtencion = null;
+            dgCerrarOrdenAnalisis.Rows.Clear();
+            AccionesTerminal ac = new AccionesTerminal();
+            List<RES_ATENCION> aux = ac.ResAtencionesAptasParaCerrarAnalisis();
+            resAtenciones = new List<RES_ATENCION>();
+            foreach (RES_ATENCION x in aux)
+            {
+                if (x.ORDEN_ANALISIS.FECHOR_RECEP != null)
+                    resAtenciones.Add(x);
+            }
+            foreach (RES_ATENCION x in resAtenciones)
+            {
+                if (x.COMENTARIO == null)
+                    x.COMENTARIO = string.Empty;
+                dgCerrarOrdenAnalisis.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
+                                         x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO);
+            }
+            if (resAtenciones.Count == 0)
+                btCerrarOrdenAnalisis.Enabled = false;
+            else
+                btCerrarOrdenAnalisis.Enabled = true;
+        }
+
+        private void btCerrarOrdenAnalisis_Click(object sender, EventArgs e)
+        {
+            AccionesTerminal ac = new AccionesTerminal();
+            if (resAtencion != null)
+            {
+                bool x = ac.cerrarOrdenDeAnalisis(resAtencion.ORDEN_ANALISIS);
+                if (x)
+                {
+                    InitCerrarOrden();
+                    MessageBox.Show("Orden de análisis cerrada", "Abierta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else
+                    MessageBox.Show("No se ha podido cerrar la orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                MessageBox.Show("No ha seleccionado una orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void dgCerrarOrdenAnalisis_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 1 && e.RowIndex >= 0)
             {

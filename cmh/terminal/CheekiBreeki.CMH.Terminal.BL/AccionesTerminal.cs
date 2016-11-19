@@ -1593,6 +1593,13 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return resultados;
             else return new List<RES_ATENCION>();
         }
+        public List<RES_ATENCION> ResAtencionesAptasParaCerrarAnalisis()
+        {
+            List<RES_ATENCION> resultados = conexionDB.RES_ATENCION.Where(d => d.ATENCION_ABIERTA == true && d.ID_ORDEN_ANALISIS != null).ToList();
+            if (resultados != null)
+                return resultados;
+            else return new List<RES_ATENCION>();
+        }
         #endregion
     }
 }
