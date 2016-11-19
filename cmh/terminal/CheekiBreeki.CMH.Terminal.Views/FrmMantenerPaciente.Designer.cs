@@ -40,6 +40,7 @@
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbMantenedorPaciente = new System.Windows.Forms.GroupBox();
+            this.txtVerificadorCargado_Pac = new System.Windows.Forms.TextBox();
             this.dtpFechaNac_Pac = new System.Windows.Forms.DateTimePicker();
             this.cbSexo_Pac = new System.Windows.Forms.ComboBox();
             this.txtRutCargado_Pac = new System.Windows.Forms.TextBox();
@@ -74,7 +75,6 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtVerificadorCargado_Pac = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -222,6 +222,15 @@
             this.gbMantenedorPaciente.TabStop = false;
             this.gbMantenedorPaciente.Text = "Mantener Paciente";
             // 
+            // txtVerificadorCargado_Pac
+            // 
+            this.txtVerificadorCargado_Pac.Location = new System.Drawing.Point(351, 203);
+            this.txtVerificadorCargado_Pac.MaxLength = 1;
+            this.txtVerificadorCargado_Pac.Name = "txtVerificadorCargado_Pac";
+            this.txtVerificadorCargado_Pac.Size = new System.Drawing.Size(100, 20);
+            this.txtVerificadorCargado_Pac.TabIndex = 31;
+            this.txtVerificadorCargado_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
             // dtpFechaNac_Pac
             // 
             this.dtpFechaNac_Pac.Location = new System.Drawing.Point(257, 252);
@@ -289,6 +298,7 @@
             this.btnEliminar.TabIndex = 22;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnGuardar
             // 
@@ -299,6 +309,7 @@
             this.btnGuardar.TabIndex = 21;
             this.btnGuardar.Text = "Guardar Cambios";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnRegistrar_Pac
             // 
@@ -540,15 +551,6 @@
             this.label8.Size = new System.Drawing.Size(97, 13);
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
-            // 
-            // txtVerificadorCargado_Pac
-            // 
-            this.txtVerificadorCargado_Pac.Location = new System.Drawing.Point(351, 203);
-            this.txtVerificadorCargado_Pac.MaxLength = 1;
-            this.txtVerificadorCargado_Pac.Name = "txtVerificadorCargado_Pac";
-            this.txtVerificadorCargado_Pac.Size = new System.Drawing.Size(100, 20);
-            this.txtVerificadorCargado_Pac.TabIndex = 31;
-            this.txtVerificadorCargado_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
             // 
             // FrmMantenerPaciente
             // 

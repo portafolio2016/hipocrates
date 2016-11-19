@@ -343,6 +343,84 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                PACIENTE pac = at.buscarPaciente(rutBuscar, verificarBuscar);
+
+                pac.NOMBRES_PACIENTE = txtNombres_Pac.Text;
+                pac.APELLIDOS_PACIENTE = txtApellidos_Pac.Text;
+                pac.EMAIL_PACIENTE = txtEmail_Pac.Text;
+                if (txtContrasena_Pac.Text != "" || txtContrasena_Pac.Text != string.Empty)
+                {
+                    pac.HASHED_PASS = Util.hashMD5(txtContrasena_Pac.Text);
+                }
+                pac.RUT = int.Parse(txtRutCargado_Pac.Text);
+                pac.DIGITO_VERIFICADOR = txtVerificadorCargado_Pac.Text;
+                pac.FEC_NAC = DateTime.Parse(dtpFechaNac_Pac.Text);
+                pac.ACTIVO = true;
+
+                if (((ComboboxItem)cbSexo_Pac.SelectedItem).Value == 0)
+                {
+                    pac.SEXO = "M";
+                }
+                else if (((ComboboxItem)cbSexo_Pac.SelectedItem).Value == 1)
+                {
+                    pac.SEXO = "F";
+                }
+
+                if (!Util.isEmailValido(pac.EMAIL_PACIENTE))
+                {
+                    throw new Exception();
+                }
+
+                if (!Util.rutValido(pac.RUT, pac.DIGITO_VERIFICADOR))
+                {
+                    throw new Exception();
+                }
+
+                at.actualizarPaciente(pac);
+                limpiarDatos();
+                MessageBox.Show("¡Personal actualizado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error actualizar datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                PACIENTE pac = at.buscarPaciente(rutBuscar, verificarBuscar);
+                //Desactivar
+                if (pac.ACTIVO == true)//Se desactiva
+                {
+                    limpiarDatos();
+                    at.desactivarPaciente(pac);
+                    MessageBox.Show("¡Personal desactivado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                }
+                else // Se Muestra un mensaje
+                {
+                    MessageBox.Show("¡Personal está desactivado!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Desactivar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
 

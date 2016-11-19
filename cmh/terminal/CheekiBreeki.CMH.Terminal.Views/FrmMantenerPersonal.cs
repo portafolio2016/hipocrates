@@ -336,6 +336,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             cbCargo_MP.Enabled = true;
             limpiarCampos_MP();
+            txtRutPersonal_MP.Text = string.Empty;
+            txtVerificador_MP.Text = string.Empty;
             btnRegistrar_MP.Enabled = true;
             btnGuardar_MP.Enabled = false;
             btnEliminar_MP.Enabled = false;
@@ -554,11 +556,20 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 AccionesTerminal at = new AccionesTerminal();
                 PERSONAL p1 = at.buscarPersonal(rutBuscar_MP);
-                at.desactivarPersonal(p1);
-                limpiarCampos_MP();
-                txtRutPersonal_MP.Text = string.Empty;
-                txtVerificador_MP.Text = string.Empty;
-                MessageBox.Show("¡Personal desactivado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                if (p1.ACTIVO == true)//Se desactiva
+                {
+                    at.desactivarPersonal(p1);
+                    limpiarCampos_MP();
+                    txtRutPersonal_MP.Text = string.Empty;
+                    txtVerificador_MP.Text = string.Empty;
+                    MessageBox.Show("¡Personal desactivado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+                else // Se Muestra un mensaje
+                {
+                    MessageBox.Show("¡Personal está desactivado!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
+               
             }
             catch (Exception ex) 
             { 

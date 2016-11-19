@@ -1087,7 +1087,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             {
                 if (Util.isObjetoNulo(personal))
                 {
-                    throw new Exception("Paciente no existe");
+                    throw new Exception("Personal no existe");
                 }
                 else
                 {
@@ -1448,7 +1448,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
-        public Boolean actualizarPaciente(PACIENTE paciente)
+        public Boolean  actualizarPaciente(PACIENTE paciente)
         {
             try
             {
@@ -1477,6 +1477,23 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
+                    PACIENTE buscado = conexionDB.PACIENTE.Where(d => d.ID_PACIENTE == paciente.ID_PACIENTE).FirstOrDefault();
+                    buscado.NOMBRES_PACIENTE = paciente.NOMBRES_PACIENTE;
+                    buscado.APELLIDOS_PACIENTE = paciente.APELLIDOS_PACIENTE;
+                    buscado.EMAIL_PACIENTE = paciente.EMAIL_PACIENTE;
+                    bool hashedNotNull = paciente.HASHED_PASS != null;
+                    bool hashedNoVacio = paciente.HASHED_PASS != string.Empty;
+
+                    if (hashedNotNull && hashedNoVacio)
+                    {
+                        buscado.HASHED_PASS = paciente.HASHED_PASS;
+                    }
+                    buscado.RUT = paciente.RUT;
+                    buscado.DIGITO_VERIFICADOR = paciente.DIGITO_VERIFICADOR;
+                    buscado.SEXO = paciente.SEXO;
+                    buscado.FEC_NAC = paciente.FEC_NAC;
+                    buscado.ACTIVO = paciente.ACTIVO;
+
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
@@ -1499,6 +1516,28 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 else
                 {
                     conexionDB.PACIENTE.Remove(paciente);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean desactivarPaciente(PACIENTE paciente)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(paciente))
+                {
+                    throw new Exception("Paciente no existe");
+                }
+                else
+                {
+                    paciente.ACTIVO = false;
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
