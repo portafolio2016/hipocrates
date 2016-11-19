@@ -3035,7 +3035,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 context.SaveChangesAsync();
 
                 //Boolean res2 = at.cerrarOrdenDeAnalisis(orden2);
-                Bolean res2 = false;
+                Boolean res2 = false;
                 Boolean resultadoEsperado2 = false;
                 Assert.AreEqual(res2, resultadoEsperado2);
 

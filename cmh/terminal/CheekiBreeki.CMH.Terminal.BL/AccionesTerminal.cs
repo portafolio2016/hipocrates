@@ -1909,7 +1909,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
         #endregion
 
-        public bool actualizarCuentaBancaria(CUEN_BANCARIA cuenta, int personalID)
+        #region CuentaBancoActualizarConUsing
+        public bool actualizarCuentaBancariaUsing(CUEN_BANCARIA cuenta, int personalID)
         {
             try
             {

@@ -151,7 +151,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 cuenta.ID_BANCO = ((ComboboxItem)cbBanco.SelectedItem).Value;
                 cuenta.ID_TIPO_C_BANCARIA = ((ComboboxItem)cbTipoCuenta.SelectedItem).Value;
                 cuenta.NUM_C_BANCARIA = tbNroCuenta.Text;
-                bool x = acciones.actualizarCuentaBancaria(cuenta, FrmLogin.usuarioLogeado.Personal.ID_PERSONAL);
+                bool x = acciones.actualizarCuentaBancariaUsing(cuenta, FrmLogin.usuarioLogeado.Personal.ID_PERSONAL);
                 if (x)
                 {
                     MessageBox.Show("Se ha actualizado la cuenta bancaria con exito", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
