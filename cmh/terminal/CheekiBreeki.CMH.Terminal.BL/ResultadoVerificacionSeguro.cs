@@ -10,6 +10,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
     {
         private bool tieneSeguro;
         private int descuento;
+        private string aseguradora;
 
         public int Descuento
         {
@@ -21,6 +22,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             get { return tieneSeguro; }
             set { tieneSeguro = value; }
+        }
+
+        public string Aseguradora
+        {
+            get { return aseguradora; }
+            set { aseguradora = value; }
         }
         
     }

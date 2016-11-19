@@ -48,6 +48,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmAbrirCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAbrirCaja.Designer.cs">
+      <DependentUpon>FrmAbrirCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="AgendaDiaria.cs" />
     <Compile Include="FemEnfermero.cs">
       <SubType>Form</SubType>
@@ -68,8 +75,8 @@
     <Compile Include="FrmAgendarAtencion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAgendarAtencion.Designer.cs">
-      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    <Compile Include="FrmCrearPaciente.Designer.cs">
+      <DependentUpon>FrmCrearPaciente.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmContenidoEntrada.cs">
       <SubType>Form</SubType>
@@ -95,6 +102,36 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAgendarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAgendarAtencion.Designer.cs">
+      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIngresarPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIngresarPaciente.Designer.cs">
+      <DependentUpon>FrmIngresarPaciente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAnularAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAnularAtencion.Designer.cs">
+      <DependentUpon>FrmAnularAtencion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCerrarCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCerrarCaja.Designer.cs">
+      <DependentUpon>FrmCerrarCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOperador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOperador.Designer.cs">
+      <DependentUpon>FrmOperador.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMedico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,14 +148,32 @@
     <EmbeddedResource Include="FrmContenidoEntrada.resx">
       <DependentUpon>FrmContenidoEntrada.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAgendarAtencion.resx">
-      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    <EmbeddedResource Include="FrmCrearPaciente.resx">
+      <DependentUpon>FrmCrearPaciente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmJefeOp.resx">
       <DependentUpon>FrmJefeOp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAgendarAtencion.resx">
+      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmIngresarPaciente.resx">
+      <DependentUpon>FrmIngresarPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAnularAtencion.resx">
+      <DependentUpon>FrmAnularAtencion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCerrarCaja.resx">
+      <DependentUpon>FrmCerrarCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOperador.resx">
+      <DependentUpon>FrmOperador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMedico.resx">
       <DependentUpon>FrmMedico.cs</DependentUpon>
@@ -155,6 +210,9 @@
       <Project>{25e6b751-8868-485b-8999-2bdf13b835e8}</Project>
       <Name>CheekiBreeki.CMH.Terminal.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

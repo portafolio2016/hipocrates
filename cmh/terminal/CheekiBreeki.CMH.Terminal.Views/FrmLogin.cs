@@ -29,7 +29,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             string usuario = txtUsuario.Text;
             string password = txtContrasena.Text;
 
@@ -37,19 +36,16 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 lblAdvertenciaUsuario.Visible = true;
                 lblAdvertenciaUsuario.Text = "Email no valido";
-                
             }
             else
             {
                 lblAdvertenciaUsuario.Visible = false;
-
             }
 
             if (string.IsNullOrWhiteSpace(txtContrasena.Text))
             {
                 lblAdvertenciaContrasena.Visible = true;
                 lblAdvertenciaContrasena.Text = "Contraseña vacía";
-               
             }
             else
             {
@@ -67,9 +63,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     switch (usuarioLogeado.Privilegio.ToUpper())
                     {
                         case "OPERADOR":
-                            FrmMain frmMain = new FrmMain(this);
-                            frmMain.Show();
-                            frmMain.Activate();
+                            FrmOperador frmOperador = new FrmOperador(this);
+                            frmOperador.Show();
+                            frmOperador.Activate();
                             this.Hide();
                             break;
 

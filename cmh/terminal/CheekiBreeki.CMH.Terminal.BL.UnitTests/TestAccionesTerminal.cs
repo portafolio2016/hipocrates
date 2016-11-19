@@ -284,7 +284,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             pago1.FECHOR = DateTime.Today;
             pago1.MONTO_PAGO = 10000;
 
-            Boolean res1 = at.registrarPago(pago1);
+            Boolean res1 = at.registrarPago(pago1,"ASE",10000);
             Boolean resultadoEsperado1 = true;
             Assert.AreEqual(resultadoEsperado1, res1, "Error místico al registrar pago");
 
@@ -296,7 +296,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             pago2.FECHOR = DateTime.Today;
             pago2.MONTO_PAGO = 20000;
 
-            Boolean res2 = at.registrarPago(pago2);
+            Boolean res2 = at.registrarPago(pago2, "ASE", 10000);
             Boolean resultadoEsperado2 = false;
             Assert.AreEqual(resultadoEsperado2, res2, "No debería ingresar");
 
@@ -308,7 +308,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             pago3.FECHOR = DateTime.Today;
             pago3.MONTO_PAGO = 30000;
 
-            Boolean res3 = at.registrarPago(pago3);
+            Boolean res3 = at.registrarPago(pago3, "ASE", 10000);
             Boolean resultadoEsperado3 = false;
             Assert.AreEqual(resultadoEsperado3, res3, "No debería ingresar");
 
@@ -320,7 +320,7 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
             pago4.FECHOR = DateTime.Today;
             pago4.MONTO_PAGO = 40000;
 
-            Boolean res4 = at.registrarPago(pago4);
+            Boolean res4 = at.registrarPago(pago4, "ASE", 10000);
             Boolean resultadoEsperado4 = false;
             Assert.AreEqual(resultadoEsperado4, res4, "No debería ingresar");
         }
@@ -3394,14 +3394,14 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 cmhEntities.SaveChangesAsync();
             }
             //Se genera la devolución
-            bool result = at.DevolucionPago(pago, "Test");
+            bool result = at.devolverPago(pago, "Test");
             Assert.AreEqual(result, true); //Si documento esta linea funciona
             //No generara la devolución por que ya existe
-            result = at.DevolucionPago(pago, "Test");
+            result = at.devolverPago(pago, "Test");
             Assert.AreEqual(result, false);
             //Pago no valido
             PAGO pagoaux = null;
-            result = at.DevolucionPago(pagoaux, "Test");
+            result = at.devolverPago(pagoaux, "Test");
             Assert.AreEqual(result, false);
             //Revertir cambios
             using (CMHEntities cmhEntities = new CMHEntities())
