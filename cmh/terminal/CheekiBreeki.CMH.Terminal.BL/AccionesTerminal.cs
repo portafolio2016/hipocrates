@@ -1584,5 +1584,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
         #endregion
 
+        //Obtener atenciones aptas para orden de analisis
+        #region AtencionesAptasAnalisis
+        public List<RES_ATENCION> ResAtencionesAptasParaAnalisis()
+        {
+            List<RES_ATENCION> resultados = conexionDB.RES_ATENCION.Where(d => d.ATENCION_ABIERTA == true && d.ID_ORDEN_ANALISIS == null).ToList();
+            if (resultados != null)
+                return resultados;
+            else return new List<RES_ATENCION>();
+        }
+        #endregion
     }
 }

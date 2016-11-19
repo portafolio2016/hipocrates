@@ -15,6 +15,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
     public partial class FemEnfermero : Form
     {
         private static AccionesTerminal acciones = new AccionesTerminal();
+        private static List<RES_ATENCION> resAtenciones = new List<RES_ATENCION>();
+        private static RES_ATENCION resAtencion = null;
         FrmLogin login = null;
         bool closeApp;
 
@@ -67,7 +69,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   FORM CLOSED                                                                                                                //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void FrmJefeOp_FormClosed(object sender, FormClosedEventArgs e)
+        private void FemEnfermero_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (closeApp)
                 Application.Exit();
@@ -162,11 +164,60 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void InitGB(GroupBox x)
         {
             gbOpcionesUsuario.Hide();
-            gbLogPagoHonorarios.Hide();
+            gbAbrirOrdenAnalisis.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
             x.Show();
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbAbrirOrdenAnalisis);
+            InitAbrirOrden();
+        }
+
+        private void InitAbrirOrden()
+        {
+            resAtencion = null;
+            dgAtencionesAOA.Rows.Clear();
+            AccionesTerminal ac = new AccionesTerminal();
+            resAtenciones = ac.ResAtencionesAptasParaAnalisis();
+            foreach (RES_ATENCION x in resAtenciones)
+            {
+                if (x.COMENTARIO == null)
+                    x.COMENTARIO = string.Empty;
+                dgAtencionesAOA.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
+                                         x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.COMENTARIO);
+            }
+            if (resAtenciones.Count == 0)
+                btnAbrirOrden.Enabled = false;
+            else
+                btnAbrirOrden.Enabled = true;
+        }
+
+        private void btnAbrirOrden_Click(object sender, EventArgs e)
+        {
+            AccionesTerminal ac = new AccionesTerminal();
+            if(resAtencion != null){
+                bool x = ac.generarOrdenDeAnalisis(resAtencion.ATENCION_AGEN, resAtencion);
+                if(x){
+                    InitAbrirOrden();
+                    MessageBox.Show("Orden de análisis abierta", "Abierta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                } 
+                else
+                    MessageBox.Show("No se ha podido abrir la orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }  
+            else
+                MessageBox.Show("No ha seleccionado un examen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void dgAtencionesAOA_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1 && e.RowIndex >= 0)
+            {
+                resAtencion = resAtenciones[e.RowIndex];
+            }
         }
     }
 }
