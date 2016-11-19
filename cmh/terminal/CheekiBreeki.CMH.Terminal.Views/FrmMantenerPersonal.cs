@@ -218,7 +218,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
 
             gbOpcionesUsuario.Hide();
-           // gbMantenedorPersonal.Hide();
+            gbMantenedorPersonal.Hide();
             x.Show();
         }
 

@@ -39,7 +39,7 @@
             this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbMantenedorPersonal = new System.Windows.Forms.GroupBox();
+            this.gbMantenedorPaciente = new System.Windows.Forms.GroupBox();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -51,12 +51,10 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.gbMantenedorPersonal.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -125,7 +123,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
-            this.groupBox1.Controls.Add(this.gbMantenedorPersonal);
+            this.groupBox1.Controls.Add(this.gbMantenedorPaciente);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
@@ -155,26 +153,25 @@
             // personalToolStripMenuItem
             // 
             this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
-            this.personalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.personalToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.personalToolStripMenuItem.Text = "Personal";
             this.personalToolStripMenuItem.Click += new System.EventHandler(this.personalToolStripMenuItem_Click);
             // 
             // pacienteToolStripMenuItem
             // 
             this.pacienteToolStripMenuItem.Name = "pacienteToolStripMenuItem";
-            this.pacienteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pacienteToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.pacienteToolStripMenuItem.Text = "Paciente";
             this.pacienteToolStripMenuItem.Click += new System.EventHandler(this.pacienteToolStripMenuItem_Click);
             // 
-            // gbMantenedorPersonal
+            // gbMantenedorPaciente
             // 
-            this.gbMantenedorPersonal.Controls.Add(this.label1);
-            this.gbMantenedorPersonal.Location = new System.Drawing.Point(6, 43);
-            this.gbMantenedorPersonal.Name = "gbMantenedorPersonal";
-            this.gbMantenedorPersonal.Size = new System.Drawing.Size(768, 462);
-            this.gbMantenedorPersonal.TabIndex = 10;
-            this.gbMantenedorPersonal.TabStop = false;
-            this.gbMantenedorPersonal.Text = "Mantener Paciente";
+            this.gbMantenedorPaciente.Location = new System.Drawing.Point(6, 43);
+            this.gbMantenedorPaciente.Name = "gbMantenedorPaciente";
+            this.gbMantenedorPaciente.Size = new System.Drawing.Size(768, 462);
+            this.gbMantenedorPaciente.TabIndex = 10;
+            this.gbMantenedorPaciente.TabStop = false;
+            this.gbMantenedorPaciente.Text = "Mantener Paciente";
             // 
             // gbOpcionesUsuario
             // 
@@ -287,15 +284,6 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(305, 116);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
-            // 
             // FrmMantenerPaciente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,8 +303,6 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.gbMantenedorPersonal.ResumeLayout(false);
-            this.gbMantenedorPersonal.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -343,7 +329,7 @@
         private System.Windows.Forms.Button btnCambiarEmail;
         private System.Windows.Forms.ToolStripMenuItem mantenedoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem personalToolStripMenuItem;
-        private System.Windows.Forms.GroupBox gbMantenedorPersonal;
+        private System.Windows.Forms.GroupBox gbMantenedorPaciente;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbContrasenaActual;
@@ -351,6 +337,5 @@
         private System.Windows.Forms.TextBox tbContrasenaNueva;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolStripMenuItem pacienteToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
     }
 }

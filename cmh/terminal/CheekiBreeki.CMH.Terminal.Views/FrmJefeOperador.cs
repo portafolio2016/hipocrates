@@ -165,6 +165,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
 
             gbOpcionesUsuario.Hide();
+
             x.Show();
         }
 
@@ -186,6 +187,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
         #endregion
+
 
 
 
