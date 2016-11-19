@@ -185,21 +185,33 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void InitAbrirOrden()
         {
-            resAtencion = null;
-            dgAtencionesAOA.Rows.Clear();
-            AccionesTerminal ac = new AccionesTerminal();
-            resAtenciones = ac.ResAtencionesAptasParaAnalisis();
-            foreach (RES_ATENCION x in resAtenciones)
+            try
             {
-                if (x.COMENTARIO == null)
-                    x.COMENTARIO = string.Empty;
-                dgAtencionesAOA.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
-                                         x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.COMENTARIO);
-            }
-            if (resAtenciones.Count == 0)
+                resAtencion = null;
+                dgAtencionesAOA.Rows.Clear();
+                AccionesTerminal ac = new AccionesTerminal();
+                resAtenciones = ac.ResAtencionesAptasParaAnalisis();
+                foreach (RES_ATENCION x in resAtenciones)
+                {
+                    if (x.COMENTARIO == null)
+                        x.COMENTARIO = string.Empty;
+                    dgAtencionesAOA.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
+                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.COMENTARIO);
+                }
+                if (resAtenciones.Count == 0)
+                {
+                    btnAbrirOrden.Enabled = false;
+                }
+                else
+                {
+                    resAtencion = resAtenciones[0];
+                    btnAbrirOrden.Enabled = true;
+                }
+            }catch(Exception){
                 btnAbrirOrden.Enabled = false;
-            else
-                btnAbrirOrden.Enabled = true;
+                MessageBox.Show("Dato incorrecto en la base de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void btnAbrirOrden_Click(object sender, EventArgs e)
@@ -239,27 +251,41 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void InitCerrarOrden()
         {
-            resAtencion = null;
-            dgCerrarOrdenAnalisis.Rows.Clear();
-            AccionesTerminal ac = new AccionesTerminal();
-            List<RES_ATENCION> aux = ac.ResAtencionesAptasParaCerrarAnalisis();
-            resAtenciones = new List<RES_ATENCION>();
-            foreach (RES_ATENCION x in aux)
+            try
             {
-                if (x.ORDEN_ANALISIS.FECHOR_RECEP != null)
-                    resAtenciones.Add(x);
+                resAtencion = null;
+                dgCerrarOrdenAnalisis.Rows.Clear();
+                AccionesTerminal ac = new AccionesTerminal();
+                List<RES_ATENCION> aux = ac.ResAtencionesAptasParaCerrarAnalisis();
+                resAtenciones = new List<RES_ATENCION>();
+                foreach (RES_ATENCION x in aux)
+                {
+                    if (x.ORDEN_ANALISIS.FECHOR_RECEP == null)
+                        resAtenciones.Add(x);
+                }
+                foreach (RES_ATENCION x in resAtenciones)
+                {
+                    if (x.COMENTARIO == null)
+                        x.COMENTARIO = string.Empty;
+                    dgCerrarOrdenAnalisis.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
+                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO);
+                }
+                if (resAtenciones.Count == 0)
+                {
+                    btCerrarOrdenAnalisis.Enabled = false;
+                }
+                else 
+                {
+                    resAtencion = resAtenciones[0];
+                    btCerrarOrdenAnalisis.Enabled = true;
+                }
             }
-            foreach (RES_ATENCION x in resAtenciones)
+            catch (Exception)
             {
-                if (x.COMENTARIO == null)
-                    x.COMENTARIO = string.Empty;
-                dgCerrarOrdenAnalisis.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
-                                         x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO);
+                btnAbrirOrden.Enabled = false;
+                MessageBox.Show("Dato incorrecto en la base de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            if (resAtenciones.Count == 0)
-                btCerrarOrdenAnalisis.Enabled = false;
-            else
-                btCerrarOrdenAnalisis.Enabled = true;
+            
         }
 
         private void btCerrarOrdenAnalisis_Click(object sender, EventArgs e)

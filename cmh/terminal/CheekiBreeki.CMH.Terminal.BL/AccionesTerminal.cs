@@ -242,19 +242,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     throw new Exception("Fecha nula");
                 }
 
-                else if (atencion.OBSERVACIONES == null || atencion.OBSERVACIONES == String.Empty)
-                {
-                    throw new Exception("Observacion nula o vacía");
-                }
-
                 else if (resultadoAtencion.ID_ATENCION_AGEN == null)
                 {
                     throw new Exception("ID de atencion agendada es nulo");
-                }
-
-                else if (resultadoAtencion.ID_ORDEN_ANALISIS == null)
-                {
-                    throw new Exception("ID de orden de analisis es nulo");
                 }
 
                 else
@@ -264,10 +254,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
                     conexionDB.SaveChangesAsync();
 
-                    resultadoAtencion.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
-                    resultadoAtencion.ID_ORDEN_ANALISIS = ordenAnalisis.ID_ORDEN_ANALISIS;
-                    conexionDB.RES_ATENCION.Add(resultadoAtencion);
-                    conexionDB.SaveChangesAsync();
+                    using (var con = new CMHEntities())
+                    {
+                        resultadoAtencion = con.RES_ATENCION.Find(resultadoAtencion.ID_RESULTADO_ATENCION);
+                        resultadoAtencion.ID_ORDEN_ANALISIS = ordenAnalisis.ID_ORDEN_ANALISIS;
+                        con.SaveChangesAsync();
+                    }
                     return true;
                 }
             }
@@ -287,16 +279,14 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Orden nula");
                 }
-
-                else if (ordenAnalisis.FECHOR_RECEP <= DateTime.Today)
-                {
-                    throw new Exception("Fecha invalida");
-                }
                 else
                 {
-                    ordenAnalisis = conexionDB.ORDEN_ANALISIS.Find(ordenAnalisis.ID_ORDEN_ANALISIS);
-                    ordenAnalisis.FECHOR_RECEP = DateTime.Today;
-                    conexionDB.SaveChangesAsync();
+                    using (var con = new CMHEntities())
+                    {
+                        ordenAnalisis = con.ORDEN_ANALISIS.Find(ordenAnalisis.ID_ORDEN_ANALISIS);
+                        ordenAnalisis.FECHOR_RECEP = DateTime.Today;
+                        con.SaveChangesAsync();
+                    }
                     return true;
                 }
             }
