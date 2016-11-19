@@ -36,6 +36,18 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logPagosHonorarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbLogPagoHonorarios = new System.Windows.Forms.GroupBox();
+            this.btnBuscarLPH = new System.Windows.Forms.Button();
+            this.dgLogs = new System.Windows.Forms.DataGridView();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Banco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtFechaLPH = new System.Windows.Forms.DateTimePicker();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -47,27 +59,15 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logPagosHonorarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbLogPagoHonorarios = new System.Windows.Forms.GroupBox();
-            this.dtFechaLPH = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dgLogs = new System.Windows.Forms.DataGridView();
-            this.btnBuscarLPH = new System.Windows.Forms.Button();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Banco = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.gbLogPagoHonorarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).BeginInit();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.gbLogPagoHonorarios.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -151,6 +151,118 @@
             this.menuStrip1.Size = new System.Drawing.Size(774, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // mantenedoresToolStripMenuItem
+            // 
+            this.mantenedoresToolStripMenuItem.Name = "mantenedoresToolStripMenuItem";
+            this.mantenedoresToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.mantenedoresToolStripMenuItem.Text = "Mantenedores";
+            // 
+            // logPagosHonorarioToolStripMenuItem
+            // 
+            this.logPagosHonorarioToolStripMenuItem.Name = "logPagosHonorarioToolStripMenuItem";
+            this.logPagosHonorarioToolStripMenuItem.Size = new System.Drawing.Size(131, 20);
+            this.logPagosHonorarioToolStripMenuItem.Text = "Log Pagos Honorario";
+            this.logPagosHonorarioToolStripMenuItem.Click += new System.EventHandler(this.logPagosHonorarioToolStripMenuItem_Click);
+            // 
+            // gbLogPagoHonorarios
+            // 
+            this.gbLogPagoHonorarios.Controls.Add(this.btnBuscarLPH);
+            this.gbLogPagoHonorarios.Controls.Add(this.dgLogs);
+            this.gbLogPagoHonorarios.Controls.Add(this.label1);
+            this.gbLogPagoHonorarios.Controls.Add(this.dtFechaLPH);
+            this.gbLogPagoHonorarios.Location = new System.Drawing.Point(6, 43);
+            this.gbLogPagoHonorarios.Name = "gbLogPagoHonorarios";
+            this.gbLogPagoHonorarios.Size = new System.Drawing.Size(768, 462);
+            this.gbLogPagoHonorarios.TabIndex = 10;
+            this.gbLogPagoHonorarios.TabStop = false;
+            this.gbLogPagoHonorarios.Text = "Log pagos honorario";
+            this.gbLogPagoHonorarios.Visible = false;
+            // 
+            // btnBuscarLPH
+            // 
+            this.btnBuscarLPH.Location = new System.Drawing.Point(521, 19);
+            this.btnBuscarLPH.Name = "btnBuscarLPH";
+            this.btnBuscarLPH.Size = new System.Drawing.Size(125, 20);
+            this.btnBuscarLPH.TabIndex = 3;
+            this.btnBuscarLPH.Text = "Buscar";
+            this.btnBuscarLPH.UseVisualStyleBackColor = true;
+            this.btnBuscarLPH.Click += new System.EventHandler(this.btnBuscarLPH_Click);
+            // 
+            // dgLogs
+            // 
+            this.dgLogs.AllowUserToAddRows = false;
+            this.dgLogs.AllowUserToDeleteRows = false;
+            this.dgLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nombre,
+            this.Banco,
+            this.TipoCuenta,
+            this.Cuenta,
+            this.Total});
+            this.dgLogs.Location = new System.Drawing.Point(8, 49);
+            this.dgLogs.Name = "dgLogs";
+            this.dgLogs.ReadOnly = true;
+            this.dgLogs.Size = new System.Drawing.Size(754, 407);
+            this.dgLogs.TabIndex = 2;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 69;
+            // 
+            // Banco
+            // 
+            this.Banco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Banco.HeaderText = "Banco";
+            this.Banco.Name = "Banco";
+            this.Banco.ReadOnly = true;
+            this.Banco.Width = 63;
+            // 
+            // TipoCuenta
+            // 
+            this.TipoCuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.TipoCuenta.HeaderText = "Tipo cuenta";
+            this.TipoCuenta.Name = "TipoCuenta";
+            this.TipoCuenta.ReadOnly = true;
+            this.TipoCuenta.Width = 89;
+            // 
+            // Cuenta
+            // 
+            this.Cuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Cuenta.HeaderText = "Cuenta";
+            this.Cuenta.Name = "Cuenta";
+            this.Cuenta.ReadOnly = true;
+            this.Cuenta.Width = 66;
+            // 
+            // Total
+            // 
+            this.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            this.Total.Width = 56;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(174, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Fecha del pago:";
+            // 
+            // dtFechaLPH
+            // 
+            this.dtFechaLPH.CustomFormat = "MMMM - yyyy";
+            this.dtFechaLPH.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFechaLPH.Location = new System.Drawing.Point(287, 19);
+            this.dtFechaLPH.Name = "dtFechaLPH";
+            this.dtFechaLPH.Size = new System.Drawing.Size(200, 20);
+            this.dtFechaLPH.TabIndex = 0;
             // 
             // gbOpcionesUsuario
             // 
@@ -263,113 +375,6 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
-            // mantenedoresToolStripMenuItem
-            // 
-            this.mantenedoresToolStripMenuItem.Name = "mantenedoresToolStripMenuItem";
-            this.mantenedoresToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
-            this.mantenedoresToolStripMenuItem.Text = "Mantenedores";
-            // 
-            // logPagosHonorarioToolStripMenuItem
-            // 
-            this.logPagosHonorarioToolStripMenuItem.Name = "logPagosHonorarioToolStripMenuItem";
-            this.logPagosHonorarioToolStripMenuItem.Size = new System.Drawing.Size(131, 20);
-            this.logPagosHonorarioToolStripMenuItem.Text = "Log Pagos Honorario";
-            this.logPagosHonorarioToolStripMenuItem.Click += new System.EventHandler(this.logPagosHonorarioToolStripMenuItem_Click);
-            // 
-            // gbLogPagoHonorarios
-            // 
-            this.gbLogPagoHonorarios.Controls.Add(this.btnBuscarLPH);
-            this.gbLogPagoHonorarios.Controls.Add(this.dgLogs);
-            this.gbLogPagoHonorarios.Controls.Add(this.label1);
-            this.gbLogPagoHonorarios.Controls.Add(this.dtFechaLPH);
-            this.gbLogPagoHonorarios.Location = new System.Drawing.Point(6, 43);
-            this.gbLogPagoHonorarios.Name = "gbLogPagoHonorarios";
-            this.gbLogPagoHonorarios.Size = new System.Drawing.Size(768, 462);
-            this.gbLogPagoHonorarios.TabIndex = 10;
-            this.gbLogPagoHonorarios.TabStop = false;
-            this.gbLogPagoHonorarios.Text = "Log pagos honorario";
-            this.gbLogPagoHonorarios.Visible = false;
-            // 
-            // dtFechaLPH
-            // 
-            this.dtFechaLPH.CustomFormat = "MMMM - yyyy";
-            this.dtFechaLPH.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFechaLPH.Location = new System.Drawing.Point(287, 19);
-            this.dtFechaLPH.Name = "dtFechaLPH";
-            this.dtFechaLPH.Size = new System.Drawing.Size(200, 20);
-            this.dtFechaLPH.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(174, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Fecha del pago:";
-            // 
-            // dgLogs
-            // 
-            this.dgLogs.AllowUserToAddRows = false;
-            this.dgLogs.AllowUserToDeleteRows = false;
-            this.dgLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Nombre,
-            this.Banco,
-            this.TipoCuenta,
-            this.Cuenta,
-            this.Total});
-            this.dgLogs.Location = new System.Drawing.Point(8, 49);
-            this.dgLogs.Name = "dgLogs";
-            this.dgLogs.ReadOnly = true;
-            this.dgLogs.Size = new System.Drawing.Size(754, 407);
-            this.dgLogs.TabIndex = 2;
-            // 
-            // btnBuscarLPH
-            // 
-            this.btnBuscarLPH.Location = new System.Drawing.Point(521, 19);
-            this.btnBuscarLPH.Name = "btnBuscarLPH";
-            this.btnBuscarLPH.Size = new System.Drawing.Size(125, 20);
-            this.btnBuscarLPH.TabIndex = 3;
-            this.btnBuscarLPH.Text = "Buscar";
-            this.btnBuscarLPH.UseVisualStyleBackColor = true;
-            this.btnBuscarLPH.Click += new System.EventHandler(this.btnBuscarLPH_Click);
-            // 
-            // Nombre
-            // 
-            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 69;
-            // 
-            // Banco
-            // 
-            this.Banco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Banco.HeaderText = "Banco";
-            this.Banco.Name = "Banco";
-            this.Banco.Width = 63;
-            // 
-            // TipoCuenta
-            // 
-            this.TipoCuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.TipoCuenta.HeaderText = "Tipo cuenta";
-            this.TipoCuenta.Name = "TipoCuenta";
-            this.TipoCuenta.Width = 89;
-            // 
-            // Cuenta
-            // 
-            this.Cuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Cuenta.HeaderText = "Cuenta";
-            this.Cuenta.Name = "Cuenta";
-            this.Cuenta.Width = 66;
-            // 
-            // Total
-            // 
-            this.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.Width = 56;
-            // 
             // FrmJefeOp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -389,14 +394,14 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.gbLogPagoHonorarios.ResumeLayout(false);
+            this.gbLogPagoHonorarios.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).EndInit();
             this.gbOpcionesUsuario.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.gbLogPagoHonorarios.ResumeLayout(false);
-            this.gbLogPagoHonorarios.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).EndInit();
             this.ResumeLayout(false);
 
         }

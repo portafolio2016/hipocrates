@@ -71,12 +71,6 @@
     <Compile Include="FrmContenidoEntrada.Designer.cs">
       <DependentUpon>FrmContenidoEntrada.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmEnfermero.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmEnfermero.Designer.cs">
-      <DependentUpon>FrmEnfermero.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmJefeOp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,9 +104,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAgendarAtencion.resx">
       <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmEnfermero.resx">
-      <DependentUpon>FrmEnfermero.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmJefeOp.resx">
       <DependentUpon>FrmJefeOp.cs</DependentUpon>
