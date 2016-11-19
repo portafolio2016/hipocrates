@@ -271,7 +271,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-013
-        public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis, RES_ATENCION resultadoAtencion)
+        public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis, RES_ATENCION resultadoAtencion, string comentario)
         {
             try
             {
@@ -291,6 +291,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     {
                         resultadoAtencion = con.RES_ATENCION.Find(resultadoAtencion.ID_RESULTADO_ATENCION);
                         resultadoAtencion.ATENCION_ABIERTA = false;
+                        resultadoAtencion.COMENTARIO = comentario;
                         con.SaveChangesAsync();
                     }
                     return true;

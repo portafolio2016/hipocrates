@@ -254,6 +254,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             try
             {
                 resAtencion = null;
+                rtComentario.Text = "";
                 dgCerrarOrdenAnalisis.Rows.Clear();
                 AccionesTerminal ac = new AccionesTerminal();
                 List<RES_ATENCION> aux = ac.ResAtencionesAptasParaCerrarAnalisis();
@@ -293,14 +294,18 @@ namespace CheekiBreeki.CMH.Terminal.Views
             AccionesTerminal ac = new AccionesTerminal();
             if (resAtencion != null)
             {
-                bool x = ac.cerrarOrdenDeAnalisis(resAtencion.ORDEN_ANALISIS, resAtencione);
-                if (x)
-                {
-                    InitCerrarOrden();
-                    MessageBox.Show("Orden de análisis cerrada", "Abierta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                if(!string.IsNullOrEmpty(rtComentario.Text.Trim())){
+                    bool x = ac.cerrarOrdenDeAnalisis(resAtencion.ORDEN_ANALISIS, resAtencion, rtComentario.Text);
+                    if (x)
+                    {
+                        InitCerrarOrden();
+                        MessageBox.Show("Orden de análisis cerrada", "Abierta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    else
+                        MessageBox.Show("No se ha podido cerrar la orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
-                    MessageBox.Show("No se ha podido cerrar la orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("El campo de comentario esta vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
                 MessageBox.Show("No ha seleccionado una orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
