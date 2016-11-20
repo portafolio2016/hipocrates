@@ -70,7 +70,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             break;
 
                         case "JEFE DE OPERADOR":
-                            FrmJefeOp frmJefeOp = new FrmJefeOp(this);
+                            FrmJefeOperador frmJefeOp = new FrmJefeOperador(this);
                             frmJefeOp.Show();
                             frmJefeOp.Activate();
                             this.Hide();
