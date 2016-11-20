@@ -36,10 +36,6 @@
         <servlet-name>Resultados</servlet-name>
         <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Resultados</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Resultado</servlet-name>
-        <servlet-class>cl.cheekibreeki.cmh.webapp.servlet.Resultado</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Router</servlet-name>
         <url-pattern>/Router.do</url-pattern>
@@ -75,10 +71,6 @@
     <servlet-mapping>
         <servlet-name>Resultados</servlet-name>
         <url-pattern>/Resultados.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Resultado</servlet-name>
-        <url-pattern>/Resultado.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
