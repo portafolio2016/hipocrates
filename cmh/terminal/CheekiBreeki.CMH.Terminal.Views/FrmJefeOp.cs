@@ -860,6 +860,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 tbCodigoMPre.Text = pres.CODIGO_PRESTACION;
                 cbTipoPrestacionMPre.SelectedIndex = (int)pres.ID_TIPO_PRESTACION - 1;
 
+                lbxEquiposMPre.Items.Clear();
                 List<TIPO_EQUIPO> tipoEquipos = acciones.listaTipoEquipos();
                 if (tipoEquipos == null)
                     tipoEquipos = new List<TIPO_EQUIPO>();
@@ -877,6 +878,50 @@ namespace CheekiBreeki.CMH.Terminal.Views
             else
             {
                 MessageBox.Show("No se pudo encontrar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnGuardarMpre_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbNombrePrestacionMPre.Text.Trim()) && !string.IsNullOrEmpty(tbPrecioPrestacionMPre.Text.Trim()) && !string.IsNullOrEmpty(tbCodigoMPre.Text.Trim()))
+            {
+                int precio;
+                if (Int32.TryParse(tbPrecioPrestacionMPre.Text, out precio))
+                {
+                    PRESTACION prestacion = new PRESTACION();
+                    prestacion.ID_ESPECIALIDAD = ((ComboboxItem)cbTipoPrestacionMPre.SelectedItem).Value;//Funciona siempre y cuando tenga el mismo orden de index que con tipo prestacion
+                    prestacion.ID_TIPO_PRESTACION = ((ComboboxItem)cbTipoPrestacionMPre.SelectedItem).Value;
+                    prestacion.NOM_PRESTACION = tbNombrePrestacionMPre.Text;
+                    prestacion.CODIGO_PRESTACION = tbCodigoMPre.Text;
+                    prestacion.PRECIO_PRESTACION = precio;
+                    prestacion.ACTIVO = true;
+                    bool x = acciones.ActualizarPrestacion(prestacion, equiposReq);
+                    if (x)
+                    {
+                        InitMantenerPrestacion();
+                        InitTipoPrestacion();
+                        acciones = new AccionesTerminal();
+                        MessageBox.Show("Prestación modificada con exito", "Prestació ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha podido registrar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                    MessageBox.Show("El valor del precio no es numerico", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(tbNombrePrestacionMPre.Text.Trim()))
+            {
+                MessageBox.Show("Campo nombre vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(tbPrecioPrestacionMPre.Text.Trim()))
+            {
+                MessageBox.Show("Campo precio vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(tbCodigoMPre.Text.Trim()))
+            {
+                MessageBox.Show("Campo código vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -377,6 +377,7 @@
             this.btnGuardarMpre.TabIndex = 16;
             this.btnGuardarMpre.Text = "Guardar cambios";
             this.btnGuardarMpre.UseVisualStyleBackColor = true;
+            this.btnGuardarMpre.Click += new System.EventHandler(this.btnGuardarMpre_Click);
             // 
             // btnEliminarMPre
             // 

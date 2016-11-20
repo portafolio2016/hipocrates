@@ -2050,5 +2050,73 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
             return x;
         }
+
+        public bool ActualizarPrestacion(PRESTACION pres, List<EQUIPO_REQ> equipos)
+        {
+            bool x = false;
+            try
+            {
+                PRESTACION prestacion = new PRESTACION();
+                using (var con = new CMHEntities())
+                {
+                    prestacion = con.PRESTACION.Where(d=> d.CODIGO_PRESTACION == pres.CODIGO_PRESTACION).FirstOrDefault();
+                    prestacion.ID_TIPO_PRESTACION = pres.ID_TIPO_PRESTACION;
+                    prestacion.ID_ESPECIALIDAD = pres.ID_ESPECIALIDAD;
+                    prestacion.NOM_PRESTACION = pres.NOM_PRESTACION;
+                    prestacion.PRECIO_PRESTACION = pres.PRECIO_PRESTACION;
+                    con.SaveChangesAsync();
+                }
+
+                List<EQUIPO_REQ> equiposActuales = conexionDB.EQUIPO_REQ.Where(d => d.ID_PRESTACION == prestacion.ID_PRESTACION).ToList();
+                using (var con = new CMHEntities())
+                {
+                    foreach (EQUIPO_REQ eq in equipos)
+                    {
+                        bool existe = false;
+                        foreach (EQUIPO_REQ eqa in equiposActuales)
+                        {
+                            if (eqa.ID_PRESTACION == eq.ID_PRESTACION && eqa.ID_TIPO_EQUIPO == eq.ID_TIPO_EQUIPO)
+                            {
+                                eqa.CANTIDAD = eq.CANTIDAD;
+                                con.SaveChangesAsync();
+                                existe = true;
+                            }
+                        }
+                        if (!existe)
+                        {
+                            EQUIPO_REQ aux = new EQUIPO_REQ();
+                            aux.ID_PRESTACION = prestacion.ID_PRESTACION;
+                            aux.ID_TIPO_EQUIPO = eq.ID_TIPO_EQUIPO;
+                            aux.CANTIDAD = eq.CANTIDAD;
+                            con.EQUIPO_REQ.Add(aux);
+                            con.SaveChangesAsync();
+                        }
+                    }
+
+                    foreach (EQUIPO_REQ eqa in equiposActuales)
+                    {
+                        bool existe = false;
+                        foreach (EQUIPO_REQ eq in equipos)
+                        {
+                            if (eqa.ID_PRESTACION == eq.ID_PRESTACION && eqa.ID_TIPO_EQUIPO == eq.ID_TIPO_EQUIPO)
+                            {
+                                existe = true;
+                            }
+                        }
+                        if (!existe)
+                        {
+                            con.EQUIPO_REQ.Remove(eqa);
+                            con.SaveChangesAsync();
+                        }
+                    }
+                }
+                x = true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return x;
+        }
     }
 }
