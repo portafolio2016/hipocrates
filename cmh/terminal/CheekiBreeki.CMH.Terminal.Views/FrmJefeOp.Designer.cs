@@ -39,6 +39,17 @@
             this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logPagosHonorarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbNuevoMail = new System.Windows.Forms.TextBox();
+            this.btnCambiarEmail = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbContrasenaActual = new System.Windows.Forms.TextBox();
+            this.btnCambiarContrasena = new System.Windows.Forms.Button();
+            this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.gbLogPagoHonorarios = new System.Windows.Forms.GroupBox();
             this.btnBuscarLPH = new System.Windows.Forms.Button();
             this.dgLogs = new System.Windows.Forms.DataGridView();
@@ -84,28 +95,18 @@
             this.lblGuion_MP = new System.Windows.Forms.Label();
             this.txtRutPersonal_MP = new System.Windows.Forms.TextBox();
             this.lblRutPersonal_MP = new System.Windows.Forms.Label();
-            this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tbNuevoMail = new System.Windows.Forms.TextBox();
-            this.btnCambiarEmail = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbContrasenaActual = new System.Windows.Forms.TextBox();
-            this.btnCambiarContrasena = new System.Windows.Forms.Button();
-            this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.horariosPersonalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.gbOpcionesUsuario.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.gbLogPagoHonorarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).BeginInit();
             this.gbMantenedorPersonal.SuspendLayout();
             this.gpMedico_MP.SuspendLayout();
-            this.gbOpcionesUsuario.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -184,7 +185,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mantenedoresToolStripMenuItem,
-            this.logPagosHonorarioToolStripMenuItem});
+            this.logPagosHonorarioToolStripMenuItem,
+            this.horariosPersonalToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 16);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(774, 24);
@@ -212,6 +214,117 @@
             this.logPagosHonorarioToolStripMenuItem.Size = new System.Drawing.Size(131, 20);
             this.logPagosHonorarioToolStripMenuItem.Text = "Log Pagos Honorario";
             this.logPagosHonorarioToolStripMenuItem.Click += new System.EventHandler(this.logPagosHonorarioToolStripMenuItem_Click);
+            // 
+            // gbOpcionesUsuario
+            // 
+            this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
+            this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
+            this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
+            this.gbOpcionesUsuario.Name = "gbOpcionesUsuario";
+            this.gbOpcionesUsuario.Size = new System.Drawing.Size(768, 462);
+            this.gbOpcionesUsuario.TabIndex = 3;
+            this.gbOpcionesUsuario.TabStop = false;
+            this.gbOpcionesUsuario.Text = "Opciones de cuenta";
+            this.gbOpcionesUsuario.Visible = false;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label9);
+            this.groupBox5.Controls.Add(this.tbNuevoMail);
+            this.groupBox5.Controls.Add(this.btnCambiarEmail);
+            this.groupBox5.Location = new System.Drawing.Point(32, 276);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(695, 158);
+            this.groupBox5.TabIndex = 9;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Email";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(71, 62);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(69, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Nuevo email:";
+            // 
+            // tbNuevoMail
+            // 
+            this.tbNuevoMail.Location = new System.Drawing.Point(205, 59);
+            this.tbNuevoMail.MaxLength = 80;
+            this.tbNuevoMail.Name = "tbNuevoMail";
+            this.tbNuevoMail.Size = new System.Drawing.Size(409, 20);
+            this.tbNuevoMail.TabIndex = 7;
+            // 
+            // btnCambiarEmail
+            // 
+            this.btnCambiarEmail.Location = new System.Drawing.Point(255, 112);
+            this.btnCambiarEmail.Name = "btnCambiarEmail";
+            this.btnCambiarEmail.Size = new System.Drawing.Size(144, 23);
+            this.btnCambiarEmail.TabIndex = 3;
+            this.btnCambiarEmail.Text = "Cambiar email";
+            this.btnCambiarEmail.UseVisualStyleBackColor = true;
+            this.btnCambiarEmail.Click += new System.EventHandler(this.btnCambiarEmail_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.tbContrasenaActual);
+            this.groupBox4.Controls.Add(this.btnCambiarContrasena);
+            this.groupBox4.Controls.Add(this.tbContrasenaNueva);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Location = new System.Drawing.Point(32, 27);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(695, 247);
+            this.groupBox4.TabIndex = 8;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Contraseña";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(71, 65);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(96, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Contraseña actual:";
+            // 
+            // tbContrasenaActual
+            // 
+            this.tbContrasenaActual.Location = new System.Drawing.Point(206, 62);
+            this.tbContrasenaActual.MaxLength = 40;
+            this.tbContrasenaActual.Name = "tbContrasenaActual";
+            this.tbContrasenaActual.PasswordChar = '*';
+            this.tbContrasenaActual.Size = new System.Drawing.Size(408, 20);
+            this.tbContrasenaActual.TabIndex = 5;
+            // 
+            // btnCambiarContrasena
+            // 
+            this.btnCambiarContrasena.Location = new System.Drawing.Point(255, 205);
+            this.btnCambiarContrasena.Name = "btnCambiarContrasena";
+            this.btnCambiarContrasena.Size = new System.Drawing.Size(144, 23);
+            this.btnCambiarContrasena.TabIndex = 4;
+            this.btnCambiarContrasena.Text = "Cambiar contraseña";
+            this.btnCambiarContrasena.UseVisualStyleBackColor = true;
+            this.btnCambiarContrasena.Click += new System.EventHandler(this.btnCambiarContrasena_Click);
+            // 
+            // tbContrasenaNueva
+            // 
+            this.tbContrasenaNueva.Location = new System.Drawing.Point(206, 136);
+            this.tbContrasenaNueva.MaxLength = 40;
+            this.tbContrasenaNueva.Name = "tbContrasenaNueva";
+            this.tbContrasenaNueva.PasswordChar = '*';
+            this.tbContrasenaNueva.Size = new System.Drawing.Size(408, 20);
+            this.tbContrasenaNueva.TabIndex = 6;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(71, 139);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Contraseña nueva:";
             // 
             // gbLogPagoHonorarios
             // 
@@ -260,7 +373,7 @@
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 69;
+            this.Nombre.Width = 67;
             // 
             // Banco
             // 
@@ -268,7 +381,7 @@
             this.Banco.HeaderText = "Banco";
             this.Banco.Name = "Banco";
             this.Banco.ReadOnly = true;
-            this.Banco.Width = 63;
+            this.Banco.Width = 61;
             // 
             // TipoCuenta
             // 
@@ -276,7 +389,7 @@
             this.TipoCuenta.HeaderText = "Tipo cuenta";
             this.TipoCuenta.Name = "TipoCuenta";
             this.TipoCuenta.ReadOnly = true;
-            this.TipoCuenta.Width = 89;
+            this.TipoCuenta.Width = 87;
             // 
             // Cuenta
             // 
@@ -284,7 +397,7 @@
             this.Cuenta.HeaderText = "Cuenta";
             this.Cuenta.Name = "Cuenta";
             this.Cuenta.ReadOnly = true;
-            this.Cuenta.Width = 66;
+            this.Cuenta.Width = 64;
             // 
             // Total
             // 
@@ -292,7 +405,7 @@
             this.Total.HeaderText = "Total";
             this.Total.Name = "Total";
             this.Total.ReadOnly = true;
-            this.Total.Width = 56;
+            this.Total.Width = 54;
             // 
             // label1
             // 
@@ -667,116 +780,12 @@
             this.lblRutPersonal_MP.TabIndex = 0;
             this.lblRutPersonal_MP.Text = "Rut de Personal";
             // 
-            // gbOpcionesUsuario
+            // horariosPersonalToolStripMenuItem
             // 
-            this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
-            this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
-            this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
-            this.gbOpcionesUsuario.Name = "gbOpcionesUsuario";
-            this.gbOpcionesUsuario.Size = new System.Drawing.Size(768, 462);
-            this.gbOpcionesUsuario.TabIndex = 3;
-            this.gbOpcionesUsuario.TabStop = false;
-            this.gbOpcionesUsuario.Text = "Opciones de cuenta";
-            this.gbOpcionesUsuario.Visible = false;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label9);
-            this.groupBox5.Controls.Add(this.tbNuevoMail);
-            this.groupBox5.Controls.Add(this.btnCambiarEmail);
-            this.groupBox5.Location = new System.Drawing.Point(32, 276);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(695, 158);
-            this.groupBox5.TabIndex = 9;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Email";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(71, 62);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(69, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Nuevo email:";
-            // 
-            // tbNuevoMail
-            // 
-            this.tbNuevoMail.Location = new System.Drawing.Point(205, 59);
-            this.tbNuevoMail.MaxLength = 80;
-            this.tbNuevoMail.Name = "tbNuevoMail";
-            this.tbNuevoMail.Size = new System.Drawing.Size(409, 20);
-            this.tbNuevoMail.TabIndex = 7;
-            // 
-            // btnCambiarEmail
-            // 
-            this.btnCambiarEmail.Location = new System.Drawing.Point(255, 112);
-            this.btnCambiarEmail.Name = "btnCambiarEmail";
-            this.btnCambiarEmail.Size = new System.Drawing.Size(144, 23);
-            this.btnCambiarEmail.TabIndex = 3;
-            this.btnCambiarEmail.Text = "Cambiar email";
-            this.btnCambiarEmail.UseVisualStyleBackColor = true;
-            this.btnCambiarEmail.Click += new System.EventHandler(this.btnCambiarEmail_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.tbContrasenaActual);
-            this.groupBox4.Controls.Add(this.btnCambiarContrasena);
-            this.groupBox4.Controls.Add(this.tbContrasenaNueva);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Location = new System.Drawing.Point(32, 27);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(695, 247);
-            this.groupBox4.TabIndex = 8;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Contraseña";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(71, 65);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(96, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Contraseña actual:";
-            // 
-            // tbContrasenaActual
-            // 
-            this.tbContrasenaActual.Location = new System.Drawing.Point(206, 62);
-            this.tbContrasenaActual.MaxLength = 40;
-            this.tbContrasenaActual.Name = "tbContrasenaActual";
-            this.tbContrasenaActual.PasswordChar = '*';
-            this.tbContrasenaActual.Size = new System.Drawing.Size(408, 20);
-            this.tbContrasenaActual.TabIndex = 5;
-            // 
-            // btnCambiarContrasena
-            // 
-            this.btnCambiarContrasena.Location = new System.Drawing.Point(255, 205);
-            this.btnCambiarContrasena.Name = "btnCambiarContrasena";
-            this.btnCambiarContrasena.Size = new System.Drawing.Size(144, 23);
-            this.btnCambiarContrasena.TabIndex = 4;
-            this.btnCambiarContrasena.Text = "Cambiar contraseña";
-            this.btnCambiarContrasena.UseVisualStyleBackColor = true;
-            this.btnCambiarContrasena.Click += new System.EventHandler(this.btnCambiarContrasena_Click);
-            // 
-            // tbContrasenaNueva
-            // 
-            this.tbContrasenaNueva.Location = new System.Drawing.Point(206, 136);
-            this.tbContrasenaNueva.MaxLength = 40;
-            this.tbContrasenaNueva.Name = "tbContrasenaNueva";
-            this.tbContrasenaNueva.PasswordChar = '*';
-            this.tbContrasenaNueva.Size = new System.Drawing.Size(408, 20);
-            this.tbContrasenaNueva.TabIndex = 6;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(71, 139);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Contraseña nueva:";
+            this.horariosPersonalToolStripMenuItem.Name = "horariosPersonalToolStripMenuItem";
+            this.horariosPersonalToolStripMenuItem.Size = new System.Drawing.Size(112, 20);
+            this.horariosPersonalToolStripMenuItem.Text = "Horarios personal";
+            this.horariosPersonalToolStripMenuItem.Click += new System.EventHandler(this.horariosPersonalToolStripMenuItem_Click);
             // 
             // FrmJefeOp
             // 
@@ -797,6 +806,11 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.gbOpcionesUsuario.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.gbLogPagoHonorarios.ResumeLayout(false);
             this.gbLogPagoHonorarios.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).EndInit();
@@ -804,11 +818,6 @@
             this.gbMantenedorPersonal.PerformLayout();
             this.gpMedico_MP.ResumeLayout(false);
             this.gpMedico_MP.PerformLayout();
-            this.gbOpcionesUsuario.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -882,5 +891,6 @@
         private System.Windows.Forms.Label lblBanco_MP;
         private System.Windows.Forms.ComboBox cbTipoCuenta_MP;
         private System.Windows.Forms.Label lblTipoCuenta_MP;
+        private System.Windows.Forms.ToolStripMenuItem horariosPersonalToolStripMenuItem;
     }
 }

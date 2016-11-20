@@ -18,7 +18,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-001
         public Boolean agendarAtencion(ATENCION_AGEN atencion)
         {
-
             try
             {
                 if (Util.isObjetoNulo(atencion))
@@ -1960,6 +1959,50 @@ namespace CheekiBreeki.CMH.Terminal.BL
             if (resultados != null)
                 return resultados;
             else return new List<RES_ATENCION>();
+        }
+        #endregion
+
+        #region Mantenedor horarios
+        public List<BLOQUE> obtenerBloquesDisponibles(int rut)
+        {
+            List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
+            List<BLOQUE> bloquesDisponibles = new List<BLOQUE>();
+            try
+            {
+                PERSONAL personal = buscarPersonal(rut);
+                if (Util.isObjetoNulo(personal.PERS_MEDICO.FirstOrDefault()))
+                    throw new Exception("No es personal médico");
+                else
+                {
+                    bloquesAsignados = obtenerBloquesAsignados(rut);
+                    bloquesDisponibles = conexionDB.BLOQUE.ToList();
+                    bloquesDisponibles = bloquesDisponibles.Except(bloquesAsignados).ToList();
+                }
+            }
+            catch (Exception ex)
+            { }
+            return (bloquesDisponibles);
+        }
+
+        public List<BLOQUE> obtenerBloquesAsignados(int rut)
+        {
+            List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
+            try
+            {
+                PERSONAL personal = buscarPersonal(rut);
+                if (Util.isObjetoNulo(personal.PERS_MEDICO.FirstOrDefault()))
+                    throw new Exception("No es personal médico");
+                else
+                {
+                    foreach (HORARIO horario in personal.PERS_MEDICO.FirstOrDefault().HORARIO)
+                    {
+                        bloquesAsignados.Add(horario.BLOQUE);
+                    }
+                }
+            }
+            catch (Exception ex)
+            { }
+            return (bloquesAsignados);
         }
         #endregion
     }

@@ -600,6 +600,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         }
 
+        private void horariosPersonalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmHorarios frmHorarios = new FrmHorarios(login);
+            frmHorarios.Show();
+            frmHorarios.Activate();
+            this.Hide();
+        }
+
 
     }
 }
