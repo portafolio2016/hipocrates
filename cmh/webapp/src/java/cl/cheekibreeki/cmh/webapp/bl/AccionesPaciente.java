@@ -146,12 +146,13 @@ public class AccionesPaciente {
      * es null significa que no fue encontrado el paciente o que no existen
      * atenciones pendientes
      */
-    public ArrayList<AtencionAgen> obtenerAtencionesPendientes(int rut) throws Exception {
+    public ArrayList<AtencionAgen> obtenerAtencionesPendientes(int rut) {
         Map<String, Object> params = new HashMap<>();
         params.put("rut", rut);
         List<? extends Object> pacienteList = Controller.findByQuery("Paciente.findByRut", params);
-        if (null == pacienteList) {
-            throw new Exception("Paciente no existe");
+        if(null == pacienteList){
+            System.out.println("Paciente no existe");
+            return null;
         }
         Paciente paciente = (Paciente) pacienteList.get(0);
         Collection<AtencionAgen> atenciones = paciente.getAtencionAgenCollection();
@@ -204,19 +205,23 @@ public class AccionesPaciente {
      * @param atencion atencion agendada
      * @return Si es true significa que se pudo anular la atencion
      */
-    public AtencionAgen anularAtencion(AtencionAgen atencion) throws Exception {
+    public AtencionAgen anularAtencion(AtencionAgen atencion){
         //Buscar estado actual de la atencion
         EstadoAten estadoAtencion = atencion.getIdEstadoAten();
         //si la atencion está anulada, lanzar excepción
-        if (estadoAtencion.getNomEstadoAten().equals("Anulada")) {
-            throw new Exception("La atención ya está anulada");
+        if(estadoAtencion.getNomEstadoAten().equals("Anulada")){
+//            throw new Exception("La atención ya está anulada");
+            System.out.println("La atención ya está anulada");
+            return null;
         }
         //si la atención no está anulada, buscar estado anulada    
         Map<String, Object> params = new HashMap<>();
-        params.put("nomEstadoAten", "Anulada");
-        List<? extends Object> estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
-        if (estadoAtenList.size() < 1) {
-            throw new Exception("No hay estado con nombre Anulada");
+        params.put("nomEstadoAten", "Anulado");
+        List<? extends Object>  estadoAtenList = Controller.findByQuery("EstadoAten.findByNomEstadoAten", params);
+        if(estadoAtenList.size() < 1){
+//            throw new Exception("No hay estado con nombre Anulada");
+            System.out.println("No hay estado con nombre Anulada");
+            return null;
         }
         EstadoAten estadoAnulada = (EstadoAten) estadoAtenList.get(0);
         //asignar estado anulada a atencion
