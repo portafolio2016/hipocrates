@@ -52,6 +52,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.equipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbMantenerEquipo = new System.Windows.Forms.GroupBox();
+            this.dgEquipo_Eq = new System.Windows.Forms.DataGridView();
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnCargar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -59,6 +63,8 @@
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.gbMantenerEquipo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -286,12 +292,51 @@
             // 
             // gbMantenerEquipo
             // 
+            this.gbMantenerEquipo.Controls.Add(this.btnEliminar);
+            this.gbMantenerEquipo.Controls.Add(this.btnCargar);
+            this.gbMantenerEquipo.Controls.Add(this.btnNuevo);
+            this.gbMantenerEquipo.Controls.Add(this.dgEquipo_Eq);
             this.gbMantenerEquipo.Location = new System.Drawing.Point(6, 43);
             this.gbMantenerEquipo.Name = "gbMantenerEquipo";
             this.gbMantenerEquipo.Size = new System.Drawing.Size(768, 462);
             this.gbMantenerEquipo.TabIndex = 4;
             this.gbMantenerEquipo.TabStop = false;
             this.gbMantenerEquipo.Text = "Mantener Equipo";
+            // 
+            // dgEquipo_Eq
+            // 
+            this.dgEquipo_Eq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgEquipo_Eq.Location = new System.Drawing.Point(8, 33);
+            this.dgEquipo_Eq.Name = "dgEquipo_Eq";
+            this.dgEquipo_Eq.Size = new System.Drawing.Size(740, 222);
+            this.dgEquipo_Eq.TabIndex = 0;
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Location = new System.Drawing.Point(181, 261);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(75, 23);
+            this.btnNuevo.TabIndex = 1;
+            this.btnNuevo.Text = "Nuevo";
+            this.btnNuevo.UseVisualStyleBackColor = true;
+            // 
+            // btnCargar
+            // 
+            this.btnCargar.Location = new System.Drawing.Point(323, 261);
+            this.btnCargar.Name = "btnCargar";
+            this.btnCargar.Size = new System.Drawing.Size(75, 23);
+            this.btnCargar.TabIndex = 2;
+            this.btnCargar.Text = "Cargar";
+            this.btnCargar.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(464, 261);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 3;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
             // 
             // FrmMantenerEquipo
             // 
@@ -317,6 +362,8 @@
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.gbMantenerEquipo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -347,5 +394,9 @@
         private System.Windows.Forms.ToolStripMenuItem pacienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem equipoToolStripMenuItem;
         private System.Windows.Forms.GroupBox gbMantenerEquipo;
+        private System.Windows.Forms.DataGridView dgEquipo_Eq;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnCargar;
+        private System.Windows.Forms.Button btnNuevo;
     }
 }

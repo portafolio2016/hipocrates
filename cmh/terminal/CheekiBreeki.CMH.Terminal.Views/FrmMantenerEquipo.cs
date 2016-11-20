@@ -18,16 +18,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         FrmLogin login = null;
         bool closeApp;
 
-        public class ComboboxItem
-        {
-            public string Text { get; set; }
-            public int Value { get; set; }
-
-            public override string ToString()
-            {
-                return Text;
-            }
-        }
+        
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                                                              //
@@ -53,8 +44,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblPrivilegio.Text = "";
                 btnSesion.Text = "Iniciar sesión";
             }
+           CMHEntities conexionDB = new CMHEntities();
 
-           
+           dgEquipo_Eq.DataSource = conexionDB.INVENTARIO.ToList();
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,9 +198,10 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
         #endregion
 
-       
 
-     
+
+
+
 
     }
 }
