@@ -238,6 +238,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
             frmMantenerPaciente.Activate();
             this.Hide();
         }
+
+        private void equipoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmMantenerEquipo frmMantenerEquipo = new FrmMantenerEquipo(login);
+            frmMantenerEquipo.Show();
+            frmMantenerEquipo.Activate();
+            this.Hide();
+        }
         #endregion
 
         #region Mantenedor Personal
@@ -579,6 +587,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
 
         #endregion
+
+        
+     
 
        
 

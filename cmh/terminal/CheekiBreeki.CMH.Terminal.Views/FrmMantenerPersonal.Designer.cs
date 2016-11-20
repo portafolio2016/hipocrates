@@ -85,6 +85,7 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.equipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -181,7 +182,8 @@
             // 
             this.mantenedoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.personalToolStripMenuItem,
-            this.pacienteToolStripMenuItem});
+            this.pacienteToolStripMenuItem,
+            this.equipoToolStripMenuItem});
             this.mantenedoresToolStripMenuItem.Name = "mantenedoresToolStripMenuItem";
             this.mantenedoresToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.mantenedoresToolStripMenuItem.Text = "Mantenedores";
@@ -189,14 +191,14 @@
             // personalToolStripMenuItem
             // 
             this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
-            this.personalToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.personalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.personalToolStripMenuItem.Text = "Personal";
             this.personalToolStripMenuItem.Click += new System.EventHandler(this.personalToolStripMenuItem_Click);
             // 
             // pacienteToolStripMenuItem
             // 
             this.pacienteToolStripMenuItem.Name = "pacienteToolStripMenuItem";
-            this.pacienteToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.pacienteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pacienteToolStripMenuItem.Text = "Paciente";
             this.pacienteToolStripMenuItem.Click += new System.EventHandler(this.pacienteToolStripMenuItem_Click);
             // 
@@ -665,6 +667,13 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
+            // equipoToolStripMenuItem
+            // 
+            this.equipoToolStripMenuItem.Name = "equipoToolStripMenuItem";
+            this.equipoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.equipoToolStripMenuItem.Text = "Equipo";
+            this.equipoToolStripMenuItem.Click += new System.EventHandler(this.equipoToolStripMenuItem_Click);
+            // 
             // FrmMantenerPersonal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -756,5 +765,6 @@
         private System.Windows.Forms.ComboBox cbTipoCuenta_MP;
         private System.Windows.Forms.Label lblTipoCuenta_MP;
         private System.Windows.Forms.ToolStripMenuItem pacienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem equipoToolStripMenuItem;
     }
 }

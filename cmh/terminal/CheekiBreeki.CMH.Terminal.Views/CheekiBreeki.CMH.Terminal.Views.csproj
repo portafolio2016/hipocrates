@@ -84,6 +84,12 @@
     <Compile Include="FrmJefeOperador.Designer.cs">
       <DependentUpon>FrmJefeOperador.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMantenerEquipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMantenerEquipo.Designer.cs">
+      <DependentUpon>FrmMantenerEquipo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMantenerPaciente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmJefeOperador.resx">
       <DependentUpon>FrmJefeOperador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMantenerEquipo.resx">
+      <DependentUpon>FrmMantenerEquipo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMantenerPaciente.resx">
       <DependentUpon>FrmMantenerPaciente.cs</DependentUpon>

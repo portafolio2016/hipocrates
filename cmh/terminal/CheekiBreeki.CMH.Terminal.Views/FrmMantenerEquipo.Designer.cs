@@ -1,6 +1,6 @@
 ﻿namespace CheekiBreeki.CMH.Terminal.Views
 {
-    partial class FrmJefeOperador
+    partial class FrmMantenerEquipo
     {
         /// <summary>
         /// Required designer variable.
@@ -51,6 +51,7 @@
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.equipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbMantenerEquipo = new System.Windows.Forms.GroupBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -122,6 +123,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.gbMantenerEquipo);
             this.groupBox1.Controls.Add(this.menuStrip1);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
@@ -155,7 +157,7 @@
             this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
             this.personalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.personalToolStripMenuItem.Text = "Personal";
-            this.personalToolStripMenuItem.Click += new System.EventHandler(this.personalToolStripMenuItem_Click_1);
+            this.personalToolStripMenuItem.Click += new System.EventHandler(this.personalToolStripMenuItem_Click);
             // 
             // pacienteToolStripMenuItem
             // 
@@ -282,7 +284,16 @@
             this.equipoToolStripMenuItem.Text = "Equipo";
             this.equipoToolStripMenuItem.Click += new System.EventHandler(this.equipoToolStripMenuItem_Click);
             // 
-            // FrmJefeOperador
+            // gbMantenerEquipo
+            // 
+            this.gbMantenerEquipo.Location = new System.Drawing.Point(6, 43);
+            this.gbMantenerEquipo.Name = "gbMantenerEquipo";
+            this.gbMantenerEquipo.Size = new System.Drawing.Size(768, 462);
+            this.gbMantenerEquipo.TabIndex = 4;
+            this.gbMantenerEquipo.TabStop = false;
+            this.gbMantenerEquipo.Text = "Mantener Equipo";
+            // 
+            // FrmMantenerEquipo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -290,7 +301,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "FrmJefeOperador";
+            this.Name = "FrmMantenerEquipo";
             this.Text = "Centro medico Hipócrates";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmJefeOp_FormClosed);
             this.groupBox3.ResumeLayout(false);
@@ -325,15 +336,16 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbNuevoMail;
         private System.Windows.Forms.Button btnCambiarEmail;
+        private System.Windows.Forms.ToolStripMenuItem mantenedoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem personalToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbContrasenaActual;
         private System.Windows.Forms.Button btnCambiarContrasena;
         private System.Windows.Forms.TextBox tbContrasenaNueva;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ToolStripMenuItem mantenedoresToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem personalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pacienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem equipoToolStripMenuItem;
+        private System.Windows.Forms.GroupBox gbMantenerEquipo;
     }
 }
