@@ -231,8 +231,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mantenedoresToolStripMenuItem,
             this.logPagosHonorarioToolStripMenuItem,
-            this.reporteDeCajaToolStripMenuItem});
-            this.logPagosHonorarioToolStripMenuItem,
+            this.reporteDeCajaToolStripMenuItem,
             this.horariosPersonalToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 16);
             this.menuStrip1.Name = "menuStrip1";
