@@ -2067,9 +2067,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     con.SaveChangesAsync();
                 }
 
-                List<EQUIPO_REQ> equiposActuales = conexionDB.EQUIPO_REQ.Where(d => d.ID_PRESTACION == prestacion.ID_PRESTACION).ToList();
+                
                 using (var con = new CMHEntities())
                 {
+                    List<EQUIPO_REQ> equiposActuales = con.EQUIPO_REQ.Where(d => d.ID_PRESTACION == prestacion.ID_PRESTACION).ToList();
                     foreach (EQUIPO_REQ eq in equipos)
                     {
                         bool existe = false;

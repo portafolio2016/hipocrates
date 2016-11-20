@@ -924,5 +924,46 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 MessageBox.Show("Campo código vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnCargarPorCodigoMPre_Click(object sender, EventArgs e)
+        {
+            PRESTACION pres = acciones.buscarPrestacionMedica(tbCodigoPrestacionMPre.Text.Trim());
+            if (pres != null)
+            {
+                btnRegistrarMPre.Enabled = false;
+                btnGuardarMpre.Enabled = true;
+                btnEliminarMPre.Enabled = true;
+                tbCodigoMPre.Enabled = false;
+                tbNombrePrestacionMPre.Text = pres.NOM_PRESTACION;
+                tbPrecioPrestacionMPre.Text = pres.PRECIO_PRESTACION.ToString();
+                tbCodigoMPre.Text = pres.CODIGO_PRESTACION;
+                cbTipoPrestacionMPre.SelectedIndex = (int)pres.ID_TIPO_PRESTACION - 1;
+
+                lbxEquiposMPre.Items.Clear();
+                List<TIPO_EQUIPO> tipoEquipos = acciones.listaTipoEquipos();
+                if (tipoEquipos == null)
+                    tipoEquipos = new List<TIPO_EQUIPO>();
+                foreach (TIPO_EQUIPO x in tipoEquipos)
+                {
+                    ComboboxItem cbi = new ComboboxItem();
+                    cbi.Text = x.NOMBRE_TIPO_EQUIPO;
+                    cbi.Value = x.ID_TIPO_EQUIPO;
+                    lbxEquiposMPre.Items.Add(cbi);
+                }
+
+                equiposReq = new List<EQUIPO_REQ>(pres.EQUIPO_REQ);
+                RefrescarEquiposPrestacion();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo encontrar la prestación por codigo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //Eliminar
+        private void btnEliminarMPre_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

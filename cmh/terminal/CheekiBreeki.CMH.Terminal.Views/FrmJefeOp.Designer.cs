@@ -275,6 +275,7 @@
             this.btnCargarPorCodigoMPre.TabIndex = 7;
             this.btnCargarPorCodigoMPre.Text = "Cargar por codigo";
             this.btnCargarPorCodigoMPre.UseVisualStyleBackColor = true;
+            this.btnCargarPorCodigoMPre.Click += new System.EventHandler(this.btnCargarPorCodigoMPre_Click);
             // 
             // btnNuevaPrestacionMPre
             // 
@@ -387,6 +388,7 @@
             this.btnEliminarMPre.TabIndex = 15;
             this.btnEliminarMPre.Text = "Eliminar";
             this.btnEliminarMPre.UseVisualStyleBackColor = true;
+            this.btnEliminarMPre.Click += new System.EventHandler(this.btnEliminarMPre_Click);
             // 
             // btnRegistrarMPre
             // 
