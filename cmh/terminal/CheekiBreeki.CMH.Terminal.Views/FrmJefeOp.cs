@@ -605,10 +605,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   MANTENEDOR PRESTACION                                                                                                      //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        static List<EQUIPO_REQ> equiposReq = new List<EQUIPO_REQ>();
+
         private void prestaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InitGB(gbMantenerPrestacion);
             InitMantenerPrestacion();
+            InitTipoPrestacion();
+            acciones = new AccionesTerminal();
         }
 
         #region InitMantenerPrestacion
@@ -618,10 +622,173 @@ namespace CheekiBreeki.CMH.Terminal.Views
             tbNombrePrestacionMPre.Text = "";
             tbPrecioPrestacionMPre.Text = "";
             cbPrestacionesMPre.Items.Clear();
-            cbPrestacionesEnModificarMPre.Items.Clear();
+            cbTipoPrestacionMPre.Items.Clear();
             lbxEquiposMPre.Items.Clear();
             lbxEquiposPrestacionMPre.Items.Clear();
+            btnRegistrarMPre.Enabled = false;
+            btnGuardarMpre.Enabled = false;
+            btnEliminarMPre.Enabled = false;
+            btnCargarPorLista.Enabled = false;
+            AccionesTerminal ac = new AccionesTerminal();
+            List<PRESTACION> prestaciones = ac.listaPrestaciones();
+            if (prestaciones == null)
+                prestaciones = new List<PRESTACION>();
+            foreach (PRESTACION x in prestaciones)
+            {
+                ComboboxItem cbi = new ComboboxItem();
+                cbi.Text = x.NOM_PRESTACION;
+                cbi.Value = x.ID_PRESTACION;
+                cbPrestacionesMPre.Items.Add(cbi);
+            }
+            if (prestaciones.Count > 0)
+            {
+                btnCargarPorLista.Enabled = true;
+                cbPrestacionesMPre.SelectedIndex = 0;
+            }
+        }
+        private void InitTipoPrestacion()
+        {
+            AccionesTerminal ac = new AccionesTerminal();
+            List<TIPO_PRES> tipoPrestaciones = ac.listaTipoPrestaciones();
+            if (tipoPrestaciones == null)
+                tipoPrestaciones = new List<TIPO_PRES>();
+            foreach (TIPO_PRES x in tipoPrestaciones)
+            {
+                ComboboxItem cbi = new ComboboxItem();
+                cbi.Text = x.NOM_TIPO_PREST;
+                cbi.Value = x.ID_TIPO_PRESTACION;
+                cbTipoPrestacionMPre.Items.Add(cbi);
+            }
+            if (tipoPrestaciones.Count > 0)
+            {
+                btnCargarPorLista.Enabled = true;
+                cbTipoPrestacionMPre.SelectedIndex = 0;
+            }
+            else
+            {
+                btnRegistrarMPre.Enabled = false;
+                btnGuardarMpre.Enabled = false;
+                btnEliminarMPre.Enabled = false;
+                btnCargarPorLista.Enabled = false;
+                btnCargarPorCodigoMPre.Enabled = false;
+                btnNuevaPrestacionMPre.Enabled = false;
+                MessageBox.Show("No se pueden crear prestaciones si no existen tipos de prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
+
+        //NUEVO
+        private void btnNuevaPrestacionMPre_Click(object sender, EventArgs e)
+        {
+            lbxEquiposMPre.Items.Clear();
+            lbxEquiposPrestacionMPre.Items.Clear();
+            tbCodigoPrestacionMPre.Text = "";
+            tbNombrePrestacionMPre.Text = "";
+            tbPrecioPrestacionMPre.Text = "";
+            if (cbTipoPrestacionMPre.Items.Count > 0)
+            {
+                cbTipoPrestacionMPre.SelectedIndex = 0;
+            }
+            btnRegistrarMPre.Enabled = true;
+
+            List<TIPO_EQUIPO> tipoEquipos = acciones.listaTipoEquipos();
+            if (tipoEquipos == null)
+                tipoEquipos = new List<TIPO_EQUIPO>();
+            foreach (TIPO_EQUIPO x in tipoEquipos)
+            {
+                ComboboxItem cbi = new ComboboxItem();
+                cbi.Text = x.NOMBRE_TIPO_EQUIPO;
+                cbi.Value = x.ID_TIPO_EQUIPO;
+                lbxEquiposMPre.Items.Add(cbi);
+            }
+        }
+
+        //>>
+        private void btnAddMPre_Click(object sender, EventArgs e)
+        {
+            EQUIPO_REQ equipoReq = new EQUIPO_REQ();
+            try{
+                bool existe = false;
+                foreach (EQUIPO_REQ x in equiposReq)
+                {
+                    if (((ComboboxItem)lbxEquiposMPre.SelectedItem).Value == x.ID_TIPO_EQUIPO)
+                    {
+                        x.CANTIDAD++;
+                        existe = true;
+                    }
+                }
+                if (!existe)
+                {
+                    TIPO_EQUIPO tipoEquip = new TIPO_EQUIPO();
+                    tipoEquip.ID_TIPO_EQUIPO = ((ComboboxItem)lbxEquiposMPre.SelectedItem).Value;
+                    tipoEquip.NOMBRE_TIPO_EQUIPO = ((ComboboxItem)lbxEquiposMPre.SelectedItem).Text;
+                    equipoReq.CANTIDAD = 1;
+                    equipoReq.ID_TIPO_EQUIPO = tipoEquip.ID_TIPO_EQUIPO;
+                    equipoReq.TIPO_EQUIPO = tipoEquip;
+                    equiposReq.Add(equipoReq);
+                }
+
+                RefrescarEquiposPrestacion();
+            }catch(Exception){
+                MessageBox.Show("No se ha seleccionado un equipo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //<<
+        private void btnRemoveMPre_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                EQUIPO_REQ equipoReq = null;
+                foreach (EQUIPO_REQ x in equiposReq)
+                {
+                    if (((ComboboxItem)lbxEquiposPrestacionMPre.SelectedItem).Value == x.ID_TIPO_EQUIPO)
+                    {
+                        x.CANTIDAD--;
+                        if(x.CANTIDAD == 0){
+                            equipoReq = x;
+                        }
+                    }
+                }
+                if (equipoReq != null)
+                    equiposReq.Remove(equipoReq);
+                RefrescarEquiposPrestacion(((ComboboxItem)lbxEquiposPrestacionMPre.SelectedItem).Value);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se ha seleccionado un equipo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //Refrescar equipos
+        private void RefrescarEquiposPrestacion()
+        {
+            lbxEquiposPrestacionMPre.Items.Clear();
+            foreach (EQUIPO_REQ x in equiposReq)
+            {
+                ComboboxItem cbi = new ComboboxItem();
+                cbi.Text = "[" + x.CANTIDAD + "]  " + x.TIPO_EQUIPO.NOMBRE_TIPO_EQUIPO;
+                cbi.Value = x.TIPO_EQUIPO.ID_TIPO_EQUIPO;
+                lbxEquiposPrestacionMPre.Items.Add(cbi);
+            }
+        }
+        private void RefrescarEquiposPrestacion(int id)
+        {
+            lbxEquiposPrestacionMPre.Items.Clear();
+            int index = 0;
+            int indexId = 0;
+            foreach (EQUIPO_REQ x in equiposReq)
+            {
+                ComboboxItem cbi = new ComboboxItem();
+                cbi.Text = "[" + x.CANTIDAD + "]  " + x.TIPO_EQUIPO.NOMBRE_TIPO_EQUIPO;
+                cbi.Value = x.TIPO_EQUIPO.ID_TIPO_EQUIPO;
+                lbxEquiposPrestacionMPre.Items.Add(cbi);
+                if (id == cbi.Value)
+                    indexId = index;
+                index++;
+            }
+            if (equiposReq.Count > 0)
+                lbxEquiposPrestacionMPre.SelectedIndex = indexId;
+        }
     }
 }

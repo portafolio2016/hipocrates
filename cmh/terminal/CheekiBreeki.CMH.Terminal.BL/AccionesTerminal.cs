@@ -1680,6 +1680,24 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return (prestaciones);
         }
 
+        public List<PRESTACION> listaPrestaciones()
+        {
+            List<PRESTACION> prestaciones = conexionDB.PRESTACION.ToList();
+            return (prestaciones);
+        }
+
+        public List<TIPO_PRES> listaTipoPrestaciones()
+        {
+            List<TIPO_PRES> tipoPrestaciones = conexionDB.TIPO_PRES.ToList();
+            return (tipoPrestaciones);
+        }
+
+        public List<TIPO_EQUIPO> listaTipoEquipos()
+        {
+            List<TIPO_EQUIPO> tipoEquipo = conexionDB.TIPO_EQUIPO.ToList();
+            return (tipoEquipo);
+        }
+
         public List<ATENCION_AGEN> listaAtencionesVigentes(int rut)
         {
             List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN

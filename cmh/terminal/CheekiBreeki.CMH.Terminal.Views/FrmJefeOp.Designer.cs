@@ -38,8 +38,31 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.prestaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logPagosHonorarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
+            this.gbMantenerPrestacion = new System.Windows.Forms.GroupBox();
+            this.btnCargarPorCodigoMPre = new System.Windows.Forms.Button();
+            this.btnNuevaPrestacionMPre = new System.Windows.Forms.Button();
+            this.btnCargarPorLista = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbCodigoPrestacionMPre = new System.Windows.Forms.TextBox();
+            this.cbPrestacionesMPre = new System.Windows.Forms.ComboBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnGuardarMpre = new System.Windows.Forms.Button();
+            this.btnEliminarMPre = new System.Windows.Forms.Button();
+            this.btnRegistrarMPre = new System.Windows.Forms.Button();
+            this.btnRemoveMPre = new System.Windows.Forms.Button();
+            this.btnAddMPre = new System.Windows.Forms.Button();
+            this.lbxEquiposPrestacionMPre = new System.Windows.Forms.ListBox();
+            this.lbxEquiposMPre = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbNombrePrestacionMPre = new System.Windows.Forms.TextBox();
+            this.tbPrecioPrestacionMPre = new System.Windows.Forms.TextBox();
+            this.cbTipoPrestacionMPre = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbNuevoMail = new System.Windows.Forms.TextBox();
@@ -95,42 +118,19 @@
             this.lblGuion_MP = new System.Windows.Forms.Label();
             this.txtRutPersonal_MP = new System.Windows.Forms.TextBox();
             this.lblRutPersonal_MP = new System.Windows.Forms.Label();
-            this.gbMantenerPrestacion = new System.Windows.Forms.GroupBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.cbPrestacionesMPre = new System.Windows.Forms.ComboBox();
-            this.tbCodigoPrestacionMPre = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnCargarPorLista = new System.Windows.Forms.Button();
-            this.btnNuevaPrestacionMPre = new System.Windows.Forms.Button();
-            this.btnCargarPorCodigoMPre = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbPrestacionesEnModificarMPre = new System.Windows.Forms.ComboBox();
-            this.tbNombrePrestacionMPre = new System.Windows.Forms.TextBox();
-            this.tbPrecioPrestacionMPre = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lbxEquiposMPre = new System.Windows.Forms.ListBox();
-            this.lbxEquiposPrestacionMPre = new System.Windows.Forms.ListBox();
-            this.btnAddMPre = new System.Windows.Forms.Button();
-            this.btnRemoveMPre = new System.Windows.Forms.Button();
-            this.btnRegistrarMPre = new System.Windows.Forms.Button();
-            this.btnEliminarMPre = new System.Windows.Forms.Button();
-            this.btnGuardarMpre = new System.Windows.Forms.Button();
-            this.prestaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
+            this.gbMantenerPrestacion.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.gbLogPagoHonorarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).BeginInit();
             this.gbMantenedorPersonal.SuspendLayout();
             this.gpMedico_MP.SuspendLayout();
-            this.gbMantenerPrestacion.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -196,6 +196,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.Controls.Add(this.gbMantenerPrestacion);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Controls.Add(this.gbLogPagoHonorarios);
             this.groupBox1.Controls.Add(this.gbMantenedorPersonal);
@@ -228,9 +229,16 @@
             // personalToolStripMenuItem
             // 
             this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
-            this.personalToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.personalToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.personalToolStripMenuItem.Text = "Personal";
             this.personalToolStripMenuItem.Click += new System.EventHandler(this.personalToolStripMenuItem_Click);
+            // 
+            // prestaciónToolStripMenuItem
+            // 
+            this.prestaciónToolStripMenuItem.Name = "prestaciónToolStripMenuItem";
+            this.prestaciónToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.prestaciónToolStripMenuItem.Text = "Prestación";
+            this.prestaciónToolStripMenuItem.Click += new System.EventHandler(this.prestaciónToolStripMenuItem_Click);
             // 
             // logPagosHonorarioToolStripMenuItem
             // 
@@ -241,7 +249,6 @@
             // 
             // gbOpcionesUsuario
             // 
-            this.gbOpcionesUsuario.Controls.Add(this.gbMantenerPrestacion);
             this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
             this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
             this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
@@ -251,6 +258,219 @@
             this.gbOpcionesUsuario.TabStop = false;
             this.gbOpcionesUsuario.Text = "Opciones de cuenta";
             this.gbOpcionesUsuario.Visible = false;
+            // 
+            // gbMantenerPrestacion
+            // 
+            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorCodigoMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.btnNuevaPrestacionMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorLista);
+            this.gbMantenerPrestacion.Controls.Add(this.label3);
+            this.gbMantenerPrestacion.Controls.Add(this.label2);
+            this.gbMantenerPrestacion.Controls.Add(this.tbCodigoPrestacionMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.cbPrestacionesMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.groupBox6);
+            this.gbMantenerPrestacion.Location = new System.Drawing.Point(6, 43);
+            this.gbMantenerPrestacion.Name = "gbMantenerPrestacion";
+            this.gbMantenerPrestacion.Size = new System.Drawing.Size(768, 462);
+            this.gbMantenerPrestacion.TabIndex = 10;
+            this.gbMantenerPrestacion.TabStop = false;
+            this.gbMantenerPrestacion.Text = "Mantener prestaciones";
+            this.gbMantenerPrestacion.Visible = false;
+            // 
+            // btnCargarPorCodigoMPre
+            // 
+            this.btnCargarPorCodigoMPre.Location = new System.Drawing.Point(273, 52);
+            this.btnCargarPorCodigoMPre.Name = "btnCargarPorCodigoMPre";
+            this.btnCargarPorCodigoMPre.Size = new System.Drawing.Size(224, 23);
+            this.btnCargarPorCodigoMPre.TabIndex = 7;
+            this.btnCargarPorCodigoMPre.Text = "Cargar por codigo";
+            this.btnCargarPorCodigoMPre.UseVisualStyleBackColor = true;
+            // 
+            // btnNuevaPrestacionMPre
+            // 
+            this.btnNuevaPrestacionMPre.Location = new System.Drawing.Point(538, 52);
+            this.btnNuevaPrestacionMPre.Name = "btnNuevaPrestacionMPre";
+            this.btnNuevaPrestacionMPre.Size = new System.Drawing.Size(224, 23);
+            this.btnNuevaPrestacionMPre.TabIndex = 6;
+            this.btnNuevaPrestacionMPre.Text = "Nueva prestación";
+            this.btnNuevaPrestacionMPre.UseVisualStyleBackColor = true;
+            this.btnNuevaPrestacionMPre.Click += new System.EventHandler(this.btnNuevaPrestacionMPre_Click);
+            // 
+            // btnCargarPorLista
+            // 
+            this.btnCargarPorLista.Location = new System.Drawing.Point(12, 52);
+            this.btnCargarPorLista.Name = "btnCargarPorLista";
+            this.btnCargarPorLista.Size = new System.Drawing.Size(224, 23);
+            this.btnCargarPorLista.TabIndex = 5;
+            this.btnCargarPorLista.Text = "Cargar por lista";
+            this.btnCargarPorLista.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Prestación:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(393, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(119, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "o Codigo de prestación:";
+            // 
+            // tbCodigoPrestacionMPre
+            // 
+            this.tbCodigoPrestacionMPre.Location = new System.Drawing.Point(538, 19);
+            this.tbCodigoPrestacionMPre.Name = "tbCodigoPrestacionMPre";
+            this.tbCodigoPrestacionMPre.Size = new System.Drawing.Size(224, 20);
+            this.tbCodigoPrestacionMPre.TabIndex = 2;
+            // 
+            // cbPrestacionesMPre
+            // 
+            this.cbPrestacionesMPre.FormattingEnabled = true;
+            this.cbPrestacionesMPre.Location = new System.Drawing.Point(79, 20);
+            this.cbPrestacionesMPre.Name = "cbPrestacionesMPre";
+            this.cbPrestacionesMPre.Size = new System.Drawing.Size(288, 21);
+            this.cbPrestacionesMPre.TabIndex = 1;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnGuardarMpre);
+            this.groupBox6.Controls.Add(this.btnEliminarMPre);
+            this.groupBox6.Controls.Add(this.btnRegistrarMPre);
+            this.groupBox6.Controls.Add(this.btnRemoveMPre);
+            this.groupBox6.Controls.Add(this.btnAddMPre);
+            this.groupBox6.Controls.Add(this.lbxEquiposPrestacionMPre);
+            this.groupBox6.Controls.Add(this.lbxEquiposMPre);
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.tbNombrePrestacionMPre);
+            this.groupBox6.Controls.Add(this.tbPrecioPrestacionMPre);
+            this.groupBox6.Controls.Add(this.cbTipoPrestacionMPre);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Location = new System.Drawing.Point(8, 77);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(754, 379);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Prestación";
+            // 
+            // btnGuardarMpre
+            // 
+            this.btnGuardarMpre.Location = new System.Drawing.Point(284, 350);
+            this.btnGuardarMpre.Name = "btnGuardarMpre";
+            this.btnGuardarMpre.Size = new System.Drawing.Size(188, 23);
+            this.btnGuardarMpre.TabIndex = 16;
+            this.btnGuardarMpre.Text = "Guardar cambios";
+            this.btnGuardarMpre.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminarMPre
+            // 
+            this.btnEliminarMPre.Location = new System.Drawing.Point(484, 350);
+            this.btnEliminarMPre.Name = "btnEliminarMPre";
+            this.btnEliminarMPre.Size = new System.Drawing.Size(188, 23);
+            this.btnEliminarMPre.TabIndex = 15;
+            this.btnEliminarMPre.Text = "Eliminar";
+            this.btnEliminarMPre.UseVisualStyleBackColor = true;
+            // 
+            // btnRegistrarMPre
+            // 
+            this.btnRegistrarMPre.Location = new System.Drawing.Point(84, 350);
+            this.btnRegistrarMPre.Name = "btnRegistrarMPre";
+            this.btnRegistrarMPre.Size = new System.Drawing.Size(188, 23);
+            this.btnRegistrarMPre.TabIndex = 8;
+            this.btnRegistrarMPre.Text = "Registrar";
+            this.btnRegistrarMPre.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveMPre
+            // 
+            this.btnRemoveMPre.Location = new System.Drawing.Point(356, 266);
+            this.btnRemoveMPre.Name = "btnRemoveMPre";
+            this.btnRemoveMPre.Size = new System.Drawing.Size(41, 73);
+            this.btnRemoveMPre.TabIndex = 14;
+            this.btnRemoveMPre.Text = "<<";
+            this.btnRemoveMPre.UseVisualStyleBackColor = true;
+            this.btnRemoveMPre.Click += new System.EventHandler(this.btnRemoveMPre_Click);
+            // 
+            // btnAddMPre
+            // 
+            this.btnAddMPre.Location = new System.Drawing.Point(356, 179);
+            this.btnAddMPre.Name = "btnAddMPre";
+            this.btnAddMPre.Size = new System.Drawing.Size(41, 73);
+            this.btnAddMPre.TabIndex = 8;
+            this.btnAddMPre.Text = ">>";
+            this.btnAddMPre.UseVisualStyleBackColor = true;
+            this.btnAddMPre.Click += new System.EventHandler(this.btnAddMPre_Click);
+            // 
+            // lbxEquiposPrestacionMPre
+            // 
+            this.lbxEquiposPrestacionMPre.FormattingEnabled = true;
+            this.lbxEquiposPrestacionMPre.Location = new System.Drawing.Point(403, 179);
+            this.lbxEquiposPrestacionMPre.Name = "lbxEquiposPrestacionMPre";
+            this.lbxEquiposPrestacionMPre.Size = new System.Drawing.Size(316, 160);
+            this.lbxEquiposPrestacionMPre.TabIndex = 13;
+            // 
+            // lbxEquiposMPre
+            // 
+            this.lbxEquiposMPre.FormattingEnabled = true;
+            this.lbxEquiposMPre.Location = new System.Drawing.Point(35, 179);
+            this.lbxEquiposMPre.Name = "lbxEquiposMPre";
+            this.lbxEquiposMPre.Size = new System.Drawing.Size(315, 160);
+            this.lbxEquiposMPre.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(113, 140);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Precio:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(113, 96);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Nombre:";
+            // 
+            // tbNombrePrestacionMPre
+            // 
+            this.tbNombrePrestacionMPre.Location = new System.Drawing.Point(201, 93);
+            this.tbNombrePrestacionMPre.Name = "tbNombrePrestacionMPre";
+            this.tbNombrePrestacionMPre.Size = new System.Drawing.Size(391, 20);
+            this.tbNombrePrestacionMPre.TabIndex = 8;
+            // 
+            // tbPrecioPrestacionMPre
+            // 
+            this.tbPrecioPrestacionMPre.Location = new System.Drawing.Point(201, 137);
+            this.tbPrecioPrestacionMPre.Name = "tbPrecioPrestacionMPre";
+            this.tbPrecioPrestacionMPre.Size = new System.Drawing.Size(203, 20);
+            this.tbPrecioPrestacionMPre.TabIndex = 9;
+            // 
+            // cbTipoPrestacionMPre
+            // 
+            this.cbTipoPrestacionMPre.FormattingEnabled = true;
+            this.cbTipoPrestacionMPre.Location = new System.Drawing.Point(201, 51);
+            this.cbTipoPrestacionMPre.Name = "cbTipoPrestacionMPre";
+            this.cbTipoPrestacionMPre.Size = new System.Drawing.Size(391, 21);
+            this.cbTipoPrestacionMPre.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(113, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Tipo prestación:";
             // 
             // groupBox5
             // 
@@ -805,223 +1025,6 @@
             this.lblRutPersonal_MP.TabIndex = 0;
             this.lblRutPersonal_MP.Text = "Rut de Personal";
             // 
-            // gbMantenerPrestacion
-            // 
-            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorCodigoMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.btnNuevaPrestacionMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorLista);
-            this.gbMantenerPrestacion.Controls.Add(this.label3);
-            this.gbMantenerPrestacion.Controls.Add(this.label2);
-            this.gbMantenerPrestacion.Controls.Add(this.tbCodigoPrestacionMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.cbPrestacionesMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.groupBox6);
-            this.gbMantenerPrestacion.Location = new System.Drawing.Point(0, 0);
-            this.gbMantenerPrestacion.Name = "gbMantenerPrestacion";
-            this.gbMantenerPrestacion.Size = new System.Drawing.Size(768, 462);
-            this.gbMantenerPrestacion.TabIndex = 10;
-            this.gbMantenerPrestacion.TabStop = false;
-            this.gbMantenerPrestacion.Text = "Mantener prestaciones";
-            this.gbMantenerPrestacion.Visible = false;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.btnGuardarMpre);
-            this.groupBox6.Controls.Add(this.btnEliminarMPre);
-            this.groupBox6.Controls.Add(this.btnRegistrarMPre);
-            this.groupBox6.Controls.Add(this.btnRemoveMPre);
-            this.groupBox6.Controls.Add(this.btnAddMPre);
-            this.groupBox6.Controls.Add(this.lbxEquiposPrestacionMPre);
-            this.groupBox6.Controls.Add(this.lbxEquiposMPre);
-            this.groupBox6.Controls.Add(this.label6);
-            this.groupBox6.Controls.Add(this.label5);
-            this.groupBox6.Controls.Add(this.tbNombrePrestacionMPre);
-            this.groupBox6.Controls.Add(this.tbPrecioPrestacionMPre);
-            this.groupBox6.Controls.Add(this.cbPrestacionesEnModificarMPre);
-            this.groupBox6.Controls.Add(this.label4);
-            this.groupBox6.Location = new System.Drawing.Point(8, 77);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(754, 379);
-            this.groupBox6.TabIndex = 0;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Prestación";
-            // 
-            // cbPrestacionesMPre
-            // 
-            this.cbPrestacionesMPre.FormattingEnabled = true;
-            this.cbPrestacionesMPre.Location = new System.Drawing.Point(79, 20);
-            this.cbPrestacionesMPre.Name = "cbPrestacionesMPre";
-            this.cbPrestacionesMPre.Size = new System.Drawing.Size(288, 21);
-            this.cbPrestacionesMPre.TabIndex = 1;
-            // 
-            // tbCodigoPrestacionMPre
-            // 
-            this.tbCodigoPrestacionMPre.Location = new System.Drawing.Point(538, 19);
-            this.tbCodigoPrestacionMPre.Name = "tbCodigoPrestacionMPre";
-            this.tbCodigoPrestacionMPre.Size = new System.Drawing.Size(224, 20);
-            this.tbCodigoPrestacionMPre.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(393, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "o Codigo de prestación:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Prestación:";
-            // 
-            // btnCargarPorLista
-            // 
-            this.btnCargarPorLista.Location = new System.Drawing.Point(12, 52);
-            this.btnCargarPorLista.Name = "btnCargarPorLista";
-            this.btnCargarPorLista.Size = new System.Drawing.Size(224, 23);
-            this.btnCargarPorLista.TabIndex = 5;
-            this.btnCargarPorLista.Text = "Cargar por lista";
-            this.btnCargarPorLista.UseVisualStyleBackColor = true;
-            // 
-            // btnNuevaPrestacionMPre
-            // 
-            this.btnNuevaPrestacionMPre.Location = new System.Drawing.Point(538, 52);
-            this.btnNuevaPrestacionMPre.Name = "btnNuevaPrestacionMPre";
-            this.btnNuevaPrestacionMPre.Size = new System.Drawing.Size(224, 23);
-            this.btnNuevaPrestacionMPre.TabIndex = 6;
-            this.btnNuevaPrestacionMPre.Text = "Nueva prestación";
-            this.btnNuevaPrestacionMPre.UseVisualStyleBackColor = true;
-            // 
-            // btnCargarPorCodigoMPre
-            // 
-            this.btnCargarPorCodigoMPre.Location = new System.Drawing.Point(273, 52);
-            this.btnCargarPorCodigoMPre.Name = "btnCargarPorCodigoMPre";
-            this.btnCargarPorCodigoMPre.Size = new System.Drawing.Size(224, 23);
-            this.btnCargarPorCodigoMPre.TabIndex = 7;
-            this.btnCargarPorCodigoMPre.Text = "Cargar por codigo";
-            this.btnCargarPorCodigoMPre.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(113, 54);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Prestaciones:";
-            // 
-            // cbPrestacionesEnModificarMPre
-            // 
-            this.cbPrestacionesEnModificarMPre.FormattingEnabled = true;
-            this.cbPrestacionesEnModificarMPre.Location = new System.Drawing.Point(201, 51);
-            this.cbPrestacionesEnModificarMPre.Name = "cbPrestacionesEnModificarMPre";
-            this.cbPrestacionesEnModificarMPre.Size = new System.Drawing.Size(391, 21);
-            this.cbPrestacionesEnModificarMPre.TabIndex = 8;
-            // 
-            // tbNombrePrestacionMPre
-            // 
-            this.tbNombrePrestacionMPre.Location = new System.Drawing.Point(201, 93);
-            this.tbNombrePrestacionMPre.Name = "tbNombrePrestacionMPre";
-            this.tbNombrePrestacionMPre.Size = new System.Drawing.Size(391, 20);
-            this.tbNombrePrestacionMPre.TabIndex = 8;
-            // 
-            // tbPrecioPrestacionMPre
-            // 
-            this.tbPrecioPrestacionMPre.Location = new System.Drawing.Point(201, 137);
-            this.tbPrecioPrestacionMPre.Name = "tbPrecioPrestacionMPre";
-            this.tbPrecioPrestacionMPre.Size = new System.Drawing.Size(203, 20);
-            this.tbPrecioPrestacionMPre.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(113, 96);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Nombre:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(113, 140);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Precio:";
-            // 
-            // lbxEquiposMPre
-            // 
-            this.lbxEquiposMPre.FormattingEnabled = true;
-            this.lbxEquiposMPre.Location = new System.Drawing.Point(35, 179);
-            this.lbxEquiposMPre.Name = "lbxEquiposMPre";
-            this.lbxEquiposMPre.Size = new System.Drawing.Size(315, 160);
-            this.lbxEquiposMPre.TabIndex = 12;
-            // 
-            // lbxEquiposPrestacionMPre
-            // 
-            this.lbxEquiposPrestacionMPre.FormattingEnabled = true;
-            this.lbxEquiposPrestacionMPre.Location = new System.Drawing.Point(403, 179);
-            this.lbxEquiposPrestacionMPre.Name = "lbxEquiposPrestacionMPre";
-            this.lbxEquiposPrestacionMPre.Size = new System.Drawing.Size(316, 160);
-            this.lbxEquiposPrestacionMPre.TabIndex = 13;
-            // 
-            // btnAddMPre
-            // 
-            this.btnAddMPre.Location = new System.Drawing.Point(356, 179);
-            this.btnAddMPre.Name = "btnAddMPre";
-            this.btnAddMPre.Size = new System.Drawing.Size(41, 73);
-            this.btnAddMPre.TabIndex = 8;
-            this.btnAddMPre.Text = ">>";
-            this.btnAddMPre.UseVisualStyleBackColor = true;
-            // 
-            // btnRemoveMPre
-            // 
-            this.btnRemoveMPre.Location = new System.Drawing.Point(356, 266);
-            this.btnRemoveMPre.Name = "btnRemoveMPre";
-            this.btnRemoveMPre.Size = new System.Drawing.Size(41, 73);
-            this.btnRemoveMPre.TabIndex = 14;
-            this.btnRemoveMPre.Text = "<<";
-            this.btnRemoveMPre.UseVisualStyleBackColor = true;
-            // 
-            // btnRegistrarMPre
-            // 
-            this.btnRegistrarMPre.Location = new System.Drawing.Point(84, 350);
-            this.btnRegistrarMPre.Name = "btnRegistrarMPre";
-            this.btnRegistrarMPre.Size = new System.Drawing.Size(188, 23);
-            this.btnRegistrarMPre.TabIndex = 8;
-            this.btnRegistrarMPre.Text = "Registrar";
-            this.btnRegistrarMPre.UseVisualStyleBackColor = true;
-            // 
-            // btnEliminarMPre
-            // 
-            this.btnEliminarMPre.Location = new System.Drawing.Point(484, 350);
-            this.btnEliminarMPre.Name = "btnEliminarMPre";
-            this.btnEliminarMPre.Size = new System.Drawing.Size(188, 23);
-            this.btnEliminarMPre.TabIndex = 15;
-            this.btnEliminarMPre.Text = "Eliminar";
-            this.btnEliminarMPre.UseVisualStyleBackColor = true;
-            // 
-            // btnGuardarMpre
-            // 
-            this.btnGuardarMpre.Location = new System.Drawing.Point(284, 350);
-            this.btnGuardarMpre.Name = "btnGuardarMpre";
-            this.btnGuardarMpre.Size = new System.Drawing.Size(188, 23);
-            this.btnGuardarMpre.TabIndex = 16;
-            this.btnGuardarMpre.Text = "Guardar cambios";
-            this.btnGuardarMpre.UseVisualStyleBackColor = true;
-            // 
-            // prestaciónToolStripMenuItem
-            // 
-            this.prestaciónToolStripMenuItem.Name = "prestaciónToolStripMenuItem";
-            this.prestaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.prestaciónToolStripMenuItem.Text = "Prestación";
-            this.prestaciónToolStripMenuItem.Click += new System.EventHandler(this.prestaciónToolStripMenuItem_Click);
-            // 
             // FrmJefeOp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1042,6 +1045,10 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
+            this.gbMantenerPrestacion.ResumeLayout(false);
+            this.gbMantenerPrestacion.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1053,10 +1060,6 @@
             this.gbMantenedorPersonal.PerformLayout();
             this.gpMedico_MP.ResumeLayout(false);
             this.gpMedico_MP.PerformLayout();
-            this.gbMantenerPrestacion.ResumeLayout(false);
-            this.gbMantenerPrestacion.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1141,7 +1144,7 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox tbNombrePrestacionMPre;
         private System.Windows.Forms.TextBox tbPrecioPrestacionMPre;
-        private System.Windows.Forms.ComboBox cbPrestacionesEnModificarMPre;
+        private System.Windows.Forms.ComboBox cbTipoPrestacionMPre;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
