@@ -7,24 +7,13 @@ package cl.cheekibreeki.cmh.webapp.servlet;
  */
 import cl.cheekibreeki.cmh.lib.dal.dbcontrol.Controller;
 import cl.cheekibreeki.cmh.lib.dal.entities.AtencionAgen;
-import cl.cheekibreeki.cmh.lib.dal.entities.PersMedico;
-import cl.cheekibreeki.cmh.lib.dal.entities.Personal;
-import cl.cheekibreeki.cmh.lib.dal.entities.Prestacion;
-import cl.cheekibreeki.cmh.lib.dal.entities.TipoPres;
+import cl.cheekibreeki.cmh.lib.dal.entities.Paciente;
 import cl.cheekibreeki.cmh.webapp.bl.AccionesPaciente;
-import cl.cheekibreeki.cmh.webapp.bl.HoraDisponible;
-import cl.cheekibreeki.cmh.webapp.bl.HorasDisponibles;
-import cl.cheekibreeki.cmh.webapp.util.AgendamientoController;
+import cl.cheekibreeki.cmh.webapp.util.AnularController;
 import cl.cheekibreeki.cmh.webapp.util.LoginController;
-import cl.cheekibreeki.cmh.webapp.util.Validador;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dev
  */
-public class Agendamiento extends HttpServlet {
+public class Anular extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,24 +37,30 @@ public class Agendamiento extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //Obtener método
+        String metodo = request.getMethod();
+        if ("POST".compareTo(metodo) == 0) {
+            //si es post
+            String atencionAnulada = request.getParameter("atencionAnulada");
+            int atencionId = Integer.parseInt(request.getParameter("atencionAnulada"));
+            AccionesPaciente accionesPaciente = new AccionesPaciente();
+            AtencionAgen atencion = (AtencionAgen) Controller.findById(AtencionAgen.class, atencionId);
+            accionesPaciente.anularAtencion(atencion);
 
-        AgendamientoController.cargarTodosTiposPrestaciones(request);
-        AgendamientoController.cargarPrestaciones(request);
-        AgendamientoController.cargarPersonal(request);
-        AgendamientoController.cargarHorasLibres(request);
-        String paramBtnRegistrar = request.getParameter("hiddenRegistrar");
-        boolean btnRegistrarClick = null != paramBtnRegistrar && "registrar".compareTo(paramBtnRegistrar) == 0;
-        if (btnRegistrarClick) {
-            boolean isLoggedIn = LoginController.obtenerPacienteEnSesion(request.getSession()) != null;
-            if (isLoggedIn) {
-                AgendamientoController.registrarAtencion(request);
-                PrintWriter out = response.getWriter();
-                out.println("<script>alert('Atencion agendada exitosamente'); location.href = 'master.jsp?page=index';</script>");
-            } else {
-                PrintWriter out = response.getWriter();
-                out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=login';</script>");
-            }
         }
+        //si GET
+        //Redireccionar si no hay login
+        if (null == LoginController.obtenerPacienteEnSesion(request.getSession())) {
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('Por favor inicie sesión'); location.href = 'master.jsp?page=login';</script>");
+        }
+        //Obtener paciente
+        Paciente paciente = LoginController.obtenerPacienteEnSesion(request.getSession());
+        //Obtener atenciones pendientes
+        ArrayList<AtencionAgen> atencionesPendientes = AnularController.atencionesPaciente(paciente);
+        //Agregar como atributo
+        request.setAttribute("atenciones", atencionesPendientes);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,9 +75,7 @@ public class Agendamiento extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         processRequest(request, response);
-
     }
 
     /**
@@ -96,9 +89,7 @@ public class Agendamiento extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         processRequest(request, response);
-
     }
 
     /**
