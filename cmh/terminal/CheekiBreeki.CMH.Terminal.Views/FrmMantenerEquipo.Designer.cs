@@ -388,6 +388,7 @@
             this.btnGuardar_Eq.TabIndex = 5;
             this.btnGuardar_Eq.Text = "Guardar Cambios";
             this.btnGuardar_Eq.UseVisualStyleBackColor = true;
+            this.btnGuardar_Eq.Click += new System.EventHandler(this.btnGuardar_Eq_Click);
             // 
             // btnNuevoEquipo_Eq
             // 

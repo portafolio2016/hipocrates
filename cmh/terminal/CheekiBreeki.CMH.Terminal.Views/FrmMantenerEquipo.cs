@@ -253,7 +253,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al cargar equipo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -280,6 +280,26 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 MessageBox.Show("Error al registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+            }
+        }
+
+        private void btnGuardar_Eq_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                INVENTARIO inv = at.buscarInventario((int)dgEquipo_Eq.CurrentRow.Cells["idInventario"].Value);
+                inv.CANT_BODEGA = int.Parse(txtCantidad_Eq.Text);
+                inv.ID_TIPO_EQUIPO = ((TIPO_EQUIPO)cbNombreEquipo_Eq.SelectedItem).ID_TIPO_EQUIPO;
+                at.actualizarInventario(inv);
+                MessageBox.Show("¡Inventario actualizado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                limpiarDatos();
+                CargarDataGridInventario();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar equipo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

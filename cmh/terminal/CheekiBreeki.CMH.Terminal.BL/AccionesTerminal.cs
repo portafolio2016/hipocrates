@@ -834,6 +834,60 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return null;
             }
         }
+
+        public INVENTARIO buscarInventario(int idInventario)
+        {
+            try
+            {
+                if (idInventario == null)
+                {
+                    throw new Exception("Nombre nulo");
+                }
+                else
+                {
+                    INVENTARIO inventario = null;
+                    inventario = conexionDB.INVENTARIO.Where(d => d.ID_INVENTARIO_EQUIPO == idInventario).FirstOrDefault();
+                    
+                    if (Util.isObjetoNulo(inventario))
+                    {
+                        throw new Exception("Equipo no existe");
+                    }
+                    return inventario;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public Boolean actualizarInventario(INVENTARIO inventario)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(inventario))
+                {
+                    throw new Exception("Inventario nulo");
+                }
+                else
+                {
+                    using (var context = new CMHEntities())
+                    {
+                        INVENTARIO buscado = context.INVENTARIO.Where(d => d.ID_INVENTARIO_EQUIPO == inventario.ID_INVENTARIO_EQUIPO).FirstOrDefault();
+                        buscado.CANT_BODEGA = inventario.CANT_BODEGA;
+                        buscado.ID_TIPO_EQUIPO = inventario.ID_TIPO_EQUIPO;
+                        context.SaveChangesAsync();
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
         #endregion
 
         //ECU-023 y ECU-026
