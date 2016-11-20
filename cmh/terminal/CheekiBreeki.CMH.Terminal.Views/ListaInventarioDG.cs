@@ -10,13 +10,15 @@ namespace CheekiBreeki.CMH.Terminal.Views
     {
         public int idInventario { get; set; }
         public int cantidad { get; set; }
+        public int idEquipo { get; set; }
         public string nombreEquipo { get; set; }
 
 
-        public ListaInventarioDG(int idInventario, int cantidad, string nombreEquipo)
+        public ListaInventarioDG(int idInventario, int cantidad,int idEquipo, string nombreEquipo)
         {
             this.idInventario = idInventario;
             this.cantidad = cantidad;
+            this.idEquipo = idEquipo;
             this.nombreEquipo = nombreEquipo;
         }
     }

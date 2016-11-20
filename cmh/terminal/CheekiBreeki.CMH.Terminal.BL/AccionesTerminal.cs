@@ -693,6 +693,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public Boolean nuevoEquipoInventario(INVENTARIO inventario)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(inventario))
+                {
+                    throw new Exception("Inventario nulo");
+                }
+                else if (inventario.CANT_BODEGA <= 0)
+                {
+                    throw new Exception("Cantidad no permitida");
+                }
+                else
+                {
+                    conexionDB.INVENTARIO.Add(inventario);
+                    conexionDB.SaveChangesAsync();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
         public TIPO_EQUIPO buscarEquipo(string nombre)
         {
             try
@@ -785,6 +812,21 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 List<INVENTARIO> listInventario = null;
                 listInventario = conexionDB.INVENTARIO.ToList();
                 return listInventario;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public List<TIPO_EQUIPO> ObtenerTipoEquipo()
+        {
+            try
+            {
+                List<TIPO_EQUIPO> listTipoEquipo = null;
+                listTipoEquipo = conexionDB.TIPO_EQUIPO.ToList();
+                return listTipoEquipo;
             }
             catch (Exception ex)
             {

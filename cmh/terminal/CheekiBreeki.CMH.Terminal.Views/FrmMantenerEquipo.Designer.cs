@@ -36,9 +36,7 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbMantenerEquipo = new System.Windows.Forms.GroupBox();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnCargar = new System.Windows.Forms.Button();
-            this.btnNuevo = new System.Windows.Forms.Button();
+            this.dgEquipo_Eq = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,16 +53,25 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.dgEquipo_Eq = new System.Windows.Forms.DataGridView();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lblCantidad_Eq = new System.Windows.Forms.Label();
+            this.lblNombreTipo = new System.Windows.Forms.Label();
+            this.txtCantidad_Eq = new System.Windows.Forms.TextBox();
+            this.cbNombreEquipo_Eq = new System.Windows.Forms.ComboBox();
+            this.btnRegistrar_Eq = new System.Windows.Forms.Button();
+            this.btnGuardar_Eq = new System.Windows.Forms.Button();
+            this.btnNuevoEquipo_Eq = new System.Windows.Forms.Button();
+            this.btnCargarEquipo_Eq = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbMantenerEquipo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -140,10 +147,10 @@
             // 
             // gbMantenerEquipo
             // 
+            this.gbMantenerEquipo.Controls.Add(this.btnCargarEquipo_Eq);
+            this.gbMantenerEquipo.Controls.Add(this.btnNuevoEquipo_Eq);
+            this.gbMantenerEquipo.Controls.Add(this.groupBox6);
             this.gbMantenerEquipo.Controls.Add(this.dgEquipo_Eq);
-            this.gbMantenerEquipo.Controls.Add(this.btnEliminar);
-            this.gbMantenerEquipo.Controls.Add(this.btnCargar);
-            this.gbMantenerEquipo.Controls.Add(this.btnNuevo);
             this.gbMantenerEquipo.Location = new System.Drawing.Point(6, 43);
             this.gbMantenerEquipo.Name = "gbMantenerEquipo";
             this.gbMantenerEquipo.Size = new System.Drawing.Size(768, 462);
@@ -151,32 +158,14 @@
             this.gbMantenerEquipo.TabStop = false;
             this.gbMantenerEquipo.Text = "Mantener Equipo";
             // 
-            // btnEliminar
+            // dgEquipo_Eq
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(464, 261);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 3;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            // 
-            // btnCargar
-            // 
-            this.btnCargar.Location = new System.Drawing.Point(323, 261);
-            this.btnCargar.Name = "btnCargar";
-            this.btnCargar.Size = new System.Drawing.Size(75, 23);
-            this.btnCargar.TabIndex = 2;
-            this.btnCargar.Text = "Cargar";
-            this.btnCargar.UseVisualStyleBackColor = true;
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Location = new System.Drawing.Point(181, 261);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(75, 23);
-            this.btnNuevo.TabIndex = 1;
-            this.btnNuevo.Text = "Nuevo";
-            this.btnNuevo.UseVisualStyleBackColor = true;
+            this.dgEquipo_Eq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgEquipo_Eq.Location = new System.Drawing.Point(16, 29);
+            this.dgEquipo_Eq.Name = "dgEquipo_Eq";
+            this.dgEquipo_Eq.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgEquipo_Eq.Size = new System.Drawing.Size(732, 226);
+            this.dgEquipo_Eq.TabIndex = 4;
             // 
             // menuStrip1
             // 
@@ -330,13 +319,95 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
-            // dgEquipo_Eq
+            // groupBox6
             // 
-            this.dgEquipo_Eq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgEquipo_Eq.Location = new System.Drawing.Point(16, 29);
-            this.dgEquipo_Eq.Name = "dgEquipo_Eq";
-            this.dgEquipo_Eq.Size = new System.Drawing.Size(732, 226);
-            this.dgEquipo_Eq.TabIndex = 4;
+            this.groupBox6.Controls.Add(this.btnGuardar_Eq);
+            this.groupBox6.Controls.Add(this.btnRegistrar_Eq);
+            this.groupBox6.Controls.Add(this.cbNombreEquipo_Eq);
+            this.groupBox6.Controls.Add(this.txtCantidad_Eq);
+            this.groupBox6.Controls.Add(this.lblNombreTipo);
+            this.groupBox6.Controls.Add(this.lblCantidad_Eq);
+            this.groupBox6.Location = new System.Drawing.Point(16, 295);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(732, 153);
+            this.groupBox6.TabIndex = 5;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Equipo";
+            // 
+            // lblCantidad_Eq
+            // 
+            this.lblCantidad_Eq.AutoSize = true;
+            this.lblCantidad_Eq.Location = new System.Drawing.Point(150, 37);
+            this.lblCantidad_Eq.Name = "lblCantidad_Eq";
+            this.lblCantidad_Eq.Size = new System.Drawing.Size(49, 13);
+            this.lblCantidad_Eq.TabIndex = 0;
+            this.lblCantidad_Eq.Text = "Cantidad";
+            // 
+            // lblNombreTipo
+            // 
+            this.lblNombreTipo.AutoSize = true;
+            this.lblNombreTipo.Location = new System.Drawing.Point(150, 74);
+            this.lblNombreTipo.Name = "lblNombreTipo";
+            this.lblNombreTipo.Size = new System.Drawing.Size(79, 13);
+            this.lblNombreTipo.TabIndex = 1;
+            this.lblNombreTipo.Text = "Nombre equipo";
+            // 
+            // txtCantidad_Eq
+            // 
+            this.txtCantidad_Eq.Location = new System.Drawing.Point(352, 34);
+            this.txtCantidad_Eq.Name = "txtCantidad_Eq";
+            this.txtCantidad_Eq.Size = new System.Drawing.Size(196, 20);
+            this.txtCantidad_Eq.TabIndex = 2;
+            // 
+            // cbNombreEquipo_Eq
+            // 
+            this.cbNombreEquipo_Eq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbNombreEquipo_Eq.FormattingEnabled = true;
+            this.cbNombreEquipo_Eq.Location = new System.Drawing.Point(352, 71);
+            this.cbNombreEquipo_Eq.Name = "cbNombreEquipo_Eq";
+            this.cbNombreEquipo_Eq.Size = new System.Drawing.Size(196, 21);
+            this.cbNombreEquipo_Eq.TabIndex = 3;
+            // 
+            // btnRegistrar_Eq
+            // 
+            this.btnRegistrar_Eq.Enabled = false;
+            this.btnRegistrar_Eq.Location = new System.Drawing.Point(211, 127);
+            this.btnRegistrar_Eq.Name = "btnRegistrar_Eq";
+            this.btnRegistrar_Eq.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrar_Eq.TabIndex = 4;
+            this.btnRegistrar_Eq.Text = "Registrar";
+            this.btnRegistrar_Eq.UseVisualStyleBackColor = true;
+            this.btnRegistrar_Eq.Click += new System.EventHandler(this.btnRegistrar_Eq_Click);
+            // 
+            // btnGuardar_Eq
+            // 
+            this.btnGuardar_Eq.Enabled = false;
+            this.btnGuardar_Eq.Location = new System.Drawing.Point(375, 127);
+            this.btnGuardar_Eq.Name = "btnGuardar_Eq";
+            this.btnGuardar_Eq.Size = new System.Drawing.Size(100, 23);
+            this.btnGuardar_Eq.TabIndex = 5;
+            this.btnGuardar_Eq.Text = "Guardar Cambios";
+            this.btnGuardar_Eq.UseVisualStyleBackColor = true;
+            // 
+            // btnNuevoEquipo_Eq
+            // 
+            this.btnNuevoEquipo_Eq.Location = new System.Drawing.Point(212, 266);
+            this.btnNuevoEquipo_Eq.Name = "btnNuevoEquipo_Eq";
+            this.btnNuevoEquipo_Eq.Size = new System.Drawing.Size(90, 23);
+            this.btnNuevoEquipo_Eq.TabIndex = 6;
+            this.btnNuevoEquipo_Eq.Text = "Nuevo Equipo";
+            this.btnNuevoEquipo_Eq.UseVisualStyleBackColor = true;
+            this.btnNuevoEquipo_Eq.Click += new System.EventHandler(this.btnNuevoEquipo_Click);
+            // 
+            // btnCargarEquipo_Eq
+            // 
+            this.btnCargarEquipo_Eq.Location = new System.Drawing.Point(391, 266);
+            this.btnCargarEquipo_Eq.Name = "btnCargarEquipo_Eq";
+            this.btnCargarEquipo_Eq.Size = new System.Drawing.Size(100, 23);
+            this.btnCargarEquipo_Eq.TabIndex = 7;
+            this.btnCargarEquipo_Eq.Text = "Cargar Equipo";
+            this.btnCargarEquipo_Eq.UseVisualStyleBackColor = true;
+            this.btnCargarEquipo_Eq.Click += new System.EventHandler(this.btnCargarEquipo_Eq_Click);
             // 
             // FrmMantenerEquipo
             // 
@@ -356,6 +427,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gbMantenerEquipo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
@@ -363,7 +435,8 @@
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -394,9 +467,15 @@
         private System.Windows.Forms.ToolStripMenuItem pacienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem equipoToolStripMenuItem;
         private System.Windows.Forms.GroupBox gbMantenerEquipo;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Button btnCargar;
-        private System.Windows.Forms.Button btnNuevo;
         private System.Windows.Forms.DataGridView dgEquipo_Eq;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label lblNombreTipo;
+        private System.Windows.Forms.Label lblCantidad_Eq;
+        private System.Windows.Forms.Button btnCargarEquipo_Eq;
+        private System.Windows.Forms.Button btnNuevoEquipo_Eq;
+        private System.Windows.Forms.Button btnGuardar_Eq;
+        private System.Windows.Forms.Button btnRegistrar_Eq;
+        private System.Windows.Forms.ComboBox cbNombreEquipo_Eq;
+        private System.Windows.Forms.TextBox txtCantidad_Eq;
     }
 }

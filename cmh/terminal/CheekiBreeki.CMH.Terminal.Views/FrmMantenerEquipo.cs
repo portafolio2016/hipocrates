@@ -31,12 +31,21 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
                 foreach (INVENTARIO x in listaInventarioDB)
                 {
-                    listaInventarioDG.Add(new ListaInventarioDG(x.ID_INVENTARIO_EQUIPO,(int)x.CANT_BODEGA,x.TIPO_EQUIPO.NOMBRE_TIPO_EQUIPO));
+                    listaInventarioDG.Add(new ListaInventarioDG(x.ID_INVENTARIO_EQUIPO,(int) x.CANT_BODEGA,(int) x.ID_TIPO_EQUIPO,x.TIPO_EQUIPO.NOMBRE_TIPO_EQUIPO));
                 }
 
             }
             dgEquipo_Eq.DataSource = listaInventarioDG;
             
+        }
+
+        public void CargarComboboxEquipo()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            cbNombreEquipo_Eq.DataSource = null;
+            cbNombreEquipo_Eq.ValueMember = "ID_TIPO_EQUIPO";
+            cbNombreEquipo_Eq.DisplayMember = "NOMBRE_TIPO_EQUIPO";
+            cbNombreEquipo_Eq.DataSource = at.ObtenerTipoEquipo();
         }
         
 
@@ -66,6 +75,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
 
             CargarDataGridInventario();
+            CargarComboboxEquipo();
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -216,6 +226,62 @@ namespace CheekiBreeki.CMH.Terminal.Views
             this.Hide();
         }
         #endregion
+
+        #region Limpiar Datos
+        public void limpiarDatos()
+        {
+            txtCantidad_Eq.Text = string.Empty;
+        }
+        #endregion
+
+        private void btnNuevoEquipo_Click(object sender, EventArgs e)
+        {
+            limpiarDatos();
+            btnRegistrar_Eq.Enabled = true;
+            btnGuardar_Eq.Enabled = false;
+        }
+
+        private void btnCargarEquipo_Eq_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                txtCantidad_Eq.Text = dgEquipo_Eq.CurrentRow.Cells["cantidad"].Value.ToString();
+                cbNombreEquipo_Eq.SelectedIndex = (int)dgEquipo_Eq.CurrentRow.Cells["idEquipo"].Value -1;
+                btnRegistrar_Eq.Enabled = false;
+                btnGuardar_Eq.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void btnRegistrar_Eq_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                INVENTARIO in1 = new INVENTARIO();
+
+                in1.CANT_BODEGA = int.Parse(txtCantidad_Eq.Text);
+                in1.ID_TIPO_EQUIPO = ((TIPO_EQUIPO)cbNombreEquipo_Eq.SelectedItem).ID_TIPO_EQUIPO;
+
+                at.nuevoEquipoInventario(in1);
+                
+                MessageBox.Show("¡Inventario creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                limpiarDatos();
+                CargarDataGridInventario();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
 
 
 
