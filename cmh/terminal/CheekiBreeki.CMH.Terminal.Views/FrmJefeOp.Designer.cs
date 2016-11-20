@@ -120,6 +120,8 @@
             this.lblGuion_MP = new System.Windows.Forms.Label();
             this.txtRutPersonal_MP = new System.Windows.Forms.TextBox();
             this.lblRutPersonal_MP = new System.Windows.Forms.Label();
+            this.reporteDeCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbReporteCaja = new System.Windows.Forms.GroupBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -198,10 +200,11 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
-            this.groupBox1.Controls.Add(this.gbMantenerPrestacion);
-            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
+            this.groupBox1.Controls.Add(this.gbReporteCaja);
             this.groupBox1.Controls.Add(this.gbLogPagoHonorarios);
             this.groupBox1.Controls.Add(this.gbMantenedorPersonal);
+            this.groupBox1.Controls.Add(this.gbMantenerPrestacion);
+            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
@@ -212,7 +215,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mantenedoresToolStripMenuItem,
-            this.logPagosHonorarioToolStripMenuItem});
+            this.logPagosHonorarioToolStripMenuItem,
+            this.reporteDeCajaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 16);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(774, 24);
@@ -1050,6 +1054,22 @@
             this.lblRutPersonal_MP.TabIndex = 0;
             this.lblRutPersonal_MP.Text = "Rut de Personal";
             // 
+            // reporteDeCajaToolStripMenuItem
+            // 
+            this.reporteDeCajaToolStripMenuItem.Name = "reporteDeCajaToolStripMenuItem";
+            this.reporteDeCajaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.reporteDeCajaToolStripMenuItem.Text = "Reporte de caja";
+            // 
+            // gbReporteCaja
+            // 
+            this.gbReporteCaja.Location = new System.Drawing.Point(6, 43);
+            this.gbReporteCaja.Name = "gbReporteCaja";
+            this.gbReporteCaja.Size = new System.Drawing.Size(768, 462);
+            this.gbReporteCaja.TabIndex = 11;
+            this.gbReporteCaja.TabStop = false;
+            this.gbReporteCaja.Text = "Reporte de caja";
+            this.gbReporteCaja.Visible = false;
+            // 
             // FrmJefeOp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1183,5 +1203,7 @@
         private System.Windows.Forms.ToolStripMenuItem prestaciónToolStripMenuItem;
         private System.Windows.Forms.TextBox tbCodigoMPre;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolStripMenuItem reporteDeCajaToolStripMenuItem;
+        private System.Windows.Forms.GroupBox gbReporteCaja;
     }
 }
