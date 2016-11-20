@@ -67,6 +67,18 @@
       <DependentUpon>FrmAbrirCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="AgendaDiaria.cs" />
+    <Compile Include="FemEnfermero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FemEnfermero.Designer.cs">
+      <DependentUpon>FemEnfermero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAgendarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAgendarAtencion.Designer.cs">
+      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmCrearPaciente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,12 +127,6 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmAgendarAtencion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmAgendarAtencion.Designer.cs">
-      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmIngresarPaciente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,12 @@
     <EmbeddedResource Include="FrmAbrirCaja.resx">
       <DependentUpon>FrmAbrirCaja.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FemEnfermero.resx">
+      <DependentUpon>FemEnfermero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAgendarAtencion.resx">
+      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmContenidoEntrada.resx">
       <DependentUpon>FrmContenidoEntrada.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,9 +193,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmAgendarAtencion.resx">
-      <DependentUpon>FrmAgendarAtencion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmIngresarPaciente.resx">
       <DependentUpon>FrmIngresarPaciente.cs</DependentUpon>

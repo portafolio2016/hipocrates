@@ -84,9 +84,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             break;
 
                         case "ENFERMERO":
-                            FrmMain frmMain3 = new FrmMain(this);
-                            frmMain3.Show();
-                            frmMain3.Activate();
+                            FemEnfermero frmEnfermero = new FemEnfermero(this);
+                            frmEnfermero.Show();
+                            frmEnfermero.Activate();
                             this.Hide();
                             break;
 
@@ -121,6 +121,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             lblAdvertenciaContrasena.Visible = false;
         }
         #endregion
+
 
 
     }

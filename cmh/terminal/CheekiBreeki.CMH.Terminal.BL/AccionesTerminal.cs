@@ -253,19 +253,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     throw new Exception("Fecha nula");
                 }
 
-                else if (atencion.OBSERVACIONES == null || atencion.OBSERVACIONES == String.Empty)
-                {
-                    throw new Exception("Observacion nula o vacía");
-                }
-
                 else if (resultadoAtencion.ID_ATENCION_AGEN == null)
                 {
                     throw new Exception("ID de atencion agendada es nulo");
-                }
-
-                else if (resultadoAtencion.ID_ORDEN_ANALISIS == null)
-                {
-                    throw new Exception("ID de orden de analisis es nulo");
                 }
 
                 else
@@ -275,10 +265,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     conexionDB.ORDEN_ANALISIS.Add(ordenAnalisis);
                     conexionDB.SaveChangesAsync();
 
-                    resultadoAtencion.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
-                    resultadoAtencion.ID_ORDEN_ANALISIS = ordenAnalisis.ID_ORDEN_ANALISIS;
-                    conexionDB.RES_ATENCION.Add(resultadoAtencion);
-                    conexionDB.SaveChangesAsync();
+                    using (var con = new CMHEntities())
+                    {
+                        resultadoAtencion = con.RES_ATENCION.Find(resultadoAtencion.ID_RESULTADO_ATENCION);
+                        resultadoAtencion.ID_ORDEN_ANALISIS = ordenAnalisis.ID_ORDEN_ANALISIS;
+                        con.SaveChangesAsync();
+                    }
                     return true;
                 }
             }
@@ -290,7 +282,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
 
         //ECU-013
-        public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis)
+        public Boolean cerrarOrdenDeAnalisis(ORDEN_ANALISIS ordenAnalisis, RES_ATENCION resultadoAtencion, string comentario)
         {
             try
             {
@@ -298,16 +290,21 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("Orden nula");
                 }
-
-                else if (ordenAnalisis.FECHOR_RECEP <= DateTime.Today)
-                {
-                    throw new Exception("Fecha invalida");
-                }
                 else
                 {
-                    ordenAnalisis = conexionDB.ORDEN_ANALISIS.Find(ordenAnalisis.ID_ORDEN_ANALISIS);
-                    ordenAnalisis.FECHOR_RECEP = DateTime.Today;
-                    conexionDB.SaveChangesAsync();
+                    using (var con = new CMHEntities())
+                    {
+                        ordenAnalisis = con.ORDEN_ANALISIS.Find(ordenAnalisis.ID_ORDEN_ANALISIS);
+                        ordenAnalisis.FECHOR_RECEP = DateTime.Today;
+                        con.SaveChangesAsync();
+                    }
+                    using (var con = new CMHEntities())
+                    {
+                        resultadoAtencion = con.RES_ATENCION.Find(resultadoAtencion.ID_RESULTADO_ATENCION);
+                        resultadoAtencion.ATENCION_ABIERTA = false;
+                        resultadoAtencion.COMENTARIO = comentario;
+                        con.SaveChangesAsync();
+                    }
                     return true;
                 }
             }
@@ -2051,6 +2048,69 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             List<TIPO_C_BANCARIA> tipcuentab = conexionDB.TIPO_C_BANCARIA.ToList();
             return tipcuentab;
+        }
+        #endregion
+
+        //LogPAgo
+        #region LogPago
+        public List<LOGPAGOHONORARIO> ObtenerLogPagoHonorario()
+        {
+            List<LOGPAGOHONORARIO> logs = conexionDB.LOGPAGOHONORARIO.ToList();
+            return logs;
+        }
+        #endregion
+
+        #region CuentaBancoActualizarConUsing
+        public bool actualizarCuentaBancariaUsing(CUEN_BANCARIA cuenta, int personalID)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(cuenta))
+                {
+                    throw new Exception("Paciente nulo");
+                }
+                else if (cuenta.ID_BANCO == null ||
+                         cuenta.ID_TIPO_C_BANCARIA == null)
+                {
+                    throw new Exception("Cuenta bancaria invalida");
+                }
+                else
+                {
+                    using (var con = new CMHEntities())
+                    {
+                        CUEN_BANCARIA x = new CUEN_BANCARIA();
+                        x = con.CUEN_BANCARIA.Where(d => d.PERS_MEDICO.ID_PERSONAL == personalID).FirstOrDefault();
+                        x.ID_BANCO = cuenta.ID_BANCO;
+                        x.ID_TIPO_C_BANCARIA = cuenta.ID_TIPO_C_BANCARIA;
+                        x.NUM_C_BANCARIA = cuenta.NUM_C_BANCARIA;
+                        con.SaveChangesAsync();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
+
+        //Obtener atenciones aptas para orden de analisis
+        #region AtencionesAptasAnalisis
+        public List<RES_ATENCION> ResAtencionesAptasParaAnalisis()
+        {
+            List<RES_ATENCION> resultados = conexionDB.RES_ATENCION.Where(d => d.ATENCION_ABIERTA == true && d.ID_ORDEN_ANALISIS == null).ToList();
+            if (resultados != null)
+                return resultados;
+            else return new List<RES_ATENCION>();
+        }
+        public List<RES_ATENCION> ResAtencionesAptasParaCerrarAnalisis()
+        {
+            List<RES_ATENCION> resultados = conexionDB.RES_ATENCION.Where(d => d.ATENCION_ABIERTA == true && d.ID_ORDEN_ANALISIS != null).ToList();
+            if (resultados != null)
+                return resultados;
+            else return new List<RES_ATENCION>();
         }
         #endregion
     }
