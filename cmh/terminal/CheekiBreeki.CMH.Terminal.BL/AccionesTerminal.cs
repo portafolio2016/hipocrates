@@ -2119,5 +2119,26 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
             return x;
         }
+
+        public bool EliminarPrestacion(PRESTACION pre)
+        {
+            bool x = false;
+            PRESTACION prestacion;
+            try
+            {
+                using (var con = new CMHEntities())
+                {
+                    prestacion = con.PRESTACION.Where(d => d.CODIGO_PRESTACION == pre.CODIGO_PRESTACION).FirstOrDefault();
+                    prestacion.ACTIVO = false;
+                    con.SaveChangesAsync();
+                    x = true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return x;
+        }
     }
 }

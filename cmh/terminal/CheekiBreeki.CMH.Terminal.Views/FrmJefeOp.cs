@@ -963,7 +963,19 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //Eliminar
         private void btnEliminarMPre_Click(object sender, EventArgs e)
         {
-
+            PRESTACION pres = acciones.buscarPrestacionMedica(tbCodigoMPre.Text.Trim());
+            bool x = acciones.EliminarPrestacion(pres);
+            if (x)
+            {
+                InitMantenerPrestacion();
+                InitTipoPrestacion();
+                acciones = new AccionesTerminal();
+                MessageBox.Show("Prestación eliminada con exito", "Prestació ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido eliminar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
