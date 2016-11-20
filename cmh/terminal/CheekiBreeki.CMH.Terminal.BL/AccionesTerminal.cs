@@ -2022,7 +2022,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     nuevo.ID_PERS_MEDICO = personal.ID_PERSONAL_MEDICO;
                     horariosNuevos.Add(nuevo);
                 }
-                //IEnumerable<HORARIO> horariosNuevosEnumerable = (IEnumerable<HORARIO>)horariosNuevos;
                 conexionDB.HORARIO.AddRange(horariosNuevos);
                 conexionDB.SaveChangesAsync();
             }
