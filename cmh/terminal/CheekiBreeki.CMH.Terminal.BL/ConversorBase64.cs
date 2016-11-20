@@ -21,6 +21,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             {
                 byte[] array = File.ReadAllBytes(file);
                 string res = Convert.ToBase64String(array);
+                Console.WriteLine(res);
                 return res;
             }
             catch (Exception ex)
