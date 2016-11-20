@@ -340,10 +340,16 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     throw new Exception();
                 }
 
-                at.nuevoPaciente(pac);
-
-                MessageBox.Show("¡Paciente creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
-                limpiarDatos();
+                if (at.nuevoPaciente(pac))
+                {
+                    MessageBox.Show("¡Paciente creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    limpiarDatos();
+                }
+                else
+                {
+                    throw new Exception();
+                }
+                
 
             }
             catch (Exception ex)
