@@ -269,7 +269,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     if (x.COMENTARIO == null)
                         x.COMENTARIO = string.Empty;
                     dgCerrarOrdenAnalisis.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
-                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO);
+                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO, "Ver PDF");
                 }
                 if (resAtenciones.Count == 0)
                 {
@@ -317,6 +317,15 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 resAtencion = resAtenciones[e.RowIndex];
             }
+        }
+
+        private void dgCerrarOrdenAnalisis_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex != 4) return;
+            
+            if(resAtencion.ARCHIVO_B64 != null)
+            resAtencion = resAtenciones[e.RowIndex];
+            MessageBox.Show("Funciona " + resAtencion);
         }
 
         
