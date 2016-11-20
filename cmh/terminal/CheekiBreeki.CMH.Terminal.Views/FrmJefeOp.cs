@@ -218,7 +218,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             gbOpcionesUsuario.Hide();
             gbLogPagoHonorarios.Hide();
             gbMantenedorPersonal.Hide();
-
+            gbMantenerPrestacion.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
@@ -600,6 +600,28 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         }
 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   MANTENEDOR PRESTACION                                                                                                      //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void prestaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbMantenerPrestacion);
+            InitMantenerPrestacion();
+        }
 
+        #region InitMantenerPrestacion
+        private void InitMantenerPrestacion()
+        {
+            tbCodigoPrestacionMPre.Text = "";
+            tbNombrePrestacionMPre.Text = "";
+            tbPrecioPrestacionMPre.Text = "";
+            cbPrestacionesMPre.Items.Clear();
+            cbPrestacionesEnModificarMPre.Items.Clear();
+            lbxEquiposMPre.Items.Clear();
+            lbxEquiposPrestacionMPre.Items.Clear();
+        }
+        #endregion
     }
 }
