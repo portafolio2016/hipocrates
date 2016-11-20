@@ -61,6 +61,14 @@
             this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
             this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
+            this.gbCuentaBancaria = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbNroCuenta = new System.Windows.Forms.TextBox();
+            this.cbTipoCuenta = new System.Windows.Forms.ComboBox();
+            this.cbBanco = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCambiarCuentaOC = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbNuevoMail = new System.Windows.Forms.TextBox();
@@ -95,6 +103,12 @@
             this.btnModificarUser = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.gbOpcionesUsuario.SuspendLayout();
+            this.gbCuentaBancaria.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.gbActualizarFichaMedica.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.gbVerFichaMedica.SuspendLayout();
             this.gbDatosPacienteVFM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgEntradaVFM)).BeginInit();
@@ -421,6 +435,7 @@
             // 
             // gbOpcionesUsuario
             // 
+            this.gbOpcionesUsuario.Controls.Add(this.gbCuentaBancaria);
             this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
             this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
             this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
@@ -431,14 +446,90 @@
             this.gbOpcionesUsuario.Text = "Opciones de cuenta";
             this.gbOpcionesUsuario.Visible = false;
             // 
+            // gbCuentaBancaria
+            // 
+            this.gbCuentaBancaria.Controls.Add(this.label4);
+            this.gbCuentaBancaria.Controls.Add(this.label3);
+            this.gbCuentaBancaria.Controls.Add(this.tbNroCuenta);
+            this.gbCuentaBancaria.Controls.Add(this.cbTipoCuenta);
+            this.gbCuentaBancaria.Controls.Add(this.cbBanco);
+            this.gbCuentaBancaria.Controls.Add(this.label1);
+            this.gbCuentaBancaria.Controls.Add(this.btnCambiarCuentaOC);
+            this.gbCuentaBancaria.Location = new System.Drawing.Point(35, 284);
+            this.gbCuentaBancaria.Name = "gbCuentaBancaria";
+            this.gbCuentaBancaria.Size = new System.Drawing.Size(695, 154);
+            this.gbCuentaBancaria.TabIndex = 10;
+            this.gbCuentaBancaria.TabStop = false;
+            this.gbCuentaBancaria.Text = "Cuenta Bancaria";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(72, 89);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Nro. cuenta:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(72, 62);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Tipo cuenta:";
+            // 
+            // tbNroCuenta
+            // 
+            this.tbNroCuenta.Location = new System.Drawing.Point(203, 86);
+            this.tbNroCuenta.Name = "tbNroCuenta";
+            this.tbNroCuenta.Size = new System.Drawing.Size(409, 20);
+            this.tbNroCuenta.TabIndex = 6;
+            // 
+            // cbTipoCuenta
+            // 
+            this.cbTipoCuenta.FormattingEnabled = true;
+            this.cbTipoCuenta.Location = new System.Drawing.Point(203, 59);
+            this.cbTipoCuenta.Name = "cbTipoCuenta";
+            this.cbTipoCuenta.Size = new System.Drawing.Size(409, 21);
+            this.cbTipoCuenta.TabIndex = 5;
+            // 
+            // cbBanco
+            // 
+            this.cbBanco.FormattingEnabled = true;
+            this.cbBanco.Location = new System.Drawing.Point(203, 32);
+            this.cbBanco.Name = "cbBanco";
+            this.cbBanco.Size = new System.Drawing.Size(409, 21);
+            this.cbBanco.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(72, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Banco:";
+            // 
+            // btnCambiarCuentaOC
+            // 
+            this.btnCambiarCuentaOC.Location = new System.Drawing.Point(261, 112);
+            this.btnCambiarCuentaOC.Name = "btnCambiarCuentaOC";
+            this.btnCambiarCuentaOC.Size = new System.Drawing.Size(144, 23);
+            this.btnCambiarCuentaOC.TabIndex = 3;
+            this.btnCambiarCuentaOC.Text = "Cambiar cuenta bancaria";
+            this.btnCambiarCuentaOC.UseVisualStyleBackColor = true;
+            this.btnCambiarCuentaOC.Click += new System.EventHandler(this.btnCambiarCuentaOC_Click);
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.tbNuevoMail);
             this.groupBox5.Controls.Add(this.btnCambiarEmail);
-            this.groupBox5.Location = new System.Drawing.Point(32, 276);
+            this.groupBox5.Location = new System.Drawing.Point(32, 168);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(695, 158);
+            this.groupBox5.Size = new System.Drawing.Size(695, 91);
             this.groupBox5.TabIndex = 9;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Email";
@@ -446,7 +537,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(71, 62);
+            this.label9.Location = new System.Drawing.Point(69, 22);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(69, 13);
             this.label9.TabIndex = 2;
@@ -454,7 +545,7 @@
             // 
             // tbNuevoMail
             // 
-            this.tbNuevoMail.Location = new System.Drawing.Point(205, 59);
+            this.tbNuevoMail.Location = new System.Drawing.Point(203, 19);
             this.tbNuevoMail.MaxLength = 80;
             this.tbNuevoMail.Name = "tbNuevoMail";
             this.tbNuevoMail.Size = new System.Drawing.Size(409, 20);
@@ -462,7 +553,7 @@
             // 
             // btnCambiarEmail
             // 
-            this.btnCambiarEmail.Location = new System.Drawing.Point(255, 112);
+            this.btnCambiarEmail.Location = new System.Drawing.Point(262, 46);
             this.btnCambiarEmail.Name = "btnCambiarEmail";
             this.btnCambiarEmail.Size = new System.Drawing.Size(144, 23);
             this.btnCambiarEmail.TabIndex = 3;
@@ -479,7 +570,7 @@
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Location = new System.Drawing.Point(32, 27);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(695, 247);
+            this.groupBox4.Size = new System.Drawing.Size(695, 112);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Contraseña";
@@ -487,7 +578,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(71, 65);
+            this.label7.Location = new System.Drawing.Point(71, 23);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(96, 13);
             this.label7.TabIndex = 0;
@@ -495,7 +586,7 @@
             // 
             // tbContrasenaActual
             // 
-            this.tbContrasenaActual.Location = new System.Drawing.Point(206, 62);
+            this.tbContrasenaActual.Location = new System.Drawing.Point(206, 20);
             this.tbContrasenaActual.MaxLength = 40;
             this.tbContrasenaActual.Name = "tbContrasenaActual";
             this.tbContrasenaActual.PasswordChar = '*';
@@ -504,7 +595,7 @@
             // 
             // btnCambiarContrasena
             // 
-            this.btnCambiarContrasena.Location = new System.Drawing.Point(255, 205);
+            this.btnCambiarContrasena.Location = new System.Drawing.Point(265, 73);
             this.btnCambiarContrasena.Name = "btnCambiarContrasena";
             this.btnCambiarContrasena.Size = new System.Drawing.Size(144, 23);
             this.btnCambiarContrasena.TabIndex = 4;
@@ -514,7 +605,7 @@
             // 
             // tbContrasenaNueva
             // 
-            this.tbContrasenaNueva.Location = new System.Drawing.Point(206, 136);
+            this.tbContrasenaNueva.Location = new System.Drawing.Point(206, 47);
             this.tbContrasenaNueva.MaxLength = 40;
             this.tbContrasenaNueva.Name = "tbContrasenaNueva";
             this.tbContrasenaNueva.PasswordChar = '*';
@@ -524,7 +615,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(71, 139);
+            this.label8.Location = new System.Drawing.Point(72, 50);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(97, 13);
             this.label8.TabIndex = 1;
@@ -760,7 +851,7 @@
             this.Controls.Add(this.groupBox1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMedico";
-            this.Text = "Inicio";
+            this.Text = "Médico";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMedico_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -774,6 +865,8 @@
             this.gbAgendaDiaria.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
             this.gbOpcionesUsuario.ResumeLayout(false);
+            this.gbCuentaBancaria.ResumeLayout(false);
+            this.gbCuentaBancaria.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -857,5 +950,13 @@
         private System.Windows.Forms.DataGridViewButtonColumn ContenidoEntrada;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoEntrada;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaEntrada;
+        private System.Windows.Forms.GroupBox gbCuentaBancaria;
+        private System.Windows.Forms.TextBox tbNroCuenta;
+        private System.Windows.Forms.ComboBox cbTipoCuenta;
+        private System.Windows.Forms.ComboBox cbBanco;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnCambiarCuentaOC;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
