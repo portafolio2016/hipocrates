@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.gpHorarios = new System.Windows.Forms.GroupBox();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.btnAsignar = new System.Windows.Forms.Button();
             this.gpAsignados = new System.Windows.Forms.GroupBox();
@@ -41,29 +41,29 @@
             this.brnBuscarHorarios = new System.Windows.Forms.Button();
             this.lblRut = new System.Windows.Forms.Label();
             this.btnGuardarCambios = new System.Windows.Forms.Button();
-            this.groupBox6.SuspendLayout();
+            this.gpHorarios.SuspendLayout();
             this.gpAsignados.SuspendLayout();
             this.gpDisponibles.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox6
+            // gpHorarios
             // 
-            this.groupBox6.Controls.Add(this.btnGuardarCambios);
-            this.groupBox6.Controls.Add(this.btnQuitar);
-            this.groupBox6.Controls.Add(this.btnAsignar);
-            this.groupBox6.Controls.Add(this.gpAsignados);
-            this.groupBox6.Controls.Add(this.gpDisponibles);
-            this.groupBox6.Controls.Add(this.txtDv);
-            this.groupBox6.Controls.Add(this.txtRut);
-            this.groupBox6.Controls.Add(this.lblError);
-            this.groupBox6.Controls.Add(this.brnBuscarHorarios);
-            this.groupBox6.Controls.Add(this.lblRut);
-            this.groupBox6.Location = new System.Drawing.Point(7, 53);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(771, 454);
-            this.groupBox6.TabIndex = 5;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Anular atención";
+            this.gpHorarios.Controls.Add(this.btnGuardarCambios);
+            this.gpHorarios.Controls.Add(this.btnQuitar);
+            this.gpHorarios.Controls.Add(this.btnAsignar);
+            this.gpHorarios.Controls.Add(this.gpAsignados);
+            this.gpHorarios.Controls.Add(this.gpDisponibles);
+            this.gpHorarios.Controls.Add(this.txtDv);
+            this.gpHorarios.Controls.Add(this.txtRut);
+            this.gpHorarios.Controls.Add(this.lblError);
+            this.gpHorarios.Controls.Add(this.brnBuscarHorarios);
+            this.gpHorarios.Controls.Add(this.lblRut);
+            this.gpHorarios.Location = new System.Drawing.Point(7, 53);
+            this.gpHorarios.Name = "gpHorarios";
+            this.gpHorarios.Size = new System.Drawing.Size(771, 454);
+            this.gpHorarios.TabIndex = 5;
+            this.gpHorarios.TabStop = false;
+            this.gpHorarios.Text = "Anular atención";
             // 
             // btnQuitar
             // 
@@ -73,6 +73,7 @@
             this.btnQuitar.TabIndex = 23;
             this.btnQuitar.Text = "<<";
             this.btnQuitar.UseVisualStyleBackColor = true;
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
             // btnAsignar
             // 
@@ -99,7 +100,7 @@
             this.lstAsignados.FormattingEnabled = true;
             this.lstAsignados.Location = new System.Drawing.Point(20, 19);
             this.lstAsignados.Name = "lstAsignados";
-            this.lstAsignados.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstAsignados.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstAsignados.Size = new System.Drawing.Size(190, 303);
             this.lstAsignados.TabIndex = 1;
             // 
@@ -118,10 +119,9 @@
             this.lstDisponibles.FormattingEnabled = true;
             this.lstDisponibles.Location = new System.Drawing.Point(20, 19);
             this.lstDisponibles.Name = "lstDisponibles";
-            this.lstDisponibles.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstDisponibles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstDisponibles.Size = new System.Drawing.Size(190, 303);
             this.lstDisponibles.TabIndex = 0;
-            this.lstDisponibles.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // txtDv
             // 
@@ -172,7 +172,7 @@
             // 
             // btnGuardarCambios
             // 
-            this.btnGuardarCambios.Location = new System.Drawing.Point(304, 407);
+            this.btnGuardarCambios.Location = new System.Drawing.Point(304, 374);
             this.btnGuardarCambios.Name = "btnGuardarCambios";
             this.btnGuardarCambios.Size = new System.Drawing.Size(131, 23);
             this.btnGuardarCambios.TabIndex = 24;
@@ -185,11 +185,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.gpHorarios);
             this.Name = "FrmHorarios";
             this.Text = "FrmHorarios";
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            this.gpHorarios.ResumeLayout(false);
+            this.gpHorarios.PerformLayout();
             this.gpAsignados.ResumeLayout(false);
             this.gpDisponibles.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -198,7 +198,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox gpHorarios;
         private System.Windows.Forms.TextBox txtDv;
         private System.Windows.Forms.TextBox txtRut;
         private System.Windows.Forms.Label lblError;

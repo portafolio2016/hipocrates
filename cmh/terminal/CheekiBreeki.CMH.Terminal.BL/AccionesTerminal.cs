@@ -1981,7 +1981,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
             catch (Exception ex)
             { }
-            return (bloquesDisponibles);
+            return (bloquesDisponibles.OrderBy(d => d.ID_BLOQUE).ToList());
         }
 
         public List<BLOQUE> obtenerBloquesAsignados(int rut)
@@ -2002,7 +2002,35 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
             catch (Exception ex)
             { }
-            return (bloquesAsignados);
+            return (bloquesAsignados.OrderBy(d => d.ID_BLOQUE).ToList());
+        }
+
+        public Boolean guardarCambiosHorarios(List<BLOQUE> bloquesAsignados, int rut)
+        {
+            try
+            {
+                PERS_MEDICO personal = buscarPersonal(rut).PERS_MEDICO.FirstOrDefault();
+                List<HORARIO> horariosViejos = conexionDB.HORARIO.Where(d => d.ID_PERS_MEDICO == personal.ID_PERSONAL_MEDICO).ToList();
+                conexionDB.HORARIO.RemoveRange(horariosViejos);
+                conexionDB.SaveChangesAsync();
+
+                List<HORARIO> horariosNuevos = new List<HORARIO>();
+                foreach (BLOQUE bloque in bloquesAsignados)
+                {
+                    HORARIO nuevo = new HORARIO();
+                    nuevo.ID_BLOQUE = bloque.ID_BLOQUE;
+                    nuevo.ID_PERS_MEDICO = personal.ID_PERSONAL_MEDICO;
+                    horariosNuevos.Add(nuevo);
+                }
+                //IEnumerable<HORARIO> horariosNuevosEnumerable = (IEnumerable<HORARIO>)horariosNuevos;
+                conexionDB.HORARIO.AddRange(horariosNuevos);
+                conexionDB.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
         }
         #endregion
     }

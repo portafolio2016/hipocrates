@@ -90,9 +90,60 @@ namespace CheekiBreeki.CMH.Terminal.Views
             if (!res)
             {
                 lblError.Visible = true;
-                lblError.Text = "Error al buscar atenciones";
+                lblError.Text = "Error al buscar horarios";
                 lblError.ForeColor = System.Drawing.Color.Red;
             }
+        }
+
+        private void btnAsignar_Click(object sender, EventArgs e)
+        {
+            List<ComboboxItem> seleccionados = lstDisponibles.SelectedItems.Cast<ComboboxItem>().ToList();
+            foreach (ComboboxItem item in seleccionados)
+            {
+                lstDisponibles.Items.Remove(item);
+            }
+            lstAsignados.Items.AddRange(seleccionados.ToArray());
+        }
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            List<ComboboxItem> seleccionados = lstAsignados.SelectedItems.Cast<ComboboxItem>().ToList();
+            foreach (ComboboxItem item in seleccionados)
+            {
+                lstAsignados.Items.Remove(item);
+            }
+            lstDisponibles.Items.AddRange(seleccionados.ToArray());
+        }
+
+        private void btnGuardarCambios_Click(object sender, EventArgs e)
+        {
+            lblError.Visible = true;
+            lblError.Text = "Actualizando horarios...";
+            btnGuardarCambios.Enabled = false;
+            lblError.ForeColor = System.Drawing.Color.Violet;
+            List<ComboboxItem> seleccionados = lstAsignados.Items.Cast<ComboboxItem>().ToList();
+            List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
+            foreach (ComboboxItem item in seleccionados)
+            {
+                BLOQUE nuevo = new BLOQUE();
+                nuevo.ID_BLOQUE = int.Parse(item.Value.ToString());
+                bloquesAsignados.Add(nuevo);
+            }
+            bool res = at.guardarCambiosHorarios(bloquesAsignados, int.Parse(txtRut.Text));
+
+            if (res)
+            {
+                lblError.Visible = true;
+                lblError.Text = "Horarios actualizados correctamente";
+                lblError.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                lblError.Visible = true;
+                lblError.Text = "Error al actualizar horarios";
+                lblError.ForeColor = System.Drawing.Color.Red;
+            }
+            btnGuardarCambios.Enabled = true;
         }
 
         private void txtRut_KeyPress(object sender, KeyPressEventArgs e)
@@ -110,22 +161,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 e.Handled = true;
             }
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnGuardarCambios_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAsignar_Click(object sender, EventArgs e)
-        {
-            //List<ComboboxItem> seleccionados = lstDisponibles.SelectedItems;
-
         }
     }
 }
