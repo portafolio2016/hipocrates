@@ -184,7 +184,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    using (var con = new CMHEntities()) {
+                    using (var con = new CMHEntities())
+                    {
                         con.ENTRADA_FICHA.Add(entradaFicha);
                         con.SaveChangesAsync();
                     }
@@ -688,6 +689,65 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public int nuevoEquipoID(TIPO_EQUIPO equipo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(equipo))
+                {
+                    throw new Exception("Personal nulo");
+                }
+                else if (equipo.NOMBRE_TIPO_EQUIPO == null ||
+                         equipo.NOMBRE_TIPO_EQUIPO == String.Empty)
+                {
+                    throw new Exception("Nombre vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarEquipo(equipo.NOMBRE_TIPO_EQUIPO)))
+                {
+                    throw new Exception("Equipo ya ingresado");
+                }
+                else
+                {
+                    conexionDB.TIPO_EQUIPO.Add(equipo);
+                    conexionDB.SaveChangesAsync();
+
+                    return equipo.ID_TIPO_EQUIPO;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
+        public Boolean nuevoEquipoInventario(INVENTARIO inventario)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(inventario))
+                {
+                    throw new Exception("Inventario nulo");
+                }
+                else if (inventario.CANT_BODEGA <= 0)
+                {
+                    throw new Exception("Cantidad no permitida");
+                }
+                else
+                {
+                    conexionDB.INVENTARIO.Add(inventario);
+                    conexionDB.SaveChangesAsync();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
         public TIPO_EQUIPO buscarEquipo(string nombre)
         {
             try
@@ -700,6 +760,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     TIPO_EQUIPO equipo = null;
                     equipo = conexionDB.TIPO_EQUIPO.Where(d => d.NOMBRE_TIPO_EQUIPO == nombre)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(equipo))
+                    {
+                        throw new Exception("Equipo no existe");
+                    }
+                    return equipo;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public TIPO_EQUIPO buscarEquipoID(int idEquipo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(idEquipo))
+                {
+                    throw new Exception("ID nulo");
+                }
+                else
+                {
+                    TIPO_EQUIPO equipo = null;
+                    equipo = conexionDB.TIPO_EQUIPO.Where(d => d.ID_TIPO_EQUIPO == idEquipo)
                                                          .FirstOrDefault();
                     if (Util.isObjetoNulo(equipo))
                     {
@@ -763,6 +850,117 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     conexionDB.TIPO_EQUIPO.Remove(equipo);
                     conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public List<INVENTARIO> listarInventario()
+        {
+            try
+            {
+                List<INVENTARIO> listInventario = null;
+                listInventario = conexionDB.INVENTARIO.ToList();
+                return listInventario;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public List<TIPO_EQUIPO> ObtenerTipoEquipo()
+        {
+            try
+            {
+                List<TIPO_EQUIPO> listTipoEquipo = null;
+                listTipoEquipo = conexionDB.TIPO_EQUIPO.ToList();
+                return listTipoEquipo;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public INVENTARIO buscarInventario(int idInventario)
+        {
+            try
+            {
+                if (idInventario == null)
+                {
+                    throw new Exception("Nombre nulo");
+                }
+                else
+                {
+                    INVENTARIO inventario = null;
+                    inventario = conexionDB.INVENTARIO.Where(d => d.ID_INVENTARIO_EQUIPO == idInventario).FirstOrDefault();
+                    
+                    if (Util.isObjetoNulo(inventario))
+                    {
+                        throw new Exception("Equipo no existe");
+                    }
+                    return inventario;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public Boolean actualizarInventario(INVENTARIO inventario)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(inventario))
+                {
+                    throw new Exception("Inventario nulo");
+                }
+                else
+                {
+                    using (var context = new CMHEntities())
+                    {
+                        INVENTARIO buscado = context.INVENTARIO.Where(d => d.ID_INVENTARIO_EQUIPO == inventario.ID_INVENTARIO_EQUIPO).FirstOrDefault();
+                        buscado.CANT_BODEGA = inventario.CANT_BODEGA;
+                        buscado.ID_TIPO_EQUIPO = inventario.ID_TIPO_EQUIPO;
+                        context.SaveChangesAsync();
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean actualizarEquipo(TIPO_EQUIPO tipoEquipo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(tipoEquipo))
+                {
+                    throw new Exception("Tipo equipo nulo");
+                }
+                else
+                {
+                    using (var context = new CMHEntities())
+                    {
+                        TIPO_EQUIPO buscado = context.TIPO_EQUIPO.Where(d => d.ID_TIPO_EQUIPO == tipoEquipo.ID_TIPO_EQUIPO).FirstOrDefault();
+                        buscado.NOMBRE_TIPO_EQUIPO = tipoEquipo.NOMBRE_TIPO_EQUIPO;
+                       
+                        context.SaveChangesAsync();
+                    }
                     return true;
                 }
             }
@@ -981,7 +1179,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                         buscado.APELLIDOS = personal.APELLIDOS;
                         bool hashedNotNull = personal.HASHED_PASS != null;
                         bool hashedNoVacio = personal.HASHED_PASS != string.Empty;
-                       
+
                         if (hashedNotNull && hashedNoVacio)
                         {
                             buscado.HASHED_PASS = personal.HASHED_PASS;
@@ -1048,7 +1246,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 Console.WriteLine(ex.Message);
                 return false;
             }
-        }       
+        }
 
         public Boolean borrarPersonal(PERSONAL personal)
         {
@@ -1083,7 +1281,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             {
                 if (Util.isObjetoNulo(personal))
                 {
-                    throw new Exception("Paciente no existe");
+                    throw new Exception("Personal no existe");
                 }
                 else
                 {
@@ -1301,6 +1499,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public PRESTACION buscarPrestacionMedica(int id)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(id))
+                {
+                    throw new Exception("ID verificador nulo");
+                }
+                else
+                {
+                    PRESTACION prestacion = null;
+                    prestacion = conexionDB.PRESTACION.Where(d => d.ID_PRESTACION == id)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(prestacion))
+                    {
+                        throw new Exception("Prestación no existe");
+                    }
+                    return prestacion;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         public Boolean actualizarPrestacionesMedicas(PRESTACION prestacion)
         {
             try
@@ -1384,6 +1609,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("RUT vacío");
                 }
+                else if (paciente.HASHED_PASS == null || paciente.HASHED_PASS == string.Empty)
+                {
+                    throw new Exception("Contraseña nula");
+                }
                 else if (!Util.isObjetoNulo(buscarPaciente(paciente.RUT, paciente.DIGITO_VERIFICADOR)))
                 {
                     throw new Exception("Paciente ya ingresado");
@@ -1428,7 +1657,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     PACIENTE paciente = null;
                     paciente = conexionDB.PACIENTE.Where(d => d.RUT == rut
-                                                         && d.DIGITO_VERIFICADOR == dv)
+                                                         && d.DIGITO_VERIFICADOR.ToUpper() == dv.ToUpper())
                                                          .FirstOrDefault();
                     if (Util.isObjetoNulo(paciente))
                     {
@@ -1467,13 +1696,30 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("RUT vacío");
                 }
-                else if (Util.isObjetoNulo(buscarPaciente(paciente.RUT, paciente.DIGITO_VERIFICADOR)))
-                {
-                    throw new Exception("Paciente no existe");
-                }
                 else
                 {
-                    conexionDB.SaveChangesAsync();
+                    using (var context = new CMHEntities())
+                    {
+                        PACIENTE buscado = context.PACIENTE.Where(d => d.ID_PACIENTE == paciente.ID_PACIENTE).FirstOrDefault();
+                        buscado.NOMBRES_PACIENTE = paciente.NOMBRES_PACIENTE;
+                        buscado.APELLIDOS_PACIENTE = paciente.APELLIDOS_PACIENTE;
+                        buscado.EMAIL_PACIENTE = paciente.EMAIL_PACIENTE;
+                        bool hashedNotNull = paciente.HASHED_PASS != null;
+                        bool hashedNoVacio = paciente.HASHED_PASS != string.Empty;
+
+                        if (hashedNotNull && hashedNoVacio)
+                        {
+                            buscado.HASHED_PASS = paciente.HASHED_PASS;
+                        }
+                        buscado.RUT = paciente.RUT;
+                        buscado.DIGITO_VERIFICADOR = paciente.DIGITO_VERIFICADOR;
+                        buscado.SEXO = paciente.SEXO;
+                        buscado.FEC_NAC = paciente.FEC_NAC;
+                        buscado.ACTIVO = paciente.ACTIVO;
+
+                        context.SaveChangesAsync();
+
+                    }
                     return true;
                 }
             }
@@ -1495,6 +1741,28 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 else
                 {
                     conexionDB.PACIENTE.Remove(paciente);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean desactivarPaciente(PACIENTE paciente)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(paciente))
+                {
+                    throw new Exception("Paciente no existe");
+                }
+                else
+                {
+                    paciente.ACTIVO = false;
                     conexionDB.SaveChangesAsync();
                     return true;
                 }
@@ -1679,6 +1947,24 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return (prestaciones);
         }
 
+        public List<PRESTACION> listaPrestaciones()
+        {
+            List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d=> d.ACTIVO == true).ToList();
+            return (prestaciones);
+        }
+
+        public List<TIPO_PRES> listaTipoPrestaciones()
+        {
+            List<TIPO_PRES> tipoPrestaciones = conexionDB.TIPO_PRES.ToList();
+            return (tipoPrestaciones);
+        }
+
+        public List<TIPO_EQUIPO> listaTipoEquipos()
+        {
+            List<TIPO_EQUIPO> tipoEquipo = conexionDB.TIPO_EQUIPO.ToList();
+            return (tipoEquipo);
+        }
+
         public List<ATENCION_AGEN> listaAtencionesVigentes(int rut)
         {
             List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
@@ -1807,7 +2093,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                         conexionDB.HORARIO.Add(horario);
                         conexionDB.SaveChangesAsync();
                     }
-                   
+
                     return true;
                 }
             }
@@ -1820,8 +2106,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         #endregion
 
-       
-        #region Bancaria 
+
+        #region Bancaria
         public bool crearCuentaBancaria(CUEN_BANCARIA cuenta)
         {
             try
@@ -1882,7 +2168,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         #endregion
-       
+
         #region Banco
         public List<BANCO> ObtenerBancos()
         {
@@ -1890,7 +2176,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return bancos;
         }
         #endregion
-       
+
         #region TipoCuentaBancaria
         public List<TIPO_C_BANCARIA> ObtenerTiposCuentaBancaria()
         {
@@ -1961,6 +2247,139 @@ namespace CheekiBreeki.CMH.Terminal.BL
             else return new List<RES_ATENCION>();
         }
         #endregion
+
+        public bool CodigoPrestacionExiste(string cod)
+        {
+            bool x = false;
+            using (var con = new CMHEntities())
+            {
+                List<PRESTACION> prest = con.PRESTACION.Where(d => d.CODIGO_PRESTACION == cod).ToList();
+                if (prest == null)
+                {
+                    x = true;
+                }
+                else if (prest.Count > 0)
+                {
+                    x = true;
+                }
+            }
+            return x;
+        }
+
+        public bool CrearPrestacion(PRESTACION pres, List<EQUIPO_REQ> equipos)
+        {
+            bool x = false;
+            try
+            {
+                PRESTACION prestacion = pres;
+                conexionDB.PRESTACION.Add(prestacion);
+                conexionDB.SaveChangesAsync();
+
+                foreach (EQUIPO_REQ eq in equipos)
+                {
+                    eq.ID_PRESTACION = prestacion.ID_PRESTACION;
+                    conexionDB.EQUIPO_REQ.Add(eq);
+                    conexionDB.SaveChangesAsync();
+                }
+
+                x = true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+            return x;
+        }
+
+        public bool ActualizarPrestacion(PRESTACION pres, List<EQUIPO_REQ> equipos)
+        {
+            bool x = false;
+            try
+            {
+                PRESTACION prestacion = new PRESTACION();
+                using (var con = new CMHEntities())
+                {
+                    prestacion = con.PRESTACION.Where(d=> d.CODIGO_PRESTACION == pres.CODIGO_PRESTACION).FirstOrDefault();
+                    prestacion.ID_TIPO_PRESTACION = pres.ID_TIPO_PRESTACION;
+                    prestacion.ID_ESPECIALIDAD = pres.ID_ESPECIALIDAD;
+                    prestacion.NOM_PRESTACION = pres.NOM_PRESTACION;
+                    prestacion.PRECIO_PRESTACION = pres.PRECIO_PRESTACION;
+                    con.SaveChangesAsync();
+                }
+
+                
+                using (var con = new CMHEntities())
+                {
+                    List<EQUIPO_REQ> equiposActuales = con.EQUIPO_REQ.Where(d => d.ID_PRESTACION == prestacion.ID_PRESTACION).ToList();
+                    foreach (EQUIPO_REQ eq in equipos)
+                    {
+                        bool existe = false;
+                        foreach (EQUIPO_REQ eqa in equiposActuales)
+                        {
+                            if (eqa.ID_PRESTACION == eq.ID_PRESTACION && eqa.ID_TIPO_EQUIPO == eq.ID_TIPO_EQUIPO)
+                            {
+                                eqa.CANTIDAD = eq.CANTIDAD;
+                                con.SaveChangesAsync();
+                                existe = true;
+                            }
+                        }
+                        if (!existe)
+                        {
+                            EQUIPO_REQ aux = new EQUIPO_REQ();
+                            aux.ID_PRESTACION = prestacion.ID_PRESTACION;
+                            aux.ID_TIPO_EQUIPO = eq.ID_TIPO_EQUIPO;
+                            aux.CANTIDAD = eq.CANTIDAD;
+                            con.EQUIPO_REQ.Add(aux);
+                            con.SaveChangesAsync();
+                        }
+                    }
+
+                    foreach (EQUIPO_REQ eqa in equiposActuales)
+                    {
+                        bool existe = false;
+                        foreach (EQUIPO_REQ eq in equipos)
+                        {
+                            if (eqa.ID_PRESTACION == eq.ID_PRESTACION && eqa.ID_TIPO_EQUIPO == eq.ID_TIPO_EQUIPO)
+                            {
+                                existe = true;
+                            }
+                        }
+                        if (!existe)
+                        {
+                            con.EQUIPO_REQ.Remove(eqa);
+                            con.SaveChangesAsync();
+                        }
+                    }
+                }
+                x = true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return x;
+        }
+
+        public bool EliminarPrestacion(PRESTACION pre)
+        {
+            bool x = false;
+            PRESTACION prestacion;
+            try
+            {
+                using (var con = new CMHEntities())
+                {
+                    prestacion = con.PRESTACION.Where(d => d.CODIGO_PRESTACION == pre.CODIGO_PRESTACION).FirstOrDefault();
+                    prestacion.ACTIVO = false;
+                    con.SaveChangesAsync();
+                    x = true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return x;
+        }
 
         #region Mantenedor horarios
         public List<BLOQUE> obtenerBloquesDisponibles(int rut)

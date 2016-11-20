@@ -12,12 +12,13 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class FrmJefeOp : Form
+    public partial class FrmMantenerPersonal : Form
     {
         private static AccionesTerminal acciones = new AccionesTerminal();
         FrmLogin login = null;
         bool closeApp;
 
+        
         public class ComboboxItem
         {
             public string Text { get; set; }
@@ -28,13 +29,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 return Text;
             }
         }
-
+        
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                                                              //
         //   CONSTRUCTOR                                                                                                                //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public FrmJefeOp(FrmLogin fLogin)
+        public FrmMantenerPersonal(FrmLogin fLogin)
         {
             InitializeComponent();
             closeApp = true;
@@ -54,6 +55,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 btnSesion.Text = "Iniciar sesión";
             }
 
+            
             #region ComboBox Cargo
             ComboboxItem item = new ComboboxItem();
             item.Text = "Médico";
@@ -94,7 +96,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             cbTipoCuenta_MP.DisplayMember = "NOM_C_BANCARIA";
             cbTipoCuenta_MP.DataSource = at.ObtenerTiposCuentaBancaria();
             #endregion
-
+            
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -217,69 +219,40 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
             gbOpcionesUsuario.Hide();
             gbMantenedorPersonal.Hide();
-            gbMantenerPrestacion.Hide();
-            gbLogPagoHonorarios.Hide();
-            //
-            //AGREGAR LOS OTROS GB QUE FALTEN
-            //
             x.Show();
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //                                                                                                                              //
-        //   LOG PAGO HONORARIO                                                                                                         //
-        //                                                                                                                              //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void btnBuscarLPH_Click(object sender, EventArgs e)
+        #region Barra menú
+        private void personalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AccionesTerminal ac = new AccionesTerminal();
-            dgLogs.Rows.Clear();
-            List<LOGPAGOHONORARIO> logList = new List<LOGPAGOHONORARIO>();
-            logList = ac.ObtenerLogPagoHonorario();
-            if (logList != null)
-            {
-                if (logList.Count != 0)
-                {
-                    foreach (LOGPAGOHONORARIO log in logList)
-                    {
-                        if (log.FECHOR.Value.Month == dtFechaLPH.Value.Month && log.FECHOR.Value.Year == dtFechaLPH.Value.Year)
-                        {
-                            dgLogs.Rows.Add(log.CUEN_BANCARIA.PERS_MEDICO.PERSONAL.NOMBREFULL, log.CUEN_BANCARIA.BANCO.NOMBRE, log.CUEN_BANCARIA.TIPO_C_BANCARIA.NOM_C_BANCARIA, log.CUEN_BANCARIA.NUM_C_BANCARIA, "$" + log.TOTAL);
-                        }
-                    }
-                    if (dgLogs.Rows.Count <= 0)
-                    {
-                        MessageBox.Show("No hay pagos en la fecha indicada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No hay registro de pagos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Error al obtener los pagos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void logPagosHonorarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InitGB(gbLogPagoHonorarios);
+            FrmMantenerPersonal frmMantenerPersonal = new FrmMantenerPersonal(login);
+            frmMantenerPersonal.Show();
+            frmMantenerPersonal.Activate();
+            this.Hide();
         }
 
+        private void pacienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmMantenerPaciente frmMantenerPaciente = new FrmMantenerPaciente(login);
+            frmMantenerPaciente.Show();
+            frmMantenerPaciente.Activate();
+            this.Hide();
+        }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //                                                                                                                              //
-        //   Mantenedor Personal                                                                                                        //
-        //                                                                                                                              //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void equipoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmMantenerEquipo frmMantenerEquipo = new FrmMantenerEquipo(login);
+            frmMantenerEquipo.Show();
+            frmMantenerEquipo.Activate();
+            this.Hide();
+        }
+        #endregion
+
+        #region Mantenedor Personal
 
         int rutBuscar_MP = 0;
 
-        private void personalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InitGB(gbMantenedorPersonal);
-        }
+        
 
         #region Validaciones de campos
         private void txtCampo_KeyPress(object sender, KeyPressEventArgs e)
@@ -363,7 +336,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Campo Run vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al cargar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -371,6 +344,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             cbCargo_MP.Enabled = true;
             limpiarCampos_MP();
+            txtRutPersonal_MP.Text = string.Empty;
+            txtVerificador_MP.Text = string.Empty;
             btnRegistrar_MP.Enabled = true;
             btnGuardar_MP.Enabled = false;
             btnEliminar_MP.Enabled = false;
@@ -401,6 +376,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 AccionesTerminal at = new AccionesTerminal();
                 PERSONAL p1 = new PERSONAL();
+
+                if (txtContrasena_MP.Text == null || txtContrasena_MP.Text == "")
+                {
+                    throw new Exception();
+                }
 
                 //CapturarDatos
                 p1.NOMBRES = txtNombres_MP.Text;
@@ -436,13 +416,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     throw new Exception();
                 }
                 
-                /*
+                
                 if (((ComboboxItem)cbCargo_MP.SelectedItem).Text == "Médico")
                 {
                     string cuentaBancaria = txtCuentaBanc_MP.Text;
 
                 }
-                */
+                
                 
                 using (var context = new CMHEntities())
                 {
@@ -496,6 +476,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             at.nuevoFuncionario(funcJefeOperador);
                             break;
                     }
+                     
                 }
 
                 MessageBox.Show("¡Personal creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -512,6 +493,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void cbCargo_MP_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             if (((ComboboxItem)cbCargo_MP.SelectedItem).Text == "Médico")
             {
                 txtCuentaBanc_MP.Enabled = true;
@@ -568,7 +550,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     cuentaBancariaMedica.ID_BANCO = ((BANCO)cbBanco_MP.SelectedItem).ID_BANCO;
                     at.actualizarCuentaBancaria(cuentaBancariaMedica);
                 }
-
+                
                 MessageBox.Show("¡Personal actualizado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
                 limpiarCampos_MP();
             }
@@ -587,11 +569,20 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 AccionesTerminal at = new AccionesTerminal();
                 PERSONAL p1 = at.buscarPersonal(rutBuscar_MP);
-                at.desactivarPersonal(p1);
-                limpiarCampos_MP();
-                txtRutPersonal_MP.Text = string.Empty;
-                txtVerificador_MP.Text = string.Empty;
-                MessageBox.Show("¡Personal desactivado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                if (p1.ACTIVO == true)//Se desactiva
+                {
+                    at.desactivarPersonal(p1);
+                    limpiarCampos_MP();
+                    txtRutPersonal_MP.Text = string.Empty;
+                    txtVerificador_MP.Text = string.Empty;
+                    MessageBox.Show("¡Personal desactivado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+                else // Se Muestra un mensaje
+                {
+                    MessageBox.Show("¡Personal está desactivado!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                
+               
             }
             catch (Exception ex) 
             { 
@@ -600,395 +591,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //                                                                                                                              //
-        //   Horarios                                                                                                                   //
-        //                                                                                                                              //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void horariosPersonalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmHorarios frmHorarios = new FrmHorarios(login);
-            frmHorarios.Show();
-            frmHorarios.Activate();
-            this.Hide();
-        }
-        
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //                                                                                                                              //
-        //   MANTENEDOR PRESTACION                                                                                                      //
-        //                                                                                                                              //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        static List<EQUIPO_REQ> equiposReq = new List<EQUIPO_REQ>();
-
-        private void prestaciónToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InitGB(gbMantenerPrestacion);
-            InitMantenerPrestacion();
-            InitTipoPrestacion();
-            acciones = new AccionesTerminal();
-        }
-
-        #region InitMantenerPrestacion
-        private void InitMantenerPrestacion()
-        {
-            tbCodigoPrestacionMPre.Text = "";
-            tbNombrePrestacionMPre.Text = "";
-            tbPrecioPrestacionMPre.Text = "";
-            tbCodigoMPre.Text = "";
-            cbPrestacionesMPre.Items.Clear();
-            cbTipoPrestacionMPre.Items.Clear();
-            lbxEquiposMPre.Items.Clear();
-            lbxEquiposPrestacionMPre.Items.Clear();
-            btnRegistrarMPre.Enabled = false;
-            btnGuardarMpre.Enabled = false;
-            btnEliminarMPre.Enabled = false;
-            btnCargarPorLista.Enabled = false;
-            AccionesTerminal ac = new AccionesTerminal();
-            List<PRESTACION> prestaciones = ac.listaPrestaciones();
-            if (prestaciones == null)
-                prestaciones = new List<PRESTACION>();
-            foreach (PRESTACION x in prestaciones)
-            {
-                ComboboxItem cbi = new ComboboxItem();
-                cbi.Text = x.NOM_PRESTACION;
-                cbi.Value = x.ID_PRESTACION;
-                cbPrestacionesMPre.Items.Add(cbi);
-            }
-            if (prestaciones.Count > 0)
-            {
-                btnCargarPorLista.Enabled = true;
-                cbPrestacionesMPre.SelectedIndex = 0;
-            }
-        }
-        private void InitTipoPrestacion()
-        {
-            AccionesTerminal ac = new AccionesTerminal();
-            List<TIPO_PRES> tipoPrestaciones = ac.listaTipoPrestaciones();
-            if (tipoPrestaciones == null)
-                tipoPrestaciones = new List<TIPO_PRES>();
-            foreach (TIPO_PRES x in tipoPrestaciones)
-            {
-                ComboboxItem cbi = new ComboboxItem();
-                cbi.Text = x.NOM_TIPO_PREST;
-                cbi.Value = x.ID_TIPO_PRESTACION;
-                cbTipoPrestacionMPre.Items.Add(cbi);
-            }
-            if (tipoPrestaciones.Count > 0)
-            {
-                btnCargarPorLista.Enabled = true;
-                cbTipoPrestacionMPre.SelectedIndex = 0;
-            }
-            else
-            {
-                btnRegistrarMPre.Enabled = false;
-                btnGuardarMpre.Enabled = false;
-                btnEliminarMPre.Enabled = false;
-                btnCargarPorLista.Enabled = false;
-                btnCargarPorCodigoMPre.Enabled = false;
-                btnNuevaPrestacionMPre.Enabled = false;
-                MessageBox.Show("No se pueden crear prestaciones si no existen tipos de prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
         #endregion
 
-        //NUEVO
-        private void btnNuevaPrestacionMPre_Click(object sender, EventArgs e)
-        {
-            lbxEquiposMPre.Items.Clear();
-            lbxEquiposPrestacionMPre.Items.Clear();
-            tbCodigoPrestacionMPre.Text = "";
-            tbNombrePrestacionMPre.Text = "";
-            tbPrecioPrestacionMPre.Text = "";
-            tbCodigoMPre.Text = "";
-            tbCodigoMPre.Enabled = true;
-            if (cbTipoPrestacionMPre.Items.Count > 0)
-            {
-                cbTipoPrestacionMPre.SelectedIndex = 0;
-            }
-            btnRegistrarMPre.Enabled = true;
+        
+     
 
-            List<TIPO_EQUIPO> tipoEquipos = acciones.listaTipoEquipos();
-            if (tipoEquipos == null)
-                tipoEquipos = new List<TIPO_EQUIPO>();
-            foreach (TIPO_EQUIPO x in tipoEquipos)
-            {
-                ComboboxItem cbi = new ComboboxItem();
-                cbi.Text = x.NOMBRE_TIPO_EQUIPO;
-                cbi.Value = x.ID_TIPO_EQUIPO;
-                lbxEquiposMPre.Items.Add(cbi);
-            }
-        }
+       
 
-        //>>
-        private void btnAddMPre_Click(object sender, EventArgs e)
-        {
-            EQUIPO_REQ equipoReq = new EQUIPO_REQ();
-            try{
-                bool existe = false;
-                foreach (EQUIPO_REQ x in equiposReq)
-                {
-                    if (((ComboboxItem)lbxEquiposMPre.SelectedItem).Value == x.ID_TIPO_EQUIPO)
-                    {
-                        x.CANTIDAD++;
-                        existe = true;
-                    }
-                }
-                if (!existe)
-                {
-                    TIPO_EQUIPO tipoEquip = new TIPO_EQUIPO();
-                    tipoEquip.ID_TIPO_EQUIPO = ((ComboboxItem)lbxEquiposMPre.SelectedItem).Value;
-                    tipoEquip.NOMBRE_TIPO_EQUIPO = ((ComboboxItem)lbxEquiposMPre.SelectedItem).Text;
-                    equipoReq.CANTIDAD = 1;
-                    equipoReq.ID_TIPO_EQUIPO = tipoEquip.ID_TIPO_EQUIPO;
-                    equipoReq.TIPO_EQUIPO = tipoEquip;
-                    equiposReq.Add(equipoReq);
-                }
-
-                RefrescarEquiposPrestacion();
-            }catch(Exception){
-                MessageBox.Show("No se ha seleccionado un equipo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //<<
-        private void btnRemoveMPre_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                EQUIPO_REQ equipoReq = null;
-                foreach (EQUIPO_REQ x in equiposReq)
-                {
-                    if (((ComboboxItem)lbxEquiposPrestacionMPre.SelectedItem).Value == x.ID_TIPO_EQUIPO)
-                    {
-                        x.CANTIDAD--;
-                        if(x.CANTIDAD == 0){
-                            equipoReq = x;
-                        }
-                    }
-                }
-                if (equipoReq != null)
-                    equiposReq.Remove(equipoReq);
-                RefrescarEquiposPrestacion(((ComboboxItem)lbxEquiposPrestacionMPre.SelectedItem).Value);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("No se ha seleccionado un equipo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //Refrescar equipos
-        private void RefrescarEquiposPrestacion()
-        {
-            lbxEquiposPrestacionMPre.Items.Clear();
-            foreach (EQUIPO_REQ x in equiposReq)
-            {
-                ComboboxItem cbi = new ComboboxItem();
-                cbi.Text = "[" + x.CANTIDAD + "]  " + x.TIPO_EQUIPO.NOMBRE_TIPO_EQUIPO;
-                cbi.Value = x.TIPO_EQUIPO.ID_TIPO_EQUIPO;
-                lbxEquiposPrestacionMPre.Items.Add(cbi);
-            }
-        }
-        private void RefrescarEquiposPrestacion(int id)
-        {
-            lbxEquiposPrestacionMPre.Items.Clear();
-            int index = 0;
-            int indexId = 0;
-            foreach (EQUIPO_REQ x in equiposReq)
-            {
-                ComboboxItem cbi = new ComboboxItem();
-                cbi.Text = "[" + x.CANTIDAD + "]  " + x.TIPO_EQUIPO.NOMBRE_TIPO_EQUIPO;
-                cbi.Value = x.TIPO_EQUIPO.ID_TIPO_EQUIPO;
-                lbxEquiposPrestacionMPre.Items.Add(cbi);
-                if (id == cbi.Value)
-                    indexId = index;
-                index++;
-            }
-            if (equiposReq.Count > 0)
-                lbxEquiposPrestacionMPre.SelectedIndex = indexId;
-        }
-
-        //REGISTRAR
-        private void btnRegistrarMPre_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(tbNombrePrestacionMPre.Text.Trim()) && !string.IsNullOrEmpty(tbPrecioPrestacionMPre.Text.Trim()) && !string.IsNullOrEmpty(tbCodigoMPre.Text.Trim()))
-            {
-                int precio;
-                if (Int32.TryParse(tbPrecioPrestacionMPre.Text, out precio))
-                {
-                    if(!acciones.CodigoPrestacionExiste(tbCodigoMPre.Text.Trim())){
-                        PRESTACION prestacion = new PRESTACION();
-                        prestacion.ID_ESPECIALIDAD = ((ComboboxItem)cbTipoPrestacionMPre.SelectedItem).Value;//Funciona siempre y cuando tenga el mismo orden de index que con tipo prestacion
-                        prestacion.ID_TIPO_PRESTACION = ((ComboboxItem)cbTipoPrestacionMPre.SelectedItem).Value;
-                        prestacion.NOM_PRESTACION = tbNombrePrestacionMPre.Text;
-                        prestacion.CODIGO_PRESTACION = tbCodigoMPre.Text;
-                        prestacion.PRECIO_PRESTACION = precio;
-                        prestacion.ACTIVO = true;
-                        bool x = acciones.CrearPrestacion(prestacion, equiposReq);
-                        if (x)
-                        {
-                            InitMantenerPrestacion();
-                            InitTipoPrestacion();
-                            acciones = new AccionesTerminal();
-                            MessageBox.Show("Prestación ingresada con exito", "Prestació ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se ha podido registrar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Una prestación ya existe con ese codigo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                    MessageBox.Show("El valor del precio no es numerico", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (string.IsNullOrEmpty(tbNombrePrestacionMPre.Text.Trim())) 
-            {
-                MessageBox.Show("Campo nombre vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (string.IsNullOrEmpty(tbPrecioPrestacionMPre.Text.Trim()))
-            {
-                MessageBox.Show("Campo precio vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if(string.IsNullOrEmpty(tbCodigoMPre.Text.Trim()))
-            {
-                MessageBox.Show("Campo código vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //CARGAR X LISTA
-        private void btnCargarPorLista_Click(object sender, EventArgs e)
-        {
-            PRESTACION pres = acciones.buscarPrestacionMedica(((ComboboxItem)cbPrestacionesMPre.SelectedItem).Value);
-            if (pres != null)
-            {
-                btnRegistrarMPre.Enabled = false;
-                btnGuardarMpre.Enabled = true;
-                btnEliminarMPre.Enabled = true;
-                tbCodigoMPre.Enabled = false;
-                tbNombrePrestacionMPre.Text = pres.NOM_PRESTACION;
-                tbPrecioPrestacionMPre.Text = pres.PRECIO_PRESTACION.ToString();
-                tbCodigoMPre.Text = pres.CODIGO_PRESTACION;
-                cbTipoPrestacionMPre.SelectedIndex = (int)pres.ID_TIPO_PRESTACION - 1;
-
-                lbxEquiposMPre.Items.Clear();
-                List<TIPO_EQUIPO> tipoEquipos = acciones.listaTipoEquipos();
-                if (tipoEquipos == null)
-                    tipoEquipos = new List<TIPO_EQUIPO>();
-                foreach (TIPO_EQUIPO x in tipoEquipos)
-                {
-                    ComboboxItem cbi = new ComboboxItem();
-                    cbi.Text = x.NOMBRE_TIPO_EQUIPO;
-                    cbi.Value = x.ID_TIPO_EQUIPO;
-                    lbxEquiposMPre.Items.Add(cbi);
-                }
-
-                equiposReq = new List<EQUIPO_REQ>(pres.EQUIPO_REQ);
-                RefrescarEquiposPrestacion();
-            }
-            else
-            {
-                MessageBox.Show("No se pudo encontrar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnGuardarMpre_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(tbNombrePrestacionMPre.Text.Trim()) && !string.IsNullOrEmpty(tbPrecioPrestacionMPre.Text.Trim()) && !string.IsNullOrEmpty(tbCodigoMPre.Text.Trim()))
-            {
-                int precio;
-                if (Int32.TryParse(tbPrecioPrestacionMPre.Text, out precio))
-                {
-                    PRESTACION prestacion = new PRESTACION();
-                    prestacion.ID_ESPECIALIDAD = ((ComboboxItem)cbTipoPrestacionMPre.SelectedItem).Value;//Funciona siempre y cuando tenga el mismo orden de index que con tipo prestacion
-                    prestacion.ID_TIPO_PRESTACION = ((ComboboxItem)cbTipoPrestacionMPre.SelectedItem).Value;
-                    prestacion.NOM_PRESTACION = tbNombrePrestacionMPre.Text;
-                    prestacion.CODIGO_PRESTACION = tbCodigoMPre.Text;
-                    prestacion.PRECIO_PRESTACION = precio;
-                    prestacion.ACTIVO = true;
-                    bool x = acciones.ActualizarPrestacion(prestacion, equiposReq);
-                    if (x)
-                    {
-                        InitMantenerPrestacion();
-                        InitTipoPrestacion();
-                        acciones = new AccionesTerminal();
-                        MessageBox.Show("Prestación modificada con exito", "Prestació ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se ha podido registrar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                    MessageBox.Show("El valor del precio no es numerico", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (string.IsNullOrEmpty(tbNombrePrestacionMPre.Text.Trim()))
-            {
-                MessageBox.Show("Campo nombre vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (string.IsNullOrEmpty(tbPrecioPrestacionMPre.Text.Trim()))
-            {
-                MessageBox.Show("Campo precio vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (string.IsNullOrEmpty(tbCodigoMPre.Text.Trim()))
-            {
-                MessageBox.Show("Campo código vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnCargarPorCodigoMPre_Click(object sender, EventArgs e)
-        {
-            PRESTACION pres = acciones.buscarPrestacionMedica(tbCodigoPrestacionMPre.Text.Trim());
-            if (pres != null)
-            {
-                btnRegistrarMPre.Enabled = false;
-                btnGuardarMpre.Enabled = true;
-                btnEliminarMPre.Enabled = true;
-                tbCodigoMPre.Enabled = false;
-                tbNombrePrestacionMPre.Text = pres.NOM_PRESTACION;
-                tbPrecioPrestacionMPre.Text = pres.PRECIO_PRESTACION.ToString();
-                tbCodigoMPre.Text = pres.CODIGO_PRESTACION;
-                cbTipoPrestacionMPre.SelectedIndex = (int)pres.ID_TIPO_PRESTACION - 1;
-
-                lbxEquiposMPre.Items.Clear();
-                List<TIPO_EQUIPO> tipoEquipos = acciones.listaTipoEquipos();
-                if (tipoEquipos == null)
-                    tipoEquipos = new List<TIPO_EQUIPO>();
-                foreach (TIPO_EQUIPO x in tipoEquipos)
-                {
-                    ComboboxItem cbi = new ComboboxItem();
-                    cbi.Text = x.NOMBRE_TIPO_EQUIPO;
-                    cbi.Value = x.ID_TIPO_EQUIPO;
-                    lbxEquiposMPre.Items.Add(cbi);
-                }
-
-                equiposReq = new List<EQUIPO_REQ>(pres.EQUIPO_REQ);
-                RefrescarEquiposPrestacion();
-            }
-            else
-            {
-                MessageBox.Show("No se pudo encontrar la prestación por codigo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //Eliminar
-        private void btnEliminarMPre_Click(object sender, EventArgs e)
-        {
-            PRESTACION pres = acciones.buscarPrestacionMedica(tbCodigoMPre.Text.Trim());
-            bool x = acciones.EliminarPrestacion(pres);
-            if (x)
-            {
-                InitMantenerPrestacion();
-                InitTipoPrestacion();
-                acciones = new AccionesTerminal();
-                MessageBox.Show("Prestación eliminada con exito", "Prestació ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }
-            else
-            {
-                MessageBox.Show("No se ha podido eliminar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
     }
 }
