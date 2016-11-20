@@ -621,6 +621,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             tbCodigoPrestacionMPre.Text = "";
             tbNombrePrestacionMPre.Text = "";
             tbPrecioPrestacionMPre.Text = "";
+            tbCodigoMPre.Text = "";
             cbPrestacionesMPre.Items.Clear();
             cbTipoPrestacionMPre.Items.Clear();
             lbxEquiposMPre.Items.Clear();
@@ -685,6 +686,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             tbCodigoPrestacionMPre.Text = "";
             tbNombrePrestacionMPre.Text = "";
             tbPrecioPrestacionMPre.Text = "";
+            tbCodigoMPre.Text = "";
             if (cbTipoPrestacionMPre.Items.Count > 0)
             {
                 cbTipoPrestacionMPre.SelectedIndex = 0;
@@ -789,6 +791,57 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             if (equiposReq.Count > 0)
                 lbxEquiposPrestacionMPre.SelectedIndex = indexId;
+        }
+
+        //REGISTRAR
+        private void btnRegistrarMPre_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(tbNombrePrestacionMPre.Text.Trim()) && !string.IsNullOrEmpty(tbPrecioPrestacionMPre.Text.Trim()) && !string.IsNullOrEmpty(tbCodigoMPre.Text.Trim()))
+            {
+                int precio;
+                if (Int32.TryParse(tbPrecioPrestacionMPre.Text, out precio))
+                {
+                    if(!acciones.CodigoPrestacionExiste(tbCodigoMPre.Text.Trim())){
+                        PRESTACION prestacion = new PRESTACION();
+                        prestacion.ID_ESPECIALIDAD = ((ComboboxItem)cbTipoPrestacionMPre.SelectedItem).Value;//Funciona siempre y cuando tenga el mismo orden de index que con tipo prestacion
+                        prestacion.ID_TIPO_PRESTACION = ((ComboboxItem)cbTipoPrestacionMPre.SelectedItem).Value;
+                        prestacion.NOM_PRESTACION = tbNombrePrestacionMPre.Text;
+                        prestacion.CODIGO_PRESTACION = tbCodigoMPre.Text;
+                        prestacion.PRECIO_PRESTACION = precio;
+                        prestacion.ACTIVO = true;
+                        bool x = acciones.CrearPrestacion(prestacion, equiposReq);
+                        if (x)
+                        {
+                            InitMantenerPrestacion();
+                            InitTipoPrestacion();
+                            acciones = new AccionesTerminal();
+                            MessageBox.Show("Prestación ingresada con exito", "Prestació ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se ha podido registrar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Una prestación ya existe con ese codigo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                    MessageBox.Show("El valor del precio no es numerico", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(tbNombrePrestacionMPre.Text.Trim())) 
+            {
+                MessageBox.Show("Campo nombre vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(tbPrecioPrestacionMPre.Text.Trim()))
+            {
+                MessageBox.Show("Campo precio vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if(string.IsNullOrEmpty(tbCodigoMPre.Text.Trim()))
+            {
+                MessageBox.Show("Campo código vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

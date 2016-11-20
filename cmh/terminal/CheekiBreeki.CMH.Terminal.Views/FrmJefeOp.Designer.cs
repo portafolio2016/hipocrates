@@ -118,6 +118,8 @@
             this.lblGuion_MP = new System.Windows.Forms.Label();
             this.txtRutPersonal_MP = new System.Windows.Forms.TextBox();
             this.lblRutPersonal_MP = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbCodigoMPre = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -321,7 +323,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(119, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "o Codigo de prestación:";
+            this.label2.Text = "o Código de prestación:";
             // 
             // tbCodigoPrestacionMPre
             // 
@@ -340,6 +342,8 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.tbCodigoMPre);
+            this.groupBox6.Controls.Add(this.label10);
             this.groupBox6.Controls.Add(this.btnGuardarMpre);
             this.groupBox6.Controls.Add(this.btnEliminarMPre);
             this.groupBox6.Controls.Add(this.btnRegistrarMPre);
@@ -386,6 +390,7 @@
             this.btnRegistrarMPre.TabIndex = 8;
             this.btnRegistrarMPre.Text = "Registrar";
             this.btnRegistrarMPre.UseVisualStyleBackColor = true;
+            this.btnRegistrarMPre.Click += new System.EventHandler(this.btnRegistrarMPre_Click);
             // 
             // btnRemoveMPre
             // 
@@ -426,7 +431,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(113, 140);
+            this.label6.Location = new System.Drawing.Point(110, 132);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 11;
@@ -435,7 +440,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(113, 96);
+            this.label5.Location = new System.Drawing.Point(108, 93);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 13);
             this.label5.TabIndex = 10;
@@ -443,14 +448,14 @@
             // 
             // tbNombrePrestacionMPre
             // 
-            this.tbNombrePrestacionMPre.Location = new System.Drawing.Point(201, 93);
+            this.tbNombrePrestacionMPre.Location = new System.Drawing.Point(201, 91);
             this.tbNombrePrestacionMPre.Name = "tbNombrePrestacionMPre";
             this.tbNombrePrestacionMPre.Size = new System.Drawing.Size(391, 20);
             this.tbNombrePrestacionMPre.TabIndex = 8;
             // 
             // tbPrecioPrestacionMPre
             // 
-            this.tbPrecioPrestacionMPre.Location = new System.Drawing.Point(201, 137);
+            this.tbPrecioPrestacionMPre.Location = new System.Drawing.Point(201, 129);
             this.tbPrecioPrestacionMPre.Name = "tbPrecioPrestacionMPre";
             this.tbPrecioPrestacionMPre.Size = new System.Drawing.Size(203, 20);
             this.tbPrecioPrestacionMPre.TabIndex = 9;
@@ -458,7 +463,7 @@
             // cbTipoPrestacionMPre
             // 
             this.cbTipoPrestacionMPre.FormattingEnabled = true;
-            this.cbTipoPrestacionMPre.Location = new System.Drawing.Point(201, 51);
+            this.cbTipoPrestacionMPre.Location = new System.Drawing.Point(201, 19);
             this.cbTipoPrestacionMPre.Name = "cbTipoPrestacionMPre";
             this.cbTipoPrestacionMPre.Size = new System.Drawing.Size(391, 21);
             this.cbTipoPrestacionMPre.TabIndex = 8;
@@ -466,7 +471,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(113, 54);
+            this.label4.Location = new System.Drawing.Point(108, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 13);
             this.label4.TabIndex = 8;
@@ -1025,6 +1030,22 @@
             this.lblRutPersonal_MP.TabIndex = 0;
             this.lblRutPersonal_MP.Text = "Rut de Personal";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(110, 58);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Código:";
+            // 
+            // tbCodigoMPre
+            // 
+            this.tbCodigoMPre.Location = new System.Drawing.Point(201, 55);
+            this.tbCodigoMPre.Name = "tbCodigoMPre";
+            this.tbCodigoMPre.Size = new System.Drawing.Size(391, 20);
+            this.tbCodigoMPre.TabIndex = 18;
+            // 
             // FrmJefeOp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1156,5 +1177,7 @@
         private System.Windows.Forms.Button btnEliminarMPre;
         private System.Windows.Forms.Button btnRegistrarMPre;
         private System.Windows.Forms.ToolStripMenuItem prestaciónToolStripMenuItem;
+        private System.Windows.Forms.TextBox tbCodigoMPre;
+        private System.Windows.Forms.Label label10;
     }
 }

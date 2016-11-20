@@ -1980,5 +1980,48 @@ namespace CheekiBreeki.CMH.Terminal.BL
             else return new List<RES_ATENCION>();
         }
         #endregion
+
+        public bool CodigoPrestacionExiste(string cod)
+        {
+            bool x = false;
+            using (var con = new CMHEntities())
+            {
+                List<PRESTACION> prest = con.PRESTACION.Where(d => d.CODIGO_PRESTACION == cod).ToList();
+                if (prest == null)
+                {
+                    x = true;
+                }
+                else if (prest.Count > 0)
+                {
+                    x = true;
+                }
+            }
+            return x;
+        }
+
+        public bool CrearPrestacion(PRESTACION pres, List<EQUIPO_REQ> equipos)
+        {
+            bool x = false;
+            try
+            {
+                PRESTACION prestacion = pres;
+                conexionDB.PRESTACION.Add(prestacion);
+                conexionDB.SaveChangesAsync();
+
+                foreach (EQUIPO_REQ eq in equipos)
+                {
+                    eq.ID_PRESTACION = prestacion.ID_PRESTACION;
+                    conexionDB.EQUIPO_REQ.Add(eq);
+                    conexionDB.SaveChangesAsync();
+                }
+
+                x = true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+            return x;
+        }
     }
 }
