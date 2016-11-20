@@ -218,10 +218,53 @@ namespace CheekiBreeki.CMH.Terminal.Views
             gbOpcionesUsuario.Hide();
             gbMantenedorPersonal.Hide();
             gbMantenerPrestacion.Hide();
+            gbLogPagoHonorarios.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
             x.Show();
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   LOG PAGO HONORARIO                                                                                                         //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void btnBuscarLPH_Click(object sender, EventArgs e)
+        {
+            AccionesTerminal ac = new AccionesTerminal();
+            dgLogs.Rows.Clear();
+            List<LOGPAGOHONORARIO> logList = new List<LOGPAGOHONORARIO>();
+            logList = ac.ObtenerLogPagoHonorario();
+            if (logList != null)
+            {
+                if (logList.Count != 0)
+                {
+                    foreach (LOGPAGOHONORARIO log in logList)
+                    {
+                        if (log.FECHOR.Value.Month == dtFechaLPH.Value.Month && log.FECHOR.Value.Year == dtFechaLPH.Value.Year)
+                        {
+                            dgLogs.Rows.Add(log.CUEN_BANCARIA.PERS_MEDICO.PERSONAL.NOMBREFULL, log.CUEN_BANCARIA.BANCO.NOMBRE, log.CUEN_BANCARIA.TIPO_C_BANCARIA.NOM_C_BANCARIA, log.CUEN_BANCARIA.NUM_C_BANCARIA, "$" + log.TOTAL);
+                        }
+                    }
+                    if (dgLogs.Rows.Count <= 0)
+                    {
+                        MessageBox.Show("No hay pagos en la fecha indicada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No hay registro de pagos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error al obtener los pagos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void logPagosHonorarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbLogPagoHonorarios);
         }
 
 

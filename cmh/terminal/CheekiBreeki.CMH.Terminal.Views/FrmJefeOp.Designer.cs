@@ -215,7 +215,6 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mantenedoresToolStripMenuItem});
             this.mantenedoresToolStripMenuItem,
             this.logPagosHonorarioToolStripMenuItem,
             this.reporteDeCajaToolStripMenuItem});
@@ -1136,6 +1135,17 @@
         private System.Windows.Forms.Button btnCambiarContrasena;
         private System.Windows.Forms.TextBox tbContrasenaNueva;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ToolStripMenuItem logPagosHonorarioToolStripMenuItem;
+        private System.Windows.Forms.GroupBox gbLogPagoHonorarios;
+        private System.Windows.Forms.DateTimePicker dtFechaLPH;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgLogs;
+        private System.Windows.Forms.Button btnBuscarLPH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Banco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoCuenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.Button btnCargarDatos_MP;
         private System.Windows.Forms.TextBox txtVerificador_MP;
         private System.Windows.Forms.Label lblGuion_MP;
