@@ -185,7 +185,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    using (var con = new CMHEntities()) {
+                    using (var con = new CMHEntities())
+                    {
                         con.ENTRADA_FICHA.Add(entradaFicha);
                         con.SaveChangesAsync();
                     }
@@ -776,6 +777,21 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
+
+        public List<INVENTARIO> listarInventario()
+        {
+            try
+            {
+                List<INVENTARIO> listInventario = null;
+                listInventario = conexionDB.INVENTARIO.ToList();
+                return listInventario;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
         #endregion
 
         //ECU-023 y ECU-026
@@ -985,7 +1001,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                         buscado.APELLIDOS = personal.APELLIDOS;
                         bool hashedNotNull = personal.HASHED_PASS != null;
                         bool hashedNoVacio = personal.HASHED_PASS != string.Empty;
-                       
+
                         if (hashedNotNull && hashedNoVacio)
                         {
                             buscado.HASHED_PASS = personal.HASHED_PASS;
@@ -1052,7 +1068,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 Console.WriteLine(ex.Message);
                 return false;
             }
-        }       
+        }
 
         public Boolean borrarPersonal(PERSONAL personal)
         {
@@ -1448,7 +1464,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
-        public Boolean  actualizarPaciente(PACIENTE paciente)
+        public Boolean actualizarPaciente(PACIENTE paciente)
         {
             try
             {
@@ -1473,24 +1489,28 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
-                    PACIENTE buscado = conexionDB.PACIENTE.Where(d => d.ID_PACIENTE == paciente.ID_PACIENTE).FirstOrDefault();
-                    buscado.NOMBRES_PACIENTE = paciente.NOMBRES_PACIENTE;
-                    buscado.APELLIDOS_PACIENTE = paciente.APELLIDOS_PACIENTE;
-                    buscado.EMAIL_PACIENTE = paciente.EMAIL_PACIENTE;
-                    bool hashedNotNull = paciente.HASHED_PASS != null;
-                    bool hashedNoVacio = paciente.HASHED_PASS != string.Empty;
-
-                    if (hashedNotNull && hashedNoVacio)
+                    using (var context = new CMHEntities())
                     {
-                        buscado.HASHED_PASS = paciente.HASHED_PASS;
-                    }
-                    buscado.RUT = paciente.RUT;
-                    buscado.DIGITO_VERIFICADOR = paciente.DIGITO_VERIFICADOR;
-                    buscado.SEXO = paciente.SEXO;
-                    buscado.FEC_NAC = paciente.FEC_NAC;
-                    buscado.ACTIVO = paciente.ACTIVO;
+                        PACIENTE buscado = context.PACIENTE.Where(d => d.ID_PACIENTE == paciente.ID_PACIENTE).FirstOrDefault();
+                        buscado.NOMBRES_PACIENTE = paciente.NOMBRES_PACIENTE;
+                        buscado.APELLIDOS_PACIENTE = paciente.APELLIDOS_PACIENTE;
+                        buscado.EMAIL_PACIENTE = paciente.EMAIL_PACIENTE;
+                        bool hashedNotNull = paciente.HASHED_PASS != null;
+                        bool hashedNoVacio = paciente.HASHED_PASS != string.Empty;
 
-                    conexionDB.SaveChangesAsync();
+                        if (hashedNotNull && hashedNoVacio)
+                        {
+                            buscado.HASHED_PASS = paciente.HASHED_PASS;
+                        }
+                        buscado.RUT = paciente.RUT;
+                        buscado.DIGITO_VERIFICADOR = paciente.DIGITO_VERIFICADOR;
+                        buscado.SEXO = paciente.SEXO;
+                        buscado.FEC_NAC = paciente.FEC_NAC;
+                        buscado.ACTIVO = paciente.ACTIVO;
+
+                        context.SaveChangesAsync();
+
+                    }
                     return true;
                 }
             }
@@ -1846,7 +1866,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                         conexionDB.HORARIO.Add(horario);
                         conexionDB.SaveChangesAsync();
                     }
-                   
+
                     return true;
                 }
             }
@@ -1859,8 +1879,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         #endregion
 
-       
-        #region Bancaria 
+
+        #region Bancaria
         public bool crearCuentaBancaria(CUEN_BANCARIA cuenta)
         {
             try
@@ -1921,7 +1941,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
         #endregion
-       
+
         #region Banco
         public List<BANCO> ObtenerBancos()
         {
@@ -1929,7 +1949,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return bancos;
         }
         #endregion
-       
+
         #region TipoCuentaBancaria
         public List<TIPO_C_BANCARIA> ObtenerTiposCuentaBancaria()
         {

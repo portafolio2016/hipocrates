@@ -18,6 +18,26 @@ namespace CheekiBreeki.CMH.Terminal.Views
         FrmLogin login = null;
         bool closeApp;
 
+        public void CargarDataGridInventario()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            List<INVENTARIO> listaInventarioDB = at.listarInventario();
+            //List<ATENCION_AGEN> listaAtenciones = acciones.revisarAgendaDiaria(FrmLogin.usuarioLogeado.Personal.RUT, DateTime.Now);
+            List<ListaInventarioDG> listaInventarioDG = new List<ListaInventarioDG>();
+            //List<AgendaDiaria> agendaDiaria = new List<AgendaDiaria>();
+
+            if (listaInventarioDB.Count > 0)
+            {
+
+                foreach (INVENTARIO x in listaInventarioDB)
+                {
+                    listaInventarioDG.Add(new ListaInventarioDG(x.ID_INVENTARIO_EQUIPO,(int)x.CANT_BODEGA,x.TIPO_EQUIPO.NOMBRE_TIPO_EQUIPO));
+                }
+
+            }
+            dgEquipo_Eq.DataSource = listaInventarioDG;
+            
+        }
         
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,9 +64,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblPrivilegio.Text = "";
                 btnSesion.Text = "Iniciar sesión";
             }
-           CMHEntities conexionDB = new CMHEntities();
 
-           dgEquipo_Eq.DataSource = conexionDB.INVENTARIO.ToList();
+            CargarDataGridInventario();
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

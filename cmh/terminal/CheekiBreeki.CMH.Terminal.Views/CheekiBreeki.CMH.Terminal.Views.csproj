@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ListaInventarioDG.cs" />
     <Compile Include="FrmAbrirCaja.cs">
       <SubType>Form</SubType>
     </Compile>
