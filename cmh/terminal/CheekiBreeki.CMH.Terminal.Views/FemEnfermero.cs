@@ -51,7 +51,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   CERRAR SESION                                                                                                              //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void btnSesion_Click(object sender, EventArgs e)
+        private void btnSesion_Click_1(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión",
                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
@@ -318,5 +318,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 resAtencion = resAtenciones[e.RowIndex];
             }
         }
+
+        
     }
 }

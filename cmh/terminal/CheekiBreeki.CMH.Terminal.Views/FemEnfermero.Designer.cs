@@ -40,6 +40,8 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbCerrarOrdenAnalisis = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.rtComentario = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btCerrarOrdenAnalisis = new System.Windows.Forms.Button();
             this.dgCerrarOrdenAnalisis = new System.Windows.Forms.DataGridView();
@@ -65,8 +67,6 @@
             this.NombrePaciente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaExamen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rtComentario = new System.Windows.Forms.RichTextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -120,6 +120,7 @@
             this.btnSesion.TabIndex = 2;
             this.btnSesion.Text = "Sesión";
             this.btnSesion.UseVisualStyleBackColor = true;
+            this.btnSesion.Click += new System.EventHandler(this.btnSesion_Click_1);
             // 
             // menuStrip1
             // 
@@ -175,9 +176,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.Controls.Add(this.gbAbrirOrdenAnalisis);
             this.groupBox1.Controls.Add(this.gbCerrarOrdenAnalisis);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
-            this.groupBox1.Controls.Add(this.gbAbrirOrdenAnalisis);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
@@ -198,6 +199,24 @@
             this.gbCerrarOrdenAnalisis.TabStop = false;
             this.gbCerrarOrdenAnalisis.Text = "Cerrar orden de análisis";
             this.gbCerrarOrdenAnalisis.Visible = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 345);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Comentario:";
+            // 
+            // rtComentario
+            // 
+            this.rtComentario.Location = new System.Drawing.Point(8, 361);
+            this.rtComentario.MaxLength = 256;
+            this.rtComentario.Name = "rtComentario";
+            this.rtComentario.Size = new System.Drawing.Size(754, 58);
+            this.rtComentario.TabIndex = 3;
+            this.rtComentario.Text = "";
             // 
             // label2
             // 
@@ -401,7 +420,7 @@
             this.label1.Size = new System.Drawing.Size(663, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "*De las atenciones que se muestran a continuación se puede abrir una orden de aná" +
-    "lisis para que el resultado de la atención sea análisado";
+    "lisis para que el resultado de la atención sea analizado";
             // 
             // btnAbrirOrden
             // 
@@ -455,24 +474,6 @@
             this.Comentario.ReadOnly = true;
             this.Comentario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Comentario.Width = 66;
-            // 
-            // rtComentario
-            // 
-            this.rtComentario.Location = new System.Drawing.Point(8, 361);
-            this.rtComentario.MaxLength = 256;
-            this.rtComentario.Name = "rtComentario";
-            this.rtComentario.Size = new System.Drawing.Size(754, 58);
-            this.rtComentario.TabIndex = 3;
-            this.rtComentario.Text = "";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 345);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Comentario:";
             // 
             // FemEnfermero
             // 
