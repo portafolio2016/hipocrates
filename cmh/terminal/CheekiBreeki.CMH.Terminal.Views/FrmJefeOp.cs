@@ -687,6 +687,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             tbNombrePrestacionMPre.Text = "";
             tbPrecioPrestacionMPre.Text = "";
             tbCodigoMPre.Text = "";
+            tbCodigoMPre.Enabled = true;
             if (cbTipoPrestacionMPre.Items.Count > 0)
             {
                 cbTipoPrestacionMPre.SelectedIndex = 0;
@@ -841,6 +842,41 @@ namespace CheekiBreeki.CMH.Terminal.Views
             else if(string.IsNullOrEmpty(tbCodigoMPre.Text.Trim()))
             {
                 MessageBox.Show("Campo código vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //CARGAR X LISTA
+        private void btnCargarPorLista_Click(object sender, EventArgs e)
+        {
+            PRESTACION pres = acciones.buscarPrestacionMedica(((ComboboxItem)cbPrestacionesMPre.SelectedItem).Value);
+            if (pres != null)
+            {
+                btnRegistrarMPre.Enabled = false;
+                btnGuardarMpre.Enabled = true;
+                btnEliminarMPre.Enabled = true;
+                tbCodigoMPre.Enabled = false;
+                tbNombrePrestacionMPre.Text = pres.NOM_PRESTACION;
+                tbPrecioPrestacionMPre.Text = pres.PRECIO_PRESTACION.ToString();
+                tbCodigoMPre.Text = pres.CODIGO_PRESTACION;
+                cbTipoPrestacionMPre.SelectedIndex = (int)pres.ID_TIPO_PRESTACION - 1;
+
+                List<TIPO_EQUIPO> tipoEquipos = acciones.listaTipoEquipos();
+                if (tipoEquipos == null)
+                    tipoEquipos = new List<TIPO_EQUIPO>();
+                foreach (TIPO_EQUIPO x in tipoEquipos)
+                {
+                    ComboboxItem cbi = new ComboboxItem();
+                    cbi.Text = x.NOMBRE_TIPO_EQUIPO;
+                    cbi.Value = x.ID_TIPO_EQUIPO;
+                    lbxEquiposMPre.Items.Add(cbi);
+                }
+
+                equiposReq = new List<EQUIPO_REQ>(pres.EQUIPO_REQ);
+                RefrescarEquiposPrestacion();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo encontrar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

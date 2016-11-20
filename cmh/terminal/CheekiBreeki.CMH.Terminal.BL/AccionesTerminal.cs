@@ -1302,6 +1302,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public PRESTACION buscarPrestacionMedica(int id)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(id))
+                {
+                    throw new Exception("ID verificador nulo");
+                }
+                else
+                {
+                    PRESTACION prestacion = null;
+                    prestacion = conexionDB.PRESTACION.Where(d => d.ID_PRESTACION == id)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(prestacion))
+                    {
+                        throw new Exception("Prestación no existe");
+                    }
+                    return prestacion;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         public Boolean actualizarPrestacionesMedicas(PRESTACION prestacion)
         {
             try
@@ -1682,7 +1709,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         public List<PRESTACION> listaPrestaciones()
         {
-            List<PRESTACION> prestaciones = conexionDB.PRESTACION.ToList();
+            List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d=> d.ACTIVO == true).ToList();
             return (prestaciones);
         }
 

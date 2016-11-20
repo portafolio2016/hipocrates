@@ -40,7 +40,6 @@
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prestaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logPagosHonorarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.gbMantenerPrestacion = new System.Windows.Forms.GroupBox();
             this.btnCargarPorCodigoMPre = new System.Windows.Forms.Button();
             this.btnNuevaPrestacionMPre = new System.Windows.Forms.Button();
@@ -50,6 +49,8 @@
             this.tbCodigoPrestacionMPre = new System.Windows.Forms.TextBox();
             this.cbPrestacionesMPre = new System.Windows.Forms.ComboBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.tbCodigoMPre = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.btnGuardarMpre = new System.Windows.Forms.Button();
             this.btnEliminarMPre = new System.Windows.Forms.Button();
             this.btnRegistrarMPre = new System.Windows.Forms.Button();
@@ -63,6 +64,7 @@
             this.tbPrecioPrestacionMPre = new System.Windows.Forms.TextBox();
             this.cbTipoPrestacionMPre = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbNuevoMail = new System.Windows.Forms.TextBox();
@@ -118,15 +120,13 @@
             this.lblGuion_MP = new System.Windows.Forms.Label();
             this.txtRutPersonal_MP = new System.Windows.Forms.TextBox();
             this.lblRutPersonal_MP = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbCodigoMPre = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.gbOpcionesUsuario.SuspendLayout();
             this.gbMantenerPrestacion.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.gbLogPagoHonorarios.SuspendLayout();
@@ -249,18 +249,6 @@
             this.logPagosHonorarioToolStripMenuItem.Text = "Log Pagos Honorario";
             this.logPagosHonorarioToolStripMenuItem.Click += new System.EventHandler(this.logPagosHonorarioToolStripMenuItem_Click);
             // 
-            // gbOpcionesUsuario
-            // 
-            this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
-            this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
-            this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
-            this.gbOpcionesUsuario.Name = "gbOpcionesUsuario";
-            this.gbOpcionesUsuario.Size = new System.Drawing.Size(768, 462);
-            this.gbOpcionesUsuario.TabIndex = 3;
-            this.gbOpcionesUsuario.TabStop = false;
-            this.gbOpcionesUsuario.Text = "Opciones de cuenta";
-            this.gbOpcionesUsuario.Visible = false;
-            // 
             // gbMantenerPrestacion
             // 
             this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorCodigoMPre);
@@ -306,6 +294,7 @@
             this.btnCargarPorLista.TabIndex = 5;
             this.btnCargarPorLista.Text = "Cargar por lista";
             this.btnCargarPorLista.UseVisualStyleBackColor = true;
+            this.btnCargarPorLista.Click += new System.EventHandler(this.btnCargarPorLista_Click);
             // 
             // label3
             // 
@@ -363,6 +352,22 @@
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Prestación";
+            // 
+            // tbCodigoMPre
+            // 
+            this.tbCodigoMPre.Location = new System.Drawing.Point(201, 55);
+            this.tbCodigoMPre.Name = "tbCodigoMPre";
+            this.tbCodigoMPre.Size = new System.Drawing.Size(391, 20);
+            this.tbCodigoMPre.TabIndex = 18;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(110, 58);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Código:";
             // 
             // btnGuardarMpre
             // 
@@ -476,6 +481,18 @@
             this.label4.Size = new System.Drawing.Size(83, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Tipo prestación:";
+            // 
+            // gbOpcionesUsuario
+            // 
+            this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
+            this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
+            this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
+            this.gbOpcionesUsuario.Name = "gbOpcionesUsuario";
+            this.gbOpcionesUsuario.Size = new System.Drawing.Size(768, 462);
+            this.gbOpcionesUsuario.TabIndex = 3;
+            this.gbOpcionesUsuario.TabStop = false;
+            this.gbOpcionesUsuario.Text = "Opciones de cuenta";
+            this.gbOpcionesUsuario.Visible = false;
             // 
             // groupBox5
             // 
@@ -1030,22 +1047,6 @@
             this.lblRutPersonal_MP.TabIndex = 0;
             this.lblRutPersonal_MP.Text = "Rut de Personal";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(110, 58);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(43, 13);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "Código:";
-            // 
-            // tbCodigoMPre
-            // 
-            this.tbCodigoMPre.Location = new System.Drawing.Point(201, 55);
-            this.tbCodigoMPre.Name = "tbCodigoMPre";
-            this.tbCodigoMPre.Size = new System.Drawing.Size(391, 20);
-            this.tbCodigoMPre.TabIndex = 18;
-            // 
             // FrmJefeOp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1065,11 +1066,11 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.gbOpcionesUsuario.ResumeLayout(false);
             this.gbMantenerPrestacion.ResumeLayout(false);
             this.gbMantenerPrestacion.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.gbOpcionesUsuario.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
