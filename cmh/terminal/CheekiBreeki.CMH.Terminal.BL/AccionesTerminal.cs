@@ -1500,6 +1500,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public PRESTACION buscarPrestacionMedica(int id)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(id))
+                {
+                    throw new Exception("ID verificador nulo");
+                }
+                else
+                {
+                    PRESTACION prestacion = null;
+                    prestacion = conexionDB.PRESTACION.Where(d => d.ID_PRESTACION == id)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(prestacion))
+                    {
+                        throw new Exception("Prestación no existe");
+                    }
+                    return prestacion;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         public Boolean actualizarPrestacionesMedicas(PRESTACION prestacion)
         {
             try
@@ -1921,6 +1948,24 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return (prestaciones);
         }
 
+        public List<PRESTACION> listaPrestaciones()
+        {
+            List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d=> d.ACTIVO == true).ToList();
+            return (prestaciones);
+        }
+
+        public List<TIPO_PRES> listaTipoPrestaciones()
+        {
+            List<TIPO_PRES> tipoPrestaciones = conexionDB.TIPO_PRES.ToList();
+            return (tipoPrestaciones);
+        }
+
+        public List<TIPO_EQUIPO> listaTipoEquipos()
+        {
+            List<TIPO_EQUIPO> tipoEquipo = conexionDB.TIPO_EQUIPO.ToList();
+            return (tipoEquipo);
+        }
+
         public List<ATENCION_AGEN> listaAtencionesVigentes(int rut)
         {
             List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
@@ -2203,5 +2248,138 @@ namespace CheekiBreeki.CMH.Terminal.BL
             else return new List<RES_ATENCION>();
         }
         #endregion
+
+        public bool CodigoPrestacionExiste(string cod)
+        {
+            bool x = false;
+            using (var con = new CMHEntities())
+            {
+                List<PRESTACION> prest = con.PRESTACION.Where(d => d.CODIGO_PRESTACION == cod).ToList();
+                if (prest == null)
+                {
+                    x = true;
+                }
+                else if (prest.Count > 0)
+                {
+                    x = true;
+                }
+            }
+            return x;
+        }
+
+        public bool CrearPrestacion(PRESTACION pres, List<EQUIPO_REQ> equipos)
+        {
+            bool x = false;
+            try
+            {
+                PRESTACION prestacion = pres;
+                conexionDB.PRESTACION.Add(prestacion);
+                conexionDB.SaveChangesAsync();
+
+                foreach (EQUIPO_REQ eq in equipos)
+                {
+                    eq.ID_PRESTACION = prestacion.ID_PRESTACION;
+                    conexionDB.EQUIPO_REQ.Add(eq);
+                    conexionDB.SaveChangesAsync();
+                }
+
+                x = true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+            return x;
+        }
+
+        public bool ActualizarPrestacion(PRESTACION pres, List<EQUIPO_REQ> equipos)
+        {
+            bool x = false;
+            try
+            {
+                PRESTACION prestacion = new PRESTACION();
+                using (var con = new CMHEntities())
+                {
+                    prestacion = con.PRESTACION.Where(d=> d.CODIGO_PRESTACION == pres.CODIGO_PRESTACION).FirstOrDefault();
+                    prestacion.ID_TIPO_PRESTACION = pres.ID_TIPO_PRESTACION;
+                    prestacion.ID_ESPECIALIDAD = pres.ID_ESPECIALIDAD;
+                    prestacion.NOM_PRESTACION = pres.NOM_PRESTACION;
+                    prestacion.PRECIO_PRESTACION = pres.PRECIO_PRESTACION;
+                    con.SaveChangesAsync();
+                }
+
+                
+                using (var con = new CMHEntities())
+                {
+                    List<EQUIPO_REQ> equiposActuales = con.EQUIPO_REQ.Where(d => d.ID_PRESTACION == prestacion.ID_PRESTACION).ToList();
+                    foreach (EQUIPO_REQ eq in equipos)
+                    {
+                        bool existe = false;
+                        foreach (EQUIPO_REQ eqa in equiposActuales)
+                        {
+                            if (eqa.ID_PRESTACION == eq.ID_PRESTACION && eqa.ID_TIPO_EQUIPO == eq.ID_TIPO_EQUIPO)
+                            {
+                                eqa.CANTIDAD = eq.CANTIDAD;
+                                con.SaveChangesAsync();
+                                existe = true;
+                            }
+                        }
+                        if (!existe)
+                        {
+                            EQUIPO_REQ aux = new EQUIPO_REQ();
+                            aux.ID_PRESTACION = prestacion.ID_PRESTACION;
+                            aux.ID_TIPO_EQUIPO = eq.ID_TIPO_EQUIPO;
+                            aux.CANTIDAD = eq.CANTIDAD;
+                            con.EQUIPO_REQ.Add(aux);
+                            con.SaveChangesAsync();
+                        }
+                    }
+
+                    foreach (EQUIPO_REQ eqa in equiposActuales)
+                    {
+                        bool existe = false;
+                        foreach (EQUIPO_REQ eq in equipos)
+                        {
+                            if (eqa.ID_PRESTACION == eq.ID_PRESTACION && eqa.ID_TIPO_EQUIPO == eq.ID_TIPO_EQUIPO)
+                            {
+                                existe = true;
+                            }
+                        }
+                        if (!existe)
+                        {
+                            con.EQUIPO_REQ.Remove(eqa);
+                            con.SaveChangesAsync();
+                        }
+                    }
+                }
+                x = true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return x;
+        }
+
+        public bool EliminarPrestacion(PRESTACION pre)
+        {
+            bool x = false;
+            PRESTACION prestacion;
+            try
+            {
+                using (var con = new CMHEntities())
+                {
+                    prestacion = con.PRESTACION.Where(d => d.CODIGO_PRESTACION == pre.CODIGO_PRESTACION).FirstOrDefault();
+                    prestacion.ACTIVO = false;
+                    con.SaveChangesAsync();
+                    x = true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return x;
+        }
     }
 }
