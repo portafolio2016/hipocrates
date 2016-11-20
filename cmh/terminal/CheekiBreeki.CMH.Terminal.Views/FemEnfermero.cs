@@ -328,7 +328,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             else
             {
                 ConversorBase64 conv = new ConversorBase64();
-                string nombreArchivo = "Resultado atención";
+                string nombreArchivo = "Resultado atención Nro" + resAtencion.ID_ATENCION_AGEN;
                 conv.convertirDesdeBase64(resAtencion.ARCHIVO_B64, nombreArchivo, resAtencion.EXT_ARCHIVO);
                 System.Diagnostics.Process.Start(nombreArchivo + "." + resAtencion.EXT_ARCHIVO);
             }
