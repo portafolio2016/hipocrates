@@ -312,6 +312,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 PACIENTE pac = new PACIENTE();
 
                 //capturando datos
+
+                if (txtContrasena_Pac.Text == null || txtContrasena_Pac.Text == "")
+                {
+                    throw new Exception();
+                }
+
                 pac.NOMBRES_PACIENTE = txtNombres_Pac.Text;
                 pac.APELLIDOS_PACIENTE = txtApellidos_Pac.Text;
                 pac.EMAIL_PACIENTE = txtEmail_Pac.Text;
@@ -336,6 +342,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 }
 
                 if (!Util.rutValido(pac.RUT, pac.DIGITO_VERIFICADOR))
+                {
+                    throw new Exception();
+                }
+
+
+                if (pac.HASHED_PASS == null || pac.HASHED_PASS == "")
                 {
                     throw new Exception();
                 }

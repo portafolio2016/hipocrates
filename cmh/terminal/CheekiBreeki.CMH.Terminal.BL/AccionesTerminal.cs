@@ -690,6 +690,38 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public int nuevoEquipoID(TIPO_EQUIPO equipo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(equipo))
+                {
+                    throw new Exception("Personal nulo");
+                }
+                else if (equipo.NOMBRE_TIPO_EQUIPO == null ||
+                         equipo.NOMBRE_TIPO_EQUIPO == String.Empty)
+                {
+                    throw new Exception("Nombre vacío");
+                }
+                else if (!Util.isObjetoNulo(buscarEquipo(equipo.NOMBRE_TIPO_EQUIPO)))
+                {
+                    throw new Exception("Equipo ya ingresado");
+                }
+                else
+                {
+                    conexionDB.TIPO_EQUIPO.Add(equipo);
+                    conexionDB.SaveChangesAsync();
+
+                    return equipo.ID_TIPO_EQUIPO;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
         public Boolean nuevoEquipoInventario(INVENTARIO inventario)
         {
             try
@@ -729,6 +761,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     TIPO_EQUIPO equipo = null;
                     equipo = conexionDB.TIPO_EQUIPO.Where(d => d.NOMBRE_TIPO_EQUIPO == nombre)
+                                                         .FirstOrDefault();
+                    if (Util.isObjetoNulo(equipo))
+                    {
+                        throw new Exception("Equipo no existe");
+                    }
+                    return equipo;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public TIPO_EQUIPO buscarEquipoID(int idEquipo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(idEquipo))
+                {
+                    throw new Exception("ID nulo");
+                }
+                else
+                {
+                    TIPO_EQUIPO equipo = null;
+                    equipo = conexionDB.TIPO_EQUIPO.Where(d => d.ID_TIPO_EQUIPO == idEquipo)
                                                          .FirstOrDefault();
                     if (Util.isObjetoNulo(equipo))
                     {
@@ -874,6 +933,33 @@ namespace CheekiBreeki.CMH.Terminal.BL
                         INVENTARIO buscado = context.INVENTARIO.Where(d => d.ID_INVENTARIO_EQUIPO == inventario.ID_INVENTARIO_EQUIPO).FirstOrDefault();
                         buscado.CANT_BODEGA = inventario.CANT_BODEGA;
                         buscado.ID_TIPO_EQUIPO = inventario.ID_TIPO_EQUIPO;
+                        context.SaveChangesAsync();
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean actualizarEquipo(TIPO_EQUIPO tipoEquipo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(tipoEquipo))
+                {
+                    throw new Exception("Tipo equipo nulo");
+                }
+                else
+                {
+                    using (var context = new CMHEntities())
+                    {
+                        TIPO_EQUIPO buscado = context.TIPO_EQUIPO.Where(d => d.ID_TIPO_EQUIPO == tipoEquipo.ID_TIPO_EQUIPO).FirstOrDefault();
+                        buscado.NOMBRE_TIPO_EQUIPO = tipoEquipo.NOMBRE_TIPO_EQUIPO;
+                       
                         context.SaveChangesAsync();
                     }
                     return true;
@@ -1496,6 +1582,10 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 else if (paciente.RUT == null || paciente.RUT == 0)
                 {
                     throw new Exception("RUT vacío");
+                }
+                else if (paciente.HASHED_PASS == null || paciente.HASHED_PASS == string.Empty)
+                {
+                    throw new Exception("Contraseña nula");
                 }
                 else if (!Util.isObjetoNulo(buscarPaciente(paciente.RUT, paciente.DIGITO_VERIFICADOR)))
                 {

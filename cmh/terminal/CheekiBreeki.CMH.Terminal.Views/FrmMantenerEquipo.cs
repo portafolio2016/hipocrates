@@ -39,16 +39,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
             
         }
 
-        public void CargarComboboxEquipo()
-        {
-            AccionesTerminal at = new AccionesTerminal();
-            cbNombreEquipo_Eq.DataSource = null;
-            cbNombreEquipo_Eq.ValueMember = "ID_TIPO_EQUIPO";
-            cbNombreEquipo_Eq.DisplayMember = "NOMBRE_TIPO_EQUIPO";
-            cbNombreEquipo_Eq.DataSource = at.ObtenerTipoEquipo();
-        }
-        
-
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                                                              //
         //   CONSTRUCTOR                                                                                                                //
@@ -75,7 +65,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
 
             CargarDataGridInventario();
-            CargarComboboxEquipo();
+            
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -231,6 +221,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         public void limpiarDatos()
         {
             txtCantidad_Eq.Text = string.Empty;
+            txtNombreEquipo.Text = string.Empty;
         }
         #endregion
 
@@ -247,7 +238,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             try
             {
                 txtCantidad_Eq.Text = dgEquipo_Eq.CurrentRow.Cells["cantidad"].Value.ToString();
-                cbNombreEquipo_Eq.SelectedIndex = (int)dgEquipo_Eq.CurrentRow.Cells["idEquipo"].Value -1;
+                txtNombreEquipo.Text =  dgEquipo_Eq.CurrentRow.Cells["nombreEquipo"].Value.ToString();
                 btnRegistrar_Eq.Enabled = false;
                 btnGuardar_Eq.Enabled = true;
             }
@@ -263,10 +254,20 @@ namespace CheekiBreeki.CMH.Terminal.Views
             try
             {
                 AccionesTerminal at = new AccionesTerminal();
-                INVENTARIO in1 = new INVENTARIO();
 
+                TIPO_EQUIPO tipoEquipo = new TIPO_EQUIPO();
+                tipoEquipo.NOMBRE_TIPO_EQUIPO = txtNombreEquipo.Text;
+                tipoEquipo.ID_TIPO_EQUIPO = at.nuevoEquipoID(tipoEquipo);
+
+                if ( tipoEquipo.ID_TIPO_EQUIPO == 0)
+                {
+                    throw new Exception();
+                }
+
+                INVENTARIO in1 = new INVENTARIO();
                 in1.CANT_BODEGA = int.Parse(txtCantidad_Eq.Text);
-                in1.ID_TIPO_EQUIPO = ((TIPO_EQUIPO)cbNombreEquipo_Eq.SelectedItem).ID_TIPO_EQUIPO;
+                in1.ID_TIPO_EQUIPO = tipoEquipo.ID_TIPO_EQUIPO;
+                
 
                 at.nuevoEquipoInventario(in1);
                 
@@ -290,7 +291,10 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 AccionesTerminal at = new AccionesTerminal();
                 INVENTARIO inv = at.buscarInventario((int)dgEquipo_Eq.CurrentRow.Cells["idInventario"].Value);
                 inv.CANT_BODEGA = int.Parse(txtCantidad_Eq.Text);
-                inv.ID_TIPO_EQUIPO = ((TIPO_EQUIPO)cbNombreEquipo_Eq.SelectedItem).ID_TIPO_EQUIPO;
+
+                TIPO_EQUIPO tipEq = at.buscarEquipoID(inv.TIPO_EQUIPO.ID_TIPO_EQUIPO);
+                tipEq.NOMBRE_TIPO_EQUIPO = txtNombreEquipo.Text;
+                at.actualizarEquipo(tipEq);
                 at.actualizarInventario(inv);
                 MessageBox.Show("¡Inventario actualizado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
                 limpiarDatos();

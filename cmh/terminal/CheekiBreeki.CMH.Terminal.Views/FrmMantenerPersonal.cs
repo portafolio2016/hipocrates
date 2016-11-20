@@ -377,6 +377,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 AccionesTerminal at = new AccionesTerminal();
                 PERSONAL p1 = new PERSONAL();
 
+                if (txtContrasena_MP.Text == null || txtContrasena_MP.Text == "")
+                {
+                    throw new Exception();
+                }
+
                 //CapturarDatos
                 p1.NOMBRES = txtNombres_MP.Text;
                 p1.APELLIDOS = txtApellidos_MP.Text;
