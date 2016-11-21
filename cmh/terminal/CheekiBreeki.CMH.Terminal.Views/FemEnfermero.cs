@@ -269,7 +269,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     if (x.COMENTARIO == null)
                         x.COMENTARIO = string.Empty;
                     dgCerrarOrdenAnalisis.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
-                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO);
+                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO, "Ver PDF");
                 }
                 if (resAtenciones.Count == 0)
                 {
@@ -319,6 +319,19 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
-        
+        private void dgCerrarOrdenAnalisis_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex != 4) return;
+
+            if (resAtencion.ARCHIVO_B64 == null)
+                MessageBox.Show("No posee ningún documento adjunto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                ConversorBase64 conv = new ConversorBase64();
+                string nombreArchivo = "Resultado atención Nro" + resAtencion.ID_ATENCION_AGEN;
+                conv.convertirDesdeBase64(resAtencion.ARCHIVO_B64, nombreArchivo, resAtencion.EXT_ARCHIVO);
+                System.Diagnostics.Process.Start(nombreArchivo + "." + resAtencion.EXT_ARCHIVO);
+            }
+        }
     }
 }
