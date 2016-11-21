@@ -23,7 +23,7 @@
             </div>
             <div class="panel-body">
                 <p>Vea y descargue los resultados de sus exámenes aquí.</p>
-                <a href="#" class="btn btn-default">Ir a resultados de exámenes</a>
+                <a href="master.jsp?page=resultados" class="btn btn-default">Ir a resultados de exámenes</a>
             </div>
         </div>
     </div>
