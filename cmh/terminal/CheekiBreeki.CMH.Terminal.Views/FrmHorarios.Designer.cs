@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gpHorarios = new System.Windows.Forms.GroupBox();
+            this.btnGuardarCambios = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.btnAsignar = new System.Windows.Forms.Button();
             this.gpAsignados = new System.Windows.Forms.GroupBox();
@@ -40,7 +41,6 @@
             this.lblError = new System.Windows.Forms.Label();
             this.brnBuscarHorarios = new System.Windows.Forms.Button();
             this.lblRut = new System.Windows.Forms.Label();
-            this.btnGuardarCambios = new System.Windows.Forms.Button();
             this.gpHorarios.SuspendLayout();
             this.gpAsignados.SuspendLayout();
             this.gpDisponibles.SuspendLayout();
@@ -63,7 +63,17 @@
             this.gpHorarios.Size = new System.Drawing.Size(771, 454);
             this.gpHorarios.TabIndex = 5;
             this.gpHorarios.TabStop = false;
-            this.gpHorarios.Text = "Anular atención";
+            this.gpHorarios.Text = "Modificar horarios";
+            // 
+            // btnGuardarCambios
+            // 
+            this.btnGuardarCambios.Location = new System.Drawing.Point(304, 374);
+            this.btnGuardarCambios.Name = "btnGuardarCambios";
+            this.btnGuardarCambios.Size = new System.Drawing.Size(131, 23);
+            this.btnGuardarCambios.TabIndex = 24;
+            this.btnGuardarCambios.Text = "Guardar Cambios";
+            this.btnGuardarCambios.UseVisualStyleBackColor = true;
+            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
             // 
             // btnQuitar
             // 
@@ -169,16 +179,6 @@
             this.lblRut.Size = new System.Drawing.Size(74, 13);
             this.lblRut.TabIndex = 11;
             this.lblRut.Text = "RUT Personal";
-            // 
-            // btnGuardarCambios
-            // 
-            this.btnGuardarCambios.Location = new System.Drawing.Point(304, 374);
-            this.btnGuardarCambios.Name = "btnGuardarCambios";
-            this.btnGuardarCambios.Size = new System.Drawing.Size(131, 23);
-            this.btnGuardarCambios.TabIndex = 24;
-            this.btnGuardarCambios.Text = "Guardar Cambios";
-            this.btnGuardarCambios.UseVisualStyleBackColor = true;
-            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
             // 
             // FrmHorarios
             // 

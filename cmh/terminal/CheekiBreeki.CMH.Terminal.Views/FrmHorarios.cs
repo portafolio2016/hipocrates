@@ -27,7 +27,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         }
 
-        public class ComboboxItem
+        public class ComboboxItemObject
         {
             public string Text { get; set; }
             public Object Value { get; set; }
@@ -55,7 +55,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     List<BLOQUE> bloquesDisponibles = at.obtenerBloquesDisponibles(int.Parse(txtRut.Text));
                     foreach (BLOQUE bloques in bloquesDisponibles)
                     {
-                        ComboboxItem item = new ComboboxItem();
+                        ComboboxItemObject item = new ComboboxItemObject();
                         item.Value = bloques.ID_BLOQUE;
                         if (bloques.NUM_MINU_INI == 0)
                             item.Text = bloques.DIA_SEM.NOMBRE_DIA + ": " + bloques.NUM_HORA_INI + ":00 - " + bloques.NUM_HORA_FIN + ":" + bloques.NUM_MINU_FIN;
@@ -70,7 +70,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     List<BLOQUE> bloquesAsignados = at.obtenerBloquesAsignados(int.Parse(txtRut.Text));
                     foreach (BLOQUE bloques in bloquesAsignados)
                     {
-                        ComboboxItem item = new ComboboxItem();
+                        ComboboxItemObject item = new ComboboxItemObject();
                         item.Value = bloques.ID_BLOQUE;
                         if (bloques.NUM_MINU_INI == 0)
                             item.Text = bloques.DIA_SEM.NOMBRE_DIA + ": " + bloques.NUM_HORA_INI + ":00 - " + bloques.NUM_HORA_FIN + ":" + bloques.NUM_MINU_FIN;
@@ -97,8 +97,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnAsignar_Click(object sender, EventArgs e)
         {
-            List<ComboboxItem> seleccionados = lstDisponibles.SelectedItems.Cast<ComboboxItem>().ToList();
-            foreach (ComboboxItem item in seleccionados)
+            List<ComboboxItemObject> seleccionados = lstDisponibles.SelectedItems.Cast<ComboboxItemObject>().ToList();
+            foreach (ComboboxItemObject item in seleccionados)
             {
                 lstDisponibles.Items.Remove(item);
             }
@@ -107,8 +107,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            List<ComboboxItem> seleccionados = lstAsignados.SelectedItems.Cast<ComboboxItem>().ToList();
-            foreach (ComboboxItem item in seleccionados)
+            List<ComboboxItemObject> seleccionados = lstAsignados.SelectedItems.Cast<ComboboxItemObject>().ToList();
+            foreach (ComboboxItemObject item in seleccionados)
             {
                 lstAsignados.Items.Remove(item);
             }
@@ -121,9 +121,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
             lblError.Text = "Actualizando horarios...";
             btnGuardarCambios.Enabled = false;
             lblError.ForeColor = System.Drawing.Color.Violet;
-            List<ComboboxItem> seleccionados = lstAsignados.Items.Cast<ComboboxItem>().ToList();
+            List<ComboboxItemObject> seleccionados = lstAsignados.Items.Cast<ComboboxItemObject>().ToList();
             List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
-            foreach (ComboboxItem item in seleccionados)
+            foreach (ComboboxItemObject item in seleccionados)
             {
                 BLOQUE nuevo = new BLOQUE();
                 nuevo.ID_BLOQUE = int.Parse(item.Value.ToString());
