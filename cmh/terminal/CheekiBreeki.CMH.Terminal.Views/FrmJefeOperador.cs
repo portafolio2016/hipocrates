@@ -12,20 +12,19 @@ using System.Windows.Forms;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
-    public partial class FemEnfermero : Form
+    public partial class FrmJefeOperador : Form
     {
         private static AccionesTerminal acciones = new AccionesTerminal();
-        private static List<RES_ATENCION> resAtenciones = new List<RES_ATENCION>();
-        private static RES_ATENCION resAtencion = null;
         FrmLogin login = null;
         bool closeApp;
 
+        
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                                                              //
         //   CONSTRUCTOR                                                                                                                //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public FemEnfermero(FrmLogin fLogin)
+        public FrmJefeOperador(FrmLogin fLogin)
         {
             InitializeComponent();
             closeApp = true;
@@ -44,6 +43,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblPrivilegio.Text = "";
                 btnSesion.Text = "Iniciar sesión";
             }
+
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   CERRAR SESION                                                                                                              //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void btnSesion_Click_1(object sender, EventArgs e)
+        private void btnSesion_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión",
                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
@@ -69,7 +69,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   FORM CLOSED                                                                                                                //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void FemEnfermero_FormClosed(object sender, FormClosedEventArgs e)
+        private void FrmJefeOp_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (closeApp)
                 Application.Exit();
@@ -80,7 +80,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   OPCIONES DE CUENTA                                                                                                         //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void btnModificarUser_Click_1(object sender, EventArgs e)
+        private void btnModificarUser_Click(object sender, EventArgs e)
         {
             InitGB(gbOpcionesUsuario);
         }
@@ -163,175 +163,43 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void InitGB(GroupBox x)
         {
+
             gbOpcionesUsuario.Hide();
-            gbAbrirOrdenAnalisis.Hide();
-            gbCerrarOrdenAnalisis.Hide();
-            //
-            //AGREGAR LOS OTROS GB QUE FALTEN
-            //
+
             x.Show();
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //                                                                                                                              //
-        //   ABRIR ORDEN ANALISIS                                                                                                       //
-        //                                                                                                                              //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+
+        #region Barra menú
+        private void personalToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            InitGB(gbAbrirOrdenAnalisis);
-            InitAbrirOrden();
+            FrmMantenerPersonal frmMantenerPersonal = new FrmMantenerPersonal(login);
+            frmMantenerPersonal.Show();
+            frmMantenerPersonal.Activate();
+            this.Hide();
         }
 
-        private void InitAbrirOrden()
+        private void pacienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                resAtencion = null;
-                dgAtencionesAOA.Rows.Clear();
-                AccionesTerminal ac = new AccionesTerminal();
-                resAtenciones = ac.ResAtencionesAptasParaAnalisis();
-                foreach (RES_ATENCION x in resAtenciones)
-                {
-                    if (x.COMENTARIO == null)
-                        x.COMENTARIO = string.Empty;
-                    dgAtencionesAOA.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
-                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.COMENTARIO);
-                }
-                if (resAtenciones.Count == 0)
-                {
-                    btnAbrirOrden.Enabled = false;
-                }
-                else
-                {
-                    resAtencion = resAtenciones[0];
-                    btnAbrirOrden.Enabled = true;
-                }
-            }catch(Exception){
-                btnAbrirOrden.Enabled = false;
-                MessageBox.Show("Dato incorrecto en la base de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+            FrmMantenerPaciente frmMantenerPaciente = new FrmMantenerPaciente(login);
+            frmMantenerPaciente.Show();
+            frmMantenerPaciente.Activate();
+            this.Hide();
         }
 
-        private void btnAbrirOrden_Click(object sender, EventArgs e)
+        private void equipoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AccionesTerminal ac = new AccionesTerminal();
-            if(resAtencion != null){
-                bool x = ac.generarOrdenDeAnalisis(resAtencion.ATENCION_AGEN, resAtencion);
-                if(x){
-                    InitAbrirOrden();
-                    MessageBox.Show("Orden de análisis abierta", "Abierta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                } 
-                else
-                    MessageBox.Show("No se ha podido abrir la orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }  
-            else
-                MessageBox.Show("No ha seleccionado un examen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            FrmMantenerEquipo frmMantenerEquipo = new FrmMantenerEquipo(login);
+            frmMantenerEquipo.Show();
+            frmMantenerEquipo.Activate();
+            this.Hide();
         }
+        #endregion
 
-        private void dgAtencionesAOA_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 1 && e.RowIndex >= 0)
-            {
-                resAtencion = resAtenciones[e.RowIndex];
-            }
-        }
+      
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //                                                                                                                              //
-        //   CERRAR ORDEN ANALISIS                                                                                                      //
-        //                                                                                                                              //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void cerrarOrdenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InitGB(gbCerrarOrdenAnalisis);
-            InitCerrarOrden();
-        }
 
-        private void InitCerrarOrden()
-        {
-            try
-            {
-                resAtencion = null;
-                rtComentario.Text = "";
-                dgCerrarOrdenAnalisis.Rows.Clear();
-                AccionesTerminal ac = new AccionesTerminal();
-                List<RES_ATENCION> aux = ac.ResAtencionesAptasParaCerrarAnalisis();
-                resAtenciones = new List<RES_ATENCION>();
-                foreach (RES_ATENCION x in aux)
-                {
-                    if (x.ORDEN_ANALISIS.FECHOR_RECEP == null)
-                        resAtenciones.Add(x);
-                }
-                foreach (RES_ATENCION x in resAtenciones)
-                {
-                    if (x.COMENTARIO == null)
-                        x.COMENTARIO = string.Empty;
-                    dgCerrarOrdenAnalisis.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
-                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO, "Ver PDF");
-                }
-                if (resAtenciones.Count == 0)
-                {
-                    btCerrarOrdenAnalisis.Enabled = false;
-                }
-                else 
-                {
-                    resAtencion = resAtenciones[0];
-                    btCerrarOrdenAnalisis.Enabled = true;
-                }
-            }
-            catch (Exception)
-            {
-                btnAbrirOrden.Enabled = false;
-                MessageBox.Show("Dato incorrecto en la base de datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
-        }
 
-        private void btCerrarOrdenAnalisis_Click(object sender, EventArgs e)
-        {
-            AccionesTerminal ac = new AccionesTerminal();
-            if (resAtencion != null)
-            {
-                if(!string.IsNullOrEmpty(rtComentario.Text.Trim())){
-                    bool x = ac.cerrarOrdenDeAnalisis(resAtencion.ORDEN_ANALISIS, resAtencion, rtComentario.Text);
-                    if (x)
-                    {
-                        InitCerrarOrden();
-                        MessageBox.Show("Orden de análisis cerrada", "Abierta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else
-                        MessageBox.Show("No se ha podido cerrar la orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                    MessageBox.Show("El campo de comentario esta vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-                MessageBox.Show("No ha seleccionado una orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
 
-        private void dgCerrarOrdenAnalisis_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 1 && e.RowIndex >= 0)
-            {
-                resAtencion = resAtenciones[e.RowIndex];
-            }
-        }
-
-        private void dgCerrarOrdenAnalisis_CellClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || e.ColumnIndex != 4) return;
-
-            if (resAtencion.ARCHIVO_B64 == null)
-                MessageBox.Show("No posee ningún documento adjunto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else
-            {
-                ConversorBase64 conv = new ConversorBase64();
-                string nombreArchivo = "Resultado atención Nro" + resAtencion.ID_ATENCION_AGEN;
-                conv.convertirDesdeBase64(resAtencion.ARCHIVO_B64, nombreArchivo, resAtencion.EXT_ARCHIVO);
-                System.Diagnostics.Process.Start(nombreArchivo + "." + resAtencion.EXT_ARCHIVO);
-            }
-        }
     }
 }
