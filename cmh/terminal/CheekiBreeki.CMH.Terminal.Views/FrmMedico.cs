@@ -726,22 +726,23 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 resultadoAtencion.ATENCION_ABIERTA = false;
                 resultadoAtencion.COMENTARIO = rtComentario_CAM.Text;
 
-                //resultadoAtencion.ID_ATENCION_AGEN = ((ATENCION_AGEN)lstAtenciones_CAM.SelectedItem).ID_ATENCION_AGEN;
-                //string clob = conversor.convertirABase64(file);
-                //resultadoAtencion.ARCHIVO_B64 = clob;
-                resultadoAtencion.EXT_ARCHIVO = Path.GetExtension(file);
+                resultadoAtencion.ID_ATENCION_AGEN = ((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value;
+                string clob = conversor.convertirABase64(file);
+                resultadoAtencion.ARCHIVO_B64 = clob;
+                string extension  = Path.GetExtension(file).ToString().Substring(1, 3);
+                resultadoAtencion.EXT_ARCHIVO = extension;
                 
                 res = at.nuevoResultadoAtencion(resultadoAtencion);
-                if (res == true)
-                {
-                    MessageBox.Show("Creada el resultado de atención", "Creada", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-                
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Error al crear resultado de atención", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                res = false;
+                
             }
+            if (res == true)
+                MessageBox.Show("Creada el resultado de atención", "Creada", MessageBoxButtons.OK, MessageBoxIcon.None);
+            else
+                MessageBox.Show("Error al crear resultado de atención", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void btnBuscarPaciente_CAM_Click(object sender, EventArgs e)
