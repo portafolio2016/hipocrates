@@ -424,8 +424,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 if (ValidaRut(tbRUNAFM.Text + "-" + tbVerificadorAFM.Text))
                 {
                     AccionesTerminal ac = new AccionesTerminal();
-                    string rut = tbRUNVFM.Text.Replace(".", "").ToUpper();
-                    paciente = ac.buscarPaciente(Int32.Parse(rut), tbVerificadorVFM.Text);
+                    string rut = tbRUNAFM.Text.Replace(".", "").ToUpper();
+                    paciente = ac.buscarPaciente(Int32.Parse(rut), tbVerificadorAFM.Text);
                     if (paciente != null)
                     {
                         //Ruta buena
