@@ -15,6 +15,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
     public partial class FrmJefeOp : Form
     {
         private static AccionesTerminal acciones = new AccionesTerminal();
+        private static DateTime fechaReporte;
         FrmLogin login = null;
         bool closeApp;
 
@@ -219,6 +220,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             gbMantenedorPersonal.Hide();
             gbMantenerPrestacion.Hide();
             gbLogPagoHonorarios.Hide();
+            gbReporteCaja.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
@@ -977,5 +979,100 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 MessageBox.Show("No se ha podido eliminar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   GENERAR REPORTE                                                                                                            //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void reporteDeCajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbReporteCaja);
+            btnCargarRC.Enabled = false;
+            cbOperadorRC.Items.Clear();
+        }
+
+        //cargar operadores
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<FUNCIONARIO> funcionarios = acciones.CargarOperadoresCajaCerrada(dtFechaCierreCaja.Value);
+            cbOperadorRC.Items.Clear();
+            if (funcionarios != null)
+            {
+                foreach (FUNCIONARIO x in funcionarios)
+                {
+                    ComboboxItem cbi = new ComboboxItem();
+                    cbi.Text = x.PERSONAL.NOMBREFULL;
+                    cbi.Value = x.ID_FUNCIONARIO;
+                    cbOperadorRC.Items.Add(cbi);
+                }
+                if (funcionarios.Count > 0)
+                {
+                    btnCargarRC.Enabled = true;
+                    cbOperadorRC.SelectedIndex = 0;
+                    fechaReporte = dtFechaCierreCaja.Value;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontraron funcionarios con caja cerrada ese día", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    btnCargarRC.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se encontraron funcionarios con caja cerrada ese día", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnCargarRC.Enabled = false;
+            }
+        }
+
+        //Genera reporte
+        private void btnCargarRC_Click(object sender, EventArgs e)
+        {
+            rbReporteCaja.Clear();
+            FUNCIONARIO funcionario = new FUNCIONARIO();
+            funcionario.ID_FUNCIONARIO = ((ComboboxItem)cbOperadorRC.SelectedItem).Value;
+            ReporteCaja reporte = acciones.GenerarReporteCaja(funcionario, fechaReporte);
+            string text = string.Empty;
+            rbReporteCaja.Text += Environment.NewLine + "Nombre operador: " + reporte.Funcionario.PERSONAL.NOMBREFULL;
+            rbReporteCaja.Text += Environment.NewLine + "--Pagos-----------------------------------------------------------------------";
+            foreach (PAGO x in reporte.Pagos)
+            {
+                rbReporteCaja.Text += Environment.NewLine + "Atención: " + x.ATENCION_AGEN.PRESTACION.NOM_PRESTACION;
+                rbReporteCaja.Text += Environment.NewLine + "Fecha de pago: " + x.FECHOR;
+                if(x.BONO != null)
+                    rbReporteCaja.Text += Environment.NewLine + "Bono: $" + x.BONO.CANT_BONO;
+                rbReporteCaja.Text += Environment.NewLine + "Monto de pago: $" + x.MONTO_PAGO;
+                rbReporteCaja.Text += Environment.NewLine;
+            }
+            rbReporteCaja.Text += Environment.NewLine + "--Devoluciones-----------------------------------------------------------";
+            foreach (PAGO x in reporte.Devoluciones)
+            {
+                if (x.DEVOLUCION != null)
+                {
+                    rbReporteCaja.Text += Environment.NewLine + "Atención: " + x.ATENCION_AGEN.PRESTACION.NOM_PRESTACION + "";
+                    rbReporteCaja.Text += Environment.NewLine + "Causa de devolución: " + x.DEVOLUCION.NOM_TIPO_DEV + "";
+                    rbReporteCaja.Text += Environment.NewLine;
+                }
+            }
+            rbReporteCaja.Text += Environment.NewLine + "--Balance--------------------------------------------------------------------";
+            rbReporteCaja.Text += Environment.NewLine + "Dinero en billetes inicial: $" + reporte.DineroEnBilletesInicial.ToString();
+            rbReporteCaja.Text += Environment.NewLine + "Dinero en cheques final: $" + reporte.DineroEnChequesFinal.ToString();
+            rbReporteCaja.Text += Environment.NewLine + "Dinero en billetes final: $" + reporte.DineroEnBilletesFinal.ToString();
+            rbReporteCaja.Text += Environment.NewLine + "Descuadre: $" + reporte.Diferencia.ToString();
+            rbReporteCaja.Text += Environment.NewLine;
+            rbReporteCaja.Text += Environment.NewLine + "Fecha apertura: $" + reporte.FechorApertura.ToString();
+            rbReporteCaja.Text += Environment.NewLine + "Fecha cierre: $" + reporte.FechorCierre.ToString();
+            
+        }
+        /*
+         * private FUNCIONARIO funcionario;
+        private List<PAGO> pagos;
+        private List<PAGO> devoluciones;
+        private int dineroEnBilletesInicial;
+        private int dineroEnBilletesFinal;
+        private int dineroEnChequesFinal;
+
+        private DateTime fechorApertura;
+        private DateTime fechorCierre;*/
     }
 }

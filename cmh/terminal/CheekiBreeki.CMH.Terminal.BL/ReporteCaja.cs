@@ -100,8 +100,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         public List<PAGO> Pagos
         {
-            get { return Pagos; }
-            set { Pagos = value; }
+            get { return pagos; }
+            set { pagos = value; }
         }
 
         public int TotalDevoluciones()
