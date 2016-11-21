@@ -85,7 +85,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             get 
             {
                 int dineroQueDeberiaHaber = this.TotalVentasSinBono() + this.dineroEnBilletesInicial;
-                int dineroQueHay = this.DineroEnBilletesFinal + this.DineroEnChequesFinal;
+                int dineroQueHay = this.DineroEnBilletesFinal;// +this.DineroEnChequesFinal;
                 return dineroQueDeberiaHaber - dineroQueHay;
             }
         }
@@ -100,8 +100,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         public List<PAGO> Pagos
         {
-            get { return Pagos; }
-            set { Pagos = value; }
+            get { return pagos; }
+            set { pagos = value; }
         }
 
         public int TotalDevoluciones()

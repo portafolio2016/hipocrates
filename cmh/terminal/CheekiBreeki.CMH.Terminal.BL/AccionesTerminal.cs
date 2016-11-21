@@ -2390,6 +2390,53 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return x;
         }
 
+        public List<FUNCIONARIO> CargarOperadoresCajaCerrada(DateTime fecha)
+        {
+            List<FUNCIONARIO> listaOp = new List<FUNCIONARIO>();
+            List<FUNCIONARIO> listaOpAux = conexionDB.FUNCIONARIO.ToList();
+            foreach (FUNCIONARIO x in listaOpAux)
+            {
+                if (x.CAJA != null)
+                {
+                    foreach (CAJA c in x.CAJA)
+                    {
+                        if (c.FECHOR_CIERRE != null)
+                        {
+                            if (c.FECHOR_CIERRE.Value.Date == fecha.Date)
+                            {
+                                listaOp.Add(x);
+                            }
+                        }
+                    }
+                }
+            }
+            return listaOp;
+        }
+
+        public ReporteCaja GenerarReporteCaja(FUNCIONARIO func, DateTime fecha)
+        {
+            FUNCIONARIO funcionario = conexionDB.FUNCIONARIO.Find(func.ID_FUNCIONARIO);
+            CAJA caja = new CAJA();
+            foreach (CAJA x in funcionario.CAJA)
+            {
+                if (x.FECHOR_CIERRE != null)
+                    if (x.FECHOR_CIERRE.Value.ToShortDateString() == fecha.ToShortDateString())
+                        caja = x; //Toma la ultima caja cerrada en el día
+            }
+            ReporteCaja reporte = new ReporteCaja(caja);
+            return reporte;
+        }
+        /*
+         * private FUNCIONARIO funcionario;
+        private List<PAGO> pagos;
+        private List<PAGO> devoluciones;
+        private int dineroEnBilletesInicial;
+        private int dineroEnBilletesFinal;
+        private int dineroEnChequesFinal;
+
+        private DateTime fechorApertura;
+        private DateTime fechorCierre;*/
+
         public bool nuevoResultadoAtencion(RES_ATENCION resultado)
         {
             try
