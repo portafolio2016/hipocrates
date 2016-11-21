@@ -41,7 +41,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblPrivilegio.Text = "";
                 btnSesion.Text = "Iniciar sesión";
             }
-            comprobarCajaAbierta();
+            comprobarEstadoCaja();
 
             InitGB(groupBox6);
         }
@@ -216,7 +216,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   DESACTIVAR BOTONES SEGUN ESTADO CAJA                                                                                       //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void comprobarCajaAbierta()
+        private void comprobarEstadoCaja()
         {
             UsuarioLogeado usuario = FrmLogin.usuarioLogeado;
             if (usuario.Privilegio.ToUpper() == "OPERADOR")
