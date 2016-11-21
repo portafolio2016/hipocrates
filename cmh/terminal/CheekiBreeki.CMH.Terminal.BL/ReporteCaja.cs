@@ -85,7 +85,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             get 
             {
                 int dineroQueDeberiaHaber = this.TotalVentasSinBono() + this.dineroEnBilletesInicial;
-                int dineroQueHay = this.DineroEnBilletesFinal + this.DineroEnChequesFinal;
+                int dineroQueHay = this.DineroEnBilletesFinal;// +this.DineroEnChequesFinal;
                 return dineroQueDeberiaHaber - dineroQueHay;
             }
         }
