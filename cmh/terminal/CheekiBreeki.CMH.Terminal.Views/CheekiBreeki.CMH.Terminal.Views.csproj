@@ -59,11 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmJefeOp.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FrmJefeOp.Designer.cs">
       <DependentUpon>FrmJefeOp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmJefeOperador.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ListaInventarioDG.cs" />
     <Compile Include="FrmAbrirCaja.cs">
