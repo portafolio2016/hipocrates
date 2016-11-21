@@ -125,6 +125,12 @@
             this.tbPrecioPrestacionMPre = new System.Windows.Forms.TextBox();
             this.cbTipoPrestacionMPre = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.dtFechaCierreCaja = new System.Windows.Forms.DateTimePicker();
+            this.cbOperadorRC = new System.Windows.Forms.ComboBox();
+            this.rbReporteCaja = new System.Windows.Forms.RichTextBox();
+            this.btnCargarRC = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnCargarOperadoresRC = new System.Windows.Forms.Button();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -143,6 +149,7 @@
             this.gpAsignados.SuspendLayout();
             this.gpDisponibles.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.gbReporteCaja.SuspendLayout();
             this.gbLogPagoHonorarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).BeginInit();
             this.gbMantenedorPersonal.SuspendLayout();
@@ -412,6 +419,7 @@
             this.reporteDeCajaToolStripMenuItem.Name = "reporteDeCajaToolStripMenuItem";
             this.reporteDeCajaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.reporteDeCajaToolStripMenuItem.Text = "Reporte de caja";
+            this.reporteDeCajaToolStripMenuItem.Click += new System.EventHandler(this.reporteDeCajaToolStripMenuItem_Click);
             // 
             // horariosPersonalToolStripMenuItem
             // 
@@ -422,6 +430,12 @@
             // 
             // gbReporteCaja
             // 
+            this.gbReporteCaja.Controls.Add(this.btnCargarOperadoresRC);
+            this.gbReporteCaja.Controls.Add(this.label11);
+            this.gbReporteCaja.Controls.Add(this.btnCargarRC);
+            this.gbReporteCaja.Controls.Add(this.rbReporteCaja);
+            this.gbReporteCaja.Controls.Add(this.cbOperadorRC);
+            this.gbReporteCaja.Controls.Add(this.dtFechaCierreCaja);
             this.gbReporteCaja.Location = new System.Drawing.Point(6, 43);
             this.gbReporteCaja.Name = "gbReporteCaja";
             this.gbReporteCaja.Size = new System.Drawing.Size(768, 462);
@@ -1231,6 +1245,58 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
+            // 
+            // dtFechaCierreCaja
+            // 
+            this.dtFechaCierreCaja.Location = new System.Drawing.Point(118, 21);
+            this.dtFechaCierreCaja.TabIndex = 0;
+            this.dtFechaCierreCaja.Name = "dtFechaCierreCaja";
+            this.dtFechaCierreCaja.Size = new System.Drawing.Size(200, 20);
+            // 
+            // cbOperadorRC
+            // 
+            this.cbOperadorRC.FormattingEnabled = true;
+            this.cbOperadorRC.Location = new System.Drawing.Point(435, 21);
+            this.cbOperadorRC.Name = "cbOperadorRC";
+            this.cbOperadorRC.Size = new System.Drawing.Size(219, 21);
+            this.cbOperadorRC.TabIndex = 1;
+            // rbReporteCaja
+            // 
+            // 
+            this.rbReporteCaja.Location = new System.Drawing.Point(10, 46);
+            this.rbReporteCaja.Name = "rbReporteCaja";
+            this.rbReporteCaja.Size = new System.Drawing.Size(746, 404);
+            this.rbReporteCaja.TabIndex = 2;
+            this.rbReporteCaja.Text = "";
+            // 
+            // btnCargarRC
+            // 
+            this.btnCargarRC.Location = new System.Drawing.Point(660, 21);
+            this.btnCargarRC.Name = "btnCargarRC";
+            this.btnCargarRC.Size = new System.Drawing.Size(96, 23);
+            this.btnCargarRC.TabIndex = 3;
+            this.btnCargarRC.Text = "Generar reporte";
+            this.btnCargarRC.UseVisualStyleBackColor = true;
+            this.btnCargarRC.Click += new System.EventHandler(this.btnCargarRC_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 24);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(92, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Fecha cierre caja:";
+            // 
+            // btnCargarOperadoresRC
+            // 
+            this.btnCargarOperadoresRC.Location = new System.Drawing.Point(323, 20);
+            this.btnCargarOperadoresRC.Name = "btnCargarOperadoresRC";
+            this.btnCargarOperadoresRC.Size = new System.Drawing.Size(108, 23);
+            this.btnCargarOperadoresRC.TabIndex = 6;
+            this.btnCargarOperadoresRC.Text = "Cargar operadores";
+            this.btnCargarOperadoresRC.UseVisualStyleBackColor = true;
+            this.btnCargarOperadoresRC.Click += new System.EventHandler(this.button1_Click);
             // FrmJefeOp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1254,6 +1320,8 @@
             this.gpDisponibles.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.gbReporteCaja.ResumeLayout(false);
+            this.gbReporteCaja.PerformLayout();
             this.gbLogPagoHonorarios.ResumeLayout(false);
             this.gbLogPagoHonorarios.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).EndInit();
@@ -1384,5 +1452,11 @@
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Button brnBuscarHorarios;
         private System.Windows.Forms.Label lblRut;
+        private System.Windows.Forms.ComboBox cbOperadorRC;
+        private System.Windows.Forms.DateTimePicker dtFechaCierreCaja;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnCargarRC;
+        private System.Windows.Forms.RichTextBox rbReporteCaja;
+        private System.Windows.Forms.Button btnCargarOperadoresRC;
     }
 }
