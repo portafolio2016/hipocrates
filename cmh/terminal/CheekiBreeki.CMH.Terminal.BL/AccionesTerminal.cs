@@ -2393,7 +2393,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     {
                         if (c.FECHOR_CIERRE != null)
                         {
-                            if (c.FECHOR_CIERRE.Value.ToShortDateString() == fecha.ToShortDateString())
+                            if (c.FECHOR_CIERRE.Value.Date == fecha.Date)
                             {
                                 listaOp.Add(x);
                             }
