@@ -2381,5 +2381,27 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
             return x;
         }
+
+        public bool nuevoResultadoAtencion(RES_ATENCION resultado)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(resultado))
+                {
+                    throw new Exception("Resultado nulo");
+                }
+                else
+                {
+                    conexionDB.RES_ATENCION.Add(resultado);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
     }
 }
