@@ -732,6 +732,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 string extension  = Path.GetExtension(file).ToString().Substring(1, 3);
                 resultadoAtencion.EXT_ARCHIVO = extension;
                 
+                //Busque atención
+                ATENCION_AGEN atencionAg = at.buscarAtencionAgendadaID(((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value);
+                //Actualice atención
+                at.actualuzarAtencionAgendadaEstado(atencionAg);
+
                 res = at.nuevoResultadoAtencion(resultadoAtencion);
             }
             catch(Exception ex)
@@ -739,6 +744,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 res = false;
                 
             }
+
             if (res == true)
                 MessageBox.Show("Creada el resultado de atención", "Creada", MessageBoxButtons.OK, MessageBoxIcon.None);
             else
@@ -758,7 +764,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     res = false;
                 else
                 {
-                    List<ATENCION_AGEN> atenciones = at.listaAtencionesVigentesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
+                    
+                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
+
+                    if (atenciones.Count <= 0)
+                    {
+                        MessageBox.Show("No tiene ninguna atención", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                     foreach (ATENCION_AGEN atencion in atenciones)
                     {
                         ComboboxItem item = new ComboboxItem();

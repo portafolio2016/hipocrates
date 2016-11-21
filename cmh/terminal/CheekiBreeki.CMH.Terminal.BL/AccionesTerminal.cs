@@ -903,7 +903,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     INVENTARIO inventario = null;
                     inventario = conexionDB.INVENTARIO.Where(d => d.ID_INVENTARIO_EQUIPO == idInventario).FirstOrDefault();
-                    
+
                     if (Util.isObjetoNulo(inventario))
                     {
                         throw new Exception("Equipo no existe");
@@ -959,7 +959,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     {
                         TIPO_EQUIPO buscado = context.TIPO_EQUIPO.Where(d => d.ID_TIPO_EQUIPO == tipoEquipo.ID_TIPO_EQUIPO).FirstOrDefault();
                         buscado.NOMBRE_TIPO_EQUIPO = tipoEquipo.NOMBRE_TIPO_EQUIPO;
-                       
+
                         context.SaveChangesAsync();
                     }
                     return true;
@@ -1950,7 +1950,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         public List<PRESTACION> listaPrestaciones()
         {
-            List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d=> d.ACTIVO == true).ToList();
+            List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d => d.ACTIVO == true).ToList();
             return (prestaciones);
         }
 
@@ -1981,6 +1981,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 .Where(d => d.PACIENTE.RUT == rut &&
                     (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE" ||
                     d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
+            atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
+            return (atenciones);
+        }
+
+        public List<ATENCION_AGEN> listaAtencionesPagadas(int rut)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => d.PACIENTE.RUT == rut &&
+                    (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
             atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
             return (atenciones);
         }
@@ -2285,7 +2294,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
                 x = true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -2300,7 +2309,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 PRESTACION prestacion = new PRESTACION();
                 using (var con = new CMHEntities())
                 {
-                    prestacion = con.PRESTACION.Where(d=> d.CODIGO_PRESTACION == pres.CODIGO_PRESTACION).FirstOrDefault();
+                    prestacion = con.PRESTACION.Where(d => d.CODIGO_PRESTACION == pres.CODIGO_PRESTACION).FirstOrDefault();
                     prestacion.ID_TIPO_PRESTACION = pres.ID_TIPO_PRESTACION;
                     prestacion.ID_ESPECIALIDAD = pres.ID_ESPECIALIDAD;
                     prestacion.NOM_PRESTACION = pres.NOM_PRESTACION;
@@ -2308,7 +2317,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     con.SaveChangesAsync();
                 }
 
-                
+
                 using (var con = new CMHEntities())
                 {
                     List<EQUIPO_REQ> equiposActuales = con.EQUIPO_REQ.Where(d => d.ID_PRESTACION == prestacion.ID_PRESTACION).ToList();
@@ -2403,5 +2412,51 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 return false;
             }
         }
+
+        public ATENCION_AGEN buscarAtencionAgendadaID(int atencionID)
+        {
+            try
+            {
+                ATENCION_AGEN encontrado = conexionDB.ATENCION_AGEN.Find(atencionID);
+                if (Util.isObjetoNulo(encontrado))
+                {
+                    throw new Exception("Atención no existe");
+                }
+                return encontrado;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public Boolean actualuzarAtencionAgendadaEstado(ATENCION_AGEN atencion)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion nulo");
+                }
+                else
+                {
+                    using (var context = new CMHEntities())
+                    {
+                        ATENCION_AGEN buscado = context.ATENCION_AGEN.Where(d => d.ID_ATENCION_AGEN == atencion.ID_ATENCION_AGEN).FirstOrDefault();
+                        buscado.ID_ESTADO_ATEN = 4;
+                        context.SaveChangesAsync();
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+
     }
 }
