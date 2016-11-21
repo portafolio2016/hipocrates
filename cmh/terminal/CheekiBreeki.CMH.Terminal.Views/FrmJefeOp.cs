@@ -1067,8 +1067,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             rbReporteCaja.Text += Environment.NewLine + "--Balance--------------------------------------------------------------------";
             rbReporteCaja.Text += Environment.NewLine + "Dinero en billetes inicial: $" + reporte.DineroEnBilletesInicial.ToString();
-            rbReporteCaja.Text += Environment.NewLine + "Dinero en cheques final: $" + reporte.DineroEnChequesFinal.ToString();
             rbReporteCaja.Text += Environment.NewLine + "Dinero en billetes final: $" + reporte.DineroEnBilletesFinal.ToString();
+            rbReporteCaja.Text += Environment.NewLine + "Cantidad de cheques final: " + reporte.DineroEnChequesFinal.ToString();
             rbReporteCaja.Text += Environment.NewLine + "Descuadre: $" + reporte.Diferencia.ToString();
             rbReporteCaja.Text += Environment.NewLine;
             rbReporteCaja.Text += Environment.NewLine + "Fecha apertura: $" + reporte.FechorApertura.ToString();
