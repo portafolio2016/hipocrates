@@ -3096,6 +3096,11 @@ namespace CheekiBreeki.CMH.Terminal.BL.UnitTests
                 resultado1.ATENCION_ABIERTA = true;
                 resultado1.COMENTARIO = "Se envía correo";
                 resultado1.ID_ATENCION_AGEN = atencion1.ID_ATENCION_AGEN;
+                string archivo1 = "../../file.pdf";
+                ConversorBase64 conversorBase64 = new ConversorBase64();
+                string archivo64 = conversorBase64.convertirABase64(archivo1);
+                resultado1.ARCHIVO_B64 = archivo64;
+                resultado1.EXT_ARCHIVO = "pdf";
                 context.RES_ATENCION.Add(resultado1);
                 context.SaveChangesAsync();
             }
