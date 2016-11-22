@@ -299,6 +299,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnAgendar_Click(object sender, EventArgs e)
         {
+            string mensajeCorrecto = "Atención agendada correctamente";
+            string mensajeError = "Error al agendar atención";
             lblError.Visible = false;
             bool res = false;
             try
@@ -310,7 +312,10 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 PERS_MEDICO personalMedico = new PERS_MEDICO();
                 BLOQUE bloque = new BLOQUE();
                 if (dtFecha.Value < DateTime.Today)
+                {
                     res = false;
+                    mensajeError = "La fecha de atención ha expirado";
+                }
                 else
                 {
                     using (var context = new CMHEntities())
@@ -318,17 +323,30 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         estado = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE").FirstOrDefault();
                         personalMedico = context.PERS_MEDICO.Find((int)cmbPersonal.SelectedValue);
                     }
-                    paciente = at.buscarPaciente(int.Parse(txtRut.Text), txtDv.Text.ToUpper());
-                    if (!Util.isObjetoNulo(paciente))
+                    if (txtRut.Text == string.Empty || txtDv.Text == string.Empty)
                     {
-                        atencion.FECHOR = dtFecha.Value;
-                        atencion.ID_PACIENTE = paciente.ID_PACIENTE;
-                        atencion.ID_PRESTACION = (int)cmbPrestacion.SelectedValue;
-                        atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
-                        atencion.ID_PERS_ATIENDE = (int)cmbPersonal.SelectedValue;
-                        atencion.ID_BLOQUE = ((ComboboxItem)cmbHora.SelectedItem).Value;
-                        res = at.agendarAtencion(atencion);
-                        actualizarBloques();
+                        res = false;
+                        mensajeError = "Complete los campos de RUT";
+                    }
+                    else
+                    {
+                        paciente = at.buscarPaciente(int.Parse(txtRut.Text), txtDv.Text.ToUpper());
+                        if (!Util.isObjetoNulo(paciente))
+                        {
+                            atencion.FECHOR = dtFecha.Value;
+                            atencion.ID_PACIENTE = paciente.ID_PACIENTE;
+                            atencion.ID_PRESTACION = (int)cmbPrestacion.SelectedValue;
+                            atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
+                            atencion.ID_PERS_ATIENDE = (int)cmbPersonal.SelectedValue;
+                            atencion.ID_BLOQUE = ((ComboboxItem)cmbHora.SelectedItem).Value;
+                            res = at.agendarAtencion(atencion);
+                            actualizarBloques();
+                        }
+                        else
+                        {
+                            res = false;
+                            mensajeError = "Paciente no encontrado";
+                        }
                     }
                 }
             }
@@ -337,17 +355,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 res = false;
             }
             if (res)
-            {
-                lblError.Visible = true;
-                lblError.Text = "Atención agendada correctamente";
-                lblError.ForeColor = System.Drawing.Color.Green;
-            }
+                MessageBox.Show(mensajeCorrecto, "Creada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             else
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al agendar atención";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void actualizarBloques()
