@@ -41,7 +41,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblPrivilegio.Text = "";
                 btnSesion.Text = "Iniciar sesión";
             }
-            comprobarCajaAbierta();
+            comprobarEstadoCaja();
 
             ComboboxItem masculino = new ComboboxItem();
             masculino.Text = "Masculino";
@@ -226,12 +226,19 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //   DESACTIVAR BOTONES SEGUN ESTADO CAJA                                                                                       //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void comprobarCajaAbierta()
+        private void comprobarEstadoCaja()
         {
             UsuarioLogeado usuario = FrmLogin.usuarioLogeado;
             if (usuario.Privilegio.ToUpper() == "OPERADOR")
             {
-                if (!Util.isObjetoNulo(at.buscarCajaAbierta(usuario.Personal.FUNCIONARIO.FirstOrDefault())))
+                if (!Util.isObjetoNulo(at.buscarCajaCerrada(usuario.Personal.FUNCIONARIO.FirstOrDefault())))
+                {
+                    abrirCajaToolStripMenuItem.Enabled = false;
+                    ingresarPacienteToolStripMenuItem.Enabled = false;
+                    anularHoraToolStripMenuItem.Enabled = false;
+                    cerrarCjaToolStripMenuItem.Enabled = false;
+                }
+                else if (!Util.isObjetoNulo(at.buscarCajaAbierta(usuario.Personal.FUNCIONARIO.FirstOrDefault())))
                 {
                     abrirCajaToolStripMenuItem.Enabled = false;
                     ingresarPacienteToolStripMenuItem.Enabled = true;
@@ -253,7 +260,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 ingresarPacienteToolStripMenuItem.Enabled = false;
                 anularHoraToolStripMenuItem.Enabled = false;
             }
-
         }
         #endregion
 
