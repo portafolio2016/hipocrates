@@ -29,33 +29,18 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string mensajeError = string.Empty;
             string usuario = txtUsuario.Text;
             string password = txtContrasena.Text;
 
             if (string.IsNullOrWhiteSpace(txtUsuario.Text) || !Util.isEmailValido(usuario))
-            {
-                lblAdvertenciaUsuario.Visible = true;
-                lblAdvertenciaUsuario.Text = "Email no valido";
-            }
-            else
-            {
-                lblAdvertenciaUsuario.Visible = false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtContrasena.Text))
-            {
-                lblAdvertenciaContrasena.Visible = true;
-                lblAdvertenciaContrasena.Text = "Contraseña vacía";
-            }
-            else
-            {
-                lblAdvertenciaContrasena.Visible = false;
-            }
+                mensajeError = "Email no valido";
+            else if (string.IsNullOrWhiteSpace(txtContrasena.Text))
+                mensajeError = "Contraseña vacía";
 
             if (!string.IsNullOrWhiteSpace(txtUsuario.Text) && !string.IsNullOrWhiteSpace(txtContrasena.Text)
                 && Util.isEmailValido(usuario))
             {
-                 
                 usuarioLogeado = Login.iniciarSesion(usuario, password);
                 if (usuarioLogeado != null)
                 {
@@ -96,18 +81,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             frmMain4.Activate();
                             this.Hide();
                             break;
-                    
                     }
-
                 }
                 else
-                {
-                    lblDatosInvalidos.Visible = true;
-                    
-                }
-               
+                    mensajeError = "Usuario o contraseña inválido";
             }
-
+            if (mensajeError != string.Empty)
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         #endregion
 
