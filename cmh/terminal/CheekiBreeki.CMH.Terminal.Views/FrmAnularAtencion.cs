@@ -296,7 +296,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             catch (Exception ex)
             {
-                res1 = false;
+                mensajeError = "Error al anular atención";
             }
 
             if (!necesitaDevolucion && res1)
