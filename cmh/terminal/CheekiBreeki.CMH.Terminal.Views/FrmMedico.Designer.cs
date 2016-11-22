@@ -32,6 +32,19 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.btnSesion = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbCerrarAtencionMedica = new System.Windows.Forms.GroupBox();
+            this.lblError_CAM = new System.Windows.Forms.Label();
+            this.lstAtenciones_CAM = new System.Windows.Forms.ListBox();
+            this.btnBuscarPaciente_CAM = new System.Windows.Forms.Button();
+            this.txtDV_CAM = new System.Windows.Forms.TextBox();
+            this.txtRutPaciente_CAM = new System.Windows.Forms.TextBox();
+            this.lblRutPaciente_CAM = new System.Windows.Forms.Label();
+            this.btnCrearResultado_CAM = new System.Windows.Forms.Button();
+            this.btnArchivo_CAM = new System.Windows.Forms.Button();
+            this.rtArchivo_CAM = new System.Windows.Forms.RichTextBox();
+            this.lblArchivo = new System.Windows.Forms.Label();
+            this.rtComentario_CAM = new System.Windows.Forms.RichTextBox();
+            this.lblComentario_CAM = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.agendaDiariaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.fichasMédicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,8 +53,9 @@
             this.consultasMédicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.atencionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAbrirConsultaMedica = new System.Windows.Forms.GroupBox();
+            this.rtObservacion = new System.Windows.Forms.RichTextBox();
+            this.lblObservacion = new System.Windows.Forms.Label();
             this.lblError_ACM = new System.Windows.Forms.Label();
             this.txtDv_ACM = new System.Windows.Forms.TextBox();
             this.dtFecha_ACM = new System.Windows.Forms.DateTimePicker();
@@ -117,22 +131,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnModificarUser = new System.Windows.Forms.Button();
-            this.lblObservacion = new System.Windows.Forms.Label();
-            this.rtObservacion = new System.Windows.Forms.RichTextBox();
-            this.gbCerrarAtencionMedica = new System.Windows.Forms.GroupBox();
-            this.lblComentario_CAM = new System.Windows.Forms.Label();
-            this.rtComentario_CAM = new System.Windows.Forms.RichTextBox();
-            this.lblArchivo = new System.Windows.Forms.Label();
-            this.rtArchivo_CAM = new System.Windows.Forms.RichTextBox();
-            this.btnArchivo_CAM = new System.Windows.Forms.Button();
-            this.btnCrearResultado_CAM = new System.Windows.Forms.Button();
-            this.lblRutPaciente_CAM = new System.Windows.Forms.Label();
-            this.txtRutPaciente_CAM = new System.Windows.Forms.TextBox();
-            this.txtDV_CAM = new System.Windows.Forms.TextBox();
-            this.btnBuscarPaciente_CAM = new System.Windows.Forms.Button();
-            this.lstAtenciones_CAM = new System.Windows.Forms.ListBox();
-            this.lblError_CAM = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.gbCerrarAtencionMedica.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gbAbrirConsultaMedica.SuspendLayout();
             this.gbVerFichaMedica.SuspendLayout();
@@ -148,7 +148,6 @@
             this.groupBox6.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.gbCerrarAtencionMedica.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -182,8 +181,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
             this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
             this.groupBox1.Controls.Add(this.gbAbrirConsultaMedica);
             this.groupBox1.Controls.Add(this.gbVerFichaMedica);
             this.groupBox1.Controls.Add(this.gbAgendaDiaria);
@@ -195,13 +194,145 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
+            // gbCerrarAtencionMedica
+            // 
+            this.gbCerrarAtencionMedica.Controls.Add(this.lblError_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.lstAtenciones_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.btnBuscarPaciente_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.txtDV_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.txtRutPaciente_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.lblRutPaciente_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.btnCrearResultado_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.btnArchivo_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.rtArchivo_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.lblArchivo);
+            this.gbCerrarAtencionMedica.Controls.Add(this.rtComentario_CAM);
+            this.gbCerrarAtencionMedica.Controls.Add(this.lblComentario_CAM);
+            this.gbCerrarAtencionMedica.Location = new System.Drawing.Point(6, 43);
+            this.gbCerrarAtencionMedica.Name = "gbCerrarAtencionMedica";
+            this.gbCerrarAtencionMedica.Size = new System.Drawing.Size(768, 448);
+            this.gbCerrarAtencionMedica.TabIndex = 35;
+            this.gbCerrarAtencionMedica.TabStop = false;
+            this.gbCerrarAtencionMedica.Text = "Cerrar atención medica";
+            this.gbCerrarAtencionMedica.Visible = false;
+            // 
+            // lblError_CAM
+            // 
+            this.lblError_CAM.AutoSize = true;
+            this.lblError_CAM.Location = new System.Drawing.Point(380, 64);
+            this.lblError_CAM.Name = "lblError_CAM";
+            this.lblError_CAM.Size = new System.Drawing.Size(39, 13);
+            this.lblError_CAM.TabIndex = 11;
+            this.lblError_CAM.Text = "lblError";
+            this.lblError_CAM.Visible = false;
+            // 
+            // lstAtenciones_CAM
+            // 
+            this.lstAtenciones_CAM.FormattingEnabled = true;
+            this.lstAtenciones_CAM.Location = new System.Drawing.Point(194, 86);
+            this.lstAtenciones_CAM.Name = "lstAtenciones_CAM";
+            this.lstAtenciones_CAM.Size = new System.Drawing.Size(415, 95);
+            this.lstAtenciones_CAM.TabIndex = 10;
+            this.lstAtenciones_CAM.SelectedIndexChanged += new System.EventHandler(this.lstAtenciones_CAM_SelectedIndexChanged);
+            // 
+            // btnBuscarPaciente_CAM
+            // 
+            this.btnBuscarPaciente_CAM.Location = new System.Drawing.Point(488, 31);
+            this.btnBuscarPaciente_CAM.Name = "btnBuscarPaciente_CAM";
+            this.btnBuscarPaciente_CAM.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscarPaciente_CAM.TabIndex = 9;
+            this.btnBuscarPaciente_CAM.Text = "Buscar";
+            this.btnBuscarPaciente_CAM.UseVisualStyleBackColor = true;
+            this.btnBuscarPaciente_CAM.Click += new System.EventHandler(this.btnBuscarPaciente_CAM_Click);
+            // 
+            // txtDV_CAM
+            // 
+            this.txtDV_CAM.Location = new System.Drawing.Point(439, 33);
+            this.txtDV_CAM.MaxLength = 1;
+            this.txtDV_CAM.Name = "txtDV_CAM";
+            this.txtDV_CAM.Size = new System.Drawing.Size(29, 20);
+            this.txtDV_CAM.TabIndex = 8;
+            this.txtDV_CAM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
+            // txtRutPaciente_CAM
+            // 
+            this.txtRutPaciente_CAM.Location = new System.Drawing.Point(334, 33);
+            this.txtRutPaciente_CAM.MaxLength = 8;
+            this.txtRutPaciente_CAM.Name = "txtRutPaciente_CAM";
+            this.txtRutPaciente_CAM.Size = new System.Drawing.Size(100, 20);
+            this.txtRutPaciente_CAM.TabIndex = 7;
+            this.txtRutPaciente_CAM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRut_KeyPress);
+            // 
+            // lblRutPaciente_CAM
+            // 
+            this.lblRutPaciente_CAM.AutoSize = true;
+            this.lblRutPaciente_CAM.Location = new System.Drawing.Point(244, 36);
+            this.lblRutPaciente_CAM.Name = "lblRutPaciente_CAM";
+            this.lblRutPaciente_CAM.Size = new System.Drawing.Size(69, 13);
+            this.lblRutPaciente_CAM.TabIndex = 6;
+            this.lblRutPaciente_CAM.Text = "Rut Paciente";
+            // 
+            // btnCrearResultado_CAM
+            // 
+            this.btnCrearResultado_CAM.Location = new System.Drawing.Point(364, 408);
+            this.btnCrearResultado_CAM.Name = "btnCrearResultado_CAM";
+            this.btnCrearResultado_CAM.Size = new System.Drawing.Size(93, 23);
+            this.btnCrearResultado_CAM.TabIndex = 5;
+            this.btnCrearResultado_CAM.Text = "Crear resultado";
+            this.btnCrearResultado_CAM.UseVisualStyleBackColor = true;
+            this.btnCrearResultado_CAM.Click += new System.EventHandler(this.btnCrearResultado_CAM_Click);
+            // 
+            // btnArchivo_CAM
+            // 
+            this.btnArchivo_CAM.Location = new System.Drawing.Point(518, 345);
+            this.btnArchivo_CAM.Name = "btnArchivo_CAM";
+            this.btnArchivo_CAM.Size = new System.Drawing.Size(75, 24);
+            this.btnArchivo_CAM.TabIndex = 4;
+            this.btnArchivo_CAM.Text = "Subir";
+            this.btnArchivo_CAM.UseVisualStyleBackColor = true;
+            this.btnArchivo_CAM.Click += new System.EventHandler(this.btnArchivo_CAM_Click);
+            // 
+            // rtArchivo_CAM
+            // 
+            this.rtArchivo_CAM.Enabled = false;
+            this.rtArchivo_CAM.Location = new System.Drawing.Point(274, 346);
+            this.rtArchivo_CAM.Name = "rtArchivo_CAM";
+            this.rtArchivo_CAM.Size = new System.Drawing.Size(229, 23);
+            this.rtArchivo_CAM.TabIndex = 3;
+            this.rtArchivo_CAM.Text = "";
+            // 
+            // lblArchivo
+            // 
+            this.lblArchivo.AutoSize = true;
+            this.lblArchivo.Location = new System.Drawing.Point(199, 352);
+            this.lblArchivo.Name = "lblArchivo";
+            this.lblArchivo.Size = new System.Drawing.Size(43, 13);
+            this.lblArchivo.TabIndex = 2;
+            this.lblArchivo.Text = "Archivo";
+            // 
+            // rtComentario_CAM
+            // 
+            this.rtComentario_CAM.Location = new System.Drawing.Point(197, 214);
+            this.rtComentario_CAM.Name = "rtComentario_CAM";
+            this.rtComentario_CAM.Size = new System.Drawing.Size(412, 98);
+            this.rtComentario_CAM.TabIndex = 1;
+            this.rtComentario_CAM.Text = "";
+            // 
+            // lblComentario_CAM
+            // 
+            this.lblComentario_CAM.AutoSize = true;
+            this.lblComentario_CAM.Location = new System.Drawing.Point(115, 213);
+            this.lblComentario_CAM.Name = "lblComentario_CAM";
+            this.lblComentario_CAM.Size = new System.Drawing.Size(60, 13);
+            this.lblComentario_CAM.TabIndex = 0;
+            this.lblComentario_CAM.Text = "Comentario";
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agendaDiariaToolStripMenuItem1,
             this.fichasMédicasToolStripMenuItem,
-            this.consultasMédicasToolStripMenuItem,
-            this.atencionesToolStripMenuItem});
+            this.consultasMédicasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(3, 16);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(774, 24);
@@ -244,28 +375,22 @@
             this.abrirConsultaMédicaToolStripMenuItem,
             this.cerrarConsultaMédicaToolStripMenuItem});
             this.consultasMédicasToolStripMenuItem.Name = "consultasMédicasToolStripMenuItem";
-            this.consultasMédicasToolStripMenuItem.Size = new System.Drawing.Size(118, 20);
-            this.consultasMédicasToolStripMenuItem.Text = "Consultas médicas";
+            this.consultasMédicasToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.consultasMédicasToolStripMenuItem.Text = "Consultas";
             // 
             // abrirConsultaMédicaToolStripMenuItem
             // 
             this.abrirConsultaMédicaToolStripMenuItem.Name = "abrirConsultaMédicaToolStripMenuItem";
-            this.abrirConsultaMédicaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.abrirConsultaMédicaToolStripMenuItem.Text = "Abrir consulta médica";
+            this.abrirConsultaMédicaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.abrirConsultaMédicaToolStripMenuItem.Text = "Derivar consulta médica";
             this.abrirConsultaMédicaToolStripMenuItem.Click += new System.EventHandler(this.abrirConsultaMédicaToolStripMenuItem_Click);
             // 
             // cerrarConsultaMédicaToolStripMenuItem
             // 
             this.cerrarConsultaMédicaToolStripMenuItem.Name = "cerrarConsultaMédicaToolStripMenuItem";
-            this.cerrarConsultaMédicaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.cerrarConsultaMédicaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.cerrarConsultaMédicaToolStripMenuItem.Text = "Cerrar consulta médica";
             this.cerrarConsultaMédicaToolStripMenuItem.Click += new System.EventHandler(this.cerrarConsultaMédicaToolStripMenuItem_Click);
-            // 
-            // atencionesToolStripMenuItem
-            // 
-            this.atencionesToolStripMenuItem.Name = "atencionesToolStripMenuItem";
-            this.atencionesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.atencionesToolStripMenuItem.Text = "Atenciones";
             // 
             // gbAbrirConsultaMedica
             // 
@@ -291,8 +416,25 @@
             this.gbAbrirConsultaMedica.Size = new System.Drawing.Size(768, 462);
             this.gbAbrirConsultaMedica.TabIndex = 8;
             this.gbAbrirConsultaMedica.TabStop = false;
-            this.gbAbrirConsultaMedica.Text = "Abrir Consulta medica";
+            this.gbAbrirConsultaMedica.Text = "Derivar Consulta medica";
             this.gbAbrirConsultaMedica.Visible = false;
+            // 
+            // rtObservacion
+            // 
+            this.rtObservacion.Location = new System.Drawing.Point(161, 243);
+            this.rtObservacion.Name = "rtObservacion";
+            this.rtObservacion.Size = new System.Drawing.Size(418, 121);
+            this.rtObservacion.TabIndex = 34;
+            this.rtObservacion.Text = "";
+            // 
+            // lblObservacion
+            // 
+            this.lblObservacion.AutoSize = true;
+            this.lblObservacion.Location = new System.Drawing.Point(30, 250);
+            this.lblObservacion.Name = "lblObservacion";
+            this.lblObservacion.Size = new System.Drawing.Size(67, 13);
+            this.lblObservacion.TabIndex = 33;
+            this.lblObservacion.Text = "Observacion";
             // 
             // lblError_ACM
             // 
@@ -1040,156 +1182,6 @@
             this.btnModificarUser.UseVisualStyleBackColor = true;
             this.btnModificarUser.Click += new System.EventHandler(this.btnModificarUser_Click);
             // 
-            // lblObservacion
-            // 
-            this.lblObservacion.AutoSize = true;
-            this.lblObservacion.Location = new System.Drawing.Point(30, 250);
-            this.lblObservacion.Name = "lblObservacion";
-            this.lblObservacion.Size = new System.Drawing.Size(67, 13);
-            this.lblObservacion.TabIndex = 33;
-            this.lblObservacion.Text = "Observacion";
-            // 
-            // rtObservacion
-            // 
-            this.rtObservacion.Location = new System.Drawing.Point(161, 243);
-            this.rtObservacion.Name = "rtObservacion";
-            this.rtObservacion.Size = new System.Drawing.Size(418, 121);
-            this.rtObservacion.TabIndex = 34;
-            this.rtObservacion.Text = "";
-            // 
-            // gbCerrarAtencionMedica
-            // 
-            this.gbCerrarAtencionMedica.Controls.Add(this.lblError_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.lstAtenciones_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.btnBuscarPaciente_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.txtDV_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.txtRutPaciente_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.lblRutPaciente_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.btnCrearResultado_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.btnArchivo_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.rtArchivo_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.lblArchivo);
-            this.gbCerrarAtencionMedica.Controls.Add(this.rtComentario_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.lblComentario_CAM);
-            this.gbCerrarAtencionMedica.Location = new System.Drawing.Point(6, 43);
-            this.gbCerrarAtencionMedica.Name = "gbCerrarAtencionMedica";
-            this.gbCerrarAtencionMedica.Size = new System.Drawing.Size(768, 448);
-            this.gbCerrarAtencionMedica.TabIndex = 35;
-            this.gbCerrarAtencionMedica.TabStop = false;
-            this.gbCerrarAtencionMedica.Text = "Cerrar atención medica";
-            this.gbCerrarAtencionMedica.Visible = false;
-            // 
-            // lblComentario_CAM
-            // 
-            this.lblComentario_CAM.AutoSize = true;
-            this.lblComentario_CAM.Location = new System.Drawing.Point(115, 213);
-            this.lblComentario_CAM.Name = "lblComentario_CAM";
-            this.lblComentario_CAM.Size = new System.Drawing.Size(60, 13);
-            this.lblComentario_CAM.TabIndex = 0;
-            this.lblComentario_CAM.Text = "Comentario";
-            // 
-            // rtComentario_CAM
-            // 
-            this.rtComentario_CAM.Location = new System.Drawing.Point(197, 214);
-            this.rtComentario_CAM.Name = "rtComentario_CAM";
-            this.rtComentario_CAM.Size = new System.Drawing.Size(412, 98);
-            this.rtComentario_CAM.TabIndex = 1;
-            this.rtComentario_CAM.Text = "";
-            // 
-            // lblArchivo
-            // 
-            this.lblArchivo.AutoSize = true;
-            this.lblArchivo.Location = new System.Drawing.Point(199, 352);
-            this.lblArchivo.Name = "lblArchivo";
-            this.lblArchivo.Size = new System.Drawing.Size(43, 13);
-            this.lblArchivo.TabIndex = 2;
-            this.lblArchivo.Text = "Archivo";
-            // 
-            // rtArchivo_CAM
-            // 
-            this.rtArchivo_CAM.Enabled = false;
-            this.rtArchivo_CAM.Location = new System.Drawing.Point(274, 346);
-            this.rtArchivo_CAM.Name = "rtArchivo_CAM";
-            this.rtArchivo_CAM.Size = new System.Drawing.Size(229, 23);
-            this.rtArchivo_CAM.TabIndex = 3;
-            this.rtArchivo_CAM.Text = "";
-            // 
-            // btnArchivo_CAM
-            // 
-            this.btnArchivo_CAM.Location = new System.Drawing.Point(518, 345);
-            this.btnArchivo_CAM.Name = "btnArchivo_CAM";
-            this.btnArchivo_CAM.Size = new System.Drawing.Size(75, 24);
-            this.btnArchivo_CAM.TabIndex = 4;
-            this.btnArchivo_CAM.Text = "Subir";
-            this.btnArchivo_CAM.UseVisualStyleBackColor = true;
-            this.btnArchivo_CAM.Click += new System.EventHandler(this.btnArchivo_CAM_Click);
-            // 
-            // btnCrearResultado_CAM
-            // 
-            this.btnCrearResultado_CAM.Location = new System.Drawing.Point(364, 408);
-            this.btnCrearResultado_CAM.Name = "btnCrearResultado_CAM";
-            this.btnCrearResultado_CAM.Size = new System.Drawing.Size(93, 23);
-            this.btnCrearResultado_CAM.TabIndex = 5;
-            this.btnCrearResultado_CAM.Text = "Crear resultado";
-            this.btnCrearResultado_CAM.UseVisualStyleBackColor = true;
-            this.btnCrearResultado_CAM.Click += new System.EventHandler(this.btnCrearResultado_CAM_Click);
-            // 
-            // lblRutPaciente_CAM
-            // 
-            this.lblRutPaciente_CAM.AutoSize = true;
-            this.lblRutPaciente_CAM.Location = new System.Drawing.Point(244, 36);
-            this.lblRutPaciente_CAM.Name = "lblRutPaciente_CAM";
-            this.lblRutPaciente_CAM.Size = new System.Drawing.Size(69, 13);
-            this.lblRutPaciente_CAM.TabIndex = 6;
-            this.lblRutPaciente_CAM.Text = "Rut Paciente";
-            // 
-            // txtRutPaciente_CAM
-            // 
-            this.txtRutPaciente_CAM.Location = new System.Drawing.Point(334, 33);
-            this.txtRutPaciente_CAM.MaxLength = 8;
-            this.txtRutPaciente_CAM.Name = "txtRutPaciente_CAM";
-            this.txtRutPaciente_CAM.Size = new System.Drawing.Size(100, 20);
-            this.txtRutPaciente_CAM.TabIndex = 7;
-            this.txtRutPaciente_CAM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRut_KeyPress);
-            // 
-            // txtDV_CAM
-            // 
-            this.txtDV_CAM.Location = new System.Drawing.Point(439, 33);
-            this.txtDV_CAM.MaxLength = 1;
-            this.txtDV_CAM.Name = "txtDV_CAM";
-            this.txtDV_CAM.Size = new System.Drawing.Size(29, 20);
-            this.txtDV_CAM.TabIndex = 8;
-            this.txtDV_CAM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
-            // 
-            // btnBuscarPaciente_CAM
-            // 
-            this.btnBuscarPaciente_CAM.Location = new System.Drawing.Point(488, 31);
-            this.btnBuscarPaciente_CAM.Name = "btnBuscarPaciente_CAM";
-            this.btnBuscarPaciente_CAM.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscarPaciente_CAM.TabIndex = 9;
-            this.btnBuscarPaciente_CAM.Text = "Buscar";
-            this.btnBuscarPaciente_CAM.UseVisualStyleBackColor = true;
-            this.btnBuscarPaciente_CAM.Click += new System.EventHandler(this.btnBuscarPaciente_CAM_Click);
-            // 
-            // lstAtenciones_CAM
-            // 
-            this.lstAtenciones_CAM.FormattingEnabled = true;
-            this.lstAtenciones_CAM.Location = new System.Drawing.Point(194, 86);
-            this.lstAtenciones_CAM.Name = "lstAtenciones_CAM";
-            this.lstAtenciones_CAM.Size = new System.Drawing.Size(415, 95);
-            this.lstAtenciones_CAM.TabIndex = 10;
-            this.lstAtenciones_CAM.SelectedIndexChanged += new System.EventHandler(this.lstAtenciones_CAM_SelectedIndexChanged);
-            // 
-            // lblError_CAM
-            // 
-            this.lblError_CAM.AutoSize = true;
-            this.lblError_CAM.Location = new System.Drawing.Point(380, 64);
-            this.lblError_CAM.Name = "lblError_CAM";
-            this.lblError_CAM.Size = new System.Drawing.Size(39, 13);
-            this.lblError_CAM.TabIndex = 11;
-            this.lblError_CAM.Text = "lblError";
-            this.lblError_CAM.Visible = false;
-            // 
             // FrmMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1200,11 +1192,13 @@
             this.Controls.Add(this.groupBox1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMedico";
-            this.Text = "Médico";
+            this.Text = "Centro medico Hipócrates";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMedico_FormClosed);
             this.Load += new System.EventHandler(this.FrmMedico_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbCerrarAtencionMedica.ResumeLayout(false);
+            this.gbCerrarAtencionMedica.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gbAbrirConsultaMedica.ResumeLayout(false);
@@ -1231,8 +1225,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.gbCerrarAtencionMedica.ResumeLayout(false);
-            this.gbCerrarAtencionMedica.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1251,7 +1243,6 @@
         private System.Windows.Forms.ToolStripMenuItem consultasMédicasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirConsultaMédicaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarConsultaMédicaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem atencionesToolStripMenuItem;
         private System.Windows.Forms.GroupBox gbActualizarFichaMedica;
         private System.Windows.Forms.Button btnModificarUser;
         private System.Windows.Forms.GroupBox gbOpcionesUsuario;
