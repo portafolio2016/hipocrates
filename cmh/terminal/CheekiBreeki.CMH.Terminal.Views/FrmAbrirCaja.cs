@@ -249,18 +249,19 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnAbrirCaja_Click(object sender, EventArgs e)
         {
-            bool res = false;
+            string mensajeError = string.Empty;
             try
             {
                 FUNCIONARIO funcionario = FrmLogin.usuarioLogeado.Personal.FUNCIONARIO.FirstOrDefault();
                 int dinero = int.Parse(txtDinero.Text);
-                res = at.abrirCaja(funcionario, dinero);
+                if(!at.abrirCaja(funcionario, dinero))
+                    mensajeError = "Error al abrir caja";
             }
             catch (Exception ex)
             {
-                res = false;
+                mensajeError = "Error al abrir caja";
             }
-            if (res)
+            if (mensajeError == string.Empty)
             {
                 FrmOperador frmOperador = new FrmOperador(login);
                 frmOperador.Show();
@@ -268,11 +269,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 this.Hide();
             }
             else
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al abrir caja";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void txtDinero_KeyPress(object sender, KeyPressEventArgs e)

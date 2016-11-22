@@ -253,7 +253,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnCerrarCaja_Click(object sender, EventArgs e)
         {
-            bool res = false;
+            string mensajeError = string.Empty;
             try
             {
                 FUNCIONARIO funcionario = FrmLogin.usuarioLogeado.Personal.FUNCIONARIO.FirstOrDefault();
@@ -265,13 +265,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblError.ForeColor = System.Drawing.Color.Violet;
                 btnCerrarCaja.Enabled = false;
 
-                res = at.cerrarCaja(funcionario, dinero, cheques);
+                if(!at.cerrarCaja(funcionario, dinero, cheques))
+                    mensajeError = "Error al cerrar caja";
             }
             catch (Exception ex)
             {
-                res = false;
+                mensajeError = "Error al cerrar caja";
             }
-            if (res)
+            if (mensajeError == string.Empty)
             {
                 FrmOperador frmOperador = new FrmOperador(login);
                 frmOperador.Show();
@@ -279,11 +280,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 this.Hide();
             }
             else
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al cerrar caja";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             btnCerrarCaja.Enabled = true;
         }
 
