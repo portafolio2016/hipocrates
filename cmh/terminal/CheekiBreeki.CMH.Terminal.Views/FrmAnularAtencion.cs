@@ -265,12 +265,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void brnBuscarAtenciones_Click(object sender, EventArgs e)
         {
-            mostrarLabelPaciente();
             ActualizarLista();
         }
 
         private void btnAnular_Click(object sender, EventArgs e)
         {
+            string mensajeCorrecto = "Atención anulada correctamente";
+            string mensajeError = string.Empty;
             bool res1 = false, res2 = false;
             bool necesitaDevolucion = false;
             try
@@ -281,7 +282,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     atencion = context.ATENCION_AGEN.Find(((ComboboxItem)lstAtenciones.SelectedItem).Value);
                     atencion.ESTADO_ATEN = context.ESTADO_ATEN.Find(atencion.ID_ESTADO_ATEN);
                     if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")
+                    {
+                        txtRazon.Enabled = true;
                         necesitaDevolucion = true;
+                    }
+                    else
+                        txtRazon.Enabled = false;
                 }
                 res1 = at.anularAtencion(atencion);
                 if (atencion.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")
@@ -292,40 +298,28 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 res1 = false;
             }
+
             if (!necesitaDevolucion && res1)
-            {
-                lblError.Visible = true;
-                lblError.Text = "Atención anulada correctamente";
-                lblError.ForeColor = System.Drawing.Color.Green;
-            }
+                MessageBox.Show(mensajeCorrecto, "Creada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             else
             {
                 if (res1 && res2)
-                {
-                    lblError.Visible = true;
-                    lblError.Text = "Atención anulada correctamente";
-                    lblError.ForeColor = System.Drawing.Color.Green;
-                }
+                    MessageBox.Show(mensajeCorrecto, "Creada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 else
-                {
-                    lblError.Visible = true;
-                    lblError.Text = "Error al anular atención";
-                    lblError.ForeColor = System.Drawing.Color.Red;
-                    txtRazon.Text = string.Empty;
-                }
+                    MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
             }
         }
 
         private void ActualizarLista()
         {
-            bool res = false;
-            int rut = int.Parse(txtRut.Text);
+            string mensajeError = string.Empty;
             lblError.Visible = false;
             lstAtenciones.Items.Clear();
             try
             {
+                int rut = int.Parse(txtRut.Text);
                 if (!Util.rutValido(rut, txtDv.Text))
-                    res = false;
+                    mensajeError = "RUT no válido";
                 else
                 {
                     List<ATENCION_AGEN> atenciones = at.listaAtencionesVigentesPagadas(rut).ToList();
@@ -341,19 +335,16 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     lblEdad.Text = paciente.FEC_NAC.Value.Date.ToShortDateString();
                     lblSexo.Text = paciente.SEXO;
                     lblRutInfo.Text = paciente.RUT + "-" + paciente.DIGITO_VERIFICADOR;
-                    res = true;
                 }
             }
             catch (Exception ex)
             {
-                res = false;
+                mensajeError = "Error al buscar atenciones";
             }
-            if (!res)
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al buscar atenciones";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
+            if (mensajeError == string.Empty)
+                mostrarLabelPaciente();
+            else
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             if (Util.isObjetoNulo(lstAtenciones.SelectedValue))
                 btnAnular.Enabled = false;
         }
@@ -445,9 +436,13 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     }
                     btnAnular.Enabled = true;
                     lblError.Visible = false;
+                    txtRazon.Enabled = true;
                 }
                 else
+                {
+                    txtRazon.Enabled = false;
                     btnAnular.Enabled = true;
+                }
 
             }
             catch (Exception ex)
