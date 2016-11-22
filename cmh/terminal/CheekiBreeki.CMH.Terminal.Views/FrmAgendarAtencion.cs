@@ -300,9 +300,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void btnAgendar_Click(object sender, EventArgs e)
         {
             string mensajeCorrecto = "Atención agendada correctamente";
-            string mensajeError = "Error al agendar atención";
+            string mensajeError = string.Empty;
             lblError.Visible = false;
-            bool res = false;
             try
             {
                 ATENCION_AGEN atencion = new ATENCION_AGEN();
@@ -312,10 +311,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 PERS_MEDICO personalMedico = new PERS_MEDICO();
                 BLOQUE bloque = new BLOQUE();
                 if (dtFecha.Value < DateTime.Today)
-                {
-                    res = false;
                     mensajeError = "La fecha de atención ha expirado";
-                }
                 else
                 {
                     using (var context = new CMHEntities())
@@ -324,10 +320,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         personalMedico = context.PERS_MEDICO.Find((int)cmbPersonal.SelectedValue);
                     }
                     if (txtRut.Text == string.Empty || txtDv.Text == string.Empty)
-                    {
-                        res = false;
                         mensajeError = "Complete los campos de RUT";
-                    }
                     else
                     {
                         paciente = at.buscarPaciente(int.Parse(txtRut.Text), txtDv.Text.ToUpper());
@@ -339,22 +332,20 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
                             atencion.ID_PERS_ATIENDE = (int)cmbPersonal.SelectedValue;
                             atencion.ID_BLOQUE = ((ComboboxItem)cmbHora.SelectedItem).Value;
-                            res = at.agendarAtencion(atencion);
+                            if (!at.agendarAtencion(atencion))
+                                mensajeError = "Error al agendar atención";
                             actualizarBloques();
                         }
                         else
-                        {
-                            res = false;
                             mensajeError = "Paciente no encontrado";
-                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                res = false;
+                mensajeError = "Error al agendar atención";
             }
-            if (res)
+            if (mensajeError == string.Empty)
                 MessageBox.Show(mensajeCorrecto, "Creada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             else
                 MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
