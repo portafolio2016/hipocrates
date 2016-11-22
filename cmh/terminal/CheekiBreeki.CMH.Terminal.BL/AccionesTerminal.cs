@@ -1637,10 +1637,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     throw new Exception("RUT vacío");
                 }
-                else if (paciente.HASHED_PASS == null || paciente.HASHED_PASS == string.Empty)
-                {
-                    throw new Exception("Contraseña nula");
-                }
                 else if (!Util.isObjetoNulo(buscarPaciente(paciente.RUT, paciente.DIGITO_VERIFICADOR)))
                 {
                     throw new Exception("Paciente ya ingresado");
