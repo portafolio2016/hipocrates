@@ -96,6 +96,19 @@ namespace CheekiBreeki.CMH.Terminal.Views
             cbTipoCuenta_MP.DataSource = at.ObtenerTiposCuentaBancaria();
             #endregion
 
+            #region ComboBox Sexo
+            ComboboxItem itemSexo1 = new ComboboxItem();
+            itemSexo1.Text = "Masculino";
+            itemSexo1.Value = 0;
+            cbSexo_Pac.Items.Add(itemSexo1);
+
+            ComboboxItem itemSexo2 = new ComboboxItem();
+            itemSexo2.Text = "Femenino";
+            itemSexo2.Value = 1;
+            cbSexo_Pac.Items.Add(itemSexo2);
+            cbSexo_Pac.SelectedIndex = 0;
+            #endregion 
+
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
