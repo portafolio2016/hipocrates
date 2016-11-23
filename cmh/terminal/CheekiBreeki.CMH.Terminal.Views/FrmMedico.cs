@@ -10,6 +10,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.IO;
 
 namespace CheekiBreeki.CMH.Terminal.Views
 {
@@ -225,6 +227,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
             gbAgendaDiaria.Hide();
             gbVerFichaMedica.Hide();
             gbActualizarFichaMedica.Hide();
+            gbAbrirConsultaMedica.Hide();
+            gbCerrarAtencionMedica.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
@@ -424,8 +428,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 if (ValidaRut(tbRUNAFM.Text + "-" + tbVerificadorAFM.Text))
                 {
                     AccionesTerminal ac = new AccionesTerminal();
-                    string rut = tbRUNVFM.Text.Replace(".", "").ToUpper();
-                    paciente = ac.buscarPaciente(Int32.Parse(rut), tbVerificadorVFM.Text);
+                    string rut = tbRUNAFM.Text.Replace(".", "").ToUpper();
+                    paciente = ac.buscarPaciente(Int32.Parse(rut), tbVerificadorAFM.Text);
                     if (paciente != null)
                     {
                         //Ruta buena
@@ -533,5 +537,272 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 return false;
             }
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   ABRIR CONSULTA MEDICA                                                                                                      //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void abrirConsultaMédicaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbAbrirConsultaMedica);
+        }
+
+        private void actualizarBloques()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            cmbHora_ACM.Items.Clear();
+            PERSONAL personal = new PERSONAL();
+            personal.ID_PERSONAL = (int)cmbPersonal_ACM.SelectedValue;
+            PERS_MEDICO persMedico = at.buscarPersonalMedico(personal);
+
+            DateTime dia = dtFecha_ACM.Value;
+
+            HorasDisponibles horas = at.horasDisponiblesMedico(persMedico, dia);
+            foreach (HoraDisponible hora in horas.Horas)
+            {
+                ComboboxItem item = new ComboboxItem();
+                if (hora.MinuIni == 0)
+                    item.Text = hora.HoraFin + ":00 - " + hora.HoraFin + ":" + hora.MinuFin;
+                else if ((hora.MinuFin == 0))
+                    item.Text = hora.HoraFin + ":" + hora.MinuIni + " - " + hora.HoraFin + ":00";
+                else
+                    item.Text = hora.HoraFin + ":" + hora.MinuIni + " - " + hora.HoraFin + ":" + hora.MinuFin;
+                item.Value = hora.Bloque.ID_BLOQUE;
+                cmbHora_ACM.Items.Add(item);
+                cmbHora_ACM.SelectedIndex = 0;
+            }
+        }
+
+        private void FrmMedico_Load(object sender, EventArgs e)
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            cmbEspecialidad_ACM.DataSource = null;
+            cmbEspecialidad_ACM.ValueMember = "ID_ESPECIALIDAD";
+            cmbEspecialidad_ACM.DisplayMember = "NOM_ESPECIALIDAD";
+            cmbEspecialidad_ACM.DataSource = at.listaEspecialidad();
+        }
+
+        private void cmbEspecialidad_ACM_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            int idEspecialidad = (int)cmbEspecialidad_ACM.SelectedValue;
+
+            cmbPersonal_ACM.DataSource = null;
+            cmbPersonal_ACM.ValueMember = "ID_PERSONAL";
+            cmbPersonal_ACM.DisplayMember = "NOMBREFULL";
+            cmbPersonal_ACM.DataSource = at.listaPersonales(idEspecialidad);
+
+            cmbPrestacion_ACM.DataSource = null;
+            cmbPrestacion_ACM.ValueMember = "ID_PRESTACION";
+            cmbPrestacion_ACM.DisplayMember = "NOM_PRESTACION";
+            cmbPrestacion_ACM.DataSource = at.listaPrestaciones(idEspecialidad);
+        }
+
+        private void dtFecha_ACM_ValueChanged(object sender, EventArgs e)
+        {
+            actualizarBloques();
+        }
+
+        private void cmbPersonal_ACM_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!Util.isObjetoNulo(cmbPersonal_ACM.SelectedValue))
+                actualizarBloques();
+        }
+
+        private void txtRut_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtDv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                    (e.KeyChar != 'k') && (e.KeyChar != 'K'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnAgendar_Click(object sender, EventArgs e)
+        {
+            lblError_ACM.Visible = false;
+            bool res = false;
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                ATENCION_AGEN atencion = new ATENCION_AGEN();
+                PACIENTE paciente = new PACIENTE();
+                PRESTACION prestacion = new PRESTACION();
+                ESTADO_ATEN estado = new ESTADO_ATEN();
+                PERS_MEDICO personalMedico = new PERS_MEDICO();
+                BLOQUE bloque = new BLOQUE();
+                if (dtFecha_ACM.Value < DateTime.Today)
+                    res = false;
+                else
+                {
+                    using (var context = new CMHEntities())
+                    {
+                        estado = context.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE").FirstOrDefault();
+                        personalMedico = context.PERS_MEDICO.Find((int)cmbPersonal_ACM.SelectedValue);
+                    }
+                    paciente = at.buscarPaciente(int.Parse(txtRut_ACM.Text), txtDv_ACM.Text.ToUpper());
+                    if (!Util.isObjetoNulo(paciente))
+                    {
+                        atencion.FECHOR = dtFecha_ACM.Value;
+                        atencion.ID_PACIENTE = paciente.ID_PACIENTE;
+                        atencion.ID_PRESTACION = (int)cmbPrestacion_ACM.SelectedValue;
+                        atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
+                        atencion.ID_PERS_ATIENDE = (int)cmbPersonal_ACM.SelectedValue;
+                        atencion.ID_BLOQUE = ((ComboboxItem)cmbHora_ACM.SelectedItem).Value;
+                        atencion.OBSERVACIONES = rtObservacion.Text;
+                        atencion.ID_PERS_SOLICITA = FrmLogin.usuarioLogeado.Personal.ID_PERSONAL;
+                        res = at.agendarAtencion(atencion);
+                        actualizarBloques();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                res = false;
+            }
+            if (res)
+            {
+                lblError_ACM.Visible = true;
+                lblError_ACM.Text = "Atención agendada correctamente";
+                lblError_ACM.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                lblError_ACM.Visible = true;
+                lblError_ACM.Text = "Error al agendar atención";
+                lblError_ACM.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   CERRAR ATENCION                                                                                                            //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void cerrarConsultaMédicaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbCerrarAtencionMedica);
+        }
+
+        string file = string.Empty;
+        private void btnArchivo_CAM_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog buscar = new OpenFileDialog();
+
+                if (buscar.ShowDialog() == DialogResult.OK)
+                {
+                    //Ruta del archivo
+                    rtArchivo_CAM.Text = buscar.FileName;
+                    file = buscar.FileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al encontrar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCrearResultado_CAM_Click(object sender, EventArgs e)
+        {
+            bool res;
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                ConversorBase64 conversor = new ConversorBase64();
+                RES_ATENCION resultadoAtencion = new RES_ATENCION();
+                resultadoAtencion.ATENCION_ABIERTA = false;
+                resultadoAtencion.COMENTARIO = rtComentario_CAM.Text;
+
+                resultadoAtencion.ID_ATENCION_AGEN = ((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value;
+                string clob = conversor.convertirABase64(file);
+                resultadoAtencion.ARCHIVO_B64 = clob;
+                string extension  = Path.GetExtension(file).ToString().Substring(1, 3);
+                resultadoAtencion.EXT_ARCHIVO = extension;
+                
+                //Busque atención
+                ATENCION_AGEN atencionAg = at.buscarAtencionAgendadaID(((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value);
+                //Actualice atención
+                at.actualuzarAtencionAgendadaEstado(atencionAg);
+
+                res = at.nuevoResultadoAtencion(resultadoAtencion);
+            }
+            catch(Exception ex)
+            {
+                res = false;
+                
+            }
+
+            if (res == true)
+                MessageBox.Show("Creada el resultado de atención", "Creada", MessageBoxButtons.OK, MessageBoxIcon.None);
+            else
+                MessageBox.Show("Error al crear resultado de atención", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void btnBuscarPaciente_CAM_Click(object sender, EventArgs e)
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            bool res = false;
+           // int rut = int.Parse(txtRutPaciente_CAM.Text);
+            lblError_CAM.Visible = false;
+            lstAtenciones_CAM.Items.Clear();
+            try
+            {
+                if (!Util.rutValido(int.Parse(txtRutPaciente_CAM.Text), txtDV_CAM.Text))
+                    res = false;
+                else
+                {
+                    
+                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
+
+                    if (atenciones.Count <= 0)
+                    {
+                        MessageBox.Show("No tiene ninguna atención", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    foreach (ATENCION_AGEN atencion in atenciones)
+                    {
+                        ComboboxItem item = new ComboboxItem();
+                        item.Value = atencion.ID_ATENCION_AGEN;
+                        item.Text = "Atención: " + atencion.ID_ATENCION_AGEN + " - Médico: " + atencion.PERS_MEDICO.PERSONAL.NOMBREFULL;
+                        lstAtenciones_CAM.Items.Add(item);
+                    }
+                   
+                    res = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                res = false;
+            }
+            if (!res)
+            {
+                lblError_CAM.Visible = true;
+                lblError_CAM.Text = "Error al buscar atenciones";
+                lblError_CAM.ForeColor = System.Drawing.Color.Red;
+            }
+            if (Util.isObjetoNulo(lstAtenciones_CAM.SelectedValue))
+            {
+                btnCrearResultado_CAM.Enabled = false;
+            }
+        }
+
+        private void lstAtenciones_CAM_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnCrearResultado_CAM.Enabled = true;
+        }
+
+
     }
 }

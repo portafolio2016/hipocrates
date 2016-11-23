@@ -15,6 +15,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
     public partial class FrmJefeOp : Form
     {
         private static AccionesTerminal acciones = new AccionesTerminal();
+        private static DateTime fechaReporte;
         FrmLogin login = null;
         bool closeApp;
 
@@ -219,6 +220,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
             gbMantenedorPersonal.Hide();
             gbMantenerPrestacion.Hide();
             gbLogPagoHonorarios.Hide();
+            gbReporteCaja.Hide();
+            gpHorarios.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
@@ -602,6 +605,16 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                                                                                                              //
+        //   Horarios                                                                                                                   //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void horariosPersonalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gpHorarios);
+        }
+        
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
         //   MANTENEDOR PRESTACION                                                                                                      //
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -975,6 +988,236 @@ namespace CheekiBreeki.CMH.Terminal.Views
             else
             {
                 MessageBox.Show("No se ha podido eliminar la prestación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   GENERAR REPORTE                                                                                                            //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void reporteDeCajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbReporteCaja);
+            btnCargarRC.Enabled = false;
+            cbOperadorRC.Items.Clear();
+        }
+
+        //cargar operadores
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<FUNCIONARIO> funcionarios = acciones.CargarOperadoresCajaCerrada(dtFechaCierreCaja.Value);
+            cbOperadorRC.Items.Clear();
+            if (funcionarios != null)
+            {
+                foreach (FUNCIONARIO x in funcionarios)
+                {
+                    ComboboxItem cbi = new ComboboxItem();
+                    cbi.Text = x.PERSONAL.NOMBREFULL;
+                    cbi.Value = x.ID_FUNCIONARIO;
+                    cbOperadorRC.Items.Add(cbi);
+                }
+                if (funcionarios.Count > 0)
+                {
+                    btnCargarRC.Enabled = true;
+                    cbOperadorRC.SelectedIndex = 0;
+                    fechaReporte = dtFechaCierreCaja.Value;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontraron funcionarios con caja cerrada ese día", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    btnCargarRC.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se encontraron funcionarios con caja cerrada ese día", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnCargarRC.Enabled = false;
+            }
+        }
+
+        //Genera reporte
+        private void btnCargarRC_Click(object sender, EventArgs e)
+        {
+            rbReporteCaja.Clear();
+            FUNCIONARIO funcionario = new FUNCIONARIO();
+            funcionario.ID_FUNCIONARIO = ((ComboboxItem)cbOperadorRC.SelectedItem).Value;
+            ReporteCaja reporte = acciones.GenerarReporteCaja(funcionario, fechaReporte);
+            string text = string.Empty;
+            rbReporteCaja.Text += Environment.NewLine + "Nombre operador: " + reporte.Funcionario.PERSONAL.NOMBREFULL;
+            rbReporteCaja.Text += Environment.NewLine + "--Pagos-----------------------------------------------------------------------";
+            foreach (PAGO x in reporte.Pagos)
+            {
+                rbReporteCaja.Text += Environment.NewLine + "Atención: " + x.ATENCION_AGEN.PRESTACION.NOM_PRESTACION;
+                rbReporteCaja.Text += Environment.NewLine + "Fecha de pago: " + x.FECHOR;
+                if(x.BONO != null)
+                    rbReporteCaja.Text += Environment.NewLine + "Bono: $" + x.BONO.CANT_BONO;
+                rbReporteCaja.Text += Environment.NewLine + "Monto de pago: $" + x.MONTO_PAGO;
+                rbReporteCaja.Text += Environment.NewLine;
+            }
+            rbReporteCaja.Text += Environment.NewLine + "--Devoluciones-----------------------------------------------------------";
+            foreach (PAGO x in reporte.Devoluciones)
+            {
+                if (x.DEVOLUCION != null)
+                {
+                    rbReporteCaja.Text += Environment.NewLine + "Atención: " + x.ATENCION_AGEN.PRESTACION.NOM_PRESTACION + "";
+                    rbReporteCaja.Text += Environment.NewLine + "Causa de devolución: " + x.DEVOLUCION.NOM_TIPO_DEV + "";
+                    rbReporteCaja.Text += Environment.NewLine;
+                }
+            }
+            rbReporteCaja.Text += Environment.NewLine + "--Balance--------------------------------------------------------------------";
+            rbReporteCaja.Text += Environment.NewLine + "Dinero inicial: $" + reporte.DineroEnBilletesInicial.ToString();
+            rbReporteCaja.Text += Environment.NewLine + "Dinero final: $" + reporte.DineroEnBilletesFinal.ToString();
+            rbReporteCaja.Text += Environment.NewLine + "Cantidad de cheques final: " + reporte.DineroEnChequesFinal.ToString();
+            if(reporte.Diferencia >= 0)
+                rbReporteCaja.Text += Environment.NewLine + "Descuadre: $" + reporte.Diferencia.ToString();
+            else
+                rbReporteCaja.Text += Environment.NewLine + "Descuadre: -$" + (reporte.Diferencia*-1).ToString();
+            rbReporteCaja.Text += Environment.NewLine;
+            rbReporteCaja.Text += Environment.NewLine + "Fecha apertura: " + reporte.FechorApertura.ToString();
+            rbReporteCaja.Text += Environment.NewLine + "Fecha cierre: " + reporte.FechorCierre.ToString();
+            
+        }
+        /*
+         * private FUNCIONARIO funcionario;
+        private List<PAGO> pagos;
+        private List<PAGO> devoluciones;
+        private int dineroEnBilletesInicial;
+        private int dineroEnBilletesFinal;
+        private int dineroEnChequesFinal;
+
+        private DateTime fechorApertura;
+        private DateTime fechorCierre;*/
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   MANTENEDOR HORARIOS                                                                                                        //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public class ComboboxItemObject
+        {
+            public string Text { get; set; }
+            public Object Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
+        private void brnBuscarHorarios_Click(object sender, EventArgs e)
+        {
+            bool res = false;
+            int rut = int.Parse(txtRut.Text);
+            lblError.Visible = false;
+            lstDisponibles.Items.Clear();
+            lstAsignados.Items.Clear();
+            try
+            {
+                if (!Util.rutValido(rut, txtDv.Text))
+                    res = false;
+                else
+                {
+                    // Bloques disponibles
+                    List<BLOQUE> bloquesDisponibles = acciones.obtenerBloquesDisponibles(int.Parse(txtRut.Text));
+                    foreach (BLOQUE bloques in bloquesDisponibles)
+                    {
+                        ComboboxItemObject item = new ComboboxItemObject();
+                        item.Value = bloques.ID_BLOQUE;
+                        if (bloques.NUM_MINU_INI == 0)
+                            item.Text = bloques.DIA_SEM.NOMBRE_DIA + ": " + bloques.NUM_HORA_INI + ":00 - " + bloques.NUM_HORA_FIN + ":" + bloques.NUM_MINU_FIN;
+                        else if ((bloques.NUM_MINU_FIN == 0))
+                            item.Text = bloques.DIA_SEM.NOMBRE_DIA + ": " + bloques.NUM_HORA_INI + ":" + bloques.NUM_MINU_INI + " - " + bloques.NUM_HORA_FIN + ":00";
+                        else
+                            item.Text = bloques.DIA_SEM.NOMBRE_DIA + ": " + bloques.NUM_HORA_INI + ":" + bloques.NUM_MINU_INI + " - " + bloques.NUM_HORA_FIN + ":" + bloques.NUM_MINU_FIN;
+                        lstDisponibles.Items.Add(item);
+                    }
+
+                    // Bloques asignados
+                    List<BLOQUE> bloquesAsignados = acciones.obtenerBloquesAsignados(int.Parse(txtRut.Text));
+                    foreach (BLOQUE bloques in bloquesAsignados)
+                    {
+                        ComboboxItemObject item = new ComboboxItemObject();
+                        item.Value = bloques.ID_BLOQUE;
+                        if (bloques.NUM_MINU_INI == 0)
+                            item.Text = bloques.DIA_SEM.NOMBRE_DIA + ": " + bloques.NUM_HORA_INI + ":00 - " + bloques.NUM_HORA_FIN + ":" + bloques.NUM_MINU_FIN;
+                        else if ((bloques.NUM_MINU_FIN == 0))
+                            item.Text = bloques.DIA_SEM.NOMBRE_DIA + ": " + bloques.NUM_HORA_INI + ":" + bloques.NUM_MINU_INI + " - " + bloques.NUM_HORA_FIN + ":00";
+                        else
+                            item.Text = bloques.DIA_SEM.NOMBRE_DIA + ": " + bloques.NUM_HORA_INI + ":" + bloques.NUM_MINU_INI + " - " + bloques.NUM_HORA_FIN + ":" + bloques.NUM_MINU_FIN;
+                        lstAsignados.Items.Add(item);
+                    }
+                    res = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                res = false;
+            }
+            if (!res)
+            {
+                lblError.Visible = true;
+                lblError.Text = "Error al buscar horarios";
+                lblError.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        private void btnAsignar_Click(object sender, EventArgs e)
+        {
+            List<ComboboxItemObject> seleccionados = lstDisponibles.SelectedItems.Cast<ComboboxItemObject>().ToList();
+            foreach (ComboboxItemObject item in seleccionados)
+            {
+                lstDisponibles.Items.Remove(item);
+            }
+            lstAsignados.Items.AddRange(seleccionados.ToArray());
+        }
+
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            List<ComboboxItemObject> seleccionados = lstAsignados.SelectedItems.Cast<ComboboxItemObject>().ToList();
+            foreach (ComboboxItemObject item in seleccionados)
+            {
+                lstAsignados.Items.Remove(item);
+            }
+            lstDisponibles.Items.AddRange(seleccionados.ToArray());
+        }
+
+        private void btnGuardarCambios_Click(object sender, EventArgs e)
+        {
+            lblError.Visible = true;
+            lblError.Text = "Actualizando horarios...";
+            btnGuardarCambios.Enabled = false;
+            lblError.ForeColor = System.Drawing.Color.Violet;
+            List<ComboboxItemObject> seleccionados = lstAsignados.Items.Cast<ComboboxItemObject>().ToList();
+            List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
+            foreach (ComboboxItemObject item in seleccionados)
+            {
+                BLOQUE nuevo = new BLOQUE();
+                nuevo.ID_BLOQUE = int.Parse(item.Value.ToString());
+                bloquesAsignados.Add(nuevo);
+            }
+            bool res = acciones.guardarCambiosHorarios(bloquesAsignados, int.Parse(txtRut.Text));
+
+            if (res)
+            {
+                lblError.Visible = true;
+                lblError.Text = "Horarios actualizados correctamente";
+                lblError.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                lblError.Visible = true;
+                lblError.Text = "Error al actualizar horarios";
+                lblError.ForeColor = System.Drawing.Color.Red;
+            }
+            btnGuardarCambios.Enabled = true;
+        }
+
+        private void txtRut_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

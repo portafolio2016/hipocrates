@@ -18,7 +18,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-001
         public Boolean agendarAtencion(ATENCION_AGEN atencion)
         {
-
             try
             {
                 if (Util.isObjetoNulo(atencion))
@@ -483,6 +482,34 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public CAJA buscarCajaCerrada(FUNCIONARIO funcionario)
+        {
+            CAJA caja = null;
+            try
+            {
+                if (Util.isObjetoNulo(funcionario))
+                {
+                    throw new Exception("Funcionario nula.");
+                }
+                else if (Util.isObjetoNulo(buscarFuncionario(funcionario.ID_CARGO_FUNCI, funcionario.ID_PERSONAL)))
+                {
+                    throw new Exception("Funcionario no encontrado.");
+                }
+                else
+                {
+                    List<CAJA> cajas = new List<CAJA>();
+                    cajas = conexionDB.CAJA.Where(d => d.FUNCIONARIO.ID_FUNCIONARIO == funcionario.ID_FUNCIONARIO && d.FECHOR_CIERRE != null).ToList();
+                    caja = cajas.Where(d => d.FECHOR_CIERRE.Value.Date == DateTime.Today.Date).FirstOrDefault();
+                    conexionDB.SaveChangesAsync();
+                    return caja;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return caja;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -903,7 +930,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     INVENTARIO inventario = null;
                     inventario = conexionDB.INVENTARIO.Where(d => d.ID_INVENTARIO_EQUIPO == idInventario).FirstOrDefault();
-                    
+
                     if (Util.isObjetoNulo(inventario))
                     {
                         throw new Exception("Equipo no existe");
@@ -959,7 +986,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     {
                         TIPO_EQUIPO buscado = context.TIPO_EQUIPO.Where(d => d.ID_TIPO_EQUIPO == tipoEquipo.ID_TIPO_EQUIPO).FirstOrDefault();
                         buscado.NOMBRE_TIPO_EQUIPO = tipoEquipo.NOMBRE_TIPO_EQUIPO;
-                       
+
                         context.SaveChangesAsync();
                     }
                     return true;
@@ -1950,7 +1977,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         public List<PRESTACION> listaPrestaciones()
         {
-            List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d=> d.ACTIVO == true).ToList();
+            List<PRESTACION> prestaciones = conexionDB.PRESTACION.Where(d => d.ACTIVO == true).ToList();
             return (prestaciones);
         }
 
@@ -1981,6 +2008,15 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 .Where(d => d.PACIENTE.RUT == rut &&
                     (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "VIGENTE" ||
                     d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
+            atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
+            return (atenciones);
+        }
+
+        public List<ATENCION_AGEN> listaAtencionesPagadas(int rut)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => d.PACIENTE.RUT == rut &&
+                    (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
             atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
             return (atenciones);
         }
@@ -2285,7 +2321,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
                 x = true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -2300,7 +2336,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 PRESTACION prestacion = new PRESTACION();
                 using (var con = new CMHEntities())
                 {
-                    prestacion = con.PRESTACION.Where(d=> d.CODIGO_PRESTACION == pres.CODIGO_PRESTACION).FirstOrDefault();
+                    prestacion = con.PRESTACION.Where(d => d.CODIGO_PRESTACION == pres.CODIGO_PRESTACION).FirstOrDefault();
                     prestacion.ID_TIPO_PRESTACION = pres.ID_TIPO_PRESTACION;
                     prestacion.ID_ESPECIALIDAD = pres.ID_ESPECIALIDAD;
                     prestacion.NOM_PRESTACION = pres.NOM_PRESTACION;
@@ -2308,7 +2344,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     con.SaveChangesAsync();
                 }
 
-                
+
                 using (var con = new CMHEntities())
                 {
                     List<EQUIPO_REQ> equiposActuales = con.EQUIPO_REQ.Where(d => d.ID_PRESTACION == prestacion.ID_PRESTACION).ToList();
@@ -2381,5 +2417,190 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
             return x;
         }
+
+        public List<FUNCIONARIO> CargarOperadoresCajaCerrada(DateTime fecha)
+        {
+            List<FUNCIONARIO> listaOp = new List<FUNCIONARIO>();
+            List<FUNCIONARIO> listaOpAux = conexionDB.FUNCIONARIO.ToList();
+            foreach (FUNCIONARIO x in listaOpAux)
+            {
+                if (x.CAJA != null)
+                {
+                    foreach (CAJA c in x.CAJA)
+                    {
+                        if (c.FECHOR_CIERRE != null)
+                        {
+                            if (c.FECHOR_CIERRE.Value.Date == fecha.Date)
+                            {
+                                listaOp.Add(x);
+                            }
+                        }
+                    }
+                }
+            }
+            return listaOp;
+        }
+
+        public ReporteCaja GenerarReporteCaja(FUNCIONARIO func, DateTime fecha)
+        {
+            FUNCIONARIO funcionario = conexionDB.FUNCIONARIO.Find(func.ID_FUNCIONARIO);
+            CAJA caja = new CAJA();
+            foreach (CAJA x in funcionario.CAJA)
+            {
+                if (x.FECHOR_CIERRE != null)
+                    if (x.FECHOR_CIERRE.Value.ToShortDateString() == fecha.ToShortDateString())
+                        caja = x; //Toma la ultima caja cerrada en el día
+            }
+            ReporteCaja reporte = new ReporteCaja(caja);
+            return reporte;
+        }
+        /*
+         * private FUNCIONARIO funcionario;
+        private List<PAGO> pagos;
+        private List<PAGO> devoluciones;
+        private int dineroEnBilletesInicial;
+        private int dineroEnBilletesFinal;
+        private int dineroEnChequesFinal;
+
+        private DateTime fechorApertura;
+        private DateTime fechorCierre;*/
+
+        public bool nuevoResultadoAtencion(RES_ATENCION resultado)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(resultado))
+                {
+                    throw new Exception("Resultado nulo");
+                }
+                else
+                {
+                    conexionDB.RES_ATENCION.Add(resultado);
+                    conexionDB.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public ATENCION_AGEN buscarAtencionAgendadaID(int atencionID)
+        {
+            try
+            {
+                ATENCION_AGEN encontrado = conexionDB.ATENCION_AGEN.Find(atencionID);
+                if (Util.isObjetoNulo(encontrado))
+                {
+                    throw new Exception("Atención no existe");
+                }
+                return encontrado;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public Boolean actualuzarAtencionAgendadaEstado(ATENCION_AGEN atencion)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atencion nulo");
+                }
+                else
+                {
+                    using (var context = new CMHEntities())
+                    {
+                        ATENCION_AGEN buscado = context.ATENCION_AGEN.Where(d => d.ID_ATENCION_AGEN == atencion.ID_ATENCION_AGEN).FirstOrDefault();
+                        buscado.ID_ESTADO_ATEN = 4;
+                        context.SaveChangesAsync();
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        #region Mantenedor horarios
+        public List<BLOQUE> obtenerBloquesDisponibles(int rut)
+        {
+            List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
+            List<BLOQUE> bloquesDisponibles = new List<BLOQUE>();
+            try
+            {
+                PERSONAL personal = buscarPersonal(rut);
+                if (Util.isObjetoNulo(personal.PERS_MEDICO.FirstOrDefault()))
+                    throw new Exception("No es personal médico");
+                else
+                {
+                    bloquesAsignados = obtenerBloquesAsignados(rut);
+                    bloquesDisponibles = conexionDB.BLOQUE.ToList();
+                    bloquesDisponibles = bloquesDisponibles.Except(bloquesAsignados).ToList();
+                }
+            }
+            catch (Exception ex)
+            { }
+            return (bloquesDisponibles.OrderBy(d => d.ID_BLOQUE).ToList());
+        }
+
+        public List<BLOQUE> obtenerBloquesAsignados(int rut)
+        {
+            List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
+            try
+            {
+                PERSONAL personal = buscarPersonal(rut);
+                if (Util.isObjetoNulo(personal.PERS_MEDICO.FirstOrDefault()))
+                    throw new Exception("No es personal médico");
+                else
+                {
+                    foreach (HORARIO horario in personal.PERS_MEDICO.FirstOrDefault().HORARIO)
+                    {
+                        bloquesAsignados.Add(horario.BLOQUE);
+                    }
+                }
+            }
+            catch (Exception ex)
+            { }
+            return (bloquesAsignados.OrderBy(d => d.ID_BLOQUE).ToList());
+        }
+
+        public Boolean guardarCambiosHorarios(List<BLOQUE> bloquesAsignados, int rut)
+        {
+            try
+            {
+                PERS_MEDICO personal = buscarPersonal(rut).PERS_MEDICO.FirstOrDefault();
+                List<HORARIO> horariosViejos = conexionDB.HORARIO.Where(d => d.ID_PERS_MEDICO == personal.ID_PERSONAL_MEDICO).ToList();
+                conexionDB.HORARIO.RemoveRange(horariosViejos);
+                conexionDB.SaveChangesAsync();
+
+                List<HORARIO> horariosNuevos = new List<HORARIO>();
+                foreach (BLOQUE bloque in bloquesAsignados)
+                {
+                    HORARIO nuevo = new HORARIO();
+                    nuevo.ID_BLOQUE = bloque.ID_BLOQUE;
+                    nuevo.ID_PERS_MEDICO = personal.ID_PERSONAL_MEDICO;
+                    horariosNuevos.Add(nuevo);
+                }
+                conexionDB.HORARIO.AddRange(horariosNuevos);
+                conexionDB.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+        #endregion
+
     }
 }
