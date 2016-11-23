@@ -59,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmEnfermero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEnfermero.Designer.cs">
+      <DependentUpon>FrmEnfermero.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmJefeOp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCrearPaciente.resx">
       <DependentUpon>FrmCrearPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEnfermero.resx">
+      <DependentUpon>FrmEnfermero.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmHorarios.resx">
       <DependentUpon>FrmHorarios.cs</DependentUpon>
