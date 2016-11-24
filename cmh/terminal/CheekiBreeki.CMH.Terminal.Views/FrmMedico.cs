@@ -48,6 +48,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblPrivilegio.Text = "";
                 btnSesion.Text = "Iniciar sesión";
             }
+
+            rtArchivo_CAM.Enabled = false;
+            btnArchivo_CAM.Enabled = false;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -696,6 +699,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
 
         string file = string.Empty;
+
+        //No médico
         private void btnArchivo_CAM_Click(object sender, EventArgs e)
         {
             try
@@ -715,22 +720,23 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
         }
 
+
         private void btnCrearResultado_CAM_Click(object sender, EventArgs e)
         {
             bool res;
             try
             {
                 AccionesTerminal at = new AccionesTerminal();
-                ConversorBase64 conversor = new ConversorBase64();
+               // ConversorBase64 conversor = new ConversorBase64();
                 RES_ATENCION resultadoAtencion = new RES_ATENCION();
                 resultadoAtencion.ATENCION_ABIERTA = false;
                 resultadoAtencion.COMENTARIO = rtComentario_CAM.Text;
 
                 resultadoAtencion.ID_ATENCION_AGEN = ((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value;
-                string clob = conversor.convertirABase64(file);
-                resultadoAtencion.ARCHIVO_B64 = clob;
-                string extension  = Path.GetExtension(file).ToString().Substring(1, 3);
-                resultadoAtencion.EXT_ARCHIVO = extension;
+                //string clob = conversor.convertirABase64(file);
+               //resultadoAtencion.ARCHIVO_B64 = clob;
+                //string extension  = Path.GetExtension(file).ToString().Substring(1, 3);
+                //resultadoAtencion.EXT_ARCHIVO = extension;
                 
                 //Busque atención
                 ATENCION_AGEN atencionAg = at.buscarAtencionAgendadaID(((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value);
