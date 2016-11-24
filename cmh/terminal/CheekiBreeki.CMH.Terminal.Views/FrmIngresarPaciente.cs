@@ -265,11 +265,12 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void brnBuscarAtenciones_Click(object sender, EventArgs e)
         {
             ActualizarLista();
-            mostrarLabelPaciente();
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+            string mensajeCorrecto = "Paciente ingresado correctamente";
+            string mensajeError = string.Empty;
             bool res1 = false, res2 = false;
             try
             {
@@ -290,36 +291,27 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 res1 = at.ingresarPaciente(atencion);
                 res2 = at.registrarPago(pago, lblAseguradora.Text, int.Parse(lblDescuento.Text));
                 ActualizarLista();
-                res1 = true;
             }
             catch (Exception ex)
             {
-                res1 = false;
+                mensajeError = "Error al ingresar paciente";
             }
             if (res1 && res2)
-            {
-                lblError.Visible = true;
-                lblError.Text = "Paciente ingresado correctamente";
-                lblError.ForeColor = System.Drawing.Color.Green;
-            }
+                MessageBox.Show(mensajeCorrecto, "Creada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             else
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al ingresar paciente";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
         }
 
         private void ActualizarLista()
         {
-            bool res = false;
+            string mensajeError = string.Empty;
             lblError.Visible = false;
             lstAtenciones.Items.Clear();
             try
             {
                 int rut = int.Parse(txtRut.Text);
                 if (!Util.rutValido(rut, txtDv.Text))
-                    res = false;
+                    mensajeError = "RUT no válido";
                 else
                 {
                     List<ATENCION_AGEN> atenciones = at.listaAtencionesVigentes(rut).ToList();
@@ -335,19 +327,17 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     lblEdad.Text = paciente.FEC_NAC.Value.Date.ToShortDateString();
                     lblSexo.Text = paciente.SEXO;
                     lblRutInfo.Text = paciente.RUT + "-" + paciente.DIGITO_VERIFICADOR;
-                    res = true;
+                    mostrarLabelPaciente();
                 }
             }
             catch (Exception ex)
             {
-                res = false;
+                mensajeError = "Error al buscar atenciones";
             }
-            if (!res)
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al buscar atenciones";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
+            if (mensajeError == string.Empty)
+                mostrarLabelPaciente();
+            else
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             if (Util.isObjetoNulo(lstAtenciones.SelectedValue))
                 btnIngresar.Enabled = false;
         }

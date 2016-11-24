@@ -276,13 +276,18 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
-            bool res = false;
+            string mensajeCorrecto = "Paciente creado correctamente";
+            string mensajeError = string.Empty;
             try
             {
-                if (dtFechaNacimiento.Value > DateTime.Today)
-                    res = false;
+                if (dtFechaNacimiento.Value.Date > DateTime.Today.Date)
+                    mensajeError = "Fecha de nacimiento inválida";
                 else if (!Util.rutValido(int.Parse(txtRut.Text), txtDv.Text))
-                    res = false;
+                    mensajeError = "RUT no válido";
+                else if (!Util.isEmailValido(txtCorreo.Text))
+                    mensajeError = "Correo no válido";
+                else if (!Util.isObjetoNulo(at.buscarPaciente(int.Parse(txtRut.Text), txtDv.Text)))
+                    mensajeError = "Paciente ya ingresado";
                 else
                 {
                     lblError.Visible = true;
@@ -290,7 +295,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     lblError.ForeColor = System.Drawing.Color.Violet;
                     btnCrear.Enabled = false;
 
-                    AccionesTerminal at = new AccionesTerminal();
                     PACIENTE paciente = new PACIENTE();
 
                     paciente.NOMBRES_PACIENTE = txtNombres.Text;
@@ -301,26 +305,20 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     paciente.SEXO = ((ComboboxItem)cmbSexo.SelectedItem).Value;
                     paciente.FEC_NAC = dtFechaNacimiento.Value;
 
-                    res = at.nuevoPaciente(paciente);
+                    if(!at.nuevoPaciente(paciente))
+                        mensajeError = "Error al crear paciente";
                 }
             }
             catch (Exception ex)
             {
-                res = false;
+                mensajeError = "Error al crear paciente";
             }
-            if (res)
-            {
-                lblError.Visible = true;
-                lblError.Text = "Paciente creado correctamente";
-                lblError.ForeColor = System.Drawing.Color.Green;
-            }
+            if (mensajeError == string.Empty)
+                MessageBox.Show(mensajeCorrecto, "Creada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             else
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al crear pacientes";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             btnCrear.Enabled = true;
+            lblError.Visible = false;
         }
 
         private void txtRut_KeyPress(object sender, KeyPressEventArgs e)

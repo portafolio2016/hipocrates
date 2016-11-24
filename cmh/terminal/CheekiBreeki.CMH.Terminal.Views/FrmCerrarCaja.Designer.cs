@@ -32,6 +32,13 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.btnSesion = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtCheques = new System.Windows.Forms.TextBox();
+            this.lblCheques = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
+            this.btnCerrarCaja = new System.Windows.Forms.Button();
+            this.txtDinero = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.agendarHoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agendarHoraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,21 +62,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnModificarUser = new System.Windows.Forms.Button();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.txtCheques = new System.Windows.Forms.TextBox();
-            this.lblCheques = new System.Windows.Forms.Label();
-            this.lblError = new System.Windows.Forms.Label();
-            this.btnCerrarCaja = new System.Windows.Forms.Button();
-            this.txtDinero = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -111,6 +111,78 @@
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.txtCheques);
+            this.groupBox6.Controls.Add(this.lblCheques);
+            this.groupBox6.Controls.Add(this.lblError);
+            this.groupBox6.Controls.Add(this.btnCerrarCaja);
+            this.groupBox6.Controls.Add(this.txtDinero);
+            this.groupBox6.Controls.Add(this.label1);
+            this.groupBox6.Location = new System.Drawing.Point(6, 43);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(768, 462);
+            this.groupBox6.TabIndex = 8;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Cerrar caja";
+            // 
+            // txtCheques
+            // 
+            this.txtCheques.Location = new System.Drawing.Point(380, 261);
+            this.txtCheques.Name = "txtCheques";
+            this.txtCheques.Size = new System.Drawing.Size(129, 20);
+            this.txtCheques.TabIndex = 19;
+            this.txtCheques.Text = "0";
+            this.txtCheques.Visible = false;
+            this.txtCheques.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDinero_KeyPress);
+            // 
+            // lblCheques
+            // 
+            this.lblCheques.AutoSize = true;
+            this.lblCheques.Location = new System.Drawing.Point(220, 268);
+            this.lblCheques.Name = "lblCheques";
+            this.lblCheques.Size = new System.Drawing.Size(108, 13);
+            this.lblCheques.TabIndex = 18;
+            this.lblCheques.Text = "Cantidad de cheques";
+            this.lblCheques.Visible = false;
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(299, 111);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(39, 13);
+            this.lblError.TabIndex = 17;
+            this.lblError.Text = "lblError";
+            this.lblError.Visible = false;
+            // 
+            // btnCerrarCaja
+            // 
+            this.btnCerrarCaja.Location = new System.Drawing.Point(302, 143);
+            this.btnCerrarCaja.Name = "btnCerrarCaja";
+            this.btnCerrarCaja.Size = new System.Drawing.Size(129, 23);
+            this.btnCerrarCaja.TabIndex = 2;
+            this.btnCerrarCaja.Text = "Cerrar caja";
+            this.btnCerrarCaja.UseVisualStyleBackColor = true;
+            this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
+            // 
+            // txtDinero
+            // 
+            this.txtDinero.Location = new System.Drawing.Point(380, 74);
+            this.txtDinero.Name = "txtDinero";
+            this.txtDinero.Size = new System.Drawing.Size(129, 20);
+            this.txtDinero.TabIndex = 1;
+            this.txtDinero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDinero_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(220, 81);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Dinero de cierre";
             // 
             // menuStrip1
             // 
@@ -327,75 +399,6 @@
             this.btnModificarUser.UseVisualStyleBackColor = true;
             this.btnModificarUser.Click += new System.EventHandler(this.btnModificarUser_Click);
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.txtCheques);
-            this.groupBox6.Controls.Add(this.lblCheques);
-            this.groupBox6.Controls.Add(this.lblError);
-            this.groupBox6.Controls.Add(this.btnCerrarCaja);
-            this.groupBox6.Controls.Add(this.txtDinero);
-            this.groupBox6.Controls.Add(this.label1);
-            this.groupBox6.Location = new System.Drawing.Point(6, 43);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(768, 462);
-            this.groupBox6.TabIndex = 8;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Cerrar caja";
-            // 
-            // txtCheques
-            // 
-            this.txtCheques.Location = new System.Drawing.Point(380, 113);
-            this.txtCheques.Name = "txtCheques";
-            this.txtCheques.Size = new System.Drawing.Size(129, 20);
-            this.txtCheques.TabIndex = 19;
-            this.txtCheques.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDinero_KeyPress);
-            // 
-            // lblCheques
-            // 
-            this.lblCheques.AutoSize = true;
-            this.lblCheques.Location = new System.Drawing.Point(220, 120);
-            this.lblCheques.Name = "lblCheques";
-            this.lblCheques.Size = new System.Drawing.Size(108, 13);
-            this.lblCheques.TabIndex = 18;
-            this.lblCheques.Text = "Cantidad de cheques";
-            // 
-            // lblError
-            // 
-            this.lblError.AutoSize = true;
-            this.lblError.Location = new System.Drawing.Point(303, 158);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(39, 13);
-            this.lblError.TabIndex = 17;
-            this.lblError.Text = "lblError";
-            this.lblError.Visible = false;
-            // 
-            // btnCerrarCaja
-            // 
-            this.btnCerrarCaja.Location = new System.Drawing.Point(306, 190);
-            this.btnCerrarCaja.Name = "btnCerrarCaja";
-            this.btnCerrarCaja.Size = new System.Drawing.Size(129, 23);
-            this.btnCerrarCaja.TabIndex = 2;
-            this.btnCerrarCaja.Text = "Cerrar caja";
-            this.btnCerrarCaja.UseVisualStyleBackColor = true;
-            this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
-            // 
-            // txtDinero
-            // 
-            this.txtDinero.Location = new System.Drawing.Point(380, 74);
-            this.txtDinero.Name = "txtDinero";
-            this.txtDinero.Size = new System.Drawing.Size(129, 20);
-            this.txtDinero.TabIndex = 1;
-            this.txtDinero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDinero_KeyPress);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(220, 81);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Dinero de cierre";
-            // 
             // FrmCerrarCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,6 +413,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmCerrarCaja_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
@@ -421,8 +426,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
