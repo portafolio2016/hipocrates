@@ -32,6 +32,14 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.btnSesion = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.agendaDiariaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fichasMédicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verFichaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actualizarFichaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultasMédicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cerrarConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbCerrarAtencionMedica = new System.Windows.Forms.GroupBox();
             this.lblError_CAM = new System.Windows.Forms.Label();
             this.lstAtenciones_CAM = new System.Windows.Forms.ListBox();
@@ -45,14 +53,6 @@
             this.lblArchivo = new System.Windows.Forms.Label();
             this.rtComentario_CAM = new System.Windows.Forms.RichTextBox();
             this.lblComentario_CAM = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.agendaDiariaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.fichasMédicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verFichaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.actualizarFichaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultasMédicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cerrarConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbAbrirConsultaMedica = new System.Windows.Forms.GroupBox();
             this.rtObservacion = new System.Windows.Forms.RichTextBox();
             this.lblObservacion = new System.Windows.Forms.Label();
@@ -132,8 +132,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnModificarUser = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.gbCerrarAtencionMedica.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.gbCerrarAtencionMedica.SuspendLayout();
             this.gbAbrirConsultaMedica.SuspendLayout();
             this.gbVerFichaMedica.SuspendLayout();
             this.gbDatosPacienteVFM.SuspendLayout();
@@ -182,17 +182,82 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
-            this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
-            this.groupBox1.Controls.Add(this.gbAbrirConsultaMedica);
-            this.groupBox1.Controls.Add(this.gbVerFichaMedica);
             this.groupBox1.Controls.Add(this.gbAgendaDiaria);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Controls.Add(this.gbActualizarFichaMedica);
+            this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
+            this.groupBox1.Controls.Add(this.gbAbrirConsultaMedica);
+            this.groupBox1.Controls.Add(this.gbVerFichaMedica);
             this.groupBox1.Location = new System.Drawing.Point(1, 35);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agendaDiariaToolStripMenuItem1,
+            this.fichasMédicasToolStripMenuItem,
+            this.consultasMédicasToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // agendaDiariaToolStripMenuItem1
+            // 
+            this.agendaDiariaToolStripMenuItem1.Name = "agendaDiariaToolStripMenuItem1";
+            this.agendaDiariaToolStripMenuItem1.Size = new System.Drawing.Size(92, 20);
+            this.agendaDiariaToolStripMenuItem1.Text = "Agenda diaria";
+            this.agendaDiariaToolStripMenuItem1.Click += new System.EventHandler(this.agendaDiariaToolStripMenuItem1_Click);
+            // 
+            // fichasMédicasToolStripMenuItem
+            // 
+            this.fichasMédicasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verFichaMédicaToolStripMenuItem,
+            this.actualizarFichaMédicaToolStripMenuItem});
+            this.fichasMédicasToolStripMenuItem.Name = "fichasMédicasToolStripMenuItem";
+            this.fichasMédicasToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.fichasMédicasToolStripMenuItem.Text = "Fichas médicas";
+            // 
+            // verFichaMédicaToolStripMenuItem
+            // 
+            this.verFichaMédicaToolStripMenuItem.Name = "verFichaMédicaToolStripMenuItem";
+            this.verFichaMédicaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.verFichaMédicaToolStripMenuItem.Text = "Ver ficha médica";
+            this.verFichaMédicaToolStripMenuItem.Click += new System.EventHandler(this.verFichaMédicaToolStripMenuItem_Click);
+            // 
+            // actualizarFichaMédicaToolStripMenuItem
+            // 
+            this.actualizarFichaMédicaToolStripMenuItem.Name = "actualizarFichaMédicaToolStripMenuItem";
+            this.actualizarFichaMédicaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.actualizarFichaMédicaToolStripMenuItem.Text = "Actualizar ficha médica";
+            this.actualizarFichaMédicaToolStripMenuItem.Click += new System.EventHandler(this.actualizarFichaMédicaToolStripMenuItem_Click);
+            // 
+            // consultasMédicasToolStripMenuItem
+            // 
+            this.consultasMédicasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirConsultaMédicaToolStripMenuItem,
+            this.cerrarConsultaMédicaToolStripMenuItem});
+            this.consultasMédicasToolStripMenuItem.Name = "consultasMédicasToolStripMenuItem";
+            this.consultasMédicasToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.consultasMédicasToolStripMenuItem.Text = "Consultas";
+            // 
+            // abrirConsultaMédicaToolStripMenuItem
+            // 
+            this.abrirConsultaMédicaToolStripMenuItem.Name = "abrirConsultaMédicaToolStripMenuItem";
+            this.abrirConsultaMédicaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.abrirConsultaMédicaToolStripMenuItem.Text = "Derivar consulta médica";
+            this.abrirConsultaMédicaToolStripMenuItem.Click += new System.EventHandler(this.abrirConsultaMédicaToolStripMenuItem_Click);
+            // 
+            // cerrarConsultaMédicaToolStripMenuItem
+            // 
+            this.cerrarConsultaMédicaToolStripMenuItem.Name = "cerrarConsultaMédicaToolStripMenuItem";
+            this.cerrarConsultaMédicaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.cerrarConsultaMédicaToolStripMenuItem.Text = "Cerrar consulta médica";
+            this.cerrarConsultaMédicaToolStripMenuItem.Click += new System.EventHandler(this.cerrarConsultaMédicaToolStripMenuItem_Click);
             // 
             // gbCerrarAtencionMedica
             // 
@@ -326,71 +391,6 @@
             this.lblComentario_CAM.Size = new System.Drawing.Size(60, 13);
             this.lblComentario_CAM.TabIndex = 0;
             this.lblComentario_CAM.Text = "Comentario";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agendaDiariaToolStripMenuItem1,
-            this.fichasMédicasToolStripMenuItem,
-            this.consultasMédicasToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // agendaDiariaToolStripMenuItem1
-            // 
-            this.agendaDiariaToolStripMenuItem1.Name = "agendaDiariaToolStripMenuItem1";
-            this.agendaDiariaToolStripMenuItem1.Size = new System.Drawing.Size(92, 20);
-            this.agendaDiariaToolStripMenuItem1.Text = "Agenda diaria";
-            this.agendaDiariaToolStripMenuItem1.Click += new System.EventHandler(this.agendaDiariaToolStripMenuItem1_Click);
-            // 
-            // fichasMédicasToolStripMenuItem
-            // 
-            this.fichasMédicasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.verFichaMédicaToolStripMenuItem,
-            this.actualizarFichaMédicaToolStripMenuItem});
-            this.fichasMédicasToolStripMenuItem.Name = "fichasMédicasToolStripMenuItem";
-            this.fichasMédicasToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-            this.fichasMédicasToolStripMenuItem.Text = "Fichas médicas";
-            // 
-            // verFichaMédicaToolStripMenuItem
-            // 
-            this.verFichaMédicaToolStripMenuItem.Name = "verFichaMédicaToolStripMenuItem";
-            this.verFichaMédicaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.verFichaMédicaToolStripMenuItem.Text = "Ver ficha médica";
-            this.verFichaMédicaToolStripMenuItem.Click += new System.EventHandler(this.verFichaMédicaToolStripMenuItem_Click);
-            // 
-            // actualizarFichaMédicaToolStripMenuItem
-            // 
-            this.actualizarFichaMédicaToolStripMenuItem.Name = "actualizarFichaMédicaToolStripMenuItem";
-            this.actualizarFichaMédicaToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.actualizarFichaMédicaToolStripMenuItem.Text = "Actualizar ficha médica";
-            this.actualizarFichaMédicaToolStripMenuItem.Click += new System.EventHandler(this.actualizarFichaMédicaToolStripMenuItem_Click);
-            // 
-            // consultasMédicasToolStripMenuItem
-            // 
-            this.consultasMédicasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.abrirConsultaMédicaToolStripMenuItem,
-            this.cerrarConsultaMédicaToolStripMenuItem});
-            this.consultasMédicasToolStripMenuItem.Name = "consultasMédicasToolStripMenuItem";
-            this.consultasMédicasToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.consultasMédicasToolStripMenuItem.Text = "Consultas";
-            // 
-            // abrirConsultaMédicaToolStripMenuItem
-            // 
-            this.abrirConsultaMédicaToolStripMenuItem.Name = "abrirConsultaMédicaToolStripMenuItem";
-            this.abrirConsultaMédicaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.abrirConsultaMédicaToolStripMenuItem.Text = "Derivar consulta médica";
-            this.abrirConsultaMédicaToolStripMenuItem.Click += new System.EventHandler(this.abrirConsultaMédicaToolStripMenuItem_Click);
-            // 
-            // cerrarConsultaMédicaToolStripMenuItem
-            // 
-            this.cerrarConsultaMédicaToolStripMenuItem.Name = "cerrarConsultaMédicaToolStripMenuItem";
-            this.cerrarConsultaMédicaToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.cerrarConsultaMédicaToolStripMenuItem.Text = "Cerrar consulta médica";
-            this.cerrarConsultaMédicaToolStripMenuItem.Click += new System.EventHandler(this.cerrarConsultaMédicaToolStripMenuItem_Click);
             // 
             // gbAbrirConsultaMedica
             // 
@@ -1197,10 +1197,10 @@
             this.Load += new System.EventHandler(this.FrmMedico_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.gbCerrarAtencionMedica.ResumeLayout(false);
-            this.gbCerrarAtencionMedica.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.gbCerrarAtencionMedica.ResumeLayout(false);
+            this.gbCerrarAtencionMedica.PerformLayout();
             this.gbAbrirConsultaMedica.ResumeLayout(false);
             this.gbAbrirConsultaMedica.PerformLayout();
             this.gbVerFichaMedica.ResumeLayout(false);

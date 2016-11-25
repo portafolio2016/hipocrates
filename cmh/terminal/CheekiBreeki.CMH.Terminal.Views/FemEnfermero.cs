@@ -333,5 +333,36 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 System.Diagnostics.Process.Start(nombreArchivo + "." + resAtencion.EXT_ARCHIVO);
             }
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   AGENDA DIARIA                                                                                                              //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void agendaDiariaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbAgendaDiaria);
+            CargarAgendaDiaria();
+        }
+
+        private void CargarAgendaDiaria()
+        {
+            List<ATENCION_AGEN> listaAtenciones = acciones.revisarAgendaDiaria(FrmLogin.usuarioLogeado.Personal.RUT, DateTime.Now);
+            List<AgendaDiaria> agendaDiaria = new List<AgendaDiaria>();
+            if (listaAtenciones.Count > 0)
+            {
+
+                foreach (ATENCION_AGEN x in listaAtenciones)
+                {
+                    bool estado = false;
+                    if (x.ESTADO_ATEN.NOM_ESTADO_ATEN == "Cerrado")
+                        estado = true;
+                    agendaDiaria.Add(new AgendaDiaria(x.PRESTACION.NOM_PRESTACION, x.PACIENTE.NOMBRES_PACIENTE + " " + x.PACIENTE.APELLIDOS_PACIENTE, x.FECHOR.ToString(), estado));
+                }
+
+            }
+            dgAgendaDiaria.DataSource = agendaDiaria;
+
+        }
     }
 }
