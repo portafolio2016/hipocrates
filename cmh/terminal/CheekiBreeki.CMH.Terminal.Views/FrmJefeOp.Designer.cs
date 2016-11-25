@@ -35,37 +35,16 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.gpHorarios = new System.Windows.Forms.GroupBox();
-            this.btnGuardarCambios = new System.Windows.Forms.Button();
-            this.btnQuitar = new System.Windows.Forms.Button();
-            this.btnAsignar = new System.Windows.Forms.Button();
-            this.gpAsignados = new System.Windows.Forms.GroupBox();
-            this.lstAsignados = new System.Windows.Forms.ListBox();
-            this.gpDisponibles = new System.Windows.Forms.GroupBox();
-            this.lstDisponibles = new System.Windows.Forms.ListBox();
-            this.txtDv = new System.Windows.Forms.TextBox();
-            this.txtRut = new System.Windows.Forms.TextBox();
-            this.lblError = new System.Windows.Forms.Label();
-            this.brnBuscarHorarios = new System.Windows.Forms.Button();
-            this.lblRut = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prestaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.equipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logPagosHonorarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reporteDeCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.horariosPersonalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbReporteCaja = new System.Windows.Forms.GroupBox();
-            this.gbLogPagoHonorarios = new System.Windows.Forms.GroupBox();
-            this.btnBuscarLPH = new System.Windows.Forms.Button();
-            this.dgLogs = new System.Windows.Forms.DataGridView();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Banco = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dtFechaLPH = new System.Windows.Forms.DateTimePicker();
+            this.gbMantenerPrestacion = new System.Windows.Forms.GroupBox();
             this.gbMantenedorPersonal = new System.Windows.Forms.GroupBox();
             this.gpMedico_MP = new System.Windows.Forms.GroupBox();
             this.cbBanco_MP = new System.Windows.Forms.ComboBox();
@@ -101,7 +80,6 @@
             this.lblGuion_MP = new System.Windows.Forms.Label();
             this.txtRutPersonal_MP = new System.Windows.Forms.TextBox();
             this.lblRutPersonal_MP = new System.Windows.Forms.Label();
-            this.gbMantenerPrestacion = new System.Windows.Forms.GroupBox();
             this.btnCargarPorCodigoMPre = new System.Windows.Forms.Button();
             this.btnNuevaPrestacionMPre = new System.Windows.Forms.Button();
             this.btnCargarPorLista = new System.Windows.Forms.Button();
@@ -125,12 +103,6 @@
             this.tbPrecioPrestacionMPre = new System.Windows.Forms.TextBox();
             this.cbTipoPrestacionMPre = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.dtFechaCierreCaja = new System.Windows.Forms.DateTimePicker();
-            this.cbOperadorRC = new System.Windows.Forms.ComboBox();
-            this.rbReporteCaja = new System.Windows.Forms.RichTextBox();
-            this.btnCargarRC = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.btnCargarOperadoresRC = new System.Windows.Forms.Button();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -142,23 +114,93 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.gpHorarios = new System.Windows.Forms.GroupBox();
+            this.btnGuardarCambios = new System.Windows.Forms.Button();
+            this.btnQuitar = new System.Windows.Forms.Button();
+            this.btnAsignar = new System.Windows.Forms.Button();
+            this.gpAsignados = new System.Windows.Forms.GroupBox();
+            this.lstAsignados = new System.Windows.Forms.ListBox();
+            this.gpDisponibles = new System.Windows.Forms.GroupBox();
+            this.lstDisponibles = new System.Windows.Forms.ListBox();
+            this.txtDv = new System.Windows.Forms.TextBox();
+            this.txtRut = new System.Windows.Forms.TextBox();
+            this.lblError = new System.Windows.Forms.Label();
+            this.brnBuscarHorarios = new System.Windows.Forms.Button();
+            this.lblRut = new System.Windows.Forms.Label();
+            this.gbReporteCaja = new System.Windows.Forms.GroupBox();
+            this.btnCargarOperadoresRC = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnCargarRC = new System.Windows.Forms.Button();
+            this.rbReporteCaja = new System.Windows.Forms.RichTextBox();
+            this.cbOperadorRC = new System.Windows.Forms.ComboBox();
+            this.dtFechaCierreCaja = new System.Windows.Forms.DateTimePicker();
+            this.gbLogPagoHonorarios = new System.Windows.Forms.GroupBox();
+            this.btnBuscarLPH = new System.Windows.Forms.Button();
+            this.dgLogs = new System.Windows.Forms.DataGridView();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Banco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtFechaLPH = new System.Windows.Forms.DateTimePicker();
+            this.gbMantenedorPaciente = new System.Windows.Forms.GroupBox();
+            this.txtVerificadorCargado_Pac = new System.Windows.Forms.TextBox();
+            this.dtpFechaNac_Pac = new System.Windows.Forms.DateTimePicker();
+            this.cbSexo_Pac = new System.Windows.Forms.ComboBox();
+            this.txtRutCargado_Pac = new System.Windows.Forms.TextBox();
+            this.txtContrasena_Pac = new System.Windows.Forms.TextBox();
+            this.txtEmail_Pac = new System.Windows.Forms.TextBox();
+            this.txtApellidos_Pac = new System.Windows.Forms.TextBox();
+            this.txtNombres_Pac = new System.Windows.Forms.TextBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnRegistrar_Pac = new System.Windows.Forms.Button();
+            this.lblFechaNac = new System.Windows.Forms.Label();
+            this.lblSexo = new System.Windows.Forms.Label();
+            this.lblRutCargado = new System.Windows.Forms.Label();
+            this.lblContrasena = new System.Windows.Forms.Label();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.lblApellidos = new System.Windows.Forms.Label();
+            this.lblNombres = new System.Windows.Forms.Label();
+            this.btnNuevoPaciente = new System.Windows.Forms.Button();
+            this.btnCargarPaciente = new System.Windows.Forms.Button();
+            this.txtVerificador_Pac = new System.Windows.Forms.TextBox();
+            this.lblGuion = new System.Windows.Forms.Label();
+            this.txtRutPaciente_Pac = new System.Windows.Forms.TextBox();
+            this.lblRutPaciente = new System.Windows.Forms.Label();
+            this.gbMantenerEquipo = new System.Windows.Forms.GroupBox();
+            this.btnCargarEquipo_Eq = new System.Windows.Forms.Button();
+            this.btnNuevoEquipo_Eq = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.txtNombreEquipo = new System.Windows.Forms.TextBox();
+            this.btnGuardar_Eq = new System.Windows.Forms.Button();
+            this.btnRegistrar_Eq = new System.Windows.Forms.Button();
+            this.txtCantidad_Eq = new System.Windows.Forms.TextBox();
+            this.lblNombreTipo = new System.Windows.Forms.Label();
+            this.lblCantidad_Eq = new System.Windows.Forms.Label();
+            this.dgEquipo_Eq = new System.Windows.Forms.DataGridView();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.gpHorarios.SuspendLayout();
-            this.gpAsignados.SuspendLayout();
-            this.gpDisponibles.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.gbReporteCaja.SuspendLayout();
-            this.gbLogPagoHonorarios.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).BeginInit();
+            this.gbMantenerPrestacion.SuspendLayout();
             this.gbMantenedorPersonal.SuspendLayout();
             this.gpMedico_MP.SuspendLayout();
-            this.gbMantenerPrestacion.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.gpHorarios.SuspendLayout();
+            this.gpAsignados.SuspendLayout();
+            this.gpDisponibles.SuspendLayout();
+            this.gbReporteCaja.SuspendLayout();
+            this.gbLogPagoHonorarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).BeginInit();
+            this.gbMantenedorPaciente.SuspendLayout();
+            this.gbMantenerEquipo.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -223,153 +265,20 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Controls.Add(this.gpHorarios);
-            this.groupBox1.Controls.Add(this.menuStrip1);
             this.groupBox1.Controls.Add(this.gbReporteCaja);
             this.groupBox1.Controls.Add(this.gbLogPagoHonorarios);
+            this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.Controls.Add(this.gbMantenerEquipo);
+            this.groupBox1.Controls.Add(this.gbMantenedorPaciente);
             this.groupBox1.Controls.Add(this.gbMantenedorPersonal);
             this.groupBox1.Controls.Add(this.gbMantenerPrestacion);
-            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
-            // 
-            // gpHorarios
-            // 
-            this.gpHorarios.Controls.Add(this.btnGuardarCambios);
-            this.gpHorarios.Controls.Add(this.btnQuitar);
-            this.gpHorarios.Controls.Add(this.btnAsignar);
-            this.gpHorarios.Controls.Add(this.gpAsignados);
-            this.gpHorarios.Controls.Add(this.gpDisponibles);
-            this.gpHorarios.Controls.Add(this.txtDv);
-            this.gpHorarios.Controls.Add(this.txtRut);
-            this.gpHorarios.Controls.Add(this.lblError);
-            this.gpHorarios.Controls.Add(this.brnBuscarHorarios);
-            this.gpHorarios.Controls.Add(this.lblRut);
-            this.gpHorarios.Location = new System.Drawing.Point(6, 43);
-            this.gpHorarios.Name = "gpHorarios";
-            this.gpHorarios.Size = new System.Drawing.Size(771, 454);
-            this.gpHorarios.TabIndex = 6;
-            this.gpHorarios.TabStop = false;
-            this.gpHorarios.Text = "Modificar horarios";
-            this.gpHorarios.Visible = false;
-            // 
-            // btnGuardarCambios
-            // 
-            this.btnGuardarCambios.Location = new System.Drawing.Point(304, 374);
-            this.btnGuardarCambios.Name = "btnGuardarCambios";
-            this.btnGuardarCambios.Size = new System.Drawing.Size(131, 23);
-            this.btnGuardarCambios.TabIndex = 24;
-            this.btnGuardarCambios.Text = "Guardar Cambios";
-            this.btnGuardarCambios.UseVisualStyleBackColor = true;
-            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
-            // 
-            // btnQuitar
-            // 
-            this.btnQuitar.Location = new System.Drawing.Point(333, 245);
-            this.btnQuitar.Name = "btnQuitar";
-            this.btnQuitar.Size = new System.Drawing.Size(75, 23);
-            this.btnQuitar.TabIndex = 23;
-            this.btnQuitar.Text = "<<";
-            this.btnQuitar.UseVisualStyleBackColor = true;
-            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
-            // 
-            // btnAsignar
-            // 
-            this.btnAsignar.Location = new System.Drawing.Point(333, 216);
-            this.btnAsignar.Name = "btnAsignar";
-            this.btnAsignar.Size = new System.Drawing.Size(75, 23);
-            this.btnAsignar.TabIndex = 22;
-            this.btnAsignar.Text = ">>";
-            this.btnAsignar.UseVisualStyleBackColor = true;
-            this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);
-            // 
-            // gpAsignados
-            // 
-            this.gpAsignados.Controls.Add(this.lstAsignados);
-            this.gpAsignados.Location = new System.Drawing.Point(441, 99);
-            this.gpAsignados.Name = "gpAsignados";
-            this.gpAsignados.Size = new System.Drawing.Size(228, 331);
-            this.gpAsignados.TabIndex = 21;
-            this.gpAsignados.TabStop = false;
-            this.gpAsignados.Text = "Horarios Asignados";
-            // 
-            // lstAsignados
-            // 
-            this.lstAsignados.FormattingEnabled = true;
-            this.lstAsignados.Location = new System.Drawing.Point(20, 19);
-            this.lstAsignados.Name = "lstAsignados";
-            this.lstAsignados.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstAsignados.Size = new System.Drawing.Size(190, 303);
-            this.lstAsignados.TabIndex = 1;
-            // 
-            // gpDisponibles
-            // 
-            this.gpDisponibles.Controls.Add(this.lstDisponibles);
-            this.gpDisponibles.Location = new System.Drawing.Point(70, 99);
-            this.gpDisponibles.Name = "gpDisponibles";
-            this.gpDisponibles.Size = new System.Drawing.Size(228, 331);
-            this.gpDisponibles.TabIndex = 20;
-            this.gpDisponibles.TabStop = false;
-            this.gpDisponibles.Text = "Horarios disponibles";
-            // 
-            // lstDisponibles
-            // 
-            this.lstDisponibles.FormattingEnabled = true;
-            this.lstDisponibles.Location = new System.Drawing.Point(20, 19);
-            this.lstDisponibles.Name = "lstDisponibles";
-            this.lstDisponibles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstDisponibles.Size = new System.Drawing.Size(190, 303);
-            this.lstDisponibles.TabIndex = 0;
-            // 
-            // txtDv
-            // 
-            this.txtDv.Location = new System.Drawing.Point(349, 24);
-            this.txtDv.MaxLength = 1;
-            this.txtDv.Name = "txtDv";
-            this.txtDv.Size = new System.Drawing.Size(15, 20);
-            this.txtDv.TabIndex = 19;
-            this.txtDv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
-            // 
-            // txtRut
-            // 
-            this.txtRut.Location = new System.Drawing.Point(243, 24);
-            this.txtRut.MaxLength = 8;
-            this.txtRut.Name = "txtRut";
-            this.txtRut.Size = new System.Drawing.Size(99, 20);
-            this.txtRut.TabIndex = 18;
-            this.txtRut.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRut_KeyPress);
-            // 
-            // lblError
-            // 
-            this.lblError.AutoSize = true;
-            this.lblError.Location = new System.Drawing.Point(259, 58);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(39, 13);
-            this.lblError.TabIndex = 17;
-            this.lblError.Text = "lblError";
-            this.lblError.Visible = false;
-            // 
-            // brnBuscarHorarios
-            // 
-            this.brnBuscarHorarios.Location = new System.Drawing.Point(401, 21);
-            this.brnBuscarHorarios.Name = "brnBuscarHorarios";
-            this.brnBuscarHorarios.Size = new System.Drawing.Size(167, 23);
-            this.brnBuscarHorarios.TabIndex = 14;
-            this.brnBuscarHorarios.Text = "Buscar horarios";
-            this.brnBuscarHorarios.UseVisualStyleBackColor = true;
-            this.brnBuscarHorarios.Click += new System.EventHandler(this.brnBuscarHorarios_Click);
-            // 
-            // lblRut
-            // 
-            this.lblRut.AutoSize = true;
-            this.lblRut.Location = new System.Drawing.Point(136, 31);
-            this.lblRut.Name = "lblRut";
-            this.lblRut.Size = new System.Drawing.Size(74, 13);
-            this.lblRut.TabIndex = 11;
-            this.lblRut.Text = "RUT Personal";
             // 
             // menuStrip1
             // 
@@ -388,7 +297,9 @@
             // 
             this.mantenedoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.personalToolStripMenuItem,
-            this.prestaciónToolStripMenuItem});
+            this.prestaciónToolStripMenuItem,
+            this.pacienteToolStripMenuItem,
+            this.equipoToolStripMenuItem});
             this.mantenedoresToolStripMenuItem.Name = "mantenedoresToolStripMenuItem";
             this.mantenedoresToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.mantenedoresToolStripMenuItem.Text = "Mantenedores";
@@ -406,6 +317,20 @@
             this.prestaciónToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.prestaciónToolStripMenuItem.Text = "Prestación";
             this.prestaciónToolStripMenuItem.Click += new System.EventHandler(this.prestaciónToolStripMenuItem_Click);
+            // 
+            // pacienteToolStripMenuItem
+            // 
+            this.pacienteToolStripMenuItem.Name = "pacienteToolStripMenuItem";
+            this.pacienteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pacienteToolStripMenuItem.Text = "Paciente";
+            this.pacienteToolStripMenuItem.Click += new System.EventHandler(this.pacienteToolStripMenuItem_Click);
+            // 
+            // equipoToolStripMenuItem
+            // 
+            this.equipoToolStripMenuItem.Name = "equipoToolStripMenuItem";
+            this.equipoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.equipoToolStripMenuItem.Text = "Equipo";
+            this.equipoToolStripMenuItem.Click += new System.EventHandler(this.equipoToolStripMenuItem_Click_1);
             // 
             // logPagosHonorarioToolStripMenuItem
             // 
@@ -428,120 +353,23 @@
             this.horariosPersonalToolStripMenuItem.Text = "Horarios personal";
             this.horariosPersonalToolStripMenuItem.Click += new System.EventHandler(this.horariosPersonalToolStripMenuItem_Click);
             // 
-            // gbReporteCaja
+            // gbMantenerPrestacion
             // 
-            this.gbReporteCaja.Controls.Add(this.btnCargarOperadoresRC);
-            this.gbReporteCaja.Controls.Add(this.label11);
-            this.gbReporteCaja.Controls.Add(this.btnCargarRC);
-            this.gbReporteCaja.Controls.Add(this.rbReporteCaja);
-            this.gbReporteCaja.Controls.Add(this.cbOperadorRC);
-            this.gbReporteCaja.Controls.Add(this.dtFechaCierreCaja);
-            this.gbReporteCaja.Location = new System.Drawing.Point(6, 43);
-            this.gbReporteCaja.Name = "gbReporteCaja";
-            this.gbReporteCaja.Size = new System.Drawing.Size(768, 462);
-            this.gbReporteCaja.TabIndex = 11;
-            this.gbReporteCaja.TabStop = false;
-            this.gbReporteCaja.Text = "Reporte de caja";
-            this.gbReporteCaja.Visible = false;
-            // 
-            // gbLogPagoHonorarios
-            // 
-            this.gbLogPagoHonorarios.Controls.Add(this.btnBuscarLPH);
-            this.gbLogPagoHonorarios.Controls.Add(this.dgLogs);
-            this.gbLogPagoHonorarios.Controls.Add(this.label1);
-            this.gbLogPagoHonorarios.Controls.Add(this.dtFechaLPH);
-            this.gbLogPagoHonorarios.Location = new System.Drawing.Point(6, 43);
-            this.gbLogPagoHonorarios.Name = "gbLogPagoHonorarios";
-            this.gbLogPagoHonorarios.Size = new System.Drawing.Size(768, 462);
-            this.gbLogPagoHonorarios.TabIndex = 10;
-            this.gbLogPagoHonorarios.TabStop = false;
-            this.gbLogPagoHonorarios.Text = "Log pagos honorario";
-            this.gbLogPagoHonorarios.Visible = false;
-            // 
-            // btnBuscarLPH
-            // 
-            this.btnBuscarLPH.Location = new System.Drawing.Point(521, 19);
-            this.btnBuscarLPH.Name = "btnBuscarLPH";
-            this.btnBuscarLPH.Size = new System.Drawing.Size(125, 20);
-            this.btnBuscarLPH.TabIndex = 3;
-            this.btnBuscarLPH.Text = "Buscar";
-            this.btnBuscarLPH.UseVisualStyleBackColor = true;
-            this.btnBuscarLPH.Click += new System.EventHandler(this.btnBuscarLPH_Click);
-            // 
-            // dgLogs
-            // 
-            this.dgLogs.AllowUserToAddRows = false;
-            this.dgLogs.AllowUserToDeleteRows = false;
-            this.dgLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Nombre,
-            this.Banco,
-            this.TipoCuenta,
-            this.Cuenta,
-            this.Total});
-            this.dgLogs.Location = new System.Drawing.Point(8, 49);
-            this.dgLogs.Name = "dgLogs";
-            this.dgLogs.ReadOnly = true;
-            this.dgLogs.Size = new System.Drawing.Size(754, 407);
-            this.dgLogs.TabIndex = 2;
-            // 
-            // Nombre
-            // 
-            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 67;
-            // 
-            // Banco
-            // 
-            this.Banco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Banco.HeaderText = "Banco";
-            this.Banco.Name = "Banco";
-            this.Banco.ReadOnly = true;
-            this.Banco.Width = 61;
-            // 
-            // TipoCuenta
-            // 
-            this.TipoCuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.TipoCuenta.HeaderText = "Tipo cuenta";
-            this.TipoCuenta.Name = "TipoCuenta";
-            this.TipoCuenta.ReadOnly = true;
-            this.TipoCuenta.Width = 87;
-            // 
-            // Cuenta
-            // 
-            this.Cuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Cuenta.HeaderText = "Cuenta";
-            this.Cuenta.Name = "Cuenta";
-            this.Cuenta.ReadOnly = true;
-            this.Cuenta.Width = 64;
-            // 
-            // Total
-            // 
-            this.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            this.Total.Width = 54;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(174, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Fecha del pago:";
-            // 
-            // dtFechaLPH
-            // 
-            this.dtFechaLPH.CustomFormat = "MMMM - yyyy";
-            this.dtFechaLPH.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFechaLPH.Location = new System.Drawing.Point(287, 19);
-            this.dtFechaLPH.Name = "dtFechaLPH";
-            this.dtFechaLPH.Size = new System.Drawing.Size(200, 20);
-            this.dtFechaLPH.TabIndex = 0;
+            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorCodigoMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.btnNuevaPrestacionMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorLista);
+            this.gbMantenerPrestacion.Controls.Add(this.label3);
+            this.gbMantenerPrestacion.Controls.Add(this.label2);
+            this.gbMantenerPrestacion.Controls.Add(this.tbCodigoPrestacionMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.cbPrestacionesMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.groupBox6);
+            this.gbMantenerPrestacion.Location = new System.Drawing.Point(6, 43);
+            this.gbMantenerPrestacion.Name = "gbMantenerPrestacion";
+            this.gbMantenerPrestacion.Size = new System.Drawing.Size(768, 462);
+            this.gbMantenerPrestacion.TabIndex = 10;
+            this.gbMantenerPrestacion.TabStop = false;
+            this.gbMantenerPrestacion.Text = "Mantener prestaciones";
+            this.gbMantenerPrestacion.Visible = false;
             // 
             // gbMantenedorPersonal
             // 
@@ -576,7 +404,7 @@
             this.gbMantenedorPersonal.Location = new System.Drawing.Point(6, 43);
             this.gbMantenedorPersonal.Name = "gbMantenedorPersonal";
             this.gbMantenedorPersonal.Size = new System.Drawing.Size(768, 462);
-            this.gbMantenedorPersonal.TabIndex = 10;
+            this.gbMantenedorPersonal.TabIndex = 11;
             this.gbMantenedorPersonal.TabStop = false;
             this.gbMantenedorPersonal.Text = "Mantenedor Personal";
             this.gbMantenedorPersonal.Visible = false;
@@ -832,7 +660,7 @@
             this.btnCrearPersonal_MP.TabIndex = 8;
             this.btnCrearPersonal_MP.Text = "Nuevo Personal";
             this.btnCrearPersonal_MP.UseVisualStyleBackColor = true;
-            this.btnCrearPersonal_MP.Click += new System.EventHandler(this.btnCrearPersonal_MP_Click);
+            this.btnCrearPersonal_MP.Click += new System.EventHandler(this.btnCrearPersonal_MP_Click_1);
             // 
             // lblApellidos_MP
             // 
@@ -860,7 +688,7 @@
             this.btnCargarDatos_MP.TabIndex = 4;
             this.btnCargarDatos_MP.Text = "Cargar Datos";
             this.btnCargarDatos_MP.UseVisualStyleBackColor = true;
-            this.btnCargarDatos_MP.Click += new System.EventHandler(this.btnCargarDatos_MP_Click);
+            this.btnCargarDatos_MP.Click += new System.EventHandler(this.btnCargarDatos_MP_Click_1);
             // 
             // txtVerificador_MP
             // 
@@ -897,24 +725,6 @@
             this.lblRutPersonal_MP.Size = new System.Drawing.Size(83, 13);
             this.lblRutPersonal_MP.TabIndex = 0;
             this.lblRutPersonal_MP.Text = "Rut de Personal";
-            // 
-            // gbMantenerPrestacion
-            // 
-            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorCodigoMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.btnNuevaPrestacionMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorLista);
-            this.gbMantenerPrestacion.Controls.Add(this.label3);
-            this.gbMantenerPrestacion.Controls.Add(this.label2);
-            this.gbMantenerPrestacion.Controls.Add(this.tbCodigoPrestacionMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.cbPrestacionesMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.groupBox6);
-            this.gbMantenerPrestacion.Location = new System.Drawing.Point(6, 43);
-            this.gbMantenerPrestacion.Name = "gbMantenerPrestacion";
-            this.gbMantenerPrestacion.Size = new System.Drawing.Size(768, 462);
-            this.gbMantenerPrestacion.TabIndex = 10;
-            this.gbMantenerPrestacion.TabStop = false;
-            this.gbMantenerPrestacion.Text = "Mantener prestaciones";
-            this.gbMantenerPrestacion.Visible = false;
             // 
             // btnCargarPorCodigoMPre
             // 
@@ -1245,29 +1055,175 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
+            // gpHorarios
             // 
-            // dtFechaCierreCaja
+            this.gpHorarios.Controls.Add(this.btnGuardarCambios);
+            this.gpHorarios.Controls.Add(this.btnQuitar);
+            this.gpHorarios.Controls.Add(this.btnAsignar);
+            this.gpHorarios.Controls.Add(this.gpAsignados);
+            this.gpHorarios.Controls.Add(this.gpDisponibles);
+            this.gpHorarios.Controls.Add(this.txtDv);
+            this.gpHorarios.Controls.Add(this.txtRut);
+            this.gpHorarios.Controls.Add(this.lblError);
+            this.gpHorarios.Controls.Add(this.brnBuscarHorarios);
+            this.gpHorarios.Controls.Add(this.lblRut);
+            this.gpHorarios.Location = new System.Drawing.Point(6, 43);
+            this.gpHorarios.Name = "gpHorarios";
+            this.gpHorarios.Size = new System.Drawing.Size(771, 454);
+            this.gpHorarios.TabIndex = 6;
+            this.gpHorarios.TabStop = false;
+            this.gpHorarios.Text = "Modificar horarios";
+            this.gpHorarios.Visible = false;
             // 
-            this.dtFechaCierreCaja.Location = new System.Drawing.Point(118, 21);
-            this.dtFechaCierreCaja.TabIndex = 0;
-            this.dtFechaCierreCaja.Name = "dtFechaCierreCaja";
-            this.dtFechaCierreCaja.Size = new System.Drawing.Size(200, 20);
+            // btnGuardarCambios
             // 
-            // cbOperadorRC
+            this.btnGuardarCambios.Location = new System.Drawing.Point(304, 374);
+            this.btnGuardarCambios.Name = "btnGuardarCambios";
+            this.btnGuardarCambios.Size = new System.Drawing.Size(131, 23);
+            this.btnGuardarCambios.TabIndex = 24;
+            this.btnGuardarCambios.Text = "Guardar Cambios";
+            this.btnGuardarCambios.UseVisualStyleBackColor = true;
+            this.btnGuardarCambios.Click += new System.EventHandler(this.btnGuardarCambios_Click);
             // 
-            this.cbOperadorRC.FormattingEnabled = true;
-            this.cbOperadorRC.Location = new System.Drawing.Point(435, 21);
-            this.cbOperadorRC.Name = "cbOperadorRC";
-            this.cbOperadorRC.Size = new System.Drawing.Size(219, 21);
-            this.cbOperadorRC.TabIndex = 1;
-            // rbReporteCaja
+            // btnQuitar
             // 
+            this.btnQuitar.Location = new System.Drawing.Point(333, 245);
+            this.btnQuitar.Name = "btnQuitar";
+            this.btnQuitar.Size = new System.Drawing.Size(75, 23);
+            this.btnQuitar.TabIndex = 23;
+            this.btnQuitar.Text = "<<";
+            this.btnQuitar.UseVisualStyleBackColor = true;
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
-            this.rbReporteCaja.Location = new System.Drawing.Point(10, 46);
-            this.rbReporteCaja.Name = "rbReporteCaja";
-            this.rbReporteCaja.Size = new System.Drawing.Size(746, 404);
-            this.rbReporteCaja.TabIndex = 2;
-            this.rbReporteCaja.Text = "";
+            // btnAsignar
+            // 
+            this.btnAsignar.Location = new System.Drawing.Point(333, 216);
+            this.btnAsignar.Name = "btnAsignar";
+            this.btnAsignar.Size = new System.Drawing.Size(75, 23);
+            this.btnAsignar.TabIndex = 22;
+            this.btnAsignar.Text = ">>";
+            this.btnAsignar.UseVisualStyleBackColor = true;
+            this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);
+            // 
+            // gpAsignados
+            // 
+            this.gpAsignados.Controls.Add(this.lstAsignados);
+            this.gpAsignados.Location = new System.Drawing.Point(441, 99);
+            this.gpAsignados.Name = "gpAsignados";
+            this.gpAsignados.Size = new System.Drawing.Size(228, 331);
+            this.gpAsignados.TabIndex = 21;
+            this.gpAsignados.TabStop = false;
+            this.gpAsignados.Text = "Horarios Asignados";
+            // 
+            // lstAsignados
+            // 
+            this.lstAsignados.FormattingEnabled = true;
+            this.lstAsignados.Location = new System.Drawing.Point(20, 19);
+            this.lstAsignados.Name = "lstAsignados";
+            this.lstAsignados.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstAsignados.Size = new System.Drawing.Size(190, 303);
+            this.lstAsignados.TabIndex = 1;
+            // 
+            // gpDisponibles
+            // 
+            this.gpDisponibles.Controls.Add(this.lstDisponibles);
+            this.gpDisponibles.Location = new System.Drawing.Point(70, 99);
+            this.gpDisponibles.Name = "gpDisponibles";
+            this.gpDisponibles.Size = new System.Drawing.Size(228, 331);
+            this.gpDisponibles.TabIndex = 20;
+            this.gpDisponibles.TabStop = false;
+            this.gpDisponibles.Text = "Horarios disponibles";
+            // 
+            // lstDisponibles
+            // 
+            this.lstDisponibles.FormattingEnabled = true;
+            this.lstDisponibles.Location = new System.Drawing.Point(20, 19);
+            this.lstDisponibles.Name = "lstDisponibles";
+            this.lstDisponibles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstDisponibles.Size = new System.Drawing.Size(190, 303);
+            this.lstDisponibles.TabIndex = 0;
+            // 
+            // txtDv
+            // 
+            this.txtDv.Location = new System.Drawing.Point(349, 24);
+            this.txtDv.MaxLength = 1;
+            this.txtDv.Name = "txtDv";
+            this.txtDv.Size = new System.Drawing.Size(15, 20);
+            this.txtDv.TabIndex = 19;
+            this.txtDv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
+            // txtRut
+            // 
+            this.txtRut.Location = new System.Drawing.Point(243, 24);
+            this.txtRut.MaxLength = 8;
+            this.txtRut.Name = "txtRut";
+            this.txtRut.Size = new System.Drawing.Size(99, 20);
+            this.txtRut.TabIndex = 18;
+            this.txtRut.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRut_KeyPress);
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(259, 58);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(39, 13);
+            this.lblError.TabIndex = 17;
+            this.lblError.Text = "lblError";
+            this.lblError.Visible = false;
+            // 
+            // brnBuscarHorarios
+            // 
+            this.brnBuscarHorarios.Location = new System.Drawing.Point(401, 21);
+            this.brnBuscarHorarios.Name = "brnBuscarHorarios";
+            this.brnBuscarHorarios.Size = new System.Drawing.Size(167, 23);
+            this.brnBuscarHorarios.TabIndex = 14;
+            this.brnBuscarHorarios.Text = "Buscar horarios";
+            this.brnBuscarHorarios.UseVisualStyleBackColor = true;
+            this.brnBuscarHorarios.Click += new System.EventHandler(this.brnBuscarHorarios_Click);
+            // 
+            // lblRut
+            // 
+            this.lblRut.AutoSize = true;
+            this.lblRut.Location = new System.Drawing.Point(136, 31);
+            this.lblRut.Name = "lblRut";
+            this.lblRut.Size = new System.Drawing.Size(74, 13);
+            this.lblRut.TabIndex = 11;
+            this.lblRut.Text = "RUT Personal";
+            // 
+            // gbReporteCaja
+            // 
+            this.gbReporteCaja.Controls.Add(this.btnCargarOperadoresRC);
+            this.gbReporteCaja.Controls.Add(this.label11);
+            this.gbReporteCaja.Controls.Add(this.btnCargarRC);
+            this.gbReporteCaja.Controls.Add(this.rbReporteCaja);
+            this.gbReporteCaja.Controls.Add(this.cbOperadorRC);
+            this.gbReporteCaja.Controls.Add(this.dtFechaCierreCaja);
+            this.gbReporteCaja.Location = new System.Drawing.Point(6, 43);
+            this.gbReporteCaja.Name = "gbReporteCaja";
+            this.gbReporteCaja.Size = new System.Drawing.Size(768, 462);
+            this.gbReporteCaja.TabIndex = 11;
+            this.gbReporteCaja.TabStop = false;
+            this.gbReporteCaja.Text = "Reporte de caja";
+            this.gbReporteCaja.Visible = false;
+            // 
+            // btnCargarOperadoresRC
+            // 
+            this.btnCargarOperadoresRC.Location = new System.Drawing.Point(323, 20);
+            this.btnCargarOperadoresRC.Name = "btnCargarOperadoresRC";
+            this.btnCargarOperadoresRC.Size = new System.Drawing.Size(108, 23);
+            this.btnCargarOperadoresRC.TabIndex = 6;
+            this.btnCargarOperadoresRC.Text = "Cargar operadores";
+            this.btnCargarOperadoresRC.UseVisualStyleBackColor = true;
+            this.btnCargarOperadoresRC.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 24);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(92, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "Fecha cierre caja:";
             // 
             // btnCargarRC
             // 
@@ -1279,32 +1235,504 @@
             this.btnCargarRC.UseVisualStyleBackColor = true;
             this.btnCargarRC.Click += new System.EventHandler(this.btnCargarRC_Click);
             // 
-            // label11
+            // rbReporteCaja
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 24);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(92, 13);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "Fecha cierre caja:";
+            this.rbReporteCaja.Location = new System.Drawing.Point(10, 46);
+            this.rbReporteCaja.Name = "rbReporteCaja";
+            this.rbReporteCaja.Size = new System.Drawing.Size(746, 404);
+            this.rbReporteCaja.TabIndex = 2;
+            this.rbReporteCaja.Text = "";
             // 
-            // btnCargarOperadoresRC
+            // cbOperadorRC
             // 
-            this.btnCargarOperadoresRC.Location = new System.Drawing.Point(323, 20);
-            this.btnCargarOperadoresRC.Name = "btnCargarOperadoresRC";
-            this.btnCargarOperadoresRC.Size = new System.Drawing.Size(108, 23);
-            this.btnCargarOperadoresRC.TabIndex = 6;
-            this.btnCargarOperadoresRC.Text = "Cargar operadores";
-            this.btnCargarOperadoresRC.UseVisualStyleBackColor = true;
-            this.btnCargarOperadoresRC.Click += new System.EventHandler(this.button1_Click);
+            this.cbOperadorRC.FormattingEnabled = true;
+            this.cbOperadorRC.Location = new System.Drawing.Point(435, 21);
+            this.cbOperadorRC.Name = "cbOperadorRC";
+            this.cbOperadorRC.Size = new System.Drawing.Size(219, 21);
+            this.cbOperadorRC.TabIndex = 1;
+            // 
+            // dtFechaCierreCaja
+            // 
+            this.dtFechaCierreCaja.Location = new System.Drawing.Point(118, 21);
+            this.dtFechaCierreCaja.Name = "dtFechaCierreCaja";
+            this.dtFechaCierreCaja.Size = new System.Drawing.Size(200, 20);
+            this.dtFechaCierreCaja.TabIndex = 0;
+            // 
+            // gbLogPagoHonorarios
+            // 
+            this.gbLogPagoHonorarios.Controls.Add(this.btnBuscarLPH);
+            this.gbLogPagoHonorarios.Controls.Add(this.dgLogs);
+            this.gbLogPagoHonorarios.Controls.Add(this.label1);
+            this.gbLogPagoHonorarios.Controls.Add(this.dtFechaLPH);
+            this.gbLogPagoHonorarios.Location = new System.Drawing.Point(6, 43);
+            this.gbLogPagoHonorarios.Name = "gbLogPagoHonorarios";
+            this.gbLogPagoHonorarios.Size = new System.Drawing.Size(768, 462);
+            this.gbLogPagoHonorarios.TabIndex = 10;
+            this.gbLogPagoHonorarios.TabStop = false;
+            this.gbLogPagoHonorarios.Text = "Log pagos honorario";
+            this.gbLogPagoHonorarios.Visible = false;
+            // 
+            // btnBuscarLPH
+            // 
+            this.btnBuscarLPH.Location = new System.Drawing.Point(521, 19);
+            this.btnBuscarLPH.Name = "btnBuscarLPH";
+            this.btnBuscarLPH.Size = new System.Drawing.Size(125, 20);
+            this.btnBuscarLPH.TabIndex = 3;
+            this.btnBuscarLPH.Text = "Buscar";
+            this.btnBuscarLPH.UseVisualStyleBackColor = true;
+            this.btnBuscarLPH.Click += new System.EventHandler(this.btnBuscarLPH_Click);
+            // 
+            // dgLogs
+            // 
+            this.dgLogs.AllowUserToAddRows = false;
+            this.dgLogs.AllowUserToDeleteRows = false;
+            this.dgLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nombre,
+            this.Banco,
+            this.TipoCuenta,
+            this.Cuenta,
+            this.Total});
+            this.dgLogs.Location = new System.Drawing.Point(8, 49);
+            this.dgLogs.Name = "dgLogs";
+            this.dgLogs.ReadOnly = true;
+            this.dgLogs.Size = new System.Drawing.Size(754, 407);
+            this.dgLogs.TabIndex = 2;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 69;
+            // 
+            // Banco
+            // 
+            this.Banco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Banco.HeaderText = "Banco";
+            this.Banco.Name = "Banco";
+            this.Banco.ReadOnly = true;
+            this.Banco.Width = 63;
+            // 
+            // TipoCuenta
+            // 
+            this.TipoCuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.TipoCuenta.HeaderText = "Tipo cuenta";
+            this.TipoCuenta.Name = "TipoCuenta";
+            this.TipoCuenta.ReadOnly = true;
+            this.TipoCuenta.Width = 89;
+            // 
+            // Cuenta
+            // 
+            this.Cuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Cuenta.HeaderText = "Cuenta";
+            this.Cuenta.Name = "Cuenta";
+            this.Cuenta.ReadOnly = true;
+            this.Cuenta.Width = 66;
+            // 
+            // Total
+            // 
+            this.Total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
+            this.Total.Width = 56;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(174, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Fecha del pago:";
+            // 
+            // dtFechaLPH
+            // 
+            this.dtFechaLPH.CustomFormat = "MMMM - yyyy";
+            this.dtFechaLPH.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFechaLPH.Location = new System.Drawing.Point(287, 19);
+            this.dtFechaLPH.Name = "dtFechaLPH";
+            this.dtFechaLPH.Size = new System.Drawing.Size(200, 20);
+            this.dtFechaLPH.TabIndex = 0;
+            // 
+            // gbMantenedorPaciente
+            // 
+            this.gbMantenedorPaciente.Controls.Add(this.txtVerificadorCargado_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.dtpFechaNac_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.cbSexo_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtRutCargado_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtContrasena_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtEmail_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtApellidos_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.txtNombres_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.btnEliminar);
+            this.gbMantenedorPaciente.Controls.Add(this.btnGuardar);
+            this.gbMantenedorPaciente.Controls.Add(this.btnRegistrar_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.lblFechaNac);
+            this.gbMantenedorPaciente.Controls.Add(this.lblSexo);
+            this.gbMantenedorPaciente.Controls.Add(this.lblRutCargado);
+            this.gbMantenedorPaciente.Controls.Add(this.lblContrasena);
+            this.gbMantenedorPaciente.Controls.Add(this.lblEmail);
+            this.gbMantenedorPaciente.Controls.Add(this.lblApellidos);
+            this.gbMantenedorPaciente.Controls.Add(this.lblNombres);
+            this.gbMantenedorPaciente.Controls.Add(this.btnNuevoPaciente);
+            this.gbMantenedorPaciente.Controls.Add(this.btnCargarPaciente);
+            this.gbMantenedorPaciente.Controls.Add(this.txtVerificador_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.lblGuion);
+            this.gbMantenedorPaciente.Controls.Add(this.txtRutPaciente_Pac);
+            this.gbMantenedorPaciente.Controls.Add(this.lblRutPaciente);
+            this.gbMantenedorPaciente.Location = new System.Drawing.Point(6, 43);
+            this.gbMantenedorPaciente.Name = "gbMantenedorPaciente";
+            this.gbMantenedorPaciente.Size = new System.Drawing.Size(768, 462);
+            this.gbMantenedorPaciente.TabIndex = 11;
+            this.gbMantenedorPaciente.TabStop = false;
+            this.gbMantenedorPaciente.Text = "Mantener Paciente";
+            this.gbMantenedorPaciente.Visible = false;
+            // 
+            // txtVerificadorCargado_Pac
+            // 
+            this.txtVerificadorCargado_Pac.Location = new System.Drawing.Point(520, 203);
+            this.txtVerificadorCargado_Pac.MaxLength = 1;
+            this.txtVerificadorCargado_Pac.Name = "txtVerificadorCargado_Pac";
+            this.txtVerificadorCargado_Pac.Size = new System.Drawing.Size(62, 20);
+            this.txtVerificadorCargado_Pac.TabIndex = 31;
+            this.txtVerificadorCargado_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
+            // dtpFechaNac_Pac
+            // 
+            this.dtpFechaNac_Pac.Location = new System.Drawing.Point(348, 252);
+            this.dtpFechaNac_Pac.Name = "dtpFechaNac_Pac";
+            this.dtpFechaNac_Pac.Size = new System.Drawing.Size(234, 20);
+            this.dtpFechaNac_Pac.TabIndex = 30;
+            // 
+            // cbSexo_Pac
+            // 
+            this.cbSexo_Pac.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSexo_Pac.FormattingEnabled = true;
+            this.cbSexo_Pac.Location = new System.Drawing.Point(348, 228);
+            this.cbSexo_Pac.Name = "cbSexo_Pac";
+            this.cbSexo_Pac.Size = new System.Drawing.Size(234, 21);
+            this.cbSexo_Pac.TabIndex = 29;
+            // 
+            // txtRutCargado_Pac
+            // 
+            this.txtRutCargado_Pac.Location = new System.Drawing.Point(348, 203);
+            this.txtRutCargado_Pac.MaxLength = 8;
+            this.txtRutCargado_Pac.Name = "txtRutCargado_Pac";
+            this.txtRutCargado_Pac.Size = new System.Drawing.Size(155, 20);
+            this.txtRutCargado_Pac.TabIndex = 27;
+            this.txtRutCargado_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
+            // 
+            // txtContrasena_Pac
+            // 
+            this.txtContrasena_Pac.Location = new System.Drawing.Point(348, 176);
+            this.txtContrasena_Pac.MaxLength = 1080;
+            this.txtContrasena_Pac.Name = "txtContrasena_Pac";
+            this.txtContrasena_Pac.PasswordChar = '*';
+            this.txtContrasena_Pac.Size = new System.Drawing.Size(234, 20);
+            this.txtContrasena_Pac.TabIndex = 26;
+            // 
+            // txtEmail_Pac
+            // 
+            this.txtEmail_Pac.Location = new System.Drawing.Point(348, 149);
+            this.txtEmail_Pac.MaxLength = 512;
+            this.txtEmail_Pac.Name = "txtEmail_Pac";
+            this.txtEmail_Pac.Size = new System.Drawing.Size(234, 20);
+            this.txtEmail_Pac.TabIndex = 25;
+            // 
+            // txtApellidos_Pac
+            // 
+            this.txtApellidos_Pac.Location = new System.Drawing.Point(348, 122);
+            this.txtApellidos_Pac.MaxLength = 64;
+            this.txtApellidos_Pac.Name = "txtApellidos_Pac";
+            this.txtApellidos_Pac.Size = new System.Drawing.Size(234, 20);
+            this.txtApellidos_Pac.TabIndex = 24;
+            // 
+            // txtNombres_Pac
+            // 
+            this.txtNombres_Pac.Location = new System.Drawing.Point(348, 95);
+            this.txtNombres_Pac.MaxLength = 64;
+            this.txtNombres_Pac.Name = "txtNombres_Pac";
+            this.txtNombres_Pac.Size = new System.Drawing.Size(234, 20);
+            this.txtNombres_Pac.TabIndex = 23;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Location = new System.Drawing.Point(459, 306);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 22;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Enabled = false;
+            this.btnGuardar.Location = new System.Drawing.Point(314, 306);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(98, 23);
+            this.btnGuardar.TabIndex = 21;
+            this.btnGuardar.Text = "Guardar Cambios";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnRegistrar_Pac
+            // 
+            this.btnRegistrar_Pac.Enabled = false;
+            this.btnRegistrar_Pac.Location = new System.Drawing.Point(193, 306);
+            this.btnRegistrar_Pac.Name = "btnRegistrar_Pac";
+            this.btnRegistrar_Pac.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrar_Pac.TabIndex = 20;
+            this.btnRegistrar_Pac.Text = "Registrar";
+            this.btnRegistrar_Pac.UseVisualStyleBackColor = true;
+            this.btnRegistrar_Pac.Click += new System.EventHandler(this.btnRegistrar_Pac_Click);
+            // 
+            // lblFechaNac
+            // 
+            this.lblFechaNac.AutoSize = true;
+            this.lblFechaNac.Location = new System.Drawing.Point(143, 258);
+            this.lblFechaNac.Name = "lblFechaNac";
+            this.lblFechaNac.Size = new System.Drawing.Size(108, 13);
+            this.lblFechaNac.TabIndex = 12;
+            this.lblFechaNac.Text = "Fecha de Nacimiento";
+            // 
+            // lblSexo
+            // 
+            this.lblSexo.AutoSize = true;
+            this.lblSexo.Location = new System.Drawing.Point(143, 228);
+            this.lblSexo.Name = "lblSexo";
+            this.lblSexo.Size = new System.Drawing.Size(31, 13);
+            this.lblSexo.TabIndex = 11;
+            this.lblSexo.Text = "Sexo";
+            // 
+            // lblRutCargado
+            // 
+            this.lblRutCargado.AutoSize = true;
+            this.lblRutCargado.Location = new System.Drawing.Point(143, 201);
+            this.lblRutCargado.Name = "lblRutCargado";
+            this.lblRutCargado.Size = new System.Drawing.Size(24, 13);
+            this.lblRutCargado.TabIndex = 10;
+            this.lblRutCargado.Text = "Rut";
+            // 
+            // lblContrasena
+            // 
+            this.lblContrasena.AutoSize = true;
+            this.lblContrasena.Location = new System.Drawing.Point(143, 175);
+            this.lblContrasena.Name = "lblContrasena";
+            this.lblContrasena.Size = new System.Drawing.Size(61, 13);
+            this.lblContrasena.TabIndex = 9;
+            this.lblContrasena.Text = "Contraseña";
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new System.Drawing.Point(143, 149);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(32, 13);
+            this.lblEmail.TabIndex = 8;
+            this.lblEmail.Text = "Email";
+            // 
+            // lblApellidos
+            // 
+            this.lblApellidos.AutoSize = true;
+            this.lblApellidos.Location = new System.Drawing.Point(143, 121);
+            this.lblApellidos.Name = "lblApellidos";
+            this.lblApellidos.Size = new System.Drawing.Size(49, 13);
+            this.lblApellidos.TabIndex = 7;
+            this.lblApellidos.Text = "Apellidos";
+            // 
+            // lblNombres
+            // 
+            this.lblNombres.AutoSize = true;
+            this.lblNombres.Location = new System.Drawing.Point(143, 95);
+            this.lblNombres.Name = "lblNombres";
+            this.lblNombres.Size = new System.Drawing.Size(49, 13);
+            this.lblNombres.TabIndex = 6;
+            this.lblNombres.Text = "Nombres";
+            // 
+            // btnNuevoPaciente
+            // 
+            this.btnNuevoPaciente.Location = new System.Drawing.Point(517, 46);
+            this.btnNuevoPaciente.Name = "btnNuevoPaciente";
+            this.btnNuevoPaciente.Size = new System.Drawing.Size(99, 23);
+            this.btnNuevoPaciente.TabIndex = 5;
+            this.btnNuevoPaciente.Text = "Nuevo Paciente";
+            this.btnNuevoPaciente.UseVisualStyleBackColor = true;
+            this.btnNuevoPaciente.Click += new System.EventHandler(this.btnNuevoPaciente_Click);
+            // 
+            // btnCargarPaciente
+            // 
+            this.btnCargarPaciente.Location = new System.Drawing.Point(417, 46);
+            this.btnCargarPaciente.Name = "btnCargarPaciente";
+            this.btnCargarPaciente.Size = new System.Drawing.Size(94, 23);
+            this.btnCargarPaciente.TabIndex = 4;
+            this.btnCargarPaciente.Text = "Cargar Paciente";
+            this.btnCargarPaciente.UseVisualStyleBackColor = true;
+            this.btnCargarPaciente.Click += new System.EventHandler(this.btnCargarPaciente_Click);
+            // 
+            // txtVerificador_Pac
+            // 
+            this.txtVerificador_Pac.Location = new System.Drawing.Point(376, 48);
+            this.txtVerificador_Pac.MaxLength = 1;
+            this.txtVerificador_Pac.Name = "txtVerificador_Pac";
+            this.txtVerificador_Pac.Size = new System.Drawing.Size(24, 20);
+            this.txtVerificador_Pac.TabIndex = 3;
+            this.txtVerificador_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
+            // lblGuion
+            // 
+            this.lblGuion.AutoSize = true;
+            this.lblGuion.Location = new System.Drawing.Point(360, 51);
+            this.lblGuion.Name = "lblGuion";
+            this.lblGuion.Size = new System.Drawing.Size(10, 13);
+            this.lblGuion.TabIndex = 2;
+            this.lblGuion.Text = "-";
+            // 
+            // txtRutPaciente_Pac
+            // 
+            this.txtRutPaciente_Pac.Location = new System.Drawing.Point(245, 48);
+            this.txtRutPaciente_Pac.MaxLength = 8;
+            this.txtRutPaciente_Pac.Name = "txtRutPaciente_Pac";
+            this.txtRutPaciente_Pac.Size = new System.Drawing.Size(108, 20);
+            this.txtRutPaciente_Pac.TabIndex = 1;
+            this.txtRutPaciente_Pac.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
+            // 
+            // lblRutPaciente
+            // 
+            this.lblRutPaciente.AutoSize = true;
+            this.lblRutPaciente.Location = new System.Drawing.Point(132, 51);
+            this.lblRutPaciente.Name = "lblRutPaciente";
+            this.lblRutPaciente.Size = new System.Drawing.Size(84, 13);
+            this.lblRutPaciente.TabIndex = 0;
+            this.lblRutPaciente.Text = "Rut de Paciente";
+            // 
+            // gbMantenerEquipo
+            // 
+            this.gbMantenerEquipo.Controls.Add(this.btnCargarEquipo_Eq);
+            this.gbMantenerEquipo.Controls.Add(this.btnNuevoEquipo_Eq);
+            this.gbMantenerEquipo.Controls.Add(this.groupBox7);
+            this.gbMantenerEquipo.Controls.Add(this.dgEquipo_Eq);
+            this.gbMantenerEquipo.Location = new System.Drawing.Point(6, 43);
+            this.gbMantenerEquipo.Name = "gbMantenerEquipo";
+            this.gbMantenerEquipo.Size = new System.Drawing.Size(768, 462);
+            this.gbMantenerEquipo.TabIndex = 32;
+            this.gbMantenerEquipo.TabStop = false;
+            this.gbMantenerEquipo.Text = "Mantener Equipo";
+            this.gbMantenerEquipo.Visible = false;
+            // 
+            // btnCargarEquipo_Eq
+            // 
+            this.btnCargarEquipo_Eq.Location = new System.Drawing.Point(391, 266);
+            this.btnCargarEquipo_Eq.Name = "btnCargarEquipo_Eq";
+            this.btnCargarEquipo_Eq.Size = new System.Drawing.Size(100, 23);
+            this.btnCargarEquipo_Eq.TabIndex = 7;
+            this.btnCargarEquipo_Eq.Text = "Cargar Equipo";
+            this.btnCargarEquipo_Eq.UseVisualStyleBackColor = true;
+            this.btnCargarEquipo_Eq.Click += new System.EventHandler(this.btnCargarEquipo_Eq_Click);
+            // 
+            // btnNuevoEquipo_Eq
+            // 
+            this.btnNuevoEquipo_Eq.Location = new System.Drawing.Point(212, 266);
+            this.btnNuevoEquipo_Eq.Name = "btnNuevoEquipo_Eq";
+            this.btnNuevoEquipo_Eq.Size = new System.Drawing.Size(90, 23);
+            this.btnNuevoEquipo_Eq.TabIndex = 6;
+            this.btnNuevoEquipo_Eq.Text = "Nuevo Equipo";
+            this.btnNuevoEquipo_Eq.UseVisualStyleBackColor = true;
+            this.btnNuevoEquipo_Eq.Click += new System.EventHandler(this.btnNuevoEquipo_Eq_Click);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.txtNombreEquipo);
+            this.groupBox7.Controls.Add(this.btnGuardar_Eq);
+            this.groupBox7.Controls.Add(this.btnRegistrar_Eq);
+            this.groupBox7.Controls.Add(this.txtCantidad_Eq);
+            this.groupBox7.Controls.Add(this.lblNombreTipo);
+            this.groupBox7.Controls.Add(this.lblCantidad_Eq);
+            this.groupBox7.Location = new System.Drawing.Point(16, 295);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(732, 153);
+            this.groupBox7.TabIndex = 5;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Equipo";
+            // 
+            // txtNombreEquipo
+            // 
+            this.txtNombreEquipo.Location = new System.Drawing.Point(352, 67);
+            this.txtNombreEquipo.Name = "txtNombreEquipo";
+            this.txtNombreEquipo.Size = new System.Drawing.Size(196, 20);
+            this.txtNombreEquipo.TabIndex = 6;
+            // 
+            // btnGuardar_Eq
+            // 
+            this.btnGuardar_Eq.Enabled = false;
+            this.btnGuardar_Eq.Location = new System.Drawing.Point(375, 127);
+            this.btnGuardar_Eq.Name = "btnGuardar_Eq";
+            this.btnGuardar_Eq.Size = new System.Drawing.Size(100, 23);
+            this.btnGuardar_Eq.TabIndex = 5;
+            this.btnGuardar_Eq.Text = "Guardar Cambios";
+            this.btnGuardar_Eq.UseVisualStyleBackColor = true;
+            this.btnGuardar_Eq.Click += new System.EventHandler(this.btnGuardar_Eq_Click);
+            // 
+            // btnRegistrar_Eq
+            // 
+            this.btnRegistrar_Eq.Enabled = false;
+            this.btnRegistrar_Eq.Location = new System.Drawing.Point(211, 127);
+            this.btnRegistrar_Eq.Name = "btnRegistrar_Eq";
+            this.btnRegistrar_Eq.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrar_Eq.TabIndex = 4;
+            this.btnRegistrar_Eq.Text = "Registrar";
+            this.btnRegistrar_Eq.UseVisualStyleBackColor = true;
+            this.btnRegistrar_Eq.Click += new System.EventHandler(this.btnRegistrar_Eq_Click);
+            // 
+            // txtCantidad_Eq
+            // 
+            this.txtCantidad_Eq.Location = new System.Drawing.Point(352, 34);
+            this.txtCantidad_Eq.Name = "txtCantidad_Eq";
+            this.txtCantidad_Eq.Size = new System.Drawing.Size(196, 20);
+            this.txtCantidad_Eq.TabIndex = 2;
+            // 
+            // lblNombreTipo
+            // 
+            this.lblNombreTipo.AutoSize = true;
+            this.lblNombreTipo.Location = new System.Drawing.Point(150, 74);
+            this.lblNombreTipo.Name = "lblNombreTipo";
+            this.lblNombreTipo.Size = new System.Drawing.Size(79, 13);
+            this.lblNombreTipo.TabIndex = 1;
+            this.lblNombreTipo.Text = "Nombre equipo";
+            // 
+            // lblCantidad_Eq
+            // 
+            this.lblCantidad_Eq.AutoSize = true;
+            this.lblCantidad_Eq.Location = new System.Drawing.Point(150, 37);
+            this.lblCantidad_Eq.Name = "lblCantidad_Eq";
+            this.lblCantidad_Eq.Size = new System.Drawing.Size(49, 13);
+            this.lblCantidad_Eq.TabIndex = 0;
+            this.lblCantidad_Eq.Text = "Cantidad";
+            // 
+            // dgEquipo_Eq
+            // 
+            this.dgEquipo_Eq.AllowUserToAddRows = false;
+            this.dgEquipo_Eq.AllowUserToDeleteRows = false;
+            this.dgEquipo_Eq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgEquipo_Eq.Location = new System.Drawing.Point(16, 29);
+            this.dgEquipo_Eq.Name = "dgEquipo_Eq";
+            this.dgEquipo_Eq.ReadOnly = true;
+            this.dgEquipo_Eq.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgEquipo_Eq.Size = new System.Drawing.Size(732, 226);
+            this.dgEquipo_Eq.TabIndex = 4;
+            // 
             // FrmJefeOp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Name = "FrmJefeOp";
             this.Text = "Centro medico Hipócrates";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmJefeOp_FormClosed);
@@ -1314,23 +1742,14 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.gpHorarios.ResumeLayout(false);
-            this.gpHorarios.PerformLayout();
-            this.gpAsignados.ResumeLayout(false);
-            this.gpDisponibles.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.gbReporteCaja.ResumeLayout(false);
-            this.gbReporteCaja.PerformLayout();
-            this.gbLogPagoHonorarios.ResumeLayout(false);
-            this.gbLogPagoHonorarios.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).EndInit();
+            this.gbMantenerPrestacion.ResumeLayout(false);
+            this.gbMantenerPrestacion.PerformLayout();
             this.gbMantenedorPersonal.ResumeLayout(false);
             this.gbMantenedorPersonal.PerformLayout();
             this.gpMedico_MP.ResumeLayout(false);
             this.gpMedico_MP.PerformLayout();
-            this.gbMantenerPrestacion.ResumeLayout(false);
-            this.gbMantenerPrestacion.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
@@ -1338,6 +1757,21 @@
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.gpHorarios.ResumeLayout(false);
+            this.gpHorarios.PerformLayout();
+            this.gpAsignados.ResumeLayout(false);
+            this.gpDisponibles.ResumeLayout(false);
+            this.gbReporteCaja.ResumeLayout(false);
+            this.gbReporteCaja.PerformLayout();
+            this.gbLogPagoHonorarios.ResumeLayout(false);
+            this.gbLogPagoHonorarios.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).EndInit();
+            this.gbMantenedorPaciente.ResumeLayout(false);
+            this.gbMantenedorPaciente.PerformLayout();
+            this.gbMantenerEquipo.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1359,7 +1793,6 @@
         private System.Windows.Forms.Button btnCambiarEmail;
         private System.Windows.Forms.ToolStripMenuItem mantenedoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem personalToolStripMenuItem;
-        private System.Windows.Forms.GroupBox gbMantenedorPersonal;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbContrasenaActual;
@@ -1377,40 +1810,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoCuenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
-        private System.Windows.Forms.Button btnCargarDatos_MP;
-        private System.Windows.Forms.TextBox txtVerificador_MP;
-        private System.Windows.Forms.Label lblGuion_MP;
-        private System.Windows.Forms.TextBox txtRutPersonal_MP;
-        private System.Windows.Forms.Label lblRutPersonal_MP;
-        private System.Windows.Forms.Label lblApellidos_MP;
-        private System.Windows.Forms.Label lblNombre_MP;
-        private System.Windows.Forms.Button btnCrearPersonal_MP;
-        private System.Windows.Forms.Label lblRemuneracion;
-        private System.Windows.Forms.TextBox txtVerificadorCargado_MP;
-        private System.Windows.Forms.Label lblGuionCargado_MP;
-        private System.Windows.Forms.TextBox txtRutPersonalCargado_MP;
-        private System.Windows.Forms.Label lblRutPersonalCargado_MP;
-        private System.Windows.Forms.Label lblContrasena_MP;
-        private System.Windows.Forms.Label lblEmail_MP;
-        private System.Windows.Forms.TextBox txtDescuento_MP;
-        private System.Windows.Forms.TextBox txtRemuneracion_MP;
-        private System.Windows.Forms.TextBox txtContrasena_MP;
-        private System.Windows.Forms.TextBox txtEmail_MP;
-        private System.Windows.Forms.TextBox txtApellidos_MP;
-        private System.Windows.Forms.TextBox txtNombres_MP;
-        private System.Windows.Forms.Label lblDescuento_MP;
-        private System.Windows.Forms.Button btnEliminar_MP;
-        private System.Windows.Forms.Button btnGuardar_MP;
-        private System.Windows.Forms.Button btnRegistrar_MP;
-        private System.Windows.Forms.ComboBox cbCargo_MP;
-        private System.Windows.Forms.Label lblCargo_MP;
-        private System.Windows.Forms.TextBox txtCuentaBanc_MP;
-        private System.Windows.Forms.Label lblCuentaBanc_MP;
-        private System.Windows.Forms.GroupBox gpMedico_MP;
-        private System.Windows.Forms.ComboBox cbBanco_MP;
-        private System.Windows.Forms.Label lblBanco_MP;
-        private System.Windows.Forms.ComboBox cbTipoCuenta_MP;
-        private System.Windows.Forms.Label lblTipoCuenta_MP;
         private System.Windows.Forms.GroupBox gbMantenerPrestacion;
         private System.Windows.Forms.Button btnCargarPorCodigoMPre;
         private System.Windows.Forms.Button btnNuevaPrestacionMPre;
@@ -1458,5 +1857,78 @@
         private System.Windows.Forms.Button btnCargarRC;
         private System.Windows.Forms.RichTextBox rbReporteCaja;
         private System.Windows.Forms.Button btnCargarOperadoresRC;
+        private System.Windows.Forms.ToolStripMenuItem pacienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem equipoToolStripMenuItem;
+        private System.Windows.Forms.GroupBox gbMantenedorPersonal;
+        private System.Windows.Forms.GroupBox gpMedico_MP;
+        private System.Windows.Forms.ComboBox cbBanco_MP;
+        private System.Windows.Forms.Label lblBanco_MP;
+        private System.Windows.Forms.ComboBox cbTipoCuenta_MP;
+        private System.Windows.Forms.Label lblTipoCuenta_MP;
+        private System.Windows.Forms.Label lblCuentaBanc_MP;
+        private System.Windows.Forms.TextBox txtCuentaBanc_MP;
+        private System.Windows.Forms.ComboBox cbCargo_MP;
+        private System.Windows.Forms.Label lblCargo_MP;
+        private System.Windows.Forms.Button btnEliminar_MP;
+        private System.Windows.Forms.Button btnGuardar_MP;
+        private System.Windows.Forms.Button btnRegistrar_MP;
+        private System.Windows.Forms.TextBox txtDescuento_MP;
+        private System.Windows.Forms.TextBox txtRemuneracion_MP;
+        private System.Windows.Forms.TextBox txtContrasena_MP;
+        private System.Windows.Forms.TextBox txtEmail_MP;
+        private System.Windows.Forms.TextBox txtApellidos_MP;
+        private System.Windows.Forms.TextBox txtNombres_MP;
+        private System.Windows.Forms.Label lblDescuento_MP;
+        private System.Windows.Forms.Label lblRemuneracion;
+        private System.Windows.Forms.TextBox txtVerificadorCargado_MP;
+        private System.Windows.Forms.Label lblGuionCargado_MP;
+        private System.Windows.Forms.TextBox txtRutPersonalCargado_MP;
+        private System.Windows.Forms.Label lblRutPersonalCargado_MP;
+        private System.Windows.Forms.Label lblContrasena_MP;
+        private System.Windows.Forms.Label lblEmail_MP;
+        private System.Windows.Forms.Button btnCrearPersonal_MP;
+        private System.Windows.Forms.Label lblApellidos_MP;
+        private System.Windows.Forms.Label lblNombre_MP;
+        private System.Windows.Forms.Button btnCargarDatos_MP;
+        private System.Windows.Forms.TextBox txtVerificador_MP;
+        private System.Windows.Forms.Label lblGuion_MP;
+        private System.Windows.Forms.TextBox txtRutPersonal_MP;
+        private System.Windows.Forms.Label lblRutPersonal_MP;
+        private System.Windows.Forms.GroupBox gbMantenedorPaciente;
+        private System.Windows.Forms.TextBox txtVerificadorCargado_Pac;
+        private System.Windows.Forms.DateTimePicker dtpFechaNac_Pac;
+        private System.Windows.Forms.ComboBox cbSexo_Pac;
+        private System.Windows.Forms.TextBox txtRutCargado_Pac;
+        private System.Windows.Forms.TextBox txtContrasena_Pac;
+        private System.Windows.Forms.TextBox txtEmail_Pac;
+        private System.Windows.Forms.TextBox txtApellidos_Pac;
+        private System.Windows.Forms.TextBox txtNombres_Pac;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnRegistrar_Pac;
+        private System.Windows.Forms.Label lblFechaNac;
+        private System.Windows.Forms.Label lblSexo;
+        private System.Windows.Forms.Label lblRutCargado;
+        private System.Windows.Forms.Label lblContrasena;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.Label lblApellidos;
+        private System.Windows.Forms.Label lblNombres;
+        private System.Windows.Forms.Button btnNuevoPaciente;
+        private System.Windows.Forms.Button btnCargarPaciente;
+        private System.Windows.Forms.TextBox txtVerificador_Pac;
+        private System.Windows.Forms.Label lblGuion;
+        private System.Windows.Forms.TextBox txtRutPaciente_Pac;
+        private System.Windows.Forms.Label lblRutPaciente;
+        private System.Windows.Forms.GroupBox gbMantenerEquipo;
+        private System.Windows.Forms.Button btnCargarEquipo_Eq;
+        private System.Windows.Forms.Button btnNuevoEquipo_Eq;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.TextBox txtNombreEquipo;
+        private System.Windows.Forms.Button btnGuardar_Eq;
+        private System.Windows.Forms.Button btnRegistrar_Eq;
+        private System.Windows.Forms.TextBox txtCantidad_Eq;
+        private System.Windows.Forms.Label lblNombreTipo;
+        private System.Windows.Forms.Label lblCantidad_Eq;
+        private System.Windows.Forms.DataGridView dgEquipo_Eq;
     }
 }

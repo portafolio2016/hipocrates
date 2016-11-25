@@ -32,29 +32,6 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.btnSesion = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.agendarHoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agendarHoraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.anularHoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crearPacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ingresarPacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cerrarCjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tbNuevoMail = new System.Windows.Forms.TextBox();
-            this.btnCambiarEmail = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbContrasenaActual = new System.Windows.Forms.TextBox();
-            this.btnCambiarContrasena = new System.Windows.Forms.Button();
-            this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnModificarUser = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.txtRazon = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -83,16 +60,39 @@
             this.lstAtenciones = new System.Windows.Forms.ListBox();
             this.brnBuscarAtenciones = new System.Windows.Forms.Button();
             this.lblRut = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.agendarHoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agendarHoraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.anularHoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearPacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ingresarPacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cerrarCjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbNuevoMail = new System.Windows.Forms.TextBox();
+            this.btnCambiarEmail = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbContrasenaActual = new System.Windows.Forms.TextBox();
+            this.btnCambiarContrasena = new System.Windows.Forms.Button();
+            this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnModificarUser = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -134,221 +134,6 @@
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agendarHoraToolStripMenuItem,
-            this.crearPacienteToolStripMenuItem,
-            this.ingresarPacienteToolStripMenuItem,
-            this.cajaToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // agendarHoraToolStripMenuItem
-            // 
-            this.agendarHoraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agendarHoraToolStripMenuItem1,
-            this.anularHoraToolStripMenuItem});
-            this.agendarHoraToolStripMenuItem.Name = "agendarHoraToolStripMenuItem";
-            this.agendarHoraToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.agendarHoraToolStripMenuItem.Text = "Agendamiento";
-            // 
-            // agendarHoraToolStripMenuItem1
-            // 
-            this.agendarHoraToolStripMenuItem1.Name = "agendarHoraToolStripMenuItem1";
-            this.agendarHoraToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
-            this.agendarHoraToolStripMenuItem1.Text = "Agendar hora";
-            this.agendarHoraToolStripMenuItem1.Click += new System.EventHandler(this.agendarHoraToolStripMenuItem1_Click);
-            // 
-            // anularHoraToolStripMenuItem
-            // 
-            this.anularHoraToolStripMenuItem.Name = "anularHoraToolStripMenuItem";
-            this.anularHoraToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.anularHoraToolStripMenuItem.Text = "Anular hora";
-            this.anularHoraToolStripMenuItem.Click += new System.EventHandler(this.anularHoraToolStripMenuItem_Click);
-            // 
-            // crearPacienteToolStripMenuItem
-            // 
-            this.crearPacienteToolStripMenuItem.Name = "crearPacienteToolStripMenuItem";
-            this.crearPacienteToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
-            this.crearPacienteToolStripMenuItem.Text = "Crear paciente";
-            this.crearPacienteToolStripMenuItem.Click += new System.EventHandler(this.crearPacienteToolStripMenuItem_Click);
-            // 
-            // ingresarPacienteToolStripMenuItem
-            // 
-            this.ingresarPacienteToolStripMenuItem.Name = "ingresarPacienteToolStripMenuItem";
-            this.ingresarPacienteToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-            this.ingresarPacienteToolStripMenuItem.Text = "Ingresar paciente";
-            this.ingresarPacienteToolStripMenuItem.Click += new System.EventHandler(this.ingresarPacienteToolStripMenuItem_Click);
-            // 
-            // cajaToolStripMenuItem
-            // 
-            this.cajaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.abrirCajaToolStripMenuItem,
-            this.cerrarCjaToolStripMenuItem});
-            this.cajaToolStripMenuItem.Name = "cajaToolStripMenuItem";
-            this.cajaToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.cajaToolStripMenuItem.Text = "Caja";
-            // 
-            // abrirCajaToolStripMenuItem
-            // 
-            this.abrirCajaToolStripMenuItem.Name = "abrirCajaToolStripMenuItem";
-            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.abrirCajaToolStripMenuItem.Text = "Abrir caja";
-            this.abrirCajaToolStripMenuItem.Click += new System.EventHandler(this.abrirCajaToolStripMenuItem_Click);
-            // 
-            // cerrarCjaToolStripMenuItem
-            // 
-            this.cerrarCjaToolStripMenuItem.Name = "cerrarCjaToolStripMenuItem";
-            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.cerrarCjaToolStripMenuItem.Text = "Cerrar caja";
-            this.cerrarCjaToolStripMenuItem.Click += new System.EventHandler(this.cerrarCjaToolStripMenuItem_Click);
-            // 
-            // gbOpcionesUsuario
-            // 
-            this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
-            this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
-            this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
-            this.gbOpcionesUsuario.Name = "gbOpcionesUsuario";
-            this.gbOpcionesUsuario.Size = new System.Drawing.Size(768, 462);
-            this.gbOpcionesUsuario.TabIndex = 3;
-            this.gbOpcionesUsuario.TabStop = false;
-            this.gbOpcionesUsuario.Text = "Opciones de cuenta";
-            this.gbOpcionesUsuario.Visible = false;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label9);
-            this.groupBox5.Controls.Add(this.tbNuevoMail);
-            this.groupBox5.Controls.Add(this.btnCambiarEmail);
-            this.groupBox5.Location = new System.Drawing.Point(32, 276);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(695, 158);
-            this.groupBox5.TabIndex = 9;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Email";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(71, 62);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(69, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Nuevo email:";
-            // 
-            // tbNuevoMail
-            // 
-            this.tbNuevoMail.Location = new System.Drawing.Point(205, 59);
-            this.tbNuevoMail.MaxLength = 80;
-            this.tbNuevoMail.Name = "tbNuevoMail";
-            this.tbNuevoMail.Size = new System.Drawing.Size(409, 20);
-            this.tbNuevoMail.TabIndex = 7;
-            // 
-            // btnCambiarEmail
-            // 
-            this.btnCambiarEmail.Location = new System.Drawing.Point(255, 112);
-            this.btnCambiarEmail.Name = "btnCambiarEmail";
-            this.btnCambiarEmail.Size = new System.Drawing.Size(144, 23);
-            this.btnCambiarEmail.TabIndex = 3;
-            this.btnCambiarEmail.Text = "Cambiar email";
-            this.btnCambiarEmail.UseVisualStyleBackColor = true;
-            this.btnCambiarEmail.Click += new System.EventHandler(this.btnCambiarEmail_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.tbContrasenaActual);
-            this.groupBox4.Controls.Add(this.btnCambiarContrasena);
-            this.groupBox4.Controls.Add(this.tbContrasenaNueva);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Location = new System.Drawing.Point(32, 27);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(695, 247);
-            this.groupBox4.TabIndex = 8;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Contraseña";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(71, 65);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(96, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Contraseña actual:";
-            // 
-            // tbContrasenaActual
-            // 
-            this.tbContrasenaActual.Location = new System.Drawing.Point(206, 62);
-            this.tbContrasenaActual.MaxLength = 40;
-            this.tbContrasenaActual.Name = "tbContrasenaActual";
-            this.tbContrasenaActual.PasswordChar = '*';
-            this.tbContrasenaActual.Size = new System.Drawing.Size(408, 20);
-            this.tbContrasenaActual.TabIndex = 5;
-            // 
-            // btnCambiarContrasena
-            // 
-            this.btnCambiarContrasena.Location = new System.Drawing.Point(255, 205);
-            this.btnCambiarContrasena.Name = "btnCambiarContrasena";
-            this.btnCambiarContrasena.Size = new System.Drawing.Size(144, 23);
-            this.btnCambiarContrasena.TabIndex = 4;
-            this.btnCambiarContrasena.Text = "Cambiar contraseña";
-            this.btnCambiarContrasena.UseVisualStyleBackColor = true;
-            this.btnCambiarContrasena.Click += new System.EventHandler(this.btnCambiarContrasena_Click);
-            // 
-            // tbContrasenaNueva
-            // 
-            this.tbContrasenaNueva.Location = new System.Drawing.Point(206, 136);
-            this.tbContrasenaNueva.MaxLength = 40;
-            this.tbContrasenaNueva.Name = "tbContrasenaNueva";
-            this.tbContrasenaNueva.PasswordChar = '*';
-            this.tbContrasenaNueva.Size = new System.Drawing.Size(408, 20);
-            this.tbContrasenaNueva.TabIndex = 6;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(71, 139);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Contraseña nueva:";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.lblPrivilegio);
-            this.groupBox2.Location = new System.Drawing.Point(1, 532);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(780, 27);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.btnModificarUser);
-            this.groupBox3.Controls.Add(this.lblUsuarioConectado);
-            this.groupBox3.Controls.Add(this.btnSesion);
-            this.groupBox3.Location = new System.Drawing.Point(1, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(780, 41);
-            this.groupBox3.TabIndex = 5;
-            this.groupBox3.TabStop = false;
-            // 
-            // btnModificarUser
-            // 
-            this.btnModificarUser.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnModificarUser.Location = new System.Drawing.Point(652, 12);
-            this.btnModificarUser.Name = "btnModificarUser";
-            this.btnModificarUser.Size = new System.Drawing.Size(122, 23);
-            this.btnModificarUser.TabIndex = 3;
-            this.btnModificarUser.Text = "Opciones de Cuenta";
-            this.btnModificarUser.UseVisualStyleBackColor = true;
-            this.btnModificarUser.Click += new System.EventHandler(this.btnModificarUser_Click);
             // 
             // groupBox6
             // 
@@ -579,6 +364,7 @@
             this.txtDv.Name = "txtDv";
             this.txtDv.Size = new System.Drawing.Size(15, 20);
             this.txtDv.TabIndex = 19;
+            this.txtDv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
             // 
             // txtRut
             // 
@@ -587,6 +373,7 @@
             this.txtRut.Name = "txtRut";
             this.txtRut.Size = new System.Drawing.Size(99, 20);
             this.txtRut.TabIndex = 18;
+            this.txtRut.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRut_KeyPress);
             // 
             // lblError
             // 
@@ -636,6 +423,221 @@
             this.lblRut.TabIndex = 11;
             this.lblRut.Text = "RUT Paciente";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agendarHoraToolStripMenuItem,
+            this.crearPacienteToolStripMenuItem,
+            this.ingresarPacienteToolStripMenuItem,
+            this.cajaToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // agendarHoraToolStripMenuItem
+            // 
+            this.agendarHoraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agendarHoraToolStripMenuItem1,
+            this.anularHoraToolStripMenuItem});
+            this.agendarHoraToolStripMenuItem.Name = "agendarHoraToolStripMenuItem";
+            this.agendarHoraToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.agendarHoraToolStripMenuItem.Text = "Agendamiento";
+            // 
+            // agendarHoraToolStripMenuItem1
+            // 
+            this.agendarHoraToolStripMenuItem1.Name = "agendarHoraToolStripMenuItem1";
+            this.agendarHoraToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
+            this.agendarHoraToolStripMenuItem1.Text = "Agendar hora";
+            this.agendarHoraToolStripMenuItem1.Click += new System.EventHandler(this.agendarHoraToolStripMenuItem1_Click);
+            // 
+            // anularHoraToolStripMenuItem
+            // 
+            this.anularHoraToolStripMenuItem.Name = "anularHoraToolStripMenuItem";
+            this.anularHoraToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.anularHoraToolStripMenuItem.Text = "Anular hora";
+            this.anularHoraToolStripMenuItem.Click += new System.EventHandler(this.anularHoraToolStripMenuItem_Click);
+            // 
+            // crearPacienteToolStripMenuItem
+            // 
+            this.crearPacienteToolStripMenuItem.Name = "crearPacienteToolStripMenuItem";
+            this.crearPacienteToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.crearPacienteToolStripMenuItem.Text = "Crear paciente";
+            this.crearPacienteToolStripMenuItem.Click += new System.EventHandler(this.crearPacienteToolStripMenuItem_Click);
+            // 
+            // ingresarPacienteToolStripMenuItem
+            // 
+            this.ingresarPacienteToolStripMenuItem.Name = "ingresarPacienteToolStripMenuItem";
+            this.ingresarPacienteToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.ingresarPacienteToolStripMenuItem.Text = "Ingresar paciente";
+            this.ingresarPacienteToolStripMenuItem.Click += new System.EventHandler(this.ingresarPacienteToolStripMenuItem_Click);
+            // 
+            // cajaToolStripMenuItem
+            // 
+            this.cajaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirCajaToolStripMenuItem,
+            this.cerrarCjaToolStripMenuItem});
+            this.cajaToolStripMenuItem.Name = "cajaToolStripMenuItem";
+            this.cajaToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
+            this.cajaToolStripMenuItem.Text = "Caja";
+            // 
+            // abrirCajaToolStripMenuItem
+            // 
+            this.abrirCajaToolStripMenuItem.Name = "abrirCajaToolStripMenuItem";
+            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.abrirCajaToolStripMenuItem.Text = "Abrir caja";
+            this.abrirCajaToolStripMenuItem.Click += new System.EventHandler(this.abrirCajaToolStripMenuItem_Click);
+            // 
+            // cerrarCjaToolStripMenuItem
+            // 
+            this.cerrarCjaToolStripMenuItem.Name = "cerrarCjaToolStripMenuItem";
+            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.cerrarCjaToolStripMenuItem.Text = "Cerrar caja";
+            this.cerrarCjaToolStripMenuItem.Click += new System.EventHandler(this.cerrarCjaToolStripMenuItem_Click);
+            // 
+            // gbOpcionesUsuario
+            // 
+            this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
+            this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
+            this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
+            this.gbOpcionesUsuario.Name = "gbOpcionesUsuario";
+            this.gbOpcionesUsuario.Size = new System.Drawing.Size(768, 462);
+            this.gbOpcionesUsuario.TabIndex = 3;
+            this.gbOpcionesUsuario.TabStop = false;
+            this.gbOpcionesUsuario.Text = "Opciones de cuenta";
+            this.gbOpcionesUsuario.Visible = false;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label9);
+            this.groupBox5.Controls.Add(this.tbNuevoMail);
+            this.groupBox5.Controls.Add(this.btnCambiarEmail);
+            this.groupBox5.Location = new System.Drawing.Point(32, 276);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(695, 158);
+            this.groupBox5.TabIndex = 9;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Email";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(71, 62);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(69, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Nuevo email:";
+            // 
+            // tbNuevoMail
+            // 
+            this.tbNuevoMail.Location = new System.Drawing.Point(205, 59);
+            this.tbNuevoMail.MaxLength = 80;
+            this.tbNuevoMail.Name = "tbNuevoMail";
+            this.tbNuevoMail.Size = new System.Drawing.Size(409, 20);
+            this.tbNuevoMail.TabIndex = 7;
+            // 
+            // btnCambiarEmail
+            // 
+            this.btnCambiarEmail.Location = new System.Drawing.Point(255, 112);
+            this.btnCambiarEmail.Name = "btnCambiarEmail";
+            this.btnCambiarEmail.Size = new System.Drawing.Size(144, 23);
+            this.btnCambiarEmail.TabIndex = 3;
+            this.btnCambiarEmail.Text = "Cambiar email";
+            this.btnCambiarEmail.UseVisualStyleBackColor = true;
+            this.btnCambiarEmail.Click += new System.EventHandler(this.btnCambiarEmail_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.tbContrasenaActual);
+            this.groupBox4.Controls.Add(this.btnCambiarContrasena);
+            this.groupBox4.Controls.Add(this.tbContrasenaNueva);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Location = new System.Drawing.Point(32, 27);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(695, 247);
+            this.groupBox4.TabIndex = 8;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Contraseña";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(71, 65);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(96, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Contraseña actual:";
+            // 
+            // tbContrasenaActual
+            // 
+            this.tbContrasenaActual.Location = new System.Drawing.Point(206, 62);
+            this.tbContrasenaActual.MaxLength = 40;
+            this.tbContrasenaActual.Name = "tbContrasenaActual";
+            this.tbContrasenaActual.PasswordChar = '*';
+            this.tbContrasenaActual.Size = new System.Drawing.Size(408, 20);
+            this.tbContrasenaActual.TabIndex = 5;
+            // 
+            // btnCambiarContrasena
+            // 
+            this.btnCambiarContrasena.Location = new System.Drawing.Point(255, 205);
+            this.btnCambiarContrasena.Name = "btnCambiarContrasena";
+            this.btnCambiarContrasena.Size = new System.Drawing.Size(144, 23);
+            this.btnCambiarContrasena.TabIndex = 4;
+            this.btnCambiarContrasena.Text = "Cambiar contraseña";
+            this.btnCambiarContrasena.UseVisualStyleBackColor = true;
+            this.btnCambiarContrasena.Click += new System.EventHandler(this.btnCambiarContrasena_Click);
+            // 
+            // tbContrasenaNueva
+            // 
+            this.tbContrasenaNueva.Location = new System.Drawing.Point(206, 136);
+            this.tbContrasenaNueva.MaxLength = 40;
+            this.tbContrasenaNueva.Name = "tbContrasenaNueva";
+            this.tbContrasenaNueva.PasswordChar = '*';
+            this.tbContrasenaNueva.Size = new System.Drawing.Size(408, 20);
+            this.tbContrasenaNueva.TabIndex = 6;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(71, 139);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Contraseña nueva:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblPrivilegio);
+            this.groupBox2.Location = new System.Drawing.Point(1, 532);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(780, 27);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnModificarUser);
+            this.groupBox3.Controls.Add(this.lblUsuarioConectado);
+            this.groupBox3.Controls.Add(this.btnSesion);
+            this.groupBox3.Location = new System.Drawing.Point(1, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(780, 41);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            // 
+            // btnModificarUser
+            // 
+            this.btnModificarUser.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnModificarUser.Location = new System.Drawing.Point(652, 12);
+            this.btnModificarUser.Name = "btnModificarUser";
+            this.btnModificarUser.Size = new System.Drawing.Size(122, 23);
+            this.btnModificarUser.TabIndex = 3;
+            this.btnModificarUser.Text = "Opciones de Cuenta";
+            this.btnModificarUser.UseVisualStyleBackColor = true;
+            this.btnModificarUser.Click += new System.EventHandler(this.btnModificarUser_Click);
+            // 
             // FrmAnularAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -650,6 +652,12 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAnularAtencion_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
@@ -661,12 +669,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
 
         }

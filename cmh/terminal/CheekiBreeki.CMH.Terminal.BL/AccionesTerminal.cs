@@ -61,8 +61,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 {
                     List<ATENCION_AGEN> atenciones = null;
                     atenciones = conexionDB.ATENCION_AGEN.
-                        Where(d => d.PERS_MEDICO.PERSONAL.RUT == rut &&
-                              d.FECHOR == dia).ToList();
+                        Where(d => d.PERS_MEDICO.PERSONAL.RUT == rut).ToList();
+                    atenciones = atenciones.Where(d => d.FECHOR.Value.Date == dia.Date).ToList();
                     return atenciones;
                 }
             }
@@ -1636,10 +1636,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 else if (paciente.RUT == null || paciente.RUT == 0)
                 {
                     throw new Exception("RUT vacío");
-                }
-                else if (paciente.HASHED_PASS == null || paciente.HASHED_PASS == string.Empty)
-                {
-                    throw new Exception("Contraseña nula");
                 }
                 else if (!Util.isObjetoNulo(buscarPaciente(paciente.RUT, paciente.DIGITO_VERIFICADOR)))
                 {

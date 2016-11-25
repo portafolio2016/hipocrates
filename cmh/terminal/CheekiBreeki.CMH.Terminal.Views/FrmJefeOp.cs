@@ -96,6 +96,19 @@ namespace CheekiBreeki.CMH.Terminal.Views
             cbTipoCuenta_MP.DataSource = at.ObtenerTiposCuentaBancaria();
             #endregion
 
+            #region ComboBox Sexo
+            ComboboxItem itemSexo1 = new ComboboxItem();
+            itemSexo1.Text = "Masculino";
+            itemSexo1.Value = 0;
+            cbSexo_Pac.Items.Add(itemSexo1);
+
+            ComboboxItem itemSexo2 = new ComboboxItem();
+            itemSexo2.Text = "Femenino";
+            itemSexo2.Value = 1;
+            cbSexo_Pac.Items.Add(itemSexo2);
+            cbSexo_Pac.SelectedIndex = 0;
+            #endregion 
+
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,6 +235,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
             gbLogPagoHonorarios.Hide();
             gbReporteCaja.Hide();
             gpHorarios.Hide();
+            gbMantenedorPaciente.Hide();
+            gbMantenerEquipo.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
@@ -303,7 +318,26 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
         #endregion
 
-        private void btnCargarDatos_MP_Click(object sender, EventArgs e)
+
+        #region Capturar y limpiar datos 
+        private void limpiarCampos_MP()
+        {
+            txtNombres_MP.Text = string.Empty;
+            txtApellidos_MP.Text = string.Empty;
+            txtEmail_MP.Text = string.Empty;
+            txtContrasena_MP.Text = string.Empty;
+            txtRutPersonalCargado_MP.Text = string.Empty;
+            txtVerificadorCargado_MP.Text = string.Empty;
+            txtRemuneracion_MP.Text = string.Empty;
+            txtDescuento_MP.Text = string.Empty;
+            txtCuentaBanc_MP.Text = string.Empty;
+
+        }
+
+        
+        #endregion
+
+        private void btnCargarDatos_MP_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -366,37 +400,20 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Campo Run vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al cargar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btnCrearPersonal_MP_Click(object sender, EventArgs e)
+        private void btnCrearPersonal_MP_Click_1(object sender, EventArgs e)
         {
             cbCargo_MP.Enabled = true;
             limpiarCampos_MP();
+            txtRutPersonal_MP.Text = string.Empty;
+            txtVerificador_MP.Text = string.Empty;
             btnRegistrar_MP.Enabled = true;
             btnGuardar_MP.Enabled = false;
             btnEliminar_MP.Enabled = false;
         }
-
-
-        #region Capturar y limpiar datos 
-        private void limpiarCampos_MP()
-        {
-            txtNombres_MP.Text = string.Empty;
-            txtApellidos_MP.Text = string.Empty;
-            txtEmail_MP.Text = string.Empty;
-            txtContrasena_MP.Text = string.Empty;
-            txtRutPersonalCargado_MP.Text = string.Empty;
-            txtVerificadorCargado_MP.Text = string.Empty;
-            txtRemuneracion_MP.Text = string.Empty;
-            txtDescuento_MP.Text = string.Empty;
-            txtCuentaBanc_MP.Text = string.Empty;
-
-        }
-
-        
-        #endregion
 
         private void btnRegistrar_MP_Click(object sender, EventArgs e)
         {
@@ -404,6 +421,11 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 AccionesTerminal at = new AccionesTerminal();
                 PERSONAL p1 = new PERSONAL();
+
+                if (txtContrasena_MP.Text == null || txtContrasena_MP.Text == "")
+                {
+                    throw new Exception();
+                }
 
                 //CapturarDatos
                 p1.NOMBRES = txtNombres_MP.Text;
@@ -421,38 +443,38 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     throw new Exception();
                 }
 
-                if (!Util.rutValido(p1.RUT,p1.VERIFICADOR))
+                if (!Util.rutValido(p1.RUT, p1.VERIFICADOR))
                 {
                     throw new Exception();
                 }
 
                 int privi = ((ComboboxItem)cbCargo_MP.SelectedItem).Value;
-                if (privi == 0 && (txtCuentaBanc_MP.Text=="" || (txtCuentaBanc_MP.Text == string.Empty))) 
+                if (privi == 0 && (txtCuentaBanc_MP.Text == "" || (txtCuentaBanc_MP.Text == string.Empty)))
                 {
                     throw new Exception();
                 }
-                
+
                 p1.ID_PERSONAL = at.nuevoPersonalId(p1);
 
                 if (p1.ID_PERSONAL == 0)
                 {
                     throw new Exception();
                 }
-                
-                /*
+
+
                 if (((ComboboxItem)cbCargo_MP.SelectedItem).Text == "Médico")
                 {
                     string cuentaBancaria = txtCuentaBanc_MP.Text;
 
                 }
-                */
-                
+
+
                 using (var context = new CMHEntities())
                 {
                     switch (privi)
                     {
                         case 0: // Médico
-                            
+
                             PERS_MEDICO persMedico = new PERS_MEDICO();
                             persMedico.ID_ESPECIALIDAD = context.ESPECIALIDAD.Where(d => d.NOM_ESPECIALIDAD.ToUpper() == "MEDICO").FirstOrDefault().ID_ESPECIALIDAD;
                             persMedico.ID_PERSONAL = p1.ID_PERSONAL;
@@ -461,7 +483,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             CUEN_BANCARIA cuentaB = new CUEN_BANCARIA();
                             cuentaB.ID_PERS_MEDICO = persMedico.ID_PERSONAL_MEDICO;
                             cuentaB.ID_TIPO_C_BANCARIA = ((TIPO_C_BANCARIA)cbTipoCuenta_MP.SelectedItem).ID_TIPO_C_BANCARIA;
-                            
+
                             cuentaB.NUM_C_BANCARIA = txtCuentaBanc_MP.Text;
                             cuentaB.ID_BANCO = ((BANCO)cbBanco_MP.SelectedItem).ID_BANCO;
                             at.crearCuentaBancaria(cuentaB);
@@ -499,6 +521,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             at.nuevoFuncionario(funcJefeOperador);
                             break;
                     }
+
                 }
 
                 MessageBox.Show("¡Personal creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -510,24 +533,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 MessageBox.Show("Error al registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-
-        }
-
-        private void cbCargo_MP_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (((ComboboxItem)cbCargo_MP.SelectedItem).Text == "Médico")
-            {
-                txtCuentaBanc_MP.Enabled = true;
-                cbTipoCuenta_MP.Enabled = true;
-                cbBanco_MP.Enabled = true;
-            }
-            else
-            {
-                txtCuentaBanc_MP.Enabled = false;
-                cbTipoCuenta_MP.Enabled = false;
-                cbBanco_MP.Enabled = false;
-            }
-                
         }
 
         private void btnGuardar_MP_Click(object sender, EventArgs e)
@@ -548,7 +553,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 p1.VERIFICADOR = txtVerificadorCargado_MP.Text;
                 p1.REMUNERACION = int.Parse(txtRemuneracion_MP.Text);
                 p1.PORCENT_DESCUENTO = byte.Parse(txtDescuento_MP.Text);
-                
+
 
                 if (!Util.isEmailValido(p1.EMAIL))
                 {
@@ -561,7 +566,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 }
 
                 at.actualizarPersonal(p1, int.Parse(txtRutPersonal_MP.Text));
-                
+
                 if (((ComboboxItem)cbCargo_MP.SelectedItem).Value == 0) //Medico
                 {
                     CUEN_BANCARIA cuentaBancariaMedica = new CUEN_BANCARIA();
@@ -579,9 +584,6 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 MessageBox.Show("Error actualizar datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
-
-
         }
 
         private void btnEliminar_MP_Click(object sender, EventArgs e)
@@ -590,17 +592,40 @@ namespace CheekiBreeki.CMH.Terminal.Views
             {
                 AccionesTerminal at = new AccionesTerminal();
                 PERSONAL p1 = at.buscarPersonal(rutBuscar_MP);
-                at.desactivarPersonal(p1);
-                limpiarCampos_MP();
-                txtRutPersonal_MP.Text = string.Empty;
-                txtVerificador_MP.Text = string.Empty;
-                MessageBox.Show("¡Personal desactivado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
-            }
-            catch (Exception ex) 
-            { 
-                 MessageBox.Show("Error Desactivar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                if (p1.ACTIVO == true)//Se desactiva
+                {
+                    at.desactivarPersonal(p1);
+                    limpiarCampos_MP();
+                    txtRutPersonal_MP.Text = string.Empty;
+                    txtVerificador_MP.Text = string.Empty;
+                    MessageBox.Show("¡Personal desactivado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+                else // Se Muestra un mensaje
+                {
+                    MessageBox.Show("¡Personal está desactivado!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Desactivar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void cbCargo_MP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (((ComboboxItem)cbCargo_MP.SelectedItem).Text == "Médico")
+            {
+                txtCuentaBanc_MP.Enabled = true;
+                cbTipoCuenta_MP.Enabled = true;
+                cbBanco_MP.Enabled = true;
+            }
+            else
+            {
+                txtCuentaBanc_MP.Enabled = false;
+                cbTipoCuenta_MP.Enabled = false;
+                cbBanco_MP.Enabled = false;
+            }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1220,5 +1245,338 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 e.Handled = true;
             }
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   MANTENEDOR PACIENTE                                                                                                        //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        int rutBuscar = 0;
+        string verificarBuscar = string.Empty;
+
+        private void pacienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbMantenedorPaciente);
+        }
+
+
+        #region Limpiar datos
+        public void limpiarDatos()
+        {
+            txtNombres_Pac.Text = string.Empty;
+            txtApellidos_Pac.Text = string.Empty;
+            txtEmail_Pac.Text = string.Empty;
+            txtContrasena_Pac.Text = string.Empty;
+            txtRutCargado_Pac.Text = string.Empty;
+            txtVerificadorCargado_Pac.Text = string.Empty;
+            dtpFechaNac_Pac.Value = (DateTime)DateTime.Today;
+
+            txtRutPaciente_Pac.Text = string.Empty;
+            txtVerificador_Pac.Text = string.Empty;
+
+        }
+        #endregion
+
+
+        private void btnCargarPaciente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                int rut = int.Parse(txtRutPaciente_Pac.Text);
+                rutBuscar = int.Parse(txtRutPaciente_Pac.Text);
+                string verificar = txtVerificador_Pac.Text;
+                verificarBuscar = txtVerificador_Pac.Text;
+
+                PACIENTE p1 = at.buscarPaciente(rut, verificar);
+                txtNombres_Pac.Text = p1.NOMBRES_PACIENTE;
+                txtApellidos_Pac.Text = p1.APELLIDOS_PACIENTE;
+                txtEmail_Pac.Text = p1.EMAIL_PACIENTE;
+                txtRutCargado_Pac.Text = p1.RUT.ToString();
+                txtVerificadorCargado_Pac.Text = p1.DIGITO_VERIFICADOR;
+
+                if (p1.SEXO.ToUpper() == "M")
+                {
+                    cbSexo_Pac.SelectedIndex = 0;
+                }
+                else if (p1.SEXO.ToUpper() == "F")
+                {
+                    cbSexo_Pac.SelectedIndex = 1;
+                }
+
+                dtpFechaNac_Pac.Text = p1.FEC_NAC.ToString();
+
+                btnRegistrar_Pac.Enabled = false;
+                btnGuardar.Enabled = true;
+                btnEliminar.Enabled = true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar paciente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnNuevoPaciente_Click(object sender, EventArgs e)
+        {
+            limpiarDatos();
+            btnRegistrar_Pac.Enabled = true;
+            btnGuardar.Enabled = false;
+            btnEliminar.Enabled = false;
+        }
+
+        private void btnRegistrar_Pac_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                PACIENTE pac = new PACIENTE();
+
+                //capturando datos
+
+                if (txtContrasena_Pac.Text == null || txtContrasena_Pac.Text == "")
+                {
+                    throw new Exception();
+                }
+
+                pac.NOMBRES_PACIENTE = txtNombres_Pac.Text;
+                pac.APELLIDOS_PACIENTE = txtApellidos_Pac.Text;
+                pac.EMAIL_PACIENTE = txtEmail_Pac.Text;
+                pac.HASHED_PASS = Util.hashMD5(txtContrasena_Pac.Text);
+                pac.RUT = int.Parse(txtRutCargado_Pac.Text);
+                pac.DIGITO_VERIFICADOR = txtVerificadorCargado_Pac.Text;
+                pac.FEC_NAC = DateTime.Parse(dtpFechaNac_Pac.Text);
+                pac.ACTIVO = true;
+
+                if (((ComboboxItem)cbSexo_Pac.SelectedItem).Value == 0)
+                {
+                    pac.SEXO = "M";
+                }
+                else if (((ComboboxItem)cbSexo_Pac.SelectedItem).Value == 1)
+                {
+                    pac.SEXO = "F";
+                }
+
+                if (!Util.isEmailValido(pac.EMAIL_PACIENTE))
+                {
+                    throw new Exception();
+                }
+
+                if (!Util.rutValido(pac.RUT, pac.DIGITO_VERIFICADOR))
+                {
+                    throw new Exception();
+                }
+
+
+                if (pac.HASHED_PASS == null || pac.HASHED_PASS == "")
+                {
+                    throw new Exception();
+                }
+
+                if (at.nuevoPaciente(pac))
+                {
+                    MessageBox.Show("¡Paciente creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    limpiarDatos();
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al crear paciente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                PACIENTE pac = at.buscarPaciente(rutBuscar, verificarBuscar);
+
+                pac.NOMBRES_PACIENTE = txtNombres_Pac.Text;
+                pac.APELLIDOS_PACIENTE = txtApellidos_Pac.Text;
+                pac.EMAIL_PACIENTE = txtEmail_Pac.Text;
+                if (txtContrasena_Pac.Text != "" || txtContrasena_Pac.Text != string.Empty)
+                {
+                    pac.HASHED_PASS = Util.hashMD5(txtContrasena_Pac.Text);
+                }
+                pac.RUT = int.Parse(txtRutCargado_Pac.Text);
+                pac.DIGITO_VERIFICADOR = txtVerificadorCargado_Pac.Text;
+                pac.FEC_NAC = DateTime.Parse(dtpFechaNac_Pac.Text);
+                pac.ACTIVO = true;
+
+                if (((ComboboxItem)cbSexo_Pac.SelectedItem).Value == 0)
+                {
+                    pac.SEXO = "M";
+                }
+                else if (((ComboboxItem)cbSexo_Pac.SelectedItem).Value == 1)
+                {
+                    pac.SEXO = "F";
+                }
+
+                if (!Util.isEmailValido(pac.EMAIL_PACIENTE))
+                {
+                    throw new Exception();
+                }
+
+                if (!Util.rutValido(pac.RUT, pac.DIGITO_VERIFICADOR))
+                {
+                    throw new Exception();
+                }
+
+                at.actualizarPaciente(pac);
+                limpiarDatos();
+                MessageBox.Show("¡Personal actualizado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error actualizar datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                PACIENTE pac = at.buscarPaciente(rutBuscar, verificarBuscar);
+                //Desactivar
+                if (pac.ACTIVO == true)//Se desactiva
+                {
+                    limpiarDatos();
+                    at.desactivarPaciente(pac);
+                    MessageBox.Show("¡Personal desactivado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                }
+                else // Se Muestra un mensaje
+                {
+                    MessageBox.Show("¡Personal está desactivado!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Desactivar personal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   MANTENEDOR EQUIPO                                                                                                          //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void equipoToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            InitGB(gbMantenerEquipo);
+        }
+
+        private void btnNuevoEquipo_Eq_Click(object sender, EventArgs e)
+        {
+            limpiarDatos();
+            btnRegistrar_Eq.Enabled = true;
+            btnGuardar_Eq.Enabled = false;
+        }
+
+        private void btnCargarEquipo_Eq_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtCantidad_Eq.Text = dgEquipo_Eq.CurrentRow.Cells["cantidad"].Value.ToString();
+                txtNombreEquipo.Text = dgEquipo_Eq.CurrentRow.Cells["nombreEquipo"].Value.ToString();
+                btnRegistrar_Eq.Enabled = false;
+                btnGuardar_Eq.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar equipo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnRegistrar_Eq_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+
+                TIPO_EQUIPO tipoEquipo = new TIPO_EQUIPO();
+                tipoEquipo.NOMBRE_TIPO_EQUIPO = txtNombreEquipo.Text;
+                tipoEquipo.ID_TIPO_EQUIPO = at.nuevoEquipoID(tipoEquipo);
+
+                if (tipoEquipo.ID_TIPO_EQUIPO == 0)
+                {
+                    throw new Exception();
+                }
+
+                INVENTARIO in1 = new INVENTARIO();
+                in1.CANT_BODEGA = int.Parse(txtCantidad_Eq.Text);
+                in1.ID_TIPO_EQUIPO = tipoEquipo.ID_TIPO_EQUIPO;
+
+
+                at.nuevoEquipoInventario(in1);
+
+                MessageBox.Show("¡Inventario creado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                limpiarDatos();
+                CargarDataGridInventario();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
+        private void btnGuardar_Eq_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AccionesTerminal at = new AccionesTerminal();
+                INVENTARIO inv = at.buscarInventario((int)dgEquipo_Eq.CurrentRow.Cells["idInventario"].Value);
+                inv.CANT_BODEGA = int.Parse(txtCantidad_Eq.Text);
+
+                TIPO_EQUIPO tipEq = at.buscarEquipoID(inv.TIPO_EQUIPO.ID_TIPO_EQUIPO);
+                tipEq.NOMBRE_TIPO_EQUIPO = txtNombreEquipo.Text;
+                at.actualizarEquipo(tipEq);
+                at.actualizarInventario(inv);
+                MessageBox.Show("¡Inventario actualizado exitosamente!", "Personal", MessageBoxButtons.OK, MessageBoxIcon.None);
+                limpiarDatos();
+                CargarDataGridInventario();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar equipo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public void CargarDataGridInventario()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            List<INVENTARIO> listaInventarioDB = at.listarInventario();
+            //List<ATENCION_AGEN> listaAtenciones = acciones.revisarAgendaDiaria(FrmLogin.usuarioLogeado.Personal.RUT, DateTime.Now);
+            List<ListaInventarioDG> listaInventarioDG = new List<ListaInventarioDG>();
+            //List<AgendaDiaria> agendaDiaria = new List<AgendaDiaria>();
+
+            if (listaInventarioDB.Count > 0)
+            {
+
+                foreach (INVENTARIO x in listaInventarioDB)
+                {
+                    listaInventarioDG.Add(new ListaInventarioDG(x.ID_INVENTARIO_EQUIPO, (int)x.CANT_BODEGA, (int)x.ID_TIPO_EQUIPO, x.TIPO_EQUIPO.NOMBRE_TIPO_EQUIPO));
+                }
+
+            }
+            dgEquipo_Eq.DataSource = listaInventarioDG;
+
+        }
+        
+        
     }
 }
