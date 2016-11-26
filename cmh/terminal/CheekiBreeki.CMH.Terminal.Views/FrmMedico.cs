@@ -49,8 +49,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 btnSesion.Text = "Iniciar sesión";
             }
 
-            rtArchivo_CAM.Enabled = false;
-            btnArchivo_CAM.Enabled = false;
+            //rtArchivo_CAM.Enabled = false;
+            //btnArchivo_CAM.Enabled = false;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -701,6 +701,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         string file = string.Empty;
 
         //No médico
+        /*
         private void btnArchivo_CAM_Click(object sender, EventArgs e)
         {
             try
@@ -719,7 +720,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 MessageBox.Show("Error al encontrar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        */
 
         private void btnCrearResultado_CAM_Click(object sender, EventArgs e)
         {
