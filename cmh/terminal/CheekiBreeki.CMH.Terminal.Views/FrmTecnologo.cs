@@ -317,6 +317,23 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             btnCrearResultado_CAM.Enabled = true;
         }
+
+        private void txtRut_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtDv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                    (e.KeyChar != 'k') && (e.KeyChar != 'K'))
+            {
+                e.Handled = true;
+            }
+        }
         #endregion
 
         #region Agenda diaria
