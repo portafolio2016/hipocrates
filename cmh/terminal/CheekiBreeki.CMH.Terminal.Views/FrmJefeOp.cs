@@ -1212,20 +1212,27 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             string mensajeCorrecto = "Horarios actualizados correctamente";
             string mensajeError = "Error al actualizar horarios";
-
-            lblError.Visible = true;
-            lblError.Text = "Actualizando horarios...";
-            btnGuardarCambios.Enabled = false;
-            lblError.ForeColor = System.Drawing.Color.Violet;
-            List<ComboboxItemObject> seleccionados = lstAsignados.Items.Cast<ComboboxItemObject>().ToList();
-            List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
-            foreach (ComboboxItemObject item in seleccionados)
+            bool res = false;
+            try
             {
-                BLOQUE nuevo = new BLOQUE();
-                nuevo.ID_BLOQUE = int.Parse(item.Value.ToString());
-                bloquesAsignados.Add(nuevo);
+                lblError.Visible = true;
+                lblError.Text = "Actualizando horarios...";
+                btnGuardarCambios.Enabled = false;
+                lblError.ForeColor = System.Drawing.Color.Violet;
+                List<ComboboxItemObject> seleccionados = lstAsignados.Items.Cast<ComboboxItemObject>().ToList();
+                List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
+                foreach (ComboboxItemObject item in seleccionados)
+                {
+                    BLOQUE nuevo = new BLOQUE();
+                    nuevo.ID_BLOQUE = int.Parse(item.Value.ToString());
+                    bloquesAsignados.Add(nuevo);
+                }
+                res = acciones.guardarCambiosHorarios(bloquesAsignados, int.Parse(txtRut.Text));
             }
-            bool res = acciones.guardarCambiosHorarios(bloquesAsignados, int.Parse(txtRut.Text));
+            catch (Exception ex)
+            {
+                res = false;
+            }
 
             if (res)
                 MessageBox.Show(mensajeCorrecto, "Creada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);

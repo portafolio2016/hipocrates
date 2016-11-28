@@ -187,7 +187,7 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.gpHorarios);
             this.Name = "FrmHorarios";
-            this.Text = "FrmHorarios";
+            this.Text = "Centro médico Hipócrates";
             this.gpHorarios.ResumeLayout(false);
             this.gpHorarios.PerformLayout();
             this.gpAsignados.ResumeLayout(false);
