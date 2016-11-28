@@ -739,15 +739,15 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 at.actualuzarAtencionAgendadaEstado(atencionAg);
 
                 res = at.nuevoResultadoAtencion(resultadoAtencion);
+                actualizarBloquesMisticos();
             }
             catch(Exception ex)
             {
                 res = false;
-                
             }
 
             if (res == true)
-                MessageBox.Show("Creada el resultado de atención", "Creada", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MessageBox.Show("Creado el resultado de atención", "Creada", MessageBoxButtons.OK, MessageBoxIcon.None);
             else
                 MessageBox.Show("Error al crear resultado de atención", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -756,7 +756,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             AccionesTerminal at = new AccionesTerminal();
             bool res = false;
-           // int rut = int.Parse(txtRutPaciente_CAM.Text);
+            // int rut = int.Parse(txtRutPaciente_CAM.Text);
             lblError_CAM.Visible = false;
             lstAtenciones_CAM.Items.Clear();
             try
@@ -765,21 +765,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     res = false;
                 else
                 {
-                    
-                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
-
-                    if (atenciones.Count <= 0)
-                    {
-                        MessageBox.Show("No tiene ninguna atención", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    foreach (ATENCION_AGEN atencion in atenciones)
-                    {
-                        ComboboxItem item = new ComboboxItem();
-                        item.Value = atencion.ID_ATENCION_AGEN;
-                        item.Text = "Atención: " + atencion.ID_ATENCION_AGEN + " - Médico: " + atencion.PERS_MEDICO.PERSONAL.NOMBREFULL;
-                        lstAtenciones_CAM.Items.Add(item);
-                    }
-                   
+                    actualizarBloquesMisticos();
                     res = true;
                 }
             }
@@ -796,6 +782,26 @@ namespace CheekiBreeki.CMH.Terminal.Views
             if (Util.isObjetoNulo(lstAtenciones_CAM.SelectedValue))
             {
                 btnCrearResultado_CAM.Enabled = false;
+            }
+            
+        }
+
+        private void actualizarBloquesMisticos()
+        {
+            AccionesTerminal at = new AccionesTerminal();
+            lstAtenciones_CAM.Items.Clear();
+            List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
+
+            if (atenciones.Count <= 0)
+            {
+                MessageBox.Show("No tiene ninguna atención", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            foreach (ATENCION_AGEN atencion in atenciones)
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Value = atencion.ID_ATENCION_AGEN;
+                item.Text = "Atención: " + atencion.ID_ATENCION_AGEN + " - Médico: " + atencion.PERS_MEDICO.PERSONAL.NOMBREFULL;
+                lstAtenciones_CAM.Items.Add(item);
             }
         }
 

@@ -334,14 +334,14 @@
             // abrirCajaToolStripMenuItem
             // 
             this.abrirCajaToolStripMenuItem.Name = "abrirCajaToolStripMenuItem";
-            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.abrirCajaToolStripMenuItem.Text = "Abrir caja";
             this.abrirCajaToolStripMenuItem.Click += new System.EventHandler(this.abrirCajaToolStripMenuItem_Click);
             // 
             // cerrarCjaToolStripMenuItem
             // 
             this.cerrarCjaToolStripMenuItem.Name = "cerrarCjaToolStripMenuItem";
-            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cerrarCjaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.cerrarCjaToolStripMenuItem.Text = "Cerrar caja";
             this.cerrarCjaToolStripMenuItem.Click += new System.EventHandler(this.cerrarCjaToolStripMenuItem_Click);
             // 
@@ -497,7 +497,7 @@
             this.Controls.Add(this.groupBox1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmCrearPaciente";
-            this.Text = "Inicio";
+            this.Text = "Centro médico Hipócrates";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmCrearPaciente_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
