@@ -373,6 +373,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         //                                                                                                                              //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private static List<ATENCION_AGEN> atenciones = new List<ATENCION_AGEN>();
+        private static ATENCION_AGEN atencion = new ATENCION_AGEN();
 
         private void muestrasParaAnálisisToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -392,6 +393,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     {
                         dgAtencionesMPA.Rows.Add(x.PACIENTE.NOMBRES_PACIENTE +" "+x.PACIENTE.APELLIDOS_PACIENTE, x.FECHOR.Value.ToString());
                     }
+                    atencion = atenciones[0];
                     btnMuestraLista.Enabled = true;
                 }
                 else
@@ -402,6 +404,26 @@ namespace CheekiBreeki.CMH.Terminal.Views
             else
             {
                 btnMuestraLista.Enabled = false;
+            }
+        }
+
+        private void btnMuestraLista_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(rtComentarioMPA.Text))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Campo de comentario vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgAtencionesMPA_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1 && e.RowIndex >= 0)
+            {
+                atencion = atenciones[e.RowIndex];
             }
         }
     }

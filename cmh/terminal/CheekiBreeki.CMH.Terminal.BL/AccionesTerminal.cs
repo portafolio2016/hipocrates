@@ -2606,5 +2606,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
             return (atenciones);
         }
+
+        public bool RegistrarMuestra(int idAtencion, string comentario)
+        {
+            bool x = false;
+
+            return x;
+        }
     }
 }

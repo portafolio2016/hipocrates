@@ -563,6 +563,7 @@
             this.btnMuestraLista.TabIndex = 1;
             this.btnMuestraLista.Text = "Muestra lista";
             this.btnMuestraLista.UseVisualStyleBackColor = true;
+            this.btnMuestraLista.Click += new System.EventHandler(this.btnMuestraLista_Click);
             // 
             // dgAtencionesMPA
             // 
@@ -577,6 +578,7 @@
             this.dgAtencionesMPA.ReadOnly = true;
             this.dgAtencionesMPA.Size = new System.Drawing.Size(754, 247);
             this.dgAtencionesMPA.TabIndex = 0;
+            this.dgAtencionesMPA.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAtencionesMPA_CellClick);
             // 
             // rtComentarioMPA
             // 
