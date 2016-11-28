@@ -76,9 +76,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             break;
 
                         case "TECNOLOGO":
-                            FrmMain frmMain4 = new FrmMain(this);
-                            frmMain4.Show();
-                            frmMain4.Activate();
+                            FrmTecnologo frmTecnologo = new FrmTecnologo(this);
+                            frmTecnologo.Show();
+                            frmTecnologo.Activate();
                             this.Hide();
                             break;
                     }
