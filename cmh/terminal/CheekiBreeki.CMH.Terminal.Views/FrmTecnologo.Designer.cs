@@ -449,7 +449,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmTecnologo";
-            this.Text = "Tecnólogo";
+            this.Text = "Centro médico Hipócrates";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmTecnologo_FormClosed);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
