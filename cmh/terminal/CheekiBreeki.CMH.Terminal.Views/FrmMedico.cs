@@ -773,7 +773,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 else
                 {
                     
-                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
+                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadasPersonalMedicoLogueado(int.Parse(txtRutPaciente_CAM.Text),FrmLogin.usuarioLogeado.Personal.ID_PERSONAL).ToList();
 
                     if (atenciones.Count <= 0)
                     {
