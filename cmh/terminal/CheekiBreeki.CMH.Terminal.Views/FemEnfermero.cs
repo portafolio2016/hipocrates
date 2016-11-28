@@ -166,6 +166,8 @@ namespace CheekiBreeki.CMH.Terminal.Views
             gbOpcionesUsuario.Hide();
             gbAbrirOrdenAnalisis.Hide();
             gbCerrarOrdenAnalisis.Hide();
+            gbMuestrasParaAnalisis.Hide();
+            gbAgendaDiaria.Hide();
             //
             //AGREGAR LOS OTROS GB QUE FALTEN
             //
@@ -363,6 +365,44 @@ namespace CheekiBreeki.CMH.Terminal.Views
             }
             dgAgendaDiaria.DataSource = agendaDiaria;
 
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                                                                                              //
+        //   MUESTRA LISTA                                                                                                              //
+        //                                                                                                                              //
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private static List<ATENCION_AGEN> atenciones = new List<ATENCION_AGEN>();
+
+        private void muestrasParaAnálisisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InitGB(gbMuestrasParaAnalisis);
+            CargarAtencionesSinMuestra();
+        }
+
+        private void CargarAtencionesSinMuestra()
+        {
+            dgAtencionesMPA.Rows.Clear();
+            atenciones = acciones.listaAtencionesPagadasDeMedico(FrmLogin.usuarioLogeado.Personal.PERS_MEDICO.FirstOrDefault().ID_PERSONAL_MEDICO);
+            if (atenciones != null)
+            {
+                if (atenciones.Count > 0)
+                {
+                    foreach (ATENCION_AGEN x in atenciones)
+                    {
+                        dgAtencionesMPA.Rows.Add(x.PACIENTE.NOMBRES_PACIENTE +" "+x.PACIENTE.APELLIDOS_PACIENTE, x.FECHOR.Value.ToString());
+                    }
+                    btnMuestraLista.Enabled = true;
+                }
+                else
+                {
+                    btnMuestraLista.Enabled = false;
+                }
+            }
+            else
+            {
+                btnMuestraLista.Enabled = false;
+            }
         }
     }
 }

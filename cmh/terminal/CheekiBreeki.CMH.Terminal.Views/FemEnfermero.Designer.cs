@@ -36,9 +36,13 @@
             this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarOrdenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agendaDiariaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.muestrasParaAnálisisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
+            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.gbCerrarOrdenAnalisis = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.rtComentario = new System.Windows.Forms.RichTextBox();
@@ -68,14 +72,18 @@
             this.NombrePaciente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaExamen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.agendaDiariaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.muestrasParaAnálisisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
-            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
+            this.gbMuestrasParaAnalisis = new System.Windows.Forms.GroupBox();
+            this.btnMuestraLista = new System.Windows.Forms.Button();
+            this.dgAtencionesMPA = new System.Windows.Forms.DataGridView();
+            this.rtComentarioMPA = new System.Windows.Forms.RichTextBox();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.gbAgendaDiaria.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).BeginInit();
             this.gbCerrarOrdenAnalisis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCerrarOrdenAnalisis)).BeginInit();
             this.gbOpcionesUsuario.SuspendLayout();
@@ -83,8 +91,8 @@
             this.groupBox4.SuspendLayout();
             this.gbAbrirOrdenAnalisis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAtencionesAOA)).BeginInit();
-            this.gbAgendaDiaria.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).BeginInit();
+            this.gbMuestrasParaAnalisis.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAtencionesMPA)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -153,16 +161,30 @@
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.abrirToolStripMenuItem.Text = "Abrir orden";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // cerrarOrdenToolStripMenuItem
             // 
             this.cerrarOrdenToolStripMenuItem.Name = "cerrarOrdenToolStripMenuItem";
-            this.cerrarOrdenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cerrarOrdenToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.cerrarOrdenToolStripMenuItem.Text = "Cerrar orden";
             this.cerrarOrdenToolStripMenuItem.Click += new System.EventHandler(this.cerrarOrdenToolStripMenuItem_Click);
+            // 
+            // agendaDiariaToolStripMenuItem
+            // 
+            this.agendaDiariaToolStripMenuItem.Name = "agendaDiariaToolStripMenuItem";
+            this.agendaDiariaToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.agendaDiariaToolStripMenuItem.Text = "Agenda diaria";
+            this.agendaDiariaToolStripMenuItem.Click += new System.EventHandler(this.agendaDiariaToolStripMenuItem_Click);
+            // 
+            // muestrasParaAnálisisToolStripMenuItem
+            // 
+            this.muestrasParaAnálisisToolStripMenuItem.Name = "muestrasParaAnálisisToolStripMenuItem";
+            this.muestrasParaAnálisisToolStripMenuItem.Size = new System.Drawing.Size(134, 20);
+            this.muestrasParaAnálisisToolStripMenuItem.Text = "Muestras para análisis";
+            this.muestrasParaAnálisisToolStripMenuItem.Click += new System.EventHandler(this.muestrasParaAnálisisToolStripMenuItem_Click);
             // 
             // groupBox2
             // 
@@ -184,16 +206,42 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.gbMuestrasParaAnalisis);
             this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.Controls.Add(this.gbAbrirOrdenAnalisis);
             this.groupBox1.Controls.Add(this.gbAgendaDiaria);
             this.groupBox1.Controls.Add(this.gbCerrarOrdenAnalisis);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
-            this.groupBox1.Controls.Add(this.gbAbrirOrdenAnalisis);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
+            // 
+            // gbAgendaDiaria
+            // 
+            this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
+            this.gbAgendaDiaria.Location = new System.Drawing.Point(6, 43);
+            this.gbAgendaDiaria.Name = "gbAgendaDiaria";
+            this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
+            this.gbAgendaDiaria.TabIndex = 5;
+            this.gbAgendaDiaria.TabStop = false;
+            this.gbAgendaDiaria.Text = "Agenda diaria";
+            this.gbAgendaDiaria.Visible = false;
+            // 
+            // dgAgendaDiaria
+            // 
+            this.dgAgendaDiaria.AllowUserToAddRows = false;
+            this.dgAgendaDiaria.AllowUserToDeleteRows = false;
+            this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
+            this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
+            this.dgAgendaDiaria.Name = "dgAgendaDiaria";
+            this.dgAgendaDiaria.ReadOnly = true;
+            this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
+            this.dgAgendaDiaria.TabIndex = 1;
             // 
             // gbCerrarOrdenAnalisis
             // 
@@ -494,43 +542,67 @@
             this.Comentario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Comentario.Width = 66;
             // 
-            // agendaDiariaToolStripMenuItem
+            // gbMuestrasParaAnalisis
             // 
-            this.agendaDiariaToolStripMenuItem.Name = "agendaDiariaToolStripMenuItem";
-            this.agendaDiariaToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
-            this.agendaDiariaToolStripMenuItem.Text = "Agenda diaria";
-            this.agendaDiariaToolStripMenuItem.Click += new System.EventHandler(this.agendaDiariaToolStripMenuItem_Click);
+            this.gbMuestrasParaAnalisis.Controls.Add(this.rtComentarioMPA);
+            this.gbMuestrasParaAnalisis.Controls.Add(this.btnMuestraLista);
+            this.gbMuestrasParaAnalisis.Controls.Add(this.dgAtencionesMPA);
+            this.gbMuestrasParaAnalisis.Location = new System.Drawing.Point(6, 43);
+            this.gbMuestrasParaAnalisis.Name = "gbMuestrasParaAnalisis";
+            this.gbMuestrasParaAnalisis.Size = new System.Drawing.Size(768, 462);
+            this.gbMuestrasParaAnalisis.TabIndex = 11;
+            this.gbMuestrasParaAnalisis.TabStop = false;
+            this.gbMuestrasParaAnalisis.Text = "Muestras para análisis";
+            this.gbMuestrasParaAnalisis.Visible = false;
             // 
-            // muestrasParaAnálisisToolStripMenuItem
+            // btnMuestraLista
             // 
-            this.muestrasParaAnálisisToolStripMenuItem.Name = "muestrasParaAnálisisToolStripMenuItem";
-            this.muestrasParaAnálisisToolStripMenuItem.Size = new System.Drawing.Size(134, 20);
-            this.muestrasParaAnálisisToolStripMenuItem.Text = "Muestras para análisis";
+            this.btnMuestraLista.Location = new System.Drawing.Point(296, 425);
+            this.btnMuestraLista.Name = "btnMuestraLista";
+            this.btnMuestraLista.Size = new System.Drawing.Size(190, 23);
+            this.btnMuestraLista.TabIndex = 1;
+            this.btnMuestraLista.Text = "Muestra lista";
+            this.btnMuestraLista.UseVisualStyleBackColor = true;
             // 
-            // gbAgendaDiaria
+            // dgAtencionesMPA
             // 
-            this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
-            this.gbAgendaDiaria.Location = new System.Drawing.Point(6, 43);
-            this.gbAgendaDiaria.Name = "gbAgendaDiaria";
-            this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
-            this.gbAgendaDiaria.TabIndex = 5;
-            this.gbAgendaDiaria.TabStop = false;
-            this.gbAgendaDiaria.Text = "Agenda diaria";
-            this.gbAgendaDiaria.Visible = false;
+            this.dgAtencionesMPA.AllowUserToAddRows = false;
+            this.dgAtencionesMPA.AllowUserToDeleteRows = false;
+            this.dgAtencionesMPA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAtencionesMPA.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            this.dgAtencionesMPA.Location = new System.Drawing.Point(8, 27);
+            this.dgAtencionesMPA.Name = "dgAtencionesMPA";
+            this.dgAtencionesMPA.ReadOnly = true;
+            this.dgAtencionesMPA.Size = new System.Drawing.Size(754, 247);
+            this.dgAtencionesMPA.TabIndex = 0;
             // 
-            // dgAgendaDiaria
+            // rtComentarioMPA
             // 
-            this.dgAgendaDiaria.AllowUserToAddRows = false;
-            this.dgAgendaDiaria.AllowUserToDeleteRows = false;
-            this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
-            this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
-            this.dgAgendaDiaria.Name = "dgAgendaDiaria";
-            this.dgAgendaDiaria.ReadOnly = true;
-            this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
-            this.dgAgendaDiaria.TabIndex = 1;
+            this.rtComentarioMPA.Location = new System.Drawing.Point(8, 280);
+            this.rtComentarioMPA.Name = "rtComentarioMPA";
+            this.rtComentarioMPA.Size = new System.Drawing.Size(754, 139);
+            this.rtComentarioMPA.TabIndex = 2;
+            this.rtComentarioMPA.Text = "";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Nombre paciente";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn4.Width = 85;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Fecha examen";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn5.Width = 75;
             // 
             // FemEnfermero
             // 
@@ -551,6 +623,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbAgendaDiaria.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
             this.gbCerrarOrdenAnalisis.ResumeLayout(false);
             this.gbCerrarOrdenAnalisis.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCerrarOrdenAnalisis)).EndInit();
@@ -562,8 +636,8 @@
             this.gbAbrirOrdenAnalisis.ResumeLayout(false);
             this.gbAbrirOrdenAnalisis.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAtencionesAOA)).EndInit();
-            this.gbAgendaDiaria.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
+            this.gbMuestrasParaAnalisis.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgAtencionesMPA)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -614,5 +688,11 @@
         private System.Windows.Forms.ToolStripMenuItem muestrasParaAnálisisToolStripMenuItem;
         private System.Windows.Forms.GroupBox gbAgendaDiaria;
         private System.Windows.Forms.DataGridView dgAgendaDiaria;
+        private System.Windows.Forms.GroupBox gbMuestrasParaAnalisis;
+        private System.Windows.Forms.RichTextBox rtComentarioMPA;
+        private System.Windows.Forms.Button btnMuestraLista;
+        private System.Windows.Forms.DataGridView dgAtencionesMPA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }
