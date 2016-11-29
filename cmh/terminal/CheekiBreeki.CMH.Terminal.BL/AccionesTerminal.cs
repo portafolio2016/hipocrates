@@ -2623,6 +2623,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 RES_ATENCION respuesta = new RES_ATENCION();
                 respuesta.ATENCION_ABIERTA = true;
                 respuesta.COMENTARIO = comentario;
+                respuesta.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
                 con.RES_ATENCION.Add(respuesta);
                 con.SaveChangesAsync();
                 x = true;

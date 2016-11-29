@@ -433,7 +433,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 {
                     acciones = new AccionesTerminal();
                     CargarAtencionesSinMuestra();
-                    MessageBox.Show("La atencion ahora tiene una muestra asociada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("La atencion ahora tiene una muestra asociada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }else
                     MessageBox.Show("Error al ingresar muestra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
