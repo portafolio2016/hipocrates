@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -192,7 +193,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 resAtencion = null;
                 dgAtencionesAOA.Rows.Clear();
                 AccionesTerminal ac = new AccionesTerminal();
-                resAtenciones = ac.ResAtencionesAptasParaAnalisis();
+                resAtenciones = ac.ResAtencionesAptasParaAnalisis(FrmLogin.usuarioLogeado.Personal.ID_PERSONAL);
                 foreach (RES_ATENCION x in resAtenciones)
                 {
                     if (x.COMENTARIO == null)
@@ -222,6 +223,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             if(resAtencion != null){
                 bool x = ac.generarOrdenDeAnalisis(resAtencion.ATENCION_AGEN, resAtencion);
                 if(x){
+                    acciones = new AccionesTerminal();
                     InitAbrirOrden();
                     MessageBox.Show("Orden de análisis abierta", "Abierta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 } 
@@ -256,10 +258,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
             try
             {
                 resAtencion = null;
-                rtComentario.Text = "";
                 dgCerrarOrdenAnalisis.Rows.Clear();
                 AccionesTerminal ac = new AccionesTerminal();
-                List<RES_ATENCION> aux = ac.ResAtencionesAptasParaCerrarAnalisis();
+                List<RES_ATENCION> aux = ac.ResAtencionesAptasParaCerrarAnalisis(FrmLogin.usuarioLogeado.Personal.ID_PERSONAL);
                 resAtenciones = new List<RES_ATENCION>();
                 foreach (RES_ATENCION x in aux)
                 {
@@ -271,7 +272,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     if (x.COMENTARIO == null)
                         x.COMENTARIO = string.Empty;
                     dgCerrarOrdenAnalisis.Rows.Add(x.ATENCION_AGEN.PACIENTE.NOMBRES_PACIENTE + " " + x.ATENCION_AGEN.PACIENTE.APELLIDOS_PACIENTE,
-                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO, "Ver PDF");
+                                             x.ATENCION_AGEN.FECHOR.Value.ToShortDateString(), x.ORDEN_ANALISIS.FECHOR_EMISION.Value.ToShortDateString(), x.COMENTARIO);
                 }
                 if (resAtenciones.Count == 0)
                 {
@@ -296,10 +297,26 @@ namespace CheekiBreeki.CMH.Terminal.Views
             AccionesTerminal ac = new AccionesTerminal();
             if (resAtencion != null)
             {
-                if(!string.IsNullOrEmpty(rtComentario.Text.Trim())){
-                    bool x = ac.cerrarOrdenDeAnalisis(resAtencion.ORDEN_ANALISIS, resAtencion, rtComentario.Text);
+                if(!string.IsNullOrEmpty(file)){
+                    string clob = string.Empty;
+                    string extension = string.Empty;
+                    try
+                    {
+                        ConversorBase64 conversor = new ConversorBase64();
+                        clob = conversor.convertirABase64(file);
+                        extension = Path.GetExtension(file).ToString().Substring(1, 3);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error con el archivo adjunto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    resAtencion.ARCHIVO_B64 = clob;
+                    resAtencion.EXT_ARCHIVO = extension;
+                    bool x = ac.CerrarOrdenAnalisis(resAtencion);
                     if (x)
                     {
+                        acciones = new AccionesTerminal();
                         InitCerrarOrden();
                         MessageBox.Show("Orden de análisis cerrada", "Abierta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
@@ -307,7 +324,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         MessageBox.Show("No se ha podido cerrar la orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
-                    MessageBox.Show("El campo de comentario esta vacio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se adjunto un archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
                 MessageBox.Show("No ha seleccionado una orden de análisis", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -409,9 +426,16 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnMuestraLista_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(rtComentarioMPA.Text))
+            if (!string.IsNullOrEmpty(rtComentarioMPA.Text.Trim()))
             {
-
+                bool x = acciones.RegistrarMuestra(atencion.ID_ATENCION_AGEN, rtComentarioMPA.Text);
+                if (x)
+                {
+                    acciones = new AccionesTerminal();
+                    CargarAtencionesSinMuestra();
+                    MessageBox.Show("La atencion ahora tiene una muestra asociada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }else
+                    MessageBox.Show("Error al ingresar muestra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -424,6 +448,26 @@ namespace CheekiBreeki.CMH.Terminal.Views
             if (e.ColumnIndex == 1 && e.RowIndex >= 0)
             {
                 atencion = atenciones[e.RowIndex];
+            }
+        }
+
+        string file = string.Empty;
+        private void btnArchivo_CAM_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog buscar = new OpenFileDialog();
+
+                if (buscar.ShowDialog() == DialogResult.OK)
+                {
+                    //Ruta del archivo
+                    rtArchivo_CAM.Text = buscar.FileName;
+                    file = buscar.FileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al encontrar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
