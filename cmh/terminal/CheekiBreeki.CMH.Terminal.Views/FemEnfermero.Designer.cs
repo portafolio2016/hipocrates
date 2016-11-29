@@ -60,6 +60,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btCerrarOrdenAnalisis = new System.Windows.Forms.Button();
             this.dgCerrarOrdenAnalisis = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaAperturaOrden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VerDocumento = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -93,6 +98,8 @@
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.gbAbrirOrdenAnalisis.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAtencionesAOA)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -436,6 +443,49 @@
             this.dgCerrarOrdenAnalisis.TabIndex = 0;
             this.dgCerrarOrdenAnalisis.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCerrarOrdenAnalisis_CellClick_1);
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Nombre paciente";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 85;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Fecha examen";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn2.Width = 75;
+            // 
+            // FechaAperturaOrden
+            // 
+            this.FechaAperturaOrden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FechaAperturaOrden.HeaderText = "Fecha apertura orden análisis";
+            this.FechaAperturaOrden.Name = "FechaAperturaOrden";
+            this.FechaAperturaOrden.ReadOnly = true;
+            this.FechaAperturaOrden.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FechaAperturaOrden.Width = 106;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Comentario";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn3.Width = 66;
+            // 
+            // VerDocumento
+            // 
+            this.VerDocumento.HeaderText = "Ver documento";
+            this.VerDocumento.Name = "VerDocumento";
+            this.VerDocumento.ReadOnly = true;
+            this.VerDocumento.Text = "Descargar documento";
+            // 
             // gbOpcionesUsuario
             // 
             this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
@@ -545,7 +595,7 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
-            // dataGridViewTextBoxColumn1
+            // gbAbrirOrdenAnalisis
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dataGridViewTextBoxColumn1.HeaderText = "Nombre paciente";
@@ -554,7 +604,7 @@
             this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn1.Width = 85;
             // 
-            // dataGridViewTextBoxColumn2
+            // label1
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dataGridViewTextBoxColumn2.HeaderText = "Fecha examen";
@@ -563,7 +613,7 @@
             this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn2.Width = 75;
             // 
-            // FechaAperturaOrden
+            // btnAbrirOrden
             // 
             this.FechaAperturaOrden.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.FechaAperturaOrden.HeaderText = "Fecha apertura orden análisis";
@@ -572,7 +622,7 @@
             this.FechaAperturaOrden.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.FechaAperturaOrden.Width = 106;
             // 
-            // dataGridViewTextBoxColumn3
+            // dgAtencionesAOA
             // 
             this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dataGridViewTextBoxColumn3.HeaderText = "Comentario";
@@ -618,7 +668,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FemEnfermero";
-            this.Text = "Enfermero";
+            this.Text = "Centro médico Hipócrates";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FemEnfermero_FormClosed);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -643,6 +693,9 @@
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.gbAbrirOrdenAnalisis.ResumeLayout(false);
+            this.gbAbrirOrdenAnalisis.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAtencionesAOA)).EndInit();
             this.ResumeLayout(false);
 
         }

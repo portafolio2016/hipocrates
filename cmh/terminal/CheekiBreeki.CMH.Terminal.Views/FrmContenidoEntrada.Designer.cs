@@ -58,7 +58,7 @@
             this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmContenidoEntrada";
-            this.Text = "Contenido Entrada";
+            this.Text = "Centro médico Hipócrates";
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -35,74 +35,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.prestaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.equipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logPagosHonorarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reporteDeCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.horariosPersonalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbMantenerPrestacion = new System.Windows.Forms.GroupBox();
-            this.gbMantenedorPersonal = new System.Windows.Forms.GroupBox();
-            this.gpMedico_MP = new System.Windows.Forms.GroupBox();
-            this.cbBanco_MP = new System.Windows.Forms.ComboBox();
-            this.lblBanco_MP = new System.Windows.Forms.Label();
-            this.cbTipoCuenta_MP = new System.Windows.Forms.ComboBox();
-            this.lblTipoCuenta_MP = new System.Windows.Forms.Label();
-            this.lblCuentaBanc_MP = new System.Windows.Forms.Label();
-            this.txtCuentaBanc_MP = new System.Windows.Forms.TextBox();
-            this.cbCargo_MP = new System.Windows.Forms.ComboBox();
-            this.lblCargo_MP = new System.Windows.Forms.Label();
-            this.btnEliminar_MP = new System.Windows.Forms.Button();
-            this.btnGuardar_MP = new System.Windows.Forms.Button();
-            this.btnRegistrar_MP = new System.Windows.Forms.Button();
-            this.txtDescuento_MP = new System.Windows.Forms.TextBox();
-            this.txtRemuneracion_MP = new System.Windows.Forms.TextBox();
-            this.txtContrasena_MP = new System.Windows.Forms.TextBox();
-            this.txtEmail_MP = new System.Windows.Forms.TextBox();
-            this.txtApellidos_MP = new System.Windows.Forms.TextBox();
-            this.txtNombres_MP = new System.Windows.Forms.TextBox();
-            this.lblDescuento_MP = new System.Windows.Forms.Label();
-            this.lblRemuneracion = new System.Windows.Forms.Label();
-            this.txtVerificadorCargado_MP = new System.Windows.Forms.TextBox();
-            this.lblGuionCargado_MP = new System.Windows.Forms.Label();
-            this.txtRutPersonalCargado_MP = new System.Windows.Forms.TextBox();
-            this.lblRutPersonalCargado_MP = new System.Windows.Forms.Label();
-            this.lblContrasena_MP = new System.Windows.Forms.Label();
-            this.lblEmail_MP = new System.Windows.Forms.Label();
-            this.btnCrearPersonal_MP = new System.Windows.Forms.Button();
-            this.lblApellidos_MP = new System.Windows.Forms.Label();
-            this.lblNombre_MP = new System.Windows.Forms.Label();
-            this.btnCargarDatos_MP = new System.Windows.Forms.Button();
-            this.txtVerificador_MP = new System.Windows.Forms.TextBox();
-            this.lblGuion_MP = new System.Windows.Forms.Label();
-            this.txtRutPersonal_MP = new System.Windows.Forms.TextBox();
-            this.lblRutPersonal_MP = new System.Windows.Forms.Label();
-            this.btnCargarPorCodigoMPre = new System.Windows.Forms.Button();
-            this.btnNuevaPrestacionMPre = new System.Windows.Forms.Button();
-            this.btnCargarPorLista = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbCodigoPrestacionMPre = new System.Windows.Forms.TextBox();
-            this.cbPrestacionesMPre = new System.Windows.Forms.ComboBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.tbCodigoMPre = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnGuardarMpre = new System.Windows.Forms.Button();
-            this.btnEliminarMPre = new System.Windows.Forms.Button();
-            this.btnRegistrarMPre = new System.Windows.Forms.Button();
-            this.btnRemoveMPre = new System.Windows.Forms.Button();
-            this.btnAddMPre = new System.Windows.Forms.Button();
-            this.lbxEquiposPrestacionMPre = new System.Windows.Forms.ListBox();
-            this.lbxEquiposMPre = new System.Windows.Forms.ListBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbNombrePrestacionMPre = new System.Windows.Forms.TextBox();
-            this.tbPrecioPrestacionMPre = new System.Windows.Forms.TextBox();
-            this.cbTipoPrestacionMPre = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -144,6 +76,26 @@
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.dtFechaLPH = new System.Windows.Forms.DateTimePicker();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mantenedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.prestaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pacienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.equipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logPagosHonorarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reporteDeCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.horariosPersonalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbMantenerEquipo = new System.Windows.Forms.GroupBox();
+            this.btnCargarEquipo_Eq = new System.Windows.Forms.Button();
+            this.btnNuevoEquipo_Eq = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.txtNombreEquipo = new System.Windows.Forms.TextBox();
+            this.btnGuardar_Eq = new System.Windows.Forms.Button();
+            this.btnRegistrar_Eq = new System.Windows.Forms.Button();
+            this.txtCantidad_Eq = new System.Windows.Forms.TextBox();
+            this.lblNombreTipo = new System.Windows.Forms.Label();
+            this.lblCantidad_Eq = new System.Windows.Forms.Label();
+            this.dgEquipo_Eq = new System.Windows.Forms.DataGridView();
             this.gbMantenedorPaciente = new System.Windows.Forms.GroupBox();
             this.txtVerificadorCargado_Pac = new System.Windows.Forms.TextBox();
             this.dtpFechaNac_Pac = new System.Windows.Forms.DateTimePicker();
@@ -169,25 +121,68 @@
             this.lblGuion = new System.Windows.Forms.Label();
             this.txtRutPaciente_Pac = new System.Windows.Forms.TextBox();
             this.lblRutPaciente = new System.Windows.Forms.Label();
-            this.gbMantenerEquipo = new System.Windows.Forms.GroupBox();
-            this.btnCargarEquipo_Eq = new System.Windows.Forms.Button();
-            this.btnNuevoEquipo_Eq = new System.Windows.Forms.Button();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.txtNombreEquipo = new System.Windows.Forms.TextBox();
-            this.btnGuardar_Eq = new System.Windows.Forms.Button();
-            this.btnRegistrar_Eq = new System.Windows.Forms.Button();
-            this.txtCantidad_Eq = new System.Windows.Forms.TextBox();
-            this.lblNombreTipo = new System.Windows.Forms.Label();
-            this.lblCantidad_Eq = new System.Windows.Forms.Label();
-            this.dgEquipo_Eq = new System.Windows.Forms.DataGridView();
+            this.gbMantenedorPersonal = new System.Windows.Forms.GroupBox();
+            this.gpMedico_MP = new System.Windows.Forms.GroupBox();
+            this.cbBanco_MP = new System.Windows.Forms.ComboBox();
+            this.lblBanco_MP = new System.Windows.Forms.Label();
+            this.cbTipoCuenta_MP = new System.Windows.Forms.ComboBox();
+            this.lblTipoCuenta_MP = new System.Windows.Forms.Label();
+            this.lblCuentaBanc_MP = new System.Windows.Forms.Label();
+            this.txtCuentaBanc_MP = new System.Windows.Forms.TextBox();
+            this.cbCargo_MP = new System.Windows.Forms.ComboBox();
+            this.lblCargo_MP = new System.Windows.Forms.Label();
+            this.btnEliminar_MP = new System.Windows.Forms.Button();
+            this.btnGuardar_MP = new System.Windows.Forms.Button();
+            this.btnRegistrar_MP = new System.Windows.Forms.Button();
+            this.txtDescuento_MP = new System.Windows.Forms.TextBox();
+            this.txtRemuneracion_MP = new System.Windows.Forms.TextBox();
+            this.txtContrasena_MP = new System.Windows.Forms.TextBox();
+            this.txtEmail_MP = new System.Windows.Forms.TextBox();
+            this.txtApellidos_MP = new System.Windows.Forms.TextBox();
+            this.txtNombres_MP = new System.Windows.Forms.TextBox();
+            this.lblDescuento_MP = new System.Windows.Forms.Label();
+            this.lblRemuneracion = new System.Windows.Forms.Label();
+            this.txtVerificadorCargado_MP = new System.Windows.Forms.TextBox();
+            this.lblGuionCargado_MP = new System.Windows.Forms.Label();
+            this.txtRutPersonalCargado_MP = new System.Windows.Forms.TextBox();
+            this.lblRutPersonalCargado_MP = new System.Windows.Forms.Label();
+            this.lblContrasena_MP = new System.Windows.Forms.Label();
+            this.lblEmail_MP = new System.Windows.Forms.Label();
+            this.btnCrearPersonal_MP = new System.Windows.Forms.Button();
+            this.lblApellidos_MP = new System.Windows.Forms.Label();
+            this.lblNombre_MP = new System.Windows.Forms.Label();
+            this.btnCargarDatos_MP = new System.Windows.Forms.Button();
+            this.txtVerificador_MP = new System.Windows.Forms.TextBox();
+            this.lblGuion_MP = new System.Windows.Forms.Label();
+            this.txtRutPersonal_MP = new System.Windows.Forms.TextBox();
+            this.lblRutPersonal_MP = new System.Windows.Forms.Label();
+            this.gbMantenerPrestacion = new System.Windows.Forms.GroupBox();
+            this.btnCargarPorCodigoMPre = new System.Windows.Forms.Button();
+            this.btnNuevaPrestacionMPre = new System.Windows.Forms.Button();
+            this.btnCargarPorLista = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbCodigoPrestacionMPre = new System.Windows.Forms.TextBox();
+            this.cbPrestacionesMPre = new System.Windows.Forms.ComboBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.tbCodigoMPre = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnGuardarMpre = new System.Windows.Forms.Button();
+            this.btnEliminarMPre = new System.Windows.Forms.Button();
+            this.btnRegistrarMPre = new System.Windows.Forms.Button();
+            this.btnRemoveMPre = new System.Windows.Forms.Button();
+            this.btnAddMPre = new System.Windows.Forms.Button();
+            this.lbxEquiposPrestacionMPre = new System.Windows.Forms.ListBox();
+            this.lbxEquiposMPre = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbNombrePrestacionMPre = new System.Windows.Forms.TextBox();
+            this.tbPrecioPrestacionMPre = new System.Windows.Forms.TextBox();
+            this.cbTipoPrestacionMPre = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.gbMantenerPrestacion.SuspendLayout();
-            this.gbMantenedorPersonal.SuspendLayout();
-            this.gpMedico_MP.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -197,10 +192,15 @@
             this.gbReporteCaja.SuspendLayout();
             this.gbLogPagoHonorarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).BeginInit();
-            this.gbMantenedorPaciente.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.gbMantenerEquipo.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).BeginInit();
+            this.gbMantenedorPaciente.SuspendLayout();
+            this.gbMantenedorPersonal.SuspendLayout();
+            this.gpMedico_MP.SuspendLayout();
+            this.gbMantenerPrestacion.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -279,670 +279,6 @@
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mantenedoresToolStripMenuItem,
-            this.logPagosHonorarioToolStripMenuItem,
-            this.reporteDeCajaToolStripMenuItem,
-            this.horariosPersonalToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // mantenedoresToolStripMenuItem
-            // 
-            this.mantenedoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.personalToolStripMenuItem,
-            this.prestaciónToolStripMenuItem,
-            this.pacienteToolStripMenuItem,
-            this.equipoToolStripMenuItem});
-            this.mantenedoresToolStripMenuItem.Name = "mantenedoresToolStripMenuItem";
-            this.mantenedoresToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
-            this.mantenedoresToolStripMenuItem.Text = "Mantenedores";
-            // 
-            // personalToolStripMenuItem
-            // 
-            this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
-            this.personalToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.personalToolStripMenuItem.Text = "Personal";
-            this.personalToolStripMenuItem.Click += new System.EventHandler(this.personalToolStripMenuItem_Click);
-            // 
-            // prestaciónToolStripMenuItem
-            // 
-            this.prestaciónToolStripMenuItem.Name = "prestaciónToolStripMenuItem";
-            this.prestaciónToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.prestaciónToolStripMenuItem.Text = "Prestación";
-            this.prestaciónToolStripMenuItem.Click += new System.EventHandler(this.prestaciónToolStripMenuItem_Click);
-            // 
-            // pacienteToolStripMenuItem
-            // 
-            this.pacienteToolStripMenuItem.Name = "pacienteToolStripMenuItem";
-            this.pacienteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pacienteToolStripMenuItem.Text = "Paciente";
-            this.pacienteToolStripMenuItem.Click += new System.EventHandler(this.pacienteToolStripMenuItem_Click);
-            // 
-            // equipoToolStripMenuItem
-            // 
-            this.equipoToolStripMenuItem.Name = "equipoToolStripMenuItem";
-            this.equipoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.equipoToolStripMenuItem.Text = "Equipo";
-            this.equipoToolStripMenuItem.Click += new System.EventHandler(this.equipoToolStripMenuItem_Click_1);
-            // 
-            // logPagosHonorarioToolStripMenuItem
-            // 
-            this.logPagosHonorarioToolStripMenuItem.Name = "logPagosHonorarioToolStripMenuItem";
-            this.logPagosHonorarioToolStripMenuItem.Size = new System.Drawing.Size(131, 20);
-            this.logPagosHonorarioToolStripMenuItem.Text = "Log Pagos Honorario";
-            this.logPagosHonorarioToolStripMenuItem.Click += new System.EventHandler(this.logPagosHonorarioToolStripMenuItem_Click);
-            // 
-            // reporteDeCajaToolStripMenuItem
-            // 
-            this.reporteDeCajaToolStripMenuItem.Name = "reporteDeCajaToolStripMenuItem";
-            this.reporteDeCajaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.reporteDeCajaToolStripMenuItem.Text = "Reporte de caja";
-            this.reporteDeCajaToolStripMenuItem.Click += new System.EventHandler(this.reporteDeCajaToolStripMenuItem_Click);
-            // 
-            // horariosPersonalToolStripMenuItem
-            // 
-            this.horariosPersonalToolStripMenuItem.Name = "horariosPersonalToolStripMenuItem";
-            this.horariosPersonalToolStripMenuItem.Size = new System.Drawing.Size(112, 20);
-            this.horariosPersonalToolStripMenuItem.Text = "Horarios personal";
-            this.horariosPersonalToolStripMenuItem.Click += new System.EventHandler(this.horariosPersonalToolStripMenuItem_Click);
-            // 
-            // gbMantenerPrestacion
-            // 
-            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorCodigoMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.btnNuevaPrestacionMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorLista);
-            this.gbMantenerPrestacion.Controls.Add(this.label3);
-            this.gbMantenerPrestacion.Controls.Add(this.label2);
-            this.gbMantenerPrestacion.Controls.Add(this.tbCodigoPrestacionMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.cbPrestacionesMPre);
-            this.gbMantenerPrestacion.Controls.Add(this.groupBox6);
-            this.gbMantenerPrestacion.Location = new System.Drawing.Point(6, 43);
-            this.gbMantenerPrestacion.Name = "gbMantenerPrestacion";
-            this.gbMantenerPrestacion.Size = new System.Drawing.Size(768, 462);
-            this.gbMantenerPrestacion.TabIndex = 10;
-            this.gbMantenerPrestacion.TabStop = false;
-            this.gbMantenerPrestacion.Text = "Mantener prestaciones";
-            this.gbMantenerPrestacion.Visible = false;
-            // 
-            // gbMantenedorPersonal
-            // 
-            this.gbMantenedorPersonal.Controls.Add(this.gpMedico_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.cbCargo_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblCargo_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.btnEliminar_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.btnGuardar_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.btnRegistrar_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.txtDescuento_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.txtRemuneracion_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.txtContrasena_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.txtEmail_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.txtApellidos_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.txtNombres_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblDescuento_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblRemuneracion);
-            this.gbMantenedorPersonal.Controls.Add(this.txtVerificadorCargado_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblGuionCargado_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.txtRutPersonalCargado_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblRutPersonalCargado_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblContrasena_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblEmail_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.btnCrearPersonal_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblApellidos_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblNombre_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.btnCargarDatos_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.txtVerificador_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblGuion_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.txtRutPersonal_MP);
-            this.gbMantenedorPersonal.Controls.Add(this.lblRutPersonal_MP);
-            this.gbMantenedorPersonal.Location = new System.Drawing.Point(6, 43);
-            this.gbMantenedorPersonal.Name = "gbMantenedorPersonal";
-            this.gbMantenedorPersonal.Size = new System.Drawing.Size(768, 462);
-            this.gbMantenedorPersonal.TabIndex = 11;
-            this.gbMantenedorPersonal.TabStop = false;
-            this.gbMantenedorPersonal.Text = "Mantenedor Personal";
-            this.gbMantenedorPersonal.Visible = false;
-            // 
-            // gpMedico_MP
-            // 
-            this.gpMedico_MP.Controls.Add(this.cbBanco_MP);
-            this.gpMedico_MP.Controls.Add(this.lblBanco_MP);
-            this.gpMedico_MP.Controls.Add(this.cbTipoCuenta_MP);
-            this.gpMedico_MP.Controls.Add(this.lblTipoCuenta_MP);
-            this.gpMedico_MP.Controls.Add(this.lblCuentaBanc_MP);
-            this.gpMedico_MP.Controls.Add(this.txtCuentaBanc_MP);
-            this.gpMedico_MP.Location = new System.Drawing.Point(351, 81);
-            this.gpMedico_MP.Name = "gpMedico_MP";
-            this.gpMedico_MP.Size = new System.Drawing.Size(397, 238);
-            this.gpMedico_MP.TabIndex = 30;
-            this.gpMedico_MP.TabStop = false;
-            this.gpMedico_MP.Text = "Cuenta Bancaria";
-            // 
-            // cbBanco_MP
-            // 
-            this.cbBanco_MP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBanco_MP.FormattingEnabled = true;
-            this.cbBanco_MP.Location = new System.Drawing.Point(178, 86);
-            this.cbBanco_MP.Name = "cbBanco_MP";
-            this.cbBanco_MP.Size = new System.Drawing.Size(151, 21);
-            this.cbBanco_MP.TabIndex = 33;
-            // 
-            // lblBanco_MP
-            // 
-            this.lblBanco_MP.AutoSize = true;
-            this.lblBanco_MP.Location = new System.Drawing.Point(23, 89);
-            this.lblBanco_MP.Name = "lblBanco_MP";
-            this.lblBanco_MP.Size = new System.Drawing.Size(38, 13);
-            this.lblBanco_MP.TabIndex = 32;
-            this.lblBanco_MP.Text = "Banco";
-            // 
-            // cbTipoCuenta_MP
-            // 
-            this.cbTipoCuenta_MP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipoCuenta_MP.FormattingEnabled = true;
-            this.cbTipoCuenta_MP.Location = new System.Drawing.Point(178, 54);
-            this.cbTipoCuenta_MP.Name = "cbTipoCuenta_MP";
-            this.cbTipoCuenta_MP.Size = new System.Drawing.Size(151, 21);
-            this.cbTipoCuenta_MP.TabIndex = 31;
-            // 
-            // lblTipoCuenta_MP
-            // 
-            this.lblTipoCuenta_MP.AutoSize = true;
-            this.lblTipoCuenta_MP.Location = new System.Drawing.Point(23, 57);
-            this.lblTipoCuenta_MP.Name = "lblTipoCuenta_MP";
-            this.lblTipoCuenta_MP.Size = new System.Drawing.Size(110, 13);
-            this.lblTipoCuenta_MP.TabIndex = 30;
-            this.lblTipoCuenta_MP.Text = "Tipo Cuenta Bancaria";
-            // 
-            // lblCuentaBanc_MP
-            // 
-            this.lblCuentaBanc_MP.AutoSize = true;
-            this.lblCuentaBanc_MP.Location = new System.Drawing.Point(23, 31);
-            this.lblCuentaBanc_MP.Name = "lblCuentaBanc_MP";
-            this.lblCuentaBanc_MP.Size = new System.Drawing.Size(86, 13);
-            this.lblCuentaBanc_MP.TabIndex = 28;
-            this.lblCuentaBanc_MP.Text = "Cuenta Bancaria";
-            // 
-            // txtCuentaBanc_MP
-            // 
-            this.txtCuentaBanc_MP.Location = new System.Drawing.Point(178, 24);
-            this.txtCuentaBanc_MP.MaxLength = 64;
-            this.txtCuentaBanc_MP.Name = "txtCuentaBanc_MP";
-            this.txtCuentaBanc_MP.Size = new System.Drawing.Size(151, 20);
-            this.txtCuentaBanc_MP.TabIndex = 29;
-            // 
-            // cbCargo_MP
-            // 
-            this.cbCargo_MP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCargo_MP.FormattingEnabled = true;
-            this.cbCargo_MP.Location = new System.Drawing.Point(163, 303);
-            this.cbCargo_MP.Name = "cbCargo_MP";
-            this.cbCargo_MP.Size = new System.Drawing.Size(151, 21);
-            this.cbCargo_MP.TabIndex = 27;
-            this.cbCargo_MP.SelectedIndexChanged += new System.EventHandler(this.cbCargo_MP_SelectedIndexChanged);
-            // 
-            // lblCargo_MP
-            // 
-            this.lblCargo_MP.AutoSize = true;
-            this.lblCargo_MP.Location = new System.Drawing.Point(38, 306);
-            this.lblCargo_MP.Name = "lblCargo_MP";
-            this.lblCargo_MP.Size = new System.Drawing.Size(35, 13);
-            this.lblCargo_MP.TabIndex = 26;
-            this.lblCargo_MP.Text = "Cargo";
-            // 
-            // btnEliminar_MP
-            // 
-            this.btnEliminar_MP.Enabled = false;
-            this.btnEliminar_MP.Location = new System.Drawing.Point(437, 425);
-            this.btnEliminar_MP.Name = "btnEliminar_MP";
-            this.btnEliminar_MP.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar_MP.TabIndex = 25;
-            this.btnEliminar_MP.Text = "Eliminar";
-            this.btnEliminar_MP.UseVisualStyleBackColor = true;
-            this.btnEliminar_MP.Click += new System.EventHandler(this.btnEliminar_MP_Click);
-            // 
-            // btnGuardar_MP
-            // 
-            this.btnGuardar_MP.Enabled = false;
-            this.btnGuardar_MP.Location = new System.Drawing.Point(324, 425);
-            this.btnGuardar_MP.Name = "btnGuardar_MP";
-            this.btnGuardar_MP.Size = new System.Drawing.Size(107, 23);
-            this.btnGuardar_MP.TabIndex = 24;
-            this.btnGuardar_MP.Text = "Guardar cambios";
-            this.btnGuardar_MP.UseVisualStyleBackColor = true;
-            this.btnGuardar_MP.Click += new System.EventHandler(this.btnGuardar_MP_Click);
-            // 
-            // btnRegistrar_MP
-            // 
-            this.btnRegistrar_MP.Enabled = false;
-            this.btnRegistrar_MP.Location = new System.Drawing.Point(243, 425);
-            this.btnRegistrar_MP.Name = "btnRegistrar_MP";
-            this.btnRegistrar_MP.Size = new System.Drawing.Size(75, 23);
-            this.btnRegistrar_MP.TabIndex = 23;
-            this.btnRegistrar_MP.Text = "Registrar";
-            this.btnRegistrar_MP.UseVisualStyleBackColor = true;
-            this.btnRegistrar_MP.Click += new System.EventHandler(this.btnRegistrar_MP_Click);
-            // 
-            // txtDescuento_MP
-            // 
-            this.txtDescuento_MP.Location = new System.Drawing.Point(163, 272);
-            this.txtDescuento_MP.MaxLength = 2;
-            this.txtDescuento_MP.Name = "txtDescuento_MP";
-            this.txtDescuento_MP.Size = new System.Drawing.Size(151, 20);
-            this.txtDescuento_MP.TabIndex = 22;
-            this.txtDescuento_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
-            // 
-            // txtRemuneracion_MP
-            // 
-            this.txtRemuneracion_MP.Location = new System.Drawing.Point(163, 240);
-            this.txtRemuneracion_MP.MaxLength = 8;
-            this.txtRemuneracion_MP.Name = "txtRemuneracion_MP";
-            this.txtRemuneracion_MP.Size = new System.Drawing.Size(151, 20);
-            this.txtRemuneracion_MP.TabIndex = 21;
-            this.txtRemuneracion_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
-            // 
-            // txtContrasena_MP
-            // 
-            this.txtContrasena_MP.Location = new System.Drawing.Point(163, 177);
-            this.txtContrasena_MP.MaxLength = 1080;
-            this.txtContrasena_MP.Name = "txtContrasena_MP";
-            this.txtContrasena_MP.PasswordChar = '*';
-            this.txtContrasena_MP.Size = new System.Drawing.Size(151, 20);
-            this.txtContrasena_MP.TabIndex = 20;
-            // 
-            // txtEmail_MP
-            // 
-            this.txtEmail_MP.Location = new System.Drawing.Point(163, 145);
-            this.txtEmail_MP.MaxLength = 512;
-            this.txtEmail_MP.Name = "txtEmail_MP";
-            this.txtEmail_MP.Size = new System.Drawing.Size(151, 20);
-            this.txtEmail_MP.TabIndex = 19;
-            // 
-            // txtApellidos_MP
-            // 
-            this.txtApellidos_MP.Location = new System.Drawing.Point(163, 116);
-            this.txtApellidos_MP.MaxLength = 64;
-            this.txtApellidos_MP.Name = "txtApellidos_MP";
-            this.txtApellidos_MP.Size = new System.Drawing.Size(151, 20);
-            this.txtApellidos_MP.TabIndex = 18;
-            // 
-            // txtNombres_MP
-            // 
-            this.txtNombres_MP.Location = new System.Drawing.Point(163, 86);
-            this.txtNombres_MP.MaxLength = 64;
-            this.txtNombres_MP.Name = "txtNombres_MP";
-            this.txtNombres_MP.Size = new System.Drawing.Size(151, 20);
-            this.txtNombres_MP.TabIndex = 17;
-            // 
-            // lblDescuento_MP
-            // 
-            this.lblDescuento_MP.AutoSize = true;
-            this.lblDescuento_MP.Location = new System.Drawing.Point(37, 275);
-            this.lblDescuento_MP.Name = "lblDescuento_MP";
-            this.lblDescuento_MP.Size = new System.Drawing.Size(59, 13);
-            this.lblDescuento_MP.TabIndex = 16;
-            this.lblDescuento_MP.Text = "Descuento";
-            // 
-            // lblRemuneracion
-            // 
-            this.lblRemuneracion.AutoSize = true;
-            this.lblRemuneracion.Location = new System.Drawing.Point(38, 243);
-            this.lblRemuneracion.Name = "lblRemuneracion";
-            this.lblRemuneracion.Size = new System.Drawing.Size(76, 13);
-            this.lblRemuneracion.TabIndex = 15;
-            this.lblRemuneracion.Text = "Remuneración";
-            // 
-            // txtVerificadorCargado_MP
-            // 
-            this.txtVerificadorCargado_MP.Location = new System.Drawing.Point(292, 208);
-            this.txtVerificadorCargado_MP.MaxLength = 1;
-            this.txtVerificadorCargado_MP.Name = "txtVerificadorCargado_MP";
-            this.txtVerificadorCargado_MP.Size = new System.Drawing.Size(22, 20);
-            this.txtVerificadorCargado_MP.TabIndex = 14;
-            this.txtVerificadorCargado_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
-            // 
-            // lblGuionCargado_MP
-            // 
-            this.lblGuionCargado_MP.AutoSize = true;
-            this.lblGuionCargado_MP.Location = new System.Drawing.Point(270, 211);
-            this.lblGuionCargado_MP.Name = "lblGuionCargado_MP";
-            this.lblGuionCargado_MP.Size = new System.Drawing.Size(10, 13);
-            this.lblGuionCargado_MP.TabIndex = 13;
-            this.lblGuionCargado_MP.Text = "-";
-            // 
-            // txtRutPersonalCargado_MP
-            // 
-            this.txtRutPersonalCargado_MP.Location = new System.Drawing.Point(163, 208);
-            this.txtRutPersonalCargado_MP.MaxLength = 8;
-            this.txtRutPersonalCargado_MP.Name = "txtRutPersonalCargado_MP";
-            this.txtRutPersonalCargado_MP.Size = new System.Drawing.Size(100, 20);
-            this.txtRutPersonalCargado_MP.TabIndex = 12;
-            this.txtRutPersonalCargado_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
-            // 
-            // lblRutPersonalCargado_MP
-            // 
-            this.lblRutPersonalCargado_MP.AutoSize = true;
-            this.lblRutPersonalCargado_MP.Location = new System.Drawing.Point(38, 211);
-            this.lblRutPersonalCargado_MP.Name = "lblRutPersonalCargado_MP";
-            this.lblRutPersonalCargado_MP.Size = new System.Drawing.Size(83, 13);
-            this.lblRutPersonalCargado_MP.TabIndex = 11;
-            this.lblRutPersonalCargado_MP.Text = "Rut de Personal";
-            // 
-            // lblContrasena_MP
-            // 
-            this.lblContrasena_MP.AutoSize = true;
-            this.lblContrasena_MP.Location = new System.Drawing.Point(37, 180);
-            this.lblContrasena_MP.Name = "lblContrasena_MP";
-            this.lblContrasena_MP.Size = new System.Drawing.Size(61, 13);
-            this.lblContrasena_MP.TabIndex = 10;
-            this.lblContrasena_MP.Text = "Contraseña";
-            // 
-            // lblEmail_MP
-            // 
-            this.lblEmail_MP.AutoSize = true;
-            this.lblEmail_MP.Location = new System.Drawing.Point(37, 152);
-            this.lblEmail_MP.Name = "lblEmail_MP";
-            this.lblEmail_MP.Size = new System.Drawing.Size(32, 13);
-            this.lblEmail_MP.TabIndex = 9;
-            this.lblEmail_MP.Text = "Email";
-            // 
-            // btnCrearPersonal_MP
-            // 
-            this.btnCrearPersonal_MP.Location = new System.Drawing.Point(507, 38);
-            this.btnCrearPersonal_MP.Name = "btnCrearPersonal_MP";
-            this.btnCrearPersonal_MP.Size = new System.Drawing.Size(93, 23);
-            this.btnCrearPersonal_MP.TabIndex = 8;
-            this.btnCrearPersonal_MP.Text = "Nuevo Personal";
-            this.btnCrearPersonal_MP.UseVisualStyleBackColor = true;
-            this.btnCrearPersonal_MP.Click += new System.EventHandler(this.btnCrearPersonal_MP_Click_1);
-            // 
-            // lblApellidos_MP
-            // 
-            this.lblApellidos_MP.AutoSize = true;
-            this.lblApellidos_MP.Location = new System.Drawing.Point(37, 119);
-            this.lblApellidos_MP.Name = "lblApellidos_MP";
-            this.lblApellidos_MP.Size = new System.Drawing.Size(49, 13);
-            this.lblApellidos_MP.TabIndex = 7;
-            this.lblApellidos_MP.Text = "Apellidos";
-            // 
-            // lblNombre_MP
-            // 
-            this.lblNombre_MP.AutoSize = true;
-            this.lblNombre_MP.Location = new System.Drawing.Point(38, 89);
-            this.lblNombre_MP.Name = "lblNombre_MP";
-            this.lblNombre_MP.Size = new System.Drawing.Size(49, 13);
-            this.lblNombre_MP.TabIndex = 6;
-            this.lblNombre_MP.Text = "Nombres";
-            // 
-            // btnCargarDatos_MP
-            // 
-            this.btnCargarDatos_MP.Location = new System.Drawing.Point(411, 38);
-            this.btnCargarDatos_MP.Name = "btnCargarDatos_MP";
-            this.btnCargarDatos_MP.Size = new System.Drawing.Size(90, 23);
-            this.btnCargarDatos_MP.TabIndex = 4;
-            this.btnCargarDatos_MP.Text = "Cargar Datos";
-            this.btnCargarDatos_MP.UseVisualStyleBackColor = true;
-            this.btnCargarDatos_MP.Click += new System.EventHandler(this.btnCargarDatos_MP_Click_1);
-            // 
-            // txtVerificador_MP
-            // 
-            this.txtVerificador_MP.Location = new System.Drawing.Point(364, 40);
-            this.txtVerificador_MP.MaxLength = 1;
-            this.txtVerificador_MP.Name = "txtVerificador_MP";
-            this.txtVerificador_MP.Size = new System.Drawing.Size(22, 20);
-            this.txtVerificador_MP.TabIndex = 3;
-            this.txtVerificador_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
-            // 
-            // lblGuion_MP
-            // 
-            this.lblGuion_MP.AutoSize = true;
-            this.lblGuion_MP.Location = new System.Drawing.Point(348, 43);
-            this.lblGuion_MP.Name = "lblGuion_MP";
-            this.lblGuion_MP.Size = new System.Drawing.Size(10, 13);
-            this.lblGuion_MP.TabIndex = 2;
-            this.lblGuion_MP.Text = "-";
-            // 
-            // txtRutPersonal_MP
-            // 
-            this.txtRutPersonal_MP.Location = new System.Drawing.Point(242, 40);
-            this.txtRutPersonal_MP.MaxLength = 8;
-            this.txtRutPersonal_MP.Name = "txtRutPersonal_MP";
-            this.txtRutPersonal_MP.Size = new System.Drawing.Size(100, 20);
-            this.txtRutPersonal_MP.TabIndex = 1;
-            this.txtRutPersonal_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
-            // 
-            // lblRutPersonal_MP
-            // 
-            this.lblRutPersonal_MP.AutoSize = true;
-            this.lblRutPersonal_MP.Location = new System.Drawing.Point(153, 43);
-            this.lblRutPersonal_MP.Name = "lblRutPersonal_MP";
-            this.lblRutPersonal_MP.Size = new System.Drawing.Size(83, 13);
-            this.lblRutPersonal_MP.TabIndex = 0;
-            this.lblRutPersonal_MP.Text = "Rut de Personal";
-            // 
-            // btnCargarPorCodigoMPre
-            // 
-            this.btnCargarPorCodigoMPre.Location = new System.Drawing.Point(273, 52);
-            this.btnCargarPorCodigoMPre.Name = "btnCargarPorCodigoMPre";
-            this.btnCargarPorCodigoMPre.Size = new System.Drawing.Size(224, 23);
-            this.btnCargarPorCodigoMPre.TabIndex = 7;
-            this.btnCargarPorCodigoMPre.Text = "Cargar por codigo";
-            this.btnCargarPorCodigoMPre.UseVisualStyleBackColor = true;
-            this.btnCargarPorCodigoMPre.Click += new System.EventHandler(this.btnCargarPorCodigoMPre_Click);
-            // 
-            // btnNuevaPrestacionMPre
-            // 
-            this.btnNuevaPrestacionMPre.Location = new System.Drawing.Point(538, 52);
-            this.btnNuevaPrestacionMPre.Name = "btnNuevaPrestacionMPre";
-            this.btnNuevaPrestacionMPre.Size = new System.Drawing.Size(224, 23);
-            this.btnNuevaPrestacionMPre.TabIndex = 6;
-            this.btnNuevaPrestacionMPre.Text = "Nueva prestación";
-            this.btnNuevaPrestacionMPre.UseVisualStyleBackColor = true;
-            this.btnNuevaPrestacionMPre.Click += new System.EventHandler(this.btnNuevaPrestacionMPre_Click);
-            // 
-            // btnCargarPorLista
-            // 
-            this.btnCargarPorLista.Location = new System.Drawing.Point(12, 52);
-            this.btnCargarPorLista.Name = "btnCargarPorLista";
-            this.btnCargarPorLista.Size = new System.Drawing.Size(224, 23);
-            this.btnCargarPorLista.TabIndex = 5;
-            this.btnCargarPorLista.Text = "Cargar por lista";
-            this.btnCargarPorLista.UseVisualStyleBackColor = true;
-            this.btnCargarPorLista.Click += new System.EventHandler(this.btnCargarPorLista_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Prestación:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(393, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "o Código de prestación:";
-            // 
-            // tbCodigoPrestacionMPre
-            // 
-            this.tbCodigoPrestacionMPre.Location = new System.Drawing.Point(538, 19);
-            this.tbCodigoPrestacionMPre.Name = "tbCodigoPrestacionMPre";
-            this.tbCodigoPrestacionMPre.Size = new System.Drawing.Size(224, 20);
-            this.tbCodigoPrestacionMPre.TabIndex = 2;
-            // 
-            // cbPrestacionesMPre
-            // 
-            this.cbPrestacionesMPre.FormattingEnabled = true;
-            this.cbPrestacionesMPre.Location = new System.Drawing.Point(79, 20);
-            this.cbPrestacionesMPre.Name = "cbPrestacionesMPre";
-            this.cbPrestacionesMPre.Size = new System.Drawing.Size(288, 21);
-            this.cbPrestacionesMPre.TabIndex = 1;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.tbCodigoMPre);
-            this.groupBox6.Controls.Add(this.label10);
-            this.groupBox6.Controls.Add(this.btnGuardarMpre);
-            this.groupBox6.Controls.Add(this.btnEliminarMPre);
-            this.groupBox6.Controls.Add(this.btnRegistrarMPre);
-            this.groupBox6.Controls.Add(this.btnRemoveMPre);
-            this.groupBox6.Controls.Add(this.btnAddMPre);
-            this.groupBox6.Controls.Add(this.lbxEquiposPrestacionMPre);
-            this.groupBox6.Controls.Add(this.lbxEquiposMPre);
-            this.groupBox6.Controls.Add(this.label6);
-            this.groupBox6.Controls.Add(this.label5);
-            this.groupBox6.Controls.Add(this.tbNombrePrestacionMPre);
-            this.groupBox6.Controls.Add(this.tbPrecioPrestacionMPre);
-            this.groupBox6.Controls.Add(this.cbTipoPrestacionMPre);
-            this.groupBox6.Controls.Add(this.label4);
-            this.groupBox6.Location = new System.Drawing.Point(8, 77);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(754, 379);
-            this.groupBox6.TabIndex = 0;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Prestación";
-            // 
-            // tbCodigoMPre
-            // 
-            this.tbCodigoMPre.Location = new System.Drawing.Point(201, 55);
-            this.tbCodigoMPre.Name = "tbCodigoMPre";
-            this.tbCodigoMPre.Size = new System.Drawing.Size(391, 20);
-            this.tbCodigoMPre.TabIndex = 18;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(110, 58);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(43, 13);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "Código:";
-            // 
-            // btnGuardarMpre
-            // 
-            this.btnGuardarMpre.Location = new System.Drawing.Point(284, 350);
-            this.btnGuardarMpre.Name = "btnGuardarMpre";
-            this.btnGuardarMpre.Size = new System.Drawing.Size(188, 23);
-            this.btnGuardarMpre.TabIndex = 16;
-            this.btnGuardarMpre.Text = "Guardar cambios";
-            this.btnGuardarMpre.UseVisualStyleBackColor = true;
-            this.btnGuardarMpre.Click += new System.EventHandler(this.btnGuardarMpre_Click);
-            // 
-            // btnEliminarMPre
-            // 
-            this.btnEliminarMPre.Location = new System.Drawing.Point(484, 350);
-            this.btnEliminarMPre.Name = "btnEliminarMPre";
-            this.btnEliminarMPre.Size = new System.Drawing.Size(188, 23);
-            this.btnEliminarMPre.TabIndex = 15;
-            this.btnEliminarMPre.Text = "Eliminar";
-            this.btnEliminarMPre.UseVisualStyleBackColor = true;
-            this.btnEliminarMPre.Click += new System.EventHandler(this.btnEliminarMPre_Click);
-            // 
-            // btnRegistrarMPre
-            // 
-            this.btnRegistrarMPre.Location = new System.Drawing.Point(84, 350);
-            this.btnRegistrarMPre.Name = "btnRegistrarMPre";
-            this.btnRegistrarMPre.Size = new System.Drawing.Size(188, 23);
-            this.btnRegistrarMPre.TabIndex = 8;
-            this.btnRegistrarMPre.Text = "Registrar";
-            this.btnRegistrarMPre.UseVisualStyleBackColor = true;
-            this.btnRegistrarMPre.Click += new System.EventHandler(this.btnRegistrarMPre_Click);
-            // 
-            // btnRemoveMPre
-            // 
-            this.btnRemoveMPre.Location = new System.Drawing.Point(356, 266);
-            this.btnRemoveMPre.Name = "btnRemoveMPre";
-            this.btnRemoveMPre.Size = new System.Drawing.Size(41, 73);
-            this.btnRemoveMPre.TabIndex = 14;
-            this.btnRemoveMPre.Text = "<<";
-            this.btnRemoveMPre.UseVisualStyleBackColor = true;
-            this.btnRemoveMPre.Click += new System.EventHandler(this.btnRemoveMPre_Click);
-            // 
-            // btnAddMPre
-            // 
-            this.btnAddMPre.Location = new System.Drawing.Point(356, 179);
-            this.btnAddMPre.Name = "btnAddMPre";
-            this.btnAddMPre.Size = new System.Drawing.Size(41, 73);
-            this.btnAddMPre.TabIndex = 8;
-            this.btnAddMPre.Text = ">>";
-            this.btnAddMPre.UseVisualStyleBackColor = true;
-            this.btnAddMPre.Click += new System.EventHandler(this.btnAddMPre_Click);
-            // 
-            // lbxEquiposPrestacionMPre
-            // 
-            this.lbxEquiposPrestacionMPre.FormattingEnabled = true;
-            this.lbxEquiposPrestacionMPre.Location = new System.Drawing.Point(403, 179);
-            this.lbxEquiposPrestacionMPre.Name = "lbxEquiposPrestacionMPre";
-            this.lbxEquiposPrestacionMPre.Size = new System.Drawing.Size(316, 160);
-            this.lbxEquiposPrestacionMPre.TabIndex = 13;
-            // 
-            // lbxEquiposMPre
-            // 
-            this.lbxEquiposMPre.FormattingEnabled = true;
-            this.lbxEquiposMPre.Location = new System.Drawing.Point(35, 179);
-            this.lbxEquiposMPre.Name = "lbxEquiposMPre";
-            this.lbxEquiposMPre.Size = new System.Drawing.Size(315, 160);
-            this.lbxEquiposMPre.TabIndex = 12;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(110, 132);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Precio:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(108, 93);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Nombre:";
-            // 
-            // tbNombrePrestacionMPre
-            // 
-            this.tbNombrePrestacionMPre.Location = new System.Drawing.Point(201, 91);
-            this.tbNombrePrestacionMPre.Name = "tbNombrePrestacionMPre";
-            this.tbNombrePrestacionMPre.Size = new System.Drawing.Size(391, 20);
-            this.tbNombrePrestacionMPre.TabIndex = 8;
-            // 
-            // tbPrecioPrestacionMPre
-            // 
-            this.tbPrecioPrestacionMPre.Location = new System.Drawing.Point(201, 129);
-            this.tbPrecioPrestacionMPre.Name = "tbPrecioPrestacionMPre";
-            this.tbPrecioPrestacionMPre.Size = new System.Drawing.Size(203, 20);
-            this.tbPrecioPrestacionMPre.TabIndex = 9;
-            // 
-            // cbTipoPrestacionMPre
-            // 
-            this.cbTipoPrestacionMPre.FormattingEnabled = true;
-            this.cbTipoPrestacionMPre.Location = new System.Drawing.Point(201, 19);
-            this.cbTipoPrestacionMPre.Name = "cbTipoPrestacionMPre";
-            this.cbTipoPrestacionMPre.Size = new System.Drawing.Size(391, 21);
-            this.cbTipoPrestacionMPre.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(108, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Tipo prestación:";
             // 
             // gbOpcionesUsuario
             // 
@@ -1357,6 +693,194 @@
             this.dtFechaLPH.Size = new System.Drawing.Size(200, 20);
             this.dtFechaLPH.TabIndex = 0;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mantenedoresToolStripMenuItem,
+            this.logPagosHonorarioToolStripMenuItem,
+            this.reporteDeCajaToolStripMenuItem,
+            this.horariosPersonalToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(3, 16);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // mantenedoresToolStripMenuItem
+            // 
+            this.mantenedoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.personalToolStripMenuItem,
+            this.prestaciónToolStripMenuItem,
+            this.pacienteToolStripMenuItem,
+            this.equipoToolStripMenuItem});
+            this.mantenedoresToolStripMenuItem.Name = "mantenedoresToolStripMenuItem";
+            this.mantenedoresToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.mantenedoresToolStripMenuItem.Text = "Mantenedores";
+            // 
+            // personalToolStripMenuItem
+            // 
+            this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
+            this.personalToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.personalToolStripMenuItem.Text = "Personal";
+            this.personalToolStripMenuItem.Click += new System.EventHandler(this.personalToolStripMenuItem_Click);
+            // 
+            // prestaciónToolStripMenuItem
+            // 
+            this.prestaciónToolStripMenuItem.Name = "prestaciónToolStripMenuItem";
+            this.prestaciónToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.prestaciónToolStripMenuItem.Text = "Prestación";
+            this.prestaciónToolStripMenuItem.Click += new System.EventHandler(this.prestaciónToolStripMenuItem_Click);
+            // 
+            // pacienteToolStripMenuItem
+            // 
+            this.pacienteToolStripMenuItem.Name = "pacienteToolStripMenuItem";
+            this.pacienteToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.pacienteToolStripMenuItem.Text = "Paciente";
+            this.pacienteToolStripMenuItem.Click += new System.EventHandler(this.pacienteToolStripMenuItem_Click);
+            // 
+            // equipoToolStripMenuItem
+            // 
+            this.equipoToolStripMenuItem.Name = "equipoToolStripMenuItem";
+            this.equipoToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.equipoToolStripMenuItem.Text = "Equipo";
+            this.equipoToolStripMenuItem.Click += new System.EventHandler(this.equipoToolStripMenuItem_Click_1);
+            // 
+            // logPagosHonorarioToolStripMenuItem
+            // 
+            this.logPagosHonorarioToolStripMenuItem.Name = "logPagosHonorarioToolStripMenuItem";
+            this.logPagosHonorarioToolStripMenuItem.Size = new System.Drawing.Size(131, 20);
+            this.logPagosHonorarioToolStripMenuItem.Text = "Log Pagos Honorario";
+            this.logPagosHonorarioToolStripMenuItem.Click += new System.EventHandler(this.logPagosHonorarioToolStripMenuItem_Click);
+            // 
+            // reporteDeCajaToolStripMenuItem
+            // 
+            this.reporteDeCajaToolStripMenuItem.Name = "reporteDeCajaToolStripMenuItem";
+            this.reporteDeCajaToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.reporteDeCajaToolStripMenuItem.Text = "Reporte de caja";
+            this.reporteDeCajaToolStripMenuItem.Click += new System.EventHandler(this.reporteDeCajaToolStripMenuItem_Click);
+            // 
+            // horariosPersonalToolStripMenuItem
+            // 
+            this.horariosPersonalToolStripMenuItem.Name = "horariosPersonalToolStripMenuItem";
+            this.horariosPersonalToolStripMenuItem.Size = new System.Drawing.Size(112, 20);
+            this.horariosPersonalToolStripMenuItem.Text = "Horarios personal";
+            this.horariosPersonalToolStripMenuItem.Click += new System.EventHandler(this.horariosPersonalToolStripMenuItem_Click);
+            // 
+            // gbMantenerEquipo
+            // 
+            this.gbMantenerEquipo.Controls.Add(this.btnCargarEquipo_Eq);
+            this.gbMantenerEquipo.Controls.Add(this.btnNuevoEquipo_Eq);
+            this.gbMantenerEquipo.Controls.Add(this.groupBox7);
+            this.gbMantenerEquipo.Controls.Add(this.dgEquipo_Eq);
+            this.gbMantenerEquipo.Location = new System.Drawing.Point(6, 43);
+            this.gbMantenerEquipo.Name = "gbMantenerEquipo";
+            this.gbMantenerEquipo.Size = new System.Drawing.Size(768, 462);
+            this.gbMantenerEquipo.TabIndex = 32;
+            this.gbMantenerEquipo.TabStop = false;
+            this.gbMantenerEquipo.Text = "Mantener Equipo";
+            this.gbMantenerEquipo.Visible = false;
+            // 
+            // btnCargarEquipo_Eq
+            // 
+            this.btnCargarEquipo_Eq.Location = new System.Drawing.Point(391, 266);
+            this.btnCargarEquipo_Eq.Name = "btnCargarEquipo_Eq";
+            this.btnCargarEquipo_Eq.Size = new System.Drawing.Size(100, 23);
+            this.btnCargarEquipo_Eq.TabIndex = 7;
+            this.btnCargarEquipo_Eq.Text = "Cargar Equipo";
+            this.btnCargarEquipo_Eq.UseVisualStyleBackColor = true;
+            this.btnCargarEquipo_Eq.Click += new System.EventHandler(this.btnCargarEquipo_Eq_Click);
+            // 
+            // btnNuevoEquipo_Eq
+            // 
+            this.btnNuevoEquipo_Eq.Location = new System.Drawing.Point(212, 266);
+            this.btnNuevoEquipo_Eq.Name = "btnNuevoEquipo_Eq";
+            this.btnNuevoEquipo_Eq.Size = new System.Drawing.Size(90, 23);
+            this.btnNuevoEquipo_Eq.TabIndex = 6;
+            this.btnNuevoEquipo_Eq.Text = "Nuevo Equipo";
+            this.btnNuevoEquipo_Eq.UseVisualStyleBackColor = true;
+            this.btnNuevoEquipo_Eq.Click += new System.EventHandler(this.btnNuevoEquipo_Eq_Click);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.txtNombreEquipo);
+            this.groupBox7.Controls.Add(this.btnGuardar_Eq);
+            this.groupBox7.Controls.Add(this.btnRegistrar_Eq);
+            this.groupBox7.Controls.Add(this.txtCantidad_Eq);
+            this.groupBox7.Controls.Add(this.lblNombreTipo);
+            this.groupBox7.Controls.Add(this.lblCantidad_Eq);
+            this.groupBox7.Location = new System.Drawing.Point(16, 295);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(732, 153);
+            this.groupBox7.TabIndex = 5;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Equipo";
+            // 
+            // txtNombreEquipo
+            // 
+            this.txtNombreEquipo.Location = new System.Drawing.Point(352, 67);
+            this.txtNombreEquipo.Name = "txtNombreEquipo";
+            this.txtNombreEquipo.Size = new System.Drawing.Size(196, 20);
+            this.txtNombreEquipo.TabIndex = 6;
+            // 
+            // btnGuardar_Eq
+            // 
+            this.btnGuardar_Eq.Enabled = false;
+            this.btnGuardar_Eq.Location = new System.Drawing.Point(375, 127);
+            this.btnGuardar_Eq.Name = "btnGuardar_Eq";
+            this.btnGuardar_Eq.Size = new System.Drawing.Size(100, 23);
+            this.btnGuardar_Eq.TabIndex = 5;
+            this.btnGuardar_Eq.Text = "Guardar Cambios";
+            this.btnGuardar_Eq.UseVisualStyleBackColor = true;
+            this.btnGuardar_Eq.Click += new System.EventHandler(this.btnGuardar_Eq_Click);
+            // 
+            // btnRegistrar_Eq
+            // 
+            this.btnRegistrar_Eq.Enabled = false;
+            this.btnRegistrar_Eq.Location = new System.Drawing.Point(211, 127);
+            this.btnRegistrar_Eq.Name = "btnRegistrar_Eq";
+            this.btnRegistrar_Eq.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrar_Eq.TabIndex = 4;
+            this.btnRegistrar_Eq.Text = "Registrar";
+            this.btnRegistrar_Eq.UseVisualStyleBackColor = true;
+            this.btnRegistrar_Eq.Click += new System.EventHandler(this.btnRegistrar_Eq_Click);
+            // 
+            // txtCantidad_Eq
+            // 
+            this.txtCantidad_Eq.Location = new System.Drawing.Point(352, 34);
+            this.txtCantidad_Eq.Name = "txtCantidad_Eq";
+            this.txtCantidad_Eq.Size = new System.Drawing.Size(196, 20);
+            this.txtCantidad_Eq.TabIndex = 2;
+            // 
+            // lblNombreTipo
+            // 
+            this.lblNombreTipo.AutoSize = true;
+            this.lblNombreTipo.Location = new System.Drawing.Point(150, 74);
+            this.lblNombreTipo.Name = "lblNombreTipo";
+            this.lblNombreTipo.Size = new System.Drawing.Size(79, 13);
+            this.lblNombreTipo.TabIndex = 1;
+            this.lblNombreTipo.Text = "Nombre equipo";
+            // 
+            // lblCantidad_Eq
+            // 
+            this.lblCantidad_Eq.AutoSize = true;
+            this.lblCantidad_Eq.Location = new System.Drawing.Point(150, 37);
+            this.lblCantidad_Eq.Name = "lblCantidad_Eq";
+            this.lblCantidad_Eq.Size = new System.Drawing.Size(49, 13);
+            this.lblCantidad_Eq.TabIndex = 0;
+            this.lblCantidad_Eq.Text = "Cantidad";
+            // 
+            // dgEquipo_Eq
+            // 
+            this.dgEquipo_Eq.AllowUserToAddRows = false;
+            this.dgEquipo_Eq.AllowUserToDeleteRows = false;
+            this.dgEquipo_Eq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgEquipo_Eq.Location = new System.Drawing.Point(16, 29);
+            this.dgEquipo_Eq.Name = "dgEquipo_Eq";
+            this.dgEquipo_Eq.ReadOnly = true;
+            this.dgEquipo_Eq.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgEquipo_Eq.Size = new System.Drawing.Size(732, 226);
+            this.dgEquipo_Eq.TabIndex = 4;
+            // 
             // gbMantenedorPaciente
             // 
             this.gbMantenedorPaciente.Controls.Add(this.txtVerificadorCargado_Pac);
@@ -1610,120 +1134,596 @@
             this.lblRutPaciente.TabIndex = 0;
             this.lblRutPaciente.Text = "Rut de Paciente";
             // 
-            // gbMantenerEquipo
+            // gbMantenedorPersonal
             // 
-            this.gbMantenerEquipo.Controls.Add(this.btnCargarEquipo_Eq);
-            this.gbMantenerEquipo.Controls.Add(this.btnNuevoEquipo_Eq);
-            this.gbMantenerEquipo.Controls.Add(this.groupBox7);
-            this.gbMantenerEquipo.Controls.Add(this.dgEquipo_Eq);
-            this.gbMantenerEquipo.Location = new System.Drawing.Point(6, 43);
-            this.gbMantenerEquipo.Name = "gbMantenerEquipo";
-            this.gbMantenerEquipo.Size = new System.Drawing.Size(768, 462);
-            this.gbMantenerEquipo.TabIndex = 32;
-            this.gbMantenerEquipo.TabStop = false;
-            this.gbMantenerEquipo.Text = "Mantener Equipo";
-            this.gbMantenerEquipo.Visible = false;
+            this.gbMantenedorPersonal.Controls.Add(this.gpMedico_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.cbCargo_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblCargo_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.btnEliminar_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.btnGuardar_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.btnRegistrar_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.txtDescuento_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.txtRemuneracion_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.txtContrasena_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.txtEmail_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.txtApellidos_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.txtNombres_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblDescuento_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblRemuneracion);
+            this.gbMantenedorPersonal.Controls.Add(this.txtVerificadorCargado_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblGuionCargado_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.txtRutPersonalCargado_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblRutPersonalCargado_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblContrasena_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblEmail_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.btnCrearPersonal_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblApellidos_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblNombre_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.btnCargarDatos_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.txtVerificador_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblGuion_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.txtRutPersonal_MP);
+            this.gbMantenedorPersonal.Controls.Add(this.lblRutPersonal_MP);
+            this.gbMantenedorPersonal.Location = new System.Drawing.Point(6, 43);
+            this.gbMantenedorPersonal.Name = "gbMantenedorPersonal";
+            this.gbMantenedorPersonal.Size = new System.Drawing.Size(768, 462);
+            this.gbMantenedorPersonal.TabIndex = 11;
+            this.gbMantenedorPersonal.TabStop = false;
+            this.gbMantenedorPersonal.Text = "Mantenedor Personal";
+            this.gbMantenedorPersonal.Visible = false;
             // 
-            // btnCargarEquipo_Eq
+            // gpMedico_MP
             // 
-            this.btnCargarEquipo_Eq.Location = new System.Drawing.Point(391, 266);
-            this.btnCargarEquipo_Eq.Name = "btnCargarEquipo_Eq";
-            this.btnCargarEquipo_Eq.Size = new System.Drawing.Size(100, 23);
-            this.btnCargarEquipo_Eq.TabIndex = 7;
-            this.btnCargarEquipo_Eq.Text = "Cargar Equipo";
-            this.btnCargarEquipo_Eq.UseVisualStyleBackColor = true;
-            this.btnCargarEquipo_Eq.Click += new System.EventHandler(this.btnCargarEquipo_Eq_Click);
+            this.gpMedico_MP.Controls.Add(this.cbBanco_MP);
+            this.gpMedico_MP.Controls.Add(this.lblBanco_MP);
+            this.gpMedico_MP.Controls.Add(this.cbTipoCuenta_MP);
+            this.gpMedico_MP.Controls.Add(this.lblTipoCuenta_MP);
+            this.gpMedico_MP.Controls.Add(this.lblCuentaBanc_MP);
+            this.gpMedico_MP.Controls.Add(this.txtCuentaBanc_MP);
+            this.gpMedico_MP.Location = new System.Drawing.Point(351, 81);
+            this.gpMedico_MP.Name = "gpMedico_MP";
+            this.gpMedico_MP.Size = new System.Drawing.Size(397, 238);
+            this.gpMedico_MP.TabIndex = 30;
+            this.gpMedico_MP.TabStop = false;
+            this.gpMedico_MP.Text = "Cuenta Bancaria";
             // 
-            // btnNuevoEquipo_Eq
+            // cbBanco_MP
             // 
-            this.btnNuevoEquipo_Eq.Location = new System.Drawing.Point(212, 266);
-            this.btnNuevoEquipo_Eq.Name = "btnNuevoEquipo_Eq";
-            this.btnNuevoEquipo_Eq.Size = new System.Drawing.Size(90, 23);
-            this.btnNuevoEquipo_Eq.TabIndex = 6;
-            this.btnNuevoEquipo_Eq.Text = "Nuevo Equipo";
-            this.btnNuevoEquipo_Eq.UseVisualStyleBackColor = true;
-            this.btnNuevoEquipo_Eq.Click += new System.EventHandler(this.btnNuevoEquipo_Eq_Click);
+            this.cbBanco_MP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBanco_MP.FormattingEnabled = true;
+            this.cbBanco_MP.Location = new System.Drawing.Point(178, 86);
+            this.cbBanco_MP.Name = "cbBanco_MP";
+            this.cbBanco_MP.Size = new System.Drawing.Size(151, 21);
+            this.cbBanco_MP.TabIndex = 33;
             // 
-            // groupBox7
+            // lblBanco_MP
             // 
-            this.groupBox7.Controls.Add(this.txtNombreEquipo);
-            this.groupBox7.Controls.Add(this.btnGuardar_Eq);
-            this.groupBox7.Controls.Add(this.btnRegistrar_Eq);
-            this.groupBox7.Controls.Add(this.txtCantidad_Eq);
-            this.groupBox7.Controls.Add(this.lblNombreTipo);
-            this.groupBox7.Controls.Add(this.lblCantidad_Eq);
-            this.groupBox7.Location = new System.Drawing.Point(16, 295);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(732, 153);
-            this.groupBox7.TabIndex = 5;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Equipo";
+            this.lblBanco_MP.AutoSize = true;
+            this.lblBanco_MP.Location = new System.Drawing.Point(23, 89);
+            this.lblBanco_MP.Name = "lblBanco_MP";
+            this.lblBanco_MP.Size = new System.Drawing.Size(38, 13);
+            this.lblBanco_MP.TabIndex = 32;
+            this.lblBanco_MP.Text = "Banco";
             // 
-            // txtNombreEquipo
+            // cbTipoCuenta_MP
             // 
-            this.txtNombreEquipo.Location = new System.Drawing.Point(352, 67);
-            this.txtNombreEquipo.Name = "txtNombreEquipo";
-            this.txtNombreEquipo.Size = new System.Drawing.Size(196, 20);
-            this.txtNombreEquipo.TabIndex = 6;
+            this.cbTipoCuenta_MP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoCuenta_MP.FormattingEnabled = true;
+            this.cbTipoCuenta_MP.Location = new System.Drawing.Point(178, 54);
+            this.cbTipoCuenta_MP.Name = "cbTipoCuenta_MP";
+            this.cbTipoCuenta_MP.Size = new System.Drawing.Size(151, 21);
+            this.cbTipoCuenta_MP.TabIndex = 31;
             // 
-            // btnGuardar_Eq
+            // lblTipoCuenta_MP
             // 
-            this.btnGuardar_Eq.Enabled = false;
-            this.btnGuardar_Eq.Location = new System.Drawing.Point(375, 127);
-            this.btnGuardar_Eq.Name = "btnGuardar_Eq";
-            this.btnGuardar_Eq.Size = new System.Drawing.Size(100, 23);
-            this.btnGuardar_Eq.TabIndex = 5;
-            this.btnGuardar_Eq.Text = "Guardar Cambios";
-            this.btnGuardar_Eq.UseVisualStyleBackColor = true;
-            this.btnGuardar_Eq.Click += new System.EventHandler(this.btnGuardar_Eq_Click);
+            this.lblTipoCuenta_MP.AutoSize = true;
+            this.lblTipoCuenta_MP.Location = new System.Drawing.Point(23, 57);
+            this.lblTipoCuenta_MP.Name = "lblTipoCuenta_MP";
+            this.lblTipoCuenta_MP.Size = new System.Drawing.Size(110, 13);
+            this.lblTipoCuenta_MP.TabIndex = 30;
+            this.lblTipoCuenta_MP.Text = "Tipo Cuenta Bancaria";
             // 
-            // btnRegistrar_Eq
+            // lblCuentaBanc_MP
             // 
-            this.btnRegistrar_Eq.Enabled = false;
-            this.btnRegistrar_Eq.Location = new System.Drawing.Point(211, 127);
-            this.btnRegistrar_Eq.Name = "btnRegistrar_Eq";
-            this.btnRegistrar_Eq.Size = new System.Drawing.Size(75, 23);
-            this.btnRegistrar_Eq.TabIndex = 4;
-            this.btnRegistrar_Eq.Text = "Registrar";
-            this.btnRegistrar_Eq.UseVisualStyleBackColor = true;
-            this.btnRegistrar_Eq.Click += new System.EventHandler(this.btnRegistrar_Eq_Click);
+            this.lblCuentaBanc_MP.AutoSize = true;
+            this.lblCuentaBanc_MP.Location = new System.Drawing.Point(23, 31);
+            this.lblCuentaBanc_MP.Name = "lblCuentaBanc_MP";
+            this.lblCuentaBanc_MP.Size = new System.Drawing.Size(86, 13);
+            this.lblCuentaBanc_MP.TabIndex = 28;
+            this.lblCuentaBanc_MP.Text = "Cuenta Bancaria";
             // 
-            // txtCantidad_Eq
+            // txtCuentaBanc_MP
             // 
-            this.txtCantidad_Eq.Location = new System.Drawing.Point(352, 34);
-            this.txtCantidad_Eq.Name = "txtCantidad_Eq";
-            this.txtCantidad_Eq.Size = new System.Drawing.Size(196, 20);
-            this.txtCantidad_Eq.TabIndex = 2;
+            this.txtCuentaBanc_MP.Location = new System.Drawing.Point(178, 24);
+            this.txtCuentaBanc_MP.MaxLength = 64;
+            this.txtCuentaBanc_MP.Name = "txtCuentaBanc_MP";
+            this.txtCuentaBanc_MP.Size = new System.Drawing.Size(151, 20);
+            this.txtCuentaBanc_MP.TabIndex = 29;
             // 
-            // lblNombreTipo
+            // cbCargo_MP
             // 
-            this.lblNombreTipo.AutoSize = true;
-            this.lblNombreTipo.Location = new System.Drawing.Point(150, 74);
-            this.lblNombreTipo.Name = "lblNombreTipo";
-            this.lblNombreTipo.Size = new System.Drawing.Size(79, 13);
-            this.lblNombreTipo.TabIndex = 1;
-            this.lblNombreTipo.Text = "Nombre equipo";
+            this.cbCargo_MP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCargo_MP.FormattingEnabled = true;
+            this.cbCargo_MP.Location = new System.Drawing.Point(163, 303);
+            this.cbCargo_MP.Name = "cbCargo_MP";
+            this.cbCargo_MP.Size = new System.Drawing.Size(151, 21);
+            this.cbCargo_MP.TabIndex = 27;
+            this.cbCargo_MP.SelectedIndexChanged += new System.EventHandler(this.cbCargo_MP_SelectedIndexChanged);
             // 
-            // lblCantidad_Eq
+            // lblCargo_MP
             // 
-            this.lblCantidad_Eq.AutoSize = true;
-            this.lblCantidad_Eq.Location = new System.Drawing.Point(150, 37);
-            this.lblCantidad_Eq.Name = "lblCantidad_Eq";
-            this.lblCantidad_Eq.Size = new System.Drawing.Size(49, 13);
-            this.lblCantidad_Eq.TabIndex = 0;
-            this.lblCantidad_Eq.Text = "Cantidad";
+            this.lblCargo_MP.AutoSize = true;
+            this.lblCargo_MP.Location = new System.Drawing.Point(38, 306);
+            this.lblCargo_MP.Name = "lblCargo_MP";
+            this.lblCargo_MP.Size = new System.Drawing.Size(35, 13);
+            this.lblCargo_MP.TabIndex = 26;
+            this.lblCargo_MP.Text = "Cargo";
             // 
-            // dgEquipo_Eq
+            // btnEliminar_MP
             // 
-            this.dgEquipo_Eq.AllowUserToAddRows = false;
-            this.dgEquipo_Eq.AllowUserToDeleteRows = false;
-            this.dgEquipo_Eq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgEquipo_Eq.Location = new System.Drawing.Point(16, 29);
-            this.dgEquipo_Eq.Name = "dgEquipo_Eq";
-            this.dgEquipo_Eq.ReadOnly = true;
-            this.dgEquipo_Eq.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgEquipo_Eq.Size = new System.Drawing.Size(732, 226);
-            this.dgEquipo_Eq.TabIndex = 4;
+            this.btnEliminar_MP.Enabled = false;
+            this.btnEliminar_MP.Location = new System.Drawing.Point(437, 425);
+            this.btnEliminar_MP.Name = "btnEliminar_MP";
+            this.btnEliminar_MP.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar_MP.TabIndex = 25;
+            this.btnEliminar_MP.Text = "Eliminar";
+            this.btnEliminar_MP.UseVisualStyleBackColor = true;
+            this.btnEliminar_MP.Click += new System.EventHandler(this.btnEliminar_MP_Click);
+            // 
+            // btnGuardar_MP
+            // 
+            this.btnGuardar_MP.Enabled = false;
+            this.btnGuardar_MP.Location = new System.Drawing.Point(324, 425);
+            this.btnGuardar_MP.Name = "btnGuardar_MP";
+            this.btnGuardar_MP.Size = new System.Drawing.Size(107, 23);
+            this.btnGuardar_MP.TabIndex = 24;
+            this.btnGuardar_MP.Text = "Guardar cambios";
+            this.btnGuardar_MP.UseVisualStyleBackColor = true;
+            this.btnGuardar_MP.Click += new System.EventHandler(this.btnGuardar_MP_Click);
+            // 
+            // btnRegistrar_MP
+            // 
+            this.btnRegistrar_MP.Enabled = false;
+            this.btnRegistrar_MP.Location = new System.Drawing.Point(243, 425);
+            this.btnRegistrar_MP.Name = "btnRegistrar_MP";
+            this.btnRegistrar_MP.Size = new System.Drawing.Size(75, 23);
+            this.btnRegistrar_MP.TabIndex = 23;
+            this.btnRegistrar_MP.Text = "Registrar";
+            this.btnRegistrar_MP.UseVisualStyleBackColor = true;
+            this.btnRegistrar_MP.Click += new System.EventHandler(this.btnRegistrar_MP_Click);
+            // 
+            // txtDescuento_MP
+            // 
+            this.txtDescuento_MP.Location = new System.Drawing.Point(163, 272);
+            this.txtDescuento_MP.MaxLength = 2;
+            this.txtDescuento_MP.Name = "txtDescuento_MP";
+            this.txtDescuento_MP.Size = new System.Drawing.Size(151, 20);
+            this.txtDescuento_MP.TabIndex = 22;
+            this.txtDescuento_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
+            // 
+            // txtRemuneracion_MP
+            // 
+            this.txtRemuneracion_MP.Location = new System.Drawing.Point(163, 240);
+            this.txtRemuneracion_MP.MaxLength = 8;
+            this.txtRemuneracion_MP.Name = "txtRemuneracion_MP";
+            this.txtRemuneracion_MP.Size = new System.Drawing.Size(151, 20);
+            this.txtRemuneracion_MP.TabIndex = 21;
+            this.txtRemuneracion_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
+            // 
+            // txtContrasena_MP
+            // 
+            this.txtContrasena_MP.Location = new System.Drawing.Point(163, 177);
+            this.txtContrasena_MP.MaxLength = 1080;
+            this.txtContrasena_MP.Name = "txtContrasena_MP";
+            this.txtContrasena_MP.PasswordChar = '*';
+            this.txtContrasena_MP.Size = new System.Drawing.Size(151, 20);
+            this.txtContrasena_MP.TabIndex = 20;
+            // 
+            // txtEmail_MP
+            // 
+            this.txtEmail_MP.Location = new System.Drawing.Point(163, 145);
+            this.txtEmail_MP.MaxLength = 512;
+            this.txtEmail_MP.Name = "txtEmail_MP";
+            this.txtEmail_MP.Size = new System.Drawing.Size(151, 20);
+            this.txtEmail_MP.TabIndex = 19;
+            // 
+            // txtApellidos_MP
+            // 
+            this.txtApellidos_MP.Location = new System.Drawing.Point(163, 116);
+            this.txtApellidos_MP.MaxLength = 64;
+            this.txtApellidos_MP.Name = "txtApellidos_MP";
+            this.txtApellidos_MP.Size = new System.Drawing.Size(151, 20);
+            this.txtApellidos_MP.TabIndex = 18;
+            // 
+            // txtNombres_MP
+            // 
+            this.txtNombres_MP.Location = new System.Drawing.Point(163, 86);
+            this.txtNombres_MP.MaxLength = 64;
+            this.txtNombres_MP.Name = "txtNombres_MP";
+            this.txtNombres_MP.Size = new System.Drawing.Size(151, 20);
+            this.txtNombres_MP.TabIndex = 17;
+            // 
+            // lblDescuento_MP
+            // 
+            this.lblDescuento_MP.AutoSize = true;
+            this.lblDescuento_MP.Location = new System.Drawing.Point(37, 275);
+            this.lblDescuento_MP.Name = "lblDescuento_MP";
+            this.lblDescuento_MP.Size = new System.Drawing.Size(59, 13);
+            this.lblDescuento_MP.TabIndex = 16;
+            this.lblDescuento_MP.Text = "Descuento";
+            // 
+            // lblRemuneracion
+            // 
+            this.lblRemuneracion.AutoSize = true;
+            this.lblRemuneracion.Location = new System.Drawing.Point(38, 243);
+            this.lblRemuneracion.Name = "lblRemuneracion";
+            this.lblRemuneracion.Size = new System.Drawing.Size(76, 13);
+            this.lblRemuneracion.TabIndex = 15;
+            this.lblRemuneracion.Text = "Remuneración";
+            // 
+            // txtVerificadorCargado_MP
+            // 
+            this.txtVerificadorCargado_MP.Location = new System.Drawing.Point(292, 208);
+            this.txtVerificadorCargado_MP.MaxLength = 1;
+            this.txtVerificadorCargado_MP.Name = "txtVerificadorCargado_MP";
+            this.txtVerificadorCargado_MP.Size = new System.Drawing.Size(22, 20);
+            this.txtVerificadorCargado_MP.TabIndex = 14;
+            this.txtVerificadorCargado_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
+            // lblGuionCargado_MP
+            // 
+            this.lblGuionCargado_MP.AutoSize = true;
+            this.lblGuionCargado_MP.Location = new System.Drawing.Point(270, 211);
+            this.lblGuionCargado_MP.Name = "lblGuionCargado_MP";
+            this.lblGuionCargado_MP.Size = new System.Drawing.Size(10, 13);
+            this.lblGuionCargado_MP.TabIndex = 13;
+            this.lblGuionCargado_MP.Text = "-";
+            // 
+            // txtRutPersonalCargado_MP
+            // 
+            this.txtRutPersonalCargado_MP.Location = new System.Drawing.Point(163, 208);
+            this.txtRutPersonalCargado_MP.MaxLength = 8;
+            this.txtRutPersonalCargado_MP.Name = "txtRutPersonalCargado_MP";
+            this.txtRutPersonalCargado_MP.Size = new System.Drawing.Size(100, 20);
+            this.txtRutPersonalCargado_MP.TabIndex = 12;
+            this.txtRutPersonalCargado_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
+            // 
+            // lblRutPersonalCargado_MP
+            // 
+            this.lblRutPersonalCargado_MP.AutoSize = true;
+            this.lblRutPersonalCargado_MP.Location = new System.Drawing.Point(38, 211);
+            this.lblRutPersonalCargado_MP.Name = "lblRutPersonalCargado_MP";
+            this.lblRutPersonalCargado_MP.Size = new System.Drawing.Size(83, 13);
+            this.lblRutPersonalCargado_MP.TabIndex = 11;
+            this.lblRutPersonalCargado_MP.Text = "Rut de Personal";
+            // 
+            // lblContrasena_MP
+            // 
+            this.lblContrasena_MP.AutoSize = true;
+            this.lblContrasena_MP.Location = new System.Drawing.Point(37, 180);
+            this.lblContrasena_MP.Name = "lblContrasena_MP";
+            this.lblContrasena_MP.Size = new System.Drawing.Size(61, 13);
+            this.lblContrasena_MP.TabIndex = 10;
+            this.lblContrasena_MP.Text = "Contraseña";
+            // 
+            // lblEmail_MP
+            // 
+            this.lblEmail_MP.AutoSize = true;
+            this.lblEmail_MP.Location = new System.Drawing.Point(37, 152);
+            this.lblEmail_MP.Name = "lblEmail_MP";
+            this.lblEmail_MP.Size = new System.Drawing.Size(32, 13);
+            this.lblEmail_MP.TabIndex = 9;
+            this.lblEmail_MP.Text = "Email";
+            // 
+            // btnCrearPersonal_MP
+            // 
+            this.btnCrearPersonal_MP.Location = new System.Drawing.Point(507, 38);
+            this.btnCrearPersonal_MP.Name = "btnCrearPersonal_MP";
+            this.btnCrearPersonal_MP.Size = new System.Drawing.Size(93, 23);
+            this.btnCrearPersonal_MP.TabIndex = 8;
+            this.btnCrearPersonal_MP.Text = "Nuevo Personal";
+            this.btnCrearPersonal_MP.UseVisualStyleBackColor = true;
+            this.btnCrearPersonal_MP.Click += new System.EventHandler(this.btnCrearPersonal_MP_Click_1);
+            // 
+            // lblApellidos_MP
+            // 
+            this.lblApellidos_MP.AutoSize = true;
+            this.lblApellidos_MP.Location = new System.Drawing.Point(37, 119);
+            this.lblApellidos_MP.Name = "lblApellidos_MP";
+            this.lblApellidos_MP.Size = new System.Drawing.Size(49, 13);
+            this.lblApellidos_MP.TabIndex = 7;
+            this.lblApellidos_MP.Text = "Apellidos";
+            // 
+            // lblNombre_MP
+            // 
+            this.lblNombre_MP.AutoSize = true;
+            this.lblNombre_MP.Location = new System.Drawing.Point(38, 89);
+            this.lblNombre_MP.Name = "lblNombre_MP";
+            this.lblNombre_MP.Size = new System.Drawing.Size(49, 13);
+            this.lblNombre_MP.TabIndex = 6;
+            this.lblNombre_MP.Text = "Nombres";
+            // 
+            // btnCargarDatos_MP
+            // 
+            this.btnCargarDatos_MP.Location = new System.Drawing.Point(411, 38);
+            this.btnCargarDatos_MP.Name = "btnCargarDatos_MP";
+            this.btnCargarDatos_MP.Size = new System.Drawing.Size(90, 23);
+            this.btnCargarDatos_MP.TabIndex = 4;
+            this.btnCargarDatos_MP.Text = "Cargar Datos";
+            this.btnCargarDatos_MP.UseVisualStyleBackColor = true;
+            this.btnCargarDatos_MP.Click += new System.EventHandler(this.btnCargarDatos_MP_Click_1);
+            // 
+            // txtVerificador_MP
+            // 
+            this.txtVerificador_MP.Location = new System.Drawing.Point(364, 40);
+            this.txtVerificador_MP.MaxLength = 1;
+            this.txtVerificador_MP.Name = "txtVerificador_MP";
+            this.txtVerificador_MP.Size = new System.Drawing.Size(22, 20);
+            this.txtVerificador_MP.TabIndex = 3;
+            this.txtVerificador_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDv_KeyPress);
+            // 
+            // lblGuion_MP
+            // 
+            this.lblGuion_MP.AutoSize = true;
+            this.lblGuion_MP.Location = new System.Drawing.Point(348, 43);
+            this.lblGuion_MP.Name = "lblGuion_MP";
+            this.lblGuion_MP.Size = new System.Drawing.Size(10, 13);
+            this.lblGuion_MP.TabIndex = 2;
+            this.lblGuion_MP.Text = "-";
+            // 
+            // txtRutPersonal_MP
+            // 
+            this.txtRutPersonal_MP.Location = new System.Drawing.Point(242, 40);
+            this.txtRutPersonal_MP.MaxLength = 8;
+            this.txtRutPersonal_MP.Name = "txtRutPersonal_MP";
+            this.txtRutPersonal_MP.Size = new System.Drawing.Size(100, 20);
+            this.txtRutPersonal_MP.TabIndex = 1;
+            this.txtRutPersonal_MP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCampo_KeyPress);
+            // 
+            // lblRutPersonal_MP
+            // 
+            this.lblRutPersonal_MP.AutoSize = true;
+            this.lblRutPersonal_MP.Location = new System.Drawing.Point(153, 43);
+            this.lblRutPersonal_MP.Name = "lblRutPersonal_MP";
+            this.lblRutPersonal_MP.Size = new System.Drawing.Size(83, 13);
+            this.lblRutPersonal_MP.TabIndex = 0;
+            this.lblRutPersonal_MP.Text = "Rut de Personal";
+            // 
+            // gbMantenerPrestacion
+            // 
+            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorCodigoMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.btnNuevaPrestacionMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.btnCargarPorLista);
+            this.gbMantenerPrestacion.Controls.Add(this.label3);
+            this.gbMantenerPrestacion.Controls.Add(this.label2);
+            this.gbMantenerPrestacion.Controls.Add(this.tbCodigoPrestacionMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.cbPrestacionesMPre);
+            this.gbMantenerPrestacion.Controls.Add(this.groupBox6);
+            this.gbMantenerPrestacion.Location = new System.Drawing.Point(6, 43);
+            this.gbMantenerPrestacion.Name = "gbMantenerPrestacion";
+            this.gbMantenerPrestacion.Size = new System.Drawing.Size(768, 462);
+            this.gbMantenerPrestacion.TabIndex = 10;
+            this.gbMantenerPrestacion.TabStop = false;
+            this.gbMantenerPrestacion.Text = "Mantener prestaciones";
+            this.gbMantenerPrestacion.Visible = false;
+            // 
+            // btnCargarPorCodigoMPre
+            // 
+            this.btnCargarPorCodigoMPre.Location = new System.Drawing.Point(273, 52);
+            this.btnCargarPorCodigoMPre.Name = "btnCargarPorCodigoMPre";
+            this.btnCargarPorCodigoMPre.Size = new System.Drawing.Size(224, 23);
+            this.btnCargarPorCodigoMPre.TabIndex = 7;
+            this.btnCargarPorCodigoMPre.Text = "Cargar por codigo";
+            this.btnCargarPorCodigoMPre.UseVisualStyleBackColor = true;
+            this.btnCargarPorCodigoMPre.Click += new System.EventHandler(this.btnCargarPorCodigoMPre_Click);
+            // 
+            // btnNuevaPrestacionMPre
+            // 
+            this.btnNuevaPrestacionMPre.Location = new System.Drawing.Point(538, 52);
+            this.btnNuevaPrestacionMPre.Name = "btnNuevaPrestacionMPre";
+            this.btnNuevaPrestacionMPre.Size = new System.Drawing.Size(224, 23);
+            this.btnNuevaPrestacionMPre.TabIndex = 6;
+            this.btnNuevaPrestacionMPre.Text = "Nueva prestación";
+            this.btnNuevaPrestacionMPre.UseVisualStyleBackColor = true;
+            this.btnNuevaPrestacionMPre.Click += new System.EventHandler(this.btnNuevaPrestacionMPre_Click);
+            // 
+            // btnCargarPorLista
+            // 
+            this.btnCargarPorLista.Location = new System.Drawing.Point(12, 52);
+            this.btnCargarPorLista.Name = "btnCargarPorLista";
+            this.btnCargarPorLista.Size = new System.Drawing.Size(224, 23);
+            this.btnCargarPorLista.TabIndex = 5;
+            this.btnCargarPorLista.Text = "Cargar por lista";
+            this.btnCargarPorLista.UseVisualStyleBackColor = true;
+            this.btnCargarPorLista.Click += new System.EventHandler(this.btnCargarPorLista_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Prestación:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(393, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(119, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "o Código de prestación:";
+            // 
+            // tbCodigoPrestacionMPre
+            // 
+            this.tbCodigoPrestacionMPre.Location = new System.Drawing.Point(538, 19);
+            this.tbCodigoPrestacionMPre.Name = "tbCodigoPrestacionMPre";
+            this.tbCodigoPrestacionMPre.Size = new System.Drawing.Size(224, 20);
+            this.tbCodigoPrestacionMPre.TabIndex = 2;
+            // 
+            // cbPrestacionesMPre
+            // 
+            this.cbPrestacionesMPre.FormattingEnabled = true;
+            this.cbPrestacionesMPre.Location = new System.Drawing.Point(79, 20);
+            this.cbPrestacionesMPre.Name = "cbPrestacionesMPre";
+            this.cbPrestacionesMPre.Size = new System.Drawing.Size(288, 21);
+            this.cbPrestacionesMPre.TabIndex = 1;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.tbCodigoMPre);
+            this.groupBox6.Controls.Add(this.label10);
+            this.groupBox6.Controls.Add(this.btnGuardarMpre);
+            this.groupBox6.Controls.Add(this.btnEliminarMPre);
+            this.groupBox6.Controls.Add(this.btnRegistrarMPre);
+            this.groupBox6.Controls.Add(this.btnRemoveMPre);
+            this.groupBox6.Controls.Add(this.btnAddMPre);
+            this.groupBox6.Controls.Add(this.lbxEquiposPrestacionMPre);
+            this.groupBox6.Controls.Add(this.lbxEquiposMPre);
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.tbNombrePrestacionMPre);
+            this.groupBox6.Controls.Add(this.tbPrecioPrestacionMPre);
+            this.groupBox6.Controls.Add(this.cbTipoPrestacionMPre);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Location = new System.Drawing.Point(8, 77);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(754, 379);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Prestación";
+            // 
+            // tbCodigoMPre
+            // 
+            this.tbCodigoMPre.Location = new System.Drawing.Point(201, 55);
+            this.tbCodigoMPre.Name = "tbCodigoMPre";
+            this.tbCodigoMPre.Size = new System.Drawing.Size(391, 20);
+            this.tbCodigoMPre.TabIndex = 18;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(110, 58);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Código:";
+            // 
+            // btnGuardarMpre
+            // 
+            this.btnGuardarMpre.Location = new System.Drawing.Point(284, 350);
+            this.btnGuardarMpre.Name = "btnGuardarMpre";
+            this.btnGuardarMpre.Size = new System.Drawing.Size(188, 23);
+            this.btnGuardarMpre.TabIndex = 16;
+            this.btnGuardarMpre.Text = "Guardar cambios";
+            this.btnGuardarMpre.UseVisualStyleBackColor = true;
+            this.btnGuardarMpre.Click += new System.EventHandler(this.btnGuardarMpre_Click);
+            // 
+            // btnEliminarMPre
+            // 
+            this.btnEliminarMPre.Location = new System.Drawing.Point(484, 350);
+            this.btnEliminarMPre.Name = "btnEliminarMPre";
+            this.btnEliminarMPre.Size = new System.Drawing.Size(188, 23);
+            this.btnEliminarMPre.TabIndex = 15;
+            this.btnEliminarMPre.Text = "Eliminar";
+            this.btnEliminarMPre.UseVisualStyleBackColor = true;
+            this.btnEliminarMPre.Click += new System.EventHandler(this.btnEliminarMPre_Click);
+            // 
+            // btnRegistrarMPre
+            // 
+            this.btnRegistrarMPre.Location = new System.Drawing.Point(84, 350);
+            this.btnRegistrarMPre.Name = "btnRegistrarMPre";
+            this.btnRegistrarMPre.Size = new System.Drawing.Size(188, 23);
+            this.btnRegistrarMPre.TabIndex = 8;
+            this.btnRegistrarMPre.Text = "Registrar";
+            this.btnRegistrarMPre.UseVisualStyleBackColor = true;
+            this.btnRegistrarMPre.Click += new System.EventHandler(this.btnRegistrarMPre_Click);
+            // 
+            // btnRemoveMPre
+            // 
+            this.btnRemoveMPre.Location = new System.Drawing.Point(356, 266);
+            this.btnRemoveMPre.Name = "btnRemoveMPre";
+            this.btnRemoveMPre.Size = new System.Drawing.Size(41, 73);
+            this.btnRemoveMPre.TabIndex = 14;
+            this.btnRemoveMPre.Text = "<<";
+            this.btnRemoveMPre.UseVisualStyleBackColor = true;
+            this.btnRemoveMPre.Click += new System.EventHandler(this.btnRemoveMPre_Click);
+            // 
+            // btnAddMPre
+            // 
+            this.btnAddMPre.Location = new System.Drawing.Point(356, 179);
+            this.btnAddMPre.Name = "btnAddMPre";
+            this.btnAddMPre.Size = new System.Drawing.Size(41, 73);
+            this.btnAddMPre.TabIndex = 8;
+            this.btnAddMPre.Text = ">>";
+            this.btnAddMPre.UseVisualStyleBackColor = true;
+            this.btnAddMPre.Click += new System.EventHandler(this.btnAddMPre_Click);
+            // 
+            // lbxEquiposPrestacionMPre
+            // 
+            this.lbxEquiposPrestacionMPre.FormattingEnabled = true;
+            this.lbxEquiposPrestacionMPre.Location = new System.Drawing.Point(403, 179);
+            this.lbxEquiposPrestacionMPre.Name = "lbxEquiposPrestacionMPre";
+            this.lbxEquiposPrestacionMPre.Size = new System.Drawing.Size(316, 160);
+            this.lbxEquiposPrestacionMPre.TabIndex = 13;
+            // 
+            // lbxEquiposMPre
+            // 
+            this.lbxEquiposMPre.FormattingEnabled = true;
+            this.lbxEquiposMPre.Location = new System.Drawing.Point(35, 179);
+            this.lbxEquiposMPre.Name = "lbxEquiposMPre";
+            this.lbxEquiposMPre.Size = new System.Drawing.Size(315, 160);
+            this.lbxEquiposMPre.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(110, 132);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Precio:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(108, 93);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Nombre:";
+            // 
+            // tbNombrePrestacionMPre
+            // 
+            this.tbNombrePrestacionMPre.Location = new System.Drawing.Point(201, 91);
+            this.tbNombrePrestacionMPre.Name = "tbNombrePrestacionMPre";
+            this.tbNombrePrestacionMPre.Size = new System.Drawing.Size(391, 20);
+            this.tbNombrePrestacionMPre.TabIndex = 8;
+            // 
+            // tbPrecioPrestacionMPre
+            // 
+            this.tbPrecioPrestacionMPre.Location = new System.Drawing.Point(201, 129);
+            this.tbPrecioPrestacionMPre.Name = "tbPrecioPrestacionMPre";
+            this.tbPrecioPrestacionMPre.Size = new System.Drawing.Size(203, 20);
+            this.tbPrecioPrestacionMPre.TabIndex = 9;
+            // 
+            // cbTipoPrestacionMPre
+            // 
+            this.cbTipoPrestacionMPre.FormattingEnabled = true;
+            this.cbTipoPrestacionMPre.Location = new System.Drawing.Point(201, 19);
+            this.cbTipoPrestacionMPre.Name = "cbTipoPrestacionMPre";
+            this.cbTipoPrestacionMPre.Size = new System.Drawing.Size(391, 21);
+            this.cbTipoPrestacionMPre.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(108, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Tipo prestación:";
             // 
             // FrmJefeOp
             // 
@@ -1734,7 +1734,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Name = "FrmJefeOp";
-            this.Text = "Centro medico Hipócrates";
+            this.Text = "Centro médico Hipócrates";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmJefeOp_FormClosed);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -1742,16 +1742,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.gbMantenerPrestacion.ResumeLayout(false);
-            this.gbMantenerPrestacion.PerformLayout();
-            this.gbMantenedorPersonal.ResumeLayout(false);
-            this.gbMantenedorPersonal.PerformLayout();
-            this.gpMedico_MP.ResumeLayout(false);
-            this.gpMedico_MP.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -1766,12 +1756,22 @@
             this.gbLogPagoHonorarios.ResumeLayout(false);
             this.gbLogPagoHonorarios.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLogs)).EndInit();
-            this.gbMantenedorPaciente.ResumeLayout(false);
-            this.gbMantenedorPaciente.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.gbMantenerEquipo.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgEquipo_Eq)).EndInit();
+            this.gbMantenedorPaciente.ResumeLayout(false);
+            this.gbMantenedorPaciente.PerformLayout();
+            this.gbMantenedorPersonal.ResumeLayout(false);
+            this.gbMantenedorPersonal.PerformLayout();
+            this.gpMedico_MP.ResumeLayout(false);
+            this.gpMedico_MP.PerformLayout();
+            this.gbMantenerPrestacion.ResumeLayout(false);
+            this.gbMantenerPrestacion.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }

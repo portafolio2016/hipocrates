@@ -46,7 +46,6 @@ namespace CheekiBreeki.CMH.Terminal.BL
         //ECU-005
         public List<ATENCION_AGEN> revisarAgendaDiaria(int rut, DateTime dia)
         {
-
             try
             {
                 if (Util.isObjetoNulo(dia))
@@ -59,6 +58,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 }
                 else
                 {
+                    conexionDB.Dispose();
+                    conexionDB = new CMHEntities();
                     List<ATENCION_AGEN> atenciones = null;
                     atenciones = conexionDB.ATENCION_AGEN.
                         Where(d => d.PERS_MEDICO.PERSONAL.RUT == rut).ToList();
@@ -2014,6 +2015,14 @@ namespace CheekiBreeki.CMH.Terminal.BL
                 .Where(d => d.PACIENTE.RUT == rut &&
                     (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
             atenciones = atenciones.Where(d => d.FECHOR.Value.Date == DateTime.Today.Date).ToList();
+            return (atenciones);
+        }
+
+        public List<ATENCION_AGEN> listaAtencionesPagadasTodosLosDias(int rut)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => d.PACIENTE.RUT == rut &&
+                    (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
             return (atenciones);
         }
         #endregion
