@@ -2274,16 +2274,16 @@ namespace CheekiBreeki.CMH.Terminal.BL
 
         //Obtener atenciones aptas para orden de analisis
         #region AtencionesAptasAnalisis
-        public List<RES_ATENCION> ResAtencionesAptasParaAnalisis()
+        public List<RES_ATENCION> ResAtencionesAptasParaAnalisis(int idPersonal)
         {
-            List<RES_ATENCION> resultados = conexionDB.RES_ATENCION.Where(d => d.ATENCION_ABIERTA == true && d.ID_ORDEN_ANALISIS == null).ToList();
+            List<RES_ATENCION> resultados = conexionDB.RES_ATENCION.Where(d => d.ATENCION_ABIERTA == true && d.ID_ORDEN_ANALISIS == null && (d.ATENCION_AGEN.PERS_MEDICO.ID_PERSONAL == idPersonal || d.ATENCION_AGEN.PERS_MEDICO1.ID_PERSONAL == idPersonal)).ToList();
             if (resultados != null)
                 return resultados;
             else return new List<RES_ATENCION>();
         }
-        public List<RES_ATENCION> ResAtencionesAptasParaCerrarAnalisis()
+        public List<RES_ATENCION> ResAtencionesAptasParaCerrarAnalisis(int idPersonal)
         {
-            List<RES_ATENCION> resultados = conexionDB.RES_ATENCION.Where(d => d.ATENCION_ABIERTA == true && d.ID_ORDEN_ANALISIS != null).ToList();
+            List<RES_ATENCION> resultados = conexionDB.RES_ATENCION.Where(d => d.ATENCION_ABIERTA == true && d.ID_ORDEN_ANALISIS != null && (d.ATENCION_AGEN.PERS_MEDICO.ID_PERSONAL == idPersonal || d.ATENCION_AGEN.PERS_MEDICO1.ID_PERSONAL == idPersonal)).ToList();
             if (resultados != null)
                 return resultados;
             else return new List<RES_ATENCION>();
@@ -2607,5 +2607,60 @@ namespace CheekiBreeki.CMH.Terminal.BL
         }
         #endregion
 
+        public List<ATENCION_AGEN> listaAtencionesPagadasDeMedico(int idPersonal)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => (d.ID_PERS_ATIENDE == idPersonal || d.ID_PERS_SOLICITA == idPersonal) &&
+                    (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
+
+            return (atenciones);
+        }
+
+        public bool RegistrarMuestra(int idAtencion, string comentario)
+        {
+            bool x = false;
+            ATENCION_AGEN atencion = new ATENCION_AGEN();
+            using (var con = new CMHEntities()){
+                ESTADO_ATEN estado = con.ESTADO_ATEN.Where(d=> d.NOM_ESTADO_ATEN.ToUpper() == "CERRADO").FirstOrDefault();
+                if (estado == null)
+                    return false;
+                atencion = con.ATENCION_AGEN.Where(d=> d.ID_ATENCION_AGEN == idAtencion).FirstOrDefault();
+                if (atencion == null)
+                    return false;
+                atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
+                con.SaveChangesAsync();
+                RES_ATENCION respuesta = new RES_ATENCION();
+                respuesta.ATENCION_ABIERTA = true;
+                respuesta.COMENTARIO = comentario;
+                respuesta.ID_ATENCION_AGEN = atencion.ID_ATENCION_AGEN;
+                con.RES_ATENCION.Add(respuesta);
+                con.SaveChangesAsync();
+                x = true;
+            }
+            return x;
+        }
+
+        public bool CerrarOrdenAnalisis(RES_ATENCION res)
+        {
+            bool x = false;
+            RES_ATENCION resultado = new RES_ATENCION();
+            ORDEN_ANALISIS orden = new ORDEN_ANALISIS();
+            using(var con = new CMHEntities()){
+                resultado = con.RES_ATENCION.Where(d => d.ID_RESULTADO_ATENCION == res.ID_RESULTADO_ATENCION).FirstOrDefault();
+                if (resultado == null)
+                    return false;
+                resultado.ARCHIVO_B64 = res.ARCHIVO_B64;
+                resultado.EXT_ARCHIVO = res.EXT_ARCHIVO;
+                resultado.ATENCION_ABIERTA = false;
+                con.SaveChangesAsync();
+                orden = con.ORDEN_ANALISIS.Where(d => d.ID_ORDEN_ANALISIS == resultado.ID_ORDEN_ANALISIS).FirstOrDefault();
+                if (orden == null)
+                    return false;
+                orden.FECHOR_RECEP = DateTime.Now;
+                con.SaveChangesAsync();
+                x = true;
+            }
+            return x;
+        }
     }
 }
