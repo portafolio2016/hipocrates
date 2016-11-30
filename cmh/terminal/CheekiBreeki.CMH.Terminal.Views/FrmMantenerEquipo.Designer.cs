@@ -39,6 +39,7 @@
             this.btnCargarEquipo_Eq = new System.Windows.Forms.Button();
             this.btnNuevoEquipo_Eq = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtNombreEquipo = new System.Windows.Forms.TextBox();
             this.btnGuardar_Eq = new System.Windows.Forms.Button();
             this.btnRegistrar_Eq = new System.Windows.Forms.Button();
             this.txtCantidad_Eq = new System.Windows.Forms.TextBox();
@@ -61,7 +62,6 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtNombreEquipo = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -192,6 +192,13 @@
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Equipo";
+            // 
+            // txtNombreEquipo
+            // 
+            this.txtNombreEquipo.Location = new System.Drawing.Point(352, 67);
+            this.txtNombreEquipo.Name = "txtNombreEquipo";
+            this.txtNombreEquipo.Size = new System.Drawing.Size(196, 20);
+            this.txtNombreEquipo.TabIndex = 6;
             // 
             // btnGuardar_Eq
             // 
@@ -404,13 +411,6 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
-            // txtNombreEquipo
-            // 
-            this.txtNombreEquipo.Location = new System.Drawing.Point(352, 67);
-            this.txtNombreEquipo.Name = "txtNombreEquipo";
-            this.txtNombreEquipo.Size = new System.Drawing.Size(196, 20);
-            this.txtNombreEquipo.TabIndex = 6;
-            // 
             // FrmMantenerEquipo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -420,7 +420,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmMantenerEquipo";
-            this.Text = "Centro medico Hipócrates";
+            this.Text = "Centro médico Hipócrates";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmJefeOp_FormClosed);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

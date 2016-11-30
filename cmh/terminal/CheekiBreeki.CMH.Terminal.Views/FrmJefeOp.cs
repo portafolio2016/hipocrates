@@ -1132,17 +1132,23 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void brnBuscarHorarios_Click(object sender, EventArgs e)
         {
-            bool res = false;
-            int rut = int.Parse(txtRut.Text);
+            string mensajeError = string.Empty;
             lblError.Visible = false;
             lstDisponibles.Items.Clear();
             lstAsignados.Items.Clear();
             try
             {
+                int rut = int.Parse(txtRut.Text);
+                PERSONAL personal = acciones.buscarPersonal(int.Parse(txtRut.Text), txtDv.Text.ToUpper());
+                PERS_MEDICO persMedico = acciones.buscarPersonalMedico(personal);
                 if (!Util.rutValido(rut, txtDv.Text))
-                    res = false;
+                    mensajeError = "RUT inválido";
+                else if (Util.isObjetoNulo(personal))
+                    mensajeError = "Personal no encontrado";
+                else if (Util.isObjetoNulo(persMedico))
+                    mensajeError = "Este personal no puede modificar sus horarios";
                 else
-                {
+                {  
                     // Bloques disponibles
                     List<BLOQUE> bloquesDisponibles = acciones.obtenerBloquesDisponibles(int.Parse(txtRut.Text));
                     foreach (BLOQUE bloques in bloquesDisponibles)
@@ -1172,19 +1178,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             item.Text = bloques.DIA_SEM.NOMBRE_DIA + ": " + bloques.NUM_HORA_INI + ":" + bloques.NUM_MINU_INI + " - " + bloques.NUM_HORA_FIN + ":" + bloques.NUM_MINU_FIN;
                         lstAsignados.Items.Add(item);
                     }
-                    res = true;
                 }
             }
             catch (Exception ex)
             {
-                res = false;
+                mensajeError = "Error al buscar bloques";
             }
-            if (!res)
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al buscar horarios";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
+            if (mensajeError != string.Empty)
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void btnAsignar_Click(object sender, EventArgs e)
@@ -1209,33 +1210,37 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
         private void btnGuardarCambios_Click(object sender, EventArgs e)
         {
-            lblError.Visible = true;
-            lblError.Text = "Actualizando horarios...";
-            btnGuardarCambios.Enabled = false;
-            lblError.ForeColor = System.Drawing.Color.Violet;
-            List<ComboboxItemObject> seleccionados = lstAsignados.Items.Cast<ComboboxItemObject>().ToList();
-            List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
-            foreach (ComboboxItemObject item in seleccionados)
+            string mensajeCorrecto = "Horarios actualizados correctamente";
+            string mensajeError = "Error al actualizar horarios";
+            bool res = false;
+            try
             {
-                BLOQUE nuevo = new BLOQUE();
-                nuevo.ID_BLOQUE = int.Parse(item.Value.ToString());
-                bloquesAsignados.Add(nuevo);
+                lblError.Visible = true;
+                lblError.Text = "Actualizando horarios...";
+                btnGuardarCambios.Enabled = false;
+                lblError.ForeColor = System.Drawing.Color.Violet;
+                List<ComboboxItemObject> seleccionados = lstAsignados.Items.Cast<ComboboxItemObject>().ToList();
+                List<BLOQUE> bloquesAsignados = new List<BLOQUE>();
+                foreach (ComboboxItemObject item in seleccionados)
+                {
+                    BLOQUE nuevo = new BLOQUE();
+                    nuevo.ID_BLOQUE = int.Parse(item.Value.ToString());
+                    bloquesAsignados.Add(nuevo);
+                }
+                res = acciones.guardarCambiosHorarios(bloquesAsignados, int.Parse(txtRut.Text));
             }
-            bool res = acciones.guardarCambiosHorarios(bloquesAsignados, int.Parse(txtRut.Text));
+            catch (Exception ex)
+            {
+                res = false;
+            }
 
             if (res)
-            {
-                lblError.Visible = true;
-                lblError.Text = "Horarios actualizados correctamente";
-                lblError.ForeColor = System.Drawing.Color.Green;
-            }
+                MessageBox.Show(mensajeCorrecto, "Creada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             else
-            {
-                lblError.Visible = true;
-                lblError.Text = "Error al actualizar horarios";
-                lblError.ForeColor = System.Drawing.Color.Red;
-            }
+                MessageBox.Show(mensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             btnGuardarCambios.Enabled = true;
+            lblError.Visible = false;
         }
 
         private void txtRut_KeyPress(object sender, KeyPressEventArgs e)
