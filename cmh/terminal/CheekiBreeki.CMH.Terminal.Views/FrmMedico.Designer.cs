@@ -32,9 +32,6 @@
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.btnSesion = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
-            this.gbCuentaBancaria = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.agendaDiariaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.fichasMédicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,14 +40,17 @@
             this.consultasMédicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarConsultaMédicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbOpcionesUsuario = new System.Windows.Forms.GroupBox();
+            this.gbCuentaBancaria = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbNroCuenta = new System.Windows.Forms.TextBox();
             this.cbTipoCuenta = new System.Windows.Forms.ComboBox();
             this.cbBanco = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCambiarCuentaOC = new System.Windows.Forms.Button();
-            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
+            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbNuevoMail = new System.Windows.Forms.TextBox();
@@ -130,13 +130,6 @@
             this.btnModificarUser = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.gbCerrarAtencionMedica.SuspendLayout();
-            this.gbAbrirConsultaMedica.SuspendLayout();
-            this.gbVerFichaMedica.SuspendLayout();
-            this.gbDatosPacienteVFM.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgEntradaVFM)).BeginInit();
-            this.gbAgendaDiaria.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).BeginInit();
             this.gbOpcionesUsuario.SuspendLayout();
             this.gbCuentaBancaria.SuspendLayout();
             this.gbAgendaDiaria.SuspendLayout();
@@ -186,11 +179,12 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.Controls.Add(this.gbAgendaDiaria);
+            this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
+            this.groupBox1.Controls.Add(this.gbVerFichaMedica);
+            this.groupBox1.Controls.Add(this.gbAbrirConsultaMedica);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Controls.Add(this.gbActualizarFichaMedica);
-            this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
-            this.groupBox1.Controls.Add(this.gbAbrirConsultaMedica);
-            this.groupBox1.Controls.Add(this.gbVerFichaMedica);
             this.groupBox1.Location = new System.Drawing.Point(1, 35);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
@@ -262,11 +256,9 @@
             this.cerrarConsultaMédicaToolStripMenuItem.Text = "Cerrar consulta médica";
             this.cerrarConsultaMédicaToolStripMenuItem.Click += new System.EventHandler(this.cerrarConsultaMédicaToolStripMenuItem_Click);
             // 
-            // 
             // gbOpcionesUsuario
             // 
             this.gbOpcionesUsuario.Controls.Add(this.gbCuentaBancaria);
-            this.gbOpcionesUsuario.Controls.Add(this.gbAgendaDiaria);
             this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
             this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
             this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
@@ -277,8 +269,8 @@
             this.gbOpcionesUsuario.Text = "Opciones de cuenta";
             this.gbOpcionesUsuario.Visible = false;
             // 
-            // 
             // gbCuentaBancaria
+            // 
             this.gbCuentaBancaria.Controls.Add(this.label4);
             this.gbCuentaBancaria.Controls.Add(this.label3);
             this.gbCuentaBancaria.Controls.Add(this.tbNroCuenta);
@@ -293,8 +285,8 @@
             this.gbCuentaBancaria.TabStop = false;
             this.gbCuentaBancaria.Text = "Cuenta Bancaria";
             // 
-            // 
             // label4
+            // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(72, 89);
             this.label4.Name = "label4";
@@ -356,7 +348,7 @@
             // gbAgendaDiaria
             // 
             this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
-            this.gbAgendaDiaria.Location = new System.Drawing.Point(0, 0);
+            this.gbAgendaDiaria.Location = new System.Drawing.Point(6, 43);
             this.gbAgendaDiaria.Name = "gbAgendaDiaria";
             this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
             this.gbAgendaDiaria.TabIndex = 4;
@@ -434,8 +426,8 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Name = "label7";
             this.label7.Location = new System.Drawing.Point(71, 23);
+            this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(96, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "Contraseña actual:";
@@ -446,8 +438,8 @@
             this.tbContrasenaActual.MaxLength = 40;
             this.tbContrasenaActual.Name = "tbContrasenaActual";
             this.tbContrasenaActual.PasswordChar = '*';
-            this.tbContrasenaActual.TabIndex = 5;
             this.tbContrasenaActual.Size = new System.Drawing.Size(408, 20);
+            this.tbContrasenaActual.TabIndex = 5;
             // 
             // btnCambiarContrasena
             // 
@@ -508,8 +500,8 @@
             this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 24;
             this.label2.Text = "Tipo entrada:";
-            // cbTipoEntradaAFM
             // 
+            // cbTipoEntradaAFM
             // 
             this.cbTipoEntradaAFM.FormattingEnabled = true;
             this.cbTipoEntradaAFM.Location = new System.Drawing.Point(137, 415);
@@ -517,8 +509,8 @@
             this.cbTipoEntradaAFM.Size = new System.Drawing.Size(393, 21);
             this.cbTipoEntradaAFM.TabIndex = 23;
             // 
-            // 
             // rtContenidoEntradaAFM
+            // 
             this.rtContenidoEntradaAFM.Location = new System.Drawing.Point(137, 243);
             this.rtContenidoEntradaAFM.MaxLength = 1028;
             this.rtContenidoEntradaAFM.Name = "rtContenidoEntradaAFM";
@@ -539,8 +531,8 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(32, 250);
             this.label14.Name = "label14";
-            this.label14.TabIndex = 18;
             this.label14.Size = new System.Drawing.Size(97, 13);
+            this.label14.TabIndex = 18;
             this.label14.Text = "Contenido entrada:";
             // 
             // label13
@@ -551,8 +543,8 @@
             this.label13.Size = new System.Drawing.Size(86, 13);
             this.label13.TabIndex = 17;
             this.label13.Text = "Nombre entrada:";
-            // btnAgregarEntradaAFM
             // 
+            // btnAgregarEntradaAFM
             // 
             this.btnAgregarEntradaAFM.Enabled = false;
             this.btnAgregarEntradaAFM.Location = new System.Drawing.Point(546, 415);
@@ -593,8 +585,8 @@
             this.lbSexoAFM.Name = "lbSexoAFM";
             this.lbSexoAFM.Size = new System.Drawing.Size(34, 13);
             this.lbSexoAFM.TabIndex = 3;
-            // 
             this.lbSexoAFM.Text = "Sexo:";
+            // 
             // lbRunAFM
             // 
             this.lbRunAFM.AutoSize = true;
@@ -604,8 +596,8 @@
             this.lbRunAFM.TabIndex = 2;
             this.lbRunAFM.Text = "Run:";
             // 
-            // 
             // lbEmailAFM
+            // 
             this.lbEmailAFM.AutoSize = true;
             this.lbEmailAFM.Location = new System.Drawing.Point(21, 61);
             this.lbEmailAFM.Name = "lbEmailAFM";
@@ -635,9 +627,9 @@
             // 
             this.btnBuscarAFM.Location = new System.Drawing.Point(496, 28);
             this.btnBuscarAFM.Name = "btnBuscarAFM";
-            this.btnBuscarAFM.Text = "Buscar";
-            this.btnBuscarAFM.TabIndex = 10;
             this.btnBuscarAFM.Size = new System.Drawing.Size(113, 23);
+            this.btnBuscarAFM.TabIndex = 10;
+            this.btnBuscarAFM.Text = "Buscar";
             this.btnBuscarAFM.UseVisualStyleBackColor = true;
             this.btnBuscarAFM.Click += new System.EventHandler(this.btnBuscarAFM_Click);
             // 
@@ -649,8 +641,8 @@
             this.tbVerificadorAFM.Size = new System.Drawing.Size(23, 20);
             this.tbVerificadorAFM.TabIndex = 13;
             // 
-            // 
             // label12
+            // 
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(134, 33);
             this.label12.Name = "label12";
@@ -659,8 +651,8 @@
             this.label12.Text = "Buscar paciente por RUN";
             // 
             // tbRUNAFM
-            this.tbRUNAFM.Location = new System.Drawing.Point(280, 30);
             // 
+            this.tbRUNAFM.Location = new System.Drawing.Point(280, 30);
             this.tbRUNAFM.MaxLength = 10;
             this.tbRUNAFM.Name = "tbRUNAFM";
             this.tbRUNAFM.Size = new System.Drawing.Size(143, 20);
@@ -787,7 +779,7 @@
             this.gbAbrirConsultaMedica.Controls.Add(this.cmbEspecialidad_ACM);
             this.gbAbrirConsultaMedica.Controls.Add(this.lblPaciente_ACM);
             this.gbAbrirConsultaMedica.Controls.Add(this.lblEspecialidad_ACM);
-            this.gbAbrirConsultaMedica.Location = new System.Drawing.Point(3, 43);
+            this.gbAbrirConsultaMedica.Location = new System.Drawing.Point(6, 43);
             this.gbAbrirConsultaMedica.Name = "gbAbrirConsultaMedica";
             this.gbAbrirConsultaMedica.Size = new System.Drawing.Size(768, 462);
             this.gbAbrirConsultaMedica.TabIndex = 8;
@@ -1173,17 +1165,6 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.gbCerrarAtencionMedica.ResumeLayout(false);
-            this.gbCerrarAtencionMedica.PerformLayout();
-            this.gbAbrirConsultaMedica.ResumeLayout(false);
-            this.gbAbrirConsultaMedica.PerformLayout();
-            this.gbVerFichaMedica.ResumeLayout(false);
-            this.gbVerFichaMedica.PerformLayout();
-            this.gbDatosPacienteVFM.ResumeLayout(false);
-            this.gbDatosPacienteVFM.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgEntradaVFM)).EndInit();
-            this.gbAgendaDiaria.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
             this.gbOpcionesUsuario.ResumeLayout(false);
             this.gbCuentaBancaria.ResumeLayout(false);
             this.gbCuentaBancaria.PerformLayout();
