@@ -157,7 +157,7 @@
             this.Controls.Add(this.lblBienvenido);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmLogin";
-            this.Text = "Iniciar sesión";
+            this.Text = "Centro médico Hipócrates";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
