@@ -151,7 +151,9 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     {
                         BONO bono = new BONO();
                         bono.CANT_BONO = cantBono;
-                        bono.ID_ASEGURADORA = conexionDB.ASEGURADORA.Where(d => d.NOM_ASEGURADORA == aseguradora).FirstOrDefault().ID_ASEGURADORA;
+                        ASEGURADORA empresa = conexionDB.ASEGURADORA.Where(d => d.NOM_ASEGURADORA.ToUpper() == aseguradora.ToUpper()).FirstOrDefault();
+                        int idAseguradora = empresa.ID_ASEGURADORA;
+                        bono.ID_ASEGURADORA = idAseguradora;
                         conexionDB.BONO.Add(bono);
                         conexionDB.SaveChangesAsync();
                         pago.ID_BONO = bono.ID_BONO;
