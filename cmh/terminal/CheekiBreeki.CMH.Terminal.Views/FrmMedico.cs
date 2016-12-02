@@ -48,6 +48,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 lblPrivilegio.Text = "";
                 btnSesion.Text = "Iniciar sesión";
             }
+
+            //rtArchivo_CAM.Enabled = false;
+            //btnArchivo_CAM.Enabled = false;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -697,6 +700,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
         }
 
         string file = string.Empty;
+
+        //No médico
+        /*
         private void btnArchivo_CAM_Click(object sender, EventArgs e)
         {
             try
@@ -715,6 +721,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 MessageBox.Show("Error al encontrar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        */
 
         private void btnCrearResultado_CAM_Click(object sender, EventArgs e)
         {
@@ -722,16 +729,16 @@ namespace CheekiBreeki.CMH.Terminal.Views
             try
             {
                 AccionesTerminal at = new AccionesTerminal();
-                ConversorBase64 conversor = new ConversorBase64();
+               // ConversorBase64 conversor = new ConversorBase64();
                 RES_ATENCION resultadoAtencion = new RES_ATENCION();
                 resultadoAtencion.ATENCION_ABIERTA = false;
                 resultadoAtencion.COMENTARIO = rtComentario_CAM.Text;
 
                 resultadoAtencion.ID_ATENCION_AGEN = ((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value;
-                string clob = conversor.convertirABase64(file);
-                resultadoAtencion.ARCHIVO_B64 = clob;
-                string extension  = Path.GetExtension(file).ToString().Substring(1, 3);
-                resultadoAtencion.EXT_ARCHIVO = extension;
+                //string clob = conversor.convertirABase64(file);
+               //resultadoAtencion.ARCHIVO_B64 = clob;
+                //string extension  = Path.GetExtension(file).ToString().Substring(1, 3);
+                //resultadoAtencion.EXT_ARCHIVO = extension;
                 
                 //Busque atención
                 ATENCION_AGEN atencionAg = at.buscarAtencionAgendadaID(((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value);
@@ -765,7 +772,21 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     res = false;
                 else
                 {
-                    actualizarBloquesMisticos();
+                    
+                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadasPersonalMedicoLogueado(int.Parse(txtRutPaciente_CAM.Text),FrmLogin.usuarioLogeado.Personal.PERS_MEDICO.FirstOrDefault().ID_PERSONAL_MEDICO).ToList();
+
+                    if (atenciones.Count <= 0)
+                    {
+                        MessageBox.Show("No tiene ninguna atención", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    foreach (ATENCION_AGEN atencion in atenciones)
+                    {
+                        ComboboxItem item = new ComboboxItem();
+                        item.Value = atencion.ID_ATENCION_AGEN;
+                        item.Text = "Atención: " + atencion.ID_ATENCION_AGEN + " - Médico: " + atencion.PERS_MEDICO.PERSONAL.NOMBREFULL;
+                        lstAtenciones_CAM.Items.Add(item);
+                    }
+                   
                     res = true;
                 }
             }
@@ -792,10 +813,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             lstAtenciones_CAM.Items.Clear();
             List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
 
-            if (atenciones.Count <= 0)
-            {
-                MessageBox.Show("No tiene ninguna atención", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            
             foreach (ATENCION_AGEN atencion in atenciones)
             {
                 ComboboxItem item = new ComboboxItem();
