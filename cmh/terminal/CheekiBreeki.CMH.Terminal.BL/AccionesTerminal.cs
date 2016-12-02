@@ -380,29 +380,36 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     atencion.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "CERRADO").FirstOrDefault().ID_ESTADO_ATEN;
                     conexionDB.SaveChanges();
 
-                    string receptor, titulo, cuerpo = string.Empty;
-                    receptor = atencion.PERS_MEDICO1.PERSONAL.EMAIL;
-                    titulo = "Cerrada orden de análisis";
-                    cuerpo += "Estimado " + atencion.PERS_MEDICO1.PERSONAL.NOMBREFULL + ",\n";
-                    cuerpo += "La orden de análisis de la atención " + atencion.ID_ATENCION_AGEN + " se ha cerrado" + "\n";
-                    cuerpo += "Paciente: " + atencion.PACIENTE.NOMBRES_PACIENTE + " " + atencion.PACIENTE.APELLIDOS_PACIENTE + "\n\n";
-                    cuerpo += "Se adjunta documento de resultados.";
-                    if (File.Exists(archivo))
-                    {
-                        Emailer.enviarCorreo(receptor, titulo, cuerpo, archivo);
-                        Console.WriteLine("Correo enviado");
-                    }
+                    if (enviarCorreoOrdenDeAnalisis(atencion, archivo))
+                        return true;
                     else
-                    {
-                        Console.WriteLine("Archivo no existente");
-                        return false;
-                    }
-                    return true;
+                        throw new Exception("Error al enviar correo");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean enviarCorreoOrdenDeAnalisis(ATENCION_AGEN atencion, string archivo)
+        {
+            string receptor, titulo, cuerpo = string.Empty;
+            receptor = atencion.PERS_MEDICO1.PERSONAL.EMAIL;
+            titulo = "Cerrada orden de análisis";
+            cuerpo += "Estimado " + atencion.PERS_MEDICO1.PERSONAL.NOMBREFULL + ",\n\n";
+            cuerpo += "La orden de análisis de la atención " + atencion.ID_ATENCION_AGEN + " se ha cerrado." + "\n";
+            cuerpo += "Paciente: " + atencion.PACIENTE.NOMBRES_PACIENTE + " " + atencion.PACIENTE.APELLIDOS_PACIENTE + ".\n\n";
+            cuerpo += "Se adjunta documento de resultados.";
+            if (File.Exists(archivo))
+            {
+                Emailer.enviarCorreo(receptor, titulo, cuerpo, archivo);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Archivo no existente");
                 return false;
             }
         }
@@ -2687,7 +2694,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return x;
         }
 
-        public bool CerrarOrdenAnalisis(RES_ATENCION res)
+        public bool CerrarOrdenAnalisis(RES_ATENCION res, string archivo)
         {
             bool x = false;
             RES_ATENCION resultado = new RES_ATENCION();
@@ -2706,7 +2713,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     return false;
                 orden.FECHOR_RECEP = DateTime.Now;
                 con.SaveChangesAsync();
-                x = true;
+
+                ATENCION_AGEN atencion = conexionDB.ATENCION_AGEN.Find(resultado.ID_ATENCION_AGEN);
+                if (enviarCorreoOrdenDeAnalisis(atencion, archivo))
+                    x = true;
+                else
+                    throw new Exception("Error al enviar correo");
             }
             return x;
         }

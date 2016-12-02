@@ -276,8 +276,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 //Busque atención
                 ATENCION_AGEN atencionAg = at.buscarAtencionAgendadaID(((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value);
                 //Actualice atención
-                at.actualuzarAtencionAgendadaEstado(atencionAg);
-
+                res = at.cerrarOrdenDeAnalisis(atencionAg, file);
+                if (res)
+                    res = at.nuevoResultadoAtencion(resultadoAtencion);
                 res = at.nuevoResultadoAtencion(resultadoAtencion);
             }
             catch (Exception ex)

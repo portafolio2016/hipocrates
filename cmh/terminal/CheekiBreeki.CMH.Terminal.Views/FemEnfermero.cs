@@ -313,8 +313,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     }
                     resAtencion.ARCHIVO_B64 = clob;
                     resAtencion.EXT_ARCHIVO = extension;
-                    bool x = ac.CerrarOrdenAnalisis(resAtencion);
-                    if (x)
+
+                    bool res = ac.CerrarOrdenAnalisis(resAtencion, file);
+                    if (res)
                     {
                         acciones = new AccionesTerminal();
                         InitCerrarOrden();
