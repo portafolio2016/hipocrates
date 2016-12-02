@@ -2083,8 +2083,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
                 .Where(d => d.PACIENTE.RUT == rut &&
-                     (d.ID_PERS_ATIENDE == idPersonal || d.ID_PERS_SOLICITA == idPersonal) &&
-                    (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
+                       d.ID_PERS_ATIENDE == idPersonal &&
+                       d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO").ToList();
             
             return (atenciones);
         }

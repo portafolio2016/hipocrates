@@ -209,7 +209,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 else
                 {
                     lstAtenciones_CAM.Items.Clear();
-                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
+                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadasPersonalMedicoLogueado(int.Parse(txtRutPaciente_CAM.Text), FrmLogin.usuarioLogeado.Personal.PERS_MEDICO.FirstOrDefault().ID_PERSONAL_MEDICO).ToList();
 
                     if (atenciones.Count <= 0)
                     {
@@ -246,7 +246,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             AccionesTerminal at = new AccionesTerminal();
             lstAtenciones_CAM.Items.Clear();
-            List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
+            List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadasPersonalMedicoLogueado(int.Parse(txtRutPaciente_CAM.Text), FrmLogin.usuarioLogeado.Personal.PERS_MEDICO.FirstOrDefault().ID_PERSONAL_MEDICO).ToList();
 
             foreach (ATENCION_AGEN atencion in atenciones)
             {
