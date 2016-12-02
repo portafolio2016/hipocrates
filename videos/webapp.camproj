@@ -6,7 +6,7 @@
 <ProjectHeight>600</ProjectHeight>
 <IsCustomProject>1</IsCustomProject>
 <SavedProjectSettings>1</SavedProjectSettings>
-<LastFlashTemplate>-1</LastFlashTemplate>
+<LastFlashTemplate>11</LastFlashTemplate>
 </Project_Settings>
 
 <UI_Layout>
@@ -33,7 +33,7 @@
 <Bookmarks>0</Bookmarks>
 </UI_Layout>
 
-<AutoSaveFile>C:\Users\pdelasotta\AppData\Local\TechSmith\Camtasia Studio\7.0\Auto-Saves\cmh795e8e8.autosave.camproj</AutoSaveFile>
+<AutoSaveFile>C:\Users\pdelasotta\AppData\Local\TechSmith\Camtasia Studio\7.0\Auto-Saves\webapp7a0508a.autosave.camproj</AutoSaveFile>
 
 <PowerPointProject>0</PowerPointProject>
 
@@ -307,7 +307,7 @@
 <Project_MetaData>
 <Project_MetaData_Object>
 <FieldArrayKey>8</FieldArrayKey>
-<Value>Untitled</Value>
+<Value>webapp</Value>
 </Project_MetaData_Object>
 <Project_MetaData_Object>
 <FieldArrayKey>13</FieldArrayKey>
