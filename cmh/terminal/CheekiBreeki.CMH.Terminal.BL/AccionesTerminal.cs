@@ -362,6 +362,49 @@ namespace CheekiBreeki.CMH.Terminal.BL
             }
         }
 
+        public Boolean cerrarOrdenDeAnalisis(ATENCION_AGEN atencion, string archivo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atención nula");
+                }
+                if (atencion.ID_PERS_SOLICITA == null)
+                {
+                    throw new Exception("Sin médico solicitante");
+                }
+                else
+                {
+                    atencion = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
+                    atencion.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "CERRADO").FirstOrDefault().ID_ESTADO_ATEN;
+                    conexionDB.SaveChanges();
+
+                    string receptor, titulo, cuerpo;
+                    receptor = atencion.PERS_MEDICO1.PERSONAL.EMAIL;
+                    titulo = "Cerrada orden de análisis";
+                    cuerpo = "La orden de análisis con de la atención " + atencion.ID_ATENCION_AGEN + " se ha cerrado";
+                    if (File.Exists(archivo))
+                    {
+                        Emailer.enviarCorreo(receptor, titulo, cuerpo);
+                        //Emailer.enviarCorreo(receptor, titulo, cuerpo, archivo);
+                        Console.WriteLine("Correo enviado");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Archivo no existente");
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
         //ECU-016
         public Boolean anularAtencion(ATENCION_AGEN atencion)
         {
@@ -2621,11 +2664,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             bool x = false;
             ATENCION_AGEN atencion = new ATENCION_AGEN();
-            using (var con = new CMHEntities()){
-                ESTADO_ATEN estado = con.ESTADO_ATEN.Where(d=> d.NOM_ESTADO_ATEN.ToUpper() == "CERRADO").FirstOrDefault();
+            using (var con = new CMHEntities())
+            {
+                ESTADO_ATEN estado = con.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "CERRADO").FirstOrDefault();
                 if (estado == null)
                     return false;
-                atencion = con.ATENCION_AGEN.Where(d=> d.ID_ATENCION_AGEN == idAtencion).FirstOrDefault();
+                atencion = con.ATENCION_AGEN.Where(d => d.ID_ATENCION_AGEN == idAtencion).FirstOrDefault();
                 if (atencion == null)
                     return false;
                 atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
@@ -2646,7 +2690,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
             bool x = false;
             RES_ATENCION resultado = new RES_ATENCION();
             ORDEN_ANALISIS orden = new ORDEN_ANALISIS();
-            using(var con = new CMHEntities()){
+            using (var con = new CMHEntities())
+            {
                 resultado = con.RES_ATENCION.Where(d => d.ID_RESULTADO_ATENCION == res.ID_RESULTADO_ATENCION).FirstOrDefault();
                 if (resultado == null)
                     return false;

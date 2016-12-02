@@ -38,6 +38,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblPrivilegio = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
+            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.gbCerrarAtencionMedica = new System.Windows.Forms.GroupBox();
             this.lblError_CAM = new System.Windows.Forms.Label();
             this.lstAtenciones_CAM = new System.Windows.Forms.ListBox();
@@ -62,18 +64,16 @@
             this.btnCambiarContrasena = new System.Windows.Forms.Button();
             this.tbContrasenaNueva = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
-            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.gbAgendaDiaria.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).BeginInit();
             this.gbCerrarAtencionMedica.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.gbAgendaDiaria.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -164,14 +164,39 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
-            this.groupBox1.Controls.Add(this.gbAgendaDiaria);
             this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
+            this.groupBox1.Controls.Add(this.gbAgendaDiaria);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
+            // 
+            // gbAgendaDiaria
+            // 
+            this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
+            this.gbAgendaDiaria.Location = new System.Drawing.Point(6, 43);
+            this.gbAgendaDiaria.Name = "gbAgendaDiaria";
+            this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
+            this.gbAgendaDiaria.TabIndex = 12;
+            this.gbAgendaDiaria.TabStop = false;
+            this.gbAgendaDiaria.Text = "Agenda diaria";
+            this.gbAgendaDiaria.Visible = false;
+            // 
+            // dgAgendaDiaria
+            // 
+            this.dgAgendaDiaria.AllowUserToAddRows = false;
+            this.dgAgendaDiaria.AllowUserToDeleteRows = false;
+            this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
+            this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
+            this.dgAgendaDiaria.Name = "dgAgendaDiaria";
+            this.dgAgendaDiaria.ReadOnly = true;
+            this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
+            this.dgAgendaDiaria.TabIndex = 1;
             // 
             // gbCerrarAtencionMedica
             // 
@@ -417,31 +442,6 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Contraseña nueva:";
             // 
-            // gbAgendaDiaria
-            // 
-            this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
-            this.gbAgendaDiaria.Location = new System.Drawing.Point(6, 43);
-            this.gbAgendaDiaria.Name = "gbAgendaDiaria";
-            this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
-            this.gbAgendaDiaria.TabIndex = 12;
-            this.gbAgendaDiaria.TabStop = false;
-            this.gbAgendaDiaria.Text = "Agenda diaria";
-            this.gbAgendaDiaria.Visible = false;
-            // 
-            // dgAgendaDiaria
-            // 
-            this.dgAgendaDiaria.AllowUserToAddRows = false;
-            this.dgAgendaDiaria.AllowUserToDeleteRows = false;
-            this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
-            this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
-            this.dgAgendaDiaria.Name = "dgAgendaDiaria";
-            this.dgAgendaDiaria.ReadOnly = true;
-            this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
-            this.dgAgendaDiaria.TabIndex = 1;
-            // 
             // FrmTecnologo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -461,6 +461,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbAgendaDiaria.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
             this.gbCerrarAtencionMedica.ResumeLayout(false);
             this.gbCerrarAtencionMedica.PerformLayout();
             this.gbOpcionesUsuario.ResumeLayout(false);
@@ -468,8 +470,6 @@
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.gbAgendaDiaria.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
             this.ResumeLayout(false);
 
         }
