@@ -1480,6 +1480,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         private void equipoToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             InitGB(gbMantenerEquipo);
+            CargarDataGridInventario();
         }
 
         private void btnNuevoEquipo_Eq_Click(object sender, EventArgs e)
@@ -1565,9 +1566,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             AccionesTerminal at = new AccionesTerminal();
             List<INVENTARIO> listaInventarioDB = at.listarInventario();
-            //List<ATENCION_AGEN> listaAtenciones = acciones.revisarAgendaDiaria(FrmLogin.usuarioLogeado.Personal.RUT, DateTime.Now);
             List<ListaInventarioDG> listaInventarioDG = new List<ListaInventarioDG>();
-            //List<AgendaDiaria> agendaDiaria = new List<AgendaDiaria>();
 
             if (listaInventarioDB.Count > 0)
             {
@@ -1579,7 +1578,9 @@ namespace CheekiBreeki.CMH.Terminal.Views
 
             }
             dgEquipo_Eq.DataSource = listaInventarioDG;
-
+            dgEquipo_Eq.Columns["idInventario"].Visible = false;
+            dgEquipo_Eq.Columns["idEquipo"].Visible = false;
+            dgEquipo_Eq.Columns["nombreEquipo"].Width = 500;
         }
         
         

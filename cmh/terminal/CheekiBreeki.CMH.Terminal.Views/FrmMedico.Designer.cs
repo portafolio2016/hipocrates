@@ -182,11 +182,11 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
-            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
+            this.groupBox1.Controls.Add(this.gbVerFichaMedica);
             this.groupBox1.Controls.Add(this.gbActualizarFichaMedica);
             this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
             this.groupBox1.Controls.Add(this.gbAbrirConsultaMedica);
-            this.groupBox1.Controls.Add(this.gbVerFichaMedica);
+            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
             this.groupBox1.Location = new System.Drawing.Point(1, 35);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
@@ -480,6 +480,7 @@
             // 
             // cbTipoEntradaAFM
             // 
+            this.cbTipoEntradaAFM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoEntradaAFM.FormattingEnabled = true;
             this.cbTipoEntradaAFM.Location = new System.Drawing.Point(137, 415);
             this.cbTipoEntradaAFM.Name = "cbTipoEntradaAFM";

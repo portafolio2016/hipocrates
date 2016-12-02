@@ -265,15 +265,15 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
-            this.groupBox1.Controls.Add(this.gpHorarios);
-            this.groupBox1.Controls.Add(this.gbReporteCaja);
-            this.groupBox1.Controls.Add(this.gbLogPagoHonorarios);
             this.groupBox1.Controls.Add(this.menuStrip1);
             this.groupBox1.Controls.Add(this.gbMantenerEquipo);
             this.groupBox1.Controls.Add(this.gbMantenedorPaciente);
             this.groupBox1.Controls.Add(this.gbMantenedorPersonal);
             this.groupBox1.Controls.Add(this.gbMantenerPrestacion);
+            this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
+            this.groupBox1.Controls.Add(this.gpHorarios);
+            this.groupBox1.Controls.Add(this.gbReporteCaja);
+            this.groupBox1.Controls.Add(this.gbLogPagoHonorarios);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
@@ -641,7 +641,7 @@
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 69;
+            this.Nombre.Width = 67;
             // 
             // Banco
             // 
@@ -649,7 +649,7 @@
             this.Banco.HeaderText = "Banco";
             this.Banco.Name = "Banco";
             this.Banco.ReadOnly = true;
-            this.Banco.Width = 63;
+            this.Banco.Width = 61;
             // 
             // TipoCuenta
             // 
@@ -657,7 +657,7 @@
             this.TipoCuenta.HeaderText = "Tipo cuenta";
             this.TipoCuenta.Name = "TipoCuenta";
             this.TipoCuenta.ReadOnly = true;
-            this.TipoCuenta.Width = 89;
+            this.TipoCuenta.Width = 87;
             // 
             // Cuenta
             // 
@@ -665,7 +665,7 @@
             this.Cuenta.HeaderText = "Cuenta";
             this.Cuenta.Name = "Cuenta";
             this.Cuenta.ReadOnly = true;
-            this.Cuenta.Width = 66;
+            this.Cuenta.Width = 64;
             // 
             // Total
             // 
@@ -673,7 +673,7 @@
             this.Total.HeaderText = "Total";
             this.Total.Name = "Total";
             this.Total.ReadOnly = true;
-            this.Total.Width = 56;
+            this.Total.Width = 54;
             // 
             // label1
             // 
@@ -850,6 +850,7 @@
             this.txtCantidad_Eq.Name = "txtCantidad_Eq";
             this.txtCantidad_Eq.Size = new System.Drawing.Size(196, 20);
             this.txtCantidad_Eq.TabIndex = 2;
+            this.txtCantidad_Eq.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRut_KeyPress);
             // 
             // lblNombreTipo
             // 
