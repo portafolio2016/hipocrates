@@ -6,7 +6,7 @@
 <ProjectHeight>600</ProjectHeight>
 <IsCustomProject>1</IsCustomProject>
 <SavedProjectSettings>1</SavedProjectSettings>
-<LastFlashTemplate>11</LastFlashTemplate>
+<LastFlashTemplate>-1</LastFlashTemplate>
 </Project_Settings>
 
 <UI_Layout>
@@ -14,7 +14,7 @@
 <AudioOne>1</AudioOne>
 <AudioTwo>0</AudioTwo>
 <Zoom>0</Zoom>
-<CursorKeyframe>0</CursorKeyframe>
+<CursorKeyframe>1</CursorKeyframe>
 <Callout>0</Callout>
 <PIP>0</PIP>
 <PIPAudio>0</PIPAudio>
@@ -33,7 +33,7 @@
 <Bookmarks>0</Bookmarks>
 </UI_Layout>
 
-<AutoSaveFile>C:\Users\pdelasotta\AppData\Local\TechSmith\Camtasia Studio\7.0\Auto-Saves\webapp7a0508a.autosave.camproj</AutoSaveFile>
+<AutoSaveFile>C:\Users\pdelasotta\AppData\Local\TechSmith\Camtasia Studio\7.0\Auto-Saves\anular-hora7c014ce.autosave.camproj</AutoSaveFile>
 
 <PowerPointProject>0</PowerPointProject>
 
@@ -43,37 +43,28 @@
 <ZoomPanHints>0</ZoomPanHints>
 <ClipBin_Array>
 <ClipBin_Object>
-<ClipName>C:\Users\pdelasotta\Documents\GitHub\hipocrates\videos\clips-fuente\webapp-anular-hora.camrec</ClipName>
-</ClipBin_Object>
-<ClipBin_Object>
-<ClipName>C:\Users\pdelasotta\Documents\GitHub\hipocrates\videos\clips-fuente\webapp-consulta-horas-y-agendar.camrec</ClipName>
-</ClipBin_Object>
-<ClipBin_Object>
-<ClipName>C:\Users\pdelasotta\Documents\GitHub\hipocrates\videos\clips-fuente\webapp-descargar-resultado.camrec</ClipName>
-</ClipBin_Object>
-<ClipBin_Object>
-<ClipName>C:\Users\pdelasotta\Documents\GitHub\hipocrates\videos\clips-fuente\webapp-tour-login.camrec</ClipName>
+<ClipName>C:\Users\pdelasotta\Documents\GitHub\hipocrates\videos\webapp\anular-hora\webapp-anular-hora.camrec</ClipName>
 </ClipBin_Object>
 </ClipBin_Array>
 
 <DShowControl_ClipMap>
 <DShowControl_ClipMap_Object>
-<FileName>tscrec7://c:\users\pdelasotta\documents\github\hipocrates\videos\clips-fuente\webapp-anular-hora.camrec!screen_stream.avi</FileName>
+<FileName>tscrec7://c:\users\pdelasotta\documents\github\hipocrates\videos\webapp\anular-hora\webapp-anular-hora.camrec!screen_stream.avi</FileName>
 <PPTFile></PPTFile>
 <FromPPT>0</FromPPT>
 <Track>0</Track>
 <Flags>8</Flags>
 <Start>0</Start>
-<End>100000000</End>
+<End>118666667</End>
 <ClipHasAudio>0</ClipHasAudio>
 <BitsPerPixel>24</BitsPerPixel>
 <Width>800</Width>
 <Height>600</Height>
 <FileLength>118666667</FileLength>
 <MarkIn>0</MarkIn>
-<MarkOut>18666667</MarkOut>
+<MarkOut>0</MarkOut>
 <MediaStart>0</MediaStart>
-<MediaEnd>100000000</MediaEnd>
+<MediaEnd>118666667</MediaEnd>
 <FrameRate>15.000015</FrameRate>
 <ClipSpeed>1.000000</ClipSpeed>
 <WFSize>65535</WFSize>
@@ -87,7 +78,7 @@
 <ClipTitle>webapp-anular-hora_Screen.avi</ClipTitle>
 <PowerPointSlide>0</PowerPointSlide>
 <SplitMinStart>0</SplitMinStart>
-<SplitMinEnd>18666667</SplitMinEnd>
+<SplitMinEnd>0</SplitMinEnd>
 <Extra>0</Extra>
 <BuddyID>-1</BuddyID>
 </DShowControl_ClipMap_Object>
@@ -117,7 +108,7 @@
 <Effects>
 <Effects_Object>
 <Main>
-<Type>0</Type>
+<Type>1</Type>
 <Color>0xFFFF0000</Color>
 <Size>20.00</Size>
 <Duration>0.80</Duration>
@@ -285,10 +276,10 @@
 <AudioClickReduction>0</AudioClickReduction>
 <AudioNoiseReduction>0</AudioNoiseReduction>
 <AudioClickSensitivity>0.50</AudioClickSensitivity>
-<AudioNoiseReduction>0.50</AudioNoiseReduction>
-<AudioNoiseSensitivity>0.50</AudioNoiseSensitivity>
+<AudioNoiseReduction>1.00</AudioNoiseReduction>
+<AudioNoiseSensitivity>1.00</AudioNoiseSensitivity>
 <AudioCompressionOn>0</AudioCompressionOn>
-<AudioCompressionPreset>0</AudioCompressionPreset>
+<AudioCompressionPreset>1</AudioCompressionPreset>
 <AudioCurRatio>20.00</AudioCurRatio>
 <AudioCurThreshold>-30.00</AudioCurThreshold>
 <AudioCurGain>5.00</AudioCurGain>
@@ -307,11 +298,11 @@
 <Project_MetaData>
 <Project_MetaData_Object>
 <FieldArrayKey>8</FieldArrayKey>
-<Value>webapp</Value>
+<Value>Untitled</Value>
 </Project_MetaData_Object>
 <Project_MetaData_Object>
 <FieldArrayKey>13</FieldArrayKey>
-<Value>2016-12-02 01:24:23 PM</Value>
+<Value>2016-12-02 02:10:28 PM</Value>
 </Project_MetaData_Object>
 <Project_MetaData_Object>
 <FieldArrayKey>16</FieldArrayKey>
