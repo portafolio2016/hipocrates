@@ -49,8 +49,6 @@
             this.cbBanco = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCambiarCuentaOC = new System.Windows.Forms.Button();
-            this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
-            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbNuevoMail = new System.Windows.Forms.TextBox();
@@ -131,12 +129,12 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnModificarUser = new System.Windows.Forms.Button();
+            this.gbAgendaDiaria = new System.Windows.Forms.GroupBox();
+            this.dgAgendaDiaria = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.gbOpcionesUsuario.SuspendLayout();
             this.gbCuentaBancaria.SuspendLayout();
-            this.gbAgendaDiaria.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.gbActualizarFichaMedica.SuspendLayout();
@@ -148,6 +146,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgEntradaVFM)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.gbAgendaDiaria.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).BeginInit();
             this.SuspendLayout();
             // 
             // lblUsuarioConectado
@@ -261,7 +261,6 @@
             // gbOpcionesUsuario
             // 
             this.gbOpcionesUsuario.Controls.Add(this.gbCuentaBancaria);
-            this.gbOpcionesUsuario.Controls.Add(this.gbAgendaDiaria);
             this.gbOpcionesUsuario.Controls.Add(this.groupBox5);
             this.gbOpcionesUsuario.Controls.Add(this.groupBox4);
             this.gbOpcionesUsuario.Location = new System.Drawing.Point(6, 43);
@@ -347,31 +346,6 @@
             this.btnCambiarCuentaOC.Text = "Cambiar cuenta bancaria";
             this.btnCambiarCuentaOC.UseVisualStyleBackColor = true;
             this.btnCambiarCuentaOC.Click += new System.EventHandler(this.btnCambiarCuentaOC_Click);
-            // 
-            // gbAgendaDiaria
-            // 
-            this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
-            this.gbAgendaDiaria.Location = new System.Drawing.Point(0, 0);
-            this.gbAgendaDiaria.Name = "gbAgendaDiaria";
-            this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
-            this.gbAgendaDiaria.TabIndex = 4;
-            this.gbAgendaDiaria.TabStop = false;
-            this.gbAgendaDiaria.Text = "Agenda diaria";
-            this.gbAgendaDiaria.Visible = false;
-            // 
-            // dgAgendaDiaria
-            // 
-            this.dgAgendaDiaria.AllowUserToAddRows = false;
-            this.dgAgendaDiaria.AllowUserToDeleteRows = false;
-            this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
-            this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
-            this.dgAgendaDiaria.Name = "dgAgendaDiaria";
-            this.dgAgendaDiaria.ReadOnly = true;
-            this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
-            this.dgAgendaDiaria.TabIndex = 1;
             // 
             // groupBox5
             // 
@@ -1079,7 +1053,7 @@
             this.NombreEntrada.Name = "NombreEntrada";
             this.NombreEntrada.ReadOnly = true;
             this.NombreEntrada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.NombreEntrada.Width = 80;
+            this.NombreEntrada.Width = 78;
             // 
             // ContenidoEntrada
             // 
@@ -1088,7 +1062,7 @@
             this.ContenidoEntrada.ReadOnly = true;
             this.ContenidoEntrada.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ContenidoEntrada.Text = "Ver";
-            this.ContenidoEntrada.Width = 98;
+            this.ContenidoEntrada.Width = 96;
             // 
             // TipoEntrada
             // 
@@ -1097,7 +1071,7 @@
             this.TipoEntrada.Name = "TipoEntrada";
             this.TipoEntrada.ReadOnly = true;
             this.TipoEntrada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.TipoEntrada.Width = 66;
+            this.TipoEntrada.Width = 64;
             // 
             // FechaEntrada
             // 
@@ -1105,7 +1079,7 @@
             this.FechaEntrada.Name = "FechaEntrada";
             this.FechaEntrada.ReadOnly = true;
             this.FechaEntrada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FechaEntrada.Width = 87;
+            this.FechaEntrada.Width = 85;
             // 
             // label11
             // 
@@ -1182,11 +1156,37 @@
             this.btnModificarUser.UseVisualStyleBackColor = true;
             this.btnModificarUser.Click += new System.EventHandler(this.btnModificarUser_Click);
             // 
+            // gbAgendaDiaria
+            // 
+            this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
+            this.gbAgendaDiaria.Location = new System.Drawing.Point(8, 78);
+            this.gbAgendaDiaria.Name = "gbAgendaDiaria";
+            this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
+            this.gbAgendaDiaria.TabIndex = 6;
+            this.gbAgendaDiaria.TabStop = false;
+            this.gbAgendaDiaria.Text = "Agenda diaria";
+            this.gbAgendaDiaria.Visible = false;
+            // 
+            // dgAgendaDiaria
+            // 
+            this.dgAgendaDiaria.AllowUserToAddRows = false;
+            this.dgAgendaDiaria.AllowUserToDeleteRows = false;
+            this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
+            this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
+            this.dgAgendaDiaria.Name = "dgAgendaDiaria";
+            this.dgAgendaDiaria.ReadOnly = true;
+            this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
+            this.dgAgendaDiaria.TabIndex = 1;
+            // 
             // FrmMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.gbAgendaDiaria);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -1202,8 +1202,6 @@
             this.gbOpcionesUsuario.ResumeLayout(false);
             this.gbCuentaBancaria.ResumeLayout(false);
             this.gbCuentaBancaria.PerformLayout();
-            this.gbAgendaDiaria.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1225,6 +1223,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.gbAgendaDiaria.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgAgendaDiaria)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1256,8 +1256,6 @@
         private System.Windows.Forms.TextBox tbContrasenaActual;
         private System.Windows.Forms.Button btnCambiarContrasena;
         private System.Windows.Forms.TextBox tbContrasenaNueva;
-        private System.Windows.Forms.GroupBox gbAgendaDiaria;
-        private System.Windows.Forms.DataGridView dgAgendaDiaria;
         private System.Windows.Forms.GroupBox gbVerFichaMedica;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbVerificadorVFM;
@@ -1334,5 +1332,7 @@
         private System.Windows.Forms.TextBox txtRutPaciente_CAM;
         private System.Windows.Forms.Label lblRutPaciente_CAM;
         private System.Windows.Forms.Label lblError_CAM;
+        private System.Windows.Forms.GroupBox gbAgendaDiaria;
+        private System.Windows.Forms.DataGridView dgAgendaDiaria;
     }
 }

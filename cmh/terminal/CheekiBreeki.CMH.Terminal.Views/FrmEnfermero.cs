@@ -208,7 +208,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     bool estado = false;
                     if (x.ESTADO_ATEN.NOM_ESTADO_ATEN == "Cerrado")
                         estado = true;
-                    agendaDiaria.Add(new AgendaDiaria(x.PRESTACION.NOM_PRESTACION, x.PACIENTE.NOMBRES_PACIENTE + " " + x.PACIENTE.APELLIDOS_PACIENTE, x.FECHOR.ToString(), estado));
+                    string bloque = "";
+                    if (x.BLOQUE.NUM_MINU_INI == 0)
+                        bloque = x.BLOQUE.NUM_HORA_INI + ":00 - " + x.BLOQUE.NUM_HORA_FIN + ":" + x.BLOQUE.NUM_MINU_FIN;
+                    else if ((x.BLOQUE.NUM_MINU_FIN == 0))
+                        bloque = x.BLOQUE.NUM_HORA_INI + ":" + x.BLOQUE.NUM_MINU_INI + " - " + x.BLOQUE.NUM_HORA_FIN + ":00";
+                    else
+                        bloque = x.BLOQUE.NUM_HORA_INI + ":" + x.BLOQUE.NUM_MINU_INI + " - " + x.BLOQUE.NUM_HORA_FIN + ":" + x.BLOQUE.NUM_MINU_FIN;
+                    agendaDiaria.Add(new AgendaDiaria(x.PRESTACION.NOM_PRESTACION, x.PACIENTE.NOMBRES_PACIENTE + " " + x.PACIENTE.APELLIDOS_PACIENTE, bloque, estado));
                 }
 
             }
