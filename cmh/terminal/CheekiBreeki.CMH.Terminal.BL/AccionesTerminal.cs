@@ -380,14 +380,16 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     atencion.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "CERRADO").FirstOrDefault().ID_ESTADO_ATEN;
                     conexionDB.SaveChanges();
 
-                    string receptor, titulo, cuerpo;
+                    string receptor, titulo, cuerpo = string.Empty;
                     receptor = atencion.PERS_MEDICO1.PERSONAL.EMAIL;
                     titulo = "Cerrada orden de análisis";
-                    cuerpo = "La orden de análisis con de la atención " + atencion.ID_ATENCION_AGEN + " se ha cerrado";
+                    cuerpo += "Estimado " + atencion.PERS_MEDICO1.PERSONAL.NOMBREFULL + ",\n";
+                    cuerpo += "La orden de análisis de la atención " + atencion.ID_ATENCION_AGEN + " se ha cerrado" + "\n";
+                    cuerpo += "Paciente: " + atencion.PACIENTE.NOMBRES_PACIENTE + " " + atencion.PACIENTE.APELLIDOS_PACIENTE + "\n\n";
+                    cuerpo += "Se adjunta documento de resultados.";
                     if (File.Exists(archivo))
                     {
-                        Emailer.enviarCorreo(receptor, titulo, cuerpo);
-                        //Emailer.enviarCorreo(receptor, titulo, cuerpo, archivo);
+                        Emailer.enviarCorreo(receptor, titulo, cuerpo, archivo);
                         Console.WriteLine("Correo enviado");
                     }
                     else
