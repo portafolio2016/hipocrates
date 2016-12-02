@@ -86,9 +86,6 @@
             this.txtRutPaciente_CAM = new System.Windows.Forms.TextBox();
             this.lblRutPaciente_CAM = new System.Windows.Forms.Label();
             this.btnCrearResultado_CAM = new System.Windows.Forms.Button();
-            this.btnArchivo_CAM = new System.Windows.Forms.Button();
-            this.rtArchivo_CAM = new System.Windows.Forms.RichTextBox();
-            this.lblArchivo = new System.Windows.Forms.Label();
             this.rtComentario_CAM = new System.Windows.Forms.RichTextBox();
             this.lblComentario_CAM = new System.Windows.Forms.Label();
             this.gbAbrirConsultaMedica = new System.Windows.Forms.GroupBox();
@@ -182,11 +179,12 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
-            this.groupBox1.Controls.Add(this.gbVerFichaMedica);
-            this.groupBox1.Controls.Add(this.gbActualizarFichaMedica);
+            this.groupBox1.Controls.Add(this.gbAgendaDiaria);
             this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
+            this.groupBox1.Controls.Add(this.gbVerFichaMedica);
             this.groupBox1.Controls.Add(this.gbAbrirConsultaMedica);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
+            this.groupBox1.Controls.Add(this.gbActualizarFichaMedica);
             this.groupBox1.Location = new System.Drawing.Point(1, 35);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);
@@ -346,6 +344,31 @@
             this.btnCambiarCuentaOC.Text = "Cambiar cuenta bancaria";
             this.btnCambiarCuentaOC.UseVisualStyleBackColor = true;
             this.btnCambiarCuentaOC.Click += new System.EventHandler(this.btnCambiarCuentaOC_Click);
+            // 
+            // gbAgendaDiaria
+            // 
+            this.gbAgendaDiaria.Controls.Add(this.dgAgendaDiaria);
+            this.gbAgendaDiaria.Location = new System.Drawing.Point(6, 43);
+            this.gbAgendaDiaria.Name = "gbAgendaDiaria";
+            this.gbAgendaDiaria.Size = new System.Drawing.Size(768, 462);
+            this.gbAgendaDiaria.TabIndex = 4;
+            this.gbAgendaDiaria.TabStop = false;
+            this.gbAgendaDiaria.Text = "Agenda diaria";
+            this.gbAgendaDiaria.Visible = false;
+            // 
+            // dgAgendaDiaria
+            // 
+            this.dgAgendaDiaria.AllowUserToAddRows = false;
+            this.dgAgendaDiaria.AllowUserToDeleteRows = false;
+            this.dgAgendaDiaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgAgendaDiaria.BackgroundColor = System.Drawing.Color.DarkSlateGray;
+            this.dgAgendaDiaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAgendaDiaria.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgAgendaDiaria.Location = new System.Drawing.Point(8, 32);
+            this.dgAgendaDiaria.Name = "dgAgendaDiaria";
+            this.dgAgendaDiaria.ReadOnly = true;
+            this.dgAgendaDiaria.Size = new System.Drawing.Size(754, 424);
+            this.dgAgendaDiaria.TabIndex = 1;
             // 
             // groupBox5
             // 
@@ -645,9 +668,6 @@
             this.gbCerrarAtencionMedica.Controls.Add(this.txtRutPaciente_CAM);
             this.gbCerrarAtencionMedica.Controls.Add(this.lblRutPaciente_CAM);
             this.gbCerrarAtencionMedica.Controls.Add(this.btnCrearResultado_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.btnArchivo_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.rtArchivo_CAM);
-            this.gbCerrarAtencionMedica.Controls.Add(this.lblArchivo);
             this.gbCerrarAtencionMedica.Controls.Add(this.rtComentario_CAM);
             this.gbCerrarAtencionMedica.Controls.Add(this.lblComentario_CAM);
             this.gbCerrarAtencionMedica.Location = new System.Drawing.Point(6, 43);
@@ -724,34 +744,6 @@
             this.btnCrearResultado_CAM.UseVisualStyleBackColor = true;
             this.btnCrearResultado_CAM.Click += new System.EventHandler(this.btnCrearResultado_CAM_Click);
             // 
-            // btnArchivo_CAM
-            // 
-            this.btnArchivo_CAM.Location = new System.Drawing.Point(518, 345);
-            this.btnArchivo_CAM.Name = "btnArchivo_CAM";
-            this.btnArchivo_CAM.Size = new System.Drawing.Size(75, 24);
-            this.btnArchivo_CAM.TabIndex = 4;
-            this.btnArchivo_CAM.Text = "Subir";
-            this.btnArchivo_CAM.UseVisualStyleBackColor = true;
-            this.btnArchivo_CAM.Click += new System.EventHandler(this.btnArchivo_CAM_Click);
-            // 
-            // rtArchivo_CAM
-            // 
-            this.rtArchivo_CAM.Enabled = false;
-            this.rtArchivo_CAM.Location = new System.Drawing.Point(274, 346);
-            this.rtArchivo_CAM.Name = "rtArchivo_CAM";
-            this.rtArchivo_CAM.Size = new System.Drawing.Size(229, 23);
-            this.rtArchivo_CAM.TabIndex = 3;
-            this.rtArchivo_CAM.Text = "";
-            // 
-            // lblArchivo
-            // 
-            this.lblArchivo.AutoSize = true;
-            this.lblArchivo.Location = new System.Drawing.Point(199, 352);
-            this.lblArchivo.Name = "lblArchivo";
-            this.lblArchivo.Size = new System.Drawing.Size(43, 13);
-            this.lblArchivo.TabIndex = 2;
-            this.lblArchivo.Text = "Archivo";
-            // 
             // rtComentario_CAM
             // 
             this.rtComentario_CAM.Location = new System.Drawing.Point(197, 214);
@@ -788,7 +780,7 @@
             this.gbAbrirConsultaMedica.Controls.Add(this.cmbEspecialidad_ACM);
             this.gbAbrirConsultaMedica.Controls.Add(this.lblPaciente_ACM);
             this.gbAbrirConsultaMedica.Controls.Add(this.lblEspecialidad_ACM);
-            this.gbAbrirConsultaMedica.Location = new System.Drawing.Point(3, 43);
+            this.gbAbrirConsultaMedica.Location = new System.Drawing.Point(6, 43);
             this.gbAbrirConsultaMedica.Name = "gbAbrirConsultaMedica";
             this.gbAbrirConsultaMedica.Size = new System.Drawing.Size(768, 462);
             this.gbAbrirConsultaMedica.TabIndex = 8;
@@ -1323,9 +1315,6 @@
         private System.Windows.Forms.GroupBox gbCerrarAtencionMedica;
         private System.Windows.Forms.RichTextBox rtComentario_CAM;
         private System.Windows.Forms.Label lblComentario_CAM;
-        private System.Windows.Forms.Label lblArchivo;
-        private System.Windows.Forms.Button btnArchivo_CAM;
-        private System.Windows.Forms.RichTextBox rtArchivo_CAM;
         private System.Windows.Forms.Button btnCrearResultado_CAM;
         private System.Windows.Forms.ListBox lstAtenciones_CAM;
         private System.Windows.Forms.Button btnBuscarPaciente_CAM;

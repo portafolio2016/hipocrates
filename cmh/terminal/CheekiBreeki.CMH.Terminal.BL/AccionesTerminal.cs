@@ -2078,6 +2078,16 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
             return (atenciones);
         }
+
+        public List<ATENCION_AGEN> listaAtencionesPagadasPersonalMedicoLogueado(int rut,int idPersonal)
+        {
+            List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
+                .Where(d => d.PACIENTE.RUT == rut &&
+                     (d.ID_PERS_ATIENDE == idPersonal || d.ID_PERS_SOLICITA == idPersonal) &&
+                    (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
+            
+            return (atenciones);
+        }
         #endregion
 
         //Tipo Ficha
