@@ -813,10 +813,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
             lstAtenciones_CAM.Items.Clear();
             List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
 
-            if (atenciones.Count <= 0)
-            {
-                MessageBox.Show("No tiene ninguna atención", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            
             foreach (ATENCION_AGEN atencion in atenciones)
             {
                 ComboboxItem item = new ComboboxItem();
