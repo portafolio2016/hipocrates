@@ -164,9 +164,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.Controls.Add(this.gbAgendaDiaria);
             this.groupBox1.Controls.Add(this.gbCerrarAtencionMedica);
             this.groupBox1.Controls.Add(this.gbOpcionesUsuario);
-            this.groupBox1.Controls.Add(this.gbAgendaDiaria);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(780, 505);

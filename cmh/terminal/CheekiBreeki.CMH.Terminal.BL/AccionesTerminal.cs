@@ -64,6 +64,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     atenciones = conexionDB.ATENCION_AGEN.
                         Where(d => d.PERS_MEDICO.PERSONAL.RUT == rut).ToList();
                     atenciones = atenciones.Where(d => d.FECHOR.Value.Date == dia.Date).ToList();
+                    atenciones = atenciones.OrderBy(d => d.ID_BLOQUE).ToList();
                     return atenciones;
                 }
             }
