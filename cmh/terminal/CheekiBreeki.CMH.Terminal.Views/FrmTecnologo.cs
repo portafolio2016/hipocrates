@@ -209,7 +209,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 else
                 {
                     lstAtenciones_CAM.Items.Clear();
-                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
+                    List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadasPersonalMedicoLogueado(int.Parse(txtRutPaciente_CAM.Text), FrmLogin.usuarioLogeado.Personal.PERS_MEDICO.FirstOrDefault().ID_PERSONAL_MEDICO).ToList();
 
                     if (atenciones.Count <= 0)
                     {
@@ -246,7 +246,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
         {
             AccionesTerminal at = new AccionesTerminal();
             lstAtenciones_CAM.Items.Clear();
-            List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadas(int.Parse(txtRutPaciente_CAM.Text)).ToList();
+            List<ATENCION_AGEN> atenciones = at.listaAtencionesPagadasPersonalMedicoLogueado(int.Parse(txtRutPaciente_CAM.Text), FrmLogin.usuarioLogeado.Personal.PERS_MEDICO.FirstOrDefault().ID_PERSONAL_MEDICO).ToList();
 
             foreach (ATENCION_AGEN atencion in atenciones)
             {
@@ -296,15 +296,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 //Busque atención
                 ATENCION_AGEN atencionAg = at.buscarAtencionAgendadaID(((ComboboxItem)lstAtenciones_CAM.SelectedItem).Value);
                 //Actualice atención
-                at.actualuzarAtencionAgendadaEstado(atencionAg);
-
-                res = at.nuevoResultadoAtencion(resultadoAtencion);
+                res = at.cerrarOrdenDeAnalisis(atencionAg, file);
+                if (res) 
+                    res = at.nuevoResultadoAtencion(resultadoAtencion);
                 actualizarBloquesMisticos();
             }
             catch (Exception ex)
             {
                 res = false;
-
             }
 
             if (res == true)
@@ -360,7 +359,14 @@ namespace CheekiBreeki.CMH.Terminal.Views
                     bool estado = false;
                     if (x.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "CERRADO")
                         estado = true;
-                    agendaDiaria.Add(new AgendaDiaria(x.PRESTACION.NOM_PRESTACION, x.PACIENTE.NOMBRES_PACIENTE + " " + x.PACIENTE.APELLIDOS_PACIENTE, x.FECHOR.ToString(), estado));
+                    string bloque = "";
+                    if (x.BLOQUE.NUM_MINU_INI == 0)
+                        bloque = x.BLOQUE.NUM_HORA_INI + ":00 - " + x.BLOQUE.NUM_HORA_FIN + ":" + x.BLOQUE.NUM_MINU_FIN;
+                    else if ((x.BLOQUE.NUM_MINU_FIN == 0))
+                        bloque = x.BLOQUE.NUM_HORA_INI + ":" + x.BLOQUE.NUM_MINU_INI + " - " + x.BLOQUE.NUM_HORA_FIN + ":00";
+                    else
+                        bloque = x.BLOQUE.NUM_HORA_INI + ":" + x.BLOQUE.NUM_MINU_INI + " - " + x.BLOQUE.NUM_HORA_FIN + ":" + x.BLOQUE.NUM_MINU_FIN;
+                    agendaDiaria.Add(new AgendaDiaria(x.PRESTACION.NOM_PRESTACION, x.PACIENTE.NOMBRES_PACIENTE + " " + x.PACIENTE.APELLIDOS_PACIENTE, bloque, estado));
                 }
             }
             dgAgendaDiaria.DataSource = agendaDiaria;
