@@ -64,6 +64,7 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     atenciones = conexionDB.ATENCION_AGEN.
                         Where(d => d.PERS_MEDICO.PERSONAL.RUT == rut).ToList();
                     atenciones = atenciones.Where(d => d.FECHOR.Value.Date == dia.Date).ToList();
+                    atenciones = atenciones.OrderBy(d => d.ID_BLOQUE).ToList();
                     return atenciones;
                 }
             }
@@ -359,6 +360,58 @@ namespace CheekiBreeki.CMH.Terminal.BL
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean cerrarOrdenDeAnalisis(ATENCION_AGEN atencion, string archivo)
+        {
+            try
+            {
+                if (Util.isObjetoNulo(atencion))
+                {
+                    throw new Exception("Atención nula");
+                }
+                if (atencion.ID_PERS_SOLICITA == null)
+                {
+                    throw new Exception("Sin médico solicitante");
+                }
+                else
+                {
+                    atencion = conexionDB.ATENCION_AGEN.Find(atencion.ID_ATENCION_AGEN);
+                    atencion.ID_ESTADO_ATEN = conexionDB.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "CERRADO").FirstOrDefault().ID_ESTADO_ATEN;
+                    conexionDB.SaveChanges();
+
+                    if (enviarCorreoOrdenDeAnalisis(atencion, archivo))
+                        return true;
+                    else
+                        throw new Exception("Error al enviar correo");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public Boolean enviarCorreoOrdenDeAnalisis(ATENCION_AGEN atencion, string archivo)
+        {
+            string receptor, titulo, cuerpo = string.Empty;
+            receptor = atencion.PERS_MEDICO1.PERSONAL.EMAIL;
+            titulo = "Cerrada orden de análisis";
+            cuerpo += "Estimado " + atencion.PERS_MEDICO1.PERSONAL.NOMBREFULL + ",\n\n";
+            cuerpo += "La orden de análisis de la atención " + atencion.ID_ATENCION_AGEN + " se ha cerrado." + "\n";
+            cuerpo += "Paciente: " + atencion.PACIENTE.NOMBRES_PACIENTE + " " + atencion.PACIENTE.APELLIDOS_PACIENTE + ".\n\n";
+            cuerpo += "Se adjunta documento de resultados.";
+            if (File.Exists(archivo))
+            {
+                Emailer.enviarCorreo(receptor, titulo, cuerpo, archivo);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Archivo no existente");
                 return false;
             }
         }
@@ -2032,8 +2085,8 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             List<ATENCION_AGEN> atenciones = conexionDB.ATENCION_AGEN
                 .Where(d => d.PACIENTE.RUT == rut &&
-                     (d.ID_PERS_ATIENDE == idPersonal || d.ID_PERS_SOLICITA == idPersonal) &&
-                    (d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO")).ToList();
+                       d.ID_PERS_ATIENDE == idPersonal &&
+                       d.ESTADO_ATEN.NOM_ESTADO_ATEN.ToUpper() == "PAGADO").ToList();
             
             return (atenciones);
         }
@@ -2632,11 +2685,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
         {
             bool x = false;
             ATENCION_AGEN atencion = new ATENCION_AGEN();
-            using (var con = new CMHEntities()){
-                ESTADO_ATEN estado = con.ESTADO_ATEN.Where(d=> d.NOM_ESTADO_ATEN.ToUpper() == "CERRADO").FirstOrDefault();
+            using (var con = new CMHEntities())
+            {
+                ESTADO_ATEN estado = con.ESTADO_ATEN.Where(d => d.NOM_ESTADO_ATEN.ToUpper() == "CERRADO").FirstOrDefault();
                 if (estado == null)
                     return false;
-                atencion = con.ATENCION_AGEN.Where(d=> d.ID_ATENCION_AGEN == idAtencion).FirstOrDefault();
+                atencion = con.ATENCION_AGEN.Where(d => d.ID_ATENCION_AGEN == idAtencion).FirstOrDefault();
                 if (atencion == null)
                     return false;
                 atencion.ID_ESTADO_ATEN = estado.ID_ESTADO_ATEN;
@@ -2652,12 +2706,13 @@ namespace CheekiBreeki.CMH.Terminal.BL
             return x;
         }
 
-        public bool CerrarOrdenAnalisis(RES_ATENCION res)
+        public bool CerrarOrdenAnalisis(RES_ATENCION res, string archivo)
         {
             bool x = false;
             RES_ATENCION resultado = new RES_ATENCION();
             ORDEN_ANALISIS orden = new ORDEN_ANALISIS();
-            using(var con = new CMHEntities()){
+            using (var con = new CMHEntities())
+            {
                 resultado = con.RES_ATENCION.Where(d => d.ID_RESULTADO_ATENCION == res.ID_RESULTADO_ATENCION).FirstOrDefault();
                 if (resultado == null)
                     return false;
@@ -2670,7 +2725,12 @@ namespace CheekiBreeki.CMH.Terminal.BL
                     return false;
                 orden.FECHOR_RECEP = DateTime.Now;
                 con.SaveChangesAsync();
-                x = true;
+
+                ATENCION_AGEN atencion = conexionDB.ATENCION_AGEN.Find(resultado.ID_ATENCION_AGEN);
+                if (enviarCorreoOrdenDeAnalisis(atencion, archivo))
+                    x = true;
+                else
+                    throw new Exception("Error al enviar correo");
             }
             return x;
         }
