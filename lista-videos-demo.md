@@ -49,6 +49,9 @@
 1. Cerrar atención
 > Una vez realizada la atención, puede cerrarla y actualizar la ficha médica del paciente.
 
+1. Actualizar ficha médica
+> El médico puede actualizar las fichas médicas de los pacientes
+
 1. Derivar (agendar para un paciente)
 > En el caso de que el paciente necesite una derivación a otro especialista o un examen en particular, esta ventana permite al médico agendar esta atención en el momento.
 
