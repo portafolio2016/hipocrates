@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <Project_Data Version="7.00">
 <Project_Settings>
-<ProfileName></ProfileName>
+<ProfileName>cmh-preset</ProfileName>
 <ProjectWidth>800</ProjectWidth>
 <ProjectHeight>600</ProjectHeight>
 <IsCustomProject>1</IsCustomProject>
@@ -55,16 +55,16 @@
 <Track>0</Track>
 <Flags>8</Flags>
 <Start>0</Start>
-<End>223000000</End>
+<End>154666667</End>
 <ClipHasAudio>0</ClipHasAudio>
 <BitsPerPixel>24</BitsPerPixel>
 <Width>800</Width>
-<Height>600</Height>
-<FileLength>240666667</FileLength>
-<MarkIn>9000000</MarkIn>
-<MarkOut>8666667</MarkOut>
-<MediaStart>9000000</MediaStart>
-<MediaEnd>232000000</MediaEnd>
+<Height>640</Height>
+<FileLength>196666667</FileLength>
+<MarkIn>19000000</MarkIn>
+<MarkOut>23000000</MarkOut>
+<MediaStart>19000000</MediaStart>
+<MediaEnd>173666667</MediaEnd>
 <FrameRate>15.000015</FrameRate>
 <ClipSpeed>1.000000</ClipSpeed>
 <WFSize>65535</WFSize>
@@ -74,11 +74,11 @@
 <WFSamplesPerSec>-1</WFSamplesPerSec>
 <WFBitsPerSample>65535</WFBitsPerSample>
 <WFFormatTag>65535</WFFormatTag>
-<ClipMapIndex>1</ClipMapIndex>
+<ClipMapIndex>3</ClipMapIndex>
 <ClipTitle>log-pago_Screen.avi</ClipTitle>
 <PowerPointSlide>0</PowerPointSlide>
-<SplitMinStart>9000000</SplitMinStart>
-<SplitMinEnd>8666667</SplitMinEnd>
+<SplitMinStart>19000000</SplitMinStart>
+<SplitMinEnd>0</SplitMinEnd>
 <Extra>0</Extra>
 <BuddyID>-1</BuddyID>
 </DShowControl_ClipMap_Object>
