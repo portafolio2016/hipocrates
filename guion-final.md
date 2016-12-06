@@ -1,5 +1,14 @@
 1. Título
+  - Buenos días, somos el grupo 1 correspondiente al caso 1. Nuestro caso es del Centro Médico Hipócrates.
+  - Los integrantes del grupo son...
 1. Agenda
+  - En nuestra presentación, veremos los siguientes temas
+    - Presentaremos al cliente y sus actividades
+    - Veremos la problemática identificada
+    - Y la solución requerida
+    - Luego presentaremos las especificaciones de alto nivel de la solución
+    - Veremos la organización del proyecto
+    - y finalizaremos con una demostración de la solución.
 1. Cliente
   - Nuestro cliente es el Centro Médico Hipócrates.
   - Esta institución ofrece servicios de:
@@ -79,7 +88,7 @@
   - Pablo de la Sotta: encargado de la arquitectura y modelamiento de procesos.
 1. Calendarización
   - Nuestro trabajo lo dividimos en 3 iteraciones.
-  - En la primera iteración desarrolló todo lo relacionado con la planificación del proyecto. Se ejecutó entre el 29 de agosto y 25 de septiembre del presente. El principal entregable fue el documento del plan de proyecto y los bpmn propuestos.
+  - En la primera iteración desarrolló todo lo relacionado con la planificación del proyecto. El principal entregable fue el documento del plan de proyecto y los bpmn propuestos.
   - En la segunda iteración diseñamos la solución, desarrollamos la capa DAL y la capa de negocios, modelamos e implementamos las bases de datos y se realizaron los tests unitarios para la capa de negocios. Los entregables de esta iteración fueron: los scripts de base de datos, las librerías de WebApp y terminal, los módulos de webservice de aseguradora y el servicio de pagos.
   - En la tercera iteración se diseñaron e implementaron las interfaces gráficas de usuario de webapp y terminal, se ejecutaron las pruebas de integración y de humo. El entregable de esta iteración fueron los ejecutables finales del sistema terminado.
 1. Pruebas
@@ -135,3 +144,4 @@
     - Mantenedor de personal: En el caso de una nueva contratación o el olvido de una contraseña, el jefe de operadores puede editar la información de cualquier miembro del personal del Centro.
 
     - Mantenedor de prestaciones: En el caso de que el centro médico modifique las prestaciones que ofrece, es posible modificarlas en esta ventana.
+1. Conclusiones
