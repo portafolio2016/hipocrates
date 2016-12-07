@@ -145,3 +145,8 @@
 
     - Mantenedor de prestaciones: En el caso de que el centro médico modifique las prestaciones que ofrece, es posible modificarlas en esta ventana.
 1. Conclusiones
+  - En conclusión:
+    - Hemos presentado un proyecto que cumple con los requerimientos de nuestro cliente.
+    - Y es viable económicamente.
+    - Ambos puntos justificado debidamente con herramientas adecuadas para este propósito.
+    - Gracias por su atención, abrimos el espacio para preguntas.
