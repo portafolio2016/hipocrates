@@ -64,7 +64,11 @@
   - La tabla paciente relaciona y organiza los datos personales de cada uno de los pacientes del centro, sirviendo como nodo que relaciona con otras tablas importantes para el negocio, como las fichas médicas, las credenciales para la página web.
   - La tabla atención agendada relaciona los paciente con las prestaciones, el personal médico tratante, contiene el factor tiempo y el resultado de las atenciones, lo que es particularmente importante cuando son exámenes.
 1. Diagrama de despliegue
-  -
+  - Webapp: Aplicación web escrita en java utilizando. Provee las funciones principales de cara al paciente, como el agendamiento de horas.
+  - BD_CMH: base de datos transaccional. Persiste los datos ingresados por el sistema. Está corriendo sobre un motor Oracle.
+  - Terminal: Aplicación de escritorio escrita en .NET. Provee las funcionalidades necesarias para los operadores y jefes de operadores, médicos, enfermeros y tecnólogos médicos.
+  - SeguroWS y seguroBD: Consistente en una webservice y una base de datos que lo soporta, este conjunto de módulos proveen funcionalidad suficiente para una integración dummy que simula la comunicación con servicios de seguros públicos o privados.
+  - paymentService: Este servicio en Java corre de forma automática periódicamente, efectuando depósitos bancarios a los médicos en base a sus honorarios del mes.
 1. Tecnologías y versiones
   - Para control de versiones utilizamos Git y GitHub.
   - Para los componentes en .NET utilizamos:
