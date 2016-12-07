@@ -18,7 +18,7 @@
 > Una vez hecho el login, el paciente puede tomar la hora directamente en la página web.
 
 1. Paciente revisa resultados
-> Cada vez que el paciente se haga un examen, recibirá una notificación en su correo. En esta página podrá descargar los
+> Cada vez que el paciente se haga un examen, recibirá una notificación en su correo. En esta página podrán descargar los resultados de los exámenes.
 
 
 ## 2. Operador
