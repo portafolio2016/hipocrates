@@ -125,10 +125,8 @@ public class AgendamientoController {
             if (fechaValida) {
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(fecha);
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                request.setAttribute("fecha", year + "-" + (month + 1) + "-" + day);
+                String fechaString = fechaFormateada(cal);
+                request.setAttribute("fecha", fechaString);
                 //Obtener las horas libres del médico
                 AccionesPaciente accionesPaciente = new AccionesPaciente();
                 int idPersonal = (int) request.getAttribute("medico");
@@ -185,5 +183,31 @@ public class AgendamientoController {
 
         AccionesPaciente accionesPaciente = new AccionesPaciente();
         accionesPaciente.agendarAtencion(atencion);
+    }
+
+    private static String fechaFormateada(Calendar cal) {
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month++;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        String yearString = "" + year;
+        String monthString = "" + month;
+        String dayString = "" + day;
+        if (menorQue10(month)) {
+            monthString = agregarPrefijoCero(month);
+        }
+        if(menorQue10(day)){
+            dayString = agregarPrefijoCero(day);
+        }
+        String fechaString = yearString + "-" + monthString + "-" + dayString;
+        return fechaString;
+    }
+
+    private static boolean menorQue10(int num) {
+        return num < 10;
+    }
+
+    private static String agregarPrefijoCero(int num) {
+        return ("0" + num);
     }
 }
