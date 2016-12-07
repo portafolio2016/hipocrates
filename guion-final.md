@@ -100,9 +100,15 @@
     - Para la medición del desempeño de los procesos vigentes proyectamos los tiempos en base a supuestos estipulados por el caso.
     - Para las mediciones de los procesos propuestos utilizamos mediadas cuantitativas sobre los tests de humo y aceptación y proyectamos sobre los resultados.
   - De desarrollo
-    - Ejecutamos la construccion usando TDD o test driven development, según el cual en la codificación de cualquier función específica escribimos un método de prueba primero y luego rellenamos el bloque correspondiente hasta que el test pasara, con el objetivo de simplificar el proceso de la construcción de tests unitarios y 
+    - Ejecutamos la construccion usando TDD o test driven development, según el cual en la codificación de cualquier función específica escribimos un método de prueba primero y luego rellenamos el bloque correspondiente hasta que el test pasara, con el objetivo de simplificar el proceso de la construcción de tests unitarios y mejorar la calidad del software.
 1. Desglose de costos y flujo de caja
-  -
+  - La inversión inicial será de $13,695,000, cifra que incluye el desarrollo del software, el costo de la implantación y las capacitaciones.
+  - El sistema tendrá un costo fijo mensual de 26800 por conceptos de costo de servicios de servidores virtualizados.
+  - El sistema implantado y funcionando ahorrará al personal médico y funcionarios sobre 750 HH mensualmente, lo que se traduce a sobre 2,7 millones de pesos mensuales.
+  - Esta cifra no considera el tiempo ahorrado a los pacientes, por lo que podemos afirmar que el beneficio es incluso mayor.
+  - Planteamos el proyecto con un horizonte de 12 meses.
+  - Considerando el dinero ahorrado como un ingreso, el payback de este proyecto es en el mes de octubre 2017.
+  - Considerando el VAN al 10%, cumplidos los 12 meses este alcanza sobre 1,2 millones.
 1. Demo
   - Paciente: Los pacientes son los clientes o potenciales clientes del centro médico.
 
