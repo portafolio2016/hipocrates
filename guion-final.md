@@ -95,7 +95,12 @@
   - El sistema tiene 72 casos de pruebas unitarias, con un 100% de aprobación.
   - Desarrollamos un plan de pruebas de humo/aceptación con 71 casos. Este plan de pruebas fue ejecutado por miembros del CITT.
 1. Metodologías
-  -
+  - De gestión de proyecto
+    - Para el desarrollo de este proyecto utilizamos una metodología híbrida, en base al ciclo de vida iterativo con elementos ágiles como Kanban y backlogs.
+    - Para la medición del desempeño de los procesos vigentes proyectamos los tiempos en base a supuestos estipulados por el caso.
+    - Para las mediciones de los procesos propuestos utilizamos mediadas cuantitativas sobre los tests de humo y aceptación y proyectamos sobre los resultados.
+  - De desarrollo
+    - Ejecutamos la construccion usando TDD o test driven development, según el cual en la codificación de cualquier función específica escribimos un método de prueba primero y luego rellenamos el bloque correspondiente hasta que el test pasara, con el objetivo de simplificar el proceso de la construcción de tests unitarios y 
 1. Desglose de costos y flujo de caja
   -
 1. Demo
