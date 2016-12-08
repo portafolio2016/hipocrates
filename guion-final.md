@@ -125,7 +125,7 @@
 
     - Operador abre caja: Al principio de cada día, el operador debe abrir su caja e ingresar el dinero inicial en dicha caja.
 
-    - Crear paciente: Cuando un paciente no existe en el sistema, el operador tiene la capacidad de crear un nuevo paciente.
+    - Crear paciente: Cuando un paciente no existe en el sistema, el operador tiene la capacidad de crear un nuevo paciente. (NO VA)
 
     - Operador ingresa paciente/pago: Cuando un paciente se presenta para una atención y llega su hora, el operador procede a cobrarle e ingresarlo.
 
