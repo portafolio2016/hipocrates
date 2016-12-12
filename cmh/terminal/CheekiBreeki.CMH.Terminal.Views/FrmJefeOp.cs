@@ -854,7 +854,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                             InitMantenerPrestacion();
                             InitTipoPrestacion();
                             acciones = new AccionesTerminal();
-                            MessageBox.Show("Prestación ingresada con exito", "Prestació ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            MessageBox.Show("Prestación ingresada con exito", "Prestación ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
                         else
                         {
@@ -939,7 +939,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                         InitMantenerPrestacion();
                         InitTipoPrestacion();
                         acciones = new AccionesTerminal();
-                        MessageBox.Show("Prestación modificada con exito", "Prestació ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        MessageBox.Show("Prestación modificada con exito", "Prestación ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else
                     {
@@ -1008,7 +1008,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 InitMantenerPrestacion();
                 InitTipoPrestacion();
                 acciones = new AccionesTerminal();
-                MessageBox.Show("Prestación eliminada con exito", "Prestació ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("Prestación eliminada con exito", "Prestación ingresada", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else
             {
