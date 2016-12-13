@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <Project_Data Version="7.00">
 <Project_Settings>
-<ProfileName></ProfileName>
+<ProfileName>cmh-preset</ProfileName>
 <ProjectWidth>800</ProjectWidth>
 <ProjectHeight>600</ProjectHeight>
 <IsCustomProject>1</IsCustomProject>
@@ -13,7 +13,7 @@
 <Video>1</Video>
 <AudioOne>1</AudioOne>
 <AudioTwo>0</AudioTwo>
-<Zoom>0</Zoom>
+<Zoom>1</Zoom>
 <CursorKeyframe>1</CursorKeyframe>
 <Callout>0</Callout>
 <PIP>0</PIP>
@@ -45,26 +45,29 @@
 <ClipBin_Object>
 <ClipName>C:\Users\pdelasotta\Documents\GitHub\hipocrates\videos\terminal\medico\datos-bancarios\datos-bancarios.camrec</ClipName>
 </ClipBin_Object>
+<ClipBin_Object>
+<ClipName>C:\Users\pdelasotta\Documents\GitHub\hipocrates\videos\terminal\medico\datos-bancarios\datos-bancarios2.camrec</ClipName>
+</ClipBin_Object>
 </ClipBin_Array>
 
 <DShowControl_ClipMap>
 <DShowControl_ClipMap_Object>
-<FileName>tscrec7://c:\users\pdelasotta\documents\github\hipocrates\videos\terminal\medico\datos-bancarios\datos-bancarios.camrec!screen_stream.avi</FileName>
+<FileName>tscrec7://c:\users\pdelasotta\documents\github\hipocrates\videos\terminal\medico\datos-bancarios\datos-bancarios2.camrec!screen_stream.avi</FileName>
 <PPTFile></PPTFile>
 <FromPPT>0</FromPPT>
 <Track>0</Track>
 <Flags>8</Flags>
 <Start>0</Start>
-<End>152333333</End>
+<End>142000000</End>
 <ClipHasAudio>0</ClipHasAudio>
 <BitsPerPixel>24</BitsPerPixel>
 <Width>800</Width>
-<Height>600</Height>
-<FileLength>158666667</FileLength>
-<MarkIn>6333333</MarkIn>
-<MarkOut>0</MarkOut>
-<MediaStart>6333333</MediaStart>
-<MediaEnd>158666667</MediaEnd>
+<Height>640</Height>
+<FileLength>187333333</FileLength>
+<MarkIn>0</MarkIn>
+<MarkOut>45333333</MarkOut>
+<MediaStart>0</MediaStart>
+<MediaEnd>142000000</MediaEnd>
 <FrameRate>15.000015</FrameRate>
 <ClipSpeed>1.000000</ClipSpeed>
 <WFSize>65535</WFSize>
@@ -74,10 +77,10 @@
 <WFSamplesPerSec>-1</WFSamplesPerSec>
 <WFBitsPerSample>65535</WFBitsPerSample>
 <WFFormatTag>65535</WFFormatTag>
-<ClipMapIndex>1</ClipMapIndex>
-<ClipTitle>datos-bancarios_Screen.avi</ClipTitle>
+<ClipMapIndex>2</ClipMapIndex>
+<ClipTitle>datos-bancarios2_Screen.avi</ClipTitle>
 <PowerPointSlide>0</PowerPointSlide>
-<SplitMinStart>6333333</SplitMinStart>
+<SplitMinStart>0</SplitMinStart>
 <SplitMinEnd>0</SplitMinEnd>
 <Extra>0</Extra>
 <BuddyID>-1</BuddyID>

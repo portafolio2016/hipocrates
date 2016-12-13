@@ -159,7 +159,7 @@ namespace CheekiBreeki.CMH.Terminal.Views
                 bool x = acciones.actualizarCuentaBancariaUsing(cuenta, FrmLogin.usuarioLogeado.Personal.ID_PERSONAL);
                 if (x)
                 {
-                    MessageBox.Show("Se ha actualizado la cuenta bancaria con exito", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show("Se ha actualizado la cuenta bancaria con exito", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     tbNroCuenta.Text = "";
                 }
                 else
